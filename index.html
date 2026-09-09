@@ -1,0 +1,1378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>CrowRules Dream World — The Dream Begins</title>
+<meta name="theme-color" content="#020202">
+<meta name="description" content="CrowRules Dream World cinematic countdown to launch — January 1, 2028.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --black:#020202;
+  --red:#e50914;
+  --red2:#ff3038;
+  --white:#f4f4f4;
+  --muted:#777;
+  --line:rgba(255,255,255,.09);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,
+body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#000;
+  color:var(--white);
+  font-family:Montserrat,Arial,sans-serif;
+}
+
+body{
+  position:relative;
+}
+
+/* =========================================================
+DREAM BACKGROUND
+========================================================= */
+
+.scene{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(229,9,20,.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(100,0,0,.12),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #000 0%,
+      #030303 50%,
+      #010101 100%
+    );
+}
+
+.scene::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 25%,
+      rgba(0,0,0,.65) 75%,
+      #000 100%
+    );
+  z-index:5;
+  pointer-events:none;
+}
+
+/* =========================================================
+STARS / DREAM PARTICLES
+========================================================= */
+
+.dreamParticles{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+}
+
+.particle{
+  position:absolute;
+  width:2px;
+  height:2px;
+  border-radius:50%;
+  background:#fff;
+  opacity:.2;
+  animation:
+    drift linear infinite,
+    pulse ease-in-out infinite;
+}
+
+@keyframes drift{
+  from{
+    transform:translate3d(0,110vh,0);
+  }
+
+  to{
+    transform:translate3d(
+      var(--driftX),
+      -20vh,
+      0
+    );
+  }
+}
+
+@keyframes pulse{
+  0%,100%{
+    opacity:.08;
+  }
+
+  50%{
+    opacity:.55;
+  }
+}
+
+/* =========================================================
+DREAM RINGS
+========================================================= */
+
+.dreamRing{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:300px;
+  height:300px;
+  border:1px solid rgba(229,9,20,.08);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  animation:ringPulse 8s ease-in-out infinite;
+}
+
+.dreamRing:nth-child(2){
+  width:600px;
+  height:600px;
+  animation-delay:2s;
+}
+
+.dreamRing:nth-child(3){
+  width:950px;
+  height:950px;
+  animation-delay:4s;
+}
+
+@keyframes ringPulse{
+
+  0%,100%{
+    opacity:.15;
+    transform:translate(-50%,-50%) scale(.95);
+  }
+
+  50%{
+    opacity:.55;
+    transform:translate(-50%,-50%) scale(1.03);
+  }
+
+}
+
+/* =========================================================
+DREAM INTRO
+========================================================= */
+
+.intro{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#000;
+  animation:introFade 2s ease 6.5s forwards;
+}
+
+.introContent{
+  width:min(900px,90%);
+  text-align:center;
+}
+
+.introWhisper{
+  color:#555;
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  opacity:0;
+  animation:
+    whisperIn 2s ease .5s forwards,
+    whisperOut 1.5s ease 4.5s forwards;
+}
+
+.introTitle{
+  margin-top:30px;
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(35px,8vw,95px);
+  font-weight:800;
+  letter-spacing:-4px;
+  opacity:0;
+  transform:scale(1.08);
+  animation:
+    titleIn 2.5s cubic-bezier(.2,.7,.2,1) 1.4s forwards,
+    titleOut 1.5s ease 4.8s forwards;
+}
+
+.introTitle span{
+  color:var(--red);
+}
+
+.introLine{
+  width:0;
+  height:1px;
+  margin:25px auto;
+  background:var(--red);
+  box-shadow:0 0 25px rgba(229,9,20,.8);
+  animation:
+    lineIn 2s ease 2.7s forwards,
+    lineOut 1s ease 5s forwards;
+}
+
+.introText{
+  color:#777;
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  opacity:0;
+  animation:
+    textIn 2s ease 3.1s forwards,
+    textOut 1s ease 5.2s forwards;
+}
+
+.introText strong{
+  color:#aaa;
+}
+
+@keyframes whisperIn{
+  to{
+    opacity:1;
+  }
+}
+
+@keyframes whisperOut{
+  to{
+    opacity:0;
+  }
+}
+
+@keyframes titleIn{
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+@keyframes titleOut{
+  to{
+    opacity:0;
+    transform:scale(.95);
+  }
+}
+
+@keyframes lineIn{
+  to{
+    width:260px;
+  }
+}
+
+@keyframes lineOut{
+  to{
+    width:0;
+  }
+}
+
+@keyframes textIn{
+  to{
+    opacity:1;
+  }
+}
+
+@keyframes textOut{
+  to{
+    opacity:0;
+  }
+}
+
+@keyframes introFade{
+  to{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+}
+
+/* =========================================================
+MAIN COUNTDOWN
+========================================================= */
+
+.countdownPage{
+  position:absolute;
+  inset:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  animation:pageIn 2.5s ease 5.8s forwards;
+}
+
+@keyframes pageIn{
+  from{
+    opacity:0;
+    transform:scale(1.04);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+.countdownContainer{
+  width:min(1200px,92%);
+  text-align:center;
+}
+
+/* =========================================================
+BRAND
+========================================================= */
+
+.brandMark{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:35px;
+}
+
+.brandLogo{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(229,9,20,.6);
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:11px;
+  font-weight:900;
+  background:rgba(0,0,0,.5);
+}
+
+.brandText{
+  text-align:left;
+}
+
+.brandText strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+  letter-spacing:2px;
+}
+
+.brandText span{
+  display:block;
+  margin-top:3px;
+  color:#555;
+  font-size:7px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+/* =========================================================
+HEADLINE
+========================================================= */
+
+.kicker{
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:5px;
+  text-transform:uppercase;
+}
+
+h1{
+  margin-top:15px;
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(35px,7vw,90px);
+  line-height:.95;
+  letter-spacing:-4px;
+}
+
+h1 span{
+  color:var(--red);
+}
+
+.subtitle{
+  max-width:650px;
+  margin:20px auto 0;
+  color:#666;
+  font-size:10px;
+  line-height:1.9;
+  letter-spacing:.5px;
+}
+
+/* =========================================================
+COUNTDOWN
+========================================================= */
+
+.countdown{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  max-width:900px;
+  margin:45px auto 0;
+}
+
+.timeBox{
+  position:relative;
+  padding:25px 10px 22px;
+  border:1px solid var(--line);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.005)
+    );
+  box-shadow:
+    inset 0 0 30px rgba(255,255,255,.01);
+}
+
+.timeBox::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:1px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(229,9,20,.7),
+    transparent
+  );
+}
+
+.time{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(32px,6vw,68px);
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-2px;
+  text-shadow:
+    0 0 30px rgba(229,9,20,.15);
+}
+
+.label{
+  display:block;
+  margin-top:12px;
+  color:#555;
+  font-size:6px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+/* =========================================================
+LAUNCH DATE
+========================================================= */
+
+.launchDate{
+  margin-top:25px;
+  color:#555;
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.launchDate strong{
+  color:#aaa;
+}
+
+/* =========================================================
+DREAM MESSAGE
+========================================================= */
+
+.dreamMessage{
+  max-width:700px;
+  margin:35px auto 0;
+  padding:18px 25px;
+  border-left:1px solid var(--red);
+  border-right:1px solid rgba(229,9,20,.15);
+  background:rgba(229,9,20,.025);
+}
+
+.dreamMessage p{
+  color:#777;
+  font-size:9px;
+  line-height:1.9;
+}
+
+.dreamMessage strong{
+  display:block;
+  margin-top:8px;
+  color:#aaa;
+  font-family:Orbitron,sans-serif;
+  font-size:7px;
+  letter-spacing:2px;
+}
+
+/* =========================================================
+BOTTOM
+========================================================= */
+
+.bottom{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:30px;
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  color:#444;
+  font-size:6px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+.bottom span::before{
+  content:"";
+  display:inline-block;
+  width:4px;
+  height:4px;
+  margin-right:7px;
+  border-radius:50%;
+  background:var(--red);
+}
+
+/* =========================================================
+SKIP INTRO
+========================================================= */
+
+.skip{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:200;
+  padding:9px 12px;
+  border:1px solid var(--line);
+  background:rgba(0,0,0,.7);
+  color:#555;
+  font-size:6px;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  cursor:pointer;
+  opacity:0;
+  animation:skipIn 1s ease 2s forwards;
+}
+
+.skip:hover{
+  color:#fff;
+  border-color:rgba(229,9,20,.4);
+}
+
+@keyframes skipIn{
+  to{
+    opacity:1;
+  }
+}
+
+/* =========================================================
+LAUNCH FLASH
+========================================================= */
+
+.launchFlash{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  display:none;
+  place-items:center;
+  background:#000;
+}
+
+.launchFlash.active{
+  display:grid;
+  animation:launchFlash 4s ease forwards;
+}
+
+.launchFlashContent{
+  text-align:center;
+}
+
+.launchFlashContent small{
+  color:#555;
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+  letter-spacing:5px;
+}
+
+.launchFlashContent h2{
+  margin-top:20px;
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(35px,8vw,90px);
+  letter-spacing:-3px;
+}
+
+.launchFlashContent h2 span{
+  color:var(--red);
+}
+
+@keyframes launchFlash{
+
+  0%{
+    opacity:0;
+  }
+
+  20%{
+    opacity:1;
+  }
+
+  70%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:0;
+  }
+
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media(max-width:650px){
+
+  .countdown{
+    gap:6px;
+    margin-top:32px;
+  }
+
+  .timeBox{
+    padding:18px 5px;
+  }
+
+  .time{
+    font-size:29px;
+  }
+
+  .label{
+    font-size:5px;
+    letter-spacing:1px;
+  }
+
+  .subtitle{
+    font-size:8px;
+  }
+
+  .dreamMessage{
+    margin-top:25px;
+    padding:14px;
+  }
+
+  .dreamMessage p{
+    font-size:7px;
+  }
+
+  .bottom{
+    bottom:18px;
+    gap:12px;
+    font-size:5px;
+  }
+
+  .introTitle{
+    letter-spacing:-2px;
+  }
+
+}
+
+/* =========================================================
+ACCESSIBILITY
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+DREAM SCENE
+===================================================== -->
+
+<div class="scene">
+
+  <div class="dreamParticles" id="particles"></div>
+
+  <div class="dreamRing"></div>
+  <div class="dreamRing"></div>
+  <div class="dreamRing"></div>
+
+</div>
+
+
+<!-- =====================================================
+CINEMATIC DREAM INTRO
+===================================================== -->
+
+<section class="intro" id="intro">
+
+  <div class="introContent">
+
+    <div class="introWhisper">
+      Somewhere between sleeping and waking...
+    </div>
+
+    <div class="introTitle">
+      <span>A</span> DREAM
+    </div>
+
+    <div class="introLine"></div>
+
+    <div class="introText">
+      becomes <strong>a story.</strong>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+SKIP
+===================================================== -->
+
+<button
+  class="skip"
+  id="skipButton"
+  onclick="skipIntro()"
+>
+  Skip Dream
+</button>
+
+
+<!-- =====================================================
+MAIN COUNTDOWN
+===================================================== -->
+
+<main class="countdownPage">
+
+  <div class="countdownContainer">
+
+
+    <!-- BRAND -->
+
+    <div class="brandMark">
+
+      <div class="brandLogo">
+        CR
+      </div>
+
+      <div class="brandText">
+
+        <strong>
+          CROWRULES
+        </strong>
+
+        <span>
+          Dream World
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- HEADLINE -->
+
+    <div class="kicker">
+      THE DREAM IS COMING
+    </div>
+
+    <h1>
+      THE WORLD<br>
+      <span>BEGINS.</span>
+    </h1>
+
+    <p class="subtitle">
+      A place for dreams that refuse to stay dreams.
+      Stories. Characters. Worlds. Nightmares.
+      Ideas waiting for someone to bring them to life.
+    </p>
+
+
+    <!-- COUNTDOWN -->
+
+    <div class="countdown">
+
+      <div class="timeBox">
+
+        <span
+          class="time"
+          id="days"
+        >
+          000
+        </span>
+
+        <span class="label">
+          Days
+        </span>
+
+      </div>
+
+
+      <div class="timeBox">
+
+        <span
+          class="time"
+          id="hours"
+        >
+          00
+        </span>
+
+        <span class="label">
+          Hours
+        </span>
+
+      </div>
+
+
+      <div class="timeBox">
+
+        <span
+          class="time"
+          id="minutes"
+        >
+          00
+        </span>
+
+        <span class="label">
+          Minutes
+        </span>
+
+      </div>
+
+
+      <div class="timeBox">
+
+        <span
+          class="time"
+          id="seconds"
+        >
+          00
+        </span>
+
+        <span class="label">
+          Seconds
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- DATE -->
+
+    <div class="launchDate">
+
+      Launching
+
+      <strong>
+        January 1, 2028
+      </strong>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div class="dreamMessage">
+
+      <p>
+        “We don't rush dreams. We develop them.
+        We build them together. And when the time is right,
+        we bring them to life.”
+      </p>
+
+      <strong>
+        CROWRULES DREAM WORLD
+      </strong>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<!-- =====================================================
+BOTTOM STATUS
+===================================================== -->
+
+<div class="bottom">
+
+  <span>
+    A New World
+  </span>
+
+  <span>
+    A New Year
+  </span>
+
+  <span>
+    Your Dream
+  </span>
+
+</div>
+
+
+<!-- =====================================================
+LAUNCH FLASH
+===================================================== -->
+
+<div
+  class="launchFlash"
+  id="launchFlash"
+>
+
+  <div class="launchFlashContent">
+
+    <small>
+      THE WAIT IS OVER
+    </small>
+
+    <h2>
+      ENTER THE <span>DREAM</span>
+    </h2>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/*
+============================================================
+CROWRULES DREAM WORLD
+CINEMATIC LAUNCH COUNTDOWN
+============================================================
+
+TARGET:
+
+January 1, 2028
+
+The countdown uses the visitor's local clock.
+
+When the target is reached:
+
+1. Countdown reaches zero.
+2. Cinematic launch screen appears.
+3. After the launch animation,
+   browser automatically navigates to:
+
+   home.html
+
+============================================================
+*/
+
+
+/* ========================================================
+TARGET DATE
+======================================================== */
+
+const launchDate =
+  new Date("January 1, 2028 00:00:00");
+
+
+/* ========================================================
+ELEMENTS
+======================================================== */
+
+const daysEl =
+  document.getElementById("days");
+
+const hoursEl =
+  document.getElementById("hours");
+
+const minutesEl =
+  document.getElementById("minutes");
+
+const secondsEl =
+  document.getElementById("seconds");
+
+const launchFlash =
+  document.getElementById("launchFlash");
+
+const intro =
+  document.getElementById("intro");
+
+const skipButton =
+  document.getElementById("skipButton");
+
+
+/* ========================================================
+FORMAT NUMBER
+======================================================== */
+
+function pad(number,length){
+
+  return String(number)
+    .padStart(length,"0");
+
+}
+
+
+/* ========================================================
+COUNTDOWN
+======================================================== */
+
+let launched = false;
+
+
+function updateCountdown(){
+
+  const now =
+    new Date();
+
+
+  const difference =
+    launchDate.getTime() -
+    now.getTime();
+
+
+  /*
+  ================================================
+  LAUNCH
+  ================================================
+  */
+
+  if(difference <= 0){
+
+    if(!launched){
+
+      launched = true;
+
+      daysEl.textContent = "000";
+      hoursEl.textContent = "00";
+      minutesEl.textContent = "00";
+      secondsEl.textContent = "00";
+
+      launchSequence();
+
+    }
+
+    return;
+
+  }
+
+
+  const totalSeconds =
+    Math.floor(
+      difference / 1000
+    );
+
+
+  const days =
+    Math.floor(
+      totalSeconds / 86400
+    );
+
+
+  const hours =
+    Math.floor(
+      (totalSeconds % 86400) / 3600
+    );
+
+
+  const minutes =
+    Math.floor(
+      (totalSeconds % 3600) / 60
+    );
+
+
+  const seconds =
+    totalSeconds % 60;
+
+
+  daysEl.textContent =
+    pad(days,3);
+
+
+  hoursEl.textContent =
+    pad(hours,2);
+
+
+  minutesEl.textContent =
+    pad(minutes,2);
+
+
+  secondsEl.textContent =
+    pad(seconds,2);
+
+}
+
+
+/* ========================================================
+LAUNCH SEQUENCE
+======================================================== */
+
+function launchSequence(){
+
+  launchFlash.classList.add("active");
+
+
+  /*
+  Give the cinematic launch message
+  time to play before entering home.html.
+  */
+
+  setTimeout(() => {
+
+    window.location.href =
+      "home.html";
+
+  },4000);
+
+}
+
+
+/* ========================================================
+DREAM PARTICLES
+======================================================== */
+
+function createParticles(){
+
+  const container =
+    document.getElementById("particles");
+
+
+  const amount =
+    window.innerWidth < 650
+      ? 55
+      : 100;
+
+
+  for(let i=0;i<amount;i++){
+
+    const particle =
+      document.createElement("div");
+
+
+    particle.className =
+      "particle";
+
+
+    particle.style.left =
+      Math.random() * 100 + "%";
+
+
+    particle.style.top =
+      Math.random() * 100 + "%";
+
+
+    particle.style.setProperty(
+      "--driftX",
+      ((Math.random() - .5) * 35) + "vw"
+    );
+
+
+    particle.style.animationDuration =
+      (12 + Math.random() * 25) + "s";
+
+
+    particle.style.animationDelay =
+      (-Math.random() * 30) + "s";
+
+
+    particle.style.width =
+      (Math.random() > .85 ? 3 : 1.5) + "px";
+
+
+    particle.style.height =
+      particle.style.width;
+
+
+    container.appendChild(
+      particle
+    );
+
+  }
+
+}
+
+
+/* ========================================================
+SKIP INTRO
+======================================================== */
+
+function skipIntro(){
+
+  intro.style.animation =
+    "none";
+
+  intro.style.opacity =
+    "0";
+
+  intro.style.visibility =
+    "hidden";
+
+  intro.style.pointerEvents =
+    "none";
+
+
+  skipButton.style.display =
+    "none";
+
+}
+
+
+/* ========================================================
+START
+======================================================== */
+
+createParticles();
+
+updateCountdown();
+
+setInterval(
+  updateCountdown,
+  1000
+);
+
+
+/* ========================================================
+PREVENT ACCIDENTAL SCROLLING
+======================================================== */
+
+document.addEventListener(
+  "wheel",
+  event => {
+
+    event.preventDefault();
+
+  },
+  {passive:false}
+);
+
+
+/* ========================================================
+KEYBOARD
+======================================================== */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Escape"){
+
+      skipIntro();
+
+    }
+
+  }
+);
+
+
+/* ========================================================
+VISIBILITY UPDATE
+======================================================== */
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    if(!document.hidden){
+
+      updateCountdown();
+
+    }
+
+  }
+);
+
+
+/*
+============================================================
+IMPORTANT:
+
+The countdown is intentionally based on the browser clock.
+
+For a production launch, the authoritative launch state
+should ideally come from a server/database so that a visitor
+cannot manipulate their local system clock to alter the
+experience.
+
+Possible future Supabase table:
+
+dream_world_launch
+
+
+id
+launch_name
+launch_at
+status
+redirect_url
+intro_enabled
+countdown_enabled
+created_at
+updated_at
+
+
+Example:
+
+launch_at:
+2028-01-01T00:00:00Z
+
+status:
+scheduled
+
+redirect_url:
+home.html
+
+
+A server-authoritative timestamp can then be used to
+calculate the remaining time.
+
+============================================================
+OPTIONAL FUTURE FEATURES:
+
+- Live Supabase launch status
+- Launch announcements
+- Email signup
+- Dream World trailer
+- Background cinematic video
+- Ambient audio
+- "Enter The Dream" button
+- Time-zone aware launch
+- Launch-day fireworks/glitch sequence
+- Creator submission opening animation
+- January 1, 2028 automatic site activation
+- Automatic transition from countdown page
+  to the full Dream World homepage
+============================================================
+*/
+
+</script>
+
+</body>
+</html>
