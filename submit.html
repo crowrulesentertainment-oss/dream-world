@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Submit Your Dream — CrowRules Dream World</title>
+
+<meta name="theme-color" content="#030305">
+<meta name="description" content="Submit your dream, idea, nightmare, character or story concept to CrowRules Dream World.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --black:#030305;
+    --black2:#08070c;
+    --panel:#0b090f;
+    --red:#e0003b;
+    --red2:#ff174f;
+    --red-dark:#65001f;
+    --white:#f7f4f6;
+    --muted:#aaa5ad;
+    --dim:#716c74;
+    --border:rgba(255,255,255,.09);
+    --green:#49d99a;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+
+    color:var(--white);
+    font-family:Montserrat,sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(130,0,50,.25),
+            transparent 40%
+        ),
+        #030305;
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:100;
+    pointer-events:none;
+
+    opacity:.035;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.8) 0,
+            rgba(255,255,255,.8) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+}
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:-5;
+}
+
+.moon{
+    position:absolute;
+
+    width:550px;
+    height:550px;
+
+    left:50%;
+    top:-300px;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.12),
+            rgba(255,0,70,.12) 30%,
+            rgba(60,0,35,.08) 55%,
+            transparent 72%
+        );
+
+    box-shadow:
+        0 0 100px rgba(255,0,70,.12),
+        0 0 300px rgba(255,0,70,.06);
+}
+
+.fog{
+    position:absolute;
+
+    width:140%;
+    height:300px;
+
+    left:-20%;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,255,255,.035),
+            transparent 70%
+        );
+
+    filter:blur(40px);
+}
+
+.fog.one{
+    top:35%;
+    animation:fog 20s ease-in-out infinite;
+}
+
+.fog.two{
+    top:70%;
+    animation:fog 28s ease-in-out infinite reverse;
+}
+
+.stars{
+    position:absolute;
+    inset:0;
+}
+
+.star{
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    opacity:.45;
+
+    animation:
+        twinkle var(--speed)
+        ease-in-out infinite alternate;
+}
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.nav{
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:74px;
+
+    z-index:60;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 5%;
+
+    background:rgba(3,3,5,.76);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    color:white;
+    text-decoration:none;
+}
+
+.logo-icon{
+    width:38px;
+    height:38px;
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid rgba(255,0,70,.5);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,0,70,.22),
+            transparent 70%
+        );
+
+    box-shadow:
+        0 0 25px rgba(255,0,70,.15);
+}
+
+.logo-icon span{
+    font-size:20px;
+}
+
+.logo-name{
+    font-family:Orbitron,sans-serif;
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.logo-name small{
+    display:block;
+
+    color:#ff315c;
+
+    font-size:8px;
+    letter-spacing:4px;
+
+    margin-top:3px;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:24px;
+}
+
+.nav-links a{
+    color:#aaa5ad;
+    text-decoration:none;
+
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1px;
+
+    transition:.25s;
+}
+
+.nav-links a:hover{
+    color:#fff;
+}
+
+.nav-home{
+    border:1px solid rgba(255,255,255,.13);
+    padding:10px 15px;
+}
+
+.menu{
+    display:none;
+
+    border:0;
+    background:none;
+
+    color:#fff;
+
+    font-size:25px;
+}
+
+/* =========================================
+   PAGE
+========================================= */
+
+.page{
+    padding-top:74px;
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero{
+    min-height:420px;
+
+    display:flex;
+    align-items:center;
+
+    padding:90px 7% 65px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.hero:after{
+    content:"";
+
+    position:absolute;
+
+    right:-150px;
+    top:50px;
+
+    width:550px;
+    height:550px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    box-shadow:
+        inset 0 0 100px rgba(255,0,70,.08),
+        0 0 100px rgba(255,0,70,.08);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+
+    max-width:760px;
+}
+
+.label{
+    color:#ff315c;
+
+    font-family:Orbitron,sans-serif;
+
+    font-size:10px;
+    letter-spacing:4px;
+
+    margin-bottom:16px;
+}
+
+.hero h1{
+    font-family:Orbitron,sans-serif;
+
+    font-size:
+        clamp(44px,7vw,82px);
+
+    line-height:.95;
+
+    letter-spacing:-3px;
+
+    margin-bottom:22px;
+}
+
+.hero h1 span{
+    color:#ff174f;
+
+    text-shadow:
+        0 0 35px rgba(255,0,70,.25);
+}
+
+.hero p{
+    max-width:650px;
+
+    color:#aaa5ad;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+/* =========================================
+   FORM AREA
+========================================= */
+
+.form-section{
+    padding:35px 7% 100px;
+}
+
+.form-layout{
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,2fr)
+        minmax(280px,1fr);
+
+    gap:25px;
+
+    align-items:start;
+}
+
+/* =========================================
+   FORM PANEL
+========================================= */
+
+.form-panel{
+    padding:38px;
+
+    border:1px solid var(--border);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.012)
+        );
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.22);
+}
+
+.form-title{
+    font-family:Orbitron,sans-serif;
+
+    font-size:21px;
+
+    margin-bottom:8px;
+}
+
+.form-subtitle{
+    color:#77727a;
+
+    font-size:11px;
+
+    line-height:1.7;
+
+    margin-bottom:32px;
+}
+
+/* =========================================
+   FIELDS
+========================================= */
+
+.field{
+    margin-bottom:23px;
+}
+
+.field-row{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:15px;
+}
+
+label{
+    display:block;
+
+    color:#d8d3d8;
+
+    font-size:10px;
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    margin-bottom:8px;
+}
+
+.required{
+    color:#ff315c;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    outline:none;
+
+    background:
+        rgba(0,0,0,.30);
+
+    color:#fff;
+
+    padding:14px;
+
+    font-family:Montserrat,sans-serif;
+
+    font-size:12px;
+
+    transition:.25s;
+}
+
+input,
+select{
+    height:48px;
+}
+
+textarea{
+    min-height:170px;
+
+    resize:vertical;
+
+    line-height:1.7;
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:#56515a;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:rgba(255,0,60,.55);
+
+    box-shadow:
+        0 0 0 2px rgba(255,0,60,.06);
+}
+
+select{
+    appearance:none;
+
+    background-image:
+        linear-gradient(45deg,transparent 50%,#888 50%),
+        linear-gradient(135deg,#888 50%,transparent 50%);
+
+    background-position:
+        calc(100% - 18px) 20px,
+        calc(100% - 13px) 20px;
+
+    background-size:
+        5px 5px,
+        5px 5px;
+
+    background-repeat:no-repeat;
+}
+
+/* =========================================
+   DREAM TYPE
+========================================= */
+
+.type-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:9px;
+}
+
+.type-option{
+    position:relative;
+}
+
+.type-option input{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+}
+
+.type-option label{
+    min-height:65px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:10px;
+
+    margin:0;
+
+    cursor:pointer;
+
+    border:1px solid rgba(255,255,255,.09);
+
+    background:rgba(255,255,255,.018);
+
+    color:#807b83;
+
+    font-size:9px;
+
+    transition:.25s;
+}
+
+.type-option input:checked + label{
+    border-color:rgba(255,0,60,.6);
+
+    color:#fff;
+
+    background:
+        rgba(150,0,40,.16);
+
+    box-shadow:
+        inset 0 0 20px rgba(255,0,60,.05);
+}
+
+.type-option label:hover{
+    border-color:rgba(255,0,60,.35);
+    color:#fff;
+}
+
+/* =========================================
+   VISIBILITY
+========================================= */
+
+.visibility{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:12px;
+}
+
+.visibility-option{
+    position:relative;
+}
+
+.visibility-option input{
+    position:absolute;
+    opacity:0;
+}
+
+.visibility-option label{
+    padding:18px;
+
+    margin:0;
+
+    min-height:95px;
+
+    cursor:pointer;
+
+    border:1px solid rgba(255,255,255,.09);
+
+    background:rgba(255,255,255,.018);
+
+    transition:.25s;
+}
+
+.visibility-option label strong{
+    display:block;
+
+    color:#fff;
+
+    font-size:11px;
+
+    margin-bottom:7px;
+}
+
+.visibility-option label span{
+    display:block;
+
+    color:#706b73;
+
+    font-size:9px;
+
+    line-height:1.6;
+
+    font-weight:400;
+}
+
+.visibility-option input:checked + label{
+    border-color:rgba(255,0,60,.55);
+
+    background:rgba(150,0,40,.13);
+}
+
+/* =========================================
+   RIGHTS CHECKBOX
+========================================= */
+
+.check-row{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+
+    padding:17px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    background:rgba(255,255,255,.018);
+}
+
+.check-row input{
+    width:17px;
+    height:17px;
+
+    margin-top:1px;
+
+    accent-color:#e0003b;
+}
+
+.check-row label{
+    margin:0;
+
+    color:#858088;
+
+    font-size:9px;
+
+    line-height:1.7;
+
+    font-weight:500;
+
+    letter-spacing:0;
+}
+
+.check-row label strong{
+    color:#ddd;
+}
+
+/* =========================================
+   ATTACHMENT
+========================================= */
+
+.file-drop{
+    border:1px dashed rgba(255,255,255,.15);
+
+    min-height:125px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:25px;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.file-drop:hover{
+    border-color:rgba(255,0,60,.45);
+    background:rgba(255,0,60,.025);
+}
+
+.file-drop input{
+    display:none;
+}
+
+.file-content strong{
+    display:block;
+
+    font-family:Orbitron,sans-serif;
+
+    font-size:11px;
+
+    margin-bottom:8px;
+}
+
+.file-content span{
+    color:#66616a;
+
+    font-size:9px;
+
+    line-height:1.6;
+}
+
+.file-name{
+    color:#ff315c!important;
+
+    margin-top:7px;
+}
+
+/* =========================================
+   SUBMIT
+========================================= */
+
+.submit-area{
+    margin-top:30px;
+}
+
+.submit-button{
+    width:100%;
+
+    height:55px;
+
+    border:0;
+
+    cursor:pointer;
+
+    background:#d9003b;
+
+    color:#fff;
+
+    font-family:Orbitron,sans-serif;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    box-shadow:
+        0 0 30px rgba(255,0,60,.18);
+
+    transition:.3s;
+}
+
+.submit-button:hover{
+    background:#f00045;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 10px 40px rgba(255,0,60,.30);
+}
+
+.submit-button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.side{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.info-card{
+    padding:27px;
+
+    border:1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+.info-number{
+    color:#ff315c;
+
+    font-family:Orbitron,sans-serif;
+
+    font-size:26px;
+
+    margin-bottom:15px;
+}
+
+.info-card h3{
+    font-family:Orbitron,sans-serif;
+
+    font-size:15px;
+
+    margin-bottom:10px;
+}
+
+.info-card p{
+    color:#7d7880;
+
+    font-size:10px;
+
+    line-height:1.8;
+}
+
+.quote{
+    padding:32px 27px;
+
+    border:1px solid rgba(255,0,60,.22);
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(255,0,60,.12),
+            transparent 60%
+        );
+}
+
+.quote p{
+    color:#c5c0c5;
+
+    font-family:Orbitron,sans-serif;
+
+    font-size:13px;
+
+    line-height:1.8;
+}
+
+.quote span{
+    display:block;
+
+    color:#ff315c;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    margin-top:18px;
+}
+
+/* =========================================
+   SUCCESS
+========================================= */
+
+.success{
+    display:none;
+
+    text-align:center;
+
+    padding:60px 30px;
+}
+
+.success.show{
+    display:block;
+}
+
+.success-icon{
+    width:75px;
+    height:75px;
+
+    display:grid;
+    place-items:center;
+
+    margin:0 auto 25px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(73,217,154,.5);
+
+    color:var(--green);
+
+    font-size:30px;
+
+    box-shadow:
+        0 0 35px rgba(73,217,154,.12);
+}
+
+.success h2{
+    font-family:Orbitron,sans-serif;
+
+    font-size:30px;
+
+    margin-bottom:15px;
+}
+
+.success p{
+    max-width:570px;
+
+    margin:auto;
+
+    color:#858088;
+
+    font-size:11px;
+
+    line-height:1.8;
+}
+
+.dream-id{
+    display:inline-block;
+
+    margin-top:22px;
+
+    padding:10px 15px;
+
+    border:1px solid rgba(255,0,60,.35);
+
+    color:#ff315c;
+
+    font-family:Orbitron,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer{
+    padding:35px 7% 25px;
+
+    border-top:1px solid rgba(255,255,255,.07);
+
+    background:#020204;
+}
+
+.footer-row{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+}
+
+.footer-copy,
+.footer-links a{
+    color:#57535a;
+
+    font-size:9px;
+}
+
+.footer-links{
+    display:flex;
+    gap:20px;
+}
+
+.footer-links a{
+    text-decoration:none;
+}
+
+.footer-links a:hover{
+    color:#ff315c;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .form-layout{
+        grid-template-columns:1fr;
+    }
+
+    .side{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .quote{
+        grid-column:1/-1;
+    }
+}
+
+@media(max-width:650px){
+
+    .hero{
+        padding:70px 25px 45px;
+    }
+
+    .form-section{
+        padding:25px 20px 70px;
+    }
+
+    .form-panel{
+        padding:25px 20px;
+    }
+
+    .field-row,
+    .visibility,
+    .type-grid,
+    .side{
+        grid-template-columns:1fr;
+    }
+
+    .quote{
+        grid-column:auto;
+    }
+
+    .hero h1{
+        font-size:46px;
+    }
+
+    .footer-row{
+        flex-direction:column;
+    }
+}
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes twinkle{
+    from{
+        opacity:.1;
+        transform:scale(.6);
+    }
+
+    to{
+        opacity:.85;
+        transform:scale(1.5);
+    }
+}
+
+@keyframes fog{
+    0%,100%{
+        transform:translateX(-7%);
+    }
+
+    50%{
+        transform:translateX(7%);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div class="background">
+
+    <div class="moon"></div>
+
+    <div class="stars" id="stars"></div>
+
+    <div class="fog one"></div>
+    <div class="fog two"></div>
+
+</div>
+
+
+<!-- =========================================
+     NAVIGATION
+========================================= -->
+
+<nav class="nav">
+
+    <a href="index.html" class="logo">
+
+        <div class="logo-icon">
+            <span>☽</span>
+        </div>
+
+        <div class="logo-name">
+            CROWRULES
+            <small>DREAM WORLD</small>
+        </div>
+
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="index.html">HOME</a>
+        <a href="dreams.html">DREAMS</a>
+        <a href="projects.html">PROJECTS</a>
+        <a href="creators.html">CREATORS</a>
+        <a href="how-it-works.html">HOW IT WORKS</a>
+
+        <a href="index.html" class="nav-home">
+            ← BACK
+        </a>
+
+    </div>
+
+
+    <button class="menu" id="menu">
+        ☰
+    </button>
+
+</nav>
+
+
+<main class="page">
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="label">
+            CROWRULES DREAM WORLD / CREATOR PORTAL
+        </div>
+
+        <h1>
+            BRING YOUR<br>
+            <span>DREAM.</span>
+        </h1>
+
+        <p>
+            It doesn't have to be polished.
+            It doesn't have to make sense.
+            It doesn't have to already be a movie.
+            Tell us what you dreamed — and let us discover
+            what it could become.
+        </p>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================
+     FORM
+========================================= -->
+
+<section class="form-section">
+
+    <div class="form-layout">
+
+
+        <!-- =================================
+             MAIN FORM
+        ================================= -->
+
+        <div class="form-panel" id="formPanel">
+
+            <div class="form-title">
+                DREAM SUBMISSION
+            </div>
+
+            <div class="form-subtitle">
+                Start with the idea. We'll worry about the
+                rest of the journey later.
+            </div>
+
+
+            <form id="dreamForm">
+
+
+                <!-- CREATOR -->
+
+                <div class="field-row">
+
+                    <div class="field">
+
+                        <label>
+                            YOUR NAME <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="creatorName"
+                            placeholder="How should we credit you?"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            EMAIL <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="creatorEmail"
+                            placeholder="you@example.com"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- TITLE -->
+
+                <div class="field">
+
+                    <label>
+                        DREAM TITLE
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="dreamTitle"
+                        placeholder="Give your dream a name..."
+                        required
+                    >
+
+                </div>
+
+
+                <!-- DREAM TYPE -->
+
+                <div class="field">
+
+                    <label>
+                        WHAT KIND OF DREAM IS THIS?
+                    </label>
+
+                    <div class="type-grid">
+
+                        <div class="type-option">
+
+                            <input
+                                type="radio"
+                                name="dreamType"
+                                id="typeStory"
+                                value="story"
+                                checked
+                            >
+
+                            <label for="typeStory">
+                                STORY
+                            </label>
+
+                        </div>
+
+
+                        <div class="type-option">
+
+                            <input
+                                type="radio"
+                                name="dreamType"
+                                id="typeNightmare"
+                                value="nightmare"
+                            >
+
+                            <label for="typeNightmare">
+                                NIGHTMARE
+                            </label>
+
+                        </div>
+
+
+                        <div class="type-option">
+
+                            <input
+                                type="radio"
+                                name="dreamType"
+                                id="typeCharacter"
+                                value="character"
+                            >
+
+                            <label for="typeCharacter">
+                                CHARACTER
+                            </label>
+
+                        </div>
+
+
+                        <div class="type-option">
+
+                            <input
+                                type="radio"
+                                name="dreamType"
+                                id="typeWorld"
+                                value="world"
+                            >
+
+                            <label for="typeWorld">
+                                WORLD
+                            </label>
+
+                        </div>
+
+
+                        <div class="type-option">
+
+                            <input
+                                type="radio"
+                                name="dreamType"
+                                id="typeScene"
+                                value="scene"
+                            >
+
+                            <label for="typeScene">
+                                SCENE
+                            </label>
+
+                        </div>
+
+
+                        <div class="type-option">
+
+                            <input
+                                type="radio"
+                                name="dreamType"
+                                id="typeOther"
+                                value="other"
+                            >
+
+                            <label for="typeOther">
+                                SOMETHING ELSE
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORMAT -->
+
+                <div class="field-row">
+
+                    <div class="field">
+
+                        <label>
+                            POSSIBLE FORMAT
+                        </label>
+
+                        <select id="format">
+
+                            <option value="">
+                                I'm not sure yet
+                            </option>
+
+                            <option value="film">
+                                Feature Film
+                            </option>
+
+                            <option value="series">
+                                TV / Streaming Series
+                            </option>
+
+                            <option value="short">
+                                Short Film
+                            </option>
+
+                            <option value="audio">
+                                Podcast / Audio Drama
+                            </option>
+
+                            <option value="book">
+                                Book / Novel
+                            </option>
+
+                            <option value="game">
+                                Game
+                            </option>
+
+                            <option value="other">
+                                Something Else
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            GENRE
+                        </label>
+
+                        <select id="genre">
+
+                            <option value="">
+                                Choose a genre
+                            </option>
+
+                            <option>
+                                Horror
+                            </option>
+
+                            <option>
+                                Science Fiction
+                            </option>
+
+                            <option>
+                                Fantasy
+                            </option>
+
+                            <option>
+                                Mystery
+                            </option>
+
+                            <option>
+                                Thriller
+                            </option>
+
+                            <option>
+                                Drama
+                            </option>
+
+                            <option>
+                                Comedy
+                            </option>
+
+                            <option>
+                                Romance
+                            </option>
+
+                            <option>
+                                Adventure
+                            </option>
+
+                            <option>
+                                Experimental
+                            </option>
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DREAM -->
+
+                <div class="field">
+
+                    <label>
+                        TELL US YOUR DREAM
+                        <span class="required">*</span>
+                    </label>
+
+                    <textarea
+                        id="dreamDescription"
+                        placeholder="What happened? What did you see? Who was there? What did it feel like? Tell us everything you remember..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- WHAT COULD IT BECOME -->
+
+                <div class="field">
+
+                    <label>
+                        WHAT WOULD YOU LIKE IT TO BECOME?
+                    </label>
+
+                    <textarea
+                        id="dreamVision"
+                        style="min-height:120px"
+                        placeholder="A movie? Series? Podcast? Book? Something completely different? You don't have to know yet."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- VISIBILITY -->
+
+                <div class="field">
+
+                    <label>
+                        DREAM VISIBILITY
+                    </label>
+
+                    <div class="visibility">
+
+                        <div class="visibility-option">
+
+                            <input
+                                type="radio"
+                                name="visibility"
+                                id="private"
+                                value="private"
+                                checked
+                            >
+
+                            <label for="private">
+
+                                <strong>
+                                    PRIVATE
+                                </strong>
+
+                                <span>
+                                    Only authorized CrowRules
+                                    development personnel can
+                                    view this submission.
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="visibility-option">
+
+                            <input
+                                type="radio"
+                                name="visibility"
+                                id="community"
+                                value="community"
+                            >
+
+                            <label for="community">
+
+                                <strong>
+                                    COMMUNITY
+                                </strong>
+
+                                <span>
+                                    Allow the dream to potentially
+                                    appear in the public Dream
+                                    Library, subject to review.
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FILE -->
+
+                <div class="field">
+
+                    <label>
+                        OPTIONAL ATTACHMENT
+                    </label>
+
+                    <label class="file-drop">
+
+                        <input
+                            type="file"
+                            id="attachment"
+                            accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.webp,.mp3,.wav,.mp4"
+                        >
+
+                        <div class="file-content">
+
+                            <strong>
+                                + ADD A FILE
+                            </strong>
+
+                            <span>
+                                Upload artwork, notes, recordings,
+                                sketches, scripts or anything that
+                                helps explain your dream.
+                            </span>
+
+                            <span
+                                class="file-name"
+                                id="fileName"
+                            ></span>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+
+                <!-- RIGHTS -->
+
+                <div class="field">
+
+                    <div class="check-row">
+
+                        <input
+                            type="checkbox"
+                            id="rights"
+                            required
+                        >
+
+                        <label for="rights">
+
+                            <strong>
+                                I understand that submitting a dream
+                                does not automatically transfer ownership
+                                of my rights to CrowRules Entertainment.
+                            </strong>
+
+                            I have read the applicable submission terms
+                            and understand that if CrowRules wants to
+                            develop my submission, additional written
+                            agreements may be required before development,
+                            production, licensing or compensation occurs.
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <div class="submit-area">
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                        id="submitButton"
+                    >
+                        SEND MY DREAM INTO THE WORLD
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- SUCCESS -->
+
+            <div class="success" id="success">
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+                <h2>
+                    DREAM RECEIVED.
+                </h2>
+
+                <p>
+                    Your dream has entered the Dream World.
+                    Keep your submission ID for your records.
+                    If CrowRules selects the idea for further
+                    development, the next step can be a conversation
+                    about the dream and where it could go.
+                </p>
+
+                <div class="dream-id" id="dreamId">
+                    DW-000000
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             SIDEBAR
+        ================================= -->
+
+        <aside class="side">
+
+
+            <div class="info-card">
+
+                <div class="info-number">
+                    01
+                </div>
+
+                <h3>
+                    DON'T OVERTHINK IT.
+                </h3>
+
+                <p>
+                    You don't need a screenplay.
+                    A paragraph is enough. A voice recording
+                    is enough. A strange image is enough.
+                    Start wherever the dream starts.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-number">
+                    02
+                </div>
+
+                <h3>
+                    YOUR DREAM CAN EVOLVE.
+                </h3>
+
+                <p>
+                    A dream submitted as a movie idea could
+                    eventually become a series, audio drama,
+                    novel, game or something nobody has
+                    imagined before.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-number">
+                    03
+                </div>
+
+                <h3>
+                    DEVELOPMENT TAKES TIME.
+                </h3>
+
+                <p>
+                    Some projects may develop quickly.
+                    Others may take years. A project can be
+                    paused, rewritten, funded and resumed
+                    as the right path becomes clear.
+                </p>
+
+            </div>
+
+
+            <div class="quote">
+
+                <p>
+                    “We don't rush dreams.
+                    We develop them.
+                    We build them together.
+                    And when the time is right,
+                    we bring them to life.”
+                </p>
+
+                <span>
+                    — CROWRULES DREAM WORLD
+                </span>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div class="footer-row">
+
+        <div class="footer-copy">
+
+            © <span id="year"></span>
+            CrowRules Entertainment —
+            CrowRules Dream World
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="creator-rights.html">
+                CREATOR RIGHTS
+            </a>
+
+            <a href="how-it-works.html">
+                HOW IT WORKS
+            </a>
+
+            <a href="faq.html">
+                FAQ
+            </a>
+
+            <a href="index.html">
+                DREAM WORLD
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================================
+   YEAR
+========================================= */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+
+/* =========================================
+   STAR FIELD
+========================================= */
+
+const stars =
+    document.getElementById("stars");
+
+for(let i=0;i<180;i++){
+
+    const star =
+        document.createElement("div");
+
+    star.className="star";
+
+    star.style.left =
+        Math.random()*100+"%";
+
+    star.style.top =
+        Math.random()*100+"%";
+
+    star.style.setProperty(
+        "--speed",
+        (2+Math.random()*5)+"s"
+    );
+
+    star.style.animationDelay =
+        (-Math.random()*5)+"s";
+
+    stars.appendChild(star);
+}
+
+
+/* =========================================
+   FILE NAME
+========================================= */
+
+const attachment =
+    document.getElementById("attachment");
+
+const fileName =
+    document.getElementById("fileName");
+
+attachment.addEventListener(
+    "change",
+    () => {
+
+        if(attachment.files.length){
+
+            fileName.textContent =
+                attachment.files[0].name;
+
+        }else{
+
+            fileName.textContent = "";
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   FORM
+========================================= */
+
+const form =
+    document.getElementById("dreamForm");
+
+const formPanel =
+    document.getElementById("formPanel");
+
+const success =
+    document.getElementById("success");
+
+const submitButton =
+    document.getElementById("submitButton");
+
+const dreamId =
+    document.getElementById("dreamId");
+
+
+form.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+        if(!form.checkValidity()){
+
+            form.reportValidity();
+
+            return;
+
+        }
+
+        submitButton.disabled=true;
+
+        submitButton.textContent =
+            "ENTERING THE DREAM WORLD...";
+
+
+        /*
+         * DEMO SUBMISSION
+         *
+         * Replace this section with:
+         *
+         * supabase
+         * .from("dream_submissions")
+         * .insert(...)
+         *
+         * when the Supabase backend is connected.
+         */
+
+
+        setTimeout(
+            () => {
+
+                const randomId =
+                    "DW-" +
+                    Math.floor(
+                        100000 +
+                        Math.random()*900000
+                    );
+
+                dreamId.textContent =
+                    randomId;
+
+                form.style.display="none";
+
+                success.classList.add("show");
+
+                window.scrollTo({
+                    top:formPanel.offsetTop-90,
+                    behavior:"smooth"
+                });
+
+            },
+            1300
+        );
+
+    }
+);
+
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+const menu =
+    document.getElementById("menu");
+
+menu.addEventListener(
+    "click",
+    () => {
+
+        const links =
+            document.querySelector(".nav-links");
+
+        if(
+            links.style.display === "flex"
+        ){
+
+            links.style.display="none";
+
+        }else{
+
+            links.style.display="flex";
+
+            links.style.position="absolute";
+
+            links.style.top="74px";
+
+            links.style.left="0";
+
+            links.style.right="0";
+
+            links.style.padding="20px";
+
+            links.style.flexDirection="column";
+
+            links.style.alignItems="stretch";
+
+            links.style.background=
+                "rgba(5,4,7,.98)";
+
+            links.style.borderBottom=
+                "1px solid rgba(255,255,255,.08)";
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   NAV SCROLL
+========================================= */
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const nav =
+            document.querySelector(".nav");
+
+        nav.style.background =
+            window.scrollY > 40
+            ? "rgba(3,3,5,.95)"
+            : "rgba(3,3,5,.76)";
+
+    }
+);
+
+</script>
+
+</body>
+</html>

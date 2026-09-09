@@ -1,0 +1,2873 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>CrowRules Dream World — Earnings</title>
+<meta name="theme-color" content="#050505">
+<meta name="description" content="CrowRules Dream World Creator Earnings Center — compensation, payments, revenue participation and financial records.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#050505;
+  --panel:#0b0b0e;
+  --panel2:#101014;
+  --panel3:#15151a;
+  --red:#e50914;
+  --red2:#ff3038;
+  --green:#43dc91;
+  --yellow:#f3c95b;
+  --blue:#69aaff;
+  --purple:#aa7cff;
+  --white:#f3f3f3;
+  --muted:#85858c;
+  --line:rgba(255,255,255,.09);
+  --shadow:0 20px 70px rgba(0,0,0,.45);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  color:var(--white);
+  font-family:Montserrat,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 8% 4%,rgba(229,9,20,.13),transparent 28%),
+    radial-gradient(circle at 92% 16%,rgba(100,0,0,.12),transparent 30%),
+    linear-gradient(180deg,#050505,#080808 55%,#040404);
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.025;
+  background-image:
+    linear-gradient(rgba(255,255,255,.7) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.7) 1px,transparent 1px);
+  background-size:50px 50px;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.container{
+  width:min(1480px,94%);
+  margin:auto;
+}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(5,5,5,.94);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.logo{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(229,9,20,.65);
+  background:#090909;
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:-2px;
+}
+
+.brand strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:14px;
+  letter-spacing:1.5px;
+}
+
+.brand span{
+  display:block;
+  margin-top:3px;
+  color:#777;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.navlinks{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:4px;
+}
+
+.navlinks a{
+  padding:10px 11px;
+  border-radius:6px;
+  color:#999;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+}
+
+.navlinks a:hover,
+.navlinks a.active{
+  color:#fff;
+  background:rgba(229,9,20,.1);
+}
+
+.navlinks a.active{
+  box-shadow:inset 0 -2px var(--red);
+}
+
+.mobileMenu{
+  display:none;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  background:none;
+  color:#fff;
+}
+
+/* HERO */
+
+.hero{
+  padding:42px 0 28px;
+}
+
+.breadcrumb{
+  color:#666;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.7px;
+  margin-bottom:17px;
+}
+
+.breadcrumb span{
+  color:var(--red2);
+}
+
+.heroGrid{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:25px;
+  align-items:end;
+}
+
+.eyebrow{
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2.5px;
+  margin-bottom:10px;
+}
+
+h1{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(30px,4vw,52px);
+  line-height:1.05;
+  letter-spacing:-1px;
+}
+
+.heroText{
+  max-width:850px;
+  margin-top:14px;
+  color:#999;
+  font-size:13px;
+  line-height:1.8;
+}
+
+.heroActions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+/* BUTTONS */
+
+.btn{
+  border:1px solid var(--line);
+  background:#101014;
+  color:#eee;
+  padding:11px 14px;
+  border-radius:6px;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+
+.btn:hover{
+  border-color:rgba(229,9,20,.5);
+}
+
+.btn.primary{
+  background:var(--red);
+  border-color:var(--red);
+  color:#fff;
+}
+
+.btn.primary:hover{
+  background:var(--red2);
+}
+
+.btn.green{
+  color:var(--green);
+  border-color:rgba(67,220,145,.3);
+  background:rgba(67,220,145,.04);
+}
+
+/* PROJECT STRIP */
+
+.projectStrip{
+  display:grid;
+  grid-template-columns:1fr repeat(5,auto);
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.018);
+}
+
+.projectTitle{
+  padding:17px 19px;
+}
+
+.projectTitle label,
+.projectStat label{
+  display:block;
+  color:#666;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:1.4px;
+  margin-bottom:6px;
+}
+
+.projectTitle strong{
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+}
+
+.projectStat{
+  min-width:125px;
+  padding:17px;
+  border-left:1px solid var(--line);
+}
+
+.projectStat strong{
+  font-size:11px;
+}
+
+/* MAIN */
+
+main{
+  padding:25px 0 80px;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 330px;
+  gap:21px;
+}
+
+.section{
+  margin-bottom:21px;
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  box-shadow:var(--shadow);
+}
+
+.sectionHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  padding:16px 18px;
+  border-bottom:1px solid var(--line);
+}
+
+.sectionHeader h2{
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.sectionHeader p{
+  color:#6d6d73;
+  font-size:9px;
+  margin-top:5px;
+}
+
+.sectionBody{
+  padding:18px;
+}
+
+/* FINANCIAL SUMMARY */
+
+.moneyGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:21px;
+}
+
+.moneyCard{
+  padding:18px;
+  border:1px solid var(--line);
+  background:#0b0b0e;
+}
+
+.moneyCard.featured{
+  border-color:rgba(67,220,145,.28);
+  background:
+    radial-gradient(circle at 90% 0,rgba(67,220,145,.08),transparent 45%),
+    #0b0b0e;
+}
+
+.moneyCard label{
+  display:block;
+  color:#666;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+}
+
+.moneyCard strong{
+  display:block;
+  margin-top:8px;
+  font-family:Orbitron,sans-serif;
+  font-size:25px;
+}
+
+.moneyCard strong.green{
+  color:var(--green);
+}
+
+.moneyCard p{
+  margin-top:6px;
+  color:#555;
+  font-size:8px;
+}
+
+/* AGREEMENT BANNER */
+
+.agreementBanner{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:20px;
+  padding:20px;
+  border:1px solid rgba(229,9,20,.3);
+  background:
+    radial-gradient(circle at 90% 0,rgba(229,9,20,.13),transparent 42%),
+    #0c0809;
+}
+
+.agreementBanner h3{
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+}
+
+.agreementBanner p{
+  max-width:700px;
+  color:#777;
+  font-size:9px;
+  line-height:1.7;
+  margin-top:7px;
+}
+
+.agreementCode{
+  padding:9px 11px;
+  border:1px solid rgba(229,9,20,.25);
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+}
+
+/* EARNING SOURCES */
+
+.sourceGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.sourceCard{
+  padding:16px;
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.sourceIcon{
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  margin-bottom:12px;
+  border:1px solid rgba(229,9,20,.25);
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:9px;
+}
+
+.sourceCard strong{
+  display:block;
+  font-size:10px;
+}
+
+.sourceCard p{
+  color:#666;
+  font-size:8px;
+  line-height:1.6;
+  margin-top:6px;
+}
+
+.sourceAmount{
+  margin-top:13px;
+  color:#ddd;
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+}
+
+/* PAYMENT TABLE */
+
+.paymentTable{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.paymentTable th{
+  color:#666;
+  font-size:8px;
+  font-weight:800;
+  text-align:left;
+  text-transform:uppercase;
+  letter-spacing:.9px;
+  padding:11px;
+  border-bottom:1px solid var(--line);
+}
+
+.paymentTable td{
+  padding:13px 11px;
+  border-bottom:1px solid var(--line);
+  color:#aaa;
+  font-size:9px;
+}
+
+.paymentTable tr:last-child td{
+  border-bottom:0;
+}
+
+.paymentName{
+  color:#eee;
+  font-weight:700;
+}
+
+.amount{
+  color:var(--green);
+  font-family:Orbitron,sans-serif;
+}
+
+.status{
+  display:inline-block;
+  padding:5px 7px;
+  border:1px solid rgba(67,220,145,.25);
+  background:rgba(67,220,145,.04);
+  color:var(--green);
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.status.pending{
+  color:var(--yellow);
+  border-color:rgba(243,201,91,.25);
+  background:rgba(243,201,91,.04);
+}
+
+.status.scheduled{
+  color:var(--blue);
+  border-color:rgba(105,170,255,.25);
+  background:rgba(105,170,255,.04);
+}
+
+/* REVENUE PARTICIPATION */
+
+.revenueBox{
+  padding:20px;
+  border:1px solid rgba(67,220,145,.2);
+  background:
+    radial-gradient(circle at 95% 5%,rgba(67,220,145,.08),transparent 40%),
+    #080c0b;
+}
+
+.revenueTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+}
+
+.revenueTop h3{
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+}
+
+.revenueTop p{
+  max-width:600px;
+  color:#777;
+  font-size:8px;
+  line-height:1.7;
+  margin-top:7px;
+}
+
+.percent{
+  color:var(--green);
+  font-family:Orbitron,sans-serif;
+  font-size:28px;
+  white-space:nowrap;
+}
+
+.progress{
+  height:6px;
+  margin-top:18px;
+  background:#171719;
+  overflow:hidden;
+}
+
+.progress span{
+  display:block;
+  width:38%;
+  height:100%;
+  background:var(--green);
+}
+
+.revenueStats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:16px;
+}
+
+.revenueStat{
+  padding:12px;
+  border:1px solid rgba(255,255,255,.06);
+}
+
+.revenueStat label{
+  display:block;
+  color:#555;
+  font-size:7px;
+  text-transform:uppercase;
+}
+
+.revenueStat strong{
+  display:block;
+  margin-top:6px;
+  font-size:10px;
+}
+
+/* SIDEBAR */
+
+.sidebar .section{
+  margin-bottom:18px;
+}
+
+.detailList{
+  display:grid;
+}
+
+.detail{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+  font-size:9px;
+}
+
+.detail:last-child{
+  border-bottom:0;
+}
+
+.detail span:first-child{
+  color:#666;
+}
+
+.detail span:last-child{
+  color:#ddd;
+  text-align:right;
+}
+
+.sideLinks{
+  display:grid;
+  gap:7px;
+}
+
+.sideLink{
+  display:block;
+  padding:10px 11px;
+  border:1px solid var(--line);
+  background:#09090b;
+  color:#888;
+  font-size:8px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+}
+
+.sideLink:hover{
+  color:#fff;
+  border-color:rgba(229,9,20,.4);
+}
+
+.notice{
+  padding:14px;
+  border:1px solid rgba(243,201,91,.2);
+  background:rgba(243,201,91,.035);
+}
+
+.notice strong{
+  display:block;
+  color:var(--yellow);
+  font-family:Orbitron,sans-serif;
+  font-size:9px;
+}
+
+.notice p{
+  color:#777;
+  font-size:8px;
+  line-height:1.7;
+  margin-top:8px;
+}
+
+/* ACCOUNT */
+
+.accountBox{
+  padding:16px;
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.accountRow{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:8px 0;
+  border-bottom:1px solid var(--line);
+  font-size:8px;
+}
+
+.accountRow:last-child{
+  border-bottom:0;
+}
+
+.accountRow span:first-child{
+  color:#666;
+}
+
+.accountRow span:last-child{
+  color:#ddd;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.84);
+  backdrop-filter:blur(10px);
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modalBox{
+  width:min(680px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border:1px solid rgba(229,9,20,.35);
+  background:#0b0b0e;
+  box-shadow:0 30px 100px rgba(0,0,0,.7);
+}
+
+.modalHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:17px 19px;
+  border-bottom:1px solid var(--line);
+}
+
+.modalHeader h2{
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+}
+
+.close{
+  border:0;
+  background:none;
+  color:#777;
+  font-size:20px;
+}
+
+.form{
+  padding:19px;
+}
+
+.field{
+  margin-bottom:14px;
+}
+
+.field label{
+  display:block;
+  color:#888;
+  font-size:8px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:7px;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:5px;
+  background:#060608;
+  color:#eee;
+  padding:11px;
+  outline:none;
+}
+
+.field textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:rgba(229,9,20,.6);
+}
+
+.check{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  color:#777;
+  font-size:8px;
+  line-height:1.6;
+}
+
+.check input{
+  margin-top:2px;
+  accent-color:var(--red);
+}
+
+.modalFooter{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  padding:14px 19px;
+  border-top:1px solid var(--line);
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:3000;
+  min-width:260px;
+  max-width:380px;
+  padding:13px 15px;
+  border:1px solid rgba(229,9,20,.35);
+  background:#0c0c0f;
+  box-shadow:0 15px 50px rgba(0,0,0,.6);
+  transform:translateY(120px);
+  opacity:0;
+  transition:.3s ease;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast strong{
+  display:block;
+  color:var(--red2);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:4px;
+}
+
+.toast span{
+  color:#aaa;
+  font-size:9px;
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid var(--line);
+  padding:35px 0;
+  color:#555;
+  font-size:9px;
+}
+
+.footerGrid{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.footerBrand{
+  color:#888;
+  font-family:Orbitron,sans-serif;
+  letter-spacing:1px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1150px){
+
+  .projectStrip{
+    grid-template-columns:1fr repeat(2,auto);
+  }
+
+  .projectStat:nth-last-child(-n+3){
+    border-top:1px solid var(--line);
+  }
+
+  .layout{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+  }
+
+  .sidebar .section{
+    margin-bottom:0;
+  }
+
+  .sidebar .section:first-child{
+    grid-column:1/-1;
+  }
+}
+
+@media(max-width:950px){
+
+  .navlinks{
+    display:none;
+  }
+
+  .mobileMenu{
+    display:block;
+  }
+
+  .moneyGrid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .sourceGrid{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:700px){
+
+  .heroGrid{
+    grid-template-columns:1fr;
+  }
+
+  .heroActions{
+    justify-content:flex-start;
+  }
+
+  .projectStrip{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .projectTitle{
+    grid-column:1/-1;
+    border-bottom:1px solid var(--line);
+  }
+
+  .projectStat{
+    min-width:0;
+  }
+
+  .projectStat:nth-child(3){
+    border-left:0;
+  }
+
+  .sidebar{
+    grid-template-columns:1fr;
+  }
+
+  .sourceGrid{
+    grid-template-columns:1fr;
+  }
+
+  .agreementBanner{
+    grid-template-columns:1fr;
+  }
+
+  .revenueTop{
+    flex-direction:column;
+  }
+
+  .revenueStats{
+    grid-template-columns:1fr;
+  }
+
+  .paymentTable{
+    min-width:650px;
+  }
+
+  .sectionBody{
+    overflow-x:auto;
+  }
+
+}
+
+@media(max-width:500px){
+
+  .container{
+    width:92%;
+  }
+
+  h1{
+    font-size:29px;
+  }
+
+  .moneyGrid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .sectionBody{
+    padding:14px;
+  }
+
+  .sectionHeader{
+    padding:14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="container nav">
+
+    <a href="index.html" class="brand">
+
+      <div class="logo">CR</div>
+
+      <div>
+        <strong>CROWRULES</strong>
+        <span>Dream World</span>
+      </div>
+
+    </a>
+
+    <nav class="navlinks">
+
+      <a href="creator-dashboard.html">Dashboard</a>
+      <a href="my-dreams.html">My Dreams</a>
+      <a href="my-projects.html">My Projects</a>
+      <a href="creative-room.html">Creative Room</a>
+      <a href="project-development.html">Development</a>
+      <a href="collaborators.html">Collaborators</a>
+      <a href="agreements.html">Agreements</a>
+      <a href="credits.html">Credits</a>
+      <a href="earnings.html" class="active">Earnings</a>
+
+    </nav>
+
+    <button
+      class="mobileMenu"
+      onclick="toggleMobileNav()"
+    >
+      MENU
+    </button>
+
+  </div>
+
+</header>
+
+
+<div class="container hero">
+
+  <div class="breadcrumb">
+    DREAM WORLD /
+    <span>EARNINGS</span>
+  </div>
+
+  <div class="heroGrid">
+
+    <div>
+
+      <div class="eyebrow">
+        CREATOR COMPENSATION CENTER
+      </div>
+
+      <h1>
+        When The Dream Becomes A Business.
+      </h1>
+
+      <p class="heroText">
+        The Earnings Center keeps approved compensation, payments and
+        revenue participation connected to the project agreements that
+        created them. Nothing here assumes a payment or royalty exists
+        unless it has been established by the applicable project agreement.
+      </p>
+
+    </div>
+
+    <div class="heroActions">
+
+      <button
+        class="btn primary"
+        onclick="openModal('paymentQuestionModal')"
+      >
+        Payment Question
+      </button>
+
+      <button
+        class="btn"
+        onclick="showToast('Statement','Your current earnings statement is being prepared from approved project records.')"
+      >
+        View Statement
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="container">
+
+  <div class="projectStrip">
+
+    <div class="projectTitle">
+
+      <label>Current Project</label>
+
+      <strong>
+        The City That Only Exists While You Sleep
+      </strong>
+
+    </div>
+
+    <div class="projectStat">
+      <label>Project</label>
+      <strong>DW-0001</strong>
+    </div>
+
+    <div class="projectStat">
+      <label>Agreement</label>
+      <strong>DW-0001-02</strong>
+    </div>
+
+    <div class="projectStat">
+      <label>Earned</label>
+      <strong id="earnedStrip">$2,500</strong>
+    </div>
+
+    <div class="projectStat">
+      <label>Paid</label>
+      <strong id="paidStrip">$1,500</strong>
+    </div>
+
+    <div class="projectStat">
+      <label>Pending</label>
+      <strong id="pendingStrip">$1,000</strong>
+    </div>
+
+  </div>
+
+</div>
+
+
+<main class="container">
+
+  <div class="moneyGrid">
+
+    <div class="moneyCard featured">
+
+      <label>Total Approved Compensation</label>
+
+      <strong class="green" id="totalCompensation">
+        $2,500.00
+      </strong>
+
+      <p>
+        Based on approved project records.
+      </p>
+
+    </div>
+
+
+    <div class="moneyCard">
+
+      <label>Paid To Date</label>
+
+      <strong id="paidAmount">
+        $1,500.00
+      </strong>
+
+      <p>
+        Completed payments.
+      </p>
+
+    </div>
+
+
+    <div class="moneyCard">
+
+      <label>Pending / Scheduled</label>
+
+      <strong id="pendingAmount">
+        $1,000.00
+      </strong>
+
+      <p>
+        Subject to applicable approval/payment terms.
+      </p>
+
+    </div>
+
+
+    <div class="moneyCard">
+
+      <label>Revenue Participation</label>
+
+      <strong>
+        Active
+      </strong>
+
+      <p>
+        Project-specific terms apply.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="layout">
+
+    <div>
+
+
+      <!-- AGREEMENT -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+
+            <h2>Compensation Agreement</h2>
+
+            <p>
+              The project agreement is the source of your compensation terms.
+            </p>
+
+          </div>
+
+          <a
+            href="agreements.html"
+            class="btn"
+          >
+            View Agreements
+          </a>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="agreementBanner">
+
+            <div>
+
+              <h3>
+                Dream World Creator Agreement
+              </h3>
+
+              <p>
+                Compensation, credit, participation and other financial
+                terms are governed by the applicable written agreement.
+                Project records shown here are an administrative summary
+                and do not replace the agreement itself.
+              </p>
+
+            </div>
+
+            <div class="agreementCode">
+              DW-0001-02
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- EARNING SOURCES -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+
+            <h2>Compensation Sources</h2>
+
+            <p>
+              Current approved compensation categories.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="sourceGrid">
+
+            <div class="sourceCard">
+
+              <div class="sourceIcon">
+                DEV
+              </div>
+
+              <strong>
+                Development Payment
+              </strong>
+
+              <p>
+                Compensation associated with approved development work.
+              </p>
+
+              <div class="sourceAmount">
+                $1,000.00
+              </div>
+
+            </div>
+
+
+            <div class="sourceCard">
+
+              <div class="sourceIcon">
+                CRE
+              </div>
+
+              <strong>
+                Creator Compensation
+              </strong>
+
+              <p>
+                Project-specific creator compensation established by agreement.
+              </p>
+
+              <div class="sourceAmount">
+                $1,500.00
+              </div>
+
+            </div>
+
+
+            <div class="sourceCard">
+
+              <div class="sourceIcon">
+                REV
+              </div>
+
+              <strong>
+                Revenue Participation
+              </strong>
+
+              <p>
+                Participation that may apply when contractual conditions are met.
+              </p>
+
+              <div class="sourceAmount">
+                TBD
+              </div>
+
+            </div>
+
+
+            <div class="sourceCard">
+
+              <div class="sourceIcon">
+                WRK
+              </div>
+
+              <strong>
+                Writing Compensation
+              </strong>
+
+              <p>
+                Available if separately established through a written agreement.
+              </p>
+
+              <div class="sourceAmount">
+                $0.00
+              </div>
+
+            </div>
+
+
+            <div class="sourceCard">
+
+              <div class="sourceIcon">
+                PRD
+              </div>
+
+              <strong>
+                Producer Compensation
+              </strong>
+
+              <p>
+                Production compensation based on assigned and approved duties.
+              </p>
+
+              <div class="sourceAmount">
+                $0.00
+              </div>
+
+            </div>
+
+
+            <div class="sourceCard">
+
+              <div class="sourceIcon">
+                BON
+              </div>
+
+              <strong>
+                Bonuses
+              </strong>
+
+              <p>
+                Milestone, performance or release bonuses if contractually established.
+              </p>
+
+              <div class="sourceAmount">
+                $0.00
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- PAYMENT HISTORY -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+
+            <h2>Payment History</h2>
+
+            <p>
+              Completed and scheduled project payments.
+            </p>
+
+          </div>
+
+          <button
+            class="btn"
+            onclick="downloadStatement()"
+          >
+            Statement
+          </button>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <table class="paymentTable">
+
+            <thead>
+
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+
+                <td>08/15/2026</td>
+
+                <td class="paymentName">
+                  Initial creator development payment
+                </td>
+
+                <td>
+                  Development
+                </td>
+
+                <td class="amount">
+                  $1,000.00
+                </td>
+
+                <td>
+                  <span class="status">
+                    Paid
+                  </span>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>09/01/2026</td>
+
+                <td class="paymentName">
+                  Creator project payment
+                </td>
+
+                <td>
+                  Creator
+                </td>
+
+                <td class="amount">
+                  $500.00
+                </td>
+
+                <td>
+                  <span class="status">
+                    Paid
+                  </span>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>09/30/2026</td>
+
+                <td class="paymentName">
+                  Development milestone payment
+                </td>
+
+                <td>
+                  Milestone
+                </td>
+
+                <td class="amount">
+                  $1,000.00
+                </td>
+
+                <td>
+                  <span class="status scheduled">
+                    Scheduled
+                  </span>
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+
+      <!-- REVENUE PARTICIPATION -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+
+            <h2>Revenue Participation</h2>
+
+            <p>
+              A separate area for project-specific participation terms.
+            </p>
+
+          </div>
+
+          <span class="status">
+            AGREEMENT ACTIVE
+          </span>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="revenueBox">
+
+            <div class="revenueTop">
+
+              <div>
+
+                <h3>
+                  Project Revenue Participation
+                </h3>
+
+                <p>
+                  This dashboard should display only participation that
+                  has actually been established in the applicable written
+                  agreement. Any definitions of revenue, deductions,
+                  accounting periods, payment timing and audit rights
+                  should come directly from that agreement.
+                </p>
+
+              </div>
+
+              <div class="percent">
+                5.0%
+              </div>
+
+            </div>
+
+            <div class="progress">
+              <span></span>
+            </div>
+
+            <div class="revenueStats">
+
+              <div class="revenueStat">
+
+                <label>Participation Rate</label>
+
+                <strong>
+                  5.0%
+                </strong>
+
+              </div>
+
+              <div class="revenueStat">
+
+                <label>Eligible Revenue</label>
+
+                <strong>
+                  Not Yet Reported
+                </strong>
+
+              </div>
+
+              <div class="revenueStat">
+
+                <label>Participation Paid</label>
+
+                <strong>
+                  $0.00
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- FUTURE REVENUE -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+
+            <h2>Revenue Sources</h2>
+
+            <p>
+              Potential project revenue streams that may become relevant after release.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="sourceGrid">
+
+            <div class="sourceCard">
+
+              <div class="sourceIcon">
+                TV
+              </div>
+
+              <strong>
+                Streaming / Distribution
+              </strong>
+
+              <p>
+                Revenue associated with licensed or distributed project content.
+              </p>
+
+              <div class="sourceAmount">
+                Pending
+              </div>
+
+            </div>
+
+
+            <div class="sourceCard">
+
+              <div class="sourceIcon">
+                LIC
+              </div>
+
+              <strong>
+                Licensing
+              </strong>
+
+              <p>
+                Potential licensing arrangements involving the finished property.
+              </p>
+
+              <div class="sourceAmount">
+                Pending
+              </div>
+
+            </div>
+
+
+            <div class="sourceCard">
+
+              <div class="sourceIcon">
+                MER
+              </div>
+
+              <strong>
+                Merchandising
+              </strong>
+
+              <p>
+                Merchandise participation only where established by agreement.
+              </p>
+
+              <div class="sourceAmount">
+                Pending
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+    </div>
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+
+      <!-- CREATOR ACCOUNT -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+            <h2>Creator Account</h2>
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="accountBox">
+
+            <div class="accountRow">
+              <span>Role</span>
+              <span>Dream Creator</span>
+            </div>
+
+            <div class="accountRow">
+              <span>Project</span>
+              <span>DW-0001</span>
+            </div>
+
+            <div class="accountRow">
+              <span>Agreement</span>
+              <span>Active</span>
+            </div>
+
+            <div class="accountRow">
+              <span>Credit</span>
+              <span>Approved</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- PAYMENT SUMMARY -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+            <h2>Payment Summary</h2>
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="detailList">
+
+            <div class="detail">
+              <span>Approved</span>
+              <span>$2,500.00</span>
+            </div>
+
+            <div class="detail">
+              <span>Paid</span>
+              <span style="color:var(--green);">
+                $1,500.00
+              </span>
+            </div>
+
+            <div class="detail">
+              <span>Pending</span>
+              <span style="color:var(--yellow);">
+                $1,000.00
+              </span>
+            </div>
+
+            <div class="detail">
+              <span>Revenue Share</span>
+              <span>5.0%</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- IMPORTANT -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+            <h2>Important</h2>
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="notice">
+
+            <strong>
+              AGREEMENT CONTROLS
+            </strong>
+
+            <p>
+              Dashboard figures are administrative summaries. They do not
+              create compensation rights by themselves. The applicable
+              signed agreement controls payment, credit, revenue
+              participation, accounting and other financial terms.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- QUICK LINKS -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+            <h2>Creator Portal</h2>
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="sideLinks">
+
+            <a
+              href="agreements.html"
+              class="sideLink"
+            >
+              Agreements
+            </a>
+
+            <a
+              href="credits.html"
+              class="sideLink"
+            >
+              Credits
+            </a>
+
+            <a
+              href="collaborators.html"
+              class="sideLink"
+            >
+              Collaborators
+            </a>
+
+            <a
+              href="project-development.html"
+              class="sideLink"
+            >
+              Development
+            </a>
+
+            <a
+              href="creator-dashboard.html"
+              class="sideLink"
+            >
+              Dashboard
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- LONG TERM -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+            <h2>Long-Term Development</h2>
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <p style="
+            color:#777;
+            font-size:8px;
+            line-height:1.8;
+          ">
+            A Dream World project can take years to reach production.
+            Financial records should remain attached to the appropriate
+            agreements and project history throughout development,
+            including pauses, rewrites, format changes and future releases.
+          </p>
+
+        </div>
+
+      </section>
+
+
+    </aside>
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <div class="container footerGrid">
+
+    <div class="footerBrand">
+      CROWRULES DREAM WORLD
+    </div>
+
+    <div>
+      Where Dreams Become Stories.
+    </div>
+
+    <div>
+      © 2026 CrowRules Entertainment
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- =====================================================
+PAYMENT QUESTION MODAL
+===================================================== -->
+
+<div
+  class="modal"
+  id="paymentQuestionModal"
+>
+
+  <div class="modalBox">
+
+    <div class="modalHeader">
+
+      <h2>
+        Payment Question
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeModal('paymentQuestionModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="form">
+
+      <div class="field">
+
+        <label>
+          Question Type
+        </label>
+
+        <select id="questionType">
+
+          <option>Payment Status</option>
+          <option>Missing Payment</option>
+          <option>Agreement Question</option>
+          <option>Revenue Participation</option>
+          <option>Tax / Payment Documentation</option>
+          <option>Other</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Details
+        </label>
+
+        <textarea
+          id="paymentQuestion"
+          placeholder="Describe your question..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="check">
+
+        <input
+          type="checkbox"
+          id="questionAck"
+        >
+
+        <label for="questionAck">
+
+          I understand that this request is for administrative
+          clarification and does not modify my agreement or create
+          a new compensation entitlement.
+
+        </label>
+
+      </div>
+
+    </div>
+
+    <div class="modalFooter">
+
+      <button
+        class="btn"
+        onclick="closeModal('paymentQuestionModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn primary"
+        onclick="submitPaymentQuestion()"
+      >
+        Submit Question
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+  class="toast"
+  id="toast"
+>
+
+  <strong id="toastTitle">
+    CrowRules Dream World
+  </strong>
+
+  <span id="toastMessage">
+    Action completed.
+  </span>
+
+</div>
+
+
+<script>
+
+/*
+===========================================================
+CROWRULES DREAM WORLD
+EARNINGS CENTER
+===========================================================
+
+
+DEMO PROJECT:
+DW-0001
+
+
+DEMO AGREEMENT:
+DW-0001-02
+
+
+IMPORTANT:
+
+The earnings dashboard must never invent contractual
+rights.
+
+Only display compensation that is:
+
+1. linked to a project
+2. linked to an applicable agreement
+3. approved according to the internal workflow
+4. associated with the correct creator/contributor
+5. supported by the appropriate financial record
+
+
+===========================================================
+RECOMMENDED SUPABASE TABLES
+===========================================================
+
+
+dream_creator_compensation
+
+id uuid primary key
+
+project_id uuid
+references dream_projects(id)
+
+dream_id uuid
+references dream_submissions(id)
+
+user_id uuid
+references auth.users(id)
+
+agreement_id uuid nullable
+
+compensation_type text
+
+description text
+
+amount numeric(14,2)
+
+currency text
+
+status text
+
+approved_by uuid nullable
+
+approved_at timestamptz nullable
+
+effective_date date nullable
+
+created_at timestamptz
+
+updated_at timestamptz
+
+
+===========================================================
+COMPENSATION TYPES
+===========================================================
+
+development
+creator
+writing
+producer
+consulting
+license
+option
+milestone
+bonus
+royalty
+revenue_participation
+merchandising
+other
+
+
+===========================================================
+STATUSES
+===========================================================
+
+proposed
+pending_approval
+approved
+scheduled
+partially_paid
+paid
+disputed
+cancelled
+superseded
+
+
+===========================================================
+PAYMENTS
+===========================================================
+
+
+dream_creator_payments
+
+id uuid primary key
+
+compensation_id uuid
+
+project_id uuid
+
+user_id uuid
+
+payment_date date
+
+scheduled_date date nullable
+
+amount numeric(14,2)
+
+currency text
+
+payment_method text nullable
+
+external_reference text nullable
+
+status text
+
+notes text
+
+created_at timestamptz
+
+updated_at timestamptz
+
+
+Never store full bank account numbers or sensitive
+payment credentials in this table.
+
+
+Payment processing should preferably be handled by
+a dedicated payment provider.
+
+
+===========================================================
+REVENUE PARTICIPATION
+===========================================================
+
+
+dream_creator_revenue
+
+
+id uuid primary key
+
+project_id uuid
+
+user_id uuid
+
+agreement_id uuid
+
+revenue_source text
+
+reporting_period_start date
+
+reporting_period_end date
+
+gross_receipts numeric(14,2)
+
+allowed_deductions numeric(14,2)
+
+defined_receipts numeric(14,2)
+
+participation_rate numeric(8,4)
+
+calculated_share numeric(14,2)
+
+amount_paid numeric(14,2)
+
+status text
+
+reported_at timestamptz
+
+created_at timestamptz
+
+updated_at timestamptz
+
+
+The exact definitions of:
+
+gross receipts
+net receipts
+defined receipts
+deductions
+distribution fees
+production costs
+taxes
+reserves
+
+must come from the actual agreement.
+
+
+===========================================================
+REVENUE STATEMENTS
+===========================================================
+
+
+dream_revenue_statements
+
+id uuid primary key
+
+project_id uuid
+
+reporting_period_start date
+
+reporting_period_end date
+
+revenue_source text
+
+gross_revenue numeric(14,2)
+
+deductions numeric(14,2)
+
+eligible_revenue numeric(14,2)
+
+creator_pool numeric(14,2)
+
+status text
+
+statement_url text nullable
+
+created_at timestamptz
+
+updated_at timestamptz
+
+
+===========================================================
+PAYMENT DOCUMENTS
+===========================================================
+
+
+Supabase Storage bucket:
+
+dream-world-financial-documents
+
+
+Suggested paths:
+
+users/{user_id}/
+projects/{project_id}/
+agreements/{agreement_id}/
+statements/{statement_id}/
+
+
+Use strict Storage RLS.
+
+
+===========================================================
+TAX DOCUMENTS
+===========================================================
+
+
+If CrowRules eventually makes reportable payments,
+tax documentation should be handled through the
+appropriate accounting/payment workflow.
+
+
+Do not store unnecessary sensitive tax information
+in ordinary project tables.
+
+
+===========================================================
+RLS
+===========================================================
+
+
+Creators:
+
+SELECT only their own authorized compensation,
+payments and revenue records.
+
+
+Project collaborators:
+
+No automatic access to another person's earnings.
+
+
+Administrators:
+
+Access according to administrative role.
+
+
+Financial administrators:
+
+Separate permission set is recommended.
+
+
+Never expose Supabase service-role keys in browser code.
+
+
+===========================================================
+AUDIT LOG
+===========================================================
+
+
+dream_financial_activity
+
+
+id uuid primary key
+
+project_id uuid
+
+user_id uuid
+
+target_user_id uuid nullable
+
+activity_type text
+
+description text
+
+amount numeric(14,2) nullable
+
+created_at timestamptz
+
+
+Financial changes should be auditable.
+
+
+===========================================================
+IMPORTANT BUSINESS RULE
+===========================================================
+
+
+Credits do NOT automatically create earnings.
+
+
+Collaborator status does NOT automatically create earnings.
+
+
+A dream submission does NOT automatically create earnings.
+
+
+A public vote does NOT create earnings.
+
+
+A project becoming popular does NOT automatically create
+revenue participation.
+
+
+Compensation comes from the applicable written agreement
+and approved financial records.
+
+
+===========================================================
+*/
+
+
+/* MOBILE NAV */
+
+function toggleMobileNav(){
+
+  const nav =
+    document.querySelector(".navlinks");
+
+  if(!nav) return;
+
+  if(nav.style.display === "flex"){
+
+    nav.style.display = "";
+
+  }else{
+
+    nav.style.display = "flex";
+    nav.style.flexDirection = "column";
+    nav.style.position = "absolute";
+    nav.style.top = "76px";
+    nav.style.left = "3%";
+    nav.style.right = "3%";
+    nav.style.padding = "12px";
+    nav.style.background = "#0a0a0c";
+    nav.style.border = "1px solid rgba(255,255,255,.1)";
+
+  }
+
+}
+
+
+/* MODALS */
+
+function openModal(id){
+
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+
+    modal.classList.add("open");
+
+  }
+
+}
+
+
+function closeModal(id){
+
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+
+    modal.classList.remove("open");
+
+  }
+
+}
+
+
+/* TOAST */
+
+let toastTimer;
+
+function showToast(title,message){
+
+  const toast =
+    document.getElementById("toast");
+
+  document.getElementById("toastTitle")
+    .textContent = title;
+
+  document.getElementById("toastMessage")
+    .textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(()=>{
+
+      toast.classList.remove("show");
+
+    },3500);
+
+}
+
+
+/* PAYMENT QUESTION */
+
+function submitPaymentQuestion(){
+
+  const type =
+    document
+      .getElementById("questionType")
+      .value;
+
+  const details =
+    document
+      .getElementById("paymentQuestion")
+      .value
+      .trim();
+
+  const acknowledged =
+    document
+      .getElementById("questionAck")
+      .checked;
+
+
+  if(!details){
+
+    showToast(
+      "Missing Details",
+      "Please describe your question."
+    );
+
+    return;
+
+  }
+
+
+  if(!acknowledged){
+
+    showToast(
+      "Acknowledgement Required",
+      "Please acknowledge the request terms."
+    );
+
+    return;
+
+  }
+
+
+  closeModal("paymentQuestionModal");
+
+
+  document
+    .getElementById("paymentQuestion")
+    .value = "";
+
+  document
+    .getElementById("questionAck")
+    .checked = false;
+
+
+  showToast(
+    "Question Submitted",
+    type + " request has been recorded."
+  );
+
+
+  /*
+  FUTURE SUPABASE:
+
+  const {
+    data:user
+  } =
+    await supabaseClient
+      .auth
+      .getUser();
+
+
+  await supabaseClient
+    .from("dream_financial_questions")
+    .insert({
+
+      project_id:PROJECT_ID,
+
+      user_id:user.user.id,
+
+      question_type:type,
+
+      details:details,
+
+      status:"open"
+
+    });
+
+
+  Also create:
+
+  dream_notifications
+
+  for authorized financial/project administrators.
+  */
+
+}
+
+
+/* STATEMENT */
+
+function downloadStatement(){
+
+  showToast(
+    "Statement",
+    "PDF statement generation will be connected to the financial reporting system."
+  );
+
+
+  /*
+  FUTURE:
+
+  Generate statement from:
+
+  dream_creator_compensation
+  dream_creator_payments
+  dream_creator_revenue
+  dream_revenue_statements
+
+
+  Prefer server-side generation or a secure
+  Edge Function for finalized financial statements.
+  */
+
+}
+
+
+/* BACKDROP */
+
+document
+  .querySelectorAll(".modal")
+  .forEach(modal => {
+
+    modal.addEventListener(
+      "click",
+      event => {
+
+        if(event.target === modal){
+
+          modal.classList.remove("open");
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* ESCAPE */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Escape"){
+
+      document
+        .querySelectorAll(".modal.open")
+        .forEach(modal => {
+
+          modal.classList.remove("open");
+
+        });
+
+    }
+
+  }
+);
+
+
+/*
+===========================================================
+FUTURE SUPABASE LOADING
+===========================================================
+
+
+const {
+  data:compensation,
+  error
+} =
+  await supabaseClient
+
+    .from("dream_creator_compensation")
+
+    .select("*")
+
+    .eq(
+      "project_id",
+      PROJECT_ID
+    )
+
+    .eq(
+      "user_id",
+      USER_ID
+    );
+
+
+===========================================================
+PAYMENT HISTORY
+===========================================================
+
+
+const {
+  data:payments
+} =
+  await supabaseClient
+
+    .from("dream_creator_payments")
+
+    .select(`
+      *,
+      dream_creator_compensation(
+        compensation_type,
+        description
+      )
+    `)
+
+    .eq(
+      "project_id",
+      PROJECT_ID
+    )
+
+    .eq(
+      "user_id",
+      USER_ID
+    )
+
+    .order(
+      "payment_date",
+      {
+        ascending:false
+      }
+    );
+
+
+===========================================================
+REVENUE
+===========================================================
+
+
+const {
+  data:revenue
+} =
+  await supabaseClient
+
+    .from("dream_creator_revenue")
+
+    .select("*")
+
+    .eq(
+      "project_id",
+      PROJECT_ID
+    )
+
+    .eq(
+      "user_id",
+      USER_ID
+    )
+
+    .order(
+      "reporting_period_end",
+      {
+        ascending:false
+      }
+    );
+
+
+===========================================================
+REALTIME
+===========================================================
+
+
+supabaseClient
+
+  .channel("dream-earnings")
+
+  .on(
+    "postgres_changes",
+    {
+      event:"*",
+      schema:"public",
+      table:"dream_creator_payments",
+      filter:
+        "user_id=eq." + USER_ID
+    },
+    payload => {
+
+      loadEarnings();
+
+    }
+  )
+
+  .subscribe();
+
+
+===========================================================
+*/
+</script>
+
+</body>
+</html>

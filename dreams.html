@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Dream Library — CrowRules Dream World</title>
+
+<meta name="theme-color" content="#030305">
+<meta name="description" content="Explore the Dream Library at CrowRules Dream World. Discover strange ideas, unforgettable characters, impossible worlds and stories waiting to be developed.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --black:#030305;
+    --black2:#08070c;
+    --panel:#0b090f;
+    --red:#e0003b;
+    --red2:#ff174f;
+    --red3:#7b0025;
+    --white:#f7f4f6;
+    --muted:#aaa5ad;
+    --dim:#706b73;
+    --border:rgba(255,255,255,.09);
+    --glass:rgba(10,8,14,.72);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(130,0,50,.22),
+            transparent 38%
+        ),
+        #030305;
+    color:var(--white);
+    font-family:Montserrat,sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:100;
+    opacity:.035;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #fff 0,
+            #fff 1px,
+            transparent 1px,
+            transparent 4px
+        );
+}
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    overflow:hidden;
+}
+
+.moon{
+    position:absolute;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    top:-220px;
+    left:50%;
+    transform:translateX(-50%);
+    background:
+        radial-gradient(
+            circle at 38% 35%,
+            rgba(255,255,255,.22),
+            rgba(255,0,70,.12) 25%,
+            rgba(70,0,40,.10) 55%,
+            transparent 72%
+        );
+    box-shadow:
+        0 0 100px rgba(255,0,60,.12),
+        0 0 250px rgba(255,0,60,.07);
+    animation:moon 10s ease-in-out infinite alternate;
+}
+
+.fog{
+    position:absolute;
+    width:130%;
+    height:260px;
+    left:-15%;
+    border-radius:50%;
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,255,255,.035),
+            transparent 70%
+        );
+    filter:blur(35px);
+}
+
+.fog.one{
+    top:30%;
+    animation:fogMove 20s ease-in-out infinite;
+}
+
+.fog.two{
+    top:70%;
+    animation:fogMove 28s ease-in-out infinite reverse;
+}
+
+.stars{
+    position:absolute;
+    inset:0;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:white;
+    opacity:.5;
+    animation:twinkle var(--time) infinite alternate;
+}
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.nav{
+    height:74px;
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    z-index:60;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 5%;
+
+    background:rgba(3,3,5,.72);
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,.07);
+
+    transition:.3s;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:white;
+    text-decoration:none;
+}
+
+.logo-icon{
+    width:38px;
+    height:38px;
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid rgba(255,0,70,.5);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,0,70,.22),
+            transparent 70%
+        );
+
+    box-shadow:
+        0 0 20px rgba(255,0,70,.18);
+}
+
+.logo-icon span{
+    font-size:20px;
+}
+
+.logo-name{
+    font-family:Orbitron,sans-serif;
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.logo-name small{
+    display:block;
+    color:#ff315c;
+    font-size:8px;
+    letter-spacing:4px;
+    margin-top:3px;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#aaa5ad;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    transition:.25s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-submit{
+    padding:10px 16px;
+    border:1px solid rgba(255,0,60,.45);
+    color:white!important;
+    background:rgba(130,0,35,.15);
+}
+
+.menu{
+    display:none;
+    border:0;
+    background:none;
+    color:white;
+    font-size:25px;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.page{
+    padding-top:74px;
+}
+
+.hero{
+    min-height:500px;
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    padding:90px 7% 70px;
+
+    overflow:hidden;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+
+    right:-100px;
+    top:80px;
+
+    width:500px;
+    height:500px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    box-shadow:
+        0 0 100px rgba(255,0,60,.10),
+        inset 0 0 100px rgba(255,0,60,.06);
+}
+
+.hero-content{
+    max-width:780px;
+    position:relative;
+    z-index:3;
+}
+
+.label{
+    color:#ff315c;
+    font-family:Orbitron,sans-serif;
+    font-size:10px;
+    letter-spacing:4px;
+    margin-bottom:16px;
+}
+
+.hero h1{
+    font-family:Orbitron,sans-serif;
+    font-size:clamp(45px,7vw,85px);
+    line-height:.95;
+    letter-spacing:-3px;
+    margin-bottom:25px;
+}
+
+.hero h1 span{
+    color:#ff174f;
+    text-shadow:0 0 40px rgba(255,0,60,.25);
+}
+
+.hero p{
+    max-width:650px;
+    color:#aaa5ad;
+    font-size:15px;
+    line-height:1.8;
+}
+
+/* =========================================
+   TOOLBAR
+========================================= */
+
+.library{
+    padding:45px 7% 110px;
+}
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+.search{
+    position:relative;
+    flex:1;
+    min-width:250px;
+}
+
+.search input{
+    width:100%;
+    height:48px;
+    padding:0 18px 0 45px;
+
+    border:1px solid var(--border);
+    outline:none;
+
+    background:rgba(255,255,255,.035);
+    color:white;
+
+    font-family:Montserrat;
+    font-size:12px;
+}
+
+.search input:focus{
+    border-color:rgba(255,0,60,.5);
+}
+
+.search-icon{
+    position:absolute;
+    left:17px;
+    top:15px;
+    color:#77727a;
+}
+
+.filters{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.filter{
+    height:40px;
+    padding:0 15px;
+
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.025);
+
+    color:#8f8991;
+
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1px;
+
+    cursor:pointer;
+    transition:.25s;
+}
+
+.filter:hover,
+.filter.active{
+    color:white;
+    border-color:rgba(255,0,60,.45);
+    background:rgba(150,0,40,.14);
+}
+
+/* =========================================
+   FEATURED DREAM
+========================================= */
+
+.featured{
+    min-height:330px;
+    position:relative;
+    overflow:hidden;
+
+    margin-bottom:65px;
+
+    border:1px solid rgba(255,0,60,.20);
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(100,0,35,.30),
+            rgba(15,10,18,.75) 50%,
+            rgba(4,4,7,.90)
+        );
+
+    padding:45px;
+}
+
+.featured:before{
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    right:-160px;
+    top:-180px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,0,70,.22),
+            transparent 67%
+        );
+
+    filter:blur(20px);
+}
+
+.featured-content{
+    max-width:700px;
+    position:relative;
+    z-index:2;
+}
+
+.featured-tag{
+    display:inline-block;
+
+    padding:7px 11px;
+
+    border:1px solid rgba(255,0,60,.35);
+
+    color:#ff4b70;
+
+    font-family:Orbitron,sans-serif;
+    font-size:9px;
+    letter-spacing:2px;
+
+    margin-bottom:25px;
+}
+
+.featured h2{
+    font-family:Orbitron,sans-serif;
+    font-size:clamp(28px,4vw,48px);
+    margin-bottom:16px;
+}
+
+.featured p{
+    color:#aaa5ad;
+    line-height:1.8;
+    max-width:620px;
+    font-size:13px;
+}
+
+.featured-meta{
+    display:flex;
+    gap:20px;
+    margin-top:25px;
+    flex-wrap:wrap;
+}
+
+.meta{
+    color:#77727a;
+    font-size:10px;
+}
+
+.meta strong{
+    color:#ddd;
+}
+
+/* =========================================
+   SECTION HEADER
+========================================= */
+
+.section-header{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    margin-bottom:25px;
+}
+
+.section-header h2{
+    font-family:Orbitron,sans-serif;
+    font-size:26px;
+}
+
+.section-header p{
+    color:#68636b;
+    font-size:10px;
+    letter-spacing:1px;
+}
+
+/* =========================================
+   DREAM GRID
+========================================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:17px;
+}
+
+.card{
+    min-height:300px;
+
+    position:relative;
+    overflow:hidden;
+
+    padding:27px;
+
+    border:1px solid var(--border);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.012)
+        );
+
+    transition:.35s;
+
+    cursor:pointer;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(255,0,60,.38);
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+
+.card-art{
+    height:110px;
+    margin:-27px -27px 25px;
+
+    position:relative;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,0,70,.25),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            rgba(100,0,45,.25),
+            rgba(10,8,14,.85)
+        );
+}
+
+.card-art:before{
+    content:"";
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    border-radius:50%;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border:1px solid rgba(255,255,255,.14);
+
+    box-shadow:
+        0 0 50px rgba(255,0,70,.12);
+}
+
+.card-art:after{
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:1px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%) rotate(-18deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,0,70,.7),
+            transparent
+        );
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.card-category{
+    color:#ff315c;
+    font-size:9px;
+    font-family:Orbitron,sans-serif;
+    letter-spacing:2px;
+}
+
+.card-number{
+    color:#55515a;
+    font-family:Orbitron,sans-serif;
+    font-size:9px;
+}
+
+.card h3{
+    font-family:Orbitron,sans-serif;
+    font-size:17px;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#88838b;
+    font-size:11px;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.card-footer{
+    position:absolute;
+    left:27px;
+    right:27px;
+    bottom:20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    border-top:1px solid rgba(255,255,255,.06);
+
+    padding-top:13px;
+}
+
+.creator{
+    color:#77727a;
+    font-size:9px;
+}
+
+.creator strong{
+    color:#c7c2c8;
+}
+
+.votes{
+    color:#ff315c;
+    font-size:9px;
+    font-family:Orbitron,sans-serif;
+}
+
+/* =========================================
+   DEVELOPMENT
+========================================= */
+
+.development{
+    margin-top:80px;
+}
+
+.development-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+    gap:17px;
+}
+
+.dev-card{
+    min-height:220px;
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.025);
+
+    padding:27px;
+
+    position:relative;
+}
+
+.dev-status{
+    color:#ff315c;
+    font-family:Orbitron,sans-serif;
+    font-size:9px;
+    letter-spacing:2px;
+    margin-bottom:20px;
+}
+
+.dev-card h3{
+    font-family:Orbitron,sans-serif;
+    font-size:19px;
+    margin-bottom:10px;
+}
+
+.dev-card p{
+    color:#858088;
+    font-size:11px;
+    line-height:1.7;
+}
+
+.progress{
+    height:3px;
+    background:rgba(255,255,255,.07);
+    margin-top:25px;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    width:64%;
+    background:#ff174f;
+    box-shadow:0 0 12px rgba(255,0,70,.5);
+}
+
+/* =========================================
+   CTA
+========================================= */
+
+.cta{
+    margin-top:100px;
+
+    padding:80px 40px;
+
+    text-align:center;
+
+    border:1px solid rgba(255,0,60,.20);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(150,0,50,.18),
+            rgba(10,7,13,.65) 65%
+        );
+}
+
+.cta h2{
+    font-family:Orbitron,sans-serif;
+    font-size:clamp(30px,5vw,55px);
+    margin-bottom:18px;
+}
+
+.cta h2 span{
+    color:#ff174f;
+}
+
+.cta p{
+    max-width:620px;
+    margin:auto;
+
+    color:#8e8991;
+
+    font-size:12px;
+    line-height:1.8;
+
+    margin-bottom:28px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-height:46px;
+    padding:0 22px;
+
+    text-decoration:none;
+
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.5px;
+
+    transition:.3s;
+}
+
+.btn-red{
+    color:white;
+    background:#d9003b;
+    box-shadow:0 0 25px rgba(255,0,60,.2);
+}
+
+.btn-red:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 35px rgba(255,0,60,.3);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer{
+    margin-top:100px;
+
+    border-top:1px solid rgba(255,255,255,.07);
+
+    padding:45px 7% 25px;
+
+    background:#020204;
+}
+
+.footer-row{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.footer-copy{
+    color:#57535a;
+    font-size:9px;
+}
+
+.footer-links{
+    display:flex;
+    gap:20px;
+}
+
+.footer-links a{
+    color:#66616a;
+    font-size:9px;
+    text-decoration:none;
+}
+
+.footer-links a:hover{
+    color:#ff315c;
+}
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    z-index:200;
+
+    padding:20px;
+
+    background:rgba(0,0,0,.75);
+
+    backdrop-filter:blur(12px);
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(700px,100%);
+
+    max-height:90vh;
+    overflow:auto;
+
+    border:1px solid rgba(255,0,60,.3);
+
+    background:#09070d;
+
+    padding:35px;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.7);
+}
+
+.close{
+    float:right;
+
+    width:35px;
+    height:35px;
+
+    border:1px solid var(--border);
+
+    background:none;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.modal-label{
+    color:#ff315c;
+
+    font-family:Orbitron,sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    margin-bottom:15px;
+}
+
+.modal h2{
+    font-family:Orbitron,sans-serif;
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+.modal p{
+    color:#969199;
+    font-size:12px;
+    line-height:1.8;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:950px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px){
+
+    .hero{
+        padding:80px 25px 60px;
+    }
+
+    .library{
+        padding:30px 20px 80px;
+    }
+
+    .hero h1{
+        font-size:47px;
+    }
+
+    .featured{
+        padding:30px 24px;
+    }
+
+    .grid,
+    .development-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-header{
+        display:block;
+    }
+
+    .section-header p{
+        margin-top:8px;
+    }
+
+    .filters{
+        width:100%;
+        overflow-x:auto;
+        flex-wrap:nowrap;
+        padding-bottom:5px;
+    }
+
+    .filter{
+        white-space:nowrap;
+    }
+
+    .cta{
+        padding:65px 22px;
+    }
+}
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes moon{
+    from{
+        transform:translateX(-50%) scale(.96);
+        opacity:.7;
+    }
+    to{
+        transform:translateX(-50%) scale(1.05);
+        opacity:1;
+    }
+}
+
+@keyframes fogMove{
+    0%,100%{
+        transform:translateX(-7%);
+    }
+
+    50%{
+        transform:translateX(7%);
+    }
+}
+
+@keyframes twinkle{
+    from{
+        opacity:.1;
+        transform:scale(.6);
+    }
+
+    to{
+        opacity:.9;
+        transform:scale(1.5);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background">
+
+    <div class="moon"></div>
+
+    <div class="stars" id="stars"></div>
+
+    <div class="fog one"></div>
+    <div class="fog two"></div>
+
+</div>
+
+
+<!-- =========================================
+     NAV
+========================================= -->
+
+<nav class="nav" id="nav">
+
+    <a href="index.html" class="logo">
+
+        <div class="logo-icon">
+            <span>☽</span>
+        </div>
+
+        <div class="logo-name">
+            CROWRULES
+            <small>DREAM WORLD</small>
+        </div>
+
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="index.html">HOME</a>
+        <a href="dreams.html">DREAMS</a>
+        <a href="projects.html">PROJECTS</a>
+        <a href="creators.html">CREATORS</a>
+        <a href="how-it-works.html">HOW IT WORKS</a>
+
+        <a
+            href="submit.html"
+            class="nav-submit"
+        >
+            SUBMIT A DREAM
+        </a>
+
+    </div>
+
+
+    <button class="menu" id="menu">
+        ☰
+    </button>
+
+</nav>
+
+
+<main class="page">
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="label">
+            CROWRULES DREAM WORLD / DREAM LIBRARY
+        </div>
+
+        <h1>
+            ENTER THE<br>
+            <span>DREAM LIBRARY.</span>
+        </h1>
+
+        <p>
+            Explore dreams, nightmares, strange ideas,
+            impossible worlds, unforgettable characters
+            and stories waiting to discover what they can become.
+        </p>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================
+     LIBRARY
+========================================= -->
+
+<section class="library">
+
+
+<!-- SEARCH -->
+
+<div class="toolbar">
+
+    <div class="search">
+
+        <span class="search-icon">⌕</span>
+
+        <input
+            type="search"
+            id="search"
+            placeholder="Search dreams, stories, characters..."
+        >
+
+    </div>
+
+
+    <div class="filters">
+
+        <button
+            class="filter active"
+            data-filter="all"
+        >
+            ALL
+        </button>
+
+        <button
+            class="filter"
+            data-filter="movie"
+        >
+            FILM
+        </button>
+
+        <button
+            class="filter"
+            data-filter="series"
+        >
+            SERIES
+        </button>
+
+        <button
+            class="filter"
+            data-filter="audio"
+        >
+            AUDIO
+        </button>
+
+        <button
+            class="filter"
+            data-filter="horror"
+        >
+            HORROR
+        </button>
+
+        <button
+            class="filter"
+            data-filter="scifi"
+        >
+            SCI-FI
+        </button>
+
+        <button
+            class="filter"
+            data-filter="fantasy"
+        >
+            FANTASY
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     FEATURED
+========================================= -->
+
+<div class="featured">
+
+    <div class="featured-content">
+
+        <div class="featured-tag">
+            FEATURED DREAM
+        </div>
+
+        <h2>
+            THE CITY THAT<br>
+            ONLY EXISTS AT NIGHT
+        </h2>
+
+        <p>
+            Every night at exactly 3:17 AM, a second city
+            appears behind the ordinary one. Its streets
+            lead somewhere impossible. Its residents know
+            the names of people who have never visited.
+        </p>
+
+        <div class="featured-meta">
+
+            <div class="meta">
+                CREATOR:
+                <strong>Anonymous Dreamer</strong>
+            </div>
+
+            <div class="meta">
+                FORMAT:
+                <strong>Feature Film</strong>
+            </div>
+
+            <div class="meta">
+                STATUS:
+                <strong>Concept</strong>
+            </div>
+
+            <div class="meta">
+                ❤️ <strong>347</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     LATEST
+========================================= -->
+
+<div class="section-header">
+
+    <div>
+        <div class="label">
+            RECENTLY DISCOVERED
+        </div>
+
+        <h2>LATEST DREAMS</h2>
+    </div>
+
+    <p id="resultCount">
+        9 DREAMS
+    </p>
+
+</div>
+
+
+<div class="grid" id="dreamGrid">
+
+
+<!-- CARD 1 -->
+
+<article
+    class="card dream"
+    data-category="movie"
+    data-search="last broadcast radio station future movie horror"
+>
+
+    <div class="card-art"></div>
+
+    <div class="card-top">
+
+        <span class="card-category">
+            FILM
+        </span>
+
+        <span class="card-number">
+            DW-001
+        </span>
+
+    </div>
+
+    <h3>THE LAST BROADCAST</h3>
+
+    <p>
+        An abandoned radio station begins broadcasting
+        messages from people who haven't been born yet.
+    </p>
+
+    <div class="card-footer">
+
+        <div class="creator">
+            BY <strong>JORDAN</strong>
+        </div>
+
+        <div class="votes">
+            ♥ 284
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- CARD 2 -->
+
+<article
+    class="card dream"
+    data-category="series"
+    data-search="impossible city sleeping city series mystery"
+>
+
+    <div class="card-art"></div>
+
+    <div class="card-top">
+
+        <span class="card-category">
+            SERIES
+        </span>
+
+        <span class="card-number">
+            DW-002
+        </span>
+
+    </div>
+
+    <h3>THE IMPOSSIBLE CITY</h3>
+
+    <p>
+        A city appears only while people sleep,
+        changing every night.
+    </p>
+
+    <div class="card-footer">
+
+        <div class="creator">
+            BY <strong>UNKNOWN</strong>
+        </div>
+
+        <div class="votes">
+            ♥ 221
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- CARD 3 -->
+
+<article
+    class="card dream"
+    data-category="horror"
+    data-search="house hallway doors nightmare horror"
+>
+
+    <div class="card-art"></div>
+
+    <div class="card-top">
+
+        <span class="card-category">
+            HORROR
+        </span>
+
+        <span class="card-number">
+            DW-003
+        </span>
+
+    </div>
+
+    <h3>THE HOUSE WITH NO EXIT</h3>
+
+    <p>
+        Every door inside the house leads to another
+        version of the same house.
+    </p>
+
+    <div class="card-footer">
+
+        <div class="creator">
+            BY <strong>MARCUS</strong>
+        </div>
+
+        <div class="votes">
+            ♥ 196
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- CARD 4 -->
+
+<article
+    class="card dream"
+    data-category="scifi"
+    data-search="moon astronaut planet space science fiction"
+>
+
+    <div class="card-art"></div>
+
+    <div class="card-top">
+
+        <span class="card-category">
+            SCI-FI
+        </span>
+
+        <span class="card-number">
+            DW-004
+        </span>
+
+    </div>
+
+    <h3>THE SECOND MOON</h3>
+
+    <p>
+        Humanity wakes up one morning to discover
+        another moon orbiting Earth.
+    </p>
+
+    <div class="card-footer">
+
+        <div class="creator">
+            BY <strong>ELENA</strong>
+        </div>
+
+        <div class="votes">
+            ♥ 174
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- CARD 5 -->
+
+<article
+    class="card dream"
+    data-category="audio"
+    data-search="voice telephone dead audio podcast"
+>
+
+    <div class="card-art"></div>
+
+    <div class="card-top">
+
+        <span class="card-category">
+            AUDIO
+        </span>
+
+        <span class="card-number">
+            DW-005
+        </span>
+
+    </div>
+
+    <h3>VOICES AFTER MIDNIGHT</h3>
+
+    <p>
+        A telephone rings every night with voices
+        belonging to people who are gone.
+    </p>
+
+    <div class="card-footer">
+
+        <div class="creator">
+            BY <strong>RILEY</strong>
+        </div>
+
+        <div class="votes">
+            ♥ 163
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- CARD 6 -->
+
+<article
+    class="card dream"
+    data-category="fantasy"
+    data-search="forest crow fantasy magical world"
+>
+
+    <div class="card-art"></div>
+
+    <div class="card-top">
+
+        <span class="card-category">
+            FANTASY
+        </span>
+
+        <span class="card-number">
+            DW-006
+        </span>
+
+    </div>
+
+    <h3>THE ROOKERY</h3>
+
+    <p>
+        Somewhere beyond the edge of ordinary reality
+        lies a kingdom ruled by memories.
+    </p>
+
+    <div class="card-footer">
+
+        <div class="creator">
+            BY <strong>DANIEL</strong>
+        </div>
+
+        <div class="votes">
+            ♥ 158
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- CARD 7 -->
+
+<article
+    class="card dream"
+    data-category="movie"
+    data-search="train nowhere movie mystery dream"
+>
+
+    <div class="card-art"></div>
+
+    <div class="card-top">
+
+        <span class="card-category">
+            FILM
+        </span>
+
+        <span class="card-number">
+            DW-007
+        </span>
+
+    </div>
+
+    <h3>THE TRAIN TO NOWHERE</h3>
+
+    <p>
+        A train arrives at a station that doesn't exist
+        on any map.
+    </p>
+
+    <div class="card-footer">
+
+        <div class="creator">
+            BY <strong>ASH</strong>
+        </div>
+
+        <div class="votes">
+            ♥ 149
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- CARD 8 -->
+
+<article
+    class="card dream"
+    data-category="horror"
+    data-search="mirror reflection horror nightmare"
+>
+
+    <div class="card-art"></div>
+
+    <div class="card-top">
+
+        <span class="card-category">
+            HORROR
+        </span>
+
+        <span class="card-number">
+            DW-008
+        </span>
+
+    </div>
+
+    <h3>THE OTHER REFLECTION</h3>
+
+    <p>
+        Your reflection begins living five minutes
+        ahead of you.
+    </p>
+
+    <div class="card-footer">
+
+        <div class="creator">
+            BY <strong>SAM</strong>
+        </div>
+
+        <div class="votes">
+            ♥ 137
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- CARD 9 -->
+
+<article
+    class="card dream"
+    data-category="series"
+    data-search="memory people disappearing television series"
+>
+
+    <div class="card-art"></div>
+
+    <div class="card-top">
+
+        <span class="card-category">
+            SERIES
+        </span>
+
+        <span class="card-number">
+            DW-009
+        </span>
+
+    </div>
+
+    <h3>WHEN EVERYONE FORGOT</h3>
+
+    <p>
+        One person wakes up and discovers nobody
+        remembers the same world anymore.
+    </p>
+
+    <div class="card-footer">
+
+        <div class="creator">
+            BY <strong>CASEY</strong>
+        </div>
+
+        <div class="votes">
+            ♥ 129
+        </div>
+
+    </div>
+
+</article>
+
+
+</div>
+
+
+<!-- =========================================
+     DEVELOPMENT
+========================================= -->
+
+<div class="development">
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="label">
+                MOVING FORWARD
+            </div>
+
+            <h2>DREAMS IN DEVELOPMENT</h2>
+
+        </div>
+
+        <p>
+            THE DREAM IS BECOMING A PROJECT
+        </p>
+
+    </div>
+
+
+    <div class="development-grid">
+
+
+        <article class="dev-card">
+
+            <div class="dev-status">
+                ● STORY DEVELOPMENT
+            </div>
+
+            <h3>THE LAST BROADCAST</h3>
+
+            <p>
+                Developing the mythology, characters,
+                broadcast mystery and first screenplay draft.
+            </p>
+
+            <div class="progress">
+                <span style="width:42%"></span>
+            </div>
+
+        </article>
+
+
+        <article class="dev-card">
+
+            <div class="dev-status">
+                ● CONCEPT DEVELOPMENT
+            </div>
+
+            <h3>THE SECOND MOON</h3>
+
+            <p>
+                Building the world, science-fiction mythology
+                and possible feature-film structure.
+            </p>
+
+            <div class="progress">
+                <span style="width:24%"></span>
+            </div>
+
+        </article>
+
+
+        <article class="dev-card">
+
+            <div class="dev-status">
+                ● WRITING
+            </div>
+
+            <h3>THE ROOKERY</h3>
+
+            <p>
+                Characters and world mythology are being expanded
+                into a larger narrative universe.
+            </p>
+
+            <div class="progress">
+                <span style="width:64%"></span>
+            </div>
+
+        </article>
+
+
+        <article class="dev-card">
+
+            <div class="dev-status">
+                ● EARLY DEVELOPMENT
+            </div>
+
+            <h3>THE IMPOSSIBLE CITY</h3>
+
+            <p>
+                Exploring whether this dream works best as a
+                feature film, limited series or audio drama.
+            </p>
+
+            <div class="progress">
+                <span style="width:17%"></span>
+            </div>
+
+        </article>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     CTA
+========================================= -->
+
+<div class="cta">
+
+    <div class="label">
+        YOUR TURN
+    </div>
+
+    <h2>
+        HAVE A DREAM<br>
+        <span>OF YOUR OWN?</span>
+    </h2>
+
+    <p>
+        Don't worry if it isn't finished.
+        Don't worry if it doesn't make sense.
+        That's where the Dream World begins.
+    </p>
+
+    <a
+        href="submit.html"
+        class="btn btn-red"
+    >
+        SUBMIT YOUR DREAM
+    </a>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div class="footer-row">
+
+        <div class="footer-copy">
+            © <span id="year"></span> CrowRules Entertainment —
+            CrowRules Dream World
+        </div>
+
+        <div class="footer-links">
+
+            <a href="how-it-works.html">
+                HOW IT WORKS
+            </a>
+
+            <a href="creator-rights.html">
+                CREATOR RIGHTS
+            </a>
+
+            <a href="faq.html">
+                FAQ
+            </a>
+
+            <a href="submit.html">
+                SUBMIT
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================
+     DREAM MODAL
+========================================= -->
+
+<div class="modal" id="dreamModal">
+
+    <div class="modal-box">
+
+        <button
+            class="close"
+            id="closeModal"
+        >
+            ×
+        </button>
+
+        <div class="modal-label">
+            DREAM DISCOVERY
+        </div>
+
+        <h2 id="modalTitle">
+            DREAM
+        </h2>
+
+        <p id="modalText">
+            Dream details will appear here.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   YEAR
+========================================= */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+
+/* =========================================
+   STARS
+========================================= */
+
+const stars =
+    document.getElementById("stars");
+
+for(let i=0;i<180;i++){
+
+    const star =
+        document.createElement("div");
+
+    star.className="star";
+
+    star.style.left =
+        Math.random()*100+"%";
+
+    star.style.top =
+        Math.random()*100+"%";
+
+    star.style.setProperty(
+        "--time",
+        (2+Math.random()*5)+"s"
+    );
+
+    star.style.animationDelay =
+        (-Math.random()*5)+"s";
+
+    stars.appendChild(star);
+}
+
+
+/* =========================================
+   FILTER SYSTEM
+========================================= */
+
+const filters =
+    document.querySelectorAll(".filter");
+
+const cards =
+    document.querySelectorAll(".dream");
+
+const search =
+    document.getElementById("search");
+
+const count =
+    document.getElementById("resultCount");
+
+let activeFilter = "all";
+
+
+function updateDreams(){
+
+    const query =
+        search.value
+        .toLowerCase()
+        .trim();
+
+    let visible = 0;
+
+    cards.forEach(card => {
+
+        const category =
+            card.dataset.category;
+
+        const text =
+            card.dataset.search;
+
+        const categoryMatch =
+            activeFilter === "all" ||
+            category === activeFilter;
+
+        const searchMatch =
+            !query ||
+            text.includes(query);
+
+        if(categoryMatch && searchMatch){
+
+            card.style.display="block";
+            visible++;
+
+        }else{
+
+            card.style.display="none";
+
+        }
+
+    });
+
+    count.textContent =
+        visible +
+        (visible === 1 ? " DREAM" : " DREAMS");
+}
+
+
+filters.forEach(filter => {
+
+    filter.addEventListener(
+        "click",
+        () => {
+
+            filters.forEach(f =>
+                f.classList.remove("active")
+            );
+
+            filter.classList.add("active");
+
+            activeFilter =
+                filter.dataset.filter;
+
+            updateDreams();
+
+        }
+    );
+
+});
+
+
+search.addEventListener(
+    "input",
+    updateDreams
+);
+
+
+/* =========================================
+   DREAM MODAL
+========================================= */
+
+const modal =
+    document.getElementById("dreamModal");
+
+const modalTitle =
+    document.getElementById("modalTitle");
+
+const modalText =
+    document.getElementById("modalText");
+
+const closeModal =
+    document.getElementById("closeModal");
+
+
+cards.forEach(card => {
+
+    card.addEventListener(
+        "click",
+        () => {
+
+            const title =
+                card.querySelector("h3").textContent;
+
+            const description =
+                card.querySelector("p").textContent;
+
+            modalTitle.textContent =
+                title;
+
+            modalText.textContent =
+                description;
+
+            modal.classList.add("show");
+
+        }
+    );
+
+});
+
+
+closeModal.addEventListener(
+    "click",
+    () => {
+        modal.classList.remove("show");
+    }
+);
+
+
+modal.addEventListener(
+    "click",
+    event => {
+
+        if(event.target === modal){
+
+            modal.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   ESCAPE MODAL
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(event.key === "Escape"){
+
+            modal.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   NAV BACKGROUND
+========================================= */
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const nav =
+            document.getElementById("nav");
+
+        if(window.scrollY > 40){
+
+            nav.style.background =
+                "rgba(3,3,5,.94)";
+
+        }else{
+
+            nav.style.background =
+                "rgba(3,3,5,.72)";
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+document
+.getElementById("menu")
+.addEventListener(
+    "click",
+    () => {
+
+        const links =
+            document.querySelector(".nav-links");
+
+        if(
+            links.style.display === "flex"
+        ){
+
+            links.style.display="none";
+
+        }else{
+
+            links.style.display="flex";
+
+            links.style.position="absolute";
+            links.style.top="74px";
+            links.style.left="0";
+            links.style.right="0";
+
+            links.style.padding="20px";
+
+            links.style.flexDirection="column";
+            links.style.alignItems="stretch";
+
+            links.style.background=
+                "rgba(5,4,7,.97)";
+
+            links.style.borderBottom=
+                "1px solid rgba(255,255,255,.08)";
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

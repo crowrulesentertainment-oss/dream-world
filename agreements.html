@@ -1,0 +1,3181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>CrowRules Dream World — Agreements</title>
+<meta name="theme-color" content="#050505">
+<meta name="description" content="CrowRules Dream World Agreements — creator agreements, development agreements, rights, credits, compensation and document history.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#050505;
+  --panel:#0b0b0e;
+  --panel2:#101014;
+  --panel3:#15151a;
+  --red:#e50914;
+  --red2:#ff3038;
+  --green:#43dc91;
+  --yellow:#f3c95b;
+  --blue:#69aaff;
+  --purple:#aa7cff;
+  --white:#f3f3f3;
+  --muted:#909097;
+  --line:rgba(255,255,255,.09);
+  --shadow:0 20px 70px rgba(0,0,0,.45);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  color:var(--white);
+  font-family:Montserrat,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 10% 5%,rgba(229,9,20,.12),transparent 27%),
+    radial-gradient(circle at 90% 18%,rgba(130,0,0,.10),transparent 28%),
+    linear-gradient(180deg,#050505,#080808 55%,#040404);
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.035;
+  background-image:
+    linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);
+  background-size:50px 50px;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.container{
+  width:min(1480px,94%);
+  margin:auto;
+}
+
+/* =====================================================
+HEADER
+===================================================== */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(5,5,5,.94);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.logo{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(229,9,20,.65);
+  background:#090909;
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:-2px;
+}
+
+.brand strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:14px;
+  letter-spacing:1.5px;
+}
+
+.brand span{
+  display:block;
+  margin-top:3px;
+  color:#777;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.navlinks{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:4px;
+}
+
+.navlinks a{
+  padding:10px 11px;
+  border-radius:6px;
+  color:#999;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+}
+
+.navlinks a:hover,
+.navlinks a.active{
+  color:#fff;
+  background:rgba(229,9,20,.1);
+}
+
+.navlinks a.active{
+  box-shadow:inset 0 -2px var(--red);
+}
+
+.mobileMenu{
+  display:none;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  background:none;
+  color:#fff;
+}
+
+/* =====================================================
+HERO
+===================================================== */
+
+.hero{
+  padding:42px 0 28px;
+}
+
+.breadcrumb{
+  color:#666;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.7px;
+  margin-bottom:17px;
+}
+
+.breadcrumb span{
+  color:var(--red2);
+}
+
+.heroGrid{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:25px;
+  align-items:end;
+}
+
+.eyebrow{
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2.5px;
+  margin-bottom:10px;
+}
+
+h1{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(30px,4vw,53px);
+  line-height:1.05;
+  letter-spacing:-1px;
+}
+
+.heroText{
+  max-width:850px;
+  margin-top:14px;
+  color:#999;
+  font-size:13px;
+  line-height:1.8;
+}
+
+.heroActions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+/* =====================================================
+BUTTONS
+===================================================== */
+
+.btn{
+  border:1px solid var(--line);
+  background:#101014;
+  color:#eee;
+  padding:11px 14px;
+  border-radius:6px;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+
+.btn:hover{
+  border-color:rgba(229,9,20,.5);
+}
+
+.btn.primary{
+  background:var(--red);
+  border-color:var(--red);
+  color:#fff;
+}
+
+.btn.primary:hover{
+  background:var(--red2);
+}
+
+.btn.green{
+  border-color:rgba(67,220,145,.35);
+  color:var(--green);
+  background:rgba(67,220,145,.05);
+}
+
+/* =====================================================
+PROJECT STRIP
+===================================================== */
+
+.projectStrip{
+  display:grid;
+  grid-template-columns:1fr repeat(4,auto);
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.018);
+}
+
+.projectTitle{
+  padding:17px 19px;
+}
+
+.projectTitle label,
+.projectStat label{
+  display:block;
+  color:#666;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:1.4px;
+  margin-bottom:6px;
+}
+
+.projectTitle strong{
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+}
+
+.projectStat{
+  min-width:125px;
+  padding:17px;
+  border-left:1px solid var(--line);
+}
+
+.projectStat strong{
+  font-size:11px;
+}
+
+/* =====================================================
+MAIN
+===================================================== */
+
+main{
+  padding:25px 0 80px;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 330px;
+  gap:21px;
+}
+
+.section{
+  margin-bottom:21px;
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  box-shadow:var(--shadow);
+}
+
+.sectionHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  padding:16px 18px;
+  border-bottom:1px solid var(--line);
+}
+
+.sectionHeader h2{
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.sectionHeader p{
+  color:#6d6d73;
+  font-size:9px;
+  margin-top:5px;
+}
+
+.sectionBody{
+  padding:18px;
+}
+
+/* =====================================================
+STATUS
+===================================================== */
+
+.statusGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:21px;
+}
+
+.statusCard{
+  padding:17px;
+  border:1px solid var(--line);
+  background:#0b0b0e;
+}
+
+.statusCard strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:25px;
+}
+
+.statusCard span{
+  display:block;
+  margin-top:5px;
+  color:#666;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+/* =====================================================
+AGREEMENT CARDS
+===================================================== */
+
+.agreements{
+  display:grid;
+  gap:10px;
+}
+
+.agreement{
+  display:grid;
+  grid-template-columns:50px minmax(0,1fr) auto;
+  gap:13px;
+  align-items:center;
+  padding:15px;
+  border:1px solid var(--line);
+  background:#09090b;
+  transition:.2s ease;
+}
+
+.agreement:hover{
+  border-color:rgba(229,9,20,.35);
+  transform:translateY(-1px);
+}
+
+.docIcon{
+  width:50px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(229,9,20,.3);
+  background:
+    linear-gradient(135deg,rgba(229,9,20,.13),transparent),
+    #100608;
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+  font-weight:800;
+}
+
+.agreementInfo strong{
+  display:block;
+  font-size:11px;
+}
+
+.agreementInfo p{
+  color:#707075;
+  font-size:8px;
+  line-height:1.5;
+  margin-top:5px;
+}
+
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:9px;
+}
+
+.badge{
+  padding:4px 6px;
+  border:1px solid var(--line);
+  color:#777;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+}
+
+.badge.active{
+  color:var(--green);
+  border-color:rgba(67,220,145,.25);
+}
+
+.badge.pending{
+  color:var(--yellow);
+  border-color:rgba(243,201,91,.25);
+}
+
+.badge.draft{
+  color:var(--blue);
+  border-color:rgba(105,170,255,.25);
+}
+
+.badge.expired{
+  color:#ff7474;
+  border-color:rgba(255,116,116,.25);
+}
+
+.agreementActions{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.smallBtn{
+  border:1px solid var(--line);
+  background:#101014;
+  color:#aaa;
+  padding:8px 10px;
+  font-size:8px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  white-space:nowrap;
+}
+
+.smallBtn:hover{
+  color:#fff;
+  border-color:rgba(229,9,20,.45);
+}
+
+/* =====================================================
+RIGHTS LEDGER
+===================================================== */
+
+.rightsGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+}
+
+.rightItem{
+  padding:13px;
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.rightItemTop{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.rightItem strong{
+  font-size:9px;
+}
+
+.rightStatus{
+  color:var(--green);
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.rightItem p{
+  color:#666;
+  font-size:8px;
+  line-height:1.5;
+  margin-top:7px;
+}
+
+/* =====================================================
+TIMELINE
+===================================================== */
+
+.timeline{
+  position:relative;
+  display:grid;
+  gap:0;
+}
+
+.timeline:before{
+  content:"";
+  position:absolute;
+  left:8px;
+  top:8px;
+  bottom:8px;
+  width:1px;
+  background:rgba(229,9,20,.25);
+}
+
+.timelineItem{
+  position:relative;
+  display:grid;
+  grid-template-columns:18px 1fr auto;
+  gap:11px;
+  padding:11px 0;
+}
+
+.timelineDot{
+  position:relative;
+  z-index:2;
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  border:1px solid rgba(229,9,20,.55);
+  background:#09090b;
+}
+
+.timelineDot.done{
+  background:var(--red);
+}
+
+.timelineItem strong{
+  display:block;
+  font-size:9px;
+}
+
+.timelineItem p{
+  color:#666;
+  font-size:8px;
+  margin-top:4px;
+}
+
+.timelineDate{
+  color:#555;
+  font-size:8px;
+  white-space:nowrap;
+}
+
+/* =====================================================
+SIGNATURE
+===================================================== */
+
+.signatureGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.signature{
+  padding:13px;
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.signatureHeader{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.signature strong{
+  font-size:9px;
+}
+
+.signature span{
+  color:#666;
+  font-size:7px;
+  text-transform:uppercase;
+}
+
+.signatureLine{
+  margin-top:17px;
+  height:1px;
+  background:rgba(255,255,255,.13);
+}
+
+.signatureStatus{
+  margin-top:8px;
+  color:var(--green);
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+
+/* =====================================================
+SIDEBAR
+===================================================== */
+
+.sidebar .section{
+  margin-bottom:18px;
+}
+
+.notice{
+  border:1px solid rgba(243,201,91,.18);
+  background:rgba(243,201,91,.035);
+  padding:14px;
+}
+
+.notice strong{
+  display:block;
+  color:var(--yellow);
+  font-family:Orbitron,sans-serif;
+  font-size:9px;
+  letter-spacing:.8px;
+}
+
+.notice p{
+  color:#777;
+  font-size:8px;
+  line-height:1.7;
+  margin-top:8px;
+}
+
+.detailList{
+  display:grid;
+}
+
+.detail{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+  font-size:9px;
+}
+
+.detail:last-child{
+  border-bottom:0;
+}
+
+.detail span:first-child{
+  color:#666;
+}
+
+.detail span:last-child{
+  color:#ddd;
+  text-align:right;
+}
+
+.sideLinks{
+  display:grid;
+  gap:7px;
+}
+
+.sideLink{
+  padding:10px 11px;
+  border:1px solid var(--line);
+  background:#09090b;
+  color:#888;
+  font-size:8px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+}
+
+.sideLink:hover{
+  color:#fff;
+  border-color:rgba(229,9,20,.4);
+}
+
+/* =====================================================
+RIGHTS PHILOSOPHY
+===================================================== */
+
+.philosophy{
+  border:1px solid rgba(229,9,20,.2);
+  background:
+    radial-gradient(circle at 90% 10%,rgba(229,9,20,.1),transparent 45%),
+    #09090b;
+}
+
+.quote{
+  color:#ddd;
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.quoteMark{
+  color:var(--red2);
+  font-size:25px;
+  vertical-align:-5px;
+}
+
+.philosophy p{
+  color:#777;
+  font-size:9px;
+  line-height:1.7;
+  margin-top:12px;
+}
+
+/* =====================================================
+MODAL
+===================================================== */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.82);
+  backdrop-filter:blur(10px);
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modalBox{
+  width:min(680px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border:1px solid rgba(229,9,20,.35);
+  background:#0b0b0e;
+  box-shadow:0 30px 100px rgba(0,0,0,.7);
+}
+
+.modalHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:17px 19px;
+  border-bottom:1px solid var(--line);
+}
+
+.modalHeader h2{
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+}
+
+.close{
+  border:0;
+  background:none;
+  color:#777;
+  font-size:20px;
+}
+
+.form{
+  padding:19px;
+}
+
+.field{
+  margin-bottom:14px;
+}
+
+.field label{
+  display:block;
+  color:#888;
+  font-size:8px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:7px;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:5px;
+  background:#060608;
+  color:#eee;
+  padding:11px;
+  outline:none;
+}
+
+.field textarea{
+  min-height:105px;
+  resize:vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:rgba(229,9,20,.6);
+}
+
+.check{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  color:#777;
+  font-size:8px;
+  line-height:1.6;
+}
+
+.check input{
+  margin-top:2px;
+  accent-color:var(--red);
+}
+
+.modalFooter{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  padding:14px 19px;
+  border-top:1px solid var(--line);
+}
+
+/* =====================================================
+DOCUMENT VIEWER
+===================================================== */
+
+.document{
+  padding:25px;
+  background:#f2f2f2;
+  color:#111;
+  font-family:Georgia,serif;
+}
+
+.document h3{
+  font-family:Arial,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.document h4{
+  margin:20px 0 8px;
+}
+
+.document p{
+  font-size:12px;
+  line-height:1.7;
+  margin-bottom:9px;
+}
+
+.document .placeholder{
+  color:#555;
+  font-style:italic;
+}
+
+/* =====================================================
+TOAST
+===================================================== */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:3000;
+  min-width:260px;
+  max-width:380px;
+  padding:13px 15px;
+  border:1px solid rgba(229,9,20,.35);
+  background:#0c0c0f;
+  box-shadow:0 15px 50px rgba(0,0,0,.6);
+  transform:translateY(120px);
+  opacity:0;
+  transition:.3s ease;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast strong{
+  display:block;
+  color:var(--red2);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:4px;
+}
+
+.toast span{
+  color:#aaa;
+  font-size:9px;
+}
+
+/* =====================================================
+FOOTER
+===================================================== */
+
+footer{
+  border-top:1px solid var(--line);
+  padding:35px 0;
+  color:#555;
+  font-size:9px;
+}
+
+.footerGrid{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.footerBrand{
+  color:#888;
+  font-family:Orbitron,sans-serif;
+  letter-spacing:1px;
+}
+
+/* =====================================================
+RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px){
+
+  .projectStrip{
+    grid-template-columns:1fr repeat(2,auto);
+  }
+
+  .projectStat:nth-last-child(-n+2){
+    border-top:1px solid var(--line);
+  }
+
+  .layout{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+  }
+
+  .sidebar .section{
+    margin-bottom:0;
+  }
+
+  .sidebar .section:first-child{
+    grid-column:1/-1;
+  }
+}
+
+@media(max-width:900px){
+
+  .navlinks{
+    display:none;
+  }
+
+  .mobileMenu{
+    display:block;
+  }
+
+  .statusGrid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .signatureGrid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:700px){
+
+  .heroGrid{
+    grid-template-columns:1fr;
+  }
+
+  .heroActions{
+    justify-content:flex-start;
+  }
+
+  .projectStrip{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .projectTitle{
+    grid-column:1/-1;
+    border-bottom:1px solid var(--line);
+  }
+
+  .projectStat{
+    min-width:0;
+  }
+
+  .projectStat:nth-child(3){
+    border-left:0;
+  }
+
+  .sidebar{
+    grid-template-columns:1fr;
+  }
+
+  .agreement{
+    grid-template-columns:50px 1fr;
+  }
+
+  .agreementActions{
+    grid-column:2;
+    flex-direction:row;
+  }
+
+  .rightsGrid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:500px){
+
+  .container{
+    width:92%;
+  }
+
+  h1{
+    font-size:29px;
+  }
+
+  .statusGrid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .sectionBody{
+    padding:14px;
+  }
+
+  .sectionHeader{
+    padding:14px;
+  }
+
+  .timelineItem{
+    grid-template-columns:18px 1fr;
+  }
+
+  .timelineDate{
+    grid-column:2;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="container nav">
+
+    <a href="index.html" class="brand">
+      <div class="logo">CR</div>
+
+      <div>
+        <strong>CROWRULES</strong>
+        <span>Dream World</span>
+      </div>
+    </a>
+
+    <nav class="navlinks">
+
+      <a href="creator-dashboard.html">Dashboard</a>
+      <a href="my-dreams.html">My Dreams</a>
+      <a href="my-projects.html">My Projects</a>
+      <a href="creative-room.html">Creative Room</a>
+      <a href="project-development.html">Development</a>
+      <a href="collaborators.html">Collaborators</a>
+      <a href="agreements.html" class="active">Agreements</a>
+      <a href="credits.html">Credits</a>
+      <a href="earnings.html">Earnings</a>
+
+    </nav>
+
+    <button class="mobileMenu" onclick="toggleMobileNav()">
+      MENU
+    </button>
+
+  </div>
+
+</header>
+
+
+<div class="container hero">
+
+  <div class="breadcrumb">
+    DREAM WORLD /
+    <span>AGREEMENTS</span>
+  </div>
+
+  <div class="heroGrid">
+
+    <div>
+
+      <div class="eyebrow">
+        PRIVATE CREATOR RIGHTS CENTER
+      </div>
+
+      <h1>
+        Protect The Dream.
+      </h1>
+
+      <p class="heroText">
+        Agreements define the relationship between the Dream Creator,
+        CrowRules Entertainment and other contributors. This center keeps
+        project documents, signatures, rights, credits and compensation terms
+        organized as a project develops.
+      </p>
+
+    </div>
+
+    <div class="heroActions">
+
+      <button
+        class="btn primary"
+        onclick="openModal('requestModal')"
+      >
+        Request Agreement
+      </button>
+
+      <button
+        class="btn"
+        onclick="showToast('Agreement Help','Your project coordinator can explain which agreement applies to your project.')"
+      >
+        Agreement Help
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="container">
+
+  <div class="projectStrip">
+
+    <div class="projectTitle">
+
+      <label>Current Project</label>
+
+      <strong>
+        The City That Only Exists While You Sleep
+      </strong>
+
+    </div>
+
+    <div class="projectStat">
+      <label>Project</label>
+      <strong>DW-0001</strong>
+    </div>
+
+    <div class="projectStat">
+      <label>Dream</label>
+      <strong>DR-0001</strong>
+    </div>
+
+    <div class="projectStat">
+      <label>Agreements</label>
+      <strong id="agreementCount">3</strong>
+    </div>
+
+    <div class="projectStat">
+      <label>Action Needed</label>
+      <strong id="actionCount">1</strong>
+    </div>
+
+  </div>
+
+</div>
+
+
+<main class="container">
+
+  <div class="statusGrid">
+
+    <div class="statusCard">
+      <strong>3</strong>
+      <span>Project Agreements</span>
+    </div>
+
+    <div class="statusCard">
+      <strong>2</strong>
+      <span>Fully Executed</span>
+    </div>
+
+    <div class="statusCard">
+      <strong>1</strong>
+      <span>Needs Action</span>
+    </div>
+
+    <div class="statusCard">
+      <strong>100%</strong>
+      <span>Rights Ledger</span>
+    </div>
+
+  </div>
+
+
+  <div class="layout">
+
+    <!-- MAIN -->
+
+    <div>
+
+
+      <!-- AGREEMENTS -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+
+            <h2>Project Agreements</h2>
+
+            <p>
+              Private documents associated with this Dream World project.
+            </p>
+
+          </div>
+
+          <button
+            class="btn"
+            onclick="openModal('requestModal')"
+          >
+            + Request
+          </button>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="agreements">
+
+
+            <article class="agreement">
+
+              <div class="docIcon">
+                DEV
+              </div>
+
+              <div class="agreementInfo">
+
+                <strong>
+                  Dream World Development Agreement
+                </strong>
+
+                <p>
+                  Establishes the development relationship between the
+                  original Dream Creator and CrowRules Entertainment.
+                </p>
+
+                <div class="meta">
+
+                  <span class="badge active">
+                    Executed
+                  </span>
+
+                  <span class="badge">
+                    Creator
+                  </span>
+
+                  <span class="badge">
+                    Development
+                  </span>
+
+                </div>
+
+              </div>
+
+              <div class="agreementActions">
+
+                <button
+                  class="smallBtn"
+                  onclick="viewDocument('Dream World Development Agreement')"
+                >
+                  View
+                </button>
+
+                <button
+                  class="smallBtn"
+                  onclick="showToast('Document','Download will be enabled through Supabase Storage.')"
+                >
+                  PDF
+                </button>
+
+              </div>
+
+            </article>
+
+
+            <article class="agreement">
+
+              <div class="docIcon">
+                CR
+              </div>
+
+              <div class="agreementInfo">
+
+                <strong>
+                  Creator Participation Agreement
+                </strong>
+
+                <p>
+                  Defines the creator's project participation, responsibilities,
+                  potential credits and other negotiated project terms.
+                </p>
+
+                <div class="meta">
+
+                  <span class="badge active">
+                    Executed
+                  </span>
+
+                  <span class="badge">
+                    Creator
+                  </span>
+
+                  <span class="badge">
+                    Participation
+                  </span>
+
+                </div>
+
+              </div>
+
+              <div class="agreementActions">
+
+                <button
+                  class="smallBtn"
+                  onclick="viewDocument('Creator Participation Agreement')"
+                >
+                  View
+                </button>
+
+                <button
+                  class="smallBtn"
+                  onclick="showToast('Document','Download will be enabled through Supabase Storage.')"
+                >
+                  PDF
+                </button>
+
+              </div>
+
+            </article>
+
+
+            <article class="agreement">
+
+              <div class="docIcon">
+                OPT
+              </div>
+
+              <div class="agreementInfo">
+
+                <strong>
+                  Project Option / License Document
+                </strong>
+
+                <p>
+                  A project-specific rights document requiring creator review
+                  and action before the next development phase.
+                </p>
+
+                <div class="meta">
+
+                  <span class="badge pending">
+                    Action Needed
+                  </span>
+
+                  <span class="badge">
+                    Rights
+                  </span>
+
+                  <span class="badge">
+                    Project Specific
+                  </span>
+
+                </div>
+
+              </div>
+
+              <div class="agreementActions">
+
+                <button
+                  class="smallBtn"
+                  onclick="viewDocument('Project Option / License Document')"
+                >
+                  Review
+                </button>
+
+                <button
+                  class="smallBtn"
+                  onclick="signDocument()"
+                >
+                  Sign
+                </button>
+
+              </div>
+
+            </article>
+
+
+            <article class="agreement">
+
+              <div class="docIcon">
+                WRT
+              </div>
+
+              <div class="agreementInfo">
+
+                <strong>
+                  Writer Agreement
+                </strong>
+
+                <p>
+                  Future writer documentation will appear here when a writer
+                  is formally engaged under a project-specific agreement.
+                </p>
+
+                <div class="meta">
+
+                  <span class="badge draft">
+                    Planning
+                  </span>
+
+                  <span class="badge">
+                    Writer
+                  </span>
+
+                </div>
+
+              </div>
+
+              <div class="agreementActions">
+
+                <button
+                  class="smallBtn"
+                  onclick="showToast('Writer Agreement','No writer agreement has been issued yet.')"
+                >
+                  Details
+                </button>
+
+              </div>
+
+            </article>
+
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- RIGHTS LEDGER -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+
+            <h2>Project Rights Ledger</h2>
+
+            <p>
+              High-level record of important rights and contribution areas.
+            </p>
+
+          </div>
+
+          <button
+            class="btn"
+            onclick="showToast('Rights Ledger','The full legal rights ledger will open here.')"
+          >
+            Full Ledger
+          </button>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="rightsGrid">
+
+
+            <div class="rightItem">
+
+              <div class="rightItemTop">
+                <strong>Original Dream</strong>
+                <span class="rightStatus">Recorded</span>
+              </div>
+
+              <p>
+                Original submission is linked to Dream Creator DR-0001.
+              </p>
+
+            </div>
+
+
+            <div class="rightItem">
+
+              <div class="rightItemTop">
+                <strong>Story Development</strong>
+                <span class="rightStatus">Tracked</span>
+              </div>
+
+              <p>
+                Development contributions are tracked through project records.
+              </p>
+
+            </div>
+
+
+            <div class="rightItem">
+
+              <div class="rightItemTop">
+                <strong>Screenplay</strong>
+                <span class="rightStatus">Pending</span>
+              </div>
+
+              <p>
+                Final writing rights and credits depend on applicable agreements.
+              </p>
+
+            </div>
+
+
+            <div class="rightItem">
+
+              <div class="rightItemTop">
+                <strong>Characters</strong>
+                <span class="rightStatus">Tracked</span>
+              </div>
+
+              <p>
+                Character development can be linked to contributors and documents.
+              </p>
+
+            </div>
+
+
+            <div class="rightItem">
+
+              <div class="rightItemTop">
+                <strong>Visual Artwork</strong>
+                <span class="rightStatus">Pending</span>
+              </div>
+
+              <p>
+                Artwork ownership and licensing will be documented when created.
+              </p>
+
+            </div>
+
+
+            <div class="rightItem">
+
+              <div class="rightItemTop">
+                <strong>Music / Audio</strong>
+                <span class="rightStatus">Pending</span>
+              </div>
+
+              <p>
+                Composer and sound rights will be documented through appropriate agreements.
+              </p>
+
+            </div>
+
+
+            <div class="rightItem">
+
+              <div class="rightItemTop">
+                <strong>Production Rights</strong>
+                <span class="rightStatus">Future</span>
+              </div>
+
+              <p>
+                Production and distribution rights may be addressed as the project advances.
+              </p>
+
+            </div>
+
+
+            <div class="rightItem">
+
+              <div class="rightItemTop">
+                <strong>Revenue Participation</strong>
+                <span class="rightStatus">Agreement</span>
+              </div>
+
+              <p>
+                Any participation must be defined by a specific written agreement.
+              </p>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- SIGNATURE STATUS -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+
+            <h2>Signature Status</h2>
+
+            <p>
+              Track who has executed each project document.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="signatureGrid">
+
+
+            <div class="signature">
+
+              <div class="signatureHeader">
+
+                <strong>Dream Creator</strong>
+
+                <span>Creator</span>
+
+              </div>
+
+              <div class="signatureLine"></div>
+
+              <div class="signatureStatus">
+                ✓ Signed / Executed
+              </div>
+
+            </div>
+
+
+            <div class="signature">
+
+              <div class="signatureHeader">
+
+                <strong>CrowRules Entertainment</strong>
+
+                <span>Company</span>
+
+              </div>
+
+              <div class="signatureLine"></div>
+
+              <div class="signatureStatus">
+                ✓ Signed / Executed
+              </div>
+
+            </div>
+
+
+            <div class="signature">
+
+              <div class="signatureHeader">
+
+                <strong>Project Writer</strong>
+
+                <span>Contributor</span>
+
+              </div>
+
+              <div class="signatureLine"></div>
+
+              <div style="margin-top:8px;color:var(--yellow);font-size:7px;font-weight:800;text-transform:uppercase;">
+                Not Yet Assigned
+              </div>
+
+            </div>
+
+
+            <div class="signature">
+
+              <div class="signatureHeader">
+
+                <strong>Future Contributors</strong>
+
+                <span>Various</span>
+
+              </div>
+
+              <div class="signatureLine"></div>
+
+              <div style="margin-top:8px;color:#666;font-size:7px;font-weight:800;text-transform:uppercase;">
+                As Needed
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- AGREEMENT HISTORY -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+
+            <h2>Agreement History</h2>
+
+            <p>
+              A permanent development record of important document events.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="timeline">
+
+
+            <div class="timelineItem">
+
+              <div class="timelineDot done"></div>
+
+              <div>
+                <strong>
+                  Development Agreement executed
+                </strong>
+
+                <p>
+                  Creator and CrowRules entered the project development relationship.
+                </p>
+              </div>
+
+              <div class="timelineDate">
+                Jun 2026
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem">
+
+              <div class="timelineDot done"></div>
+
+              <div>
+                <strong>
+                  Creator Participation Agreement executed
+                </strong>
+
+                <p>
+                  Project participation terms were recorded.
+                </p>
+              </div>
+
+              <div class="timelineDate">
+                Jul 2026
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem">
+
+              <div class="timelineDot done"></div>
+
+              <div>
+                <strong>
+                  Rights ledger created
+                </strong>
+
+                <p>
+                  Dream, project and contributor records were linked.
+                </p>
+              </div>
+
+              <div class="timelineDate">
+                Aug 2026
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem">
+
+              <div class="timelineDot"></div>
+
+              <div>
+                <strong>
+                  Option / License document pending review
+                </strong>
+
+                <p>
+                  Creator review and applicable signatures are required before advancement.
+                </p>
+              </div>
+
+              <div class="timelineDate">
+                Current
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- PHILOSOPHY -->
+
+      <section class="section philosophy">
+
+        <div class="sectionHeader">
+
+          <div>
+
+            <h2>Dream Creator First</h2>
+
+            <p>
+              Agreements should make the relationship clearer — not mysterious.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="quote">
+
+            <span class="quoteMark">“</span>
+
+            A dream should never disappear into a filing cabinet.
+
+          </div>
+
+          <p>
+            CrowRules Dream World is designed around collaboration. When a
+            project moves forward, the creator should understand what is
+            happening, who is involved, what has been agreed to and what still
+            needs to be decided.
+          </p>
+
+          <p>
+            The exact legal rights, ownership, licenses, credits, compensation,
+            revenue participation and other terms belong in the applicable
+            written agreements for the project.
+          </p>
+
+        </div>
+
+      </section>
+
+
+    </div>
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+
+      <!-- IMPORTANT NOTICE -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+
+            <h2>Important</h2>
+
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="notice">
+
+            <strong>
+              AGREEMENTS ARE PROJECT-SPECIFIC
+            </strong>
+
+            <p>
+              A general submission does not automatically establish every
+              ownership, credit, compensation or licensing term.
+            </p>
+
+            <p>
+              When CrowRules and a creator decide to develop a project,
+              appropriate agreements should be reviewed and executed for
+              that relationship.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- PROJECT DETAILS -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+            <h2>Project Details</h2>
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="detailList">
+
+            <div class="detail">
+              <span>Project</span>
+              <span>DW-0001</span>
+            </div>
+
+            <div class="detail">
+              <span>Dream</span>
+              <span>DR-0001</span>
+            </div>
+
+            <div class="detail">
+              <span>Creator</span>
+              <span>Dream Creator</span>
+            </div>
+
+            <div class="detail">
+              <span>Format</span>
+              <span>Streaming Series</span>
+            </div>
+
+            <div class="detail">
+              <span>Stage</span>
+              <span>Writing</span>
+            </div>
+
+            <div class="detail">
+              <span>Progress</span>
+              <span>38%</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- DOCUMENT TYPES -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+
+            <h2>Agreement Types</h2>
+
+            <p>Possible project documentation.</p>
+
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="sideLinks">
+
+            <button
+              class="sideLink"
+              onclick="showAgreementInfo('Development Agreement')"
+            >
+              Development Agreement
+            </button>
+
+            <button
+              class="sideLink"
+              onclick="showAgreementInfo('Creator Agreement')"
+            >
+              Creator Agreement
+            </button>
+
+            <button
+              class="sideLink"
+              onclick="showAgreementInfo('Writer Agreement')"
+            >
+              Writer Agreement
+            </button>
+
+            <button
+              class="sideLink"
+              onclick="showAgreementInfo('Producer Agreement')"
+            >
+              Producer Agreement
+            </button>
+
+            <button
+              class="sideLink"
+              onclick="showAgreementInfo('License Agreement')"
+            >
+              License Agreement
+            </button>
+
+            <button
+              class="sideLink"
+              onclick="showAgreementInfo('Option Agreement')"
+            >
+              Option Agreement
+            </button>
+
+            <button
+              class="sideLink"
+              onclick="showAgreementInfo('Production Agreement')"
+            >
+              Production Agreement
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- QUICK LINKS -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <div>
+            <h2>Quick Links</h2>
+          </div>
+
+        </div>
+
+        <div class="sectionBody">
+
+          <div class="sideLinks">
+
+            <a class="sideLink" href="collaborators.html">
+              Collaborators
+            </a>
+
+            <a class="sideLink" href="credits.html">
+              Project Credits
+            </a>
+
+            <a class="sideLink" href="earnings.html">
+              Earnings
+            </a>
+
+            <a class="sideLink" href="project-development.html">
+              Development
+            </a>
+
+            <a class="sideLink" href="creative-room.html">
+              Creative Room
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+    </aside>
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <div class="container footerGrid">
+
+    <div class="footerBrand">
+      CROWRULES DREAM WORLD
+    </div>
+
+    <div>
+      Where Dreams Become Stories.
+    </div>
+
+    <div>
+      © 2026 CrowRules Entertainment
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- =====================================================
+REQUEST AGREEMENT MODAL
+===================================================== -->
+
+<div class="modal" id="requestModal">
+
+  <div class="modalBox">
+
+    <div class="modalHeader">
+
+      <h2>Request Agreement</h2>
+
+      <button
+        class="close"
+        onclick="closeModal('requestModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="form">
+
+      <div class="field">
+
+        <label>Agreement Type</label>
+
+        <select id="agreementType">
+
+          <option>Development Agreement</option>
+          <option>Creator Agreement</option>
+          <option>Writer Agreement</option>
+          <option>Producer Agreement</option>
+          <option>License Agreement</option>
+          <option>Option Agreement</option>
+          <option>Production Agreement</option>
+          <option>Other</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Requested For</label>
+
+        <input
+          type="text"
+          id="agreementFor"
+          placeholder="Creator, writer, producer, artist, etc."
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Request Details</label>
+
+        <textarea
+          id="agreementDetails"
+          placeholder="Explain what you need the agreement to address..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="check">
+
+        <input
+          type="checkbox"
+          id="legalAcknowledgement"
+        >
+
+        <label for="legalAcknowledgement">
+          I understand that this request starts an administrative workflow
+          and does not itself create, modify or terminate legal rights.
+          Applicable agreements must be properly prepared, reviewed and
+          executed before relying on their terms.
+        </label>
+
+      </div>
+
+    </div>
+
+    <div class="modalFooter">
+
+      <button
+        class="btn"
+        onclick="closeModal('requestModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn primary"
+        onclick="submitAgreementRequest()"
+      >
+        Submit Request
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+DOCUMENT MODAL
+===================================================== -->
+
+<div class="modal" id="documentModal">
+
+  <div class="modalBox">
+
+    <div class="modalHeader">
+
+      <h2 id="documentTitle">
+        Agreement
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeModal('documentModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="document">
+
+      <h3 id="documentHeading">
+        CrowRules Dream World
+      </h3>
+
+      <p class="placeholder">
+        DEMONSTRATION DOCUMENT VIEW
+      </p>
+
+      <h4>Project</h4>
+
+      <p>
+        The City That Only Exists While You Sleep
+      </p>
+
+      <h4>Purpose</h4>
+
+      <p>
+        This document represents a project-specific agreement record
+        associated with CrowRules Dream World.
+      </p>
+
+      <h4>Important</h4>
+
+      <p>
+        This interface is a demonstration of the future agreement-management
+        system. Actual legal documents should be prepared and reviewed
+        appropriately before being presented for execution.
+      </p>
+
+      <h4>Project Terms</h4>
+
+      <p class="placeholder">
+        Agreement-specific provisions, definitions, rights, obligations,
+        credits, compensation, licensing terms and signatures would appear
+        here from the executed project document.
+      </p>
+
+      <h4>Document Status</h4>
+
+      <p id="documentStatus">
+        Executed
+      </p>
+
+    </div>
+
+    <div class="modalFooter">
+
+      <button
+        class="btn"
+        onclick="closeModal('documentModal')"
+      >
+        Close
+      </button>
+
+      <button
+        class="btn primary"
+        onclick="showToast('Document','Secure document download will be connected to Supabase Storage.')"
+      >
+        Secure PDF
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+TOAST
+===================================================== -->
+
+<div class="toast" id="toast">
+
+  <strong id="toastTitle">
+    CrowRules Dream World
+  </strong>
+
+  <span id="toastMessage">
+    Action completed.
+  </span>
+
+</div>
+
+
+<script>
+
+/*
+===========================================================
+CROWRULES DREAM WORLD
+AGREEMENTS CENTER
+===========================================================
+
+CURRENT PROJECT
+DW-0001
+
+CURRENT DREAM
+DR-0001
+
+
+===========================================================
+RECOMMENDED SUPABASE ARCHITECTURE
+===========================================================
+
+
+TABLE:
+dream_creator_agreements
+
+id uuid primary key
+
+project_id uuid
+references dream_projects(id)
+
+dream_id uuid
+references dream_submissions(id)
+
+creator_id uuid
+references auth.users(id)
+
+agreement_type text
+
+title text
+
+version_number integer
+
+status text
+
+effective_date date
+
+expiration_date date
+
+executed_at timestamptz
+
+created_by uuid
+
+created_at timestamptz
+
+updated_at timestamptz
+
+
+SUGGESTED STATUSES:
+
+draft
+pending_review
+pending_signature
+partially_executed
+executed
+expired
+terminated
+superseded
+archived
+
+
+===========================================================
+AGREEMENT PARTIES
+
+TABLE:
+dream_agreement_parties
+
+id uuid primary key
+
+agreement_id uuid
+references dream_creator_agreements(id)
+
+user_id uuid nullable
+
+party_name text
+
+party_type text
+
+role text
+
+signature_required boolean
+
+signed_at timestamptz
+
+signature_status text
+
+created_at timestamptz
+
+updated_at timestamptz
+
+
+POSSIBLE PARTY TYPES:
+
+creator
+company
+writer
+producer
+artist
+composer
+director
+consultant
+licensee
+licensor
+other
+
+
+===========================================================
+AGREEMENT VERSIONS
+
+TABLE:
+dream_agreement_versions
+
+id uuid primary key
+
+agreement_id uuid
+
+version_number integer
+
+document_path text
+
+document_hash text
+
+change_summary text
+
+created_by uuid
+
+created_at timestamptz
+
+
+Never overwrite an executed document.
+
+Create a new version.
+
+===========================================================
+RIGHTS LEDGER
+
+TABLE:
+dream_rights_ledger
+
+id uuid primary key
+
+project_id uuid
+
+dream_id uuid
+
+creator_id uuid
+
+rights_category text
+
+rights_status text
+
+holder_name text
+
+holder_user_id uuid nullable
+
+source_agreement_id uuid nullable
+
+notes text
+
+effective_date date
+
+expiration_date date
+
+created_at timestamptz
+
+updated_at timestamptz
+
+
+POSSIBLE RIGHTS CATEGORIES:
+
+original_dream
+story
+screenplay
+characters
+world
+artwork
+music
+audio
+photography
+video
+production
+distribution
+streaming
+merchandising
+publishing
+licensing
+international
+ancillary
+revenue_participation
+
+
+===========================================================
+SIGNATURES
+
+TABLE:
+dream_agreement_signatures
+
+id uuid primary key
+
+agreement_id uuid
+
+party_id uuid
+
+signer_user_id uuid
+
+signature_method text
+
+signature_status text
+
+signed_at timestamptz
+
+ip_hash text nullable
+
+document_version integer
+
+created_at timestamptz
+
+
+IMPORTANT:
+
+For a real electronic-signature system, use a
+proper legally appropriate signature provider
+and legal review.
+
+Do not treat a simple checkbox as an electronic
+signature unless the applicable legal process
+supports it.
+
+
+===========================================================
+COMPENSATION
+
+Separate table:
+
+dream_creator_compensation
+
+id uuid primary key
+
+project_id uuid
+
+agreement_id uuid
+
+creator_id uuid
+
+compensation_type text
+
+amount numeric
+
+currency text
+
+percentage numeric
+
+payment_trigger text
+
+status text
+
+effective_date date
+
+notes text
+
+created_at timestamptz
+
+updated_at timestamptz
+
+
+POSSIBLE TYPES:
+
+development_fee
+writing_fee
+producer_fee
+consulting_fee
+license_fee
+option_fee
+bonus
+revenue_participation
+royalty
+merchandising
+other
+
+
+===========================================================
+DOCUMENT STORAGE
+
+SUPABASE STORAGE BUCKET:
+
+dream-world-private-documents
+
+
+Suggested paths:
+
+projects/{project_id}/agreements/
+projects/{project_id}/agreements/drafts/
+projects/{project_id}/agreements/executed/
+projects/{project_id}/agreements/archive/
+
+
+IMPORTANT:
+
+The bucket should be PRIVATE.
+
+Use signed URLs.
+
+Never expose private agreement documents
+through public URLs.
+
+
+===========================================================
+RLS SECURITY
+
+Creators should only see agreements where:
+
+creator_id = auth.uid()
+
+OR
+
+they are an authorized project member.
+
+Company administrators should have appropriate
+elevated permissions.
+
+Do not allow ordinary project collaborators to
+read another person's compensation information.
+
+Do not expose service-role credentials in browser code.
+
+
+===========================================================
+LONG-TERM DEVELOPMENT
+
+Agreements should support projects that take years.
+
+Possible events:
+
+agreement created
+agreement revised
+agreement reviewed
+agreement signed
+agreement amended
+agreement extended
+agreement paused
+agreement resumed
+agreement terminated
+agreement superseded
+
+
+Never delete the historical record of an executed
+agreement simply because a project changes direction.
+
+
+===========================================================
+IMPORTANT LEGAL DESIGN PRINCIPLE
+
+The database is an administrative record.
+
+It does not replace the actual legal document.
+
+The executed document should remain the controlling
+source for the actual rights and obligations.
+
+
+===========================================================
+*/
+
+
+/* =====================================================
+MOBILE NAV
+===================================================== */
+
+function toggleMobileNav(){
+
+  const nav =
+    document.querySelector(".navlinks");
+
+  if(!nav) return;
+
+  if(nav.style.display === "flex"){
+
+    nav.style.display = "";
+
+  }else{
+
+    nav.style.display = "flex";
+    nav.style.flexDirection = "column";
+    nav.style.position = "absolute";
+    nav.style.top = "76px";
+    nav.style.left = "3%";
+    nav.style.right = "3%";
+    nav.style.padding = "12px";
+    nav.style.background = "#0a0a0c";
+    nav.style.border = "1px solid rgba(255,255,255,.1)";
+
+  }
+
+}
+
+
+/* =====================================================
+MODALS
+===================================================== */
+
+function openModal(id){
+
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+    modal.classList.add("open");
+  }
+
+}
+
+
+function closeModal(id){
+
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+    modal.classList.remove("open");
+  }
+
+}
+
+
+/* =====================================================
+TOAST
+===================================================== */
+
+let toastTimer;
+
+function showToast(title,message){
+
+  const toast =
+    document.getElementById("toast");
+
+  document.getElementById("toastTitle")
+    .textContent = title;
+
+  document.getElementById("toastMessage")
+    .textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(()=>{
+
+    toast.classList.remove("show");
+
+  },3500);
+
+}
+
+
+/* =====================================================
+VIEW DOCUMENT
+===================================================== */
+
+function viewDocument(title){
+
+  document
+    .getElementById("documentTitle")
+    .textContent = title;
+
+  document
+    .getElementById("documentHeading")
+    .textContent = title;
+
+  document
+    .getElementById("documentStatus")
+    .textContent =
+      title.includes("Option")
+        ? "Pending Creator Review"
+        : "Executed";
+
+  openModal("documentModal");
+
+}
+
+
+/* =====================================================
+SIGN DOCUMENT
+===================================================== */
+
+function signDocument(){
+
+  showToast(
+    "Creator Review",
+    "Secure agreement review and signature workflow will open here."
+  );
+
+  /*
+  FUTURE:
+
+  location.href =
+    "agreement-review.html?id=" +
+    AGREEMENT_ID;
+  */
+
+}
+
+
+/* =====================================================
+AGREEMENT REQUEST
+===================================================== */
+
+function submitAgreementRequest(){
+
+  const type =
+    document
+      .getElementById("agreementType")
+      .value;
+
+  const requestedFor =
+    document
+      .getElementById("agreementFor")
+      .value
+      .trim();
+
+  const details =
+    document
+      .getElementById("agreementDetails")
+      .value
+      .trim();
+
+  const acknowledged =
+    document
+      .getElementById("legalAcknowledgement")
+      .checked;
+
+
+  if(!requestedFor){
+
+    showToast(
+      "Missing Information",
+      "Enter who the agreement is being requested for."
+    );
+
+    return;
+
+  }
+
+
+  if(!acknowledged){
+
+    showToast(
+      "Acknowledgement Required",
+      "Please acknowledge the agreement workflow notice."
+    );
+
+    return;
+
+  }
+
+
+  closeModal("requestModal");
+
+
+  document
+    .getElementById("agreementFor")
+    .value = "";
+
+  document
+    .getElementById("agreementDetails")
+    .value = "";
+
+  document
+    .getElementById("legalAcknowledgement")
+    .checked = false;
+
+
+  showToast(
+    "Request Submitted",
+    type + " request submitted for " + requestedFor + "."
+  );
+
+
+  /*
+  FUTURE SUPABASE:
+
+  const {
+    data:user
+  } =
+    await supabase.auth.getUser();
+
+  await supabase
+    .from("dream_agreement_requests")
+    .insert({
+
+      project_id:PROJECT_ID,
+
+      requested_by:user.user.id,
+
+      agreement_type:type,
+
+      requested_for:requestedFor,
+
+      details:details,
+
+      status:"pending"
+
+    });
+
+
+  A notification could then be sent
+  to the assigned CrowRules administrator
+  through a Supabase Edge Function.
+  */
+
+}
+
+
+/* =====================================================
+AGREEMENT TYPE INFO
+===================================================== */
+
+function showAgreementInfo(type){
+
+  const descriptions = {
+
+    "Development Agreement":
+      "Defines the relationship for developing the dream or project.",
+
+    "Creator Agreement":
+      "Defines the creator's project relationship and negotiated terms.",
+
+    "Writer Agreement":
+      "Addresses writing services, contributions, credits and applicable rights.",
+
+    "Producer Agreement":
+      "Addresses producer responsibilities and negotiated project terms.",
+
+    "License Agreement":
+      "Documents licensing of specified rights under defined terms.",
+
+    "Option Agreement":
+      "May provide defined rights to pursue development or production for a specific period.",
+
+    "Production Agreement":
+      "Addresses project production and related obligations."
+
+  };
+
+  showToast(
+    type,
+    descriptions[type] ||
+    "Project-specific agreement information."
+  );
+
+}
+
+
+/* =====================================================
+CLOSE MODALS BY BACKDROP
+===================================================== */
+
+document
+  .querySelectorAll(".modal")
+  .forEach(modal => {
+
+    modal.addEventListener("click",event => {
+
+      if(event.target === modal){
+
+        modal.classList.remove("open");
+
+      }
+
+    });
+
+  });
+
+
+/* =====================================================
+ESCAPE KEY
+===================================================== */
+
+document.addEventListener("keydown",event => {
+
+  if(event.key === "Escape"){
+
+    document
+      .querySelectorAll(".modal.open")
+      .forEach(modal => {
+
+        modal.classList.remove("open");
+
+      });
+
+  }
+
+});
+
+
+/*
+===========================================================
+FUTURE SUPABASE LOADING EXAMPLE
+===========================================================
+
+
+const PROJECT_ID =
+  "YOUR_PROJECT_UUID";
+
+
+const {
+  data:agreements,
+  error
+} =
+  await supabaseClient
+
+    .from("dream_creator_agreements")
+
+    .select(`
+      *,
+      dream_agreement_parties(*)
+    `)
+
+    .eq(
+      "project_id",
+      PROJECT_ID
+    )
+
+    .order(
+      "created_at",
+      {
+        ascending:false
+      }
+    );
+
+
+===========================================================
+RIGHTS LEDGER
+
+const {
+  data:rights
+} =
+  await supabaseClient
+
+    .from("dream_rights_ledger")
+
+    .select("*")
+
+    .eq(
+      "project_id",
+      PROJECT_ID
+    )
+
+    .order(
+      "rights_category",
+      {
+        ascending:true
+      }
+    );
+
+
+===========================================================
+REALTIME
+
+supabaseClient
+  .channel(
+    "dream-agreements"
+  )
+  .on(
+    "postgres_changes",
+    {
+      event:"*",
+      schema:"public",
+      table:"dream_creator_agreements",
+      filter:
+        "project_id=eq." + PROJECT_ID
+    },
+    payload => {
+
+      loadAgreements();
+
+    }
+  )
+  .subscribe();
+
+
+===========================================================
+*/
+</script>
+
+</body>
+</html>

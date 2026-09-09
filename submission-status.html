@@ -1,0 +1,3933 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>CrowRules Dream World — Submission Status</title>
+<meta name="theme-color" content="#050505">
+<meta name="description" content="CrowRules Dream World Creator Submission Status Center.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#050505;
+  --panel:#0b0b0e;
+  --panel2:#101014;
+  --panel3:#15151a;
+  --red:#e50914;
+  --red2:#ff3038;
+  --green:#43dc91;
+  --yellow:#f3c95b;
+  --blue:#65a8ff;
+  --purple:#aa7cff;
+  --white:#f4f4f4;
+  --muted:#77777e;
+  --line:rgba(255,255,255,.09);
+  --shadow:0 20px 70px rgba(0,0,0,.45);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  color:var(--white);
+  font-family:Montserrat,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 5% 0%,rgba(229,9,20,.15),transparent 28%),
+    radial-gradient(circle at 95% 20%,rgba(100,0,0,.13),transparent 30%),
+    linear-gradient(180deg,#050505,#090909 65%,#040404);
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.025;
+  background-image:
+    linear-gradient(rgba(255,255,255,.7) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.7) 1px,transparent 1px);
+  background-size:50px 50px;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.container{
+  width:min(1450px,94%);
+  margin:auto;
+}
+
+/* =====================================================
+HEADER
+===================================================== */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(5,5,5,.96);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.logo{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(229,9,20,.65);
+  background:#090909;
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:-2px;
+}
+
+.brand strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:14px;
+  letter-spacing:1.5px;
+}
+
+.brand span{
+  display:block;
+  margin-top:3px;
+  color:#777;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.navlinks{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:4px;
+}
+
+.navlinks a{
+  padding:10px;
+  border-radius:6px;
+  color:#999;
+  font-size:9px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.65px;
+}
+
+.navlinks a:hover,
+.navlinks a.active{
+  color:#fff;
+  background:rgba(229,9,20,.1);
+}
+
+.navlinks a.active{
+  box-shadow:inset 0 -2px var(--red);
+}
+
+.mobileMenu{
+  display:none;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  background:none;
+  color:#fff;
+}
+
+/* =====================================================
+HERO
+===================================================== */
+
+.hero{
+  padding:42px 0 28px;
+}
+
+.breadcrumb{
+  margin-bottom:17px;
+  color:#666;
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:1.7px;
+}
+
+.breadcrumb span{
+  color:var(--red2);
+}
+
+.heroGrid{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:25px;
+  align-items:end;
+}
+
+.eyebrow{
+  margin-bottom:10px;
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2.5px;
+}
+
+h1{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(30px,4vw,50px);
+  line-height:1.05;
+  letter-spacing:-1px;
+}
+
+.heroText{
+  max-width:850px;
+  margin-top:14px;
+  color:#999;
+  font-size:13px;
+  line-height:1.85;
+}
+
+.statusBadge{
+  padding:12px 15px;
+  border:1px solid rgba(67,220,145,.25);
+  background:rgba(67,220,145,.035);
+  color:var(--green);
+  font-size:9px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+/* =====================================================
+MAIN
+===================================================== */
+
+main{
+  padding:25px 0 80px;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:240px minmax(0,1fr);
+  gap:18px;
+}
+
+.panel{
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  box-shadow:var(--shadow);
+}
+
+/* =====================================================
+SIDEBAR
+===================================================== */
+
+.side{
+  position:sticky;
+  top:96px;
+  align-self:start;
+}
+
+.sideHeader{
+  padding:17px;
+  border-bottom:1px solid var(--line);
+}
+
+.sideHeader h2{
+  font-family:Orbitron,sans-serif;
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+.sideHeader p{
+  margin-top:6px;
+  color:#666;
+  font-size:8px;
+  line-height:1.6;
+}
+
+.sideLinks{
+  padding:10px;
+}
+
+.sideLink{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  width:100%;
+  padding:11px;
+  margin-bottom:3px;
+  border:1px solid transparent;
+  background:none;
+  color:#777;
+  text-align:left;
+  font-size:8px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.65px;
+}
+
+.sideLink:hover,
+.sideLink.active{
+  color:#fff;
+  border-color:rgba(229,9,20,.24);
+  background:rgba(229,9,20,.055);
+}
+
+.sideLink.active{
+  box-shadow:inset 2px 0 var(--red);
+}
+
+.icon{
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:7px;
+}
+
+.sideCard{
+  margin:10px;
+  padding:14px;
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.sideCard strong{
+  display:block;
+  color:#aaa;
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+}
+
+.sideCard p{
+  margin-top:7px;
+  color:#5e5e64;
+  font-size:7px;
+  line-height:1.7;
+}
+
+.sideCard .mini{
+  margin-top:10px;
+  color:var(--green);
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+/* =====================================================
+CONTENT
+===================================================== */
+
+.content{
+  min-width:0;
+}
+
+.section{
+  margin-bottom:18px;
+  border:1px solid var(--line);
+  background:#0a0a0c;
+}
+
+.sectionHeader{
+  padding:18px 20px;
+  border-bottom:1px solid var(--line);
+}
+
+.sectionHeader h2{
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.sectionHeader p{
+  max-width:850px;
+  margin-top:6px;
+  color:#666;
+  font-size:8px;
+  line-height:1.7;
+}
+
+.sectionBody{
+  padding:20px;
+}
+
+/* =====================================================
+STATS
+===================================================== */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.stat{
+  padding:16px;
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.statNumber{
+  font-family:Orbitron,sans-serif;
+  font-size:21px;
+  font-weight:800;
+}
+
+.statLabel{
+  margin-top:6px;
+  color:#666;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+
+.stat.green .statNumber{
+  color:var(--green);
+}
+
+.stat.red .statNumber{
+  color:var(--red2);
+}
+
+.stat.yellow .statNumber{
+  color:var(--yellow);
+}
+
+/* =====================================================
+SUBMISSION CARDS
+===================================================== */
+
+.submissions{
+  display:grid;
+  gap:10px;
+}
+
+.submission{
+  position:relative;
+  padding:18px;
+  border:1px solid var(--line);
+  background:#09090b;
+  overflow:hidden;
+}
+
+.submission.active{
+  border-color:rgba(229,9,20,.35);
+}
+
+.submission.active:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:var(--red);
+}
+
+.subTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+}
+
+.subCode{
+  color:#666;
+  font-family:Orbitron,sans-serif;
+  font-size:7px;
+  letter-spacing:1px;
+}
+
+.submission h3{
+  margin-top:6px;
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+}
+
+.subMeta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:9px;
+}
+
+.tag{
+  padding:5px 7px;
+  border:1px solid var(--line);
+  color:#777;
+  font-size:6px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+.tag.green{
+  color:var(--green);
+  border-color:rgba(67,220,145,.2);
+}
+
+.tag.yellow{
+  color:var(--yellow);
+  border-color:rgba(243,201,91,.2);
+}
+
+.tag.red{
+  color:var(--red2);
+  border-color:rgba(229,9,20,.25);
+}
+
+.tag.blue{
+  color:var(--blue);
+  border-color:rgba(101,168,255,.2);
+}
+
+.subDescription{
+  max-width:900px;
+  margin-top:12px;
+  color:#777;
+  font-size:8px;
+  line-height:1.75;
+}
+
+.progressWrap{
+  margin-top:15px;
+}
+
+.progressTop{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:6px;
+  color:#666;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.progress{
+  height:6px;
+  overflow:hidden;
+  background:#17171b;
+}
+
+.progressBar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--red),var(--red2));
+  transition:width .7s ease;
+}
+
+.subFooter{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:16px;
+  padding-top:13px;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+
+.subDate{
+  color:#555;
+  font-size:7px;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+/* =====================================================
+BUTTONS
+===================================================== */
+
+.btn{
+  padding:10px 13px;
+  border:1px solid var(--line);
+  border-radius:5px;
+  background:#101014;
+  color:#eee;
+  font-size:8px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+}
+
+.btn:hover{
+  border-color:rgba(229,9,20,.45);
+}
+
+.btn.primary{
+  border-color:var(--red);
+  background:var(--red);
+  color:#fff;
+}
+
+.btn.primary:hover{
+  background:var(--red2);
+}
+
+/* =====================================================
+DETAIL VIEW
+===================================================== */
+
+.detailGrid{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:14px;
+}
+
+.detailPanel{
+  padding:18px;
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.detailPanel h3{
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+}
+
+.detailPanel p{
+  margin-top:8px;
+  color:#666;
+  font-size:8px;
+  line-height:1.8;
+}
+
+.detailRows{
+  margin-top:14px;
+  display:grid;
+  gap:7px;
+}
+
+.detailRow{
+  display:grid;
+  grid-template-columns:145px 1fr;
+  gap:10px;
+  padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.detailRow:last-child{
+  border-bottom:0;
+}
+
+.detailKey{
+  color:#555;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.detailValue{
+  color:#bbb;
+  font-size:8px;
+}
+
+/* =====================================================
+STATUS TIMELINE
+===================================================== */
+
+.timeline{
+  position:relative;
+  margin-top:5px;
+}
+
+.timeline:before{
+  content:"";
+  position:absolute;
+  left:17px;
+  top:16px;
+  bottom:16px;
+  width:1px;
+  background:rgba(229,9,20,.3);
+}
+
+.timelineItem{
+  position:relative;
+  display:grid;
+  grid-template-columns:36px 1fr;
+  gap:12px;
+  padding:11px 0;
+}
+
+.timelineDot{
+  position:relative;
+  z-index:2;
+  width:35px;
+  height:35px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  background:#09090b;
+  color:#555;
+  font-family:Orbitron,sans-serif;
+  font-size:7px;
+}
+
+.timelineItem h3{
+  font-size:9px;
+}
+
+.timelineItem p{
+  margin-top:4px;
+  color:#5f5f65;
+  font-size:7px;
+  line-height:1.65;
+}
+
+.timelineDate{
+  display:inline-block;
+  margin-top:5px;
+  color:#555;
+  font-size:6px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.timelineItem.complete .timelineDot{
+  color:var(--green);
+  border-color:rgba(67,220,145,.3);
+  background:rgba(67,220,145,.04);
+}
+
+.timelineItem.current .timelineDot{
+  color:var(--red2);
+  border-color:var(--red);
+  background:rgba(229,9,20,.1);
+  box-shadow:0 0 20px rgba(229,9,20,.12);
+}
+
+.timelineItem.current h3{
+  color:#fff;
+}
+
+.timelineItem.current .timelineDate{
+  color:var(--red2);
+}
+
+/* =====================================================
+NEXT STEPS
+===================================================== */
+
+.nextGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.nextCard{
+  padding:16px;
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.nextNumber{
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+}
+
+.nextCard h3{
+  margin-top:9px;
+  font-family:Orbitron,sans-serif;
+  font-size:9px;
+}
+
+.nextCard p{
+  margin-top:7px;
+  color:#666;
+  font-size:7px;
+  line-height:1.7;
+}
+
+/* =====================================================
+CREATOR NOTE
+===================================================== */
+
+.creatorNote{
+  padding:19px;
+  border:1px solid rgba(229,9,20,.27);
+  background:
+    radial-gradient(circle at 0% 0%,rgba(229,9,20,.1),transparent 50%),
+    #09090b;
+}
+
+.creatorNote .label{
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+  letter-spacing:1.5px;
+}
+
+.creatorNote h3{
+  margin-top:8px;
+  font-family:Orbitron,sans-serif;
+  font-size:18px;
+  line-height:1.35;
+}
+
+.creatorNote p{
+  max-width:850px;
+  margin-top:10px;
+  color:#777;
+  font-size:8px;
+  line-height:1.85;
+}
+
+/* =====================================================
+NOTICE
+===================================================== */
+
+.notice{
+  padding:15px;
+  border:1px solid rgba(101,168,255,.2);
+  background:rgba(101,168,255,.025);
+}
+
+.notice strong{
+  display:block;
+  color:var(--blue);
+  font-family:Orbitron,sans-serif;
+  font-size:7px;
+  letter-spacing:.8px;
+}
+
+.notice p{
+  margin-top:6px;
+  color:#666;
+  font-size:7px;
+  line-height:1.8;
+}
+
+/* =====================================================
+MODAL
+===================================================== */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.88);
+  backdrop-filter:blur(10px);
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modalBox{
+  width:min(650px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border:1px solid rgba(229,9,20,.35);
+  background:#0b0b0e;
+  box-shadow:0 30px 100px rgba(0,0,0,.7);
+}
+
+.modalHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:17px 19px;
+  border-bottom:1px solid var(--line);
+}
+
+.modalHeader h2{
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+}
+
+.close{
+  border:0;
+  background:none;
+  color:#777;
+  font-size:21px;
+}
+
+.modalBody{
+  padding:19px;
+}
+
+.modalBody p{
+  color:#777;
+  font-size:8px;
+  line-height:1.8;
+}
+
+.formGrid{
+  display:grid;
+  gap:12px;
+  margin-top:15px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:6px;
+  color:#777;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  padding:11px;
+  border:1px solid var(--line);
+  outline:none;
+  background:#070709;
+  color:#eee;
+  font-size:8px;
+}
+
+.field textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+  border-color:rgba(229,9,20,.55);
+}
+
+.modalFooter{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  padding:14px 19px;
+  border-top:1px solid var(--line);
+}
+
+/* =====================================================
+TOAST
+===================================================== */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:5000;
+  min-width:270px;
+  max-width:400px;
+  padding:14px 16px;
+  border:1px solid rgba(229,9,20,.35);
+  background:#0c0c0f;
+  box-shadow:0 15px 50px rgba(0,0,0,.6);
+  transform:translateY(120px);
+  opacity:0;
+  transition:.3s ease;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast strong{
+  display:block;
+  margin-bottom:4px;
+  color:var(--red2);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.toast span{
+  color:#aaa;
+  font-size:8px;
+}
+
+/* =====================================================
+FOOTER
+===================================================== */
+
+footer{
+  border-top:1px solid var(--line);
+  padding:35px 0;
+  color:#555;
+  font-size:9px;
+}
+
+.footerGrid{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.footerBrand{
+  color:#888;
+  font-family:Orbitron,sans-serif;
+  letter-spacing:1px;
+}
+
+/* =====================================================
+RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px){
+
+  .navlinks{
+    display:none;
+  }
+
+  .mobileMenu{
+    display:block;
+  }
+
+}
+
+@media(max-width:950px){
+
+  .layout{
+    grid-template-columns:1fr;
+  }
+
+  .side{
+    position:static;
+  }
+
+  .sideLinks{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .detailGrid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:700px){
+
+  .heroGrid{
+    grid-template-columns:1fr;
+  }
+
+  .statusBadge{
+    width:max-content;
+  }
+
+  .nextGrid{
+    grid-template-columns:1fr;
+  }
+
+  .sideLinks{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .subTop{
+    flex-direction:column;
+  }
+
+}
+
+@media(max-width:450px){
+
+  .container{
+    width:92%;
+  }
+
+  h1{
+    font-size:28px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .sideLinks{
+    grid-template-columns:1fr;
+  }
+
+  .detailRow{
+    grid-template-columns:1fr;
+    gap:4px;
+  }
+
+  .sectionBody{
+    padding:15px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- =====================================================
+HEADER
+===================================================== -->
+
+<header>
+
+  <div class="container nav">
+
+    <a href="index.html" class="brand">
+
+      <div class="logo">
+        CR
+      </div>
+
+      <div>
+
+        <strong>CROWRULES</strong>
+
+        <span>Dream World</span>
+
+      </div>
+
+    </a>
+
+
+    <nav class="navlinks">
+
+      <a href="creator-dashboard.html">
+        Dashboard
+      </a>
+
+      <a href="my-dreams.html">
+        My Dreams
+      </a>
+
+      <a href="my-projects.html">
+        My Projects
+      </a>
+
+      <a href="creative-room.html">
+        Creative Room
+      </a>
+
+      <a href="project-development.html">
+        Development
+      </a>
+
+      <a href="collaborators.html">
+        Collaborators
+      </a>
+
+      <a href="agreements.html">
+        Agreements
+      </a>
+
+      <a href="credits.html">
+        Credits
+      </a>
+
+      <a href="earnings.html">
+        Earnings
+      </a>
+
+      <a href="messages.html">
+        Messages
+      </a>
+
+      <a href="files.html">
+        Files
+      </a>
+
+      <a href="creator-rights.html">
+        Rights
+      </a>
+
+      <a
+        href="submission-status.html"
+        class="active"
+      >
+        Submissions
+      </a>
+
+    </nav>
+
+
+    <button
+      class="mobileMenu"
+      onclick="toggleMobileNav()"
+    >
+      MENU
+    </button>
+
+  </div>
+
+</header>
+
+
+<!-- =====================================================
+HERO
+===================================================== -->
+
+<div class="container hero">
+
+  <div class="breadcrumb">
+    DREAM WORLD /
+    <span>SUBMISSION STATUS</span>
+  </div>
+
+
+  <div class="heroGrid">
+
+    <div>
+
+      <div class="eyebrow">
+        CREATOR SUBMISSION CENTER
+      </div>
+
+      <h1>
+        Know Where
+        Your Dream Stands.
+      </h1>
+
+      <p class="heroText">
+        Follow every submission from the moment it enters Dream World
+        through review, discovery, development and beyond. A dream may
+        move quickly, slowly, pause for years, change direction or become
+        something completely different. The important thing is that its
+        history remains visible.
+      </p>
+
+    </div>
+
+
+    <div class="statusBadge">
+      SUBMISSION RECORD ACTIVE
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+MAIN
+===================================================== -->
+
+<main class="container">
+
+  <div class="layout">
+
+
+    <!-- =================================================
+    SIDEBAR
+    ================================================= -->
+
+    <aside class="panel side">
+
+      <div class="sideHeader">
+
+        <h2>
+          Submission Center
+        </h2>
+
+        <p>
+          Track your dreams and their development journey.
+        </p>
+
+      </div>
+
+
+      <div class="sideLinks">
+
+        <button
+          class="sideLink active"
+          onclick="scrollToSection('overview',this)"
+        >
+          <span class="icon">OV</span>
+          Overview
+        </button>
+
+
+        <button
+          class="sideLink"
+          onclick="scrollToSection('submissions',this)"
+        >
+          <span class="icon">DR</span>
+          My Dreams
+        </button>
+
+
+        <button
+          class="sideLink"
+          onclick="scrollToSection('detail',this)"
+        >
+          <span class="icon">DT</span>
+          Details
+        </button>
+
+
+        <button
+          class="sideLink"
+          onclick="scrollToSection('timeline',this)"
+        >
+          <span class="icon">TL</span>
+          Timeline
+        </button>
+
+
+        <button
+          class="sideLink"
+          onclick="scrollToSection('next',this)"
+        >
+          <span class="icon">NX</span>
+          Next Steps
+        </button>
+
+      </div>
+
+
+      <div class="sideCard">
+
+        <strong>
+          CURRENT CREATOR
+        </strong>
+
+        <p>
+          Your Dream World account controls access to your private
+          submissions and project records.
+        </p>
+
+        <div class="mini">
+          AUTHENTICATED CREATOR
+        </div>
+
+      </div>
+
+
+      <div class="sideCard">
+
+        <strong>
+          LONG-TERM DEVELOPMENT
+        </strong>
+
+        <p>
+          Some dreams need time. A project can remain paused or in
+          development for years without losing its history.
+        </p>
+
+      </div>
+
+    </aside>
+
+
+    <!-- =================================================
+    CONTENT
+    ================================================= -->
+
+    <section class="content">
+
+
+      <!-- =================================================
+      OVERVIEW
+      ================================================= -->
+
+      <section
+        class="section"
+        id="overview"
+      >
+
+        <div class="sectionHeader">
+
+          <h2>
+            Submission Overview
+          </h2>
+
+          <p>
+            Your current Dream World submission activity.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div class="stats">
+
+            <div class="stat">
+
+              <div
+                class="statNumber"
+                id="totalDreams"
+              >
+                3
+              </div>
+
+              <div class="statLabel">
+                Total Dreams
+              </div>
+
+            </div>
+
+
+            <div class="stat green">
+
+              <div
+                class="statNumber"
+                id="activeDreams"
+              >
+                1
+              </div>
+
+              <div class="statLabel">
+                Active Review
+              </div>
+
+            </div>
+
+
+            <div class="stat yellow">
+
+              <div
+                class="statNumber"
+                id="developmentDreams"
+              >
+                1
+              </div>
+
+              <div class="statLabel">
+                In Development
+              </div>
+
+            </div>
+
+
+            <div class="stat red">
+
+              <div
+                class="statNumber"
+                id="completedDreams"
+              >
+                0
+              </div>
+
+              <div class="statLabel">
+                Produced
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      SUBMISSIONS
+      ================================================= -->
+
+      <section
+        class="section"
+        id="submissions"
+      >
+
+        <div class="sectionHeader">
+
+          <h2>
+            My Dream Submissions
+          </h2>
+
+          <p>
+            Every submission receives its own record. Click into a
+            submission to see its current status and history.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div class="submissions">
+
+
+            <!-- DREAM 1 -->
+
+            <article
+              class="submission active"
+              data-status="development"
+              data-title="The City That Only Exists While You Sleep"
+            >
+
+              <div class="subTop">
+
+                <div>
+
+                  <div class="subCode">
+                    SUBMISSION DW-DR-0001
+                  </div>
+
+                  <h3>
+                    The City That Only Exists While You Sleep
+                  </h3>
+
+                  <div class="subMeta">
+
+                    <span class="tag red">
+                      Development
+                    </span>
+
+                    <span class="tag">
+                      Streaming Series
+                    </span>
+
+                    <span class="tag">
+                      Sci-Fi / Mystery
+                    </span>
+
+                    <span class="tag green">
+                      Creator Involved
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <button
+                  class="btn"
+                  onclick="viewSubmission('DW-DR-0001')"
+                >
+                  View Record
+                </button>
+
+              </div>
+
+
+              <p class="subDescription">
+                Every night, a mysterious city appears in the dreams
+                of strangers. Eventually they discover that they are
+                visiting the same streets, buildings and people.
+              </p>
+
+
+              <div class="progressWrap">
+
+                <div class="progressTop">
+
+                  <span>
+                    Dream Journey
+                  </span>
+
+                  <span>
+                    62%
+                  </span>
+
+                </div>
+
+                <div class="progress">
+
+                  <div
+                    class="progressBar"
+                    data-progress="62"
+                  ></div>
+
+                </div>
+
+              </div>
+
+
+              <div class="subFooter">
+
+                <div class="subDate">
+                  Submitted June 18, 2026
+                </div>
+
+
+                <div class="actions">
+
+                  <button
+                    class="btn"
+                    onclick="requestUpdate('DW-DR-0001')"
+                  >
+                    Request Update
+                  </button>
+
+                  <a
+                    href="project-development.html"
+                    class="btn primary"
+                  >
+                    Open Development
+                  </a>
+
+                </div>
+
+              </div>
+
+            </article>
+
+
+            <!-- DREAM 2 -->
+
+            <article
+              class="submission"
+              data-status="review"
+              data-title="Night Window"
+            >
+
+              <div class="subTop">
+
+                <div>
+
+                  <div class="subCode">
+                    SUBMISSION DW-DR-0002
+                  </div>
+
+                  <h3>
+                    Night Window
+                  </h3>
+
+                  <div class="subMeta">
+
+                    <span class="tag yellow">
+                      Under Review
+                    </span>
+
+                    <span class="tag">
+                      Short Film
+                    </span>
+
+                    <span class="tag">
+                      Psychological
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <button
+                  class="btn"
+                  onclick="viewSubmission('DW-DR-0002')"
+                >
+                  View Record
+                </button>
+
+              </div>
+
+
+              <p class="subDescription">
+                A person discovers that the window across the street
+                shows a version of their life that is happening exactly
+                twenty-four hours in the future.
+              </p>
+
+
+              <div class="progressWrap">
+
+                <div class="progressTop">
+
+                  <span>
+                    Review Progress
+                  </span>
+
+                  <span>
+                    28%
+                  </span>
+
+                </div>
+
+                <div class="progress">
+
+                  <div
+                    class="progressBar"
+                    data-progress="28"
+                  ></div>
+
+                </div>
+
+              </div>
+
+
+              <div class="subFooter">
+
+                <div class="subDate">
+                  Submitted July 11, 2026
+                </div>
+
+
+                <div class="actions">
+
+                  <button
+                    class="btn"
+                    onclick="requestUpdate('DW-DR-0002')"
+                  >
+                    Request Update
+                  </button>
+
+                </div>
+
+              </div>
+
+            </article>
+
+
+            <!-- DREAM 3 -->
+
+            <article
+              class="submission"
+              data-status="community"
+              data-title="The Last Radio Station"
+            >
+
+              <div class="subTop">
+
+                <div>
+
+                  <div class="subCode">
+                    SUBMISSION DW-DR-0003
+                  </div>
+
+                  <h3>
+                    The Last Radio Station
+                  </h3>
+
+                  <div class="subMeta">
+
+                    <span class="tag blue">
+                      Community Idea
+                    </span>
+
+                    <span class="tag">
+                      Audio Drama
+                    </span>
+
+                    <span class="tag">
+                      Mystery
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <button
+                  class="btn"
+                  onclick="viewSubmission('DW-DR-0003')"
+                >
+                  View Record
+                </button>
+
+              </div>
+
+
+              <p class="subDescription">
+                A radio station continues broadcasting long after the
+                rest of the world has disappeared. One listener discovers
+                the broadcasts may be coming from somewhere impossible.
+              </p>
+
+
+              <div class="progressWrap">
+
+                <div class="progressTop">
+
+                  <span>
+                    Submission Journey
+                  </span>
+
+                  <span>
+                    10%
+                  </span>
+
+                </div>
+
+                <div class="progress">
+
+                  <div
+                    class="progressBar"
+                    data-progress="10"
+                  ></div>
+
+                </div>
+
+              </div>
+
+
+              <div class="subFooter">
+
+                <div class="subDate">
+                  Submitted August 22, 2026
+                </div>
+
+
+                <div class="actions">
+
+                  <button
+                    class="btn"
+                    onclick="requestUpdate('DW-DR-0003')"
+                  >
+                    Request Update
+                  </button>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      SELECTED DETAIL
+      ================================================= -->
+
+      <section
+        class="section"
+        id="detail"
+      >
+
+        <div class="sectionHeader">
+
+          <h2>
+            Selected Submission
+          </h2>
+
+          <p>
+            Detailed information for the currently selected dream.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div class="detailGrid">
+
+
+            <div class="detailPanel">
+
+              <h3 id="detailTitle">
+                The City That Only Exists While You Sleep
+              </h3>
+
+              <p id="detailDescription">
+                This dream is currently in active development with
+                CrowRules and the original Dream Creator.
+              </p>
+
+
+              <div class="detailRows">
+
+                <div class="detailRow">
+
+                  <div class="detailKey">
+                    Submission ID
+                  </div>
+
+                  <div class="detailValue">
+                    DW-DR-0001
+                  </div>
+
+                </div>
+
+
+                <div class="detailRow">
+
+                  <div class="detailKey">
+                    Current Status
+                  </div>
+
+                  <div class="detailValue">
+                    Development
+                  </div>
+
+                </div>
+
+
+                <div class="detailRow">
+
+                  <div class="detailKey">
+                    Submitted
+                  </div>
+
+                  <div class="detailValue">
+                    June 18, 2026
+                  </div>
+
+                </div>
+
+
+                <div class="detailRow">
+
+                  <div class="detailKey">
+                    Format
+                  </div>
+
+                  <div class="detailValue">
+                    Streaming Series
+                  </div>
+
+                </div>
+
+
+                <div class="detailRow">
+
+                  <div class="detailKey">
+                    Genre
+                  </div>
+
+                  <div class="detailValue">
+                    Sci-Fi / Mystery
+                  </div>
+
+                </div>
+
+
+                <div class="detailRow">
+
+                  <div class="detailKey">
+                    Visibility
+                  </div>
+
+                  <div class="detailValue">
+                    Private Development
+                  </div>
+
+                </div>
+
+
+                <div class="detailRow">
+
+                  <div class="detailKey">
+                    Project
+                  </div>
+
+                  <div class="detailValue">
+                    DW-0001
+                  </div>
+
+                </div>
+
+
+                <div class="detailRow">
+
+                  <div class="detailKey">
+                    Creator Participation
+                  </div>
+
+                  <div class="detailValue">
+                    Active
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="detailPanel">
+
+              <h3>
+                Current State
+              </h3>
+
+              <p>
+                The submission has moved beyond initial review and
+                is now connected to an active Dream World project.
+              </p>
+
+
+              <div style="margin-top:18px">
+
+                <div class="tag red">
+                  DEVELOPMENT
+                </div>
+
+              </div>
+
+
+              <div style="margin-top:18px">
+
+                <div class="progressTop">
+
+                  <span>
+                    Overall Journey
+                  </span>
+
+                  <span>
+                    62%
+                  </span>
+
+                </div>
+
+                <div class="progress">
+
+                  <div
+                    class="progressBar"
+                    data-progress="62"
+                  ></div>
+
+                </div>
+
+              </div>
+
+
+              <div style="
+                margin-top:18px;
+                display:flex;
+                flex-wrap:wrap;
+                gap:7px;
+              ">
+
+                <a
+                  href="creative-room.html"
+                  class="btn primary"
+                >
+                  Creative Room
+                </a>
+
+                <a
+                  href="creator-rights.html"
+                  class="btn"
+                >
+                  Rights
+                </a>
+
+                <a
+                  href="agreements.html"
+                  class="btn"
+                >
+                  Agreements
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      TIMELINE
+      ================================================= -->
+
+      <section
+        class="section"
+        id="timeline"
+      >
+
+        <div class="sectionHeader">
+
+          <h2>
+            Dream Journey Timeline
+          </h2>
+
+          <p>
+            The history of this submission from original dream through
+            its current development stage.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div class="timeline">
+
+
+            <div class="timelineItem complete">
+
+              <div class="timelineDot">
+                ✓
+              </div>
+
+              <div>
+
+                <h3>
+                  Original Dream Submitted
+                </h3>
+
+                <p>
+                  The creator submitted the original dream to CrowRules
+                  Dream World.
+                </p>
+
+                <span class="timelineDate">
+                  June 18, 2026
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem complete">
+
+              <div class="timelineDot">
+                ✓
+              </div>
+
+              <div>
+
+                <h3>
+                  Initial Review
+                </h3>
+
+                <p>
+                  CrowRules reviewed the concept and identified
+                  potential for further creative development.
+                </p>
+
+                <span class="timelineDate">
+                  June 2026
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem complete">
+
+              <div class="timelineDot">
+                ✓
+              </div>
+
+              <div>
+
+                <h3>
+                  Creator Discovery
+                </h3>
+
+                <p>
+                  The creator and development team discussed the dream,
+                  possible formats and the direction of the story.
+                </p>
+
+                <span class="timelineDate">
+                  July 2026
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem complete">
+
+              <div class="timelineDot">
+                ✓
+              </div>
+
+              <div>
+
+                <h3>
+                  Project Created
+                </h3>
+
+                <p>
+                  The dream became project DW-0001 and entered the
+                  formal Dream World development pipeline.
+                </p>
+
+                <span class="timelineDate">
+                  July 2026
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem current">
+
+              <div class="timelineDot">
+                05
+              </div>
+
+              <div>
+
+                <h3>
+                  Creative Development
+                </h3>
+
+                <p>
+                  Story, characters, worldbuilding, screenplay and
+                  visual development are currently being explored.
+                </p>
+
+                <span class="timelineDate">
+                  Current Stage
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem">
+
+              <div class="timelineDot">
+                06
+              </div>
+
+              <div>
+
+                <h3>
+                  Funding / Packaging
+                </h3>
+
+                <p>
+                  Future stage. The project may eventually require
+                  development funding or a production package.
+                </p>
+
+                <span class="timelineDate">
+                  Future
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem">
+
+              <div class="timelineDot">
+                07
+              </div>
+
+              <div>
+
+                <h3>
+                  Production
+                </h3>
+
+                <p>
+                  If approved and funded, the project could move into
+                  pre-production and production.
+                </p>
+
+                <span class="timelineDate">
+                  Future
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem">
+
+              <div class="timelineDot">
+                08
+              </div>
+
+              <div>
+
+                <h3>
+                  Release
+                </h3>
+
+                <p>
+                  The ultimate goal may be a CrowRules TV release or
+                  another distribution path appropriate to the project.
+                </p>
+
+                <span class="timelineDate">
+                  Future
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      NEXT STEPS
+      ================================================= -->
+
+      <section
+        class="section"
+        id="next"
+      >
+
+        <div class="sectionHeader">
+
+          <h2>
+            What Happens Next?
+          </h2>
+
+          <p>
+            Submission status does not necessarily mean a fixed deadline.
+            Creative development can evolve over time.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div class="nextGrid">
+
+
+            <article class="nextCard">
+
+              <div class="nextNumber">
+                NEXT / 01
+              </div>
+
+              <h3>
+                Continue Development
+              </h3>
+
+              <p>
+                Continue working with the development team on story,
+                characters, worldbuilding and format.
+              </p>
+
+            </article>
+
+
+            <article class="nextCard">
+
+              <div class="nextNumber">
+                NEXT / 02
+              </div>
+
+              <h3>
+                Build The Package
+              </h3>
+
+              <p>
+                Future development can include scripts, artwork,
+                pitch materials, production planning and proof-of-concept
+                materials.
+              </p>
+
+            </article>
+
+
+            <article class="nextCard">
+
+              <div class="nextNumber">
+                NEXT / 03
+              </div>
+
+              <h3>
+                Determine The Path
+              </h3>
+
+              <p>
+                A project may ultimately be produced, paused, reworked,
+                reformatted, archived or continue developing until the
+                right opportunity appears.
+              </p>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      CREATOR MESSAGE
+      ================================================= -->
+
+      <section class="section">
+
+        <div class="sectionBody">
+
+          <div class="creatorNote">
+
+            <div class="label">
+              THE DREAM WORLD PROMISE
+            </div>
+
+            <h3>
+              We Don't Rush Dreams.
+              We Develop Them.
+            </h3>
+
+            <p>
+              Some ideas can become something in months. Others may need
+              years. A project may take five years or more to find the
+              right story, team, funding, technology or production window.
+              Dream World is designed to preserve that journey rather
+              than treating a long development period as failure.
+            </p>
+
+            <p>
+              We build with creators, not simply from creators' ideas.
+              When a project enters formal development, the creator's
+              involvement, credits, compensation and applicable rights
+              should be addressed through the appropriate written
+              agreements.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      NOTICE
+      ================================================= -->
+
+      <section class="section">
+
+        <div class="sectionBody">
+
+          <div class="notice">
+
+            <strong>
+              STATUS INFORMATION
+            </strong>
+
+            <p>
+              A status shown on this page is an informational project
+              workflow status. It is not a promise that a submission
+              will be produced, funded, published or distributed.
+              Actual project rights, ownership, licensing, compensation,
+              credits and production obligations are governed by the
+              applicable written agreements.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      ACTIONS
+      ================================================= -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <h2>
+            Submission Actions
+          </h2>
+
+          <p>
+            Continue your Dream World journey.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div style="
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+          ">
+
+            <a
+              href="submit.html"
+              class="btn primary"
+            >
+              Submit Another Dream
+            </a>
+
+            <a
+              href="my-dreams.html"
+              class="btn"
+            >
+              My Dreams
+            </a>
+
+            <a
+              href="my-projects.html"
+              class="btn"
+            >
+              My Projects
+            </a>
+
+            <button
+              class="btn"
+              onclick="requestUpdate('DW-DR-0001')"
+            >
+              Request Status Update
+            </button>
+
+            <a
+              href="messages.html"
+              class="btn"
+            >
+              Contact Dream Team
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<!-- =====================================================
+SUBMISSION MODAL
+===================================================== -->
+
+<div
+  class="modal"
+  id="submissionModal"
+>
+
+  <div class="modalBox">
+
+    <div class="modalHeader">
+
+      <h2 id="modalTitle">
+        Submission Record
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modalBody">
+
+      <p id="modalDescription">
+        Submission details will appear here.
+      </p>
+
+
+      <div class="formGrid">
+
+        <div class="detailRows">
+
+          <div class="detailRow">
+
+            <div class="detailKey">
+              Submission ID
+            </div>
+
+            <div
+              class="detailValue"
+              id="modalId"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detailRow">
+
+            <div class="detailKey">
+              Status
+            </div>
+
+            <div
+              class="detailValue"
+              id="modalStatus"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detailRow">
+
+            <div class="detailKey">
+              Last Updated
+            </div>
+
+            <div
+              class="detailValue"
+              id="modalUpdated"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detailRow">
+
+            <div class="detailKey">
+              Record
+            </div>
+
+            <div
+              class="detailValue"
+              id="modalRecord"
+            >
+              —
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="modalFooter">
+
+      <button
+        class="btn"
+        onclick="closeModal()"
+      >
+        Close
+      </button>
+
+      <button
+        class="btn primary"
+        onclick="requestUpdateFromModal()"
+      >
+        Request Update
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+UPDATE REQUEST MODAL
+===================================================== -->
+
+<div
+  class="modal"
+  id="updateModal"
+>
+
+  <div class="modalBox">
+
+    <div class="modalHeader">
+
+      <h2>
+        Request A Status Update
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeUpdateModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modalBody">
+
+      <p>
+        If you need clarification about a submission, you can send
+        a request to the Dream World team. This does not automatically
+        change the project's status.
+      </p>
+
+
+      <div class="formGrid">
+
+        <div class="field">
+
+          <label for="updateReason">
+            What would you like to know?
+          </label>
+
+          <select id="updateReason">
+
+            <option>
+              General status update
+            </option>
+
+            <option>
+              Development progress
+            </option>
+
+            <option>
+              Creator meeting
+            </option>
+
+            <option>
+              Rights / agreement question
+            </option>
+
+            <option>
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="updateMessage">
+            Message
+          </label>
+
+          <textarea
+            id="updateMessage"
+            placeholder="Tell the Dream World team what you would like to know..."
+          ></textarea>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="modalFooter">
+
+      <button
+        class="btn"
+        onclick="closeUpdateModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn primary"
+        onclick="submitUpdateRequest()"
+      >
+        Send Request
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+TOAST
+===================================================== -->
+
+<div
+  class="toast"
+  id="toast"
+>
+
+  <strong id="toastTitle">
+    Dream World
+  </strong>
+
+  <span id="toastMessage">
+    Action completed.
+  </span>
+
+</div>
+
+
+<script>
+
+/*
+===========================================================
+CROWRULES DREAM WORLD
+SUBMISSION STATUS CENTER
+===========================================================
+
+
+FUTURE SUPABASE ARCHITECTURE
+===========================================================
+
+
+1. dream_submissions
+
+id
+submission_code
+creator_id
+
+dream_title
+description
+
+dream_type
+format
+genre
+
+visibility
+
+status
+
+review_status
+
+reviewed_by
+reviewed_at
+
+current_stage
+
+progress_percent
+
+project_id
+
+submitted_at
+created_at
+updated_at
+
+
+===========================================================
+RECOMMENDED STATUS VALUES
+===========================================================
+
+
+community
+submitted
+received
+under_review
+needs_information
+discovery
+selected
+development
+writing
+visual_development
+funding
+pitch
+pre_production
+production
+post_production
+distribution
+released
+paused
+archived
+declined
+withdrawn
+
+
+The actual status taxonomy should be
+kept consistent across the entire platform.
+
+
+===========================================================
+2. dream_submission_events
+===========================================================
+
+
+id
+submission_id
+
+event_type
+
+old_status
+new_status
+
+title
+description
+
+created_by
+
+metadata jsonb
+
+created_at
+
+
+Examples:
+
+
+submission_created
+submission_received
+review_started
+review_completed
+creator_contacted
+discovery_completed
+selected_for_development
+project_created
+status_changed
+creator_meeting
+information_requested
+paused
+resumed
+archived
+withdrawn
+declined
+
+
+Never destroy historical events.
+
+
+===========================================================
+3. dream_submission_reviews
+===========================================================
+
+
+id
+submission_id
+
+reviewer_id
+
+review_stage
+
+rating
+recommendation
+
+notes
+
+status
+
+created_at
+updated_at
+
+
+Possible recommendations:
+
+
+consider
+develop
+hold
+decline
+request_more_information
+
+
+Private reviewer notes should NEVER
+be exposed to creators unless explicitly
+approved for creator visibility.
+
+
+===========================================================
+4. dream_submission_requests
+===========================================================
+
+
+id
+
+submission_id
+creator_id
+
+request_type
+
+message
+
+status
+
+assigned_to
+
+response
+
+responded_at
+
+created_at
+updated_at
+
+
+Possible request types:
+
+
+status_update
+creator_question
+meeting_request
+rights_question
+withdrawal_request
+information_update
+other
+
+
+===========================================================
+5. dream_submission_status_history
+===========================================================
+
+
+id
+
+submission_id
+
+status
+stage
+
+progress_percent
+
+effective_at
+
+created_by
+
+reason
+
+created_at
+
+
+This provides a clean status timeline.
+
+
+===========================================================
+RELATIONSHIP
+===========================================================
+
+
+CREATOR
+
+   ↓
+
+DREAM SUBMISSION
+
+   ↓
+
+SUBMISSION EVENTS
+
+   ↓
+
+REVIEW
+
+   ↓
+
+DISCOVERY
+
+   ↓
+
+PROJECT
+
+   ↓
+
+DEVELOPMENT
+
+   ↓
+
+FUNDING
+
+   ↓
+
+PRODUCTION
+
+   ↓
+
+RELEASE
+
+
+A submission can exist without ever
+becoming a project.
+
+
+===========================================================
+IMPORTANT DISTINCTION
+===========================================================
+
+
+SUBMISSION STATUS
+
+is not the same as
+
+
+PROJECT STATUS.
+
+
+Example:
+
+
+Submission:
+selected
+
+
+Project:
+development
+
+
+Production:
+not started
+
+
+Funding:
+not secured
+
+
+These should be independent
+but related records.
+
+
+===========================================================
+CREATOR SECURITY
+===========================================================
+
+
+Creators should only see their
+own submission records.
+
+
+Conceptual RLS:
+
+
+creator_id = auth.uid()
+
+
+or through a secure ownership
+relationship.
+
+
+Never expose:
+
+
+private reviewer notes
+internal scoring
+confidential staff discussions
+other creators' submissions
+internal financial information
+
+
+===========================================================
+COMMUNITY SUBMISSIONS
+===========================================================
+
+
+If visibility = community:
+
+
+Public fields can include:
+
+
+title
+description
+dream type
+format
+genre
+creator display name
+vote count
+comment count
+approved status
+
+
+Private fields must remain protected.
+
+
+===========================================================
+WITHDRAWAL
+===========================================================
+
+
+Do not simply delete submissions.
+
+
+If withdrawal is allowed:
+
+
+set status = withdrawn
+
+
+create submission event
+
+
+record requested_by
+
+
+record requested_at
+
+
+preserve the historical record
+according to the applicable terms.
+
+
+===========================================================
+DECLINED SUBMISSIONS
+===========================================================
+
+
+A declined submission should remain
+historically identifiable to the creator,
+subject to applicable retention terms.
+
+
+It should not automatically be
+publicly displayed.
+
+
+===========================================================
+LONG-TERM PROJECTS
+===========================================================
+
+
+A project can take:
+
+
+1 year
+3 years
+5 years
+10+ years
+
+
+The submission record should remain
+connected to the resulting project
+throughout that lifecycle.
+
+
+===========================================================
+REALTIME
+===========================================================
+
+
+Potential realtime subscriptions:
+
+
+dream_submission_events
+dream_submissions
+dream_projects
+
+
+When staff changes the status:
+
+
+the creator dashboard can update
+without a full page refresh.
+
+
+===========================================================
+NOTIFICATIONS
+===========================================================
+
+
+Status changes should eventually
+create records in:
+
+
+dream_notifications
+
+
+Examples:
+
+
+"Your dream has been received."
+
+
+"Your dream has entered review."
+
+
+"We'd like to talk with you."
+
+
+"Your dream has entered development."
+
+
+"Your project has been paused."
+
+
+"Your project has resumed."
+
+
+"Your project has entered production."
+
+
+===========================================================
+*/
+
+
+const submissions = {
+
+  "DW-DR-0001":{
+    title:
+      "The City That Only Exists While You Sleep",
+
+    status:
+      "Development",
+
+    description:
+      "This dream has moved beyond initial review and is connected to active Dream World project DW-0001.",
+
+    updated:
+      "August 2026",
+
+    record:
+      "Active development record"
+  },
+
+  "DW-DR-0002":{
+    title:
+      "Night Window",
+
+    status:
+      "Under Review",
+
+    description:
+      "This submission is currently being considered by the Dream World review process.",
+
+    updated:
+      "August 2026",
+
+    record:
+      "Review record active"
+  },
+
+  "DW-DR-0003":{
+    title:
+      "The Last Radio Station",
+
+    status:
+      "Community Idea",
+
+    description:
+      "This dream currently exists as a community submission and has not entered formal project development.",
+
+    updated:
+      "August 2026",
+
+    record:
+      "Community submission"
+  }
+
+};
+
+
+let selectedSubmission = null;
+let toastTimer;
+
+
+/* =====================================================
+PROGRESS BARS
+===================================================== */
+
+function initializeProgress(){
+
+  document
+    .querySelectorAll(".progressBar")
+    .forEach(bar => {
+
+      const value =
+        Number(bar.dataset.progress || 0);
+
+      requestAnimationFrame(()=>{
+
+        bar.style.width =
+          value + "%";
+
+      });
+
+    });
+
+}
+
+
+/* =====================================================
+MOBILE NAV
+===================================================== */
+
+function toggleMobileNav(){
+
+  const nav =
+    document.querySelector(".navlinks");
+
+  if(!nav) return;
+
+  if(nav.style.display === "flex"){
+
+    nav.style.display = "";
+
+  }else{
+
+    nav.style.display = "flex";
+    nav.style.flexDirection = "column";
+    nav.style.position = "absolute";
+    nav.style.top = "76px";
+    nav.style.left = "3%";
+    nav.style.right = "3%";
+    nav.style.padding = "12px";
+    nav.style.background = "#0a0a0c";
+    nav.style.border =
+      "1px solid rgba(255,255,255,.1)";
+
+  }
+
+}
+
+
+/* =====================================================
+SCROLL
+===================================================== */
+
+function scrollToSection(id,button){
+
+  const target =
+    document.getElementById(id);
+
+  if(!target) return;
+
+  document
+    .querySelectorAll(".sideLink")
+    .forEach(item =>
+      item.classList.remove("active")
+    );
+
+  button.classList.add("active");
+
+  target.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* =====================================================
+VIEW SUBMISSION
+===================================================== */
+
+function viewSubmission(id){
+
+  const record =
+    submissions[id];
+
+  if(!record) return;
+
+  selectedSubmission = id;
+
+
+  document
+    .getElementById("modalTitle")
+    .textContent =
+      record.title;
+
+
+  document
+    .getElementById("modalDescription")
+    .textContent =
+      record.description;
+
+
+  document
+    .getElementById("modalId")
+    .textContent =
+      id;
+
+
+  document
+    .getElementById("modalStatus")
+    .textContent =
+      record.status;
+
+
+  document
+    .getElementById("modalUpdated")
+    .textContent =
+      record.updated;
+
+
+  document
+    .getElementById("modalRecord")
+    .textContent =
+      record.record;
+
+
+  document
+    .getElementById("submissionModal")
+    .classList.add("open");
+
+}
+
+
+/* =====================================================
+CLOSE SUBMISSION MODAL
+===================================================== */
+
+function closeModal(){
+
+  document
+    .getElementById("submissionModal")
+    .classList.remove("open");
+
+}
+
+
+/* =====================================================
+REQUEST UPDATE
+===================================================== */
+
+function requestUpdate(id){
+
+  selectedSubmission = id;
+
+  document
+    .getElementById("updateModal")
+    .classList.add("open");
+
+}
+
+
+/* =====================================================
+CLOSE UPDATE MODAL
+===================================================== */
+
+function closeUpdateModal(){
+
+  document
+    .getElementById("updateModal")
+    .classList.remove("open");
+
+}
+
+
+/* =====================================================
+REQUEST UPDATE FROM RECORD
+===================================================== */
+
+function requestUpdateFromModal(){
+
+  closeModal();
+
+  if(selectedSubmission){
+
+    requestUpdate(
+      selectedSubmission
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+SUBMIT UPDATE REQUEST
+===================================================== */
+
+function submitUpdateRequest(){
+
+  const reason =
+    document
+      .getElementById("updateReason")
+      .value;
+
+  const message =
+    document
+      .getElementById("updateMessage")
+      .value
+      .trim();
+
+
+  if(!message){
+
+    showToast(
+      "Message Required",
+      "Please tell the Dream World team what you would like to know."
+    );
+
+    return;
+
+  }
+
+
+  /*
+  Future Supabase insert:
+
+
+  const {
+    data,
+    error
+  } = await supabase
+    .from("dream_submission_requests")
+    .insert({
+
+      submission_id:
+        selectedSubmission,
+
+      creator_id:
+        user.id,
+
+      request_type:
+        reason,
+
+      message:
+
+        message,
+
+      status:
+        "open"
+
+    });
+
+
+  */
+
+
+  closeUpdateModal();
+
+
+  document
+    .getElementById("updateMessage")
+    .value = "";
+
+
+  showToast(
+    "Request Sent",
+    "Your submission status request has been recorded."
+  );
+
+}
+
+
+/* =====================================================
+TOAST
+===================================================== */
+
+function showToast(title,message){
+
+  const toast =
+    document.getElementById("toast");
+
+
+  document
+    .getElementById("toastTitle")
+    .textContent =
+      title;
+
+
+  document
+    .getElementById("toastMessage")
+    .textContent =
+      message;
+
+
+  toast.classList.add("show");
+
+
+  clearTimeout(toastTimer);
+
+
+  toastTimer =
+    setTimeout(()=>{
+
+      toast.classList.remove("show");
+
+    },3500);
+
+}
+
+
+/* =====================================================
+BACKDROP CLICK
+===================================================== */
+
+document
+  .getElementById("submissionModal")
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target.id ===
+        "submissionModal"
+      ){
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById("updateModal")
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target.id ===
+        "updateModal"
+      ){
+
+        closeUpdateModal();
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+ESCAPE
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Escape"){
+
+      closeModal();
+      closeUpdateModal();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+INITIALIZE
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  initializeProgress
+);
+
+
+/* =====================================================
+FUTURE AUTH
+=====================================================
+
+
+const {
+  data:{
+    user
+  }
+} =
+  await supabase.auth.getUser();
+
+
+if(!user){
+
+  window.location.href =
+    "login.html";
+
+}
+
+
+===========================================================
+*/
+
+
+/* =====================================================
+FUTURE SUBMISSION QUERY
+===========================================================
+
+
+async function loadSubmissions(){
+
+  const {
+    data:{
+      user
+    }
+  } =
+    await supabase.auth.getUser();
+
+
+  if(!user){
+
+    window.location.href =
+      "login.html";
+
+    return;
+
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabase
+      .from("dream_submissions")
+      .select(`
+        *,
+        dream_projects (
+          id,
+          project_code,
+          title,
+          status,
+          progress_percent
+        )
+      `)
+      .eq(
+        "creator_id",
+        user.id
+      )
+      .order(
+        "submitted_at",
+        {
+          ascending:false
+        }
+      );
+
+
+  if(error){
+
+    console.error(
+      "Submission load failed:",
+      error
+    );
+
+    showToast(
+      "Load Error",
+      "Unable to load your submissions."
+    );
+
+    return;
+
+  }
+
+
+  renderSubmissions(data);
+
+}
+
+
+===========================================================
+*/
+
+
+/* =====================================================
+FUTURE STATUS EVENTS
+===========================================================
+
+
+async function loadSubmissionHistory(
+  submissionId
+){
+
+  const {
+    data,
+    error
+  } =
+    await supabase
+      .from("dream_submission_events")
+      .select("*")
+      .eq(
+        "submission_id",
+        submissionId
+      )
+      .order(
+        "created_at",
+        {
+          ascending:true
+        }
+      );
+
+
+  if(error){
+
+    console.error(error);
+
+    return;
+
+  }
+
+
+  renderTimeline(data);
+
+}
+
+
+===========================================================
+*/
+
+
+/* =====================================================
+FUTURE REALTIME
+===========================================================
+
+
+const channel =
+  supabase
+    .channel(
+      "dream-submission-status"
+    )
+    .on(
+      "postgres_changes",
+      {
+        event:"*",
+        schema:"public",
+        table:"dream_submissions"
+      },
+      payload => {
+
+        loadSubmissions();
+
+      }
+    )
+    .subscribe();
+
+
+When a staff member changes a submission
+status, the creator can see the change
+without manually refreshing.
+
+
+===========================================================
+*/
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>CrowRules Dream World — My Dreams</title>
+<meta name="theme-color" content="#050505">
+<meta name="description" content="CrowRules Dream World — Creator Dream Library">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#050505;
+  --bg2:#090909;
+  --panel:#101010;
+  --panel2:#151515;
+  --red:#e50914;
+  --red2:#ff2633;
+  --text:#f5f5f5;
+  --muted:#929292;
+  --dim:#5e5e5e;
+  --line:#292929;
+  --green:#48d597;
+  --yellow:#f5c451;
+  --blue:#5aa9ff;
+  --purple:#ad7cff;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(229,9,20,.12),transparent 30%),
+    radial-gradient(circle at 90% 10%,rgba(120,20,30,.08),transparent 30%),
+    linear-gradient(180deg,#050505,#080808 45%,#050505);
+  color:var(--text);
+  font-family:Montserrat,Arial,sans-serif;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.025;
+  background-image:
+    linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  height:72px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(5,5,5,.95);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  width:min(1500px,94%);
+  height:100%;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#fff;
+  text-decoration:none;
+}
+
+.brand-mark{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#26070a,#0b0b0b);
+  border:1px solid var(--red);
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-weight:900;
+  font-size:11px;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+  box-shadow:0 0 25px rgba(229,9,20,.16);
+}
+
+.brand-text strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.brand-text span{
+  display:block;
+  margin-top:2px;
+  color:var(--red2);
+  font-size:9px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.nav-links{
+  display:flex;
+  gap:4px;
+}
+
+.nav-links a{
+  color:#999;
+  text-decoration:none;
+  padding:10px 12px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  color:#fff;
+  background:#151515;
+}
+
+.nav-links a.active{
+  box-shadow:inset 0 -2px var(--red);
+}
+
+.user-area{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.notification{
+  position:relative;
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  background:#101010;
+  color:#ddd;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.notification-dot{
+  position:absolute;
+  right:6px;
+  top:5px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 10px var(--red);
+}
+
+.avatar{
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid #671018;
+  background:linear-gradient(135deg,#3b080d,#120506);
+  font-family:Orbitron,sans-serif;
+  font-size:11px;
+  font-weight:800;
+}
+
+.mobile-menu{
+  display:none;
+  width:38px;
+  height:38px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#111;
+  color:#fff;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+  width:min(1500px,94%);
+  margin:auto;
+  padding:42px 0 90px;
+}
+
+.dashboard-layout{
+  display:grid;
+  grid-template-columns:230px 1fr;
+  gap:28px;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+  position:sticky;
+  top:98px;
+  align-self:start;
+}
+
+.creator-mini{
+  background:
+    linear-gradient(145deg,rgba(229,9,20,.10),rgba(255,255,255,.01)),
+    var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:14px;
+}
+
+.creator-avatar{
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:linear-gradient(135deg,#42090d,#100506);
+  border:1px solid #711019;
+  font-family:Orbitron,sans-serif;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.creator-mini h3{
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.creator-mini p{
+  color:#666;
+  font-size:9px;
+}
+
+.badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:5px 8px;
+  border:1px solid rgba(229,9,20,.35);
+  border-radius:5px;
+  color:#ff666e;
+  background:rgba(229,9,20,.08);
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.side-menu{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.side-menu a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#999;
+  text-decoration:none;
+  padding:12px 14px;
+  border-bottom:1px solid #1e1e1e;
+  font-size:10px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.side-menu a:last-child{
+  border-bottom:0;
+}
+
+.side-menu a:hover,
+.side-menu a.active{
+  color:#fff;
+  background:#171717;
+}
+
+.side-menu a.active{
+  border-left:3px solid var(--red);
+  padding-left:11px;
+}
+
+.side-icon{
+  width:20px;
+  text-align:center;
+  font-size:14px;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+  min-width:0;
+}
+
+.eyebrow{
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:9px;
+  letter-spacing:3px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+h1{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(27px,4vw,43px);
+  letter-spacing:-1px;
+  margin-bottom:10px;
+}
+
+.intro{
+  max-width:760px;
+  color:#888;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.top-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:22px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:10px 14px;
+  border-radius:7px;
+  border:1px solid var(--line);
+  background:#111;
+  color:#fff;
+  text-decoration:none;
+  font-size:10px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.btn:hover{
+  border-color:#555;
+  transform:translateY(-1px);
+}
+
+.btn-primary{
+  background:var(--red);
+  border-color:var(--red);
+}
+
+.btn-primary:hover{
+  background:#ff1823;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin-top:30px;
+}
+
+.stat{
+  min-height:96px;
+  padding:16px;
+  background:linear-gradient(145deg,#111,#0b0b0b);
+  border:1px solid var(--line);
+  border-radius:11px;
+}
+
+.stat-label{
+  color:#666;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+.stat-number{
+  font-family:Orbitron,sans-serif;
+  font-size:24px;
+  margin-top:8px;
+}
+
+.stat-detail{
+  color:#555;
+  font-size:8px;
+  margin-top:4px;
+}
+
+.stat.red .stat-number{
+  color:var(--red2);
+}
+
+.stat.green .stat-number{
+  color:var(--green);
+}
+
+.stat.yellow .stat-number{
+  color:var(--yellow);
+}
+
+.stat.blue .stat-number{
+  color:var(--blue);
+}
+
+.stat.purple .stat-number{
+  color:var(--purple);
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.section{
+  margin-top:32px;
+}
+
+.toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  padding:15px;
+  background:#0e0e0e;
+  border:1px solid var(--line);
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+.search{
+  position:relative;
+  flex:1;
+  max-width:500px;
+}
+
+.search input{
+  width:100%;
+  height:40px;
+  padding:0 13px 0 38px;
+  background:#090909;
+  color:#fff;
+  border:1px solid #282828;
+  border-radius:7px;
+  outline:none;
+  font-family:Montserrat,sans-serif;
+  font-size:10px;
+}
+
+.search input:focus{
+  border-color:#6b161c;
+}
+
+.search-icon{
+  position:absolute;
+  left:13px;
+  top:11px;
+  color:#666;
+}
+
+.filters{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+.filter{
+  border:1px solid #292929;
+  background:#101010;
+  color:#777;
+  border-radius:6px;
+  padding:8px 10px;
+  font-size:8px;
+  font-weight:800;
+  cursor:pointer;
+  text-transform:uppercase;
+}
+
+.filter:hover,
+.filter.active{
+  color:#fff;
+  background:#1a1a1a;
+  border-color:#555;
+}
+
+.filter.active{
+  border-bottom:2px solid var(--red);
+}
+
+/* =========================
+   DREAM CARDS
+========================= */
+
+.dreams{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.dream{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(229,9,20,.11),transparent 35%),
+    var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:21px;
+}
+
+.dream:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:#383838;
+}
+
+.dream.development:before{
+  background:var(--red);
+}
+
+.dream.review:before{
+  background:var(--yellow);
+}
+
+.dream.community:before{
+  background:var(--blue);
+}
+
+.dream.archived:before{
+  background:#555;
+}
+
+.dream-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:start;
+  gap:10px;
+}
+
+.code{
+  color:#5b5b5b;
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+  letter-spacing:1px;
+}
+
+.status{
+  padding:5px 8px;
+  border-radius:5px;
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+
+.status.development{
+  color:#ff6971;
+  border:1px solid rgba(229,9,20,.32);
+  background:rgba(229,9,20,.08);
+}
+
+.status.review{
+  color:#f5c451;
+  border:1px solid rgba(245,196,81,.28);
+  background:rgba(245,196,81,.07);
+}
+
+.status.community{
+  color:#62adff;
+  border:1px solid rgba(90,169,255,.28);
+  background:rgba(90,169,255,.07);
+}
+
+.status.draft{
+  color:#aaa;
+  border:1px solid #333;
+  background:#151515;
+}
+
+.status.archived{
+  color:#777;
+  border:1px solid #292929;
+  background:#0d0d0d;
+}
+
+.dream h2{
+  font-family:Orbitron,sans-serif;
+  font-size:15px;
+  line-height:1.4;
+  margin:16px 0 8px;
+}
+
+.description{
+  color:#888;
+  font-size:10px;
+  line-height:1.65;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:14px;
+}
+
+.tag{
+  color:#777;
+  border:1px solid #292929;
+  background:#0d0d0d;
+  padding:5px 7px;
+  border-radius:5px;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.dream-meta{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-top:16px;
+}
+
+.meta-box{
+  padding:9px;
+  border:1px solid #232323;
+  border-radius:6px;
+  background:#0c0c0c;
+}
+
+.meta-box label{
+  display:block;
+  color:#555;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+
+.meta-box strong{
+  color:#aaa;
+  font-size:8px;
+}
+
+.dream-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border-top:1px solid #222;
+  margin-top:16px;
+  padding-top:14px;
+}
+
+.updated{
+  color:#555;
+  font-size:8px;
+}
+
+.card-actions{
+  display:flex;
+  gap:6px;
+}
+
+/* =========================
+   FEATURED DREAM
+========================= */
+
+.featured{
+  background:
+    radial-gradient(circle at 80% 20%,rgba(229,9,20,.17),transparent 30%),
+    linear-gradient(120deg,#130507,#0c0c0c 60%);
+  border:1px solid #43151a;
+  border-radius:14px;
+  padding:23px;
+  margin-bottom:16px;
+}
+
+.featured-label{
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+  letter-spacing:2px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.featured h2{
+  font-family:Orbitron,sans-serif;
+  font-size:21px;
+  max-width:700px;
+  line-height:1.4;
+  margin:10px 0;
+}
+
+.featured p{
+  color:#999;
+  font-size:10px;
+  max-width:760px;
+  line-height:1.7;
+}
+
+.featured-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:15px;
+}
+
+.featured-meta span{
+  padding:6px 9px;
+  border:1px solid #352023;
+  background:rgba(0,0,0,.2);
+  color:#999;
+  border-radius:5px;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  display:none;
+  padding:55px 20px;
+  text-align:center;
+  background:#0e0e0e;
+  border:1px dashed #292929;
+  border-radius:13px;
+}
+
+.empty-icon{
+  width:55px;
+  height:55px;
+  margin:0 auto 15px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid #3c1217;
+  color:var(--red2);
+  background:#140506;
+  font-family:Orbitron,sans-serif;
+}
+
+.empty h3{
+  font-family:Orbitron,sans-serif;
+  font-size:14px;
+  margin-bottom:7px;
+}
+
+.empty p{
+  max-width:500px;
+  margin:auto;
+  color:#666;
+  font-size:10px;
+  line-height:1.6;
+}
+
+/* =========================
+   INFO
+========================= */
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.info{
+  background:#0e0e0e;
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:17px;
+}
+
+.info h3{
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+  margin-bottom:7px;
+}
+
+.info p{
+  color:#777;
+  font-size:9px;
+  line-height:1.6;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:3000;
+  padding:13px 16px;
+  background:#171717;
+  border:1px solid #333;
+  border-left:3px solid var(--red);
+  border-radius:7px;
+  color:#ddd;
+  font-size:9px;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+  opacity:0;
+  transform:translateY(20px);
+  pointer-events:none;
+  transition:.25s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .mobile-menu{
+    display:grid;
+    place-items:center;
+  }
+
+  .stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .dashboard-layout{
+    grid-template-columns:190px 1fr;
+  }
+}
+
+@media(max-width:800px){
+
+  .page{
+    width:92%;
+    padding-top:28px;
+  }
+
+  .dashboard-layout{
+    display:block;
+  }
+
+  .sidebar{
+    position:static;
+    margin-bottom:22px;
+  }
+
+  .creator-mini{
+    display:flex;
+    align-items:center;
+    gap:13px;
+  }
+
+  .creator-avatar{
+    margin:0;
+    flex:none;
+  }
+
+  .side-menu{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .side-menu a{
+    border-right:1px solid #1e1e1e;
+  }
+
+  .toolbar{
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .search{
+    max-width:none;
+  }
+
+  .dreams{
+    grid-template-columns:1fr;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:520px){
+
+  .brand-text{
+    display:none;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .side-menu{
+    grid-template-columns:1fr;
+  }
+
+  .dream-meta{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+
+  .featured h2{
+    font-size:17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<nav class="nav">
+
+  <a href="index.html" class="brand">
+    <div class="brand-mark">CR</div>
+
+    <div class="brand-text">
+      <strong>CROWRULES DREAM WORLD</strong>
+      <span>Creator Workspace</span>
+    </div>
+  </a>
+
+  <div class="nav-links">
+    <a href="index.html">Dream World</a>
+    <a href="dreams.html">Dreams</a>
+    <a href="projects.html">Projects</a>
+    <a href="community.html">Community</a>
+    <a href="creator-dashboard.html">Dashboard</a>
+  </div>
+
+  <div class="user-area">
+
+    <button
+      class="notification"
+      onclick="showToast('You have 3 new notifications.')">
+      ♢
+      <span class="notification-dot"></span>
+    </button>
+
+    <div class="avatar" id="navAvatar">DC</div>
+
+    <button class="mobile-menu" onclick="mobileMenu()">
+      ☰
+    </button>
+
+  </div>
+
+</nav>
+
+</header>
+
+
+<main class="page">
+
+<div class="dashboard-layout">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+  <div class="creator-mini">
+
+    <div class="creator-avatar" id="creatorAvatar">
+      DC
+    </div>
+
+    <div>
+      <h3 id="creatorName">
+        Dream Creator
+      </h3>
+
+      <p id="creatorEmail">
+        creator@example.com
+      </p>
+
+      <span class="badge">
+        Dream Creator
+      </span>
+    </div>
+
+  </div>
+
+
+  <nav class="side-menu">
+
+    <a href="creator-dashboard.html">
+      <span class="side-icon">⌂</span>
+      Dashboard
+    </a>
+
+    <a href="my-dreams.html" class="active">
+      <span class="side-icon">◉</span>
+      My Dreams
+    </a>
+
+    <a href="my-projects.html">
+      <span class="side-icon">◆</span>
+      My Projects
+    </a>
+
+    <a href="creative-room.html">
+      <span class="side-icon">✦</span>
+      Creative Room
+    </a>
+
+    <a href="collaborators.html">
+      <span class="side-icon">◎</span>
+      Collaborators
+    </a>
+
+    <a href="messages.html">
+      <span class="side-icon">◇</span>
+      Messages
+    </a>
+
+    <a href="files.html">
+      <span class="side-icon">▣</span>
+      Files
+    </a>
+
+    <a href="agreements.html">
+      <span class="side-icon">▤</span>
+      Agreements
+    </a>
+
+    <a href="credits.html">
+      <span class="side-icon">★</span>
+      Credits
+    </a>
+
+    <a href="earnings.html">
+      <span class="side-icon">$</span>
+      Earnings
+    </a>
+
+    <a href="settings.html">
+      <span class="side-icon">⚙</span>
+      Settings
+    </a>
+
+  </nav>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<section class="main">
+
+  <div class="eyebrow">
+    Creator Library
+  </div>
+
+  <h1>
+    MY DREAMS
+  </h1>
+
+  <p class="intro">
+    Every dream you've submitted lives here.
+    Some may remain personal ideas. Some may become community
+    concepts. Others may grow into full CrowRules productions.
+    This is your creative history.
+  </p>
+
+
+  <div class="top-actions">
+
+    <a href="submit.html" class="btn btn-primary">
+      + SUBMIT NEW DREAM
+    </a>
+
+    <a href="creator-dashboard.html" class="btn">
+      ← DASHBOARD
+    </a>
+
+  </div>
+
+
+  <!-- ===================================================
+       STATS
+  ==================================================== -->
+
+  <div class="stats">
+
+    <div class="stat red">
+      <div class="stat-label">Total Dreams</div>
+      <div class="stat-number" id="totalDreams">4</div>
+      <div class="stat-detail">All submissions</div>
+    </div>
+
+    <div class="stat yellow">
+      <div class="stat-label">Under Review</div>
+      <div class="stat-number" id="reviewDreams">1</div>
+      <div class="stat-detail">Being evaluated</div>
+    </div>
+
+    <div class="stat red">
+      <div class="stat-label">In Development</div>
+      <div class="stat-number" id="developmentDreams">1</div>
+      <div class="stat-detail">Active projects</div>
+    </div>
+
+    <div class="stat blue">
+      <div class="stat-label">Community</div>
+      <div class="stat-number" id="communityDreams">1</div>
+      <div class="stat-detail">Public dreams</div>
+    </div>
+
+    <div class="stat purple">
+      <div class="stat-label">Archived</div>
+      <div class="stat-number" id="archivedDreams">1</div>
+      <div class="stat-detail">Preserved ideas</div>
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================
+       FEATURED / ACTIVE DREAM
+  ==================================================== -->
+
+  <section class="section">
+
+    <div class="featured">
+
+      <div class="featured-label">
+        ★ YOUR MOST ADVANCED DREAM
+      </div>
+
+      <h2>
+        The City That Only Exists While You Sleep
+      </h2>
+
+      <p>
+        Your original dream has entered active development.
+        The current direction is a serialized science-fiction
+        mystery exploring a hidden city that appears inside
+        the dreams of people around the world.
+      </p>
+
+      <div class="featured-meta">
+        <span>DR-0001</span>
+        <span>DEVELOPMENT</span>
+        <span>STREAMING SERIES</span>
+        <span>38% PROJECT PROGRESS</span>
+      </div>
+
+      <div class="top-actions">
+
+        <a href="project-development.html" class="btn btn-primary">
+          OPEN PROJECT
+        </a>
+
+        <button
+          class="btn"
+          onclick="showToast('Opening development journal...')">
+          DEVELOPMENT JOURNAL
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================
+       TOOLBAR
+  ==================================================== -->
+
+  <section class="section">
+
+    <div class="toolbar">
+
+      <div class="search">
+
+        <span class="search-icon">
+          ⌕
+        </span>
+
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Search your dreams..."
+          oninput="renderDreams()">
+
+      </div>
+
+
+      <div class="filters">
+
+        <button
+          class="filter active"
+          data-filter="all"
+          onclick="setFilter('all',this)">
+          All
+        </button>
+
+        <button
+          class="filter"
+          data-filter="development"
+          onclick="setFilter('development',this)">
+          Development
+        </button>
+
+        <button
+          class="filter"
+          data-filter="review"
+          onclick="setFilter('review',this)">
+          Review
+        </button>
+
+        <button
+          class="filter"
+          data-filter="community"
+          onclick="setFilter('community',this)">
+          Community
+        </button>
+
+        <button
+          class="filter"
+          data-filter="draft"
+          onclick="setFilter('draft',this)">
+          Drafts
+        </button>
+
+        <button
+          class="filter"
+          data-filter="archived"
+          onclick="setFilter('archived',this)">
+          Archived
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- DREAM GRID -->
+
+    <div class="dreams" id="dreamGrid"></div>
+
+    <div class="empty" id="emptyState">
+
+      <div class="empty-icon">
+        ◉
+      </div>
+
+      <h3>
+        NO DREAMS FOUND
+      </h3>
+
+      <p>
+        Nothing matches your current search or filter.
+        Try another search or submit a new dream.
+      </p>
+
+      <div class="top-actions" style="justify-content:center;">
+
+        <a href="submit.html" class="btn btn-primary">
+          SUBMIT A DREAM
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================
+       DREAM WORLD INFORMATION
+  ==================================================== -->
+
+  <section class="section">
+
+    <div class="eyebrow">
+      Your Creative Journey
+    </div>
+
+    <h2 style="
+      font-family:Orbitron,sans-serif;
+      font-size:20px;
+      margin-bottom:12px;
+    ">
+      WHAT HAPPENS TO A DREAM?
+    </h2>
+
+    <div class="info-grid">
+
+      <div class="info">
+        <h3>01 · SUBMIT</h3>
+        <p>
+          Your dream enters the CrowRules Dream World
+          and receives its own record and identification code.
+        </p>
+      </div>
+
+      <div class="info">
+        <h3>02 · DISCOVER</h3>
+        <p>
+          If selected for further development, CrowRules
+          can work directly with you to explore what the
+          dream could become.
+        </p>
+      </div>
+
+      <div class="info">
+        <h3>03 · DEVELOP</h3>
+        <p>
+          Characters, worlds, stories, scripts, visuals
+          and production plans can evolve over time.
+        </p>
+      </div>
+
+      <div class="info">
+        <h3>04 · BUILD</h3>
+        <p>
+          A project may become a film, series, audio drama,
+          book, game, short or another creative format.
+        </p>
+      </div>
+
+      <div class="info">
+        <h3>05 · PRODUCE</h3>
+        <p>
+          Funding, casting, production and post-production
+          can happen when the project is ready.
+        </p>
+      </div>
+
+      <div class="info">
+        <h3>06 · RELEASE</h3>
+        <p>
+          When a finished project is released, your approved
+          creator credits and applicable compensation are
+          tracked according to the project's agreements.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================
+       RIGHTS REMINDER
+  ==================================================== -->
+
+  <section class="section">
+
+    <div style="
+      background:
+        linear-gradient(135deg,rgba(229,9,20,.08),transparent),
+        #0c0c0c;
+      border:1px solid #34171a;
+      border-radius:13px;
+      padding:21px;
+    ">
+
+      <div class="eyebrow">
+        Creator Rights
+      </div>
+
+      <h2 style="
+        font-family:Orbitron,sans-serif;
+        font-size:16px;
+        margin-bottom:9px;
+      ">
+        YOUR DREAM. YOUR DEVELOPMENT HISTORY.
+      </h2>
+
+      <p style="
+        color:#858585;
+        font-size:10px;
+        line-height:1.7;
+        max-width:900px;
+      ">
+        CrowRules Dream World is designed around collaboration.
+        A submission does not automatically transfer ownership
+        of your work to CrowRules. If a dream becomes a project,
+        the applicable rights, ownership, credits, compensation,
+        licensing and participation terms should be established
+        through appropriate written agreements.
+      </p>
+
+      <div class="top-actions">
+
+        <a href="agreements.html" class="btn">
+          VIEW MY AGREEMENTS
+        </a>
+
+        <a href="credits.html" class="btn">
+          VIEW MY CREDITS
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</section>
+
+</div>
+
+</main>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+/* =========================================================
+   CROWRULES DREAM WORLD
+   MY DREAMS
+   Supabase-ready creator library
+========================================================= */
+
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const CONFIG = {
+
+  SUPABASE_URL:
+    "YOUR_SUPABASE_URL",
+
+  SUPABASE_ANON_KEY:
+    "YOUR_SUPABASE_ANON_KEY"
+
+};
+
+
+/* =========================================================
+   CURRENT CREATOR
+========================================================= */
+
+const currentCreator = {
+
+  id:"creator-demo-001",
+
+  name:"Dream Creator",
+
+  email:"creator@example.com",
+
+  initials:"DC"
+
+};
+
+
+/* =========================================================
+   DEMO DREAM DATA
+========================================================= */
+
+const dreams = [
+
+  {
+    id:"dr-0001",
+    code:"DR-0001",
+    title:"The City That Only Exists While You Sleep",
+    description:
+      "Every night, a hidden city appears inside the dreams of people around the world. One person discovers that the city may actually be trying to communicate.",
+    type:"Story",
+    format:"Streaming Series",
+    genre:"Sci-Fi",
+    status:"development",
+    statusLabel:"In Development",
+    views:1842,
+    votes:327,
+    updated:"2 days ago"
+  },
+
+  {
+    id:"dr-0002",
+    code:"DR-0002",
+    title:"The Man Who Woke Up Yesterday",
+    description:
+      "A stranger wakes every morning believing he has traveled backward exactly one day, but nobody else remembers the previous version of reality.",
+    type:"Concept",
+    format:"Feature Film",
+    genre:"Thriller",
+    status:"review",
+    statusLabel:"Under Review",
+    views:642,
+    votes:91,
+    updated:"6 days ago"
+  },
+
+  {
+    id:"dr-0003",
+    code:"DR-0003",
+    title:"Voices Behind the Red Door",
+    description:
+      "A mysterious red door appears in different houses around the world. Everyone who opens it hears a voice describing a future that hasn't happened yet.",
+    type:"Nightmare",
+    format:"Short Film",
+    genre:"Horror",
+    status:"community",
+    statusLabel:"Community",
+    views:2107,
+    votes:418,
+    updated:"12 days ago"
+  },
+
+  {
+    id:"dr-0004",
+    code:"DR-0004",
+    title:"The Ocean Above the Clouds",
+    description:
+      "A surreal world where an enormous ocean floats above the clouds and impossible ships sail through the sky.",
+    type:"World",
+    format:"Experimental",
+    genre:"Fantasy",
+    status:"archived",
+    statusLabel:"Archived",
+    views:118,
+    votes:12,
+    updated:"Aug 4, 2026"
+  }
+
+];
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+let activeFilter = "all";
+
+
+function setFilter(filter,button){
+
+  activeFilter = filter;
+
+  document
+    .querySelectorAll(".filter")
+    .forEach(item => item.classList.remove("active"));
+
+  button.classList.add("active");
+
+  renderDreams();
+}
+
+
+/* =========================================================
+   RENDER DREAMS
+========================================================= */
+
+function renderDreams(){
+
+  const grid =
+    document.getElementById("dreamGrid");
+
+  const empty =
+    document.getElementById("emptyState");
+
+  const search =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  const filtered = dreams.filter(dream => {
+
+    const matchesFilter =
+      activeFilter === "all" ||
+      dream.status === activeFilter;
+
+    const haystack = (
+
+      dream.title + " " +
+      dream.description + " " +
+      dream.type + " " +
+      dream.format + " " +
+      dream.genre + " " +
+      dream.code
+
+    ).toLowerCase();
+
+    const matchesSearch =
+      !search ||
+      haystack.includes(search);
+
+    return matchesFilter && matchesSearch;
+
+  });
+
+
+  grid.innerHTML = "";
+
+
+  if(!filtered.length){
+
+    empty.style.display = "block";
+
+    return;
+
+  }
+
+
+  empty.style.display = "none";
+
+
+  filtered.forEach(dream => {
+
+    const article =
+      document.createElement("article");
+
+    article.className =
+      "dream " + dream.status;
+
+
+    article.innerHTML = `
+
+      <div class="dream-head">
+
+        <span class="code">
+          ${escapeHtml(dream.code)}
+        </span>
+
+        <span class="status ${escapeHtml(dream.status)}">
+          ${escapeHtml(dream.statusLabel)}
+        </span>
+
+      </div>
+
+
+      <h2>
+        ${escapeHtml(dream.title)}
+      </h2>
+
+
+      <p class="description">
+        ${escapeHtml(dream.description)}
+      </p>
+
+
+      <div class="tags">
+
+        <span class="tag">
+          ${escapeHtml(dream.type)}
+        </span>
+
+        <span class="tag">
+          ${escapeHtml(dream.format)}
+        </span>
+
+        <span class="tag">
+          ${escapeHtml(dream.genre)}
+        </span>
+
+      </div>
+
+
+      <div class="dream-meta">
+
+        <div class="meta-box">
+          <label>Views</label>
+          <strong>
+            ${Number(dream.views).toLocaleString()}
+          </strong>
+        </div>
+
+        <div class="meta-box">
+          <label>Votes</label>
+          <strong>
+            ${Number(dream.votes).toLocaleString()}
+          </strong>
+        </div>
+
+        <div class="meta-box">
+          <label>Updated</label>
+          <strong>
+            ${escapeHtml(dream.updated)}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div class="dream-bottom">
+
+        <span class="updated">
+          ${escapeHtml(dream.code)}
+        </span>
+
+        <div class="card-actions">
+
+          <button
+            class="btn"
+            onclick="openDream('${escapeJs(dream.id)}')">
+            OPEN
+          </button>
+
+          ${
+            dream.status === "draft"
+            ? `
+              <button
+                class="btn btn-primary"
+                onclick="continueDream('${escapeJs(dream.id)}')">
+                CONTINUE
+              </button>
+            `
+            : ""
+          }
+
+        </div>
+
+      </div>
+
+    `;
+
+    grid.appendChild(article);
+
+  });
+
+}
+
+
+/* =========================================================
+   OPEN DREAM
+========================================================= */
+
+function openDream(id){
+
+  const dream =
+    dreams.find(item => item.id === id);
+
+  if(!dream) return;
+
+  /*
+    Future:
+
+    window.location.href =
+      "dream.html?id=" +
+      encodeURIComponent(id);
+  */
+
+  showToast(
+    "Opening " + dream.code + " — " + dream.title
+  );
+
+}
+
+
+/* =========================================================
+   CONTINUE DRAFT
+========================================================= */
+
+function continueDream(id){
+
+  const dream =
+    dreams.find(item => item.id === id);
+
+  if(!dream) return;
+
+  showToast(
+    "Continuing " + dream.title
+  );
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+function mobileMenu(){
+
+  document
+    .querySelector(".sidebar")
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove("show");
+
+    },2800);
+
+}
+
+
+/* =========================================================
+   CREATOR
+========================================================= */
+
+function loadCreator(){
+
+  document
+    .getElementById("creatorName")
+    .textContent =
+      currentCreator.name;
+
+  document
+    .getElementById("creatorEmail")
+    .textContent =
+      currentCreator.email;
+
+  document
+    .getElementById("creatorAvatar")
+    .textContent =
+      currentCreator.initials;
+
+  document
+    .getElementById("navAvatar")
+    .textContent =
+      currentCreator.initials;
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+  const total =
+    dreams.length;
+
+  const review =
+    dreams.filter(
+      d => d.status === "review"
+    ).length;
+
+  const development =
+    dreams.filter(
+      d => d.status === "development"
+    ).length;
+
+  const community =
+    dreams.filter(
+      d => d.status === "community"
+    ).length;
+
+  const archived =
+    dreams.filter(
+      d => d.status === "archived"
+    ).length;
+
+
+  document
+    .getElementById("totalDreams")
+    .textContent = total;
+
+  document
+    .getElementById("reviewDreams")
+    .textContent = review;
+
+  document
+    .getElementById("developmentDreams")
+    .textContent = development;
+
+  document
+    .getElementById("communityDreams")
+    .textContent = community;
+
+  document
+    .getElementById("archivedDreams")
+    .textContent = archived;
+
+}
+
+
+/* =========================================================
+   ESCAPE HELPERS
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJs(value){
+
+  return String(value ?? "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/"/g,"&quot;");
+
+}
+
+
+/* =========================================================
+   SUPABASE FUTURE CONNECTION
+========================================================= */
+
+/*
+
+Load Supabase JS before this script:
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+Then:
+
+const supabase =
+  window.supabase.createClient(
+    CONFIG.SUPABASE_URL,
+    CONFIG.SUPABASE_ANON_KEY
+  );
+
+
+async function loadAuthenticatedCreator(){
+
+  const {
+    data:{user},
+    error
+  } =
+    await supabase.auth.getUser();
+
+
+  if(error){
+
+    console.error(error);
+
+    return;
+
+  }
+
+
+  if(!user){
+
+    window.location.href =
+      "login.html";
+
+    return;
+
+  }
+
+
+  currentCreator.id =
+    user.id;
+
+
+  await loadDreams(user.id);
+
+}
+
+
+async function loadDreams(userId){
+
+  const {
+    data,
+    error
+  } =
+    await supabase
+      .from("dream_submissions")
+      .select(`
+        id,
+        dream_code,
+        dream_title,
+        description,
+        dream_type,
+        format,
+        genre,
+        status,
+        visibility,
+        view_count,
+        vote_count,
+        created_at,
+        updated_at
+      `)
+      .eq("creator_id",userId)
+      .order(
+        "updated_at",
+        {ascending:false}
+      );
+
+
+  if(error){
+
+    console.error(
+      "Dream loading failed:",
+      error
+    );
+
+    showToast(
+      "Could not load your dreams."
+    );
+
+    return;
+
+  }
+
+
+  dreams.length = 0;
+
+
+  (data || []).forEach(row => {
+
+    dreams.push({
+
+      id:row.id,
+
+      code:
+        row.dream_code ||
+        "DREAM",
+
+      title:
+        row.dream_title ||
+        "Untitled Dream",
+
+      description:
+        row.description ||
+        "",
+
+      type:
+        row.dream_type ||
+        "Dream",
+
+      format:
+        row.format ||
+        "Unspecified",
+
+      genre:
+        row.genre ||
+        "Unspecified",
+
+      status:
+        normalizeStatus(row.status),
+
+      statusLabel:
+        formatStatus(row.status),
+
+      views:
+        row.view_count || 0,
+
+      votes:
+        row.vote_count || 0,
+
+      updated:
+        formatDate(row.updated_at)
+
+    });
+
+  });
+
+
+  updateStats();
+
+  renderDreams();
+
+}
+
+
+function normalizeStatus(status){
+
+  const value =
+    String(status || "")
+      .toLowerCase();
+
+
+  if(
+    value.includes("develop")
+  ){
+    return "development";
+  }
+
+  if(
+    value.includes("review")
+  ){
+    return "review";
+  }
+
+  if(
+    value.includes("community")
+  ){
+    return "community";
+  }
+
+  if(
+    value.includes("draft")
+  ){
+    return "draft";
+  }
+
+  if(
+    value.includes("archive")
+  ){
+    return "archived";
+  }
+
+  return "review";
+
+}
+
+
+function formatStatus(status){
+
+  if(!status)
+    return "Submitted";
+
+  return String(status)
+    .replace(/_/g," ")
+    .replace(/\b\w/g,
+      letter => letter.toUpperCase()
+    );
+
+}
+
+
+function formatDate(value){
+
+  if(!value)
+    return "";
+
+  return new Date(value)
+    .toLocaleDateString(
+      undefined,
+      {
+        month:"short",
+        day:"numeric",
+        year:"numeric"
+      }
+    );
+
+}
+
+*/
+
+
+/* =========================================================
+   FUTURE DATABASE
+========================================================= */
+
+/*
+
+TABLE:
+
+dream_submissions
+
+
+RECOMMENDED FIELDS:
+
+id
+uuid primary key
+
+dream_code
+text unique
+
+creator_id
+uuid references auth.users(id)
+
+dream_title
+text
+
+description
+text
+
+dream_type
+text
+
+format
+text
+
+genre
+text
+
+visibility
+text
+
+status
+text
+
+view_count
+integer default 0
+
+vote_count
+integer default 0
+
+comment_count
+integer default 0
+
+trend_score
+numeric default 0
+
+featured
+boolean default false
+
+submitted_at
+timestamptz
+
+created_at
+timestamptz default now()
+
+updated_at
+timestamptz default now()
+
+
+RECOMMENDED STATUS VALUES:
+
+draft
+submitted
+under_review
+community
+concept
+development
+selected
+paused
+archived
+
+
+IMPORTANT:
+
+RLS should prevent a creator from
+reading another creator's private dreams.
+
+Creator SELECT policy should effectively
+limit access to:
+
+creator_id = auth.uid()
+
+Public/community dreams can have
+separate policies.
+
+
+*/
+
+
+/* =========================================================
+   FUTURE DREAM DETAIL ROUTE
+========================================================= */
+
+/*
+
+dream.html?id=DR-0001
+
+
+Possible detail page sections:
+
+- Dream title
+- Original submission
+- Creator
+- Submission date
+- Current status
+- Visibility
+- Development history
+- Comments
+- Votes
+- Project connection
+- Files
+- Agreements
+- Creator credits
+- Development notes
+- Project timeline
+
+
+If the dream becomes a project:
+
+DREAM
+  ↓
+CONCEPT
+  ↓
+PROJECT
+  ↓
+DEVELOPMENT
+  ↓
+PRODUCTION
+  ↓
+RELEASE
+
+
+The original dream record should remain
+linked to the resulting project permanently.
+*/
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    loadCreator();
+
+    updateStats();
+
+    renderDreams();
+
+    /*
+      Future authenticated startup:
+
+      loadAuthenticatedCreator();
+    */
+
+  }
+);
+
+</script>
+
+</body>
+</html>

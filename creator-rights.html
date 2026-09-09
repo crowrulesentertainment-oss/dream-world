@@ -1,0 +1,3760 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>CrowRules Dream World — Creator Rights</title>
+<meta name="theme-color" content="#050505">
+<meta name="description" content="CrowRules Dream World Creator Rights Center — submissions, ownership, development, credits, compensation and project rights.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#050505;
+  --panel:#0b0b0e;
+  --panel2:#101014;
+  --panel3:#15151a;
+  --red:#e50914;
+  --red2:#ff3038;
+  --green:#43dc91;
+  --yellow:#f3c95b;
+  --blue:#65a8ff;
+  --purple:#aa7cff;
+  --white:#f4f4f4;
+  --muted:#85858c;
+  --line:rgba(255,255,255,.09);
+  --shadow:0 20px 70px rgba(0,0,0,.45);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  color:var(--white);
+  font-family:Montserrat,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 5% 0%,rgba(229,9,20,.15),transparent 27%),
+    radial-gradient(circle at 95% 22%,rgba(90,0,0,.14),transparent 30%),
+    linear-gradient(180deg,#050505,#090909 65%,#040404);
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.025;
+  background-image:
+    linear-gradient(rgba(255,255,255,.7) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.7) 1px,transparent 1px);
+  background-size:50px 50px;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.container{
+  width:min(1450px,94%);
+  margin:auto;
+}
+
+/* =====================================================
+HEADER
+===================================================== */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(5,5,5,.96);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.logo{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(229,9,20,.65);
+  background:#090909;
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:-2px;
+}
+
+.brand strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:14px;
+  letter-spacing:1.5px;
+}
+
+.brand span{
+  display:block;
+  margin-top:3px;
+  color:#777;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.navlinks{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:4px;
+}
+
+.navlinks a{
+  padding:10px 10px;
+  border-radius:6px;
+  color:#999;
+  font-size:9px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.65px;
+}
+
+.navlinks a:hover,
+.navlinks a.active{
+  color:#fff;
+  background:rgba(229,9,20,.1);
+}
+
+.navlinks a.active{
+  box-shadow:inset 0 -2px var(--red);
+}
+
+.mobileMenu{
+  display:none;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  background:none;
+  color:#fff;
+}
+
+/* =====================================================
+HERO
+===================================================== */
+
+.hero{
+  padding:42px 0 28px;
+}
+
+.breadcrumb{
+  margin-bottom:17px;
+  color:#666;
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:1.7px;
+}
+
+.breadcrumb span{
+  color:var(--red2);
+}
+
+.heroGrid{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:25px;
+  align-items:end;
+}
+
+.eyebrow{
+  margin-bottom:10px;
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2.5px;
+}
+
+h1{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(30px,4vw,50px);
+  line-height:1.05;
+  letter-spacing:-1px;
+}
+
+.heroText{
+  max-width:850px;
+  margin-top:14px;
+  color:#999;
+  font-size:13px;
+  line-height:1.85;
+}
+
+.heroBadge{
+  padding:12px 15px;
+  border:1px solid rgba(67,220,145,.25);
+  background:rgba(67,220,145,.035);
+  color:var(--green);
+  font-size:9px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+/* =====================================================
+LAYOUT
+===================================================== */
+
+main{
+  padding:25px 0 80px;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:240px minmax(0,1fr);
+  gap:18px;
+}
+
+.panel{
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  box-shadow:var(--shadow);
+}
+
+/* =====================================================
+SIDEBAR
+===================================================== */
+
+.side{
+  position:sticky;
+  top:96px;
+  align-self:start;
+}
+
+.sideHeader{
+  padding:17px;
+  border-bottom:1px solid var(--line);
+}
+
+.sideHeader h2{
+  font-family:Orbitron,sans-serif;
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+.sideHeader p{
+  margin-top:6px;
+  color:#666;
+  font-size:8px;
+  line-height:1.6;
+}
+
+.sideLinks{
+  padding:10px;
+}
+
+.sideLink{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  width:100%;
+  padding:11px;
+  margin-bottom:3px;
+  border:1px solid transparent;
+  background:none;
+  color:#777;
+  text-align:left;
+  font-size:8px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.65px;
+}
+
+.sideLink:hover,
+.sideLink.active{
+  color:#fff;
+  border-color:rgba(229,9,20,.24);
+  background:rgba(229,9,20,.055);
+}
+
+.sideLink.active{
+  box-shadow:inset 2px 0 var(--red);
+}
+
+.icon{
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:7px;
+}
+
+.sideNote{
+  margin:10px;
+  padding:14px;
+  border:1px solid rgba(229,9,20,.2);
+  background:rgba(229,9,20,.025);
+}
+
+.sideNote strong{
+  display:block;
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+  letter-spacing:.8px;
+}
+
+.sideNote p{
+  margin-top:7px;
+  color:#666;
+  font-size:7px;
+  line-height:1.7;
+}
+
+/* =====================================================
+CONTENT
+===================================================== */
+
+.content{
+  min-width:0;
+}
+
+.section{
+  margin-bottom:18px;
+  border:1px solid var(--line);
+  background:#0a0a0c;
+}
+
+.sectionHeader{
+  padding:18px 20px;
+  border-bottom:1px solid var(--line);
+}
+
+.sectionHeader h2{
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.sectionHeader p{
+  max-width:820px;
+  margin-top:6px;
+  color:#666;
+  font-size:8px;
+  line-height:1.7;
+}
+
+.sectionBody{
+  padding:20px;
+}
+
+/* =====================================================
+RIGHTS STATUS
+===================================================== */
+
+.rightsStatus{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.statusCard{
+  padding:16px;
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.statusCard .number{
+  font-family:Orbitron,sans-serif;
+  font-size:21px;
+  font-weight:800;
+  color:#fff;
+}
+
+.statusCard .label{
+  margin-top:6px;
+  color:#666;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.9px;
+}
+
+.statusCard.green .number{
+  color:var(--green);
+}
+
+.statusCard.red .number{
+  color:var(--red2);
+}
+
+.statusCard.yellow .number{
+  color:var(--yellow);
+}
+
+/* =====================================================
+CORE PRINCIPLE
+===================================================== */
+
+.principle{
+  padding:24px;
+  border:1px solid rgba(229,9,20,.3);
+  background:
+    radial-gradient(circle at 0% 0%,rgba(229,9,20,.12),transparent 45%),
+    #09090b;
+}
+
+.principleLabel{
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:2px;
+}
+
+.principle h3{
+  max-width:800px;
+  margin-top:10px;
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(18px,3vw,28px);
+  line-height:1.3;
+}
+
+.principle p{
+  max-width:850px;
+  margin-top:13px;
+  color:#888;
+  font-size:9px;
+  line-height:1.85;
+}
+
+/* =====================================================
+RIGHTS CARDS
+===================================================== */
+
+.rightsGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.rightCard{
+  position:relative;
+  padding:18px;
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.rightCard:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:var(--red);
+}
+
+.rightCard h3{
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+}
+
+.rightCard p{
+  margin-top:8px;
+  color:#666;
+  font-size:8px;
+  line-height:1.75;
+}
+
+.rightCard .tag{
+  display:inline-block;
+  margin-top:11px;
+  padding:5px 7px;
+  border:1px solid rgba(67,220,145,.2);
+  color:var(--green);
+  font-size:6px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+/* =====================================================
+PIPELINE
+===================================================== */
+
+.timeline{
+  position:relative;
+  margin-top:5px;
+}
+
+.timeline:before{
+  content:"";
+  position:absolute;
+  left:18px;
+  top:15px;
+  bottom:15px;
+  width:1px;
+  background:rgba(229,9,20,.3);
+}
+
+.timelineItem{
+  position:relative;
+  display:grid;
+  grid-template-columns:38px 1fr;
+  gap:12px;
+  padding:12px 0;
+}
+
+.timelineDot{
+  position:relative;
+  z-index:2;
+  width:37px;
+  height:37px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(229,9,20,.3);
+  background:#09090b;
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:7px;
+}
+
+.timelineItem h3{
+  font-size:10px;
+}
+
+.timelineItem p{
+  margin-top:4px;
+  color:#666;
+  font-size:8px;
+  line-height:1.6;
+}
+
+.timelineStatus{
+  display:inline-block;
+  margin-top:6px;
+  padding:4px 6px;
+  border:1px solid var(--line);
+  color:#777;
+  font-size:6px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.timelineItem.active .timelineDot{
+  background:rgba(229,9,20,.12);
+  border-color:var(--red);
+}
+
+.timelineItem.active .timelineStatus{
+  color:var(--red2);
+  border-color:rgba(229,9,20,.3);
+}
+
+/* =====================================================
+AGREEMENT TABLE
+===================================================== */
+
+.agreementTable{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.agreementTable th{
+  padding:10px;
+  color:#555;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  font-size:7px;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+
+.agreementTable td{
+  padding:13px 10px;
+  border-bottom:1px solid rgba(255,255,255,.055);
+  color:#999;
+  font-size:8px;
+}
+
+.agreementTable tr:last-child td{
+  border-bottom:0;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 7px;
+  border:1px solid var(--line);
+  background:#101014;
+  font-size:6px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+.badge.signed{
+  color:var(--green);
+  border-color:rgba(67,220,145,.2);
+}
+
+.badge.review{
+  color:var(--yellow);
+  border-color:rgba(243,201,91,.2);
+}
+
+.badge.none{
+  color:#777;
+}
+
+/* =====================================================
+RIGHTS LEDGER
+===================================================== */
+
+.ledger{
+  display:grid;
+  gap:8px;
+}
+
+.ledgerRow{
+  display:grid;
+  grid-template-columns:180px 1fr auto;
+  gap:15px;
+  align-items:center;
+  padding:13px;
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.ledgerKey{
+  color:#666;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+
+.ledgerValue{
+  color:#ccc;
+  font-size:9px;
+}
+
+.ledgerState{
+  padding:5px 7px;
+  border:1px solid rgba(67,220,145,.2);
+  color:var(--green);
+  font-size:6px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+/* =====================================================
+COMPENSATION
+===================================================== */
+
+.compGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.compCard{
+  padding:15px;
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.compCard h3{
+  font-family:Orbitron,sans-serif;
+  font-size:9px;
+}
+
+.compCard .value{
+  margin-top:10px;
+  font-family:Orbitron,sans-serif;
+  font-size:19px;
+}
+
+.compCard p{
+  margin-top:5px;
+  color:#555;
+  font-size:7px;
+  line-height:1.6;
+}
+
+.compNotice{
+  margin-top:14px;
+  padding:13px;
+  border:1px solid rgba(243,201,91,.2);
+  background:rgba(243,201,91,.025);
+}
+
+.compNotice strong{
+  display:block;
+  color:var(--yellow);
+  font-family:Orbitron,sans-serif;
+  font-size:7px;
+}
+
+.compNotice p{
+  margin-top:6px;
+  color:#666;
+  font-size:7px;
+  line-height:1.7;
+}
+
+/* =====================================================
+FAQ
+===================================================== */
+
+.faq{
+  display:grid;
+  gap:8px;
+}
+
+.faqItem{
+  border:1px solid var(--line);
+  background:#09090b;
+}
+
+.faqQuestion{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:14px;
+  border:0;
+  background:none;
+  color:#ddd;
+  text-align:left;
+  font-size:9px;
+  font-weight:800;
+}
+
+.faqQuestion span:last-child{
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+}
+
+.faqAnswer{
+  display:none;
+  padding:0 14px 15px;
+  color:#666;
+  font-size:8px;
+  line-height:1.8;
+}
+
+.faqItem.open .faqAnswer{
+  display:block;
+}
+
+/* =====================================================
+NOTICE
+===================================================== */
+
+.notice{
+  padding:16px;
+  border:1px solid rgba(101,168,255,.2);
+  background:rgba(101,168,255,.025);
+}
+
+.notice strong{
+  display:block;
+  color:var(--blue);
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+  letter-spacing:.8px;
+}
+
+.notice p{
+  margin-top:7px;
+  color:#666;
+  font-size:8px;
+  line-height:1.8;
+}
+
+/* =====================================================
+MODAL
+===================================================== */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.88);
+  backdrop-filter:blur(10px);
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modalBox{
+  width:min(620px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border:1px solid rgba(229,9,20,.35);
+  background:#0b0b0e;
+  box-shadow:0 30px 100px rgba(0,0,0,.7);
+}
+
+.modalHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:17px 19px;
+  border-bottom:1px solid var(--line);
+}
+
+.modalHeader h2{
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+}
+
+.close{
+  border:0;
+  background:none;
+  color:#777;
+  font-size:21px;
+}
+
+.modalBody{
+  padding:19px;
+}
+
+.modalBody p{
+  color:#777;
+  font-size:8px;
+  line-height:1.8;
+}
+
+.modalFooter{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  padding:14px 19px;
+  border-top:1px solid var(--line);
+}
+
+/* =====================================================
+BUTTONS
+===================================================== */
+
+.btn{
+  padding:10px 13px;
+  border:1px solid var(--line);
+  border-radius:5px;
+  background:#101014;
+  color:#eee;
+  font-size:8px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+}
+
+.btn:hover{
+  border-color:rgba(229,9,20,.45);
+}
+
+.btn.primary{
+  border-color:var(--red);
+  background:var(--red);
+  color:#fff;
+}
+
+.btn.primary:hover{
+  background:var(--red2);
+}
+
+/* =====================================================
+TOAST
+===================================================== */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:5000;
+  min-width:270px;
+  max-width:400px;
+  padding:14px 16px;
+  border:1px solid rgba(229,9,20,.35);
+  background:#0c0c0f;
+  box-shadow:0 15px 50px rgba(0,0,0,.6);
+  transform:translateY(120px);
+  opacity:0;
+  transition:.3s ease;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast strong{
+  display:block;
+  margin-bottom:4px;
+  color:var(--red2);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.toast span{
+  color:#aaa;
+  font-size:8px;
+}
+
+/* =====================================================
+FOOTER
+===================================================== */
+
+footer{
+  border-top:1px solid var(--line);
+  padding:35px 0;
+  color:#555;
+  font-size:9px;
+}
+
+.footerGrid{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.footerBrand{
+  color:#888;
+  font-family:Orbitron,sans-serif;
+  letter-spacing:1px;
+}
+
+/* =====================================================
+RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px){
+
+  .navlinks{
+    display:none;
+  }
+
+  .mobileMenu{
+    display:block;
+  }
+
+}
+
+@media(max-width:900px){
+
+  .layout{
+    grid-template-columns:1fr;
+  }
+
+  .side{
+    position:static;
+  }
+
+  .sideLinks{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .sideNote{
+    display:none;
+  }
+
+  .rightsStatus{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .ledgerRow{
+    grid-template-columns:1fr;
+    gap:7px;
+  }
+
+}
+
+@media(max-width:700px){
+
+  .heroGrid{
+    grid-template-columns:1fr;
+  }
+
+  .heroBadge{
+    width:max-content;
+  }
+
+  .rightsGrid{
+    grid-template-columns:1fr;
+  }
+
+  .compGrid{
+    grid-template-columns:1fr;
+  }
+
+  .sideLinks{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .agreementTable{
+    display:block;
+    overflow-x:auto;
+  }
+
+}
+
+@media(max-width:450px){
+
+  .container{
+    width:92%;
+  }
+
+  h1{
+    font-size:28px;
+  }
+
+  .rightsStatus{
+    grid-template-columns:1fr;
+  }
+
+  .sideLinks{
+    grid-template-columns:1fr;
+  }
+
+  .sectionBody{
+    padding:15px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- =====================================================
+HEADER
+===================================================== -->
+
+<header>
+
+  <div class="container nav">
+
+    <a href="index.html" class="brand">
+
+      <div class="logo">
+        CR
+      </div>
+
+      <div>
+
+        <strong>
+          CROWRULES
+        </strong>
+
+        <span>
+          Dream World
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <nav class="navlinks">
+
+      <a href="creator-dashboard.html">
+        Dashboard
+      </a>
+
+      <a href="my-dreams.html">
+        My Dreams
+      </a>
+
+      <a href="my-projects.html">
+        My Projects
+      </a>
+
+      <a href="creative-room.html">
+        Creative Room
+      </a>
+
+      <a href="project-development.html">
+        Development
+      </a>
+
+      <a href="collaborators.html">
+        Collaborators
+      </a>
+
+      <a href="agreements.html">
+        Agreements
+      </a>
+
+      <a href="credits.html">
+        Credits
+      </a>
+
+      <a href="earnings.html">
+        Earnings
+      </a>
+
+      <a href="messages.html">
+        Messages
+      </a>
+
+      <a href="files.html">
+        Files
+      </a>
+
+      <a
+        href="creator-rights.html"
+        class="active"
+      >
+        Rights
+      </a>
+
+    </nav>
+
+
+    <button
+      class="mobileMenu"
+      onclick="toggleMobileNav()"
+    >
+      MENU
+    </button>
+
+  </div>
+
+</header>
+
+
+<!-- =====================================================
+HERO
+===================================================== -->
+
+<div class="container hero">
+
+  <div class="breadcrumb">
+    DREAM WORLD /
+    <span>CREATOR RIGHTS</span>
+  </div>
+
+
+  <div class="heroGrid">
+
+    <div>
+
+      <div class="eyebrow">
+        CREATOR RIGHTS CENTER
+      </div>
+
+      <h1>
+        Your Dream.
+        Your Record.
+        Your Rights.
+      </h1>
+
+      <p class="heroText">
+        This is the central rights reference for your Dream World
+        creative activity. Track your original submissions, development
+        agreements, credits, compensation and project relationships
+        while keeping each project's legal and contractual record clear.
+      </p>
+
+    </div>
+
+
+    <div class="heroBadge">
+      RIGHTS RECORD ACTIVE
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+MAIN
+===================================================== -->
+
+<main class="container">
+
+  <div class="layout">
+
+
+    <!-- =================================================
+    SIDEBAR
+    ================================================= -->
+
+    <aside class="panel side">
+
+      <div class="sideHeader">
+
+        <h2>
+          Rights Center
+        </h2>
+
+        <p>
+          Your creative rights and project records.
+        </p>
+
+      </div>
+
+
+      <div class="sideLinks">
+
+        <button
+          class="sideLink active"
+          onclick="scrollToSection('overview',this)"
+        >
+          <span class="icon">OV</span>
+          Overview
+        </button>
+
+
+        <button
+          class="sideLink"
+          onclick="scrollToSection('principles',this)"
+        >
+          <span class="icon">RP</span>
+          Principles
+        </button>
+
+
+        <button
+          class="sideLink"
+          onclick="scrollToSection('submission',this)"
+        >
+          <span class="icon">SB</span>
+          Submissions
+        </button>
+
+
+        <button
+          class="sideLink"
+          onclick="scrollToSection('agreements',this)"
+        >
+          <span class="icon">AG</span>
+          Agreements
+        </button>
+
+
+        <button
+          class="sideLink"
+          onclick="scrollToSection('ledger',this)"
+        >
+          <span class="icon">RL</span>
+          Rights Ledger
+        </button>
+
+
+        <button
+          class="sideLink"
+          onclick="scrollToSection('compensation',this)"
+        >
+          <span class="icon">$$</span>
+          Compensation
+        </button>
+
+
+        <button
+          class="sideLink"
+          onclick="scrollToSection('faq',this)"
+        >
+          <span class="icon">?</span>
+          FAQ
+        </button>
+
+      </div>
+
+
+      <div class="sideNote">
+
+        <strong>
+          LONG-TERM RECORD
+        </strong>
+
+        <p>
+          Dream World projects may take years to develop.
+          Your approved project history should remain connected
+          through rewrites, pauses, format changes and production.
+        </p>
+
+      </div>
+
+    </aside>
+
+
+    <!-- =================================================
+    CONTENT
+    ================================================= -->
+
+    <section class="content">
+
+
+      <!-- =================================================
+      OVERVIEW
+      ================================================= -->
+
+      <section
+        class="section"
+        id="overview"
+      >
+
+        <div class="sectionHeader">
+
+          <h2>
+            Rights Overview
+          </h2>
+
+          <p>
+            A snapshot of the current creator-rights record for
+            your Dream World account.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div class="rightsStatus">
+
+            <div class="statusCard">
+
+              <div class="number">
+                3
+              </div>
+
+              <div class="label">
+                Dreams Submitted
+              </div>
+
+            </div>
+
+
+            <div class="statusCard green">
+
+              <div class="number">
+                1
+              </div>
+
+              <div class="label">
+                Active Project
+              </div>
+
+            </div>
+
+
+            <div class="statusCard green">
+
+              <div class="number">
+                6
+              </div>
+
+              <div class="label">
+                Approved Credits
+              </div>
+
+            </div>
+
+
+            <div class="statusCard yellow">
+
+              <div class="number">
+                2
+              </div>
+
+              <div class="label">
+                Agreement Actions
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      PRINCIPLE
+      ================================================= -->
+
+      <section
+        class="section"
+        id="principles"
+      >
+
+        <div class="sectionBody">
+
+          <div class="principle">
+
+            <div class="principleLabel">
+              THE DREAM WORLD PRINCIPLE
+            </div>
+
+            <h3>
+              We don't just collect dreams.
+              We build them with the people who dreamed them.
+            </h3>
+
+            <p>
+              A submitted dream may begin as a simple idea, strange
+              image, nightmare, character, scene or story. If CrowRules
+              chooses to develop it, the goal is to work with the creator
+              to shape that idea into something real. The project can
+              evolve over time, and the creator's involvement, credit,
+              compensation and rights should be documented through the
+              appropriate project agreements.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      RIGHTS PRINCIPLES
+      ================================================= -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <h2>
+            Core Rights Principles
+          </h2>
+
+          <p>
+            These principles describe how Dream World intends to organize
+            creative relationships. The applicable written agreement for
+            a particular project controls the actual contractual terms.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div class="rightsGrid">
+
+
+            <article class="rightCard">
+
+              <h3>
+                Your Submission
+              </h3>
+
+              <p>
+                Submitting a dream does not, by itself, automatically
+                mean that CrowRules owns everything associated with the
+                submission. The applicable submission terms and later
+                project agreements determine the relationship.
+              </p>
+
+              <span class="tag">
+                Submission Record
+              </span>
+
+            </article>
+
+
+            <article class="rightCard">
+
+              <h3>
+                Your Creative Expression
+              </h3>
+
+              <p>
+                Written stories, scripts, artwork, recordings and other
+                creative expression may involve rights distinct from
+                the underlying idea. Those contributions should be
+                identified and documented appropriately.
+              </p>
+
+              <span class="tag">
+                Creative Material
+              </span>
+
+            </article>
+
+
+            <article class="rightCard">
+
+              <h3>
+                Development
+              </h3>
+
+              <p>
+                When CrowRules and a creator begin actively developing
+                a project, the parties can establish the rights,
+                responsibilities, credits, compensation and permissions
+                for that development.
+              </p>
+
+              <span class="tag">
+                Project Agreement
+              </span>
+
+            </article>
+
+
+            <article class="rightCard">
+
+              <h3>
+                Credits
+              </h3>
+
+              <p>
+                Creator and contributor credits should be documented,
+                reviewed and preserved. Approved historical credits
+                should not simply disappear because a project changes.
+              </p>
+
+              <span class="tag">
+                Credit Record
+              </span>
+
+            </article>
+
+
+            <article class="rightCard">
+
+              <h3>
+                Compensation
+              </h3>
+
+              <p>
+                If compensation, licensing fees, development payments,
+                writing fees, producer fees, bonuses or revenue
+                participation are agreed upon, those terms should be
+                recorded in a written project agreement.
+              </p>
+
+              <span class="tag">
+                Agreement Based
+              </span>
+
+            </article>
+
+
+            <article class="rightCard">
+
+              <h3>
+                Long-Term Development
+              </h3>
+
+              <p>
+                A project may take years to become a finished production.
+                Pauses, rewrites, funding delays, format changes and
+                creator availability should be recorded rather than
+                erasing the project's history.
+              </p>
+
+              <span class="tag">
+                Long-Term Record
+              </span>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      SUBMISSIONS
+      ================================================= -->
+
+      <section
+        class="section"
+        id="submission"
+      >
+
+        <div class="sectionHeader">
+
+          <h2>
+            Submission Rights
+          </h2>
+
+          <p>
+            Understand what happens between submitting a dream and
+            potentially entering formal development.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div class="timeline">
+
+
+            <div class="timelineItem active">
+
+              <div class="timelineDot">
+                01
+              </div>
+
+              <div>
+
+                <h3>
+                  You Submit The Dream
+                </h3>
+
+                <p>
+                  Your submission creates a dated record identifying
+                  the creator, submission content and the terms under
+                  which CrowRules receives it.
+                </p>
+
+                <span class="timelineStatus">
+                  Creator Initiated
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem active">
+
+              <div class="timelineDot">
+                02
+              </div>
+
+              <div>
+
+                <h3>
+                  CrowRules Reviews It
+                </h3>
+
+                <p>
+                  The submission may be reviewed for suitability,
+                  originality concerns, production potential, audience,
+                  development possibilities and available resources.
+                </p>
+
+                <span class="timelineStatus">
+                  Review
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem active">
+
+              <div class="timelineDot">
+                03
+              </div>
+
+              <div>
+
+                <h3>
+                  Discovery With The Creator
+                </h3>
+
+                <p>
+                  If selected for further consideration, CrowRules can
+                  discuss what the creator imagined, possible formats,
+                  story direction and the creator's desired involvement.
+                </p>
+
+                <span class="timelineStatus">
+                  Collaboration
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem">
+
+              <div class="timelineDot">
+                04
+              </div>
+
+              <div>
+
+                <h3>
+                  Development Agreement
+                </h3>
+
+                <p>
+                  Before substantial formal development, the parties
+                  can document applicable rights, responsibilities,
+                  credits, compensation and permissions.
+                </p>
+
+                <span class="timelineStatus">
+                  Project Specific
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem">
+
+              <div class="timelineDot">
+                05
+              </div>
+
+              <div>
+
+                <h3>
+                  Project Development
+                </h3>
+
+                <p>
+                  Writers, producers, artists, directors, composers
+                  and other collaborators may contribute under their
+                  own applicable agreements.
+                </p>
+
+                <span class="timelineStatus">
+                  Development
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="timelineItem">
+
+              <div class="timelineDot">
+                06
+              </div>
+
+              <div>
+
+                <h3>
+                  Production & Release
+                </h3>
+
+                <p>
+                  If the project reaches production, final credits,
+                  production rights and distribution arrangements are
+                  documented for the finished work.
+                </p>
+
+                <span class="timelineStatus">
+                  Future
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      AGREEMENTS
+      ================================================= -->
+
+      <section
+        class="section"
+        id="agreements"
+      >
+
+        <div class="sectionHeader">
+
+          <h2>
+            Your Agreements
+          </h2>
+
+          <p>
+            Project-specific agreements are the authoritative place for
+            negotiated rights, responsibilities, credits and compensation.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div style="overflow-x:auto">
+
+            <table class="agreementTable">
+
+              <thead>
+
+                <tr>
+                  <th>Project</th>
+                  <th>Agreement</th>
+                  <th>Status</th>
+                  <th>Effective</th>
+                  <th></th>
+                </tr>
+
+              </thead>
+
+
+              <tbody>
+
+                <tr>
+
+                  <td>
+                    The City That Only Exists While You Sleep
+                  </td>
+
+                  <td>
+                    Creator Development Agreement
+                  </td>
+
+                  <td>
+                    <span class="badge signed">
+                      Signed
+                    </span>
+                  </td>
+
+                  <td>
+                    Aug 2026
+                  </td>
+
+                  <td>
+                    <button
+                      class="btn"
+                      onclick="viewAgreement('Creator Development Agreement')"
+                    >
+                      View
+                    </button>
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    The City That Only Exists While You Sleep
+                  </td>
+
+                  <td>
+                    Credit & Compensation Addendum
+                  </td>
+
+                  <td>
+                    <span class="badge review">
+                      Review
+                    </span>
+                  </td>
+
+                  <td>
+                    Pending
+                  </td>
+
+                  <td>
+                    <button
+                      class="btn"
+                      onclick="viewAgreement('Credit & Compensation Addendum')"
+                    >
+                      Review
+                    </button>
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    Night Window
+                  </td>
+
+                  <td>
+                    Submission Record
+                  </td>
+
+                  <td>
+                    <span class="badge none">
+                      Submission
+                    </span>
+                  </td>
+
+                  <td>
+                    Jul 2026
+                  </td>
+
+                  <td>
+                    <button
+                      class="btn"
+                      onclick="viewAgreement('Submission Record')"
+                    >
+                      View
+                    </button>
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      RIGHTS LEDGER
+      ================================================= -->
+
+      <section
+        class="section"
+        id="ledger"
+      >
+
+        <div class="sectionHeader">
+
+          <h2>
+            Project Rights Ledger
+          </h2>
+
+          <p>
+            A simplified view of the rights and records associated with
+            your active Dream World project.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div class="ledger">
+
+
+            <div class="ledgerRow">
+
+              <div class="ledgerKey">
+                Original Dream
+              </div>
+
+              <div class="ledgerValue">
+                Dream Creator
+              </div>
+
+              <div class="ledgerState">
+                Recorded
+              </div>
+
+            </div>
+
+
+            <div class="ledgerRow">
+
+              <div class="ledgerKey">
+                Original Submission
+              </div>
+
+              <div class="ledgerValue">
+                DR-0001
+              </div>
+
+              <div class="ledgerState">
+                Archived
+              </div>
+
+            </div>
+
+
+            <div class="ledgerRow">
+
+              <div class="ledgerKey">
+                Project
+              </div>
+
+              <div class="ledgerValue">
+                DW-0001
+              </div>
+
+              <div class="ledgerState">
+                Active
+              </div>
+
+            </div>
+
+
+            <div class="ledgerRow">
+
+              <div class="ledgerKey">
+                Development Rights
+              </div>
+
+              <div class="ledgerValue">
+                Governed by Creator Development Agreement
+              </div>
+
+              <div class="ledgerState">
+                Documented
+              </div>
+
+            </div>
+
+
+            <div class="ledgerRow">
+
+              <div class="ledgerKey">
+                Writing Contributions
+              </div>
+
+              <div class="ledgerValue">
+                Project Writing Team
+              </div>
+
+              <div class="ledgerState">
+                Tracked
+              </div>
+
+            </div>
+
+
+            <div class="ledgerRow">
+
+              <div class="ledgerKey">
+                Creator Credit
+              </div>
+
+              <div class="ledgerValue">
+                Based on an Original Dream By / Creator
+              </div>
+
+              <div class="ledgerState">
+                Approved
+              </div>
+
+            </div>
+
+
+            <div class="ledgerRow">
+
+              <div class="ledgerKey">
+                Compensation
+              </div>
+
+              <div class="ledgerValue">
+                Agreement Linked
+              </div>
+
+              <div class="ledgerState">
+                Documented
+              </div>
+
+            </div>
+
+
+            <div class="ledgerRow">
+
+              <div class="ledgerKey">
+                Production Rights
+              </div>
+
+              <div class="ledgerValue">
+                Not Yet Finalized
+              </div>
+
+              <div class="ledgerState">
+                Future
+              </div>
+
+            </div>
+
+
+            <div class="ledgerRow">
+
+              <div class="ledgerKey">
+                Distribution
+              </div>
+
+              <div class="ledgerValue">
+                To Be Determined
+              </div>
+
+              <div class="ledgerState">
+                Future
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      COMPENSATION
+      ================================================= -->
+
+      <section
+        class="section"
+        id="compensation"
+      >
+
+        <div class="sectionHeader">
+
+          <h2>
+            Compensation & Participation
+          </h2>
+
+          <p>
+            Compensation is project-specific and should be based on
+            actual written agreements rather than assumptions or promises.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div class="compGrid">
+
+
+            <div class="compCard">
+
+              <h3>
+                Development
+              </h3>
+
+              <div class="value">
+                Agreement
+              </div>
+
+              <p>
+                Development payments, if any, are governed by the
+                applicable project agreement.
+              </p>
+
+            </div>
+
+
+            <div class="compCard">
+
+              <h3>
+                Creative Work
+              </h3>
+
+              <div class="value">
+                Defined
+              </div>
+
+              <p>
+                Writing, producing, consulting and other services
+                can have separately negotiated compensation.
+              </p>
+
+            </div>
+
+
+            <div class="compCard">
+
+              <h3>
+                Revenue Participation
+              </h3>
+
+              <div class="value">
+                If Agreed
+              </div>
+
+              <p>
+                Revenue participation only exists where established
+                by the applicable written agreement.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="compNotice">
+
+            <strong>
+              NO AUTOMATIC PROMISE OF PAYMENT
+            </strong>
+
+            <p>
+              A dream submission does not automatically create a promise
+              of payment, ownership, royalties or production. If CrowRules
+              and a creator agree to compensation or participation, the
+              terms should be clearly documented in a project-specific
+              written agreement.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      LONG TERM
+      ================================================= -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <h2>
+            The Long-Term Dream Record
+          </h2>
+
+          <p>
+            A Dream World project can survive far longer than a single
+            development cycle.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div class="rightsGrid">
+
+
+            <article class="rightCard">
+
+              <h3>
+                Paused
+              </h3>
+
+              <p>
+                A project can be paused because of funding, scheduling,
+                creator availability, creative decisions or production
+                circumstances without erasing its development history.
+              </p>
+
+              <span class="tag">
+                Preserve
+              </span>
+
+            </article>
+
+
+            <article class="rightCard">
+
+              <h3>
+                Rewritten
+              </h3>
+
+              <p>
+                Multiple screenplay, story, visual and concept versions
+                can be retained so the project's creative evolution is
+                traceable.
+              </p>
+
+              <span class="tag">
+                Versioned
+              </span>
+
+            </article>
+
+
+            <article class="rightCard">
+
+              <h3>
+                Reimagined
+              </h3>
+
+              <p>
+                A project can potentially change from a movie to a series,
+                a series to audio, or another format if the project and
+                agreements permit the change.
+              </p>
+
+              <span class="tag">
+                Flexible
+              </span>
+
+            </article>
+
+
+            <article class="rightCard">
+
+              <h3>
+                Archived
+              </h3>
+
+              <p>
+                Projects that do not immediately become productions can
+                remain part of the historical Dream World archive subject
+                to applicable creator, privacy and rights terms.
+              </p>
+
+              <span class="tag">
+                Historical
+              </span>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      NOTICE
+      ================================================= -->
+
+      <section class="section">
+
+        <div class="sectionBody">
+
+          <div class="notice">
+
+            <strong>
+              IMPORTANT RIGHTS NOTICE
+            </strong>
+
+            <p>
+              This page is an organizational and educational overview,
+              not a substitute for a negotiated legal agreement or legal
+              advice. Copyright, contract, trademark, publicity, privacy,
+              licensing, employment, union/guild, tax, securities and
+              other laws may apply differently depending on the project,
+              contributor, jurisdiction and transaction. CrowRules should
+              have qualified entertainment/IP counsel review the actual
+              submission terms and project agreements before launch.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      FAQ
+      ================================================= -->
+
+      <section
+        class="section"
+        id="faq"
+      >
+
+        <div class="sectionHeader">
+
+          <h2>
+            Rights FAQ
+          </h2>
+
+          <p>
+            Common questions creators may have when entering Dream World.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div class="faq">
+
+
+            <div class="faqItem">
+
+              <button
+                class="faqQuestion"
+                onclick="toggleFaq(this)"
+              >
+                <span>
+                  Does submitting a dream automatically give CrowRules ownership?
+                </span>
+
+                <span>
+                  +
+                </span>
+
+              </button>
+
+              <div class="faqAnswer">
+
+                No. A submission relationship should be governed by the
+                applicable submission terms. If a project later enters
+                formal development, the parties can establish the
+                project-specific rights through a written agreement.
+
+              </div>
+
+            </div>
+
+
+            <div class="faqItem">
+
+              <button
+                class="faqQuestion"
+                onclick="toggleFaq(this)"
+              >
+                <span>
+                  Can my dream become a movie or TV series?
+                </span>
+
+                <span>
+                  +
+                </span>
+
+              </button>
+
+              <div class="faqAnswer">
+
+                Potentially. Dream World is specifically designed to
+                develop creative seeds into different formats, including
+                films, streaming series, audio dramas, books, games,
+                shorts and experimental projects.
+
+              </div>
+
+            </div>
+
+
+            <div class="faqItem">
+
+              <button
+                class="faqQuestion"
+                onclick="toggleFaq(this)"
+              >
+                <span>
+                  Will I stay involved if my dream becomes a project?
+                </span>
+
+                <span>
+                  +
+                </span>
+
+              </button>
+
+              <div class="faqAnswer">
+
+                The intended model is collaborative. A creator may have
+                opportunities to participate in development, writing,
+                producing, consulting or other roles, depending on the
+                project and the agreements reached.
+
+              </div>
+
+            </div>
+
+
+            <div class="faqItem">
+
+              <button
+                class="faqQuestion"
+                onclick="toggleFaq(this)"
+              >
+                <span>
+                  Can I receive compensation?
+                </span>
+
+                <span>
+                  +
+                </span>
+
+              </button>
+
+              <div class="faqAnswer">
+
+                Compensation may be negotiated for selected projects.
+                It could take forms such as development payments, writing
+                fees, producer fees, consulting fees, licensing payments,
+                bonuses or defined revenue participation. Nothing should
+                be assumed unless it is included in the applicable written
+                agreement.
+
+              </div>
+
+            </div>
+
+
+            <div class="faqItem">
+
+              <button
+                class="faqQuestion"
+                onclick="toggleFaq(this)"
+              >
+                <span>
+                  What happens if the project takes five years?
+                </span>
+
+                <span>
+                  +
+                </span>
+
+              </button>
+
+              <div class="faqAnswer">
+
+                Dream World is intended to support long-term development.
+                The project record can preserve development stages,
+                agreements, versions, credits, contributors, funding,
+                pauses and production history over time.
+
+              </div>
+
+            </div>
+
+
+            <div class="faqItem">
+
+              <button
+                class="faqQuestion"
+                onclick="toggleFaq(this)"
+              >
+                <span>
+                  What if the project changes format?
+                </span>
+
+                <span>
+                  +
+                </span>
+
+              </button>
+
+              <div class="faqAnswer">
+
+                A project may evolve. For example, a concept could move
+                from feature film development to a streaming series or
+                audio drama. The applicable agreements should be reviewed
+                whenever material rights or format changes occur.
+
+              </div>
+
+            </div>
+
+
+            <div class="faqItem">
+
+              <button
+                class="faqQuestion"
+                onclick="toggleFaq(this)"
+              >
+                <span>
+                  What happens to my credit if the project changes?
+                </span>
+
+                <span>
+                  +
+                </span>
+
+              </button>
+
+              <div class="faqAnswer">
+
+                Approved credits should be maintained as historical
+                records. Changes should be versioned rather than simply
+                deleting the prior record.
+
+              </div>
+
+            </div>
+
+
+            <div class="faqItem">
+
+              <button
+                class="faqQuestion"
+                onclick="toggleFaq(this)"
+              >
+                <span>
+                  Who decides final rights?
+                </span>
+
+                <span>
+                  +
+                </span>
+
+              </button>
+
+              <div class="faqAnswer">
+
+                The final contractual relationship depends on the
+                applicable written agreements and the circumstances of
+                the project. The Dream World website should never present
+                a generic dashboard setting as overriding a signed
+                agreement.
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+      ACTIONS
+      ================================================= -->
+
+      <section class="section">
+
+        <div class="sectionHeader">
+
+          <h2>
+            Rights Center Actions
+          </h2>
+
+          <p>
+            Jump directly to the records that matter to your project.
+          </p>
+
+        </div>
+
+
+        <div class="sectionBody">
+
+          <div style="
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+          ">
+
+            <a
+              class="btn primary"
+              href="agreements.html"
+            >
+              View Agreements
+            </a>
+
+            <a
+              class="btn"
+              href="credits.html"
+            >
+              View Credits
+            </a>
+
+            <a
+              class="btn"
+              href="earnings.html"
+            >
+              View Earnings
+            </a>
+
+            <a
+              class="btn"
+              href="files.html"
+            >
+              Project Files
+            </a>
+
+            <a
+              class="btn"
+              href="messages.html"
+            >
+              Contact Team
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<!-- =====================================================
+FOOTER
+===================================================== -->
+
+<footer>
+
+  <div class="container footerGrid">
+
+    <div class="footerBrand">
+      CROWRULES DREAM WORLD
+    </div>
+
+    <div>
+      Where Dreams Become Stories.
+    </div>
+
+    <div>
+      © 2026 CrowRules Entertainment
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- =====================================================
+AGREEMENT MODAL
+===================================================== -->
+
+<div
+  class="modal"
+  id="agreementModal"
+>
+
+  <div class="modalBox">
+
+    <div class="modalHeader">
+
+      <h2 id="agreementTitle">
+        Agreement
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modalBody">
+
+      <p>
+        This demonstration agreement viewer represents where a
+        project-specific agreement would be displayed after the
+        account is connected to Supabase.
+      </p>
+
+      <br>
+
+      <div class="notice">
+
+        <strong>
+          PROJECT-SPECIFIC RECORD
+        </strong>
+
+        <p>
+          The actual signed agreement, effective date, parties,
+          rights, compensation, credits, term, renewal provisions
+          and other contractual terms should be loaded from the
+          appropriate secure project record.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="modalFooter">
+
+      <button
+        class="btn"
+        onclick="closeModal()"
+      >
+        Close
+      </button>
+
+      <a
+        href="agreements.html"
+        class="btn primary"
+      >
+        Open Agreements
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+TOAST
+===================================================== -->
+
+<div
+  class="toast"
+  id="toast"
+>
+
+  <strong id="toastTitle">
+    Dream World
+  </strong>
+
+  <span id="toastMessage">
+    Action completed.
+  </span>
+
+</div>
+
+
+<script>
+
+/*
+===========================================================
+CROWRULES DREAM WORLD
+CREATOR RIGHTS CENTER
+===========================================================
+
+
+PURPOSE
+===========================================================
+
+This page is the creator-facing rights dashboard.
+
+It should eventually become a secure,
+authenticated Supabase page.
+
+
+IMPORTANT:
+
+This page is NOT itself a legal contract.
+
+Actual rights should come from
+the applicable project agreements.
+
+
+===========================================================
+RECOMMENDED SUPABASE TABLES
+===========================================================
+
+
+dream_submissions
+
+id uuid primary key
+submission_code text unique
+creator_id uuid
+title text
+description text
+submission_type text
+format text
+genre text
+visibility text
+status text
+
+submitted_at timestamptz
+reviewed_at timestamptz
+created_at timestamptz
+updated_at timestamptz
+
+
+dream_projects
+
+id uuid primary key
+project_code text unique
+dream_id uuid
+creator_id uuid
+
+title text
+logline text
+description text
+
+format text
+genre text
+status text
+
+progress_percent integer
+
+visibility text
+
+started_at timestamptz
+target_date date
+
+created_at timestamptz
+updated_at timestamptz
+
+
+dream_creator_agreements
+
+id uuid primary key
+
+project_id uuid
+creator_id uuid
+
+agreement_type text
+
+title text
+
+status text
+
+version_number integer
+
+effective_date date
+expiration_date date
+
+document_path text
+
+signed_at timestamptz
+
+created_at timestamptz
+updated_at timestamptz
+
+
+dream_creator_credits
+
+id uuid primary key
+
+project_id uuid
+dream_id uuid
+user_id uuid
+
+credit_name text
+credit_role text
+credit_category text
+credit_wording text
+
+credit_order integer
+
+status text
+
+source_agreement_id uuid
+
+approved_by uuid
+approved_at timestamptz
+
+effective_date date
+
+created_at timestamptz
+updated_at timestamptz
+
+
+dream_credit_history
+
+id uuid primary key
+
+credit_id uuid
+project_id uuid
+
+action text
+
+previous_status text
+new_status text
+
+previous_wording text
+new_wording text
+
+changed_by uuid
+
+reason text
+
+created_at timestamptz
+
+
+dream_creator_compensation
+
+id uuid primary key
+
+project_id uuid
+creator_id uuid
+
+agreement_id uuid
+
+compensation_type text
+
+description text
+
+amount numeric
+
+currency text
+
+payment_schedule text
+
+status text
+
+effective_date date
+
+created_at timestamptz
+updated_at timestamptz
+
+
+dream_rights_records
+
+id uuid primary key
+
+project_id uuid
+dream_id uuid
+creator_id uuid
+
+rights_category text
+
+rights_holder text
+
+rights_status text
+
+agreement_id uuid
+
+notes text
+
+effective_date date
+
+expiration_date date
+
+created_at timestamptz
+updated_at timestamptz
+
+
+dream_rights_history
+
+id uuid primary key
+
+rights_record_id uuid
+project_id uuid
+
+action text
+
+previous_value jsonb
+new_value jsonb
+
+changed_by uuid
+
+reason text
+
+created_at timestamptz
+
+
+===========================================================
+RIGHTS CATEGORIES
+===========================================================
+
+
+Possible categories:
+
+
+original_dream
+submission
+story
+screenplay
+characters
+world
+artwork
+photography
+audio
+music
+performance
+production
+distribution
+licensing
+merchandising
+publicity
+trademark
+format
+adaptation
+derivative_work
+revenue_participation
+
+
+Do not assume that all categories apply
+to every project.
+
+
+===========================================================
+AGREEMENT TYPES
+===========================================================
+
+
+Possible values:
+
+
+submission_terms
+development_agreement
+creator_agreement
+writer_agreement
+producer_agreement
+consulting_agreement
+license_agreement
+option_agreement
+production_agreement
+credit_addendum
+compensation_addendum
+distribution_agreement
+music_agreement
+artwork_agreement
+
+
+The exact agreement taxonomy should be
+finalized with entertainment/IP counsel.
+
+
+===========================================================
+RIGHTS LEDGER
+===========================================================
+
+
+The rights ledger should become a structured
+project-level record.
+
+
+Example:
+
+
+PROJECT
+DW-0001
+
+
+DREAM
+DR-0001
+
+
+ORIGINAL CREATOR
+Creator UUID
+
+
+DEVELOPMENT AGREEMENT
+Agreement UUID
+
+
+WRITING RIGHTS
+Agreement UUID
+
+
+CHARACTER RIGHTS
+Agreement UUID
+
+
+MUSIC RIGHTS
+Agreement UUID
+
+
+PRODUCTION RIGHTS
+Agreement UUID
+
+
+DISTRIBUTION RIGHTS
+Agreement UUID
+
+
+REVENUE PARTICIPATION
+Agreement UUID
+
+
+Every important rights entry should be
+traceable to its source agreement whenever
+possible.
+
+
+===========================================================
+VERSION HISTORY
+===========================================================
+
+
+Never simply overwrite a historical rights record.
+
+
+Instead:
+
+
+V1
+V2
+V3
+
+
+Every change should capture:
+
+
+who changed it
+when
+why
+old value
+new value
+source agreement
+
+
+This is especially important for:
+
+
+credits
+compensation
+rights
+agreements
+production records
+
+
+===========================================================
+RLS
+===========================================================
+
+
+Creators should only see records
+for projects where they are authorized.
+
+
+Conceptual policy:
+
+
+auth.uid() = creator_id
+
+
+or:
+
+
+EXISTS (
+
+  SELECT 1
+
+  FROM dream_project_members pm
+
+  WHERE pm.project_id = dream_projects.id
+
+  AND pm.user_id = auth.uid()
+
+)
+
+
+Sensitive agreement documents should
+have stronger access controls.
+
+
+Admin approval should be restricted
+to authorized staff.
+
+
+Never use a service-role key
+in browser JavaScript.
+
+
+===========================================================
+SECURE AGREEMENT DOCUMENTS
+===========================================================
+
+
+Recommended Storage bucket:
+
+
+dream-world-private-documents
+
+
+Suggested paths:
+
+
+agreements/{project_id}/{agreement_id}/
+
+
+Documents should remain private.
+
+
+When a creator opens an agreement:
+
+
+1. Authenticate.
+
+2. Check project authorization.
+
+3. Check agreement authorization.
+
+4. Generate a short-lived signed URL.
+
+5. Display/download document.
+
+
+Never create permanent public
+URLs for private agreements.
+
+
+===========================================================
+COMPENSATION PRIVACY
+===========================================================
+
+
+Compensation is sensitive.
+
+
+Creators should see their own
+compensation records.
+
+
+Other project collaborators
+should not automatically see them.
+
+
+Admins should only have access
+according to role and policy.
+
+
+===========================================================
+LEGAL DISCLAIMER
+===========================================================
+
+
+The website should clearly distinguish:
+
+
+Educational explanation
+from
+actual contractual rights.
+
+
+The signed project agreement
+controls the relationship.
+
+
+Before public launch, CrowRules should
+have qualified entertainment/IP counsel
+review:
+
+
+Submission Terms
+Privacy Policy
+Terms of Service
+Development Agreement
+Creator Agreement
+Writer Agreement
+Producer Agreement
+License Agreement
+Option Agreement
+Compensation Terms
+Revenue Participation Terms
+Credit Policy
+Minor/Youth Creator Policy
+AI Policy
+Community Guidelines
+
+
+===========================================================
+LONG-TERM DEVELOPMENT
+===========================================================
+
+
+Dream World should support projects
+that take:
+
+
+1 year
+3 years
+5 years
+10+ years
+
+
+A project can:
+
+
+pause
+resume
+rewrite
+change format
+change production team
+seek funding
+lose funding
+restart development
+enter production
+return to development
+be archived
+eventually release
+
+
+None of these actions should silently
+destroy the historical rights record.
+
+
+===========================================================
+*/
+
+
+let toastTimer;
+
+
+/* =====================================================
+MOBILE NAV
+===================================================== */
+
+function toggleMobileNav(){
+
+  const nav =
+    document.querySelector(".navlinks");
+
+  if(!nav) return;
+
+  if(nav.style.display === "flex"){
+
+    nav.style.display = "";
+
+  }else{
+
+    nav.style.display = "flex";
+    nav.style.flexDirection = "column";
+    nav.style.position = "absolute";
+    nav.style.top = "76px";
+    nav.style.left = "3%";
+    nav.style.right = "3%";
+    nav.style.padding = "12px";
+    nav.style.background = "#0a0a0c";
+    nav.style.border =
+      "1px solid rgba(255,255,255,.1)";
+
+  }
+
+}
+
+
+/* =====================================================
+SCROLL
+===================================================== */
+
+function scrollToSection(id,button){
+
+  const target =
+    document.getElementById(id);
+
+  if(!target) return;
+
+  document
+    .querySelectorAll(".sideLink")
+    .forEach(item =>
+      item.classList.remove("active")
+    );
+
+  button.classList.add("active");
+
+  target.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* =====================================================
+FAQ
+===================================================== */
+
+function toggleFaq(button){
+
+  const item =
+    button.closest(".faqItem");
+
+  if(!item) return;
+
+  const isOpen =
+    item.classList.contains("open");
+
+
+  document
+    .querySelectorAll(".faqItem")
+    .forEach(other => {
+
+      other.classList.remove("open");
+
+      const symbol =
+        other.querySelector(
+          ".faqQuestion span:last-child"
+        );
+
+      if(symbol){
+        symbol.textContent = "+";
+      }
+
+    });
+
+
+  if(!isOpen){
+
+    item.classList.add("open");
+
+    const symbol =
+      item.querySelector(
+        ".faqQuestion span:last-child"
+      );
+
+    if(symbol){
+      symbol.textContent = "−";
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+AGREEMENT
+===================================================== */
+
+function viewAgreement(name){
+
+  document
+    .getElementById("agreementTitle")
+    .textContent = name;
+
+  document
+    .getElementById("agreementModal")
+    .classList.add("open");
+
+}
+
+
+/* =====================================================
+CLOSE MODAL
+===================================================== */
+
+function closeModal(){
+
+  document
+    .getElementById("agreementModal")
+    .classList.remove("open");
+
+}
+
+
+/* =====================================================
+TOAST
+===================================================== */
+
+function showToast(title,message){
+
+  const toast =
+    document.getElementById("toast");
+
+  document
+    .getElementById("toastTitle")
+    .textContent = title;
+
+  document
+    .getElementById("toastMessage")
+    .textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(()=>{
+
+      toast.classList.remove("show");
+
+    },3500);
+
+}
+
+
+/* =====================================================
+MODAL BACKDROP
+===================================================== */
+
+document
+  .getElementById("agreementModal")
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target.id ===
+        "agreementModal"
+      ){
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+ESCAPE
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Escape"){
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+FUTURE SUPABASE LOADING
+===========================================================
+
+
+Example conceptual loader:
+
+
+async function loadRights(){
+
+  const {
+    data:{
+      user
+    }
+  } =
+    await supabase.auth.getUser();
+
+
+  if(!user){
+
+    window.location.href =
+      "login.html";
+
+    return;
+
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabase
+      .from("dream_rights_records")
+      .select(`
+        *,
+        dream_projects (
+          id,
+          project_code,
+          title
+        ),
+        dream_creator_agreements (
+          id,
+          title,
+          status
+        )
+      `)
+      .eq(
+        "creator_id",
+        user.id
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
+
+
+  if(error){
+
+    console.error(error);
+
+    return;
+
+  }
+
+
+  renderRights(data);
+
+}
+
+
+===========================================================
+*/
+
+
+/* =====================================================
+FUTURE RIGHTS LEDGER EVENTS
+===========================================================
+
+
+Whenever a rights record changes:
+
+
+1. Create/update current rights record.
+
+2. Insert historical event into
+   dream_rights_history.
+
+3. Record changed_by.
+
+4. Record reason.
+
+5. Link source agreement.
+
+6. Record timestamp.
+
+
+This creates an auditable
+long-term project history.
+
+
+===========================================================
+*/
+
+
+/* =====================================================
+FUTURE REALTIME
+===========================================================
+
+
+Possible realtime channels:
+
+
+dream-rights-{project_id}
+
+dream-agreements-{project_id}
+
+dream-credits-{project_id}
+
+
+Changes can update the creator's
+rights dashboard without requiring
+a page refresh.
+
+
+===========================================================
+*/
+
+</script>
+
+</body>
+</html>

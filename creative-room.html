@@ -1,0 +1,3217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>CrowRules Dream World — Creative Room</title>
+<meta name="theme-color" content="#050505">
+<meta name="description" content="CrowRules Dream World Creative Room — Collaborative development workspace for creators and creative teams.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#050505;
+  --panel:#101010;
+  --panel2:#151515;
+  --panel3:#0b0b0b;
+  --red:#e50914;
+  --red2:#ff2633;
+  --text:#f5f5f5;
+  --muted:#8d8d8d;
+  --dim:#5c5c5c;
+  --line:#292929;
+  --green:#48d597;
+  --yellow:#f5c451;
+  --blue:#5aa9ff;
+  --purple:#ae7cff;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(229,9,20,.13),transparent 28%),
+    radial-gradient(circle at 90% 5%,rgba(120,20,30,.08),transparent 30%),
+    linear-gradient(180deg,#050505,#080808 45%,#050505);
+  color:var(--text);
+  font-family:Montserrat,Arial,sans-serif;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.025;
+  background-image:
+    linear-gradient(rgba(255,255,255,.55) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.55) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+  height:72px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(5,5,5,.96);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  width:min(1550px,94%);
+  height:100%;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:#fff;
+}
+
+.brand-mark{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#28070a,#0a0a0a);
+  border:1px solid var(--red);
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+  font-weight:900;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+  box-shadow:0 0 25px rgba(229,9,20,.17);
+}
+
+.brand-text strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.brand-text span{
+  display:block;
+  color:var(--red2);
+  font-size:9px;
+  letter-spacing:2px;
+  margin-top:2px;
+  text-transform:uppercase;
+}
+
+.nav-links{
+  display:flex;
+  gap:4px;
+}
+
+.nav-links a{
+  color:#999;
+  text-decoration:none;
+  padding:10px 12px;
+  border-radius:7px;
+  font-size:10px;
+  font-weight:700;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  color:#fff;
+  background:#151515;
+}
+
+.nav-links a.active{
+  box-shadow:inset 0 -2px var(--red);
+}
+
+.user-area{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.notification{
+  position:relative;
+  width:38px;
+  height:38px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:#101010;
+  color:#ddd;
+  cursor:pointer;
+}
+
+.notification-dot{
+  position:absolute;
+  top:5px;
+  right:6px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 10px var(--red);
+}
+
+.avatar{
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid #681019;
+  background:linear-gradient(135deg,#40090e,#100506);
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+  font-weight:800;
+}
+
+.mobile-menu{
+  display:none;
+  width:38px;
+  height:38px;
+  background:#111;
+  color:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+}
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+  width:min(1550px,94%);
+  margin:auto;
+  padding:35px 0 80px;
+}
+
+/* =========================================================
+   PROJECT HEADER
+========================================================= */
+
+.project-header{
+  background:
+    radial-gradient(circle at 90% 20%,rgba(229,9,20,.16),transparent 32%),
+    linear-gradient(120deg,#130507,#0b0b0b 65%);
+  border:1px solid #40161a;
+  border-radius:15px;
+  padding:24px;
+}
+
+.eyebrow{
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:9px;
+  letter-spacing:3px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.project-title-row{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.project-title{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(23px,4vw,39px);
+  line-height:1.2;
+  letter-spacing:-1px;
+}
+
+.project-code{
+  color:#656565;
+  font-family:Orbitron,sans-serif;
+  font-size:8px;
+  margin-top:7px;
+}
+
+.project-description{
+  max-width:850px;
+  margin-top:12px;
+  color:#8e8e8e;
+  font-size:11px;
+  line-height:1.7;
+}
+
+.project-status{
+  flex:none;
+  padding:7px 10px;
+  border:1px solid rgba(229,9,20,.35);
+  border-radius:5px;
+  color:#ff6b73;
+  background:rgba(229,9,20,.08);
+  font-size:8px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.project-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:17px;
+}
+
+.project-meta span{
+  padding:6px 8px;
+  border:1px solid #322326;
+  background:#0b0b0b;
+  color:#888;
+  border-radius:5px;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.project-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:10px 13px;
+  background:#111;
+  border:1px solid var(--line);
+  color:#fff;
+  border-radius:7px;
+  font-family:Montserrat,sans-serif;
+  font-size:9px;
+  font-weight:800;
+  cursor:pointer;
+  text-decoration:none;
+  transition:.2s;
+}
+
+.btn:hover{
+  border-color:#555;
+  transform:translateY(-1px);
+}
+
+.btn-primary{
+  background:var(--red);
+  border-color:var(--red);
+}
+
+.btn-primary:hover{
+  background:#ff1823;
+}
+
+/* =========================================================
+   WORKSPACE
+========================================================= */
+
+.workspace{
+  display:grid;
+  grid-template-columns:220px minmax(0,1fr) 270px;
+  gap:14px;
+  margin-top:20px;
+}
+
+/* =========================================================
+   LEFT TOOL PANEL
+========================================================= */
+
+.workspace-panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:13px;
+  overflow:hidden;
+}
+
+.panel-heading{
+  padding:15px;
+  border-bottom:1px solid #232323;
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+  letter-spacing:1px;
+}
+
+.tool-list{
+  padding:7px;
+}
+
+.tool{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:11px;
+  margin-bottom:2px;
+  border:0;
+  border-radius:7px;
+  background:transparent;
+  color:#888;
+  text-align:left;
+  cursor:pointer;
+  font-family:Montserrat,sans-serif;
+  font-size:9px;
+  font-weight:700;
+}
+
+.tool:hover,
+.tool.active{
+  background:#181818;
+  color:#fff;
+}
+
+.tool.active{
+  border-left:3px solid var(--red);
+  padding-left:8px;
+}
+
+.tool-icon{
+  width:20px;
+  text-align:center;
+  color:#777;
+  font-size:13px;
+}
+
+.tool.active .tool-icon{
+  color:var(--red2);
+}
+
+.workspace-note{
+  margin:10px;
+  padding:13px;
+  background:#0c0c0c;
+  border:1px solid #242424;
+  border-radius:8px;
+}
+
+.workspace-note strong{
+  display:block;
+  color:#aaa;
+  font-size:8px;
+  margin-bottom:6px;
+  font-family:Orbitron,sans-serif;
+}
+
+.workspace-note p{
+  color:#666;
+  font-size:8px;
+  line-height:1.6;
+}
+
+/* =========================================================
+   CENTER EDITOR
+========================================================= */
+
+.editor{
+  min-width:0;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:13px;
+  overflow:hidden;
+}
+
+.editor-toolbar{
+  min-height:57px;
+  padding:9px 11px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid #242424;
+  background:#0d0d0d;
+}
+
+.editor-mode{
+  display:flex;
+  gap:4px;
+}
+
+.mode{
+  padding:7px 9px;
+  border:1px solid #262626;
+  border-radius:5px;
+  background:#111;
+  color:#666;
+  font-size:7px;
+  font-weight:800;
+  cursor:pointer;
+  text-transform:uppercase;
+}
+
+.mode.active{
+  color:#fff;
+  border-color:#4b1116;
+  background:#190609;
+}
+
+.editor-actions{
+  display:flex;
+  gap:5px;
+}
+
+.icon-button{
+  width:31px;
+  height:31px;
+  display:grid;
+  place-items:center;
+  background:#111;
+  border:1px solid #282828;
+  border-radius:6px;
+  color:#888;
+  cursor:pointer;
+}
+
+.icon-button:hover{
+  color:#fff;
+  border-color:#555;
+}
+
+.editor-body{
+  padding:25px;
+  min-height:560px;
+}
+
+.editor-label{
+  color:#5e5e5e;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.editor-title{
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#fff;
+  font-family:Orbitron,sans-serif;
+  font-size:23px;
+  line-height:1.4;
+  resize:none;
+  margin-bottom:18px;
+}
+
+.editor-content{
+  width:100%;
+  min-height:360px;
+  padding:0;
+  border:0;
+  outline:0;
+  resize:vertical;
+  background:transparent;
+  color:#aaa;
+  font-family:Montserrat,sans-serif;
+  font-size:11px;
+  line-height:1.9;
+}
+
+.editor-content::placeholder,
+.editor-title::placeholder{
+  color:#414141;
+}
+
+.save-bar{
+  padding:11px 15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  border-top:1px solid #222;
+  background:#0c0c0c;
+}
+
+.save-state{
+  color:#555;
+  font-size:8px;
+}
+
+.save-state.saved{
+  color:var(--green);
+}
+
+/* =========================================================
+   RIGHT PANEL
+========================================================= */
+
+.right-stack{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:13px;
+  overflow:hidden;
+}
+
+.card-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:14px;
+  border-bottom:1px solid #222;
+}
+
+.card-head h3{
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+}
+
+.card-head a{
+  color:#777;
+  font-size:8px;
+  text-decoration:none;
+}
+
+.card-body{
+  padding:14px;
+}
+
+/* =========================================================
+   TEAM
+========================================================= */
+
+.team-member{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 0;
+  border-bottom:1px solid #202020;
+}
+
+.team-member:last-child{
+  border-bottom:0;
+}
+
+.team-avatar{
+  width:31px;
+  height:31px;
+  display:grid;
+  place-items:center;
+  flex:none;
+  border-radius:50%;
+  background:#181818;
+  border:1px solid #343434;
+  color:#bbb;
+  font-family:Orbitron,sans-serif;
+  font-size:7px;
+  font-weight:800;
+}
+
+.team-info{
+  min-width:0;
+  flex:1;
+}
+
+.team-info strong{
+  display:block;
+  color:#ccc;
+  font-size:8px;
+  margin-bottom:3px;
+}
+
+.team-info span{
+  display:block;
+  color:#555;
+  font-size:7px;
+}
+
+.online{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--green);
+}
+
+/* =========================================================
+   PROJECT STAGES
+========================================================= */
+
+.stage-list{
+  display:flex;
+  flex-direction:column;
+}
+
+.stage-item{
+  position:relative;
+  display:flex;
+  gap:10px;
+  padding:9px 0;
+}
+
+.stage-item:not(:last-child):after{
+  content:"";
+  position:absolute;
+  left:9px;
+  top:27px;
+  bottom:-2px;
+  width:1px;
+  background:#292929;
+}
+
+.stage-dot{
+  width:19px;
+  height:19px;
+  display:grid;
+  place-items:center;
+  flex:none;
+  border-radius:50%;
+  border:1px solid #383838;
+  background:#0b0b0b;
+  color:#666;
+  font-size:7px;
+  z-index:2;
+}
+
+.stage-item.complete .stage-dot{
+  background:var(--red);
+  border-color:var(--red);
+  color:#fff;
+}
+
+.stage-item.current .stage-dot{
+  border-color:var(--red2);
+  color:#fff;
+  box-shadow:0 0 12px rgba(229,9,20,.25);
+}
+
+.stage-text strong{
+  display:block;
+  font-size:8px;
+  margin-bottom:3px;
+}
+
+.stage-text span{
+  color:#555;
+  font-size:7px;
+}
+
+/* =========================================================
+   FILES
+========================================================= */
+
+.file{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 0;
+  border-bottom:1px solid #202020;
+}
+
+.file:last-child{
+  border-bottom:0;
+}
+
+.file-icon{
+  width:29px;
+  height:29px;
+  display:grid;
+  place-items:center;
+  border:1px solid #292929;
+  background:#0b0b0b;
+  border-radius:6px;
+  color:#777;
+  font-size:11px;
+}
+
+.file-info{
+  flex:1;
+  min-width:0;
+}
+
+.file-info strong{
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:8px;
+}
+
+.file-info span{
+  display:block;
+  color:#555;
+  font-size:7px;
+  margin-top:3px;
+}
+
+/* =========================================================
+   ACTIVITY
+========================================================= */
+
+.activity{
+  display:flex;
+  gap:10px;
+  padding:11px 0;
+  border-bottom:1px solid #202020;
+}
+
+.activity:last-child{
+  border-bottom:0;
+}
+
+.activity-marker{
+  width:6px;
+  height:6px;
+  margin-top:4px;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 8px rgba(229,9,20,.4);
+  flex:none;
+}
+
+.activity strong{
+  display:block;
+  font-size:8px;
+  margin-bottom:3px;
+}
+
+.activity p{
+  color:#666;
+  font-size:7px;
+  line-height:1.5;
+}
+
+.activity time{
+  display:block;
+  color:#444;
+  font-size:7px;
+  margin-top:4px;
+}
+
+/* =========================================================
+   DEVELOPMENT NOTES
+========================================================= */
+
+.notes-section{
+  margin-top:18px;
+}
+
+.section-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:15px;
+  margin-bottom:12px;
+}
+
+.section-heading h2{
+  font-family:Orbitron,sans-serif;
+  font-size:16px;
+}
+
+.section-heading p{
+  color:#666;
+  font-size:8px;
+  margin-top:5px;
+}
+
+.notes-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:11px;
+}
+
+.note-card{
+  background:#101010;
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:16px;
+}
+
+.note-type{
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-size:7px;
+  letter-spacing:1.5px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.note-card h3{
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+  margin:9px 0 6px;
+}
+
+.note-card p{
+  color:#777;
+  font-size:8px;
+  line-height:1.65;
+}
+
+.note-footer{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:12px;
+  padding-top:9px;
+  border-top:1px solid #222;
+  color:#4f4f4f;
+  font-size:7px;
+}
+
+/* =========================================================
+   LONG TERM
+========================================================= */
+
+.long-term{
+  margin-top:18px;
+  padding:21px;
+  border:1px solid #35181b;
+  border-radius:12px;
+  background:
+    linear-gradient(135deg,rgba(229,9,20,.08),transparent),
+    #0d0d0d;
+}
+
+.long-term h3{
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.long-term p{
+  max-width:900px;
+  color:#777;
+  font-size:9px;
+  line-height:1.75;
+}
+
+.long-term strong{
+  color:#bbb;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(8px);
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(650px,100%);
+  background:#101010;
+  border:1px solid #3b171b;
+  border-radius:13px;
+  box-shadow:0 30px 100px rgba(0,0,0,.7);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px;
+  border-bottom:1px solid #252525;
+}
+
+.modal-head h3{
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+}
+
+.close{
+  width:30px;
+  height:30px;
+  border:1px solid #2a2a2a;
+  border-radius:6px;
+  background:#111;
+  color:#888;
+  cursor:pointer;
+}
+
+.modal-body{
+  padding:18px;
+}
+
+.form-row{
+  margin-bottom:14px;
+}
+
+.form-row label{
+  display:block;
+  color:#777;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea{
+  width:100%;
+  background:#090909;
+  border:1px solid #292929;
+  border-radius:7px;
+  color:#fff;
+  outline:0;
+  padding:10px;
+  font-family:Montserrat,sans-serif;
+  font-size:9px;
+}
+
+.form-row textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus{
+  border-color:#681019;
+}
+
+.modal-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  padding:14px 18px;
+  border-top:1px solid #252525;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:6000;
+  padding:13px 16px;
+  border:1px solid #333;
+  border-left:3px solid var(--red);
+  border-radius:7px;
+  background:#171717;
+  color:#ddd;
+  font-size:9px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  opacity:0;
+  transform:translateY(20px);
+  pointer-events:none;
+  transition:.25s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1200px){
+
+  .workspace{
+    grid-template-columns:190px minmax(0,1fr);
+  }
+
+  .right-stack{
+    grid-column:1 / -1;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+@media(max-width:950px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .mobile-menu{
+    display:grid;
+    place-items:center;
+  }
+
+  .workspace{
+    grid-template-columns:1fr;
+  }
+
+  .right-stack{
+    grid-column:auto;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .notes-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:700px){
+
+  .page{
+    width:92%;
+    padding-top:25px;
+  }
+
+  .project-title-row{
+    display:block;
+  }
+
+  .project-status{
+    display:inline-block;
+    margin-top:12px;
+  }
+
+  .workspace{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .workspace-panel{
+    order:2;
+  }
+
+  .editor{
+    order:1;
+  }
+
+  .right-stack{
+    order:3;
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .notes-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:500px){
+
+  .brand-text{
+    display:none;
+  }
+
+  .editor-body{
+    padding:17px;
+  }
+
+  .editor-title{
+    font-size:18px;
+  }
+
+  .editor-content{
+    font-size:10px;
+  }
+
+  .editor-toolbar{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .editor-actions{
+    justify-content:flex-end;
+  }
+
+  .project-actions{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .project-actions .btn{
+    width:100%;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<nav class="nav">
+
+  <a href="index.html" class="brand">
+
+    <div class="brand-mark">
+      CR
+    </div>
+
+    <div class="brand-text">
+      <strong>CROWRULES DREAM WORLD</strong>
+      <span>Creative Room</span>
+    </div>
+
+  </a>
+
+
+  <div class="nav-links">
+
+    <a href="index.html">
+      Dream World
+    </a>
+
+    <a href="dreams.html">
+      Dreams
+    </a>
+
+    <a href="projects.html">
+      Projects
+    </a>
+
+    <a href="community.html">
+      Community
+    </a>
+
+    <a href="creator-dashboard.html">
+      Dashboard
+    </a>
+
+    <a href="creative-room.html" class="active">
+      Creative Room
+    </a>
+
+  </div>
+
+
+  <div class="user-area">
+
+    <button
+      class="notification"
+      onclick="showToast('You have 3 new notifications.')">
+
+      ♢
+
+      <span class="notification-dot"></span>
+
+    </button>
+
+    <div class="avatar">
+      DC
+    </div>
+
+    <button
+      class="mobile-menu"
+      onclick="document.querySelector('.workspace-panel').scrollIntoView({behavior:'smooth'})">
+
+      ☰
+
+    </button>
+
+  </div>
+
+</nav>
+
+</header>
+
+
+<main class="page">
+
+
+<!-- =====================================================
+     PROJECT HEADER
+===================================================== -->
+
+<section class="project-header">
+
+  <div class="eyebrow">
+    Private Development Workspace
+  </div>
+
+
+  <div class="project-title-row">
+
+    <div>
+
+      <h1 class="project-title">
+        The City That Only Exists While You Sleep
+      </h1>
+
+      <div class="project-code">
+        PROJECT DW-0001 · DREAM DR-0001
+      </div>
+
+    </div>
+
+    <div class="project-status">
+      Writing / Development
+    </div>
+
+  </div>
+
+
+  <p class="project-description">
+    A hidden city appears inside the dreams of people around the
+    world. One person discovers that the city is not merely a dream —
+    it may be trying to communicate with the waking world.
+  </p>
+
+
+  <div class="project-meta">
+
+    <span>
+      Creator: Dream Creator
+    </span>
+
+    <span>
+      Format: Streaming Series
+    </span>
+
+    <span>
+      Genre: Sci-Fi / Mystery
+    </span>
+
+    <span>
+      Development: 38%
+    </span>
+
+  </div>
+
+
+  <div class="project-actions">
+
+    <a
+      href="project-development.html"
+      class="btn">
+
+      ← PROJECT OVERVIEW
+
+    </a>
+
+    <button
+      class="btn btn-primary"
+      onclick="saveDocument()">
+
+      SAVE CHANGES
+
+    </button>
+
+    <button
+      class="btn"
+      onclick="openModal('meetingModal')">
+
+      + CREATOR MEETING
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     WORKSPACE
+===================================================== -->
+
+<section class="workspace">
+
+
+<!-- =====================================================
+     LEFT TOOLBOX
+===================================================== -->
+
+<aside class="workspace-panel">
+
+  <div class="panel-heading">
+    CREATIVE TOOLS
+  </div>
+
+
+  <div class="tool-list">
+
+    <button class="tool active" onclick="selectTool(this,'Story Development')">
+      <span class="tool-icon">✎</span>
+      Story Development
+    </button>
+
+    <button class="tool" onclick="selectTool(this,'Characters')">
+      <span class="tool-icon">◎</span>
+      Characters
+    </button>
+
+    <button class="tool" onclick="selectTool(this,'Worldbuilding')">
+      <span class="tool-icon">◇</span>
+      Worldbuilding
+    </button>
+
+    <button class="tool" onclick="selectTool(this,'Episode Planning')">
+      <span class="tool-icon">▤</span>
+      Episode Planning
+    </button>
+
+    <button class="tool" onclick="selectTool(this,'Screenplay')">
+      <span class="tool-icon">▣</span>
+      Screenplay
+    </button>
+
+    <button class="tool" onclick="selectTool(this,'Visual Development')">
+      <span class="tool-icon">◈</span>
+      Visual Development
+    </button>
+
+    <button class="tool" onclick="selectTool(this,'Music & Audio')">
+      <span class="tool-icon">♫</span>
+      Music & Audio
+    </button>
+
+    <button class="tool" onclick="selectTool(this,'Production Notes')">
+      <span class="tool-icon">◆</span>
+      Production Notes
+    </button>
+
+    <button class="tool" onclick="selectTool(this,'Research')">
+      <span class="tool-icon">⌕</span>
+      Research
+    </button>
+
+    <button class="tool" onclick="selectTool(this,'Freeform')">
+      <span class="tool-icon">✦</span>
+      Freeform
+    </button>
+
+  </div>
+
+
+  <div class="workspace-note">
+
+    <strong>
+      CREATIVE ROOM
+    </strong>
+
+    <p>
+      This space belongs to the development process.
+      Ideas can change, grow, be rewritten, or be completely
+      reimagined as the project evolves.
+    </p>
+
+  </div>
+
+</aside>
+
+
+<!-- =====================================================
+     EDITOR
+===================================================== -->
+
+<section class="editor">
+
+
+  <div class="editor-toolbar">
+
+    <div class="editor-mode">
+
+      <button class="mode active">
+        EDIT
+      </button>
+
+      <button
+        class="mode"
+        onclick="previewDocument()">
+
+        PREVIEW
+
+      </button>
+
+    </div>
+
+
+    <div class="editor-actions">
+
+      <button
+        class="icon-button"
+        title="Bold"
+        onclick="formatText('bold')">
+
+        B
+
+      </button>
+
+      <button
+        class="icon-button"
+        title="Italic"
+        onclick="formatText('italic')">
+
+        I
+
+      </button>
+
+      <button
+        class="icon-button"
+        title="Save"
+        onclick="saveDocument()">
+
+        ✓
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="editor-body">
+
+    <div class="editor-label" id="editorLabel">
+      STORY DEVELOPMENT
+    </div>
+
+
+    <textarea
+      id="documentTitle"
+      class="editor-title"
+      placeholder="Untitled creative document...">The City — Core Story Direction</textarea>
+
+
+    <textarea
+      id="documentContent"
+      class="editor-content"
+      placeholder="Start developing the idea here...">The city exists in the space between sleeping and waking.
+
+Nobody knows exactly where it is.
+
+Different people describe the same streets, buildings and landmarks despite never having met.
+
+The central mystery is whether the city is a shared dream, an alternate reality, or something intentionally communicating with humanity.
+
+Current development questions:
+
+1. Why does the city appear?
+
+2. Why can certain people remember it?
+
+3. Who — or what — controls the city?
+
+4. What happens when someone tries to bring something from the city into the waking world?
+
+5. Can the city exist without people dreaming about it?
+
+The current direction is to build the story as a serialized mystery rather than explaining everything immediately.
+
+The audience should discover the rules of the city at approximately the same pace as the main character.</textarea>
+
+  </div>
+
+
+  <div class="save-bar">
+
+    <span
+      class="save-state"
+      id="saveState">
+
+      Unsaved changes
+
+    </span>
+
+    <div>
+
+      <button
+        class="btn btn-primary"
+        onclick="saveDocument()">
+
+        SAVE DOCUMENT
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     RIGHT STACK
+===================================================== -->
+
+<aside class="right-stack">
+
+
+<!-- TEAM -->
+
+<div class="card">
+
+  <div class="card-head">
+
+    <h3>
+      DEVELOPMENT TEAM
+    </h3>
+
+    <a href="collaborators.html">
+      MANAGE
+    </a>
+
+  </div>
+
+
+  <div class="card-body">
+
+    <div class="team-member">
+
+      <div class="team-avatar">
+        DC
+      </div>
+
+      <div class="team-info">
+        <strong>
+          Dream Creator
+        </strong>
+        <span>
+          Original Dream Creator
+        </span>
+      </div>
+
+      <span class="online"></span>
+
+    </div>
+
+
+    <div class="team-member">
+
+      <div class="team-avatar">
+        CR
+      </div>
+
+      <div class="team-info">
+        <strong>
+          CrowRules Development
+        </strong>
+        <span>
+          Development Producer
+        </span>
+      </div>
+
+      <span class="online"></span>
+
+    </div>
+
+
+    <div class="team-member">
+
+      <div class="team-avatar">
+        WR
+      </div>
+
+      <div class="team-info">
+        <strong>
+          Story Development
+        </strong>
+        <span>
+          Writer
+        </span>
+      </div>
+
+      <span class="online"></span>
+
+    </div>
+
+
+    <div class="team-member">
+
+      <div class="team-avatar">
+        VD
+      </div>
+
+      <div class="team-info">
+        <strong>
+          Visual Development
+        </strong>
+        <span>
+          Concept Artist
+        </span>
+      </div>
+
+      <span class="online"></span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- STAGES -->
+
+<div class="card">
+
+  <div class="card-head">
+
+    <h3>
+      DEVELOPMENT STAGES
+    </h3>
+
+    <a href="project-development.html">
+      VIEW
+    </a>
+
+  </div>
+
+
+  <div class="card-body">
+
+    <div class="stage-list">
+
+      <div class="stage-item complete">
+
+        <div class="stage-dot">
+          ✓
+        </div>
+
+        <div class="stage-text">
+          <strong>Original Dream</strong>
+          <span>Completed</span>
+        </div>
+
+      </div>
+
+
+      <div class="stage-item complete">
+
+        <div class="stage-dot">
+          ✓
+        </div>
+
+        <div class="stage-text">
+          <strong>Discovery</strong>
+          <span>Completed</span>
+        </div>
+
+      </div>
+
+
+      <div class="stage-item complete">
+
+        <div class="stage-dot">
+          ✓
+        </div>
+
+        <div class="stage-text">
+          <strong>Concept</strong>
+          <span>Completed</span>
+        </div>
+
+      </div>
+
+
+      <div class="stage-item current">
+
+        <div class="stage-dot">
+          4
+        </div>
+
+        <div class="stage-text">
+          <strong>Writing</strong>
+          <span>Current stage</span>
+        </div>
+
+      </div>
+
+
+      <div class="stage-item">
+
+        <div class="stage-dot">
+          5
+        </div>
+
+        <div class="stage-text">
+          <strong>Visual Development</strong>
+          <span>Upcoming</span>
+        </div>
+
+      </div>
+
+
+      <div class="stage-item">
+
+        <div class="stage-dot">
+          6
+        </div>
+
+        <div class="stage-text">
+          <strong>Funding</strong>
+          <span>Upcoming</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- FILES -->
+
+<div class="card">
+
+  <div class="card-head">
+
+    <h3>
+      PROJECT FILES
+    </h3>
+
+    <a href="files.html">
+      ALL
+    </a>
+
+  </div>
+
+
+  <div class="card-body">
+
+    <div class="file">
+
+      <div class="file-icon">
+        ▣
+      </div>
+
+      <div class="file-info">
+        <strong>
+          City Series Bible.pdf
+        </strong>
+        <span>
+          4.2 MB · Updated today
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="file">
+
+      <div class="file-icon">
+        ◈
+      </div>
+
+      <div class="file-info">
+        <strong>
+          City Concept Art.zip
+        </strong>
+        <span>
+          28 MB · Updated yesterday
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="file">
+
+      <div class="file-icon">
+        ✎
+      </div>
+
+      <div class="file-info">
+        <strong>
+          Episode 01 Outline.docx
+        </strong>
+        <span>
+          92 KB · Updated 2 days ago
+        </span>
+      </div>
+
+    </div>
+
+
+    <button
+      class="btn"
+      style="width:100%;margin-top:10px;"
+      onclick="showToast('File uploader will connect to Supabase Storage.')">
+
+      + UPLOAD FILE
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ACTIVITY -->
+
+<div class="card">
+
+  <div class="card-head">
+
+    <h3>
+      RECENT ACTIVITY
+    </h3>
+
+  </div>
+
+
+  <div class="card-body">
+
+    <div class="activity">
+
+      <span class="activity-marker"></span>
+
+      <div>
+        <strong>
+          Story document updated
+        </strong>
+
+        <p>
+          Core mystery revised.
+        </p>
+
+        <time>
+          2 hours ago
+        </time>
+      </div>
+
+    </div>
+
+
+    <div class="activity">
+
+      <span class="activity-marker"></span>
+
+      <div>
+        <strong>
+          New collaborator added
+        </strong>
+
+        <p>
+          Visual development joined.
+        </p>
+
+        <time>
+          Yesterday
+        </time>
+      </div>
+
+    </div>
+
+
+    <div class="activity">
+
+      <span class="activity-marker"></span>
+
+      <div>
+        <strong>
+          Project stage updated
+        </strong>
+
+        <p>
+          Writing is now active.
+        </p>
+
+        <time>
+          2 days ago
+        </time>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+</aside>
+
+</section>
+
+
+<!-- =====================================================
+     DEVELOPMENT NOTES
+===================================================== -->
+
+<section class="notes-section">
+
+  <div class="section-heading">
+
+    <div>
+
+      <h2>
+        DEVELOPMENT NOTES
+      </h2>
+
+      <p>
+        Important creative decisions become part of the project's history.
+      </p>
+
+    </div>
+
+    <button
+      class="btn btn-primary"
+      onclick="openModal('noteModal')">
+
+      + NEW NOTE
+
+    </button>
+
+  </div>
+
+
+  <div class="notes-grid" id="notesGrid">
+
+
+    <article class="note-card">
+
+      <div class="note-type">
+        Story
+      </div>
+
+      <h3>
+        The Central Mystery
+      </h3>
+
+      <p>
+        Do not reveal the true nature of the city too early.
+        The audience should experience uncertainty alongside
+        the main character.
+      </p>
+
+      <div class="note-footer">
+        <span>
+          CrowRules Development
+        </span>
+
+        <span>
+          Sep 7, 2026
+        </span>
+      </div>
+
+    </article>
+
+
+    <article class="note-card">
+
+      <div class="note-type">
+        Format
+      </div>
+
+      <h3>
+        Series Direction
+      </h3>
+
+      <p>
+        Current development favors a serialized streaming format
+        because the mythology requires room to expand across episodes.
+      </p>
+
+      <div class="note-footer">
+        <span>
+          Development Team
+        </span>
+
+        <span>
+          Sep 2, 2026
+        </span>
+      </div>
+
+    </article>
+
+
+    <article class="note-card">
+
+      <div class="note-type">
+        Creator
+      </div>
+
+      <h3>
+        Original Dream
+      </h3>
+
+      <p>
+        The original submission remains the foundation of the project.
+        Future development should preserve the emotional core of the dream.
+      </p>
+
+      <div class="note-footer">
+        <span>
+          Dream Creator
+        </span>
+
+        <span>
+          Aug 24, 2026
+        </span>
+      </div>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     LONG-TERM DEVELOPMENT
+===================================================== -->
+
+<section class="long-term">
+
+  <h3>
+    DREAMS CAN TAKE YEARS TO BUILD
+  </h3>
+
+  <p>
+    This project is not required to move at artificial speed.
+    Development can take months or years. The project may be
+    <strong>paused</strong>, resumed, rewritten, restructured,
+    change formats, receive new collaborators, enter additional
+    funding phases, or return to an earlier stage.
+    The Creative Room preserves that history.
+  </p>
+
+  <div class="project-actions">
+
+    <button
+      class="btn"
+      onclick="showToast('Project pause workflow will be connected to Supabase.')">
+
+      PAUSE DEVELOPMENT
+
+    </button>
+
+    <button
+      class="btn"
+      onclick="showToast('Development timeline opened.')">
+
+      VIEW FULL TIMELINE
+
+    </button>
+
+    <a
+      href="agreements.html"
+      class="btn">
+
+      VIEW AGREEMENTS
+
+    </a>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     CREATOR MEETING MODAL
+===================================================== -->
+
+<div class="modal" id="meetingModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h3>
+        REQUEST CREATOR MEETING
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeModal('meetingModal')">
+
+        ×
+
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div class="form-row">
+
+        <label>
+          Meeting Type
+        </label>
+
+        <select id="meetingType">
+
+          <option>
+            Story Development
+          </option>
+
+          <option>
+            Character Development
+          </option>
+
+          <option>
+            Worldbuilding
+          </option>
+
+          <option>
+            Screenplay Review
+          </option>
+
+          <option>
+            Production Planning
+          </option>
+
+          <option>
+            General Creator Meeting
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-row">
+
+        <label>
+          Preferred Date
+        </label>
+
+        <input
+          type="date"
+          id="meetingDate">
+
+      </div>
+
+
+      <div class="form-row">
+
+        <label>
+          Message
+        </label>
+
+        <textarea
+          id="meetingMessage"
+          placeholder="What would you like to discuss?"></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn"
+        onclick="closeModal('meetingModal')">
+
+        CANCEL
+
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="requestMeeting()">
+
+        SEND REQUEST
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     NOTE MODAL
+===================================================== -->
+
+<div class="modal" id="noteModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h3>
+        ADD DEVELOPMENT NOTE
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeModal('noteModal')">
+
+        ×
+
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div class="form-row">
+
+        <label>
+          Note Type
+        </label>
+
+        <select id="noteType">
+
+          <option>
+            Story
+          </option>
+
+          <option>
+            Character
+          </option>
+
+          <option>
+            Worldbuilding
+          </option>
+
+          <option>
+            Format
+          </option>
+
+          <option>
+            Visual
+          </option>
+
+          <option>
+            Production
+          </option>
+
+          <option>
+            Creator
+          </option>
+
+          <option>
+            Research
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-row">
+
+        <label>
+          Title
+        </label>
+
+        <input
+          type="text"
+          id="noteTitle"
+          placeholder="Note title">
+
+      </div>
+
+
+      <div class="form-row">
+
+        <label>
+          Note
+        </label>
+
+        <textarea
+          id="noteBody"
+          placeholder="Write the development note..."></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn"
+        onclick="closeModal('noteModal')">
+
+        CANCEL
+
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="addNote()">
+
+        ADD NOTE
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+/* =========================================================
+   CROWRULES DREAM WORLD
+   CREATIVE ROOM
+========================================================= */
+
+const CONFIG = {
+
+  SUPABASE_URL:
+    "YOUR_SUPABASE_URL",
+
+  SUPABASE_ANON_KEY:
+    "YOUR_SUPABASE_ANON_KEY",
+
+  PROJECT_ID:
+    "project-demo-0001",
+
+  DREAM_ID:
+    "dream-demo-0001"
+
+};
+
+
+/* =========================================================
+   SAVE STATE
+========================================================= */
+
+let saveTimer = null;
+
+
+const titleField =
+  document.getElementById("documentTitle");
+
+const contentField =
+  document.getElementById("documentContent");
+
+
+titleField.addEventListener(
+  "input",
+  markUnsaved
+);
+
+
+contentField.addEventListener(
+  "input",
+  markUnsaved
+);
+
+
+function markUnsaved(){
+
+  const state =
+    document.getElementById("saveState");
+
+  state.textContent =
+    "Unsaved changes";
+
+  state.classList.remove("saved");
+
+  clearTimeout(saveTimer);
+
+  saveTimer =
+    setTimeout(() => {
+
+      saveDocument(true);
+
+    },3000);
+
+}
+
+
+/* =========================================================
+   SAVE DOCUMENT
+========================================================= */
+
+function saveDocument(autoSave=false){
+
+  const title =
+    titleField.value.trim();
+
+  const body =
+    contentField.value.trim();
+
+
+  if(!title){
+
+    showToast(
+      "Please enter a document title."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    FUTURE SUPABASE:
+
+    await supabase
+      .from("dream_development_notes")
+      .upsert({
+        id: documentId,
+        project_id: CONFIG.PROJECT_ID,
+        author_id: currentUser.id,
+        note_type: currentTool,
+        title: title,
+        body: body,
+        visibility: "development"
+      });
+
+  */
+
+
+  const state =
+    document.getElementById("saveState");
+
+  state.textContent =
+    autoSave
+      ? "Auto-saved just now"
+      : "Saved just now";
+
+  state.classList.add("saved");
+
+
+  if(!autoSave){
+
+    showToast(
+      "Creative document saved."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   TOOL SELECTOR
+========================================================= */
+
+let currentTool =
+  "Story Development";
+
+
+function selectTool(button,tool){
+
+  document
+    .querySelectorAll(".tool")
+    .forEach(item =>
+      item.classList.remove("active")
+    );
+
+  button.classList.add("active");
+
+  currentTool = tool;
+
+  document
+    .getElementById("editorLabel")
+    .textContent =
+      tool.toUpperCase();
+
+
+  showToast(
+    tool + " workspace selected."
+  );
+
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function previewDocument(){
+
+  const title =
+    escapeHtml(titleField.value);
+
+  const body =
+    escapeHtml(contentField.value)
+      .replace(/\n/g,"<br>");
+
+  const modal =
+    document.createElement("div");
+
+  modal.className = "modal show";
+
+  modal.innerHTML = `
+
+    <div class="modal-box">
+
+      <div class="modal-head">
+
+        <h3>
+          DOCUMENT PREVIEW
+        </h3>
+
+        <button
+          class="close"
+          onclick="this.closest('.modal').remove()">
+
+          ×
+
+        </button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <div class="eyebrow">
+          ${escapeHtml(currentTool)}
+        </div>
+
+        <h2 style="
+          font-family:Orbitron,sans-serif;
+          font-size:20px;
+          line-height:1.4;
+          margin-bottom:15px;
+        ">
+          ${title}
+        </h2>
+
+        <div style="
+          color:#999;
+          font-size:10px;
+          line-height:1.9;
+        ">
+          ${body}
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(modal);
+
+}
+
+
+/* =========================================================
+   TEXT FORMATTING
+========================================================= */
+
+function formatText(type){
+
+  showToast(
+    type.toUpperCase() +
+    " formatting will be connected to the rich editor."
+  );
+
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+function openModal(id){
+
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+
+    modal.classList.add("show");
+
+  }
+
+}
+
+
+function closeModal(id){
+
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+
+    modal.classList.remove("show");
+
+  }
+
+}
+
+
+/* =========================================================
+   MEETING REQUEST
+========================================================= */
+
+function requestMeeting(){
+
+  const type =
+    document.getElementById("meetingType").value;
+
+  const date =
+    document.getElementById("meetingDate").value;
+
+  const message =
+    document.getElementById("meetingMessage").value.trim();
+
+
+  if(!date){
+
+    showToast(
+      "Please select a preferred date."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    FUTURE SUPABASE:
+
+    INSERT INTO dream_messages
+    or dream_meetings.
+
+    Recommended table:
+
+    dream_meetings
+
+    id
+    project_id
+    creator_id
+    requested_by
+    meeting_type
+    requested_date
+    message
+    status
+    scheduled_at
+    created_at
+    updated_at
+  */
+
+
+  closeModal("meetingModal");
+
+  showToast(
+    "Meeting request submitted."
+  );
+
+}
+
+
+/* =========================================================
+   ADD DEVELOPMENT NOTE
+========================================================= */
+
+function addNote(){
+
+  const type =
+    document.getElementById("noteType").value;
+
+  const title =
+    document.getElementById("noteTitle")
+      .value
+      .trim();
+
+  const body =
+    document.getElementById("noteBody")
+      .value
+      .trim();
+
+
+  if(!title || !body){
+
+    showToast(
+      "Enter a title and note."
+    );
+
+    return;
+
+  }
+
+
+  const grid =
+    document.getElementById("notesGrid");
+
+
+  const article =
+    document.createElement("article");
+
+  article.className =
+    "note-card";
+
+
+  article.innerHTML = `
+
+    <div class="note-type">
+      ${escapeHtml(type)}
+    </div>
+
+    <h3>
+      ${escapeHtml(title)}
+    </h3>
+
+    <p>
+      ${escapeHtml(body)}
+    </p>
+
+    <div class="note-footer">
+
+      <span>
+        Dream Creator
+      </span>
+
+      <span>
+        Just now
+      </span>
+
+    </div>
+
+  `;
+
+
+  grid.prepend(article);
+
+
+  /*
+    FUTURE SUPABASE:
+
+    await supabase
+      .from("dream_development_notes")
+      .insert({
+        project_id: CONFIG.PROJECT_ID,
+        author_id: currentUser.id,
+        note_type: type,
+        title: title,
+        body: body,
+        visibility: "development"
+      });
+  */
+
+
+  document.getElementById("noteTitle").value = "";
+
+  document.getElementById("noteBody").value = "";
+
+  closeModal("noteModal");
+
+  showToast(
+    "Development note added."
+  );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent =
+    message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove("show");
+
+    },2800);
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   SUPABASE CONNECTION PLAN
+========================================================= */
+
+/*
+
+Load:
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+Then:
+
+const supabase =
+  window.supabase.createClient(
+    CONFIG.SUPABASE_URL,
+    CONFIG.SUPABASE_ANON_KEY
+  );
+
+
+AUTHENTICATION
+
+const {
+  data:{user}
+} =
+  await supabase.auth.getUser();
+
+
+If no user:
+
+window.location.href =
+  "login.html";
+
+
+PROJECT ACCESS
+
+The creator should only be able to access
+projects where they are:
+
+1. creator_id = auth.uid()
+
+OR
+
+2. A member of dream_project_members.
+
+
+=========================================================
+TABLE: dream_development_notes
+=========================================================
+
+id
+uuid primary key
+
+project_id
+uuid
+
+author_id
+uuid
+
+note_type
+text
+
+title
+text
+
+body
+text
+
+visibility
+text
+
+created_at
+timestamptz
+
+updated_at
+timestamptz
+
+
+=========================================================
+TABLE: dream_meetings
+=========================================================
+
+id
+uuid primary key
+
+project_id
+uuid
+
+creator_id
+uuid
+
+requested_by
+uuid
+
+meeting_type
+text
+
+requested_date
+date
+
+message
+text
+
+status
+text
+
+scheduled_at
+timestamptz
+
+created_at
+timestamptz
+
+updated_at
+timestamptz
+
+
+=========================================================
+TABLE: dream_creative_documents
+=========================================================
+
+Recommended for the actual editor.
+
+id
+uuid primary key
+
+project_id
+uuid
+
+dream_id
+uuid
+
+author_id
+uuid
+
+document_type
+text
+
+title
+text
+
+content
+text
+
+version_number
+integer
+
+status
+text
+
+visibility
+text
+
+created_at
+timestamptz
+
+updated_at
+timestamptz
+
+
+DOCUMENT TYPES
+
+story
+character
+world
+episode
+screenplay
+visual
+music
+production
+research
+freeform
+
+
+=========================================================
+TABLE: dream_document_versions
+=========================================================
+
+id
+uuid primary key
+
+document_id
+uuid
+
+version_number
+integer
+
+content
+text
+
+created_by
+uuid
+
+change_summary
+text
+
+created_at
+timestamptz
+
+
+This gives CrowRules a permanent revision history.
+
+
+=========================================================
+TABLE: dream_project_members
+=========================================================
+
+id
+uuid primary key
+
+project_id
+uuid
+
+user_id
+uuid
+
+role
+text
+
+status
+text
+
+joined_at
+timestamptz
+
+created_at
+timestamptz
+
+updated_at
+timestamptz
+
+
+=========================================================
+TABLE: dream_activity
+=========================================================
+
+id
+uuid primary key
+
+user_id
+uuid
+
+project_id
+uuid
+
+dream_id
+uuid
+
+activity_type
+text
+
+title
+text
+
+description
+text
+
+created_at
+timestamptz
+
+
+=========================================================
+SUPABASE STORAGE
+=========================================================
+
+Recommended bucket:
+
+dream-world-project-files
+
+
+Suggested paths:
+
+projects/{project_id}/
+projects/{project_id}/scripts/
+projects/{project_id}/art/
+projects/{project_id}/audio/
+projects/{project_id}/video/
+projects/{project_id}/research/
+
+
+Never expose the service-role key.
+
+Use the anon key with RLS and Storage policies.
+
+
+=========================================================
+REAL-TIME FEATURES
+=========================================================
+
+The Creative Room can eventually subscribe to:
+
+dream_creative_documents
+dream_document_versions
+dream_development_notes
+dream_project_members
+dream_messages
+dream_activity
+
+
+This allows multiple authorized collaborators
+to see updates without refreshing.
+
+
+=========================================================
+LONG-TERM VERSIONING
+=========================================================
+
+Every major creative document should maintain versions:
+
+V1
+V2
+V3
+V4
+...
+
+A creator should be able to:
+
+VIEW VERSION
+COMPARE VERSION
+RESTORE VERSION
+DUPLICATE VERSION
+ADD CHANGE NOTE
+
+
+This is especially important for projects that
+remain in development for years.
+
+
+=========================================================
+*/
+
+</script>
+
+</body>
+</html>
