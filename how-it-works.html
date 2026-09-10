@@ -1,2066 +1,3203 @@
 <!doctype html>
 <html lang="en">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>How It Works — CrowRules Dream World</title>
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
 
-<meta name="theme-color" content="#050505">
-<meta name="description" content="Learn how CrowRules Dream World turns dreams and ideas into stories, films, series, podcasts, books, games, and other creative projects.">
+<title>
+  How It Works · CrowRules Dreamscapes
+</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta
+  name="description"
+  content="Learn how CrowRules Dreamscapes turns ordinary people's dreams and ideas into worlds, stories, collaborations and potential productions."
+>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta
+  name="theme-color"
+  content="#03020a"
+>
+
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
+
+<link
+  rel="stylesheet"
+  href="assets/css/dreamscapes.css"
+>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
+/* =========================================================
+   DREAMSCAPES — HOW IT WORKS
+========================================================= */
+
 :root{
-    --bg:#050505;
-    --bg2:#090909;
-    --panel:#101010;
-    --panel2:#151515;
-    --red:#d40000;
-    --red2:#ff2020;
-    --red3:#7d0000;
-    --text:#f5f5f5;
-    --muted:#a5a5a5;
-    --line:rgba(255,255,255,.09);
-    --glow:rgba(212,0,0,.28);
-    --max:1250px;
+
+  --ds-bg:#03020a;
+  --ds-panel:rgba(13,10,27,.82);
+  --ds-panel-strong:rgba(18,14,38,.94);
+
+  --ds-purple:#9d6cff;
+  --ds-pink:#ef70ff;
+  --ds-cyan:#56dcff;
+  --ds-green:#65e6a5;
+
+  --ds-text:#f8f5ff;
+  --ds-muted:#aaa5ba;
+
+  --ds-line:rgba(255,255,255,.09);
+
+  --ds-shadow:
+    0 30px 90px rgba(0,0,0,.48);
+
 }
 
+
+/* =========================================================
+   BASE
+========================================================= */
+
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-    min-height:100vh;
-    background:
-        radial-gradient(circle at 50% -10%,rgba(212,0,0,.18),transparent 35%),
-        radial-gradient(circle at 15% 30%,rgba(255,0,0,.06),transparent 25%),
-        linear-gradient(180deg,#030303 0%,#080808 45%,#030303 100%);
-    color:var(--text);
-    font-family:Montserrat,Arial,sans-serif;
-    overflow-x:hidden;
+
+  margin:0;
+
+  color:var(--ds-text);
+
+  font-family:
+    Montserrat,
+    Arial,
+    sans-serif;
+
+  background:
+
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(157,108,255,.13),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 85% 30%,
+      rgba(86,220,255,.08),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(239,112,255,.08),
+      transparent 32%
+    ),
+
+    var(--ds-bg);
+
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:999;
-    opacity:.055;
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(255,255,255,.8) 0px,
-            rgba(255,255,255,.8) 1px,
-            transparent 1px,
-            transparent 4px
-        );
-    mix-blend-mode:screen;
-}
 
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-button,
-input,
-select{
-    font:inherit;
-}
-
-.container{
-    width:min(var(--max),calc(100% - 40px));
-    margin:auto;
-}
-
-/* =========================
-   NAVIGATION
-========================= */
+/* =========================================================
+   NAV
+========================================================= */
 
 .nav{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    height:76px;
-    z-index:100;
-    background:rgba(3,3,3,.88);
-    border-bottom:1px solid var(--line);
-    backdrop-filter:blur(14px);
+
+  position:sticky;
+
+  top:0;
+
+  z-index:1000;
+
+  background:
+    rgba(3,2,10,.74);
+
+  backdrop-filter:
+    blur(18px);
+
+  border-bottom:
+    1px solid var(--ds-line);
+
 }
 
-.nav-inner{
-    height:100%;
-    max-width:1400px;
-    margin:auto;
-    padding:0 24px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:25px;
+
+.container{
+
+  width:min(
+    1180px,
+    92%
+  );
+
+  margin:auto;
+
 }
+
+
+.navin{
+
+  min-height:72px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:25px;
+
+}
+
 
 .brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    min-width:max-content;
+
+  color:#fff;
+
+  text-decoration:none;
+
+  font-family:Orbitron,sans-serif;
+
+  font-weight:800;
+
+  letter-spacing:1px;
+
 }
 
-.brand-mark{
-    width:42px;
-    height:42px;
-    border:1px solid rgba(255,0,0,.65);
-    display:grid;
-    place-items:center;
-    color:var(--red2);
-    font-family:Orbitron,sans-serif;
-    font-weight:800;
-    position:relative;
-    box-shadow:0 0 22px rgba(212,0,0,.14);
+
+.brand span{
+
+  display:block;
+
+  color:var(--ds-purple);
+
+  font-size:.62rem;
+
+  letter-spacing:4px;
+
 }
 
-.brand-mark::after{
-    content:"";
-    position:absolute;
-    inset:5px;
-    border:1px solid rgba(255,255,255,.12);
+
+.links{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:20px;
+
 }
 
-.brand-text strong{
-    display:block;
-    font-family:Orbitron,sans-serif;
-    font-size:14px;
-    letter-spacing:1.5px;
+
+.links a{
+
+  color:#c7c2d2;
+
+  text-decoration:none;
+
+  font-size:.78rem;
+
+  font-weight:600;
+
+  transition:.25s;
+
 }
 
-.brand-text span{
-    display:block;
-    color:var(--red2);
-    font-size:10px;
-    letter-spacing:2px;
-    margin-top:2px;
+
+.links a:hover,
+.links a.active{
+
+  color:#fff;
+
 }
 
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:5px;
+
+.menu{
+
+  display:none;
+
+  border:1px solid var(--ds-line);
+
+  background:rgba(255,255,255,.04);
+
+  color:#fff;
+
+  padding:10px 13px;
+
+  border-radius:10px;
+
 }
 
-.nav-links a{
-    padding:10px 13px;
-    color:#bbb;
-    font-size:12px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:.8px;
-    transition:.2s;
-}
 
-.nav-links a:hover,
-.nav-links a.active{
-    color:#fff;
-}
-
-.nav-links a.active{
-    text-shadow:0 0 12px rgba(255,0,0,.55);
-}
-
-.nav-cta{
-    background:var(--red);
-    color:#fff!important;
-    border:1px solid var(--red2);
-    padding:11px 16px!important;
-}
-
-.nav-cta:hover{
-    background:var(--red2);
-}
-
-.menu-btn{
-    display:none;
-    background:none;
-    border:1px solid var(--line);
-    color:#fff;
-    width:42px;
-    height:42px;
-    cursor:pointer;
-}
-
-/* =========================
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero{
-    min-height:720px;
-    padding:150px 0 100px;
-    position:relative;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
+
+  position:relative;
+
+  min-height:650px;
+
+  display:flex;
+
+  align-items:center;
+
+  overflow:hidden;
+
+  text-align:center;
+
 }
 
-.hero::before{
-    content:"";
-    position:absolute;
-    width:800px;
-    height:800px;
-    left:50%;
-    top:-350px;
-    transform:translateX(-50%);
-    background:radial-gradient(circle,rgba(212,0,0,.17),transparent 65%);
-    filter:blur(10px);
-}
-
-.hero-stars{
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-    pointer-events:none;
-}
-
-.star{
-    position:absolute;
-    width:2px;
-    height:2px;
-    background:#fff;
-    border-radius:50%;
-    opacity:.4;
-    animation:twinkle 4s infinite ease-in-out;
-}
-
-@keyframes twinkle{
-    0%,100%{opacity:.15}
-    50%{opacity:.75}
-}
-
-.hero-grid{
-    position:absolute;
-    inset:0;
-    opacity:.08;
-    background-image:
-        linear-gradient(rgba(255,255,255,.18) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.18) 1px,transparent 1px);
-    background-size:70px 70px;
-    mask-image:linear-gradient(to bottom,black,transparent 85%);
-}
 
 .hero-content{
-    position:relative;
-    z-index:2;
-    max-width:900px;
-    margin:auto;
-    text-align:center;
+
+  position:relative;
+
+  z-index:3;
+
+  width:100%;
+
+  padding:110px 0 80px;
+
 }
+
 
 .eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    color:var(--red2);
-    font-family:Orbitron,sans-serif;
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:3px;
-    margin-bottom:25px;
+
+  color:var(--ds-cyan);
+
+  font-family:Orbitron,sans-serif;
+
+  font-size:.7rem;
+
+  letter-spacing:5px;
+
+  font-weight:700;
+
 }
 
-.eyebrow::before,
-.eyebrow::after{
-    content:"";
-    width:45px;
-    height:1px;
-    background:var(--red);
-}
 
 .hero h1{
-    font-family:Orbitron,sans-serif;
-    font-size:clamp(42px,7vw,86px);
-    line-height:1.02;
-    letter-spacing:-2px;
-    text-transform:uppercase;
-    margin-bottom:25px;
+
+  max-width:1000px;
+
+  margin:20px auto;
+
+  font-family:Orbitron,sans-serif;
+
+  font-size:
+    clamp(
+      2.6rem,
+      7vw,
+      6rem
+    );
+
+  line-height:1;
+
+  letter-spacing:-3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #fff,
+      var(--ds-purple),
+      var(--ds-cyan),
+      var(--ds-pink),
+      #fff
+    );
+
+  background-size:300% auto;
+
+  -webkit-background-clip:text;
+
+  background-clip:text;
+
+  color:transparent;
+
+  animation:
+    titleFlow 10s linear infinite;
+
 }
 
-.hero h1 span{
-    color:var(--red2);
-    text-shadow:
-        0 0 25px rgba(255,0,0,.35),
-        0 0 70px rgba(255,0,0,.15);
+
+@keyframes titleFlow{
+
+  to{
+    background-position:300% center;
+  }
+
 }
+
 
 .hero p{
-    max-width:760px;
-    margin:auto;
-    color:#c2c2c2;
-    font-size:17px;
-    line-height:1.9;
+
+  max-width:760px;
+
+  margin:auto;
+
+  color:var(--ds-muted);
+
+  line-height:1.9;
+
+  font-size:1rem;
+
 }
+
 
 .hero-actions{
-    margin-top:35px;
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    flex-wrap:wrap;
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:12px;
+
+  margin-top:30px;
+
+  flex-wrap:wrap;
+
 }
+
 
 .btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    min-height:48px;
-    padding:0 22px;
-    border:1px solid var(--red);
-    background:var(--red);
-    color:#fff;
-    font-size:12px;
-    font-weight:800;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    cursor:pointer;
-    transition:.2s;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  min-height:46px;
+
+  padding:0 19px;
+
+  border-radius:11px;
+
+  border:1px solid var(--ds-line);
+
+  color:#fff;
+
+  background:rgba(255,255,255,.04);
+
+  text-decoration:none;
+
+  font-family:inherit;
+
+  font-size:.76rem;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.25s;
+
 }
+
 
 .btn:hover{
-    background:var(--red2);
-    transform:translateY(-2px);
-    box-shadow:0 10px 30px rgba(212,0,0,.2);
+
+  transform:translateY(-2px);
+
 }
+
+
+.btn.primary{
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(157,108,255,.85),
+      rgba(239,112,255,.65)
+    );
+
+  border-color:
+    rgba(157,108,255,.5);
+
+}
+
 
 .btn.secondary{
-    background:transparent;
-    border-color:var(--line);
+
+  background:
+    rgba(255,255,255,.045);
+
 }
 
-.btn.secondary:hover{
-    border-color:var(--red);
-    background:rgba(212,0,0,.08);
+
+/* =========================================================
+   ORBITS
+========================================================= */
+
+.orbit{
+
+  position:absolute;
+
+  left:50%;
+
+  top:50%;
+
+  width:650px;
+
+  height:650px;
+
+  transform:
+    translate(-50%,-50%);
+
+  border:
+    1px solid
+    rgba(157,108,255,.12);
+
+  border-radius:50%;
+
+  animation:
+    orbitSpin 30s linear infinite;
+
 }
 
-/* =========================
-   SECTION
-========================= */
 
-section{
-    padding:100px 0;
-    border-top:1px solid var(--line);
-    position:relative;
+.orbit::before,
+.orbit::after{
+
+  content:"";
+
+  position:absolute;
+
+  border-radius:50%;
+
+  border:1px solid
+    rgba(86,220,255,.1);
+
 }
 
-.section-heading{
-    max-width:780px;
-    margin-bottom:55px;
+
+.orbit::before{
+
+  inset:80px;
+
 }
 
-.section-label{
-    color:var(--red2);
-    font-family:Orbitron,sans-serif;
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    margin-bottom:15px;
+
+.orbit::after{
+
+  inset:170px;
+
+  border-color:
+    rgba(239,112,255,.1);
+
 }
 
-.section-heading h2{
-    font-family:Orbitron,sans-serif;
-    font-size:clamp(28px,4vw,48px);
-    line-height:1.15;
-    text-transform:uppercase;
-    margin-bottom:18px;
+
+.orbit-dot{
+
+  position:absolute;
+
+  width:10px;
+
+  height:10px;
+
+  border-radius:50%;
+
+  background:var(--ds-cyan);
+
+  box-shadow:
+    0 0 25px var(--ds-cyan);
+
+  top:40px;
+
+  left:50%;
+
 }
 
-.section-heading p{
-    color:var(--muted);
-    line-height:1.8;
+
+@keyframes orbitSpin{
+
+  to{
+    transform:
+      translate(-50%,-50%)
+      rotate(360deg);
+  }
+
 }
 
-/* =========================
-   JOURNEY
-========================= */
+
+/* =========================================================
+   OVERVIEW
+========================================================= */
+
+.overview{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:18px;
+
+  margin:
+    0 auto 90px;
+
+}
+
+
+.overview-card{
+
+  padding:27px;
+
+  border:
+    1px solid var(--ds-line);
+
+  border-radius:20px;
+
+  background:
+    var(--ds-panel);
+
+  box-shadow:
+    var(--ds-shadow);
+
+}
+
+
+.overview-icon{
+
+  font-size:1.7rem;
+
+  margin-bottom:13px;
+
+}
+
+
+.overview-card h3{
+
+  margin:0 0 9px;
+
+  font-family:Orbitron,sans-serif;
+
+  font-size:1rem;
+
+}
+
+
+.overview-card p{
+
+  margin:0;
+
+  color:var(--ds-muted);
+
+  font-size:.82rem;
+
+  line-height:1.7;
+
+}
+
+
+/* =========================================================
+   JOURNEY HEADER
+========================================================= */
+
+.section-head{
+
+  text-align:center;
+
+  max-width:760px;
+
+  margin:
+    0 auto 45px;
+
+}
+
+
+.section-head .eyebrow{
+
+  margin-bottom:12px;
+
+}
+
+
+.section-head h2{
+
+  margin:0 0 15px;
+
+  font-family:Orbitron,sans-serif;
+
+  font-size:
+    clamp(
+      1.8rem,
+      4vw,
+      3rem
+    );
+
+}
+
+
+.section-head p{
+
+  color:var(--ds-muted);
+
+  line-height:1.8;
+
+}
+
+
+/* =========================================================
+   JOURNEY PIPELINE
+========================================================= */
 
 .journey{
-    background:
-        radial-gradient(circle at 80% 20%,rgba(212,0,0,.08),transparent 25%),
-        #070707;
+
+  position:relative;
+
+  max-width:940px;
+
+  margin:auto;
+
 }
 
-.journey-list{
-    position:relative;
-    max-width:1050px;
-    margin:auto;
-}
 
-.journey-list::before{
-    content:"";
-    position:absolute;
-    left:36px;
-    top:30px;
-    bottom:30px;
-    width:1px;
-    background:linear-gradient(
-        to bottom,
-        transparent,
-        var(--red),
-        var(--red),
-        transparent
+.journey-line{
+
+  position:absolute;
+
+  top:0;
+
+  bottom:0;
+
+  left:50%;
+
+  width:2px;
+
+  transform:translateX(-50%);
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(157,108,255,.45),
+      rgba(86,220,255,.45),
+      transparent
     );
+
 }
 
-.step{
-    display:grid;
-    grid-template-columns:74px 1fr;
-    gap:28px;
-    margin-bottom:35px;
-    position:relative;
+
+.journey-progress{
+
+  position:absolute;
+
+  top:0;
+
+  left:50%;
+
+  width:4px;
+
+  height:0;
+
+  transform:translateX(-50%);
+
+  background:
+    linear-gradient(
+      to bottom,
+      var(--ds-purple),
+      var(--ds-cyan),
+      var(--ds-pink)
+    );
+
+  box-shadow:
+    0 0 18px rgba(157,108,255,.7);
+
+  transition:
+    height .6s ease;
+
 }
 
-.step:last-child{
-    margin-bottom:0;
+
+.journey-step{
+
+  position:relative;
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 90px 1fr;
+
+  align-items:center;
+
+  min-height:210px;
+
 }
+
+
+.journey-step:nth-child(even)
+.journey-copy{
+
+  grid-column:3;
+
+  grid-row:1;
+
+}
+
+
+.journey-step:nth-child(even)
+.journey-node{
+
+  grid-column:2;
+
+  grid-row:1;
+
+}
+
+
+.journey-copy{
+
+  padding:27px;
+
+  border:
+    1px solid var(--ds-line);
+
+  border-radius:20px;
+
+  background:
+    var(--ds-panel);
+
+  box-shadow:
+    var(--ds-shadow);
+
+  transition:.3s;
+
+}
+
+
+.journey-copy:hover{
+
+  transform:translateY(-4px);
+
+  border-color:
+    rgba(157,108,255,.35);
+
+}
+
+
+.journey-step:nth-child(odd)
+.journey-copy{
+
+  grid-column:1;
+
+}
+
+
+.journey-node{
+
+  grid-column:2;
+
+  grid-row:1;
+
+  width:72px;
+
+  height:72px;
+
+  margin:auto;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(157,108,255,.35),
+      rgba(12,9,25,.96)
+    );
+
+  border:
+    1px solid
+    rgba(157,108,255,.5);
+
+  box-shadow:
+    0 0 30px
+    rgba(157,108,255,.16);
+
+  z-index:2;
+
+}
+
 
 .step-number{
-    width:74px;
-    height:74px;
-    border:1px solid rgba(255,0,0,.55);
-    background:#090909;
-    display:grid;
-    place-items:center;
-    color:var(--red2);
-    font-family:Orbitron,sans-serif;
-    font-size:19px;
-    font-weight:800;
-    z-index:2;
-    box-shadow:0 0 25px rgba(212,0,0,.1);
+
+  font-family:Orbitron,sans-serif;
+
+  font-size:.7rem;
+
+  color:var(--ds-cyan);
+
 }
 
-.step-card{
-    border:1px solid var(--line);
-    background:linear-gradient(135deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
-    padding:28px;
-    transition:.25s;
+
+.step-icon{
+
+  font-size:1.35rem;
+
 }
 
-.step-card:hover{
-    border-color:rgba(255,0,0,.3);
-    transform:translateX(5px);
+
+.journey-copy h3{
+
+  margin:0 0 10px;
+
+  font-family:Orbitron,sans-serif;
+
+  font-size:1rem;
+
 }
 
-.step-card h3{
-    font-family:Orbitron,sans-serif;
-    font-size:20px;
-    margin-bottom:10px;
-    text-transform:uppercase;
+
+.journey-copy p{
+
+  margin:0;
+
+  color:var(--ds-muted);
+
+  line-height:1.7;
+
+  font-size:.82rem;
+
 }
 
-.step-card h3 span{
-    color:var(--red2);
+
+.step-status{
+
+  display:inline-flex;
+
+  margin-top:15px;
+
+  padding:6px 9px;
+
+  border-radius:7px;
+
+  background:
+    rgba(255,255,255,.04);
+
+  border:
+    1px solid var(--ds-line);
+
+  color:#918ba0;
+
+  font-size:.61rem;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+
 }
 
-.step-card p{
-    color:#aaa;
-    line-height:1.8;
-    font-size:14px;
+
+/* =========================================================
+   PERSONAL JOURNEY
+========================================================= */
+
+.personal{
+
+  margin:
+    100px auto;
+
+  padding:
+    45px;
+
+  border-radius:25px;
+
+  border:
+    1px solid
+    rgba(157,108,255,.2);
+
+  background:
+
+    radial-gradient(
+      circle at 50% 0,
+      rgba(157,108,255,.13),
+      transparent 55%
+    ),
+
+    rgba(12,9,25,.85);
+
+  box-shadow:
+    var(--ds-shadow);
+
 }
 
-.step-meta{
-    margin-top:18px;
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
+
+.personal-head{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-end;
+
+  gap:25px;
+
+  margin-bottom:30px;
+
 }
 
-.tag{
-    border:1px solid rgba(255,255,255,.1);
-    color:#aaa;
-    padding:6px 9px;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:.8px;
+
+.personal-head h2{
+
+  margin:0;
+
+  font-family:Orbitron,sans-serif;
+
 }
 
-/* =========================
-   TIME / YEARS
-========================= */
 
-.time-section{
-    background:#030303;
+.personal-head p{
+
+  color:var(--ds-muted);
+
+  margin:7px 0 0;
+
+  font-size:.8rem;
+
 }
 
-.time-box{
-    border:1px solid var(--line);
-    padding:45px;
-    background:
-        linear-gradient(135deg,rgba(212,0,0,.08),transparent 45%),
-        #0b0b0b;
-    position:relative;
-    overflow:hidden;
+
+.progress-bar{
+
+  height:8px;
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.07);
+
+  overflow:hidden;
+
 }
 
-.time-box::after{
-    content:"DREAM → DEVELOPMENT → CREATION";
-    position:absolute;
-    right:-80px;
-    bottom:20px;
-    color:rgba(255,255,255,.025);
-    font-family:Orbitron,sans-serif;
-    font-size:60px;
-    white-space:nowrap;
-    transform:rotate(-8deg);
+
+.progress-fill{
+
+  width:0%;
+
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--ds-purple),
+      var(--ds-cyan)
+    );
+
+  transition:
+    width .8s ease;
+
 }
 
-.time-box h3{
-    font-family:Orbitron,sans-serif;
-    font-size:30px;
-    text-transform:uppercase;
-    margin-bottom:20px;
+
+.personal-stats{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:15px;
+
+  margin-top:18px;
+
 }
 
-.time-box h3 span{
-    color:var(--red2);
+
+.personal-stat{
+
+  padding:20px;
+
+  text-align:center;
+
+  border:
+    1px solid var(--ds-line);
+
+  border-radius:14px;
+
+  background:
+    rgba(255,255,255,.025);
+
 }
 
-.time-box p{
-    max-width:850px;
-    color:#aaa;
-    line-height:1.9;
+
+.personal-stat strong{
+
+  display:block;
+
+  font-family:Orbitron,sans-serif;
+
+  font-size:1.4rem;
+
 }
 
-.time-points{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-    margin-top:35px;
-    position:relative;
-    z-index:2;
+
+.personal-stat span{
+
+  display:block;
+
+  margin-top:6px;
+
+  color:var(--ds-muted);
+
+  font-size:.65rem;
+
+  text-transform:uppercase;
+
 }
 
-.time-point{
-    border-top:2px solid var(--red);
-    padding-top:18px;
+
+/* =========================================================
+   CREATIVE TEAM
+========================================================= */
+
+.team-section{
+
+  margin:
+    100px auto;
+
 }
 
-.time-point strong{
-    display:block;
-    font-family:Orbitron,sans-serif;
-    font-size:16px;
-    margin-bottom:7px;
+
+.team-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:15px;
+
 }
 
-.time-point span{
-    color:#888;
-    font-size:12px;
-    line-height:1.6;
+
+.team-card{
+
+  text-align:center;
+
+  padding:24px 16px;
+
+  border:
+    1px solid var(--ds-line);
+
+  border-radius:18px;
+
+  background:
+    rgba(255,255,255,.025);
+
 }
 
-/* =========================
-   PAUSE / RESUME
-========================= */
 
-.pause-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
+.team-icon{
+
+  font-size:1.8rem;
+
+  margin-bottom:12px;
+
 }
 
-.info-card{
-    border:1px solid var(--line);
-    background:#0b0b0b;
-    padding:35px;
+
+.team-card h3{
+
+  margin:0 0 7px;
+
+  font-family:Orbitron,sans-serif;
+
+  font-size:.8rem;
+
 }
 
-.info-icon{
-    width:48px;
-    height:48px;
-    display:grid;
-    place-items:center;
-    border:1px solid rgba(255,0,0,.4);
-    color:var(--red2);
-    font-family:Orbitron,sans-serif;
-    margin-bottom:22px;
+
+.team-card p{
+
+  margin:0;
+
+  color:var(--ds-muted);
+
+  font-size:.68rem;
+
+  line-height:1.55;
+
 }
 
-.info-card h3{
-    font-family:Orbitron,sans-serif;
-    text-transform:uppercase;
-    font-size:20px;
-    margin-bottom:13px;
+
+/* =========================================================
+   IMPORTANT PRINCIPLES
+========================================================= */
+
+.principles{
+
+  margin:
+    100px auto;
+
 }
 
-.info-card p{
-    color:#999;
-    line-height:1.8;
-    font-size:14px;
+
+.principle-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:16px;
+
 }
 
-/* =========================
-   FORMAT
-========================= */
 
-.format-section{
-    background:
-        radial-gradient(circle at 20% 50%,rgba(212,0,0,.08),transparent 30%),
-        #080808;
+.principle{
+
+  display:flex;
+
+  gap:17px;
+
+  padding:23px;
+
+  border:
+    1px solid var(--ds-line);
+
+  border-radius:18px;
+
+  background:
+    var(--ds-panel);
+
 }
 
-.format-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
+
+.principle-icon{
+
+  flex:none;
+
+  width:42px;
+
+  height:42px;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:12px;
+
+  background:
+    rgba(157,108,255,.1);
+
 }
 
-.format-card{
-    min-height:180px;
-    padding:25px;
-    border:1px solid var(--line);
-    background:#0c0c0c;
-    transition:.25s;
+
+.principle h3{
+
+  margin:0 0 7px;
+
+  font-family:Orbitron,sans-serif;
+
+  font-size:.82rem;
+
 }
 
-.format-card:hover{
-    border-color:rgba(255,0,0,.45);
-    transform:translateY(-5px);
+
+.principle p{
+
+  margin:0;
+
+  color:var(--ds-muted);
+
+  font-size:.75rem;
+
+  line-height:1.65;
+
 }
 
-.format-number{
-    color:var(--red2);
-    font-family:Orbitron,sans-serif;
-    font-size:11px;
-    margin-bottom:28px;
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.cta{
+
+  margin:
+    100px auto 70px;
+
+  padding:
+    65px 30px;
+
+  text-align:center;
+
+  border-radius:28px;
+
+  background:
+
+    radial-gradient(
+      circle at 50% 0,
+      rgba(157,108,255,.16),
+      transparent 55%
+    ),
+
+    rgba(13,10,28,.85);
+
+  border:
+    1px solid
+    rgba(157,108,255,.2);
+
 }
 
-.format-card h3{
-    font-family:Orbitron,sans-serif;
-    font-size:16px;
-    margin-bottom:10px;
-    text-transform:uppercase;
+
+.cta h2{
+
+  margin:0 0 15px;
+
+  font-family:Orbitron,sans-serif;
+
+  font-size:
+    clamp(
+      1.8rem,
+      4vw,
+      3rem
+    );
+
 }
 
-.format-card p{
-    color:#888;
-    font-size:12px;
-    line-height:1.6;
+
+.cta p{
+
+  max-width:650px;
+
+  margin:
+    0 auto 25px;
+
+  color:var(--ds-muted);
+
+  line-height:1.8;
+
 }
 
-/* =========================
-   CREATOR ROLE
-========================= */
 
-.creator-section{
-    background:#040404;
+/* =========================================================
+   AUTH STATUS
+========================================================= */
+
+.auth-status{
+
+  position:fixed;
+
+  right:18px;
+
+  bottom:18px;
+
+  z-index:2000;
+
+  display:none;
+
+  padding:11px 14px;
+
+  border:
+    1px solid var(--ds-line);
+
+  border-radius:12px;
+
+  background:
+    rgba(10,8,20,.93);
+
+  font-size:.68rem;
+
+  box-shadow:
+    var(--ds-shadow);
+
 }
 
-.creator-panel{
-    border:1px solid rgba(255,0,0,.25);
-    background:
-        linear-gradient(120deg,rgba(212,0,0,.09),transparent 50%),
-        #0a0a0a;
-    padding:50px;
+
+.auth-status.show{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
 }
 
-.creator-panel h3{
-    font-family:Orbitron,sans-serif;
-    font-size:30px;
-    text-transform:uppercase;
-    margin-bottom:20px;
+
+.auth-dot{
+
+  width:7px;
+
+  height:7px;
+
+  border-radius:50%;
+
+  background:var(--ds-green);
+
+  box-shadow:
+    0 0 10px var(--ds-green);
+
 }
 
-.creator-panel h3 span{
-    color:var(--red2);
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+
+  position:fixed;
+
+  left:50%;
+
+  bottom:28px;
+
+  z-index:5000;
+
+  transform:
+    translate(-50%,20px);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  padding:13px 18px;
+
+  border-radius:11px;
+
+  background:#171327;
+
+  border:
+    1px solid
+    rgba(157,108,255,.3);
+
+  font-size:.75rem;
+
+  transition:.3s;
+
 }
 
-.creator-panel p{
-    max-width:900px;
-    color:#aaa;
-    line-height:1.9;
-    margin-bottom:28px;
+
+.toast.show{
+
+  opacity:1;
+
+  transform:
+    translate(-50%,0);
+
 }
 
-.creator-list{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-}
 
-.creator-item{
-    padding:15px;
-    border:1px solid var(--line);
-    color:#bbb;
-    font-size:13px;
-}
-
-.creator-item::before{
-    content:"◆";
-    color:var(--red2);
-    margin-right:10px;
-}
-
-/* =========================
-   STATUS
-========================= */
-
-.status-section{
-    background:#080808;
-}
-
-.status-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-}
-
-.status{
-    border:1px solid var(--line);
-    background:#0c0c0c;
-    padding:20px;
-}
-
-.status-bar{
-    height:3px;
-    background:var(--red);
-    margin-bottom:18px;
-    box-shadow:0 0 10px rgba(255,0,0,.3);
-}
-
-.status strong{
-    display:block;
-    font-family:Orbitron,sans-serif;
-    font-size:13px;
-    text-transform:uppercase;
-    margin-bottom:7px;
-}
-
-.status span{
-    color:#777;
-    font-size:11px;
-}
-
-/* =========================
-   RIGHTS
-========================= */
-
-.rights{
-    background:#030303;
-}
-
-.rights-box{
-    max-width:950px;
-    border:1px solid var(--line);
-    padding:38px;
-    margin:auto;
-}
-
-.rights-box h3{
-    font-family:Orbitron,sans-serif;
-    text-transform:uppercase;
-    font-size:22px;
-    margin-bottom:16px;
-}
-
-.rights-box p{
-    color:#999;
-    line-height:1.85;
-    font-size:14px;
-    margin-bottom:15px;
-}
-
-.rights-box p:last-child{
-    margin-bottom:0;
-}
-
-/* =========================
-   CTA
-========================= */
-
-.final-cta{
-    padding:120px 0;
-    text-align:center;
-    background:
-        radial-gradient(circle at center,rgba(212,0,0,.17),transparent 45%),
-        #050505;
-}
-
-.final-cta h2{
-    font-family:Orbitron,sans-serif;
-    font-size:clamp(30px,5vw,60px);
-    text-transform:uppercase;
-    margin-bottom:20px;
-}
-
-.final-cta h2 span{
-    color:var(--red2);
-}
-
-.final-cta p{
-    max-width:650px;
-    margin:0 auto 30px;
-    color:#999;
-    line-height:1.8;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    border-top:1px solid var(--line);
-    background:#020202;
-    padding:50px 0 30px;
-}
-
-.footer-grid{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:35px;
-}
-
-.footer-brand h3{
-    font-family:Orbitron,sans-serif;
-    font-size:16px;
-    margin-bottom:10px;
-}
-
-.footer-brand p{
-    max-width:380px;
-    color:#777;
-    font-size:12px;
-    line-height:1.7;
-}
-
-.footer-col h4{
-    color:#fff;
-    font-family:Orbitron,sans-serif;
-    font-size:11px;
-    letter-spacing:1px;
-    margin-bottom:15px;
-}
-
-.footer-col a{
-    display:block;
-    color:#777;
-    font-size:12px;
-    margin-bottom:10px;
-}
-
-.footer-col a:hover{
-    color:var(--red2);
-}
-
-.footer-bottom{
-    border-top:1px solid var(--line);
-    margin-top:40px;
-    padding-top:20px;
-    display:flex;
-    justify-content:space-between;
-    gap:20px;
-    color:#555;
-    font-size:10px;
-}
-
-/* =========================
+/* =========================================================
    RESPONSIVE
-========================= */
+========================================================= */
 
-@media(max-width:1050px){
+@media(max-width:900px){
 
-    .nav-links{
-        display:none;
-        position:absolute;
-        top:76px;
-        left:0;
-        right:0;
-        background:#050505;
-        border-bottom:1px solid var(--line);
-        padding:15px;
-        flex-direction:column;
-        align-items:stretch;
-    }
+  .links{
+    display:none;
+  }
 
-    .nav-links.open{
-        display:flex;
-    }
+  .menu{
+    display:block;
+  }
 
-    .nav-links a{
-        padding:14px;
-    }
+  .overview{
+    grid-template-columns:1fr;
+  }
 
-    .menu-btn{
-        display:block;
-    }
+  .team-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
 
-    .format-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr 1fr;
-    }
 }
+
 
 @media(max-width:700px){
 
-    .container{
-        width:min(var(--max),calc(100% - 28px));
-    }
+  .hero{
+    min-height:580px;
+  }
 
-    .hero{
-        min-height:650px;
-        padding-top:125px;
-    }
+  .hero h1{
+    letter-spacing:-1.5px;
+  }
 
-    .hero p{
-        font-size:14px;
-    }
+  .orbit{
+    width:480px;
+    height:480px;
+  }
 
-    section{
-        padding:75px 0;
-    }
+  .journey-line,
+  .journey-progress{
+    left:25px;
+  }
 
-    .journey-list::before{
-        left:25px;
-    }
+  .journey-step{
 
-    .step{
-        grid-template-columns:52px 1fr;
-        gap:16px;
-    }
+    display:block;
 
-    .step-number{
-        width:52px;
-        height:52px;
-        font-size:14px;
-    }
+    min-height:0;
 
-    .step-card{
-        padding:22px;
-    }
+    padding:
+      20px 0 20px 58px;
 
-    .time-box,
-    .creator-panel,
-    .rights-box{
-        padding:28px 22px;
-    }
+  }
 
-    .time-points{
-        grid-template-columns:1fr;
-    }
+  .journey-node{
 
-    .pause-grid{
-        grid-template-columns:1fr;
-    }
+    position:absolute;
 
-    .format-grid{
-        grid-template-columns:1fr;
-    }
+    left:0;
 
-    .creator-list{
-        grid-template-columns:1fr;
-    }
+    top:25px;
 
-    .status-grid{
-        grid-template-columns:1fr;
-    }
+    width:50px;
 
-    .footer-grid{
-        grid-template-columns:1fr;
-    }
+    height:50px;
 
-    .footer-bottom{
-        flex-direction:column;
-    }
+  }
+
+  .journey-copy{
+    display:block !important;
+  }
+
+  .principle-grid{
+    grid-template-columns:1fr;
+  }
+
+  .personal{
+    padding:28px 20px;
+  }
+
+  .personal-head{
+    display:block;
+  }
+
+  .personal-stats{
+    grid-template-columns:1fr;
+  }
+
 }
+
+
+@media(max-width:500px){
+
+  .team-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-actions{
+    flex-direction:column;
+  }
+
+  .hero-actions .btn{
+    width:100%;
+  }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- =========================
+<div id="stars"></div>
+
+<div id="nebula">
+
+  <div class="neb a"></div>
+  <div class="neb b"></div>
+  <div class="neb c"></div>
+
+</div>
+
+
+<!-- ======================================================
      NAVIGATION
-========================= -->
+====================================================== -->
 
-<header class="nav">
-    <div class="nav-inner">
+<nav class="nav">
 
-        <a href="index.html" class="brand">
-            <div class="brand-mark">CR</div>
+  <div class="container navin">
 
-            <div class="brand-text">
-                <strong>CROWRULES</strong>
-                <span>DREAM WORLD</span>
-            </div>
-        </a>
+    <a
+      class="brand"
+      href="index.html"
+    >
+      CROWRULES
+      <span>DREAMSCAPES</span>
+    </a>
 
-        <nav class="nav-links" id="navLinks">
-            <a href="index.html">Home</a>
-            <a href="dreams.html">Dreams</a>
-            <a href="projects.html">Projects</a>
-            <a href="creators.html">Creators</a>
-            <a href="how-it-works.html" class="active">How It Works</a>
-            <a href="creator-rights.html">Creator Rights</a>
-            <a href="submit.html" class="nav-cta">Submit Dream</a>
-        </nav>
 
-        <button class="menu-btn" id="menuBtn" aria-label="Open menu">
-            ☰
-        </button>
+    <button
+      class="menu"
+      id="menuBtn"
+    >
+      MENU
+    </button>
+
+
+    <div class="links">
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <a href="submit.html">
+        Submit a Dream
+      </a>
+
+      <a
+        href="how-it-works.html"
+        class="active"
+      >
+        How It Works
+      </a>
+
+      <a href="projects.html">
+        Projects
+      </a>
+
+      <a href="creators.html">
+        Creators
+      </a>
+
+      <a href="creator-dashboard.html">
+        Creator Hub
+      </a>
 
     </div>
-</header>
 
+  </div>
 
-<!-- =========================
-     HERO
-========================= -->
+</nav>
+
 
 <main>
 
+
+<!-- ======================================================
+     HERO
+====================================================== -->
+
 <section class="hero">
 
-    <div class="hero-stars" id="heroStars"></div>
-    <div class="hero-grid"></div>
+  <div class="orbit">
+
+    <div class="orbit-dot"></div>
+
+  </div>
+
+
+  <div class="hero-content">
 
     <div class="container">
-        <div class="hero-content">
 
-            <div class="eyebrow">
-                THE DREAM JOURNEY
-            </div>
+      <div class="eyebrow">
+        THE DREAMSCAPES JOURNEY
+      </div>
 
-            <h1>
-                FROM <span>DREAM</span><br>
-                TO REALITY
-            </h1>
 
-            <p>
-                A dream can begin as a strange thought at 3 AM,
-                a nightmare you can't forget, a character living in
-                your head, or an entire world you've imagined.
-                CrowRules Dream World gives that idea a place to grow.
-            </p>
+      <h1>
+        How Dreams Become Stories
+      </h1>
 
-            <div class="hero-actions">
-                <a href="submit.html" class="btn">
-                    Submit Your Dream
-                </a>
 
-                <a href="#journey" class="btn secondary">
-                    Explore The Journey
-                </a>
-            </div>
+      <p>
 
-        </div>
+        An idea doesn't need to arrive fully formed.
+
+        Dreamscapes exists to give creators a place to
+        imagine, discover, build, write, collaborate,
+        produce and eventually release something that
+        didn't exist before.
+
+      </p>
+
+
+      <div class="hero-actions">
+
+        <a
+          class="btn primary"
+          href="submit.html"
+        >
+          Begin With a Dream
+        </a>
+
+
+        <a
+          class="btn secondary"
+          href="#journey"
+        >
+          Explore the Journey
+        </a>
+
+      </div>
+
     </div>
+
+  </div>
 
 </section>
 
 
-<!-- =========================
+<!-- ======================================================
+     CORE IDEA
+====================================================== -->
+
+<section class="container">
+
+  <div class="overview">
+
+
+    <article class="overview-card">
+
+      <div class="overview-icon">
+        🌙
+      </div>
+
+      <h3>
+        Start Anywhere
+      </h3>
+
+      <p>
+        A dream can begin as a sentence,
+        character, image, scene, world,
+        memory, question or completely
+        strange idea.
+      </p>
+
+    </article>
+
+
+    <article class="overview-card">
+
+      <div class="overview-icon">
+        🌌
+      </div>
+
+      <h3>
+        Build Together
+      </h3>
+
+      <p>
+        The original dreamer can remain
+        involved while writers, artists,
+        producers and other creators help
+        expand the idea.
+      </p>
+
+    </article>
+
+
+    <article class="overview-card">
+
+      <div class="overview-icon">
+        🚀
+      </div>
+
+      <h3>
+        See Where It Goes
+      </h3>
+
+      <p>
+        Some projects may remain experiments.
+        Others may become stories, series,
+        films, games, experiences or future
+        CrowRules productions.
+      </p>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
      JOURNEY
-========================= -->
+====================================================== -->
 
-<section class="journey" id="journey">
+<section
+  id="journey"
+  class="container"
+>
 
-    <div class="container">
+  <div class="section-head">
 
-        <div class="section-heading">
-            <div class="section-label">THE PROCESS</div>
+    <div class="eyebrow">
+      THE SEVEN STAGES
+    </div>
 
-            <h2>
-                One Dream.<br>
-                Many Possibilities.
-            </h2>
+    <h2>
+      From Spark to Story
+    </h2>
 
-            <p>
-                Not every dream becomes a production, and not every
-                project follows exactly the same path. The journey can
-                change as the idea develops.
-            </p>
-        </div>
+    <p>
+      Every project can move at its own pace.
+      Some stages may overlap, repeat or evolve
+      as the idea grows.
+    </p>
 
+  </div>
 
-        <div class="journey-list">
 
-            <article class="step">
+  <div
+    class="journey"
+    id="journeyContainer"
+  >
 
-                <div class="step-number">01</div>
+    <div class="journey-line"></div>
 
-                <div class="step-card">
+    <div
+      class="journey-progress"
+      id="journeyProgress"
+    ></div>
 
-                    <h3>
-                        <span>Dream</span>
-                    </h3>
 
-                    <p>
-                        You bring us the dream. It might be a story,
-                        character, scene, world, nightmare, concept,
-                        conversation, image, or something you cannot
-                        quite explain yet.
-                    </p>
+    <!-- Loaded from Supabase -->
 
-                    <div class="step-meta">
-                        <span class="tag">Your Imagination</span>
-                        <span class="tag">Your Starting Point</span>
-                    </div>
+    <div
+      id="journeySteps"
+    >
 
-                </div>
+      <div
+        style="
+          text-align:center;
+          padding:50px;
+          color:#aaa5ba;
+        "
+      >
 
-            </article>
+        Loading the Dreamscapes journey...
 
-
-            <article class="step">
-
-                <div class="step-number">02</div>
-
-                <div class="step-card">
-
-                    <h3>
-                        <span>Discovery</span>
-                    </h3>
-
-                    <p>
-                        If a submission moves forward, CrowRules can
-                        talk with the creator about what they imagined,
-                        what inspired it, what matters most, and what
-                        they would like the dream to become.
-                    </p>
-
-                    <div class="step-meta">
-                        <span class="tag">Conversation</span>
-                        <span class="tag">Creator Vision</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="step">
-
-                <div class="step-number">03</div>
-
-                <div class="step-card">
-
-                    <h3>
-                        <span>Concept</span>
-                    </h3>
-
-                    <p>
-                        The raw dream begins taking shape. Characters,
-                        themes, settings, story possibilities, tone,
-                        genre, format and audience can begin to emerge.
-                    </p>
-
-                    <div class="step-meta">
-                        <span class="tag">Worldbuilding</span>
-                        <span class="tag">Characters</span>
-                        <span class="tag">Story</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="step">
-
-                <div class="step-number">04</div>
-
-                <div class="step-card">
-
-                    <h3>
-                        <span>Development</span>
-                    </h3>
-
-                    <p>
-                        CrowRules and the creator work together to
-                        develop the project. This can include outlines,
-                        scripts, treatments, character development,
-                        visual concepts, episode ideas, research and
-                        repeated revisions.
-                    </p>
-
-                    <div class="step-meta">
-                        <span class="tag">Writing</span>
-                        <span class="tag">Revisions</span>
-                        <span class="tag">Creative Collaboration</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="step">
-
-                <div class="step-number">05</div>
-
-                <div class="step-card">
-
-                    <h3>
-                        <span>Build</span>
-                    </h3>
-
-                    <p>
-                        The project becomes more than an idea. A
-                        screenplay, series bible, audio script, pitch
-                        package, character designs, proof of concept,
-                        trailer or other development materials may be
-                        created.
-                    </p>
-
-                    <div class="step-meta">
-                        <span class="tag">Proof</span>
-                        <span class="tag">Creative Package</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="step">
-
-                <div class="step-number">06</div>
-
-                <div class="step-card">
-
-                    <h3>
-                        <span>Funding</span>
-                    </h3>
-
-                    <p>
-                        When a project is ready, CrowRules can explore
-                        appropriate ways to finance development or
-                        production. Funding may involve internal
-                        resources, grants, sponsorships, crowdfunding,
-                        partnerships or other lawful financing.
-                    </p>
-
-                    <div class="step-meta">
-                        <span class="tag">Funding</span>
-                        <span class="tag">Partnerships</span>
-                        <span class="tag">Production Planning</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="step">
-
-                <div class="step-number">07</div>
-
-                <div class="step-card">
-
-                    <h3>
-                        <span>Production</span>
-                    </h3>
-
-                    <p>
-                        The dream enters the real world. Depending on
-                        the project, this could mean filming, recording,
-                        animation, game development, publishing,
-                        photography, music production or another
-                        creative production process.
-                    </p>
-
-                    <div class="step-meta">
-                        <span class="tag">Production</span>
-                        <span class="tag">Crew</span>
-                        <span class="tag">Creation</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="step">
-
-                <div class="step-number">08</div>
-
-                <div class="step-card">
-
-                    <h3>
-                        <span>Release</span>
-                    </h3>
-
-                    <p>
-                        When the finished project is ready, it can be
-                        released through CrowRules TV, CrowRules
-                        Publishing, podcasting, digital platforms,
-                        theatrical or festival opportunities, or other
-                        appropriate distribution channels.
-                    </p>
-
-                    <div class="step-meta">
-                        <span class="tag">Premiere</span>
-                        <span class="tag">Distribution</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-        </div>
+      </div>
 
     </div>
+
+  </div>
 
 </section>
 
 
-<!-- =========================
-     LONG DEVELOPMENT
-========================= -->
+<!-- ======================================================
+     PERSONAL PROJECT PROGRESS
+====================================================== -->
 
-<section class="time-section">
+<section
+  class="container"
+>
 
-    <div class="container">
+  <div class="personal">
 
-        <div class="section-heading">
-            <div class="section-label">TIME IS PART OF CREATION</div>
+    <div class="personal-head">
 
-            <h2>
-                Some Dreams<br>
-                Take Years.
-            </h2>
+      <div>
 
-            <p>
-                That's okay. CrowRules Dream World is designed around
-                the idea that meaningful creative work should not be
-                forced into an artificial deadline.
-            </p>
-        </div>
-
-
-        <div class="time-box">
-
-            <h3>
-                <span>5+ Years?</span> That's Possible.
-            </h3>
-
-            <p>
-                A project might take months to develop. Another might
-                take five years, ten years, or longer. A creator may
-                need time. Funding may take time. A script may need
-                twenty rewrites. Technology may change. Production
-                schedules may shift. A project may pause and return
-                later.
-            </p>
-
-            <div class="time-points">
-
-                <div class="time-point">
-                    <strong>Develop Slowly</strong>
-                    <span>
-                        Ideas can mature through research, writing,
-                        collaboration and revision.
-                    </span>
-                </div>
-
-                <div class="time-point">
-                    <strong>Pause When Necessary</strong>
-                    <span>
-                        Projects can enter a paused state without
-                        automatically becoming forgotten.
-                    </span>
-                </div>
-
-                <div class="time-point">
-                    <strong>Resume When Ready</strong>
-                    <span>
-                        Development can continue when the creator,
-                        team, resources and timing align.
-                    </span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     PAUSE / RESUME
-========================= -->
-
-<section>
-
-    <div class="container">
-
-        <div class="section-heading">
-
-            <div class="section-label">
-                LONG-TERM DEVELOPMENT
-            </div>
-
-            <h2>
-                Dreams Don't<br>
-                Expire Because Life Happens.
-            </h2>
-
-            <p>
-                Creative projects live in the real world. People have
-                jobs, families, other projects, financial limitations,
-                health challenges, creative changes and unexpected
-                responsibilities.
-            </p>
-
-        </div>
-
-
-        <div class="pause-grid">
-
-            <div class="info-card">
-
-                <div class="info-icon">II</div>
-
-                <h3>Paused</h3>
-
-                <p>
-                    A project can be placed on hold when circumstances
-                    make continued development impractical. Its
-                    development history can remain preserved while the
-                    project waits.
-                </p>
-
-            </div>
-
-
-            <div class="info-card">
-
-                <div class="info-icon">▶</div>
-
-                <h3>Resumed</h3>
-
-                <p>
-                    When the creator and project team are ready,
-                    development can resume. The project can continue
-                    from its previous stage rather than starting over.
-                </p>
-
-            </div>
-
-
-            <div class="info-card">
-
-                <div class="info-icon">↻</div>
-
-                <h3>Reimagined</h3>
-
-                <p>
-                    Sometimes development reveals that the original
-                    format was not the best one. A movie may become a
-                    series. A story may become an audio drama. A short
-                    may become something much larger.
-                </p>
-
-            </div>
-
-
-            <div class="info-card">
-
-                <div class="info-icon">∞</div>
-
-                <h3>Long-Term Archive</h3>
-
-                <p>
-                    Projects that do not immediately become productions
-                    can remain part of the Dream World archive, subject
-                    to the creator's rights, privacy settings and
-                    applicable agreements.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     FORMATS
-========================= -->
-
-<section class="format-section">
-
-    <div class="container">
-
-        <div class="section-heading">
-
-            <div class="section-label">
-                WHERE CAN A DREAM GO?
-            </div>
-
-            <h2>
-                The Dream Decides.
-            </h2>
-
-            <p>
-                We don't assume every dream needs to become a movie.
-                The right format depends on the idea.
-            </p>
-
-        </div>
-
-
-        <div class="format-grid">
-
-            <div class="format-card">
-                <div class="format-number">01 / SCREEN</div>
-                <h3>Feature Film</h3>
-                <p>
-                    A cinematic story designed for a feature-length
-                    production.
-                </p>
-            </div>
-
-            <div class="format-card">
-                <div class="format-number">02 / TELEVISION</div>
-                <h3>Series</h3>
-                <p>
-                    A continuing story developed for television or
-                    streaming.
-                </p>
-            </div>
-
-            <div class="format-card">
-                <div class="format-number">03 / AUDIO</div>
-                <h3>Audio Drama</h3>
-                <p>
-                    Stories brought to life through voices, sound
-                    design, music and imagination.
-                </p>
-            </div>
-
-            <div class="format-card">
-                <div class="format-number">04 / BOOKS</div>
-                <h3>Novel</h3>
-                <p>
-                    A dream transformed into prose, fiction,
-                    nonfiction or another written work.
-                </p>
-            </div>
-
-            <div class="format-card">
-                <div class="format-number">05 / SHORT</div>
-                <h3>Short Film</h3>
-                <p>
-                    A focused cinematic interpretation of a smaller
-                    or highly concentrated idea.
-                </p>
-            </div>
-
-            <div class="format-card">
-                <div class="format-number">06 / INTERACTIVE</div>
-                <h3>Game</h3>
-                <p>
-                    A world or concept transformed into an interactive
-                    experience.
-                </p>
-            </div>
-
-            <div class="format-card">
-                <div class="format-number">07 / EXPERIMENTAL</div>
-                <h3>Experimental</h3>
-                <p>
-                    Something that does not fit traditional categories.
-                    That's part of the point.
-                </p>
-            </div>
-
-            <div class="format-card">
-                <div class="format-number">08 / UNKNOWN</div>
-                <h3>Something Else</h3>
-                <p>
-                    You don't have to know what it should become.
-                    Bring us the dream first.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     CREATOR ROLE
-========================= -->
-
-<section class="creator-section">
-
-    <div class="container">
-
-        <div class="creator-panel">
-
-            <div class="section-label">
-                THE CREATOR
-            </div>
-
-            <h3>
-                You Are More Than<br>
-                <span>The Submission.</span>
-            </h3>
-
-            <p>
-                When CrowRules chooses to develop a dream with its
-                creator, the goal is collaboration. The person who
-                brought the original dream can potentially remain part
-                of its journey.
-            </p>
-
-            <p>
-                Depending on the project and the written agreements,
-                that involvement could include creative development,
-                writing, producing, consulting, worldbuilding,
-                character development or other roles.
-            </p>
-
-            <div class="creator-list">
-
-                <div class="creator-item">
-                    Original Dream Creator
-                </div>
-
-                <div class="creator-item">
-                    Story / Concept Development
-                </div>
-
-                <div class="creator-item">
-                    Writer or Co-Writer
-                </div>
-
-                <div class="creator-item">
-                    Producer / Creative Producer
-                </div>
-
-                <div class="creator-item">
-                    Creative Consultant
-                </div>
-
-                <div class="creator-item">
-                    Project-Specific Credits
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     PROJECT STATUS
-========================= -->
-
-<section class="status-section">
-
-    <div class="container">
-
-        <div class="section-heading">
-
-            <div class="section-label">
-                PROJECT PIPELINE
-            </div>
-
-            <h2>
-                Every Dream Has<br>
-                A Story of Its Own.
-            </h2>
-
-            <p>
-                A Dream World project can move through different
-                stages as it develops.
-            </p>
-
-        </div>
-
-
-        <div class="status-grid">
-
-            <div class="status">
-                <div class="status-bar"></div>
-                <strong>Community Idea</strong>
-                <span>Shared with the Dream World community.</span>
-            </div>
-
-            <div class="status">
-                <div class="status-bar"></div>
-                <strong>Under Review</strong>
-                <span>Being evaluated for possible development.</span>
-            </div>
-
-            <div class="status">
-                <div class="status-bar"></div>
-                <strong>Concept</strong>
-                <span>The idea is taking an identifiable form.</span>
-            </div>
-
-            <div class="status">
-                <div class="status-bar"></div>
-                <strong>Development</strong>
-                <span>Active creative development is underway.</span>
-            </div>
-
-            <div class="status">
-                <div class="status-bar"></div>
-                <strong>Writing</strong>
-                <span>Scripts, treatments or story materials are being developed.</span>
-            </div>
-
-            <div class="status">
-                <div class="status-bar"></div>
-                <strong>Visual Development</strong>
-                <span>Characters, environments and visual identity are being explored.</span>
-            </div>
-
-            <div class="status">
-                <div class="status-bar"></div>
-                <strong>Funding</strong>
-                <span>Resources for the next phase are being pursued.</span>
-            </div>
-
-            <div class="status">
-                <div class="status-bar"></div>
-                <strong>Pre-Production</strong>
-                <span>The project is preparing to enter production.</span>
-            </div>
-
-            <div class="status">
-                <div class="status-bar"></div>
-                <strong>Production</strong>
-                <span>The project is being created.</span>
-            </div>
-
-            <div class="status">
-                <div class="status-bar"></div>
-                <strong>Post-Production</strong>
-                <span>Editing, sound, graphics, finishing and delivery.</span>
-            </div>
-
-            <div class="status">
-                <div class="status-bar"></div>
-                <strong>Released</strong>
-                <span>The dream has become a public work.</span>
-            </div>
-
-            <div class="status">
-                <div class="status-bar"></div>
-                <strong>Paused / Archived</strong>
-                <span>The project is preserved while inactive.</span>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     RIGHTS
-========================= -->
-
-<section class="rights">
-
-    <div class="container">
-
-        <div class="section-heading">
-
-            <div class="section-label">
-                IMPORTANT
-            </div>
-
-            <h2>
-                Creative Collaboration<br>
-                Requires Clarity.
-            </h2>
-
-        </div>
-
-
-        <div class="rights-box">
-
-            <h3>
-                Your Dream. Clear Agreements.
-            </h3>
-
-            <p>
-                Submitting a dream does not automatically mean that
-                CrowRules owns it. The submission process, privacy
-                choices and applicable terms determine how a submission
-                may be handled.
-            </p>
-
-            <p>
-                If CrowRules decides to develop a project with a
-                creator, the parties should establish the applicable
-                rights, responsibilities, credits, compensation,
-                licensing, ownership and other terms in appropriate
-                written agreements.
-            </p>
-
-            <p>
-                A project may involve additional writers, producers,
-                artists, performers, composers, designers or other
-                collaborators. Their contributions and rights should
-                also be documented appropriately.
-            </p>
-
-            <p>
-                CrowRules Dream World is a creative-development
-                platform, not a guarantee that every submission will
-                be accepted, developed, produced or released.
-            </p>
-
-            <p>
-                Nothing on this page replaces project-specific legal
-                agreements or professional legal advice.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     FINAL CTA
-========================= -->
-
-<section class="final-cta">
-
-    <div class="container">
-
-        <div class="section-label">
-            THE DOOR IS OPEN
+        <div class="eyebrow">
+          YOUR JOURNEY
         </div>
 
         <h2>
-            What Have You<br>
-            <span>Been Dreaming?</span>
+          Dreamscapes Progress
         </h2>
 
-        <p>
-            You don't need a screenplay. You don't need a production
-            plan. You don't even need to know exactly what your idea
-            is yet.
+        <p id="personalMessage">
+          Sign in through Creator Hub to track your
+          project development journey.
         </p>
 
-        <a href="submit.html" class="btn">
-            Enter The Dream World
-        </a>
+      </div>
+
+
+      <a
+        class="btn primary"
+        href="creator-dashboard.html"
+      >
+        Open Creator Hub
+      </a>
 
     </div>
 
+
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+        id="progressFill"
+      ></div>
+
+    </div>
+
+
+    <div class="personal-stats">
+
+      <div class="personal-stat">
+
+        <strong id="completedCount">
+          —
+        </strong>
+
+        <span>
+          Completed
+        </span>
+
+      </div>
+
+
+      <div class="personal-stat">
+
+        <strong id="activeCount">
+          —
+        </strong>
+
+        <span>
+          In Progress
+        </span>
+
+      </div>
+
+
+      <div class="personal-stat">
+
+        <strong id="overallProgress">
+          —
+        </strong>
+
+        <span>
+          Journey Progress
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
+
+
+<!-- ======================================================
+     CREATIVE TEAM
+====================================================== -->
+
+<section
+  class="container team-section"
+>
+
+  <div class="section-head">
+
+    <div class="eyebrow">
+      THE PEOPLE BEHIND THE DREAM
+    </div>
+
+    <h2>
+      You Don't Have to Make Everything
+    </h2>
+
+    <p>
+      Dreamscapes is designed so different kinds of
+      creators can contribute different kinds of magic.
+    </p>
+
+  </div>
+
+
+  <div class="team-grid">
+
+
+    <article class="team-card">
+
+      <div class="team-icon">
+        🌙
+      </div>
+
+      <h3>
+        Dreamers
+      </h3>
+
+      <p>
+        Bring the original idea,
+        inspiration or concept.
+      </p>
+
+    </article>
+
+
+    <article class="team-card">
+
+      <div class="team-icon">
+        ✍️
+      </div>
+
+      <h3>
+        Writers
+      </h3>
+
+      <p>
+        Develop stories, characters,
+        treatments and scripts.
+      </p>
+
+    </article>
+
+
+    <article class="team-card">
+
+      <div class="team-icon">
+        🎨
+      </div>
+
+      <h3>
+        Artists
+      </h3>
+
+      <p>
+        Give worlds and characters
+        a visual identity.
+      </p>
+
+    </article>
+
+
+    <article class="team-card">
+
+      <div class="team-icon">
+        🌌
+      </div>
+
+      <h3>
+        World Builders
+      </h3>
+
+      <p>
+        Develop lore, locations,
+        history and rules.
+      </p>
+
+    </article>
+
+
+    <article class="team-card">
+
+      <div class="team-icon">
+        🎥
+      </div>
+
+      <h3>
+        Filmmakers
+      </h3>
+
+      <p>
+        Help translate developed
+        ideas into visual productions.
+      </p>
+
+    </article>
+
+
+    <article class="team-card">
+
+      <div class="team-icon">
+        🎵
+      </div>
+
+      <h3>
+        Audio Creators
+      </h3>
+
+      <p>
+        Build atmosphere through music,
+        sound and voice.
+      </p>
+
+    </article>
+
+
+    <article class="team-card">
+
+      <div class="team-icon">
+        🎬
+      </div>
+
+      <h3>
+        Producers
+      </h3>
+
+      <p>
+        Help organize development,
+        resources and production.
+      </p>
+
+    </article>
+
+
+    <article class="team-card">
+
+      <div class="team-icon">
+        🤝
+      </div>
+
+      <h3>
+        Collaborators
+      </h3>
+
+      <p>
+        Bring skills, ideas,
+        feedback and new perspectives.
+      </p>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     PRINCIPLES
+====================================================== -->
+
+<section
+  class="container principles"
+>
+
+  <div class="section-head">
+
+    <div class="eyebrow">
+      THE DREAMSCAPES PHILOSOPHY
+    </div>
+
+    <h2>
+      How We Want the Process to Feel
+    </h2>
+
+  </div>
+
+
+  <div class="principle-grid">
+
+
+    <article class="principle">
+
+      <div class="principle-icon">
+        💡
+      </div>
+
+      <div>
+
+        <h3>
+          Ideas Can Start Small
+        </h3>
+
+        <p>
+          You don't need a complete screenplay,
+          business plan or production package
+          before bringing an idea into Dreamscapes.
+        </p>
+
+      </div>
+
+    </article>
+
+
+    <article class="principle">
+
+      <div class="principle-icon">
+        🧑‍🚀
+      </div>
+
+      <div>
+
+        <h3>
+          The Dreamer Matters
+        </h3>
+
+        <p>
+          When someone brings the original dream,
+          their involvement and creative contribution
+          should remain part of the conversation.
+        </p>
+
+      </div>
+
+    </article>
+
+
+    <article class="principle">
+
+      <div class="principle-icon">
+        🤝
+      </div>
+
+      <div>
+
+        <h3>
+          Collaboration Is Intentional
+        </h3>
+
+        <p>
+          People join projects because their skills,
+          interests and availability fit what the
+          project needs.
+        </p>
+
+      </div>
+
+    </article>
+
+
+    <article class="principle">
+
+      <div class="principle-icon">
+        🔐
+      </div>
+
+      <div>
+
+        <h3>
+          Rights Should Be Clear
+        </h3>
+
+        <p>
+          Creative participation, credits and
+          project agreements should be documented
+          rather than left to assumptions.
+        </p>
+
+      </div>
+
+    </article>
+
+
+    <article class="principle">
+
+      <div class="principle-icon">
+        🐢
+      </div>
+
+      <div>
+
+        <h3>
+          Development Takes Time
+        </h3>
+
+        <p>
+          A project can remain in development while
+          its world, characters and story continue
+          to evolve.
+        </p>
+
+      </div>
+
+    </article>
+
+
+    <article class="principle">
+
+      <div class="principle-icon">
+        🚀
+      </div>
+
+      <div>
+
+        <h3>
+          Not Every Dream Must Become a Production
+        </h3>
+
+        <p>
+          Exploration itself has value. Some ideas
+          may become productions, while others become
+          learning experiences or remain creative worlds.
+        </p>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     FINAL CTA
+====================================================== -->
+
+<section class="container">
+
+  <div class="cta">
+
+    <div class="eyebrow">
+      THE FIRST STEP IS YOURS
+    </div>
+
+    <h2>
+      You Don't Have to Know How to Make It Yet.
+    </h2>
+
+    <p>
+      That's why Dreamscapes exists.
+
+      Bring the dream.
+
+      We'll discover what it could become.
+    </p>
+
+
+    <div class="hero-actions">
+
+      <a
+        class="btn primary"
+        href="submit.html"
+      >
+        Submit Your Dream
+      </a>
+
+      <a
+        class="btn secondary"
+        href="creators.html"
+      >
+        Meet the Creators
+      </a>
+
+      <a
+        class="btn secondary"
+        href="creative-room.html"
+      >
+        Enter the Creative Room
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
 
 </main>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- ======================================================
+     AUTH STATUS
+====================================================== -->
+
+<div
+  class="auth-status"
+  id="authStatus"
+>
+
+  <span class="auth-dot"></span>
+
+  <span id="authText">
+    Dreamscapes connected
+  </span>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
 
 <footer>
 
-    <div class="container">
+  <div class="container foot">
 
-        <div class="footer-grid">
-
-            <div class="footer-brand">
-
-                <h3>
-                    CROWRULES DREAM WORLD
-                </h3>
-
-                <p>
-                    A creative universe where dreams, strange ideas,
-                    characters, stories and impossible worlds can
-                    become something real.
-                </p>
-
-            </div>
-
-
-            <div class="footer-col">
-
-                <h4>Explore</h4>
-
-                <a href="dreams.html">Dreams</a>
-                <a href="projects.html">Projects</a>
-                <a href="creators.html">Creators</a>
-                <a href="produced.html">Produced</a>
-
-            </div>
-
-
-            <div class="footer-col">
-
-                <h4>Create</h4>
-
-                <a href="submit.html">Submit Dream</a>
-                <a href="idea-lab.html">Idea Lab</a>
-                <a href="collaborate.html">Collaborate</a>
-                <a href="creator-dashboard.html">Creator Portal</a>
-
-            </div>
-
-
-            <div class="footer-col">
-
-                <h4>Information</h4>
-
-                <a href="how-it-works.html">How It Works</a>
-                <a href="creator-rights.html">Creator Rights</a>
-                <a href="faq.html">FAQ</a>
-                <a href="contact.html">Contact</a>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-bottom">
-
-            <span>
-                © <span id="year"></span> CrowRules Entertainment
-            </span>
-
-            <span>
-                DREAM IT. BUILD IT. MAKE IT REAL.
-            </span>
-
-        </div>
-
+    <div>
+      ©
+      <span data-year></span>
+      CrowRules Entertainment ·
+      CrowRules Dreamscapes
     </div>
+
+    <div>
+      One Dream. One World. One Story.
+    </div>
+
+  </div>
 
 </footer>
 
 
+<script src="assets/js/dreamscapes.js"></script>
+
+
 <script>
-/* =========================
-   MOBILE NAV
-========================= */
 
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
+/* =========================================================
+   SUPABASE
+========================================================= */
 
-menuBtn.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
-});
+const SUPABASE_URL =
+  "https://cevylpnoexugwgygvtgu.supabase.co";
 
 
-document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-    });
-});
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
 
 
-/* =========================
-   YEAR
-========================= */
+let db = null;
 
-document.getElementById("year").textContent =
-    new Date().getFullYear();
+let currentUser = null;
+
+let journeySteps = [];
+
+let journeyProgress = [];
 
 
-/* =========================
-   DREAM STARS
-========================= */
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
-const stars = document.getElementById("heroStars");
+document.addEventListener(
+  "DOMContentLoaded",
+  init
+);
 
-for(let i = 0; i < 90; i++){
 
-    const star = document.createElement("span");
+async function init(){
 
-    star.className = "star";
+  setYear();
 
-    star.style.left = Math.random() * 100 + "%";
-    star.style.top = Math.random() * 100 + "%";
+  setupMenu();
 
-    const size = Math.random() * 2 + 1;
+  setupScrollProgress();
 
-    star.style.width = size + "px";
-    star.style.height = size + "px";
 
-    star.style.animationDelay =
-        (Math.random() * 5) + "s";
+  if(
+    !window.supabase ||
+    SUPABASE_PUBLISHABLE_KEY ===
+      "YOUR_SUPABASE_PUBLISHABLE_KEY"
+  ){
 
-    star.style.animationDuration =
-        (3 + Math.random() * 5) + "s";
+    renderStaticJourney();
 
-    stars.appendChild(star);
+    showToast(
+      "Add your Supabase publishable key to enable live progress."
+    );
+
+    return;
+
+  }
+
+
+  db =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  await loadSession();
+
+  await loadJourneySteps();
+
+
+  if(currentUser){
+
+    await loadPersonalProgress();
+
+  }
+
+
+  watchAuth();
+
 }
 
 
-/* =========================
-   SCROLL REVEAL
-========================= */
+/* =========================================================
+   SESSION
+========================================================= */
 
-const revealItems = document.querySelectorAll(
-    ".step-card,.info-card,.format-card,.status,.time-box,.creator-panel,.rights-box"
-);
+async function loadSession(){
 
-const revealObserver = new IntersectionObserver(
-    entries => {
+  const {
+    data,
+    error
+  } =
+    await db.auth.getUser();
 
-        entries.forEach(entry => {
 
-            if(entry.isIntersecting){
+  if(error){
 
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
+    console.warn(error);
 
-                revealObserver.unobserve(entry.target);
-            }
+    return;
 
-        });
+  }
+
+
+  currentUser =
+    data?.user || null;
+
+
+  updateAuthUI();
+
+}
+
+
+/* =========================================================
+   AUTH UI
+========================================================= */
+
+function updateAuthUI(){
+
+  const status =
+    document.getElementById(
+      "authStatus"
+    );
+
+
+  const text =
+    document.getElementById(
+      "authText"
+    );
+
+
+  if(currentUser){
+
+    status.classList.add("show");
+
+    text.textContent =
+      "Signed in · Dreamscapes";
+
+  }else{
+
+    status.classList.remove(
+      "show"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD JOURNEY STEPS
+========================================================= */
+
+async function loadJourneySteps(){
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from("ds_journey_steps")
+      .select(`
+        id,
+        step_number,
+        step_key,
+        title,
+        description,
+        icon,
+        is_active
+      `)
+      .eq(
+        "is_active",
+        true
+      )
+      .order(
+        "step_number",
+        {
+          ascending:true
+        }
+      );
+
+
+  if(error){
+
+    console.error(error);
+
+    renderStaticJourney();
+
+    return;
+
+  }
+
+
+  journeySteps =
+    data || [];
+
+
+  renderJourney();
+
+}
+
+
+/* =========================================================
+   RENDER JOURNEY
+========================================================= */
+
+function renderJourney(){
+
+  const container =
+    document.getElementById(
+      "journeySteps"
+    );
+
+
+  if(!journeySteps.length){
+
+    renderStaticJourney();
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    journeySteps
+      .map(
+        (step,index) => {
+
+          return `
+
+            <article
+              class="journey-step"
+              data-step-id="${step.id}"
+            >
+
+              <div class="journey-node">
+
+                <div>
+
+                  <div class="step-number">
+                    ${String(
+                      step.step_number
+                    ).padStart(2,"0")}
+                  </div>
+
+                  <div class="step-icon">
+                    ${
+                      escapeHtml(
+                        step.icon || "✦"
+                      )
+                    }
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div class="journey-copy">
+
+                <h3>
+                  ${escapeHtml(
+                    step.title
+                  )}
+                </h3>
+
+                <p>
+                  ${escapeHtml(
+                    step.description
+                  )}
+                </p>
+
+                <div class="step-status">
+
+                  Stage
+                  ${step.step_number}
+                  of
+                  ${journeySteps.length}
+
+                </div>
+
+              </div>
+
+            </article>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =========================================================
+   STATIC FALLBACK
+========================================================= */
+
+function renderStaticJourney(){
+
+  const fallback = [
+
+    [
+      "01",
+      "🌙",
+      "Dream",
+      "Submit an original idea, concept, character, world or story seed."
+    ],
+
+    [
+      "02",
+      "🔭",
+      "Discover",
+      "CrowRules reviews the concept and determines whether it fits a development path."
+    ],
+
+    [
+      "03",
+      "🌌",
+      "Build the World",
+      "Characters, locations, lore, timelines and rules turn an idea into a living universe."
+    ],
+
+    [
+      "04",
+      "✍️",
+      "Write",
+      "Story bibles, treatments, episodes, scripts and other creative materials are developed."
+    ],
+
+    [
+      "05",
+      "🤝",
+      "Collaborate",
+      "Writers, artists, producers and other creators can join the project."
+    ],
+
+    [
+      "06",
+      "🎬",
+      "Produce",
+      "A project may move into pre-production and eventually become a CrowRules Entertainment production."
+    ],
+
+    [
+      "07",
+      "🚀",
+      "Release",
+      "The finished work can live across CrowRules platforms and future divisions."
+    ]
+
+  ];
+
+
+  journeySteps =
+    fallback.map(
+      item => ({
+
+        step_number:
+          Number(item[0]),
+
+        step_key:
+          item[2]
+            .toLowerCase()
+            .replace(/\s+/g,"-"),
+
+        title:
+          item[2],
+
+        description:
+          item[3],
+
+        icon:
+          item[1]
+
+      })
+    );
+
+
+  const container =
+    document.getElementById(
+      "journeySteps"
+    );
+
+
+  container.innerHTML =
+    journeySteps
+      .map(
+        step => `
+
+          <article class="journey-step">
+
+            <div class="journey-node">
+
+              <div>
+
+                <div class="step-number">
+                  ${String(
+                    step.step_number
+                  ).padStart(2,"0")}
+                </div>
+
+                <div class="step-icon">
+                  ${step.icon}
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="journey-copy">
+
+              <h3>
+                ${escapeHtml(
+                  step.title
+                )}
+              </h3>
+
+              <p>
+                ${escapeHtml(
+                  step.description
+                )}
+              </p>
+
+              <div class="step-status">
+                Stage
+                ${step.step_number}
+                of 7
+              </div>
+
+            </div>
+
+          </article>
+
+        `
+      )
+      .join("");
+
+}
+
+
+/* =========================================================
+   PERSONAL PROGRESS
+========================================================= */
+
+async function loadPersonalProgress(){
+
+  if(!currentUser){
+
+    return;
+
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from("ds_journey_progress")
+      .select(`
+        id,
+        project_id,
+        step_id,
+        status,
+        notes,
+        completed_at,
+        updated_at
+      `)
+      .eq(
+        "user_id",
+        currentUser.id
+      );
+
+
+  if(error){
+
+    console.warn(
+      "Journey progress:",
+      error
+    );
+
+    return;
+
+  }
+
+
+  journeyProgress =
+    data || [];
+
+
+  updatePersonalStats();
+
+}
+
+
+/* =========================================================
+   PERSONAL STATS
+========================================================= */
+
+function updatePersonalStats(){
+
+  const completed =
+    journeyProgress.filter(
+      row =>
+        row.status ===
+        "completed"
+    ).length;
+
+
+  const active =
+    journeyProgress.filter(
+      row =>
+        row.status ===
+        "in_progress"
+    ).length;
+
+
+  const total =
+    journeySteps.length ||
+    7;
+
+
+  const progress =
+    Math.min(
+      100,
+      Math.round(
+        (
+          completed /
+          total
+        ) * 100
+      )
+    );
+
+
+  document.getElementById(
+    "completedCount"
+  ).textContent =
+    completed;
+
+
+  document.getElementById(
+    "activeCount"
+  ).textContent =
+    active;
+
+
+  document.getElementById(
+    "overallProgress"
+  ).textContent =
+    progress + "%";
+
+
+  document.getElementById(
+    "progressFill"
+  ).style.width =
+    progress + "%";
+
+
+  document.getElementById(
+    "personalMessage"
+  ).textContent =
+    completed
+      ? `You've completed ${completed} of ${total} Dreamscapes journey stages.`
+      : "Your Dreamscapes journey will appear here as your projects develop.";
+
+}
+
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+function setupScrollProgress(){
+
+  const progress =
+    document.getElementById(
+      "journeyProgress"
+    );
+
+
+  window.addEventListener(
+    "scroll",
+    () => {
+
+      const journey =
+        document.getElementById(
+          "journeyContainer"
+        );
+
+
+      if(!journey){
+
+        return;
+
+      }
+
+
+      const rect =
+        journey.getBoundingClientRect();
+
+
+      const viewport =
+        window.innerHeight;
+
+
+      const total =
+        rect.height;
+
+
+      const passed =
+        viewport -
+        rect.top;
+
+
+      const percent =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            (
+              passed /
+              (
+                total +
+                viewport
+              )
+            ) * 100
+          )
+        );
+
+
+      progress.style.height =
+        percent + "%";
 
     },
     {
-        threshold:.12
+      passive:true
     }
-);
+  );
+
+}
 
 
-revealItems.forEach(item => {
+/* =========================================================
+   AUTH WATCHER
+========================================================= */
 
-    item.style.opacity = "0";
-    item.style.transform = "translateY(18px)";
-    item.style.transition =
-        "opacity .6s ease, transform .6s ease";
+function watchAuth(){
 
-    revealObserver.observe(item);
+  db.auth.onAuthStateChange(
+    async (
+      _event,
+      session
+    ) => {
 
-});
+      currentUser =
+        session?.user || null;
+
+
+      updateAuthUI();
+
+
+      if(currentUser){
+
+        await loadPersonalProgress();
+
+      }else{
+
+        journeyProgress = [];
+
+        updatePersonalStats();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+function setupMenu(){
+
+  const button =
+    document.getElementById(
+      "menuBtn"
+    );
+
+
+  const links =
+    document.querySelector(
+      ".links"
+    );
+
+
+  if(!button || !links){
+
+    return;
+
+  }
+
+
+  button.addEventListener(
+    "click",
+    () => {
+
+      const isOpen =
+        links.dataset.open ===
+        "true";
+
+
+      links.dataset.open =
+        String(!isOpen);
+
+
+      links.style.display =
+        isOpen
+          ? "none"
+          : "flex";
+
+
+      if(!isOpen){
+
+        links.style.position =
+          "absolute";
+
+        links.style.top =
+          "72px";
+
+        links.style.right =
+          "4%";
+
+        links.style.flexDirection =
+          "column";
+
+        links.style.padding =
+          "18px";
+
+        links.style.background =
+          "rgba(8,6,18,.97)";
+
+        links.style.border =
+          "1px solid rgba(255,255,255,.1)";
+
+        links.style.borderRadius =
+          "15px";
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+function showToast(message){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.textContent =
+    message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    window.__dsToastTimer
+  );
+
+
+  window.__dsToastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      3500
+    );
+
+}
+
+
+function setYear(){
+
+  document
+    .querySelectorAll(
+      "[data-year]"
+    )
+    .forEach(
+      el => {
+
+        el.textContent =
+          new Date()
+            .getFullYear();
+
+      }
+    );
+
+}
+
 </script>
 
 </body>

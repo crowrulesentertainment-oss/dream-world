@@ -4,2000 +4,843 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>CrowRules Dream World — Credits</title>
-<meta name="theme-color" content="#050505">
-<meta name="description" content="CrowRules Dream World Creator Credits Center — manage project credits, creator recognition, contributors, approvals and production credits.">
+<title>Credits · CrowRules Dreamscapes</title>
+
+<meta name="description"
+      content="CrowRules Dreamscapes creator credits — preserving the creative journey from original dream to finished production.">
+
+<meta name="theme-color" content="#03030a">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+  rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/dreamscapes.css">
 
 <style>
+
 :root{
-  --bg:#050505;
-  --panel:#0b0b0e;
-  --panel2:#101014;
-  --panel3:#15151a;
-  --red:#e50914;
-  --red2:#ff3038;
-  --green:#43dc91;
-  --yellow:#f3c95b;
-  --blue:#69aaff;
-  --purple:#aa7cff;
-  --white:#f3f3f3;
-  --muted:#8d8d94;
-  --line:rgba(255,255,255,.09);
-  --shadow:0 20px 70px rgba(0,0,0,.45);
+  --bg:#03030a;
+  --panel:rgba(12,12,28,.78);
+  --panel2:rgba(20,18,42,.65);
+  --line:rgba(255,255,255,.10);
+  --text:#f7f5ff;
+  --muted:#aaa6c7;
+  --purple:#a879ff;
+  --blue:#6dc8ff;
+  --pink:#ff79d8;
+  --green:#72f5b5;
 }
 
 *{
   box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
 }
 
 body{
-  min-height:100vh;
-  color:var(--white);
-  font-family:Montserrat,Arial,sans-serif;
+  margin:0;
   background:
-    radial-gradient(circle at 8% 5%,rgba(229,9,20,.12),transparent 28%),
-    radial-gradient(circle at 92% 15%,rgba(120,0,0,.11),transparent 30%),
-    linear-gradient(180deg,#050505,#080808 55%,#040404);
+    radial-gradient(circle at 50% -10%,rgba(116,67,255,.22),transparent 40%),
+    radial-gradient(circle at 90% 30%,rgba(71,162,255,.10),transparent 30%),
+    var(--bg);
+  color:var(--text);
+  font-family:Montserrat,sans-serif;
 }
-
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.03;
-  background-image:
-    linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);
-  background-size:50px 50px;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button,
-input,
-select,
-textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-/* =====================================================
-CONTAINER
-===================================================== */
 
 .container{
-  width:min(1480px,94%);
+  width:min(1180px,92%);
   margin:auto;
 }
 
-/* =====================================================
-HEADER
-===================================================== */
-
-header{
+.nav{
   position:sticky;
   top:0;
-  z-index:1000;
-  background:rgba(5,5,5,.94);
+  z-index:100;
   backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
+  background:rgba(3,3,10,.72);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.nav{
-  min-height:76px;
+.navin{
+  min-height:74px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:20px;
+  gap:28px;
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:13px;
-}
-
-.logo{
-  width:44px;
-  height:44px;
-  display:grid;
-  place-items:center;
-  border:1px solid rgba(229,9,20,.65);
-  background:#090909;
-  color:var(--red2);
+  color:#fff;
+  text-decoration:none;
   font-family:Orbitron,sans-serif;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:-2px;
-}
-
-.brand strong{
-  display:block;
-  font-family:Orbitron,sans-serif;
-  font-size:14px;
-  letter-spacing:1.5px;
+  font-weight:800;
+  letter-spacing:2px;
+  white-space:nowrap;
 }
 
 .brand span{
   display:block;
+  color:var(--purple);
+  font-size:.65em;
+  letter-spacing:4px;
   margin-top:3px;
-  color:#777;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:2px;
 }
 
-.navlinks{
+.links{
+  margin-left:auto;
   display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  flex-wrap:wrap;
-  gap:4px;
+  gap:18px;
 }
 
-.navlinks a{
-  padding:10px 11px;
-  border-radius:6px;
-  color:#999;
-  font-size:10px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.7px;
+.links a{
+  color:#bbb8d2;
+  text-decoration:none;
+  font-size:.82rem;
+  transition:.25s ease;
 }
 
-.navlinks a:hover,
-.navlinks a.active{
+.links a:hover,
+.links a.active{
   color:#fff;
-  background:rgba(229,9,20,.1);
 }
 
-.navlinks a.active{
-  box-shadow:inset 0 -2px var(--red);
-}
-
-.mobileMenu{
+.menu{
   display:none;
-  padding:10px 12px;
-  border:1px solid var(--line);
-  background:none;
-  color:#fff;
 }
 
-/* =====================================================
-HERO
-===================================================== */
-
-.hero{
-  padding:42px 0 28px;
+.page{
+  position:relative;
+  padding:90px 0 120px;
+  min-height:calc(100vh - 150px);
 }
 
-.breadcrumb{
-  color:#666;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:1.7px;
-  margin-bottom:17px;
-}
-
-.breadcrumb span{
-  color:var(--red2);
-}
-
-.heroGrid{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:25px;
-  align-items:end;
+.title{
+  text-align:center;
+  max-width:850px;
+  margin:0 auto 55px;
 }
 
 .eyebrow{
-  color:var(--red2);
+  color:var(--purple);
   font-family:Orbitron,sans-serif;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:2.5px;
-  margin-bottom:10px;
-}
-
-h1{
-  font-family:Orbitron,sans-serif;
-  font-size:clamp(30px,4vw,53px);
-  line-height:1.05;
-  letter-spacing:-1px;
-}
-
-.heroText{
-  max-width:850px;
-  margin-top:14px;
-  color:#999;
-  font-size:13px;
-  line-height:1.8;
-}
-
-.heroActions{
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-/* =====================================================
-BUTTONS
-===================================================== */
-
-.btn{
-  border:1px solid var(--line);
-  background:#101014;
-  color:#eee;
-  padding:11px 14px;
-  border-radius:6px;
-  font-size:10px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.8px;
-}
-
-.btn:hover{
-  border-color:rgba(229,9,20,.5);
-}
-
-.btn.primary{
-  background:var(--red);
-  border-color:var(--red);
-  color:#fff;
-}
-
-.btn.primary:hover{
-  background:var(--red2);
-}
-
-.btn.green{
-  color:var(--green);
-  border-color:rgba(67,220,145,.3);
-  background:rgba(67,220,145,.04);
-}
-
-/* =====================================================
-PROJECT STRIP
-===================================================== */
-
-.projectStrip{
-  display:grid;
-  grid-template-columns:1fr repeat(4,auto);
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.018);
-}
-
-.projectTitle{
-  padding:17px 19px;
-}
-
-.projectTitle label,
-.projectStat label{
-  display:block;
-  color:#666;
-  font-size:8px;
-  text-transform:uppercase;
-  letter-spacing:1.4px;
-  margin-bottom:6px;
-}
-
-.projectTitle strong{
-  font-family:Orbitron,sans-serif;
-  font-size:12px;
-}
-
-.projectStat{
-  min-width:125px;
-  padding:17px;
-  border-left:1px solid var(--line);
-}
-
-.projectStat strong{
-  font-size:11px;
-}
-
-/* =====================================================
-MAIN
-===================================================== */
-
-main{
-  padding:25px 0 80px;
-}
-
-.layout{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 330px;
-  gap:21px;
-}
-
-.section{
-  margin-bottom:21px;
-  border:1px solid var(--line);
-  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
-  box-shadow:var(--shadow);
-}
-
-.sectionHeader{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  padding:16px 18px;
-  border-bottom:1px solid var(--line);
-}
-
-.sectionHeader h2{
-  font-family:Orbitron,sans-serif;
-  font-size:13px;
-  letter-spacing:1px;
-}
-
-.sectionHeader p{
-  color:#6d6d73;
-  font-size:9px;
-  margin-top:5px;
-}
-
-.sectionBody{
-  padding:18px;
-}
-
-/* =====================================================
-CREDIT SUMMARY
-===================================================== */
-
-.summaryGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-bottom:21px;
-}
-
-.summaryCard{
-  padding:17px;
-  border:1px solid var(--line);
-  background:#0b0b0e;
-}
-
-.summaryCard strong{
-  display:block;
-  font-family:Orbitron,sans-serif;
-  font-size:25px;
-}
-
-.summaryCard span{
-  display:block;
-  margin-top:5px;
-  color:#666;
-  font-size:8px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-/* =====================================================
-CREDIT FEATURE
-===================================================== */
-
-.creatorCredit{
-  position:relative;
-  overflow:hidden;
-  padding:23px;
-  border:1px solid rgba(229,9,20,.35);
-  background:
-    radial-gradient(circle at 85% 10%,rgba(229,9,20,.15),transparent 38%),
-    linear-gradient(135deg,#0e0708,#09090b);
-}
-
-.creatorCredit:after{
-  content:"DREAM";
-  position:absolute;
-  right:-15px;
-  bottom:-32px;
-  color:rgba(255,255,255,.025);
-  font-family:Orbitron,sans-serif;
-  font-size:90px;
-  font-weight:900;
-  pointer-events:none;
-}
-
-.creditEyebrow{
-  color:var(--red2);
-  font-family:Orbitron,sans-serif;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-
-.creatorCredit h3{
-  position:relative;
-  z-index:1;
-  margin-top:9px;
-  font-family:Orbitron,sans-serif;
-  font-size:22px;
-}
-
-.creditLine{
-  position:relative;
-  z-index:1;
-  margin-top:11px;
-  color:#bbb;
-  font-size:12px;
-}
-
-.creditLine strong{
-  color:#fff;
-}
-
-.creditDescription{
-  position:relative;
-  z-index:1;
-  max-width:750px;
-  margin-top:11px;
-  color:#777;
-  font-size:9px;
-  line-height:1.7;
-}
-
-/* =====================================================
-CREDIT LIST
-===================================================== */
-
-.creditList{
-  display:grid;
-  gap:9px;
-}
-
-.creditRow{
-  display:grid;
-  grid-template-columns:45px minmax(0,1fr) 190px auto;
-  gap:13px;
-  align-items:center;
-  padding:14px;
-  border:1px solid var(--line);
-  background:#09090b;
-}
-
-.creditNumber{
-  width:40px;
-  height:40px;
-  display:grid;
-  place-items:center;
-  border:1px solid rgba(229,9,20,.25);
-  color:var(--red2);
-  font-family:Orbitron,sans-serif;
-  font-size:10px;
-}
-
-.creditPerson strong{
-  display:block;
-  font-size:10px;
-}
-
-.creditPerson p{
-  color:#666;
-  font-size:8px;
-  margin-top:4px;
-}
-
-.creditRole{
-  color:#bbb;
-  font-size:8px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-}
-
-.creditStatus{
-  padding:5px 7px;
-  border:1px solid rgba(67,220,145,.25);
-  color:var(--green);
-  background:rgba(67,220,145,.04);
-  font-size:7px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-}
-
-.creditStatus.pending{
-  color:var(--yellow);
-  border-color:rgba(243,201,91,.25);
-  background:rgba(243,201,91,.04);
-}
-
-.creditStatus.proposed{
-  color:var(--blue);
-  border-color:rgba(105,170,255,.25);
-  background:rgba(105,170,255,.04);
-}
-
-/* =====================================================
-CREDIT TYPES
-===================================================== */
-
-.creditTypes{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-}
-
-.typeCard{
-  padding:15px;
-  border:1px solid var(--line);
-  background:#09090b;
-}
-
-.typeCard strong{
-  display:block;
-  font-family:Orbitron,sans-serif;
-  font-size:9px;
-}
-
-.typeCard span{
-  display:block;
-  margin-top:6px;
-  color:#666;
-  font-size:8px;
-  line-height:1.6;
-}
-
-/* =====================================================
-TIMELINE
-===================================================== */
-
-.timeline{
-  position:relative;
-  display:grid;
-}
-
-.timeline:before{
-  content:"";
-  position:absolute;
-  left:8px;
-  top:8px;
-  bottom:8px;
-  width:1px;
-  background:rgba(229,9,20,.24);
-}
-
-.timelineItem{
-  position:relative;
-  display:grid;
-  grid-template-columns:18px 1fr auto;
-  gap:11px;
-  padding:11px 0;
-}
-
-.timelineDot{
-  position:relative;
-  z-index:2;
-  width:17px;
-  height:17px;
-  border-radius:50%;
-  border:1px solid rgba(229,9,20,.5);
-  background:#09090b;
-}
-
-.timelineDot.done{
-  background:var(--red);
-}
-
-.timelineItem strong{
-  display:block;
-  font-size:9px;
-}
-
-.timelineItem p{
-  color:#666;
-  font-size:8px;
-  line-height:1.5;
-  margin-top:4px;
-}
-
-.timelineDate{
-  color:#555;
-  font-size:8px;
-  white-space:nowrap;
-}
-
-/* =====================================================
-SIDEBAR
-===================================================== */
-
-.sidebar .section{
+  font-size:.72rem;
+  letter-spacing:4px;
+  font-weight:700;
   margin-bottom:18px;
 }
 
-.detailList{
-  display:grid;
+.title h1{
+  margin:0;
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(2.5rem,6vw,5.5rem);
+  line-height:1;
+  background:linear-gradient(90deg,#fff,var(--purple),var(--blue),#fff);
+  background-size:300%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:titleFlow 9s linear infinite;
 }
 
-.detail{
+@keyframes titleFlow{
+  to{background-position:300% center}
+}
+
+.title p{
+  margin:25px auto 0;
+  max-width:720px;
+  color:var(--muted);
+  line-height:1.8;
+  font-size:1.02rem;
+}
+
+/* HERO CREDIT MESSAGE */
+
+.credit-intro{
+  position:relative;
+  overflow:hidden;
+  padding:42px;
+  border:1px solid var(--line);
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 15% 30%,rgba(168,121,255,.16),transparent 35%),
+    radial-gradient(circle at 90% 70%,rgba(109,200,255,.10),transparent 35%),
+    rgba(10,9,24,.72);
+  box-shadow:0 30px 100px rgba(0,0,0,.35);
+  margin-bottom:35px;
+}
+
+.credit-intro:before{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  border:1px solid rgba(168,121,255,.18);
+  border-radius:50%;
+  right:-90px;
+  top:-130px;
+  animation:orbit 18s linear infinite;
+}
+
+@keyframes orbit{
+  to{transform:rotate(360deg)}
+}
+
+.credit-intro h2{
+  margin:0 0 12px;
+  font-family:Orbitron,sans-serif;
+  font-size:1.45rem;
+}
+
+.credit-intro p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.8;
+  max-width:850px;
+}
+
+/* CONTROLS */
+
+.credit-controls{
   display:flex;
-  justify-content:space-between;
   gap:12px;
-  padding:10px 0;
-  border-bottom:1px solid var(--line);
-  font-size:9px;
+  flex-wrap:wrap;
+  margin-bottom:28px;
 }
 
-.detail:last-child{
-  border-bottom:0;
-}
-
-.detail span:first-child{
-  color:#666;
-}
-
-.detail span:last-child{
-  color:#ddd;
-  text-align:right;
-}
-
-.sideLinks{
-  display:grid;
-  gap:7px;
-}
-
-.sideLink{
-  padding:10px 11px;
+.control,
+.search{
+  min-height:46px;
   border:1px solid var(--line);
-  background:#09090b;
-  color:#888;
-  font-size:8px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.7px;
-  text-align:left;
-}
-
-.sideLink:hover{
+  border-radius:12px;
+  background:rgba(255,255,255,.045);
   color:#fff;
-  border-color:rgba(229,9,20,.4);
-}
-
-.notice{
-  padding:14px;
-  border:1px solid rgba(243,201,91,.2);
-  background:rgba(243,201,91,.035);
-}
-
-.notice strong{
-  display:block;
-  color:var(--yellow);
-  font-family:Orbitron,sans-serif;
-  font-size:9px;
-}
-
-.notice p{
-  color:#777;
-  font-size:8px;
-  line-height:1.7;
-  margin-top:8px;
-}
-
-/* =====================================================
-CREDIT PREVIEW
-===================================================== */
-
-.creditPreview{
-  border:1px solid rgba(255,255,255,.1);
-  background:#070709;
-  padding:22px;
-  text-align:center;
-}
-
-.creditPreview small{
-  display:block;
-  color:#666;
-  font-size:7px;
-  text-transform:uppercase;
-  letter-spacing:2px;
-  margin-bottom:12px;
-}
-
-.creditPreview h3{
-  font-family:Orbitron,sans-serif;
-  font-size:16px;
-}
-
-.creditPreview p{
-  margin-top:8px;
-  color:#aaa;
-  font-family:Georgia,serif;
-  font-size:11px;
-}
-
-.creditPreview .line{
-  width:55px;
-  height:1px;
-  margin:15px auto;
-  background:var(--red);
-}
-
-.creditPreview .names{
-  color:#ddd;
-  font-size:9px;
-  line-height:2;
-}
-
-/* =====================================================
-MODAL
-===================================================== */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:2000;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(0,0,0,.82);
-  backdrop-filter:blur(10px);
-}
-
-.modal.open{
-  display:flex;
-}
-
-.modalBox{
-  width:min(680px,100%);
-  max-height:90vh;
-  overflow:auto;
-  border:1px solid rgba(229,9,20,.35);
-  background:#0b0b0e;
-  box-shadow:0 30px 100px rgba(0,0,0,.7);
-}
-
-.modalHeader{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:17px 19px;
-  border-bottom:1px solid var(--line);
-}
-
-.modalHeader h2{
-  font-family:Orbitron,sans-serif;
-  font-size:13px;
-}
-
-.close{
-  border:0;
-  background:none;
-  color:#777;
-  font-size:20px;
-}
-
-.form{
-  padding:19px;
-}
-
-.field{
-  margin-bottom:14px;
-}
-
-.field label{
-  display:block;
-  color:#888;
-  font-size:8px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  margin-bottom:7px;
-}
-
-.field input,
-.field select,
-.field textarea{
-  width:100%;
-  border:1px solid var(--line);
-  border-radius:5px;
-  background:#060608;
-  color:#eee;
-  padding:11px;
+  padding:0 15px;
+  font:inherit;
   outline:none;
 }
 
-.field textarea{
-  min-height:110px;
-  resize:vertical;
+.search{
+  flex:1;
+  min-width:220px;
 }
 
-.field input:focus,
-.field select:focus,
-.field textarea:focus{
-  border-color:rgba(229,9,20,.6);
+.control:focus,
+.search:focus{
+  border-color:rgba(168,121,255,.6);
+  box-shadow:0 0 0 3px rgba(168,121,255,.08);
 }
 
-.check{
-  display:flex;
-  align-items:flex-start;
-  gap:8px;
-  color:#777;
-  font-size:8px;
-  line-height:1.6;
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:35px;
 }
 
-.check input{
-  margin-top:2px;
-  accent-color:var(--red);
+.stat{
+  padding:24px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:var(--panel);
+  text-align:center;
 }
 
-.modalFooter{
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  padding:14px 19px;
-  border-top:1px solid var(--line);
-}
-
-/* =====================================================
-TOAST
-===================================================== */
-
-.toast{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  z-index:3000;
-  min-width:260px;
-  max-width:380px;
-  padding:13px 15px;
-  border:1px solid rgba(229,9,20,.35);
-  background:#0c0c0f;
-  box-shadow:0 15px 50px rgba(0,0,0,.6);
-  transform:translateY(120px);
-  opacity:0;
-  transition:.3s ease;
-}
-
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-.toast strong{
+.stat strong{
   display:block;
-  color:var(--red2);
-  font-size:9px;
-  text-transform:uppercase;
+  font-family:Orbitron,sans-serif;
+  font-size:1.7rem;
+  color:#fff;
+}
+
+.stat span{
+  display:block;
+  margin-top:7px;
+  color:var(--muted);
+  font-size:.75rem;
   letter-spacing:1px;
-  margin-bottom:4px;
+  text-transform:uppercase;
 }
 
-.toast span{
-  color:#aaa;
-  font-size:9px;
+/* PROJECT GROUP */
+
+.project{
+  margin-bottom:28px;
+  border:1px solid var(--line);
+  border-radius:24px;
+  overflow:hidden;
+  background:rgba(9,8,22,.72);
+  box-shadow:0 20px 70px rgba(0,0,0,.22);
 }
 
-/* =====================================================
-FOOTER
-===================================================== */
-
-footer{
-  border-top:1px solid var(--line);
-  padding:35px 0;
-  color:#555;
-  font-size:9px;
-}
-
-.footerGrid{
+.project-head{
+  padding:28px 30px;
   display:flex;
   justify-content:space-between;
+  align-items:flex-start;
   gap:20px;
-  flex-wrap:wrap;
+  background:
+    linear-gradient(135deg,
+      rgba(168,121,255,.10),
+      rgba(109,200,255,.04));
+  border-bottom:1px solid var(--line);
 }
 
-.footerBrand{
-  color:#888;
+.project-title{
+  margin:0;
   font-family:Orbitron,sans-serif;
+  font-size:1.25rem;
+}
+
+.project-meta{
+  color:var(--muted);
+  margin-top:8px;
+  font-size:.82rem;
+}
+
+.status{
+  padding:7px 11px;
+  border-radius:999px;
+  border:1px solid rgba(168,121,255,.25);
+  background:rgba(168,121,255,.10);
+  color:#d9c7ff;
+  font-size:.68rem;
+  text-transform:uppercase;
   letter-spacing:1px;
+  white-space:nowrap;
 }
 
-/* =====================================================
-RESPONSIVE
-===================================================== */
-
-@media(max-width:1100px){
-
-  .projectStrip{
-    grid-template-columns:1fr repeat(2,auto);
-  }
-
-  .projectStat:nth-last-child(-n+2){
-    border-top:1px solid var(--line);
-  }
-
-  .layout{
-    grid-template-columns:1fr;
-  }
-
-  .sidebar{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-  }
-
-  .sidebar .section{
-    margin-bottom:0;
-  }
-
-  .sidebar .section:first-child{
-    grid-column:1/-1;
-  }
-
-  .creditRow{
-    grid-template-columns:45px 1fr auto;
-  }
-
-  .creditRole{
-    grid-column:2;
-  }
+.credit-list{
+  padding:10px 30px 20px;
 }
 
-@media(max-width:900px){
+.credit{
+  display:grid;
+  grid-template-columns:64px 1fr auto;
+  gap:20px;
+  align-items:center;
+  padding:22px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
 
-  .navlinks{
+.credit:last-child{
+  border-bottom:0;
+}
+
+.avatar{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 30% 20%,#c29aff,transparent 40%),
+    linear-gradient(135deg,#211b42,#0b1022);
+  border:1px solid rgba(255,255,255,.12);
+  font-family:Orbitron,sans-serif;
+  font-weight:700;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.credit-name{
+  font-weight:700;
+}
+
+.credit-user{
+  color:#918ba9;
+  font-size:.75rem;
+  margin-top:4px;
+}
+
+.credit-description{
+  color:var(--muted);
+  font-size:.83rem;
+  line-height:1.6;
+  margin-top:7px;
+}
+
+.credit-type{
+  padding:8px 11px;
+  border-radius:9px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:.65rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#d4d0e8;
+}
+
+/* EMPTY / LOADING */
+
+.state{
+  padding:65px 30px;
+  text-align:center;
+  border:1px dashed rgba(255,255,255,.13);
+  border-radius:22px;
+  color:var(--muted);
+}
+
+.state h3{
+  color:#fff;
+  font-family:Orbitron,sans-serif;
+}
+
+.spinner{
+  width:35px;
+  height:35px;
+  margin:0 auto 18px;
+  border:3px solid rgba(255,255,255,.12);
+  border-top-color:var(--purple);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* RIGHTS EXPLANATION */
+
+.rights-card{
+  margin-top:50px;
+  padding:35px;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:linear-gradient(
+    135deg,
+    rgba(114,245,181,.055),
+    rgba(168,121,255,.07)
+  );
+}
+
+.rights-card h2{
+  margin-top:0;
+  font-family:Orbitron,sans-serif;
+}
+
+.rights-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:25px;
+}
+
+.right-item{
+  padding:20px;
+  border-radius:16px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.right-item strong{
+  display:block;
+  margin-bottom:8px;
+}
+
+.right-item p{
+  margin:0;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.7;
+}
+
+/* CTA */
+
+.cta{
+  margin-top:55px;
+  padding:50px 30px;
+  text-align:center;
+  border-radius:28px;
+  border:1px solid rgba(168,121,255,.18);
+  background:
+    radial-gradient(circle at 50% 0%,rgba(168,121,255,.13),transparent 55%),
+    rgba(10,9,24,.65);
+}
+
+.cta h2{
+  font-family:Orbitron,sans-serif;
+  margin:0 0 12px;
+}
+
+.cta p{
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:0 22px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:700;
+  margin-top:14px;
+}
+
+.btn.primary{
+  color:#09070f;
+  background:linear-gradient(90deg,#b98aff,#70d5ff);
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+  .links{
     display:none;
+    position:absolute;
+    top:74px;
+    left:0;
+    right:0;
+    padding:20px;
+    background:rgba(5,5,14,.97);
+    border-bottom:1px solid var(--line);
+    flex-direction:column;
   }
 
-  .mobileMenu{
+  .links.open{
+    display:flex;
+  }
+
+  .menu{
     display:block;
+    margin-left:auto;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:rgba(255,255,255,.04);
+    color:#fff;
+    padding:9px 13px;
   }
 
-  .summaryGrid{
+  .stats{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .creditTypes{
-    grid-template-columns:1fr 1fr;
-  }
-}
-
-@media(max-width:700px){
-
-  .heroGrid{
-    grid-template-columns:1fr;
+  .project-head{
+    flex-direction:column;
   }
 
-  .heroActions{
-    justify-content:flex-start;
+  .credit{
+    grid-template-columns:50px 1fr;
   }
 
-  .projectStrip{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .projectTitle{
-    grid-column:1/-1;
-    border-bottom:1px solid var(--line);
-  }
-
-  .projectStat{
-    min-width:0;
-  }
-
-  .projectStat:nth-child(3){
-    border-left:0;
-  }
-
-  .sidebar{
-    grid-template-columns:1fr;
-  }
-
-  .creditRow{
-    grid-template-columns:45px 1fr;
-  }
-
-  .creditStatus{
+  .credit-type{
     grid-column:2;
-    width:max-content;
+    justify-self:start;
   }
 
-  .creditTypes{
+  .rights-grid{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:500px){
 
-  .container{
-    width:92%;
+  .page{
+    padding-top:60px;
   }
 
-  h1{
-    font-size:29px;
+  .credit-intro{
+    padding:25px;
   }
 
-  .sectionBody{
-    padding:14px;
+  .credit-list{
+    padding-left:20px;
+    padding-right:20px;
   }
 
-  .sectionHeader{
-    padding:14px;
-  }
-
-  .timelineItem{
-    grid-template-columns:18px 1fr;
-  }
-
-  .timelineDate{
-    grid-column:2;
-  }
-
-  .summaryGrid{
+  .stats{
     grid-template-columns:1fr 1fr;
   }
+
+  .stat{
+    padding:18px 10px;
+  }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<header>
+<div id="stars"></div>
 
-  <div class="container nav">
+<div id="nebula">
+  <div class="neb a"></div>
+  <div class="neb b"></div>
+  <div class="neb c"></div>
+</div>
 
-    <a href="index.html" class="brand">
+<nav class="nav">
 
-      <div class="logo">CR</div>
+  <div class="container navin">
 
-      <div>
-        <strong>CROWRULES</strong>
-        <span>Dream World</span>
-      </div>
-
+    <a class="brand" href="index.html">
+      CROWRULES
+      <span>DREAMSCAPES</span>
     </a>
 
-    <nav class="navlinks">
-
-      <a href="creator-dashboard.html">Dashboard</a>
-      <a href="my-dreams.html">My Dreams</a>
-      <a href="my-projects.html">My Projects</a>
-      <a href="creative-room.html">Creative Room</a>
-      <a href="project-development.html">Development</a>
-      <a href="collaborators.html">Collaborators</a>
-      <a href="agreements.html">Agreements</a>
-      <a href="credits.html" class="active">Credits</a>
-      <a href="earnings.html">Earnings</a>
-
-    </nav>
-
-    <button
-      class="mobileMenu"
-      onclick="toggleMobileNav()"
-    >
+    <button class="menu" id="menuButton">
       MENU
     </button>
 
+    <div class="links" id="navLinks">
+
+      <a href="index.html">Home</a>
+      <a href="submit.html">Submit a Dream</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="projects.html">Projects</a>
+      <a href="creators.html">Creators</a>
+      <a href="creator-dashboard.html">Creator Hub</a>
+
+    </div>
+
   </div>
 
-</header>
+</nav>
+
+<main class="page">
+
+<div class="container">
+
+  <section class="title reveal">
+
+    <div class="eyebrow">
+      CREATOR HISTORY
+    </div>
+
+    <h1>
+      Credits
+    </h1>
+
+    <p>
+      Every Dreamscapes project carries a creative history.
+      From the person who imagined the first idea to the people
+      who helped build, write, design and produce it.
+    </p>
+
+  </section>
 
 
-<div class="container hero">
+  <section class="credit-intro reveal">
 
-  <div class="breadcrumb">
-    DREAM WORLD /
-    <span>CREDITS</span>
-  </div>
+    <h2>
+      One Dream. Many Creators.
+    </h2>
 
-  <div class="heroGrid">
+    <p>
+      Dreamscapes is designed to preserve the creative chain.
+      The original dreamer should not disappear when an idea grows.
+      Contributors can be recognized for the roles they actually
+      helped create, develop or produce.
+    </p>
 
-    <div>
+  </section>
 
-      <div class="eyebrow">
-        CREATOR & PROJECT CREDIT CENTER
-      </div>
 
-      <h1>
-        Give Credit Where The Dream Began.
-      </h1>
+  <section class="credit-controls reveal">
 
-      <p class="heroText">
-        Every Dream World project has a history. This center records the
-        people who imagined, developed, wrote, produced, designed, composed,
-        directed and contributed to that journey — from the original dream
-        through the finished production.
+    <input
+      id="searchInput"
+      class="search"
+      type="search"
+      placeholder="Search projects, creators or credits..."
+      autocomplete="off"
+    >
+
+    <select id="typeFilter" class="control">
+
+      <option value="all">
+        All Credit Types
+      </option>
+
+      <option value="original dream">
+        Original Dream
+      </option>
+
+      <option value="world">
+        World Development
+      </option>
+
+      <option value="writing">
+        Writing
+      </option>
+
+      <option value="character">
+        Characters
+      </option>
+
+      <option value="production">
+        Production
+      </option>
+
+      <option value="design">
+        Design
+      </option>
+
+      <option value="other">
+        Other
+      </option>
+
+    </select>
+
+  </section>
+
+
+  <section class="stats reveal">
+
+    <div class="stat">
+      <strong id="projectCount">0</strong>
+      <span>Projects</span>
+    </div>
+
+    <div class="stat">
+      <strong id="creditCount">0</strong>
+      <span>Credits</span>
+    </div>
+
+    <div class="stat">
+      <strong id="creatorCount">0</strong>
+      <span>Creators</span>
+    </div>
+
+    <div class="stat">
+      <strong id="typeCount">0</strong>
+      <span>Credit Types</span>
+    </div>
+
+  </section>
+
+
+  <section id="creditsContainer">
+
+    <div class="state">
+
+      <div class="spinner"></div>
+
+      <h3>
+        Loading the Dreamscapes archive
+      </h3>
+
+      <p>
+        Connecting to the creator credit system...
       </p>
 
     </div>
 
-    <div class="heroActions">
+  </section>
 
-      <button
-        class="btn primary"
-        onclick="openModal('creditRequestModal')"
-      >
-        Request Credit
-      </button>
 
-      <button
-        class="btn"
-        onclick="showToast('Credit Preview','The final production credit sequence will be generated from approved credits.')"
-      >
-        Preview Credits
-      </button>
+  <section class="rights-card reveal">
+
+    <h2>
+      Creator Recognition & Rights
+    </h2>
+
+    <p>
+      Credits and rights are separate parts of the Dreamscapes
+      development record. A credit records creative contribution.
+      A rights record can track participation terms, acknowledgements
+      and other project-specific information.
+    </p>
+
+    <div class="rights-grid">
+
+      <div class="right-item">
+
+        <strong>
+          Original Creators
+        </strong>
+
+        <p>
+          The person who submitted the original dream or concept
+          can remain connected to the project throughout development
+          when they choose to participate.
+        </p>
+
+      </div>
+
+      <div class="right-item">
+
+        <strong>
+          Contributors
+        </strong>
+
+        <p>
+          Writers, world builders, artists, researchers, producers
+          and other collaborators can receive permanent project credits
+          for their creative contributions.
+        </p>
+
+      </div>
+
+      <div class="right-item">
+
+        <strong>
+          Production History
+        </strong>
+
+        <p>
+          When a Dreamscapes project becomes a CrowRules Entertainment
+          production, the creative history can continue into the
+          production record.
+        </p>
+
+      </div>
 
     </div>
 
-  </div>
+  </section>
+
+
+  <section class="cta reveal">
+
+    <h2>
+      Your Name Belongs in the Story.
+    </h2>
+
+    <p>
+      Whether you created the original dream or helped build the world,
+      Dreamscapes is designed to remember the people behind the work.
+    </p>
+
+    <a
+      class="btn primary"
+      href="creators.html">
+      Explore Creators
+    </a>
+
+  </section>
 
 </div>
-
-
-<div class="container">
-
-  <div class="projectStrip">
-
-    <div class="projectTitle">
-
-      <label>Current Project</label>
-
-      <strong>
-        The City That Only Exists While You Sleep
-      </strong>
-
-    </div>
-
-    <div class="projectStat">
-      <label>Project</label>
-      <strong>DW-0001</strong>
-    </div>
-
-    <div class="projectStat">
-      <label>Dream</label>
-      <strong>DR-0001</strong>
-    </div>
-
-    <div class="projectStat">
-      <label>Credits</label>
-      <strong id="creditCount">8</strong>
-    </div>
-
-    <div class="projectStat">
-      <label>Approved</label>
-      <strong id="approvedCount">6</strong>
-    </div>
-
-  </div>
-
-</div>
-
-
-<main class="container">
-
-  <div class="summaryGrid">
-
-    <div class="summaryCard">
-      <strong>8</strong>
-      <span>Total Contributors</span>
-    </div>
-
-    <div class="summaryCard">
-      <strong>6</strong>
-      <span>Approved Credits</span>
-    </div>
-
-    <div class="summaryCard">
-      <strong>2</strong>
-      <span>Pending Credits</span>
-    </div>
-
-    <div class="summaryCard">
-      <strong>100%</strong>
-      <span>Dream Origin Recorded</span>
-    </div>
-
-  </div>
-
-
-  <div class="layout">
-
-    <div>
-
-
-      <!-- ORIGINAL DREAM CREATOR -->
-
-      <section class="section">
-
-        <div class="sectionHeader">
-
-          <div>
-
-            <h2>Original Dream Creator</h2>
-
-            <p>
-              The person whose dream started this project.
-            </p>
-
-          </div>
-
-          <span class="creditStatus">
-            APPROVED
-          </span>
-
-        </div>
-
-        <div class="sectionBody">
-
-          <div class="creatorCredit">
-
-            <div class="creditEyebrow">
-              ORIGINAL DREAM CREATOR
-            </div>
-
-            <h3>
-              Dream Creator
-            </h3>
-
-            <div class="creditLine">
-              <strong>
-                Original Dream
-              </strong>
-              — The City That Only Exists While You Sleep
-            </div>
-
-            <p class="creditDescription">
-              The original dream submission is permanently connected to
-              this project's development history. The final credit wording
-              may be determined by the applicable project agreement.
-            </p>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- APPROVED CREDITS -->
-
-      <section class="section">
-
-        <div class="sectionHeader">
-
-          <div>
-
-            <h2>Approved Project Credits</h2>
-
-            <p>
-              Credits currently approved for the project record.
-            </p>
-
-          </div>
-
-          <button
-            class="btn"
-            onclick="openModal('creditRequestModal')"
-          >
-            + Add Credit
-          </button>
-
-        </div>
-
-        <div class="sectionBody">
-
-          <div class="creditList">
-
-
-            <article class="creditRow">
-
-              <div class="creditNumber">
-                01
-              </div>
-
-              <div class="creditPerson">
-
-                <strong>
-                  Dream Creator
-                </strong>
-
-                <p>
-                  Original creator
-                </p>
-
-              </div>
-
-              <div class="creditRole">
-                Based on an Original Dream By
-              </div>
-
-              <span class="creditStatus">
-                Approved
-              </span>
-
-            </article>
-
-
-            <article class="creditRow">
-
-              <div class="creditNumber">
-                02
-              </div>
-
-              <div class="creditPerson">
-
-                <strong>
-                  Dream Creator
-                </strong>
-
-                <p>
-                  Original creative contributor
-                </p>
-
-              </div>
-
-              <div class="creditRole">
-                Creator
-              </div>
-
-              <span class="creditStatus">
-                Approved
-              </span>
-
-            </article>
-
-
-            <article class="creditRow">
-
-              <div class="creditNumber">
-                03
-              </div>
-
-              <div class="creditPerson">
-
-                <strong>
-                  CrowRules Story Team
-                </strong>
-
-                <p>
-                  Story development
-                </p>
-
-              </div>
-
-              <div class="creditRole">
-                Story Development
-              </div>
-
-              <span class="creditStatus">
-                Approved
-              </span>
-
-            </article>
-
-
-            <article class="creditRow">
-
-              <div class="creditNumber">
-                04
-              </div>
-
-              <div class="creditPerson">
-
-                <strong>
-                  CrowRules Writing Team
-                </strong>
-
-                <p>
-                  Series writing
-                </p>
-
-              </div>
-
-              <div class="creditRole">
-                Written By
-              </div>
-
-              <span class="creditStatus">
-                Approved
-              </span>
-
-            </article>
-
-
-            <article class="creditRow">
-
-              <div class="creditNumber">
-                05
-              </div>
-
-              <div class="creditPerson">
-
-                <strong>
-                  CrowRules Development
-                </strong>
-
-                <p>
-                  Project development
-                </p>
-
-              </div>
-
-              <div class="creditRole">
-                Developed By
-              </div>
-
-              <span class="creditStatus">
-                Approved
-              </span>
-
-            </article>
-
-
-            <article class="creditRow">
-
-              <div class="creditNumber">
-                06
-              </div>
-
-              <div class="creditPerson">
-
-                <strong>
-                  CrowRules Entertainment
-                </strong>
-
-                <p>
-                  Production company
-                </p>
-
-              </div>
-
-              <div class="creditRole">
-                A CrowRules Production
-              </div>
-
-              <span class="creditStatus">
-                Approved
-              </span>
-
-            </article>
-
-
-            <article class="creditRow">
-
-              <div class="creditNumber">
-                07
-              </div>
-
-              <div class="creditPerson">
-
-                <strong>
-                  Future Director
-                </strong>
-
-                <p>
-                  To be assigned
-                </p>
-
-              </div>
-
-              <div class="creditRole">
-                Directed By
-              </div>
-
-              <span class="creditStatus pending">
-                Pending
-              </span>
-
-            </article>
-
-
-            <article class="creditRow">
-
-              <div class="creditNumber">
-                08
-              </div>
-
-              <div class="creditPerson">
-
-                <strong>
-                  Future Composer
-                </strong>
-
-                <p>
-                  To be assigned
-                </p>
-
-              </div>
-
-              <div class="creditRole">
-                Original Music By
-              </div>
-
-              <span class="creditStatus proposed">
-                Proposed
-              </span>
-
-            </article>
-
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- CREDIT TYPES -->
-
-      <section class="section">
-
-        <div class="sectionHeader">
-
-          <div>
-
-            <h2>Credit Categories</h2>
-
-            <p>
-              Credit roles can evolve as the project develops.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="sectionBody">
-
-          <div class="creditTypes">
-
-            <div class="typeCard">
-              <strong>CREATOR</strong>
-              <span>Original Dream Creator, Creator, Co-Creator.</span>
-            </div>
-
-            <div class="typeCard">
-              <strong>WRITING</strong>
-              <span>Story By, Written By, Screenplay By, Teleplay By.</span>
-            </div>
-
-            <div class="typeCard">
-              <strong>PRODUCING</strong>
-              <span>Producer, Executive Producer, Creative Producer.</span>
-            </div>
-
-            <div class="typeCard">
-              <strong>DIRECTING</strong>
-              <span>Director, Episode Director, Creative Director.</span>
-            </div>
-
-            <div class="typeCard">
-              <strong>ART</strong>
-              <span>Production Design, Concept Art, Illustration, VFX.</span>
-            </div>
-
-            <div class="typeCard">
-              <strong>MUSIC & AUDIO</strong>
-              <span>Composer, Music Supervisor, Sound Designer.</span>
-            </div>
-
-            <div class="typeCard">
-              <strong>CONSULTING</strong>
-              <span>Creative Consultant, Subject Consultant, Story Consultant.</span>
-            </div>
-
-            <div class="typeCard">
-              <strong>PERFORMANCE</strong>
-              <span>Cast, Voice Cast, Narrators and other performers.</span>
-            </div>
-
-            <div class="typeCard">
-              <strong>SPECIAL</strong>
-              <span>Special thanks and project-specific recognition.</span>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- CREDIT HISTORY -->
-
-      <section class="section">
-
-        <div class="sectionHeader">
-
-          <div>
-
-            <h2>Credit History</h2>
-
-            <p>
-              Track how project credits change throughout development.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="sectionBody">
-
-          <div class="timeline">
-
-
-            <div class="timelineItem">
-
-              <div class="timelineDot done"></div>
-
-              <div>
-
-                <strong>
-                  Original Dream Creator recorded
-                </strong>
-
-                <p>
-                  The creator was linked to the original dream submission.
-                </p>
-
-              </div>
-
-              <div class="timelineDate">
-                Jun 2026
-              </div>
-
-            </div>
-
-
-            <div class="timelineItem">
-
-              <div class="timelineDot done"></div>
-
-              <div>
-
-                <strong>
-                  Creator credit established
-                </strong>
-
-                <p>
-                  Creator participation was documented in the project record.
-                </p>
-
-              </div>
-
-              <div class="timelineDate">
-                Jul 2026
-              </div>
-
-            </div>
-
-
-            <div class="timelineItem">
-
-              <div class="timelineDot done"></div>
-
-              <div>
-
-                <strong>
-                  Development credits added
-                </strong>
-
-                <p>
-                  CrowRules development contributors were added to the ledger.
-                </p>
-
-              </div>
-
-              <div class="timelineDate">
-                Aug 2026
-              </div>
-
-            </div>
-
-
-            <div class="timelineItem">
-
-              <div class="timelineDot"></div>
-
-              <div>
-
-                <strong>
-                  Production credit package
-                </strong>
-
-                <p>
-                  Final production roles will be added as contributors are formally engaged.
-                </p>
-
-              </div>
-
-              <div class="timelineDate">
-                Future
-              </div>
-
-            </div>
-
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- CREDIT PREVIEW -->
-
-      <section class="section">
-
-        <div class="sectionHeader">
-
-          <div>
-
-            <h2>Production Credit Preview</h2>
-
-            <p>
-              Example of how the approved credit ledger can appear on a finished production.
-            </p>
-
-          </div>
-
-          <button
-            class="btn"
-            onclick="showToast('Credit Sequence','Final production credits will be generated from approved project records.')"
-          >
-            Full Screen
-          </button>
-
-        </div>
-
-        <div class="sectionBody">
-
-          <div class="creditPreview">
-
-            <small>
-              A CrowRules Dream World Production
-            </small>
-
-            <h3>
-              THE CITY THAT ONLY EXISTS WHILE YOU SLEEP
-            </h3>
-
-            <p>
-              Based on an Original Dream By
-            </p>
-
-            <div class="line"></div>
-
-            <div class="names">
-              Dream Creator<br>
-              <br>
-              Developed By<br>
-              CrowRules Development<br>
-              <br>
-              Written By<br>
-              CrowRules Writing Team<br>
-              <br>
-              A CrowRules Entertainment Production
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-    </div>
-
-
-    <!-- SIDEBAR -->
-
-    <aside class="sidebar">
-
-
-      <!-- CREATOR CREDIT -->
-
-      <section class="section">
-
-        <div class="sectionHeader">
-
-          <div>
-            <h2>Your Credit</h2>
-          </div>
-
-        </div>
-
-        <div class="sectionBody">
-
-          <div class="detailList">
-
-            <div class="detail">
-              <span>Creator</span>
-              <span>Dream Creator</span>
-            </div>
-
-            <div class="detail">
-              <span>Dream</span>
-              <span>DR-0001</span>
-            </div>
-
-            <div class="detail">
-              <span>Project</span>
-              <span>DW-0001</span>
-            </div>
-
-            <div class="detail">
-              <span>Status</span>
-              <span style="color:var(--green);">
-                Approved
-              </span>
-            </div>
-
-            <div class="detail">
-              <span>Credit</span>
-              <span>Creator</span>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- CREDIT NOTICE -->
-
-      <section class="section">
-
-        <div class="sectionHeader">
-
-          <div>
-            <h2>Credit Notice</h2>
-          </div>
-
-        </div>
-
-        <div class="sectionBody">
-
-          <div class="notice">
-
-            <strong>
-              CREDIT FOLLOWS THE AGREEMENT
-            </strong>
-
-            <p>
-              A person may contribute creatively without automatically
-              receiving a particular contractual credit. Final credit
-              obligations should be determined by the applicable written
-              agreement and project records.
-            </p>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- QUICK LINKS -->
-
-      <section class="section">
-
-        <div class="sectionHeader">
-
-          <div>
-            <h2>Creator Portal</h2>
-          </div>
-
-        </div>
-
-        <div class="sectionBody">
-
-          <div class="sideLinks">
-
-            <a
-              class="sideLink"
-              href="agreements.html"
-            >
-              Agreements
-            </a>
-
-            <a
-              class="sideLink"
-              href="collaborators.html"
-            >
-              Collaborators
-            </a>
-
-            <a
-              class="sideLink"
-              href="project-development.html"
-            >
-              Development
-            </a>
-
-            <a
-              class="sideLink"
-              href="creative-room.html"
-            >
-              Creative Room
-            </a>
-
-            <a
-              class="sideLink"
-              href="earnings.html"
-            >
-              Earnings
-            </a>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- LONG TERM -->
-
-      <section class="section">
-
-        <div class="sectionHeader">
-
-          <div>
-            <h2>Long-Term Record</h2>
-          </div>
-
-        </div>
-
-        <div class="sectionBody">
-
-          <p style="
-            color:#777;
-            font-size:8px;
-            line-height:1.8;
-          ">
-            Dream World projects can take years to develop. Credits should
-            remain part of the permanent project history even when a project
-            pauses, changes format, undergoes rewrites or resumes years later.
-          </p>
-
-        </div>
-
-      </section>
-
-
-    </aside>
-
-  </div>
 
 </main>
 
 
 <footer>
 
-  <div class="container footerGrid">
+  <div class="container foot">
 
-    <div class="footerBrand">
-      CROWRULES DREAM WORLD
+    <div>
+      © <span data-year></span>
+      CrowRules Entertainment · CrowRules Dreamscapes
     </div>
 
     <div>
-      Where Dreams Become Stories.
-    </div>
-
-    <div>
-      © 2026 CrowRules Entertainment
+      One Dream. One World. One Story.
     </div>
 
   </div>
@@ -2005,908 +848,797 @@ RESPONSIVE
 </footer>
 
 
-<!-- =====================================================
-REQUEST CREDIT MODAL
-===================================================== -->
-
-<div
-  class="modal"
-  id="creditRequestModal"
->
-
-  <div class="modalBox">
-
-    <div class="modalHeader">
-
-      <h2>
-        Request / Propose Credit
-      </h2>
-
-      <button
-        class="close"
-        onclick="closeModal('creditRequestModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-    <div class="form">
-
-      <div class="field">
-
-        <label>
-          Person / Contributor
-        </label>
-
-        <input
-          id="creditPersonInput"
-          type="text"
-          placeholder="Name of contributor"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Credit Role
-        </label>
-
-        <select id="creditRoleInput">
-
-          <option>Creator</option>
-          <option>Co-Creator</option>
-          <option>Based on an Original Dream By</option>
-          <option>Story By</option>
-          <option>Written By</option>
-          <option>Producer</option>
-          <option>Executive Producer</option>
-          <option>Creative Producer</option>
-          <option>Director</option>
-          <option>Concept Artist</option>
-          <option>Production Designer</option>
-          <option>Composer</option>
-          <option>Sound Designer</option>
-          <option>Creative Consultant</option>
-          <option>Special Thanks</option>
-          <option>Other</option>
-
-        </select>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Request Details
-        </label>
-
-        <textarea
-          id="creditDetailsInput"
-          placeholder="Describe the contributor's work and why this credit is being requested..."
-        ></textarea>
-
-      </div>
-
-
-      <div class="check">
-
-        <input
-          type="checkbox"
-          id="creditAgreementCheck"
-        >
-
-        <label for="creditAgreementCheck">
-          I understand that submitting a credit request does not automatically
-          create a contractual credit. The request will be reviewed against
-          the project's agreements, contribution history and applicable
-          production records.
-        </label>
-
-      </div>
-
-    </div>
-
-    <div class="modalFooter">
-
-      <button
-        class="btn"
-        onclick="closeModal('creditRequestModal')"
-      >
-        Cancel
-      </button>
-
-      <button
-        class="btn primary"
-        onclick="submitCreditRequest()"
-      >
-        Submit Request
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================================
-TOAST
-===================================================== -->
-
-<div
-  class="toast"
-  id="toast"
->
-
-  <strong id="toastTitle">
-    CrowRules Dream World
-  </strong>
-
-  <span id="toastMessage">
-    Action completed.
-  </span>
-
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-/*
-===========================================================
-CROWRULES DREAM WORLD
-CREDITS CENTER
-===========================================================
+(() => {
 
-
-PROJECT:
-DW-0001
-
-
-DREAM:
-DR-0001
-
-
-===========================================================
-RECOMMENDED SUPABASE TABLE
-===========================================================
-
-
-TABLE:
-dream_creator_credits
-
-
-id uuid primary key
-
-project_id uuid
-references dream_projects(id)
-
-dream_id uuid
-references dream_submissions(id)
-
-user_id uuid nullable
-references auth.users(id)
-
-credit_name text
-
-credit_role text
-
-credit_category text
-
-credit_wording text
-
-credit_description text
-
-credit_order integer
-
-status text
-
-source_agreement_id uuid nullable
-
-approved_by uuid nullable
-
-approved_at timestamptz nullable
-
-effective_date date nullable
-
-created_at timestamptz
-
-updated_at timestamptz
-
-
-===========================================================
-POSSIBLE STATUS VALUES
-===========================================================
-
-proposed
-pending_review
-approved
-rejected
-superseded
-withdrawn
-archived
-
-
-===========================================================
-CREDIT CATEGORIES
-===========================================================
-
-creator
-writing
-producing
-directing
-art
-music
-audio
-performance
-consulting
-technical
-special
-production
-
-
-===========================================================
-CREDIT HISTORY
-===========================================================
-
-
-TABLE:
-dream_credit_history
-
-
-id uuid primary key
-
-credit_id uuid
-
-project_id uuid
-
-action text
-
-previous_status text
-
-new_status text
-
-previous_wording text
-
-new_wording text
-
-changed_by uuid
-
-reason text
-
-created_at timestamptz
-
-
-This creates a permanent audit trail.
-
-Do not simply overwrite historical credit records.
-
-
-===========================================================
-CREDIT REQUESTS
-===========================================================
-
-
-TABLE:
-dream_credit_requests
-
-
-id uuid primary key
-
-project_id uuid
-
-requested_by uuid
-
-person_user_id uuid nullable
-
-person_name text
-
-requested_role text
-
-requested_category text
-
-details text
-
-status text
-
-reviewed_by uuid nullable
-
-reviewed_at timestamptz nullable
-
-review_notes text
-
-created_at timestamptz
-
-updated_at timestamptz
-
-
-===========================================================
-FINAL PRODUCTION CREDITS
-===========================================================
-
-
-TABLE:
-dream_production_credits
-
-
-id uuid primary key
-
-project_id uuid
-
-production_id uuid nullable
-
-credit_id uuid
-
-screen_credit text
-
-credit_order integer
-
-credit_section text
-
-is_final boolean
-
-created_at timestamptz
-
-updated_at timestamptz
-
-
-This allows development credits to eventually become
-the final production credit sequence.
-
-
-===========================================================
-EPISODE-LEVEL CREDITS
-===========================================================
-
-
-For a series, credits should eventually support:
-
-project-level credits
-
-season-level credits
-
-episode-level credits
-
-special-event credits
-
-
-Possible table:
-
-dream_episode_credits
-
-
-id uuid primary key
-
-project_id uuid
-
-episode_id uuid
-
-credit_id uuid
-
-screen_credit text
-
-credit_order integer
-
-created_at timestamptz
-
-
-===========================================================
-CREDIT VERSIONING
-===========================================================
-
-
-Never destroy a previous approved credit.
-
-If wording changes:
-
-Version 1
-Version 2
-Version 3
-
-
-Keep the history.
-
-Example:
-
-"Based on an Original Dream By"
-
-could later become:
-
-"Created By"
-
-only if the applicable project agreements and
-approval process support that change.
-
-
-===========================================================
-AGREEMENT CONNECTION
-===========================================================
-
-
-Credits should be linked to:
-
-dream_creator_agreements
-
-
-A credit can therefore show:
-
-Credit:
-Based on an Original Dream By
-
-Agreement:
-Creator Agreement #DW-0001-02
-
-Status:
-Approved
-
-
-This gives the project a traceable rights/credit ledger.
-
-
-===========================================================
-RLS
-===========================================================
-
-
-Creators should be able to view credits associated
-with projects they own or are authorized to access.
-
-
-Project collaborators should only see project
-information permitted by their project role.
-
-
-Only authorized administrators should be able to:
-
-approve credits
-reject credits
-change final production credits
-connect contractual agreement records
-
-
-Never expose service-role credentials in browser code.
-
-
-===========================================================
-PUBLIC CREDIT DISPLAY
-===========================================================
-
-
-Once a production is released, approved credits can
-be copied into a public production page.
-
-
-Example:
-
-Based on an Original Dream By
-
-[Creator Name]
-
-
-Created By
-
-[Creator Name]
-
-
-Written By
-
-[Writer Name]
-
-
-Produced By
-
-[CrowRules / Producer]
-
-
-A CrowRules Dream World Production
-
-
-===========================================================
-LONG-TERM DEVELOPMENT
-===========================================================
-
-
-A project may take:
-
-1 year
-3 years
-5 years
-10+ years
-
-
-Credits should survive:
-
-pauses
-rewrites
-format changes
-creator changes
-development resets
-production delays
-funding delays
-
-
-The credit ledger is part of the project's permanent
-development history.
-
-
-===========================================================
-*/
-
-
-/* =====================================================
-MOBILE NAV
-===================================================== */
-
-function toggleMobileNav(){
-
-  const nav =
-    document.querySelector(".navlinks");
-
-  if(!nav) return;
-
-  if(nav.style.display === "flex"){
-
-    nav.style.display = "";
-
-  }else{
-
-    nav.style.display = "flex";
-    nav.style.flexDirection = "column";
-    nav.style.position = "absolute";
-    nav.style.top = "76px";
-    nav.style.left = "3%";
-    nav.style.right = "3%";
-    nav.style.padding = "12px";
-    nav.style.background = "#0a0a0c";
-    nav.style.border = "1px solid rgba(255,255,255,.1)";
-
-  }
-
-}
-
-
-/* =====================================================
-MODALS
-===================================================== */
-
-function openModal(id){
-
-  const modal =
-    document.getElementById(id);
-
-  if(modal){
-    modal.classList.add("open");
-  }
-
-}
-
-
-function closeModal(id){
-
-  const modal =
-    document.getElementById(id);
-
-  if(modal){
-    modal.classList.remove("open");
-  }
-
-}
-
-
-/* =====================================================
-TOAST
-===================================================== */
-
-let toastTimer;
-
-function showToast(title,message){
-
-  const toast =
-    document.getElementById("toast");
-
-  document.getElementById("toastTitle")
-    .textContent = title;
-
-  document.getElementById("toastMessage")
-    .textContent = message;
-
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer =
-    setTimeout(()=>{
-
-      toast.classList.remove("show");
-
-    },3500);
-
-}
-
-
-/* =====================================================
-CREDIT REQUEST
-===================================================== */
-
-function submitCreditRequest(){
-
-  const person =
-    document
-      .getElementById("creditPersonInput")
-      .value
-      .trim();
-
-  const role =
-    document
-      .getElementById("creditRoleInput")
-      .value;
-
-  const details =
-    document
-      .getElementById("creditDetailsInput")
-      .value
-      .trim();
-
-  const checked =
-    document
-      .getElementById("creditAgreementCheck")
-      .checked;
-
-
-  if(!person){
-
-    showToast(
-      "Missing Information",
-      "Enter the contributor's name."
-    );
-
-    return;
-
-  }
-
-
-  if(!details){
-
-    showToast(
-      "Missing Details",
-      "Describe the contributor's work."
-    );
-
-    return;
-
-  }
-
-
-  if(!checked){
-
-    showToast(
-      "Acknowledgement Required",
-      "Please acknowledge the credit review process."
-    );
-
-    return;
-
-  }
-
-
-  closeModal("creditRequestModal");
-
-
-  document
-    .getElementById("creditPersonInput")
-    .value = "";
-
-  document
-    .getElementById("creditDetailsInput")
-    .value = "";
-
-  document
-    .getElementById("creditAgreementCheck")
-    .checked = false;
-
-
-  showToast(
-    "Credit Request Submitted",
-    role + " request submitted for " + person + "."
-  );
+  "use strict";
 
 
   /*
-  FUTURE SUPABASE:
+   * ============================================================
+   * CROWRULES DREAMSCAPES — CREDITS ENGINE
+   * ============================================================
+   *
+   * Supabase project:
+   * cevylpnoexugwgygvtgu
+   *
+   * IMPORTANT:
+   * Use ONLY your Supabase publishable/anon key here.
+   *
+   * NEVER place a service-role key in this file.
+   */
 
-  const {
-    data:user
-  } =
-    await supabase.auth.getUser();
+  const SUPABASE_URL =
+    "https://cevylpnoexugwgygvtgu.supabase.co";
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
 
 
-  await supabase
+  let supabaseClient = null;
 
-    .from("dream_credit_requests")
+  let allCredits = [];
 
-    .insert({
 
-      project_id:PROJECT_ID,
+  /*
+   * ------------------------------------------------------------
+   * DOM HELPERS
+   * ------------------------------------------------------------
+   */
 
-      requested_by:user.user.id,
+  const $ = selector =>
+    document.querySelector(selector);
 
-      person_name:person,
 
-      requested_role:role,
+  const escapeHtml = value => {
 
-      details:details,
+    if (value === null || value === undefined) {
+      return "";
+    }
 
-      status:"pending_review"
+    return String(value)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+
+  };
+
+
+  /*
+   * ------------------------------------------------------------
+   * SUPABASE INITIALIZATION
+   * ------------------------------------------------------------
+   */
+
+  function initSupabase(){
+
+    if (
+      !window.supabase ||
+      !SUPABASE_URL ||
+      SUPABASE_PUBLISHABLE_KEY ===
+      "YOUR_SUPABASE_PUBLISHABLE_KEY"
+    ){
+
+      console.warn(
+        "Dreamscapes Credits: Supabase publishable key has not been configured."
+      );
+
+      return false;
+    }
+
+
+    supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
+
+    return true;
+  }
+
+
+  /*
+   * ------------------------------------------------------------
+   * LOAD PUBLIC CREDITS
+   * ------------------------------------------------------------
+   *
+   * Credits are loaded from:
+   *
+   * ds_creator_credits
+   *
+   * Project information:
+   *
+   * ds_projects
+   *
+   * Creator profile information:
+   *
+   * ds_creator_profiles
+   *
+   * RLS controls what can actually be returned.
+   */
+
+  async function loadCredits(){
+
+    const container =
+      $("#creditsContainer");
+
+
+    if (!supabaseClient){
+
+      showState(
+        "Supabase Not Configured",
+        "Add your Supabase publishable key to the page before connecting the live credit archive."
+      );
+
+      return;
+    }
+
+
+    const {
+      data,
+      error
+    } = await supabaseClient
+
+      .from("ds_creator_credits")
+
+      .select(`
+        id,
+        project_id,
+        creator_id,
+        credit_name,
+        credit_type,
+        description,
+        display_order,
+        created_at,
+
+        ds_projects!inner(
+          id,
+          title,
+          slug,
+          status,
+          visibility
+        )
+      `)
+
+      .eq("is_public",true)
+
+      .order("display_order",{ascending:true})
+
+      .order("created_at",{ascending:true});
+
+
+    if (error){
+
+      console.error(
+        "Dreamscapes credits query failed:",
+        error
+      );
+
+      showState(
+        "Credits Are Temporarily Unavailable",
+        "The Dreamscapes credit archive could not be loaded. Check your Supabase configuration and RLS policies."
+      );
+
+      return;
+    }
+
+
+    allCredits = data || [];
+
+
+    /*
+     * Fetch discoverable creator profiles separately.
+     *
+     * This avoids exposing auth.users directly from the browser.
+     */
+
+    const creatorIds =
+      [
+        ...new Set(
+          allCredits
+            .map(item => item.creator_id)
+            .filter(Boolean)
+        )
+      ];
+
+
+    let profiles = [];
+
+
+    if (creatorIds.length){
+
+      const profileResult =
+        await supabaseClient
+
+          .from("ds_creator_profiles")
+
+          .select(`
+            id,
+            username,
+            display_name,
+            avatar_url,
+            is_discoverable
+          `)
+
+          .in("id",creatorIds)
+
+          .eq("is_discoverable",true);
+
+
+      if (!profileResult.error){
+
+        profiles =
+          profileResult.data || [];
+
+      }
+
+    }
+
+
+    const profileMap =
+      new Map(
+        profiles.map(profile =>
+          [profile.id,profile]
+        )
+      );
+
+
+    allCredits =
+      allCredits.map(credit => ({
+
+        ...credit,
+
+        creator_profile:
+          profileMap.get(
+            credit.creator_id
+          ) || null
+
+      }));
+
+
+    renderCredits(allCredits);
+
+  }
+
+
+  /*
+   * ------------------------------------------------------------
+   * RENDER
+   * ------------------------------------------------------------
+   */
+
+  function renderCredits(records){
+
+    const container =
+      $("#creditsContainer");
+
+
+    if (!records.length){
+
+      showState(
+        "No Public Credits Yet",
+        "The Dreamscapes credit archive will appear here as projects and creators are credited."
+      );
+
+      updateStats([]);
+
+      return;
+    }
+
+
+    const grouped = new Map();
+
+
+    records.forEach(record => {
+
+      const project =
+        record.ds_projects || {};
+
+
+      const projectId =
+        record.project_id;
+
+
+      if (!grouped.has(projectId)){
+
+        grouped.set(
+          projectId,
+          {
+            project,
+            credits:[]
+          }
+        );
+
+      }
+
+
+      grouped
+        .get(projectId)
+        .credits
+        .push(record);
 
     });
 
 
-  Then create:
-
-  dream_activity
-
-  activity_type:
-  "credit_request_created"
+    let html = "";
 
 
-  and:
+    grouped.forEach(group => {
 
-  dream_notifications
-
-  for the project administrator.
-  */
-
-}
+      const project =
+        group.project;
 
 
-/* =====================================================
-CLOSE MODAL ON BACKDROP
-===================================================== */
+      html += `
 
-document
-  .querySelectorAll(".modal")
-  .forEach(modal => {
+        <article
+          class="project reveal"
+          data-project="${escapeHtml(project.title || "")}"
+        >
 
-    modal.addEventListener(
+          <div class="project-head">
+
+            <div>
+
+              <h2 class="project-title">
+                ${escapeHtml(
+                  project.title ||
+                  "Untitled Dream"
+                )}
+              </h2>
+
+              <div class="project-meta">
+
+                ${escapeHtml(
+                  project.status ||
+                  "Development"
+                )}
+
+                ·
+
+                ${group.credits.length}
+                credit${group.credits.length === 1 ? "" : "s"}
+
+              </div>
+
+            </div>
+
+            <div class="status">
+
+              ${escapeHtml(
+                project.status ||
+                "Project"
+              )}
+
+            </div>
+
+          </div>
+
+
+          <div class="credit-list">
+
+            ${group.credits
+              .map(renderCredit)
+              .join("")}
+
+          </div>
+
+        </article>
+
+      `;
+
+    });
+
+
+    container.innerHTML = html;
+
+
+    updateStats(records);
+
+    applyFilters();
+
+  }
+
+
+  function renderCredit(credit){
+
+    const profile =
+      credit.creator_profile;
+
+
+    const creatorName =
+      profile?.display_name ||
+      credit.credit_name ||
+      "Dreamscapes Creator";
+
+
+    const username =
+      profile?.username
+        ? `@${profile.username}`
+        : "Dreamscapes Creator";
+
+
+    const initials =
+      creatorName
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0,2)
+        .map(word => word[0])
+        .join("")
+        .toUpperCase();
+
+
+    const avatar =
+      profile?.avatar_url
+        ? `
+          <img
+            src="${escapeHtml(profile.avatar_url)}"
+            alt="${escapeHtml(creatorName)}"
+            loading="lazy"
+          >
+        `
+        : escapeHtml(initials || "DS");
+
+
+    return `
+
+      <div
+        class="credit"
+        data-search="${escapeHtml(
+          [
+            creatorName,
+            username,
+            credit.credit_name,
+            credit.credit_type,
+            credit.description,
+            credit.ds_projects?.title
+          ].join(" ")
+        ).toLowerCase()}"
+        data-type="${escapeHtml(
+          (credit.credit_type || "").toLowerCase()
+        )}"
+      >
+
+        <div class="avatar">
+          ${avatar}
+        </div>
+
+
+        <div>
+
+          <div class="credit-name">
+            ${escapeHtml(creatorName)}
+          </div>
+
+          <div class="credit-user">
+            ${escapeHtml(username)}
+          </div>
+
+          <div class="credit-description">
+
+            <strong>
+              ${escapeHtml(
+                credit.credit_name ||
+                "Creative Contribution"
+              )}
+            </strong>
+
+            ${
+              credit.description
+                ? `
+                  <br>
+                  ${escapeHtml(
+                    credit.description
+                  )}
+                `
+                : ""
+            }
+
+          </div>
+
+        </div>
+
+
+        <div class="credit-type">
+
+          ${escapeHtml(
+            credit.credit_type ||
+            "Creator"
+          )}
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /*
+   * ------------------------------------------------------------
+   * FILTERING
+   * ------------------------------------------------------------
+   */
+
+  function applyFilters(){
+
+    const search =
+      (
+        $("#searchInput")?.value ||
+        ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    const type =
+      (
+        $("#typeFilter")?.value ||
+        "all"
+      )
+      .toLowerCase();
+
+
+    document
+      .querySelectorAll(".credit")
+      .forEach(card => {
+
+        const text =
+          card.dataset.search || "";
+
+        const creditType =
+          card.dataset.type || "";
+
+
+        const matchesSearch =
+          !search ||
+          text.includes(search);
+
+
+        const matchesType =
+          type === "all" ||
+          creditType.includes(type);
+
+
+        card.style.display =
+          matchesSearch && matchesType
+            ? "grid"
+            : "none";
+
+      });
+
+
+    document
+      .querySelectorAll(".project")
+      .forEach(project => {
+
+        const visibleCredits =
+          [...project.querySelectorAll(".credit")]
+            .some(card =>
+              card.style.display !== "none"
+            );
+
+
+        project.style.display =
+          visibleCredits
+            ? ""
+            : "none";
+
+      });
+
+  }
+
+
+  /*
+   * ------------------------------------------------------------
+   * STATISTICS
+   * ------------------------------------------------------------
+   */
+
+  function updateStats(records){
+
+    const projects =
+      new Set(
+        records.map(
+          record => record.project_id
+        )
+      );
+
+
+    const creators =
+      new Set(
+        records.map(
+          record => record.creator_id
+        )
+      );
+
+
+    const types =
+      new Set(
+        records
+          .map(record =>
+            (record.credit_type || "")
+              .trim()
+              .toLowerCase()
+          )
+          .filter(Boolean)
+      );
+
+
+    $("#projectCount").textContent =
+      projects.size;
+
+
+    $("#creditCount").textContent =
+      records.length;
+
+
+    $("#creatorCount").textContent =
+      creators.size;
+
+
+    $("#typeCount").textContent =
+      types.size;
+
+  }
+
+
+  /*
+   * ------------------------------------------------------------
+   * EMPTY / ERROR STATE
+   * ------------------------------------------------------------
+   */
+
+  function showState(title,message){
+
+    $("#creditsContainer").innerHTML = `
+
+      <div class="state">
+
+        <h3>
+          ${escapeHtml(title)}
+        </h3>
+
+        <p>
+          ${escapeHtml(message)}
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /*
+   * ------------------------------------------------------------
+   * EVENTS
+   * ------------------------------------------------------------
+   */
+
+  $("#searchInput")
+    ?.addEventListener(
+      "input",
+      applyFilters
+    );
+
+
+  $("#typeFilter")
+    ?.addEventListener(
+      "change",
+      applyFilters
+    );
+
+
+  $("#menuButton")
+    ?.addEventListener(
       "click",
-      event => {
+      () => {
 
-        if(event.target === modal){
-
-          modal.classList.remove("open");
-
-        }
+        $("#navLinks")
+          ?.classList
+          .toggle("open");
 
       }
     );
 
-  });
+
+  /*
+   * ------------------------------------------------------------
+   * YEAR
+   * ------------------------------------------------------------
+   */
+
+  document
+    .querySelectorAll("[data-year]")
+    .forEach(el => {
+
+      el.textContent =
+        new Date().getFullYear();
+
+    });
 
 
-/* =====================================================
-ESCAPE KEY
-===================================================== */
+  /*
+   * ------------------------------------------------------------
+   * START
+   * ------------------------------------------------------------
+   */
 
-document.addEventListener(
-  "keydown",
-  event => {
+  const connected =
+    initSupabase();
 
-    if(event.key === "Escape"){
 
-      document
-        .querySelectorAll(".modal.open")
-        .forEach(modal => {
+  if (connected){
 
-          modal.classList.remove("open");
+    loadCredits();
+
+  }else{
+
+    showState(
+      "Supabase Connection Required",
+      "Configure the Dreamscapes publishable key to activate the live creator credit archive."
+    );
+
+  }
+
+
+  /*
+   * ------------------------------------------------------------
+   * SIMPLE REVEAL ANIMATION
+   * ------------------------------------------------------------
+   */
+
+  const revealObserver =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting){
+
+            entry.target.style.opacity = "1";
+            entry.target.style.transform =
+              "translateY(0)";
+
+            revealObserver.unobserve(
+              entry.target
+            );
+
+          }
 
         });
 
-    }
-
-  }
-);
-
-
-/*
-===========================================================
-FUTURE SUPABASE CREDIT QUERY
-===========================================================
-
-
-const {
-  data:credits,
-  error
-} =
-  await supabaseClient
-
-    .from("dream_creator_credits")
-
-    .select(`
-      *,
-      dream_projects(
-        title,
-        project_code
-      )
-    `)
-
-    .eq(
-      "project_id",
-      PROJECT_ID
-    )
-
-    .order(
-      "credit_order",
+      },
       {
-        ascending:true
+        threshold:.08
       }
     );
 
 
-===========================================================
-APPROVED CREDITS ONLY
-===========================================================
+  document
+    .querySelectorAll(".reveal")
+    .forEach(el => {
+
+      el.style.opacity = "0";
+      el.style.transform =
+        "translateY(18px)";
+      el.style.transition =
+        "opacity .7s ease, transform .7s ease";
+
+      revealObserver.observe(el);
+
+    });
 
 
-const {
-  data:approvedCredits
-} =
-  await supabaseClient
+})();
 
-    .from("dream_creator_credits")
-
-    .select("*")
-
-    .eq(
-      "project_id",
-      PROJECT_ID
-    )
-
-    .eq(
-      "status",
-      "approved"
-    )
-
-    .order(
-      "credit_order",
-      {
-        ascending:true
-      }
-    );
-
-
-===========================================================
-REALTIME
-===========================================================
-
-
-supabaseClient
-
-  .channel("dream-credits")
-
-  .on(
-    "postgres_changes",
-    {
-      event:"*",
-      schema:"public",
-      table:"dream_creator_credits",
-      filter:
-        "project_id=eq." + PROJECT_ID
-    },
-    payload => {
-
-      loadCredits();
-
-    }
-  )
-
-  .subscribe();
-
-
-===========================================================
-*/
 </script>
 
 </body>
