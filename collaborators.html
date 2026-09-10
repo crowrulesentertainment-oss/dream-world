@@ -12,6 +12,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 :root{
   --bg:#050505;
@@ -42,6 +44,7 @@ html{
 
 body{
   min-height:100vh;
+  overflow-x:hidden;
   background:
     radial-gradient(circle at 12% 5%,rgba(229,9,20,.12),transparent 28%),
     radial-gradient(circle at 88% 15%,rgba(130,0,0,.10),transparent 26%),
@@ -55,11 +58,16 @@ body:before{
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.035;
+  z-index:9999;
+  opacity:.025;
   background-image:
     linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);
   background-size:50px 50px;
+}
+
+body.loading{
+  cursor:progress;
 }
 
 a{
@@ -78,12 +86,19 @@ button{
   cursor:pointer;
 }
 
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
 .container{
   width:min(1480px,94%);
   margin:auto;
 }
 
-/* HEADER */
+/* =========================================================
+   HEADER
+========================================================= */
 
 header{
   position:sticky;
@@ -177,61 +192,619 @@ header{
   color:#fff;
 }
 
-/* HERO */
+/* =========================================================
+   CINEMATIC HERO
+========================================================= */
 
 .hero{
-  padding:42px 0 28px;
+  position:relative;
+  min-height:690px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  isolation:isolate;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  background:
+    radial-gradient(circle at 50% 45%,rgba(229,9,20,.12),transparent 25%),
+    radial-gradient(circle at 20% 80%,rgba(255,255,255,.025),transparent 30%),
+    #020202;
 }
 
-.breadcrumb{
-  color:#666;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:1.7px;
-  margin-bottom:17px;
+.hero-cinematic-bg{
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
 }
 
-.breadcrumb span{
-  color:var(--red2);
+.hero-vignette{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse at center,
+      transparent 15%,
+      rgba(0,0,0,.25) 48%,
+      rgba(0,0,0,.9) 100%);
+  pointer-events:none;
 }
 
-.heroGrid{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:25px;
-  align-items:end;
+.hero-grid{
+  position:absolute;
+  inset:-20%;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  transform:
+    perspective(700px)
+    rotateX(65deg)
+    translateY(20%);
+  transform-origin:center bottom;
+  opacity:.3;
+  animation:gridMove 18s linear infinite;
 }
 
-.eyebrow{
+@keyframes gridMove{
+  from{
+    transform:
+      perspective(700px)
+      rotateX(65deg)
+      translateY(20%);
+  }
+  to{
+    transform:
+      perspective(700px)
+      rotateX(65deg)
+      translateY(0%);
+  }
+}
+
+.hero-orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(70px);
+  pointer-events:none;
+}
+
+.hero-orb-one{
+  width:420px;
+  height:420px;
+  left:50%;
+  top:45%;
+  transform:translate(-50%,-50%);
+  background:rgba(229,9,20,.16);
+  animation:orbPulse 7s ease-in-out infinite;
+}
+
+.hero-orb-two{
+  width:260px;
+  height:260px;
+  right:8%;
+  top:10%;
+  background:rgba(229,9,20,.07);
+  animation:orbFloat 10s ease-in-out infinite;
+}
+
+@keyframes orbPulse{
+  0%,100%{
+    transform:translate(-50%,-50%) scale(.85);
+    opacity:.45;
+  }
+  50%{
+    transform:translate(-50%,-50%) scale(1.2);
+    opacity:.8;
+  }
+}
+
+@keyframes orbFloat{
+  0%,100%{
+    transform:translate(0,0);
+  }
+  50%{
+    transform:translate(-50px,40px);
+  }
+}
+
+.hero-ring{
+  position:absolute;
+  left:50%;
+  top:50%;
+  border:1px solid rgba(229,9,20,.16);
+  border-radius:50%;
+  transform:
+    translate(-50%,-50%)
+    rotateX(70deg);
+  pointer-events:none;
+}
+
+.ring-one{
+  width:320px;
+  height:320px;
+  animation:cinematicRing 18s linear infinite;
+}
+
+.ring-two{
+  width:520px;
+  height:520px;
+  border-color:rgba(255,255,255,.06);
+  animation:cinematicRingReverse 27s linear infinite;
+}
+
+.ring-three{
+  width:760px;
+  height:760px;
+  border-color:rgba(229,9,20,.07);
+  animation:cinematicRing 40s linear infinite;
+}
+
+@keyframes cinematicRing{
+  from{
+    transform:
+      translate(-50%,-50%)
+      rotateX(70deg)
+      rotateZ(0deg);
+  }
+  to{
+    transform:
+      translate(-50%,-50%)
+      rotateX(70deg)
+      rotateZ(360deg);
+  }
+}
+
+@keyframes cinematicRingReverse{
+  from{
+    transform:
+      translate(-50%,-50%)
+      rotateX(70deg)
+      rotateZ(360deg);
+  }
+  to{
+    transform:
+      translate(-50%,-50%)
+      rotateX(70deg)
+      rotateZ(0deg);
+  }
+}
+
+.hero-light-beam{
+  position:absolute;
+  top:-30%;
+  width:2px;
+  height:160%;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(229,9,20,.35),
+      transparent
+    );
+  filter:blur(2px);
+  opacity:.25;
+}
+
+.beam-one{
+  left:32%;
+  transform:rotate(18deg);
+  animation:beamMoveOne 9s ease-in-out infinite;
+}
+
+.beam-two{
+  right:30%;
+  transform:rotate(-15deg);
+  animation:beamMoveTwo 12s ease-in-out infinite;
+}
+
+@keyframes beamMoveOne{
+  0%,100%{
+    opacity:.1;
+    transform:rotate(18deg) translateX(-60px);
+  }
+  50%{
+    opacity:.4;
+    transform:rotate(18deg) translateX(80px);
+  }
+}
+
+@keyframes beamMoveTwo{
+  0%,100%{
+    opacity:.08;
+    transform:rotate(-15deg) translateX(80px);
+  }
+  50%{
+    opacity:.3;
+    transform:rotate(-15deg) translateX(-70px);
+  }
+}
+
+.hero-grain{
+  position:absolute;
+  inset:-50%;
+  opacity:.045;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+  animation:grainMove .18s steps(2) infinite;
+  pointer-events:none;
+}
+
+@keyframes grainMove{
+  0%{transform:translate(0,0);}
+  25%{transform:translate(-2%,1%);}
+  50%{transform:translate(1%,-2%);}
+  75%{transform:translate(2%,2%);}
+  100%{transform:translate(-1%,-1%);}
+}
+
+.hero-particles{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+}
+
+.hero-particle{
+  position:absolute;
+  width:2px;
+  height:2px;
+  border-radius:50%;
+  background:#fff;
+  opacity:0;
+  animation:
+    particleRise
+    var(--duration)
+    linear
+    infinite;
+  animation-delay:var(--delay);
+}
+
+.hero-particle.red{
+  background:var(--red);
+  box-shadow:0 0 10px var(--red);
+}
+
+@keyframes particleRise{
+  0%{
+    transform:translate3d(0,40px,0) scale(.5);
+    opacity:0;
+  }
+  15%{
+    opacity:.6;
+  }
+  75%{
+    opacity:.25;
+  }
+  100%{
+    transform:
+      translate3d(var(--drift),-600px,0)
+      scale(1.4);
+    opacity:0;
+  }
+}
+
+.hero-content{
+  position:relative;
+  z-index:5;
+  width:min(1050px,calc(100% - 40px));
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  animation:
+    heroReveal
+    1.6s
+    cubic-bezier(.16,1,.3,1)
+    both;
+}
+
+@keyframes heroReveal{
+  from{
+    opacity:0;
+    transform:translateY(35px) scale(.97);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+.cinematic-eyebrow{
+  display:flex;
+  align-items:center;
+  gap:9px;
   color:var(--red2);
   font-family:Orbitron,sans-serif;
-  font-size:10px;
+  font-size:9px;
   font-weight:800;
   letter-spacing:2.5px;
-  margin-bottom:10px;
+  opacity:0;
+  animation:
+    fadeUp
+    .9s
+    .2s
+    cubic-bezier(.16,1,.3,1)
+    forwards;
 }
 
-h1{
+.eyebrow-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 14px var(--red);
+  animation:statusPulse 2s infinite;
+}
+
+.hero-symbol{
+  position:relative;
+  width:110px;
+  height:110px;
+  margin:32px 0 20px;
+  display:grid;
+  place-items:center;
+  animation:
+    symbolReveal
+    1.5s
+    .35s
+    cubic-bezier(.16,1,.3,1)
+    both;
+}
+
+.symbol-ring{
+  position:absolute;
+  inset:0;
+  border:1px solid rgba(229,9,20,.5);
+  border-radius:50%;
+  box-shadow:
+    0 0 30px rgba(229,9,20,.12),
+    inset 0 0 30px rgba(229,9,20,.06);
+  animation:symbolSpin 12s linear infinite;
+}
+
+.symbol-ring:before,
+.symbol-ring:after{
+  content:"";
+  position:absolute;
+  width:7px;
+  height:7px;
+  background:var(--red);
+  border-radius:50%;
+  box-shadow:0 0 15px var(--red);
+}
+
+.symbol-ring:before{
+  top:-4px;
+  left:50%;
+}
+
+.symbol-ring:after{
+  bottom:-4px;
+  right:50%;
+}
+
+.symbol-core{
+  width:68px;
+  height:68px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid #292929;
+  background:
+    radial-gradient(circle,#191919,#050505);
+  color:#fff;
   font-family:Orbitron,sans-serif;
-  font-size:clamp(30px,4vw,54px);
-  line-height:1.04;
-  letter-spacing:-1px;
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:1px;
+  box-shadow:0 0 45px rgba(229,9,20,.13);
 }
 
-.heroText{
-  max-width:850px;
-  margin-top:14px;
-  color:#999;
-  font-size:13px;
+@keyframes symbolSpin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+@keyframes symbolReveal{
+  from{
+    opacity:0;
+    transform:scale(.4) rotate(-90deg);
+  }
+  to{
+    opacity:1;
+    transform:scale(1) rotate(0);
+  }
+}
+
+.hero h1{
+  margin:10px 0 18px;
+  max-width:1000px;
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(48px,8vw,96px);
+  letter-spacing:-4px;
+  line-height:.95;
+  text-shadow:0 0 50px rgba(255,255,255,.06);
+  animation:
+    titleReveal
+    1.4s
+    .45s
+    cubic-bezier(.16,1,.3,1)
+    both;
+}
+
+.hero h1 span{
+  display:block;
+  color:var(--red);
+  text-shadow:0 0 45px rgba(229,9,20,.25);
+}
+
+@keyframes titleReveal{
+  from{
+    opacity:0;
+    transform:translateY(30px) scale(.96);
+    filter:blur(8px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+    filter:none;
+  }
+}
+
+.heroLead{
+  max-width:750px;
+  color:#d2d2d2;
+  font-size:clamp(14px,2vw,18px);
   line-height:1.8;
+  animation:
+    fadeUp
+    1s
+    .8s
+    cubic-bezier(.16,1,.3,1)
+    both;
+}
+
+.heroSub{
+  max-width:650px;
+  margin:9px auto 0;
+  color:#666;
+  font-size:11px;
+  line-height:1.7;
+  animation:
+    fadeUp
+    1s
+    1s
+    cubic-bezier(.16,1,.3,1)
+    both;
 }
 
 .heroActions{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
-  justify-content:flex-end;
+  justify-content:center;
+  margin-top:30px;
+  animation:
+    fadeUp
+    1s
+    1.1s
+    cubic-bezier(.16,1,.3,1)
+    both;
 }
+
+.heroStatus{
+  margin-top:28px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#555;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  animation:
+    fadeUp
+    1s
+    1.3s
+    cubic-bezier(.16,1,.3,1)
+    both;
+}
+
+.status-pulse{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 0 0 rgba(229,9,20,.5);
+  animation:statusPulse 2s infinite;
+}
+
+@keyframes statusPulse{
+  0%{
+    box-shadow:0 0 0 0 rgba(229,9,20,.5);
+  }
+  70%{
+    box-shadow:0 0 0 8px rgba(229,9,20,0);
+  }
+  100%{
+    box-shadow:0 0 0 0 rgba(229,9,20,0);
+  }
+}
+
+.status-line{
+  width:35px;
+  height:1px;
+  background:#292929;
+}
+
+.hero-scroll{
+  position:absolute;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  color:#444;
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:1.7px;
+  animation:scrollReveal 1s 2s both;
+}
+
+.scroll-line{
+  width:1px;
+  height:35px;
+  background:
+    linear-gradient(
+      to bottom,
+      var(--red),
+      transparent
+    );
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollReveal{
+  from{
+    opacity:0;
+    transform:translate(-50%,20px);
+  }
+  to{
+    opacity:1;
+    transform:translate(-50%,0);
+  }
+}
+
+@keyframes scrollPulse{
+  0%,100%{
+    opacity:.3;
+    transform:scaleY(.7);
+    transform-origin:top;
+  }
+  50%{
+    opacity:1;
+    transform:scaleY(1);
+    transform-origin:top;
+  }
+}
+
+.fadeUp{
+  animation:fadeUp 1s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 .btn{
   border:1px solid var(--line);
@@ -243,10 +816,12 @@ h1{
   font-weight:800;
   text-transform:uppercase;
   letter-spacing:.8px;
+  transition:.2s ease;
 }
 
 .btn:hover{
   border-color:rgba(229,9,20,.55);
+  transform:translateY(-1px);
 }
 
 .btn.primary{
@@ -259,13 +834,31 @@ h1{
   background:var(--red2);
 }
 
-/* PROJECT STRIP */
+.btn.secondary{
+  background:rgba(15,15,15,.7);
+  backdrop-filter:blur(10px);
+}
+
+.btn.danger{
+  border-color:rgba(229,9,20,.3);
+  color:var(--red2);
+}
+
+.btn.small{
+  padding:8px 10px;
+  font-size:8px;
+}
+
+/* =========================================================
+   PROJECT STRIP
+========================================================= */
 
 .projectStrip{
   display:grid;
   grid-template-columns:1fr repeat(4,auto);
   border:1px solid var(--line);
   background:rgba(255,255,255,.018);
+  margin-top:-1px;
 }
 
 .projectTitle{
@@ -297,7 +890,9 @@ h1{
   font-size:11px;
 }
 
-/* MAIN */
+/* =========================================================
+   MAIN
+========================================================= */
 
 main{
   padding:25px 0 80px;
@@ -312,7 +907,12 @@ main{
 .section{
   margin-bottom:21px;
   border:1px solid var(--line);
-  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.012)
+    );
   box-shadow:var(--shadow);
 }
 
@@ -341,7 +941,9 @@ main{
   padding:18px;
 }
 
-/* STATS */
+/* =========================================================
+   STATS
+========================================================= */
 
 .stats{
   display:grid;
@@ -372,7 +974,9 @@ main{
   letter-spacing:1px;
 }
 
-/* FILTERS */
+/* =========================================================
+   FILTERS
+========================================================= */
 
 .filters{
   display:flex;
@@ -400,7 +1004,27 @@ main{
   background:rgba(229,9,20,.08);
 }
 
-/* COLLABORATORS */
+.searchBox{
+  margin-bottom:13px;
+}
+
+.searchBox input{
+  width:100%;
+  padding:12px 13px;
+  border:1px solid var(--line);
+  border-radius:5px;
+  background:#08080a;
+  color:#eee;
+  outline:none;
+}
+
+.searchBox input:focus{
+  border-color:rgba(229,9,20,.5);
+}
+
+/* =========================================================
+   COLLABORATORS
+========================================================= */
 
 .collaborators{
   display:grid;
@@ -409,7 +1033,6 @@ main{
 }
 
 .collaborator{
-  position:relative;
   display:grid;
   grid-template-columns:52px 1fr auto;
   gap:12px;
@@ -423,6 +1046,12 @@ main{
 .collaborator:hover{
   border-color:rgba(229,9,20,.35);
   transform:translateY(-1px);
+}
+
+.collabAvatar,
+.bigAvatar,
+.inviteAvatar{
+  overflow:hidden;
 }
 
 .collabAvatar{
@@ -439,6 +1068,13 @@ main{
   font-family:Orbitron,sans-serif;
   font-size:12px;
   font-weight:900;
+}
+
+.collabAvatar img,
+.bigAvatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 .collabInfo strong{
@@ -486,6 +1122,15 @@ main{
   border-color:rgba(243,201,91,.22);
 }
 
+.tag.paused{
+  color:var(--blue);
+  border-color:rgba(105,170,255,.22);
+}
+
+.tag.declined{
+  color:#888;
+}
+
 .collabActions{
   display:flex;
   align-items:center;
@@ -508,7 +1153,9 @@ main{
   border-color:rgba(229,9,20,.45);
 }
 
-/* ROLES */
+/* =========================================================
+   ROLES
+========================================================= */
 
 .roleGrid{
   display:grid;
@@ -541,7 +1188,9 @@ main{
   font-size:12px;
 }
 
-/* INVITATIONS */
+/* =========================================================
+   INVITATIONS
+========================================================= */
 
 .invites{
   display:grid;
@@ -605,11 +1254,12 @@ main{
   font-weight:800;
 }
 
-/* ACTIVITY */
+/* =========================================================
+   ACTIVITY
+========================================================= */
 
 .activity{
   display:grid;
-  gap:0;
 }
 
 .activityItem{
@@ -654,7 +1304,9 @@ main{
   white-space:nowrap;
 }
 
-/* SIDEBAR */
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
 .sidebar .section{
   margin-bottom:18px;
@@ -720,7 +1372,9 @@ main{
   text-align:right;
 }
 
-/* PERMISSIONS */
+/* =========================================================
+   PERMISSIONS
+========================================================= */
 
 .permissions{
   display:grid;
@@ -748,7 +1402,9 @@ main{
   background:var(--yellow);
 }
 
-/* COLLABORATION PHILOSOPHY */
+/* =========================================================
+   PHILOSOPHY
+========================================================= */
 
 .philosophy{
   border:1px solid rgba(229,9,20,.18);
@@ -777,7 +1433,49 @@ main{
   margin-top:12px;
 }
 
-/* MODAL */
+/* =========================================================
+   EMPTY / LOADING / ERROR
+========================================================= */
+
+.state{
+  padding:35px 20px;
+  text-align:center;
+  border:1px dashed rgba(255,255,255,.08);
+  color:#666;
+}
+
+.state strong{
+  display:block;
+  color:#aaa;
+  font-family:Orbitron,sans-serif;
+  font-size:10px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.state span{
+  display:block;
+  font-size:9px;
+  line-height:1.6;
+}
+
+.loadingDots:after{
+  content:"";
+  animation:dots 1.4s steps(4,end) infinite;
+}
+
+@keyframes dots{
+  0%{content:"";}
+  25%{content:".";}
+  50%{content:"..";}
+  75%{content:"...";}
+  100%{content:"";}
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modal{
   position:fixed;
@@ -887,7 +1585,66 @@ main{
   border-top:1px solid var(--line);
 }
 
-/* TOAST */
+/* =========================================================
+   PROFILE MODAL
+========================================================= */
+
+.profileHero{
+  padding:22px 19px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  border-bottom:1px solid var(--line);
+}
+
+.profileAvatar{
+  width:70px;
+  height:70px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border-radius:50%;
+  border:1px solid rgba(229,9,20,.4);
+  background:#150607;
+  color:var(--red2);
+  font-family:Orbitron,sans-serif;
+  font-weight:900;
+}
+
+.profileAvatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.profileHero strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:15px;
+}
+
+.profileHero span{
+  display:block;
+  margin-top:5px;
+  color:#777;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.profileBody{
+  padding:19px;
+}
+
+.profileBio{
+  color:#aaa;
+  font-size:10px;
+  line-height:1.7;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
 
 .toast{
   position:fixed;
@@ -924,7 +1681,9 @@ main{
   font-size:9px;
 }
 
-/* FOOTER */
+/* =========================================================
+   FOOTER
+========================================================= */
 
 footer{
   border-top:1px solid var(--line);
@@ -946,7 +1705,9 @@ footer{
   letter-spacing:1px;
 }
 
-/* RESPONSIVE */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media(max-width:1100px){
 
@@ -1002,12 +1763,57 @@ footer{
 
 @media(max-width:700px){
 
-  .heroGrid{
-    grid-template-columns:1fr;
+  .hero{
+    min-height:650px;
+  }
+
+  .hero h1{
+    font-size:47px;
+    letter-spacing:-2px;
+  }
+
+  .heroLead{
+    font-size:13px;
+  }
+
+  .heroSub{
+    font-size:10px;
   }
 
   .heroActions{
-    justify-content:flex-start;
+    width:100%;
+    flex-direction:column;
+  }
+
+  .heroActions .btn{
+    width:100%;
+  }
+
+  .hero-symbol{
+    width:85px;
+    height:85px;
+    margin-top:25px;
+  }
+
+  .symbol-core{
+    width:53px;
+    height:53px;
+    font-size:12px;
+  }
+
+  .ring-three{
+    width:520px;
+    height:520px;
+  }
+
+  .ring-two{
+    width:380px;
+    height:380px;
+  }
+
+  .ring-one{
+    width:240px;
+    height:240px;
   }
 
   .projectStrip{
@@ -1051,11 +1857,15 @@ footer{
   }
 
   .hero{
-    padding-top:28px;
+    min-height:620px;
   }
 
-  h1{
-    font-size:28px;
+  .hero-content{
+    width:calc(100% - 28px);
+  }
+
+  .hero h1{
+    font-size:40px;
   }
 
   .stats{
@@ -1091,26 +1901,39 @@ footer{
     grid-column:2;
   }
 }
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *:before,
+  *:after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition:none !important;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-
   <div class="container nav">
 
     <a href="index.html" class="brand">
       <div class="logo">CR</div>
-
       <div>
         <strong>CROWRULES</strong>
         <span>Dream World</span>
       </div>
     </a>
 
-    <nav class="navlinks">
-
+    <nav class="navlinks" id="navLinks">
       <a href="creator-dashboard.html">Dashboard</a>
       <a href="my-dreams.html">My Dreams</a>
       <a href="my-projects.html">My Projects</a>
@@ -1120,98 +1943,151 @@ footer{
       <a href="agreements.html">Agreements</a>
       <a href="credits.html">Credits</a>
       <a href="earnings.html">Earnings</a>
-
     </nav>
 
-    <button class="mobileMenu" onclick="toggleMobileNav()">MENU</button>
+    <button
+      class="mobileMenu"
+      id="mobileMenu"
+      type="button"
+      aria-expanded="false"
+      aria-controls="navLinks"
+    >
+      MENU
+    </button>
 
   </div>
-
 </header>
 
 
-<div class="container hero">
+<!-- ======================================================
+     CINEMATIC HERO
+====================================================== -->
 
-  <div class="breadcrumb">
-    DREAM WORLD /
-    <span>COLLABORATORS</span>
+<section class="hero">
+
+  <div class="hero-cinematic-bg">
+
+    <div class="hero-orb hero-orb-one"></div>
+    <div class="hero-orb hero-orb-two"></div>
+
+    <div class="hero-ring ring-one"></div>
+    <div class="hero-ring ring-two"></div>
+    <div class="hero-ring ring-three"></div>
+
+    <div class="hero-grid"></div>
+
+    <div class="hero-light-beam beam-one"></div>
+    <div class="hero-light-beam beam-two"></div>
+
+    <div
+      class="hero-particles"
+      id="heroParticles"
+      aria-hidden="true"
+    ></div>
+
+    <div class="hero-vignette"></div>
+    <div class="hero-grain"></div>
+
   </div>
 
-  <div class="heroGrid">
+  <div class="hero-content">
 
-    <div>
-
-      <div class="eyebrow">
-        CREATIVE COLLABORATION CENTER
-      </div>
-
-      <h1>
-        Build It Together.
-      </h1>
-
-      <p class="heroText">
-        A Dream World project can grow from one person's dream into a creative
-        team. Writers, producers, directors, artists, composers, editors,
-        researchers and other collaborators can join the project as it develops.
-      </p>
-
+    <div class="cinematic-eyebrow">
+      <span class="eyebrow-dot"></span>
+      <span>Dream World Collaboration Center</span>
     </div>
+
+    <div class="hero-symbol">
+      <div class="symbol-ring"></div>
+      <div class="symbol-core">CR</div>
+    </div>
+
+    <h1>
+      Build It
+      <span>Together.</span>
+    </h1>
+
+    <p class="heroLead">
+      Dreams become stronger when the right people build them together.
+      Bring writers, producers, artists, directors, composers, editors,
+      researchers and creators into the story.
+    </p>
+
+    <p class="heroSub">
+      Manage project members, collaboration requests, creative roles
+      and team activity inside CrowRules Dream World.
+    </p>
 
     <div class="heroActions">
 
       <button
         class="btn primary"
-        onclick="openModal('inviteModal')"
+        id="inviteHeroBtn"
+        type="button"
       >
         + Invite Collaborator
       </button>
 
       <button
-        class="btn"
-        onclick="showToast('Team Directory','The wider Dream World creator directory will open here.')"
+        class="btn secondary"
+        id="refreshBtn"
+        type="button"
       >
-        Find Creators
+        ↻ Refresh
       </button>
 
     </div>
 
+    <div class="heroStatus">
+      <span class="status-pulse"></span>
+      <span>Collaboration System</span>
+      <span class="status-line"></span>
+      <span id="connectionStatus">CONNECTING</span>
+    </div>
+
   </div>
 
-</div>
+  <div class="hero-scroll">
+    <span>SCROLL TO ENTER</span>
+    <div class="scroll-line"></div>
+  </div>
 
+</section>
+
+
+<!-- ======================================================
+     PROJECT STRIP
+====================================================== -->
 
 <div class="container">
 
   <div class="projectStrip">
 
     <div class="projectTitle">
-
       <label>Current Project</label>
-
-      <strong>
-        The City That Only Exists While You Sleep
+      <strong id="projectTitle">
+        Loading project...
       </strong>
-
     </div>
 
     <div class="projectStat">
       <label>Project</label>
-      <strong>DW-0001</strong>
+      <strong id="projectCode">—</strong>
     </div>
 
     <div class="projectStat">
       <label>Stage</label>
-      <strong>Writing</strong>
+      <strong id="projectStage">—</strong>
     </div>
 
     <div class="projectStat">
       <label>Team</label>
-      <strong id="teamCount">3</strong>
+      <strong id="teamCount">—</strong>
     </div>
 
     <div class="projectStat">
       <label>Invitations</label>
-      <strong id="inviteCount">2</strong>
+      <strong id="inviteCount">—</strong>
     </div>
 
   </div>
@@ -1224,35 +2100,40 @@ footer{
   <div class="stats">
 
     <div class="stat">
-      <strong id="statMembers">3</strong>
+      <strong id="statMembers">—</strong>
       <span>Active Collaborators</span>
     </div>
 
     <div class="stat">
-      <strong>6</strong>
+      <strong id="statRoles">—</strong>
       <span>Creative Roles</span>
     </div>
 
     <div class="stat">
-      <strong>18</strong>
-      <span>Contributions</span>
+      <strong id="statContributions">—</strong>
+      <span>Project Activity</span>
     </div>
 
     <div class="stat">
-      <strong>2</strong>
-      <span>Pending Invites</span>
+      <strong id="statPending">—</strong>
+      <span>Pending Requests</span>
     </div>
 
   </div>
 
 
+  <div id="globalError"></div>
+
+
   <div class="layout">
 
-    <!-- MAIN -->
+    <!-- ==================================================
+         MAIN CONTENT
+    ================================================== -->
 
     <div>
 
-      <!-- COLLABORATOR DIRECTORY -->
+      <!-- COLLABORATORS -->
 
       <section class="section">
 
@@ -1260,12 +2141,15 @@ footer{
 
           <div>
             <h2>Project Collaborators</h2>
-            <p>Everyone currently attached to this project.</p>
+            <p>
+              Everyone currently attached to this project.
+            </p>
           </div>
 
           <button
             class="btn"
-            onclick="openModal('inviteModal')"
+            id="inviteBtn"
+            type="button"
           >
             + Add
           </button>
@@ -1274,333 +2158,85 @@ footer{
 
         <div class="sectionBody">
 
+          <div class="searchBox">
+            <input
+              id="memberSearch"
+              type="search"
+              placeholder="Search collaborators..."
+              autocomplete="off"
+            >
+          </div>
+
           <div class="filters">
 
             <button
               class="filter active"
-              onclick="filterCollaborators('all',this)"
+              data-filter="all"
+              type="button"
             >
               All
             </button>
 
             <button
               class="filter"
-              onclick="filterCollaborators('creator',this)"
+              data-filter="creator"
+              type="button"
             >
               Creators
             </button>
 
             <button
               class="filter"
-              onclick="filterCollaborators('writing',this)"
+              data-filter="writing"
+              type="button"
             >
               Writing
             </button>
 
             <button
               class="filter"
-              onclick="filterCollaborators('production',this)"
+              data-filter="production"
+              type="button"
             >
               Production
             </button>
 
             <button
               class="filter"
-              onclick="filterCollaborators('visual',this)"
+              data-filter="visual"
+              type="button"
             >
               Visual
             </button>
 
             <button
               class="filter"
-              onclick="filterCollaborators('audio',this)"
+              data-filter="audio"
+              type="button"
             >
               Audio
             </button>
 
+            <button
+              class="filter"
+              data-filter="other"
+              type="button"
+            >
+              Other
+            </button>
+
           </div>
 
-
-          <div class="collaborators" id="collaborators">
-
-
-            <article
-              class="collaborator"
-              data-role="creator"
-            >
-
-              <div class="collabAvatar">
-                DC
-              </div>
-
-              <div class="collabInfo">
-
-                <strong>Dream Creator</strong>
-
-                <div class="collabRole">
-                  Original Dream Creator
-                </div>
-
-                <div class="collabMeta">
-                  <span class="tag creator">
-                    Original Creator
-                  </span>
-
-                  <span class="tag active">
-                    Active
-                  </span>
-                </div>
-
-              </div>
-
-              <div class="collabActions">
-
-                <button
-                  class="iconBtn"
-                  title="View Profile"
-                  onclick="viewCollaborator('Dream Creator')"
-                >
-                  ↗
-                </button>
-
-                <button
-                  class="iconBtn"
-                  title="Message"
-                  onclick="messageCollaborator('Dream Creator')"
-                >
-                  ✉
-                </button>
-
-              </div>
-
-            </article>
-
-
-            <article
-              class="collaborator"
-              data-role="writing"
-            >
-
-              <div class="collabAvatar">
-                WR
-              </div>
-
-              <div class="collabInfo">
-
-                <strong>Writing Team</strong>
-
-                <div class="collabRole">
-                  Story / Screenplay
-                </div>
-
-                <div class="collabMeta">
-                  <span class="tag">
-                    Writer
-                  </span>
-
-                  <span class="tag active">
-                    Active
-                  </span>
-                </div>
-
-              </div>
-
-              <div class="collabActions">
-
-                <button
-                  class="iconBtn"
-                  onclick="viewCollaborator('Writing Team')"
-                >
-                  ↗
-                </button>
-
-                <button
-                  class="iconBtn"
-                  onclick="messageCollaborator('Writing Team')"
-                >
-                  ✉
-                </button>
-
-              </div>
-
-            </article>
-
-
-            <article
-              class="collaborator"
-              data-role="production"
-            >
-
-              <div class="collabAvatar">
-                CR
-              </div>
-
-              <div class="collabInfo">
-
-                <strong>CrowRules Development</strong>
-
-                <div class="collabRole">
-                  Development / Production
-                </div>
-
-                <div class="collabMeta">
-                  <span class="tag">
-                    Producer
-                  </span>
-
-                  <span class="tag active">
-                    Active
-                  </span>
-
-                </div>
-
-              </div>
-
-              <div class="collabActions">
-
-                <button
-                  class="iconBtn"
-                  onclick="viewCollaborator('CrowRules Development')"
-                >
-                  ↗
-                </button>
-
-                <button
-                  class="iconBtn"
-                  onclick="messageCollaborator('CrowRules Development')"
-                >
-                  ✉
-                </button>
-
-              </div>
-
-            </article>
-
-
-            <article
-              class="collaborator"
-              data-role="visual"
-            >
-
-              <div class="collabAvatar">
-                VD
-              </div>
-
-              <div class="collabInfo">
-
-                <strong>Visual Development</strong>
-
-                <div class="collabRole">
-                  Concept Art / Environments
-                </div>
-
-                <div class="collabMeta">
-                  <span class="tag pending">
-                    Not Yet Joined
-                  </span>
-                </div>
-
-              </div>
-
-              <div class="collabActions">
-
-                <button
-                  class="iconBtn"
-                  onclick="showToast('Visual Team','Visual development is not yet staffed.')"
-                >
-                  +
-                </button>
-
-              </div>
-
-            </article>
-
-
-            <article
-              class="collaborator"
-              data-role="audio"
-            >
-
-              <div class="collabAvatar">
-                AU
-              </div>
-
-              <div class="collabInfo">
-
-                <strong>Music / Audio</strong>
-
-                <div class="collabRole">
-                  Composer / Sound
-                </div>
-
-                <div class="collabMeta">
-                  <span class="tag pending">
-                    Future Role
-                  </span>
-                </div>
-
-              </div>
-
-              <div class="collabActions">
-
-                <button
-                  class="iconBtn"
-                  onclick="showToast('Audio Team','Audio development will be staffed later.')"
-                >
-                  +
-                </button>
-
-              </div>
-
-            </article>
-
-
-            <article
-              class="collaborator"
-              data-role="production"
-            >
-
-              <div class="collabAvatar">
-                RS
-              </div>
-
-              <div class="collabInfo">
-
-                <strong>Research Consultant</strong>
-
-                <div class="collabRole">
-                  Research / Worldbuilding
-                </div>
-
-                <div class="collabMeta">
-                  <span class="tag active">
-                    Active
-                  </span>
-                </div>
-
-              </div>
-
-              <div class="collabActions">
-
-                <button
-                  class="iconBtn"
-                  onclick="viewCollaborator('Research Consultant')"
-                >
-                  ↗
-                </button>
-
-                <button
-                  class="iconBtn"
-                  onclick="messageCollaborator('Research Consultant')"
-                >
-                  ✉
-                </button>
-
-              </div>
-
-            </article>
-
-
+          <div
+            class="collaborators"
+            id="collaborators"
+          >
+            <div class="state">
+              <strong>Loading Collaborators</strong>
+              <span class="loadingDots">
+                Connecting to Dream World
+              </span>
+            </div>
           </div>
 
         </div>
@@ -1616,87 +2252,23 @@ footer{
 
           <div>
             <h2>Creative Roles</h2>
-            <p>Potential roles a Dream World project can use.</p>
+            <p>
+              Roles represented on this project.
+            </p>
           </div>
 
         </div>
 
         <div class="sectionBody">
 
-          <div class="roleGrid">
-
-            <div class="role">
-              <strong>Original Creator</strong>
-              <span>
-                The person whose dream or original concept began the project.
-              </span>
-              <div class="roleCount">1</div>
+          <div
+            class="roleGrid"
+            id="roleGrid"
+          >
+            <div class="state">
+              <strong>Loading Roles</strong>
+              <span>Please wait.</span>
             </div>
-
-            <div class="role">
-              <strong>Writer</strong>
-              <span>
-                Story, screenplay, dialogue, episode and narrative development.
-              </span>
-              <div class="roleCount">1</div>
-            </div>
-
-            <div class="role">
-              <strong>Producer</strong>
-              <span>
-                Development, production planning, financing and project coordination.
-              </span>
-              <div class="roleCount">1</div>
-            </div>
-
-            <div class="role">
-              <strong>Director</strong>
-              <span>
-                Creative direction and eventual production leadership.
-              </span>
-              <div class="roleCount">0</div>
-            </div>
-
-            <div class="role">
-              <strong>Visual Artist</strong>
-              <span>
-                Characters, environments, concept art and visual development.
-              </span>
-              <div class="roleCount">0</div>
-            </div>
-
-            <div class="role">
-              <strong>Composer / Audio</strong>
-              <span>
-                Music, sound design, audio identity and sonic storytelling.
-              </span>
-              <div class="roleCount">0</div>
-            </div>
-
-            <div class="role">
-              <strong>Editor</strong>
-              <span>
-                Editorial development, continuity and final production editing.
-              </span>
-              <div class="roleCount">0</div>
-            </div>
-
-            <div class="role">
-              <strong>Researcher</strong>
-              <span>
-                Research, fact checking, worldbuilding and subject-matter support.
-              </span>
-              <div class="roleCount">1</div>
-            </div>
-
-            <div class="role">
-              <strong>Consultant</strong>
-              <span>
-                Specialized creative, technical, cultural or production expertise.
-              </span>
-              <div class="roleCount">0</div>
-            </div>
-
           </div>
 
         </div>
@@ -1704,97 +2276,41 @@ footer{
       </section>
 
 
-      <!-- INVITATIONS -->
+      <!-- COLLABORATION REQUESTS -->
 
       <section class="section">
 
         <div class="sectionHeader">
 
           <div>
-            <h2>Pending Invitations</h2>
-            <p>People invited to participate in this project.</p>
+            <h2>Collaboration Requests</h2>
+            <p>
+              Incoming requests associated with this project.
+            </p>
           </div>
 
           <button
             class="btn"
-            onclick="openModal('inviteModal')"
+            id="refreshRequestsBtn"
+            type="button"
           >
-            + Invite
+            Refresh
           </button>
 
         </div>
 
         <div class="sectionBody">
 
-          <div class="invites" id="invites">
-
-            <div class="invite">
-
-              <div class="inviteAvatar">
-                CA
-              </div>
-
-              <div>
-                <strong>Concept Artist</strong>
-                <span>
-                  Invited for Visual Development
-                </span>
-              </div>
-
-              <div class="inviteActions">
-
-                <button
-                  class="accept"
-                  onclick="acceptInvite(this)"
-                >
-                  Accept
-                </button>
-
-                <button
-                  class="decline"
-                  onclick="declineInvite(this)"
-                >
-                  Decline
-                </button>
-
-              </div>
-
+          <div
+            class="invites"
+            id="invites"
+          >
+            <div class="state">
+              <strong>Loading Requests</strong>
+              <span class="loadingDots">
+                Checking collaboration requests
+              </span>
             </div>
-
-
-            <div class="invite">
-
-              <div class="inviteAvatar">
-                CO
-              </div>
-
-              <div>
-                <strong>Composer</strong>
-                <span>
-                  Invited for Music / Audio
-                </span>
-              </div>
-
-              <div class="inviteActions">
-
-                <button
-                  class="accept"
-                  onclick="acceptInvite(this)"
-                >
-                  Accept
-                </button>
-
-                <button
-                  class="decline"
-                  onclick="declineInvite(this)"
-                >
-                  Decline
-                </button>
-
-              </div>
-
-            </div>
-
           </div>
 
         </div>
@@ -1810,113 +2326,25 @@ footer{
 
           <div>
             <h2>Collaboration Activity</h2>
-            <p>Recent activity involving project collaborators.</p>
+            <p>
+              Recent project activity involving collaborators.
+            </p>
           </div>
-
-          <button
-            class="btn"
-            onclick="showToast('Activity','Full collaboration activity history coming soon.')"
-          >
-            View All
-          </button>
 
         </div>
 
         <div class="sectionBody">
 
-          <div class="activity">
-
-            <div class="activityItem">
-
-              <div class="activityIcon">
-                DOC
-              </div>
-
-              <div>
-                <strong>
-                  Writing Team updated the Season One story bible.
-                </strong>
-
-                <p>
-                  Version 3 created with revised mythology.
-                </p>
-              </div>
-
-              <div class="activityTime">
-                2h ago
-              </div>
-
+          <div
+            class="activity"
+            id="activity"
+          >
+            <div class="state">
+              <strong>Loading Activity</strong>
+              <span class="loadingDots">
+                Reading project activity
+              </span>
             </div>
-
-
-            <div class="activityItem">
-
-              <div class="activityIcon">
-                MSG
-              </div>
-
-              <div>
-                <strong>
-                  Dream Creator sent a development message.
-                </strong>
-
-                <p>
-                  “I think the city should remember them before they remember it.”
-                </p>
-              </div>
-
-              <div class="activityTime">
-                Yesterday
-              </div>
-
-            </div>
-
-
-            <div class="activityItem">
-
-              <div class="activityIcon">
-                MEM
-              </div>
-
-              <div>
-                <strong>
-                  Research Consultant joined the project.
-                </strong>
-
-                <p>
-                  Role: Research / Worldbuilding
-                </p>
-              </div>
-
-              <div class="activityTime">
-                3 days ago
-              </div>
-
-            </div>
-
-
-            <div class="activityItem">
-
-              <div class="activityIcon">
-                INV
-              </div>
-
-              <div>
-                <strong>
-                  Concept Artist was invited to collaborate.
-                </strong>
-
-                <p>
-                  Role: Visual Development
-                </p>
-              </div>
-
-              <div class="activityTime">
-                4 days ago
-              </div>
-
-            </div>
-
           </div>
 
         </div>
@@ -1932,7 +2360,9 @@ footer{
 
           <div>
             <h2>The Dream World Way</h2>
-            <p>Collaboration is part of the project itself.</p>
+            <p>
+              Collaboration is part of the project itself.
+            </p>
           </div>
 
         </div>
@@ -1952,9 +2382,9 @@ footer{
           </p>
 
           <p>
-            The exact creative roles, credits, rights, compensation and other
-            project terms should be established through appropriate written
-            agreements rather than assumed.
+            Creative roles, credits, rights, compensation and other project
+            terms should be established through appropriate written agreements
+            rather than assumed.
           </p>
 
         </div>
@@ -1964,12 +2394,13 @@ footer{
     </div>
 
 
-    <!-- SIDEBAR -->
+    <!-- ==================================================
+         SIDEBAR
+    ================================================== -->
 
     <aside class="sidebar">
 
-
-      <!-- PROJECT OWNER -->
+      <!-- PROJECT CREATOR -->
 
       <section class="section">
 
@@ -1986,21 +2417,30 @@ footer{
 
           <div class="creatorCard">
 
-            <div class="bigAvatar">
-              DC
+            <div
+              class="bigAvatar"
+              id="creatorAvatar"
+            >
+              CR
             </div>
 
             <div>
-              <strong>Dream Creator</strong>
-              <span>Original Dream Creator</span>
+              <strong id="creatorName">
+                Loading...
+              </strong>
+
+              <span id="creatorRole">
+                Project Creator
+              </span>
             </div>
 
           </div>
 
           <button
             class="btn"
+            id="creatorProfileBtn"
             style="width:100%;margin-top:14px;"
-            onclick="viewCollaborator('Dream Creator')"
+            type="button"
           >
             View Creator Profile
           </button>
@@ -2028,32 +2468,32 @@ footer{
 
             <div class="detail">
               <span>Project</span>
-              <span>DW-0001</span>
-            </div>
-
-            <div class="detail">
-              <span>Dream</span>
-              <span>DR-0001</span>
+              <span id="detailProjectCode">—</span>
             </div>
 
             <div class="detail">
               <span>Format</span>
-              <span>Series</span>
+              <span id="detailFormat">—</span>
             </div>
 
             <div class="detail">
               <span>Genre</span>
-              <span>Sci-Fi / Mystery</span>
+              <span id="detailGenre">—</span>
             </div>
 
             <div class="detail">
               <span>Stage</span>
-              <span>Writing</span>
+              <span id="detailStage">—</span>
+            </div>
+
+            <div class="detail">
+              <span>Status</span>
+              <span id="detailStatus">—</span>
             </div>
 
             <div class="detail">
               <span>Progress</span>
-              <span>38%</span>
+              <span id="detailProgress">—</span>
             </div>
 
           </div>
@@ -2071,7 +2511,7 @@ footer{
 
           <div>
             <h2>Collaboration Access</h2>
-            <p>What project members can access.</p>
+            <p>Project access principles.</p>
           </div>
 
         </div>
@@ -2092,7 +2532,7 @@ footer{
 
             <div class="permission">
               <i></i>
-              <span>Project development notes</span>
+              <span>Development notes</span>
             </div>
 
             <div class="permission">
@@ -2134,10 +2574,14 @@ footer{
 
         </div>
 
-        <div class="sectionBody" style="display:grid;gap:8px;">
+        <div
+          class="sectionBody"
+          style="display:grid;gap:8px;"
+        >
 
           <button
             class="btn"
+            type="button"
             onclick="location.href='creative-room.html'"
           >
             Creative Room
@@ -2145,6 +2589,7 @@ footer{
 
           <button
             class="btn"
+            type="button"
             onclick="location.href='project-development.html'"
           >
             Project Development
@@ -2152,6 +2597,7 @@ footer{
 
           <button
             class="btn"
+            type="button"
             onclick="location.href='messages.html'"
           >
             Project Messages
@@ -2159,6 +2605,7 @@ footer{
 
           <button
             class="btn"
+            type="button"
             onclick="location.href='agreements.html'"
           >
             Agreements
@@ -2166,6 +2613,7 @@ footer{
 
           <button
             class="btn"
+            type="button"
             onclick="location.href='credits.html'"
           >
             Project Credits
@@ -2203,19 +2651,31 @@ footer{
 </footer>
 
 
-<!-- INVITE MODAL -->
+<!-- ======================================================
+     INVITE MODAL
+====================================================== -->
 
-<div class="modal" id="inviteModal">
+<div
+  class="modal"
+  id="inviteModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="inviteTitle"
+>
 
   <div class="modalBox">
 
     <div class="modalHeader">
 
-      <h2>Invite Collaborator</h2>
+      <h2 id="inviteTitle">
+        Request Collaborator
+      </h2>
 
       <button
         class="close"
-        onclick="closeModal('inviteModal')"
+        id="closeInvite"
+        type="button"
+        aria-label="Close"
       >
         ×
       </button>
@@ -2226,12 +2686,15 @@ footer{
 
       <div class="field">
 
-        <label>Collaborator Email</label>
+        <label for="inviteEmail">
+          Collaborator Email
+        </label>
 
         <input
           type="email"
           id="inviteEmail"
           placeholder="creator@example.com"
+          autocomplete="email"
         >
 
       </div>
@@ -2239,23 +2702,25 @@ footer{
 
       <div class="field">
 
-        <label>Project Role</label>
+        <label for="inviteRole">
+          Project Role
+        </label>
 
         <select id="inviteRole">
 
-          <option>Writer</option>
-          <option>Co-Writer</option>
-          <option>Producer</option>
-          <option>Creative Producer</option>
-          <option>Director</option>
-          <option>Visual Artist</option>
-          <option>Concept Artist</option>
-          <option>Composer</option>
-          <option>Sound Designer</option>
-          <option>Editor</option>
-          <option>Researcher</option>
-          <option>Consultant</option>
-          <option>Other</option>
+          <option value="Writer">Writer</option>
+          <option value="Co-Writer">Co-Writer</option>
+          <option value="Producer">Producer</option>
+          <option value="Creative Producer">Creative Producer</option>
+          <option value="Director">Director</option>
+          <option value="Visual Artist">Visual Artist</option>
+          <option value="Concept Artist">Concept Artist</option>
+          <option value="Composer">Composer</option>
+          <option value="Sound Designer">Sound Designer</option>
+          <option value="Editor">Editor</option>
+          <option value="Researcher">Researcher</option>
+          <option value="Consultant">Consultant</option>
+          <option value="Other">Other</option>
 
         </select>
 
@@ -2264,11 +2729,13 @@ footer{
 
       <div class="field">
 
-        <label>Invitation Message</label>
+        <label for="inviteMessage">
+          Invitation Message
+        </label>
 
         <textarea
           id="inviteMessage"
-          placeholder="Tell this person why you would like them to join the project..."
+          placeholder="Tell this creator why you would like them to collaborate..."
         ></textarea>
 
       </div>
@@ -2282,9 +2749,9 @@ footer{
         >
 
         <label for="inviteAgreement">
-          I understand that project access, creative responsibilities,
-          ownership, credits, compensation and other rights should be
-          governed by appropriate project agreements where applicable.
+          I understand that this request does not itself create an employment,
+          ownership, compensation, licensing or other legal agreement.
+          Appropriate project agreements should be used where applicable.
         </label>
 
       </div>
@@ -2295,16 +2762,18 @@ footer{
 
       <button
         class="btn"
-        onclick="closeModal('inviteModal')"
+        id="cancelInvite"
+        type="button"
       >
         Cancel
       </button>
 
       <button
         class="btn primary"
-        onclick="sendInvite()"
+        id="sendInviteBtn"
+        type="button"
       >
-        Send Invitation
+        Send Request
       </button>
 
     </div>
@@ -2314,69 +2783,61 @@ footer{
 </div>
 
 
-<!-- ROLE MODAL -->
+<!-- ======================================================
+     PROFILE MODAL
+====================================================== -->
 
-<div class="modal" id="roleModal">
+<div
+  class="modal"
+  id="profileModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="profileTitle"
+>
 
   <div class="modalBox">
 
     <div class="modalHeader">
 
-      <h2>Edit Collaborator Role</h2>
+      <h2 id="profileTitle">
+        Creator Profile
+      </h2>
 
       <button
         class="close"
-        onclick="closeModal('roleModal')"
+        id="closeProfile"
+        type="button"
+        aria-label="Close"
       >
         ×
       </button>
 
     </div>
 
-    <div class="form">
-
-      <div class="field">
-
-        <label>Collaborator</label>
-
-        <input
-          id="rolePerson"
-          readonly
-        >
-
+    <div
+      class="profileHero"
+      id="profileHero"
+    >
+      <div
+        class="profileAvatar"
+        id="profileAvatar"
+      >
+        CR
       </div>
 
-      <div class="field">
-
-        <label>Role</label>
-
-        <select id="roleSelect">
-
-          <option>Original Creator</option>
-          <option>Writer</option>
-          <option>Co-Writer</option>
-          <option>Producer</option>
-          <option>Creative Producer</option>
-          <option>Director</option>
-          <option>Visual Artist</option>
-          <option>Composer</option>
-          <option>Editor</option>
-          <option>Researcher</option>
-          <option>Consultant</option>
-
-        </select>
-
+      <div>
+        <strong id="profileName">Creator</strong>
+        <span id="profileRole">Collaborator</span>
       </div>
+    </div>
 
-      <div class="field">
+    <div class="profileBody">
 
-        <label>Internal Note</label>
-
-        <textarea
-          id="roleNote"
-          placeholder="Describe the collaborator's responsibilities..."
-        ></textarea>
-
+      <div
+        class="profileBio"
+        id="profileBio"
+      >
+        No public creator biography has been provided.
       </div>
 
     </div>
@@ -2385,16 +2846,10 @@ footer{
 
       <button
         class="btn"
-        onclick="closeModal('roleModal')"
+        id="profileCloseBtn"
+        type="button"
       >
-        Cancel
-      </button>
-
-      <button
-        class="btn primary"
-        onclick="saveRole()"
-      >
-        Save Role
+        Close
       </button>
 
     </div>
@@ -2404,7 +2859,16 @@ footer{
 </div>
 
 
-<div class="toast" id="toast">
+<!-- ======================================================
+     TOAST
+====================================================== -->
+
+<div
+  class="toast"
+  id="toast"
+  role="status"
+  aria-live="polite"
+>
 
   <strong id="toastTitle">
     CrowRules Dream World
@@ -2418,382 +2882,1499 @@ footer{
 
 
 <script>
+/* =========================================================
+   CROWRULES DREAM WORLD
+   COLLABORATORS — PRODUCTION VERSION
+========================================================= */
 
-/*
-===========================================================
-CROWRULES DREAM WORLD
-COLLABORATORS CENTER
-===========================================================
+"use strict";
 
-CURRENT MODE:
-Front-end demo.
 
-PROJECT:
-DW-0001
+/* =========================================================
+   SUPABASE CONFIG
+========================================================= */
 
-DREAM:
-DR-0001
+const SUPABASE_URL =
+  "https://cevylpnoexugwgygvtgu.supabase.co";
 
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
 
-FUTURE SUPABASE TABLE:
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
 
-dream_project_members
----------------------
 
-id uuid primary key
+/* =========================================================
+   STATE
+========================================================= */
 
-project_id uuid
-references dream_projects(id)
+const state = {
+  user:null,
+  profile:null,
+  project:null,
+  members:[],
+  requests:[],
+  activity:[],
+  activeFilter:"all",
+  search:"",
+  realtimeChannel:null,
+  loading:false
+};
 
-user_id uuid
-references auth.users(id)
 
-role text
+/* =========================================================
+   DOM
+========================================================= */
 
-role_category text
+const $ = id =>
+  document.getElementById(id);
 
-status text
 
-invited_by uuid
+/* =========================================================
+   SAFE HTML
+========================================================= */
 
-invited_at timestamptz
+function escapeHtml(value){
 
-joined_at timestamptz
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
-left_at timestamptz
+}
 
-permissions jsonb
 
-responsibilities text
+/* =========================================================
+   INITIALS
+========================================================= */
 
-notes text
+function initials(name){
 
-created_at timestamptz
+  const text =
+    String(name || "CR")
+      .trim();
 
-updated_at timestamptz
-
-
-SUGGESTED ROLE CATEGORIES:
-
-creator
-writing
-production
-directing
-visual
-audio
-editing
-research
-consulting
-marketing
-distribution
-
-
-SUGGESTED STATUSES:
-
-invited
-pending
-active
-paused
-removed
-declined
-
-
-===========================================================
-COLLABORATOR INVITATIONS
-
-dream_project_invitations
--------------------------
-
-id uuid primary key
-
-project_id uuid
-
-invited_by uuid
-
-invitee_user_id uuid nullable
-
-invitee_email text
-
-role text
-
-message text
-
-status text
-
-expires_at timestamptz
-
-accepted_at timestamptz
-
-declined_at timestamptz
-
-created_at timestamptz
-
-updated_at timestamptz
-
-
-===========================================================
-ROLE RESPONSIBILITIES
-
-Potential separate table:
-
-dream_project_member_responsibilities
-
-id uuid primary key
-
-member_id uuid
-
-responsibility text
-
-status text
-
-created_at timestamptz
-
-updated_at timestamptz
-
-
-===========================================================
-IMPORTANT SECURITY
-
-Use Supabase Auth.
-
-Use RLS.
-
-A project member should only see
-projects they are authorized to access.
-
-The Dream Creator should not automatically
-receive access to confidential information
-such as:
-
-- other people's compensation
-- private contracts
-- internal production budgets
-- confidential negotiations
-- private personnel information
-
-Admins and authorized production staff can
-receive elevated permissions.
-
-Do NOT expose a service-role key in this page.
-
-
-===========================================================
-REALTIME
-
-Potential realtime tables:
-
-dream_project_members
-dream_project_invitations
-dream_activity
-dream_messages
-
-
-When someone accepts an invitation,
-the project membership and activity feed
-can update in real time.
-
-
-===========================================================
-FUTURE FEATURES
-
-- Creator directory
-- Search collaborators
-- Skill tags
-- Portfolio links
-- Availability
-- Invite by email
-- Invite existing Dream World member
-- Role permissions
-- Project responsibilities
-- Collaboration history
-- Private messages
-- Creator meetings
-- Shared documents
-- File permissions
-- Approval workflow
-- Credit recommendations
-- Agreement status
-- Contributor onboarding
-- Offboarding
-- Activity history
-===========================================================
-*/
-
-
-let activeFilter = "all";
-
-
-/* MOBILE NAV */
-
-function toggleMobileNav(){
-
-  const nav =
-    document.querySelector(".navlinks");
-
-  if(!nav) return;
-
-  if(nav.style.display === "flex"){
-
-    nav.style.display = "";
-
-  }else{
-
-    nav.style.display = "flex";
-    nav.style.flexDirection = "column";
-    nav.style.position = "absolute";
-    nav.style.top = "76px";
-    nav.style.left = "3%";
-    nav.style.right = "3%";
-    nav.style.padding = "12px";
-    nav.style.background = "#0a0a0c";
-    nav.style.border = "1px solid rgba(255,255,255,.1)";
-
+  if(!text){
+    return "CR";
   }
-}
 
+  const parts =
+    text
+      .split(/\s+/)
+      .filter(Boolean);
 
-/* MODALS */
+  if(parts.length === 1){
+    return parts[0]
+      .slice(0,2)
+      .toUpperCase();
+  }
 
-function openModal(id){
-
-  document
-    .getElementById(id)
-    .classList.add("open");
-
-}
-
-
-function closeModal(id){
-
-  document
-    .getElementById(id)
-    .classList.remove("open");
+  return (
+    parts[0][0] +
+    parts[parts.length - 1][0]
+  ).toUpperCase();
 
 }
 
 
-/* TOAST */
+/* =========================================================
+   STATUS
+========================================================= */
+
+function normalizeStatus(status){
+
+  return String(status || "active")
+    .toLowerCase()
+    .trim();
+
+}
+
+
+/* =========================================================
+   ROLE CATEGORY
+========================================================= */
+
+function roleCategory(role){
+
+  const value =
+    String(role || "")
+      .toLowerCase();
+
+  if(
+    value.includes("creator") ||
+    value.includes("origin")
+  ){
+    return "creator";
+  }
+
+  if(
+    value.includes("writer") ||
+    value.includes("story") ||
+    value.includes("screenplay")
+  ){
+    return "writing";
+  }
+
+  if(
+    value.includes("producer") ||
+    value.includes("production") ||
+    value.includes("research")
+  ){
+    return "production";
+  }
+
+  if(
+    value.includes("director") ||
+    value.includes("directing")
+  ){
+    return "production";
+  }
+
+  if(
+    value.includes("visual") ||
+    value.includes("artist") ||
+    value.includes("concept")
+  ){
+    return "visual";
+  }
+
+  if(
+    value.includes("composer") ||
+    value.includes("audio") ||
+    value.includes("sound") ||
+    value.includes("music")
+  ){
+    return "audio";
+  }
+
+  return "other";
+
+}
+
+
+/* =========================================================
+   DISPLAY DATE
+========================================================= */
+
+function relativeTime(value){
+
+  if(!value){
+    return "—";
+  }
+
+  const date =
+    new Date(value);
+
+  if(Number.isNaN(date.getTime())){
+    return "—";
+  }
+
+  const seconds =
+    Math.floor(
+      (Date.now() - date.getTime()) / 1000
+    );
+
+  if(seconds < 60){
+    return "Just now";
+  }
+
+  const minutes =
+    Math.floor(seconds / 60);
+
+  if(minutes < 60){
+    return minutes + "m ago";
+  }
+
+  const hours =
+    Math.floor(minutes / 60);
+
+  if(hours < 24){
+    return hours + "h ago";
+  }
+
+  const days =
+    Math.floor(hours / 24);
+
+  if(days < 7){
+    return days + "d ago";
+  }
+
+  return date.toLocaleDateString(
+    undefined,
+    {
+      month:"short",
+      day:"numeric",
+      year:
+        date.getFullYear() !==
+        new Date().getFullYear()
+          ? "numeric"
+          : undefined
+    }
+  );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
 
 let toastTimer;
 
 function showToast(title,message){
 
   const toast =
-    document.getElementById("toast");
+    $("toast");
 
-  document.getElementById("toastTitle")
-    .textContent = title;
+  if(!toast){
+    return;
+  }
 
-  document.getElementById("toastMessage")
-    .textContent = message;
+  $("toastTitle").textContent =
+    title;
+
+  $("toastMessage").textContent =
+    message;
 
   toast.classList.add("show");
 
   clearTimeout(toastTimer);
 
-  toastTimer = setTimeout(()=>{
-
-    toast.classList.remove("show");
-
-  },3200);
+  toastTimer =
+    setTimeout(
+      () =>
+        toast.classList.remove("show"),
+      3500
+    );
 
 }
 
 
-/* FILTER */
+/* =========================================================
+   AUTH GUARD
+========================================================= */
 
-function filterCollaborators(filter,button){
+async function requireAuth(){
 
-  activeFilter = filter;
+  const {
+    data,
+    error
+  } =
+    await supabaseClient.auth.getUser();
 
-  document
-    .querySelectorAll(".filter")
-    .forEach(item => {
-      item.classList.remove("active");
+  if(
+    error ||
+    !data ||
+    !data.user
+  ){
+
+    const next =
+      encodeURIComponent(
+        location.pathname.split("/").pop() ||
+        "collaborators.html"
+      );
+
+    location.href =
+      "login.html?next=" + next;
+
+    return null;
+  }
+
+  state.user =
+    data.user;
+
+  return data.user;
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+async function loadProfile(){
+
+  if(!state.user){
+    return;
+  }
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("dream_profiles")
+      .select("*")
+      .eq("user_id",state.user.id)
+      .maybeSingle();
+
+  if(error){
+
+    console.warn(
+      "Profile lookup:",
+      error.message
+    );
+
+    return;
+
+  }
+
+  state.profile =
+    data || null;
+
+}
+
+
+/* =========================================================
+   CURRENT PROJECT
+========================================================= */
+
+async function loadProject(){
+
+  if(!state.user){
+    return null;
+  }
+
+  /*
+   Prefer projects where the authenticated user
+   is the creator.
+  */
+
+  let query =
+    await supabaseClient
+      .from("dream_projects")
+      .select("*")
+      .eq("creator_id",state.user.id)
+      .order(
+        "updated_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(1)
+      .maybeSingle();
+
+  if(
+    !query.data &&
+    !query.error
+  ){
+
+    /*
+     Fall back to membership.
+    */
+
+    const membership =
+      await supabaseClient
+        .from("dream_project_members")
+        .select("project_id")
+        .eq("user_id",state.user.id)
+        .eq("status","active")
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        )
+        .limit(1)
+        .maybeSingle();
+
+    if(
+      membership.data &&
+      membership.data.project_id
+    ){
+
+      query =
+        await supabaseClient
+          .from("dream_projects")
+          .select("*")
+          .eq(
+            "id",
+            membership.data.project_id
+          )
+          .maybeSingle();
+
+    }
+
+  }
+
+  if(query.error){
+
+    throw new Error(
+      "Unable to load project: " +
+      query.error.message
+    );
+
+  }
+
+  state.project =
+    query.data || null;
+
+  return state.project;
+
+}
+
+
+/* =========================================================
+   MEMBERS
+========================================================= */
+
+async function loadMembers(){
+
+  state.members = [];
+
+  if(!state.project){
+    renderMembers();
+    renderRoles();
+    return;
+  }
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("dream_project_members")
+      .select("*")
+      .eq(
+        "project_id",
+        state.project.id
+      )
+      .order(
+        "created_at",
+        {
+          ascending:true
+        }
+      );
+
+  if(error){
+
+    throw new Error(
+      "Unable to load collaborators: " +
+      error.message
+    );
+
+  }
+
+  const rows =
+    data || [];
+
+  /*
+   Load public creator profiles separately.
+   This avoids depending on a specific foreign-key
+   relationship being exposed by PostgREST.
+  */
+
+  const userIds =
+    [
+      ...new Set(
+        rows
+          .map(row => row.user_id)
+          .filter(Boolean)
+      )
+    ];
+
+  let profiles = [];
+
+  if(userIds.length){
+
+    const result =
+      await supabaseClient
+        .from("dream_profiles")
+        .select(`
+          user_id,
+          display_name,
+          creator_handle,
+          bio,
+          avatar_url,
+          primary_role,
+          secondary_roles,
+          public_profile,
+          show_bio
+        `)
+        .in(
+          "user_id",
+          userIds
+        );
+
+    if(!result.error){
+      profiles =
+        result.data || [];
+    }
+
+  }
+
+  const profileMap =
+    new Map(
+      profiles.map(
+        profile =>
+          [profile.user_id,profile]
+      )
+    );
+
+  state.members =
+    rows.map(row => ({
+      ...row,
+      profile:
+        profileMap.get(row.user_id) || null
+    }));
+
+  renderMembers();
+  renderRoles();
+
+}
+
+
+/* =========================================================
+   COLLABORATION REQUESTS
+========================================================= */
+
+async function loadRequests(){
+
+  state.requests = [];
+
+  if(!state.project){
+    renderRequests();
+    return;
+  }
+
+  /*
+   Existing Dream World schema uses
+   dream_collaborations rather than the
+   nonexistent dream_project_invitations table.
+  */
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("dream_collaborations")
+      .select("*")
+      .eq(
+        "project_id",
+        state.project.id
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
+
+  if(error){
+
+    throw new Error(
+      "Unable to load collaboration requests: " +
+      error.message
+    );
+
+  }
+
+  state.requests =
+    data || [];
+
+  renderRequests();
+
+}
+
+
+/* =========================================================
+   ACTIVITY
+========================================================= */
+
+async function loadActivity(){
+
+  state.activity = [];
+
+  if(!state.project){
+    renderActivity();
+    return;
+  }
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("dream_activity")
+      .select("*")
+      .eq(
+        "project_id",
+        state.project.id
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(20);
+
+  if(error){
+
+    throw new Error(
+      "Unable to load activity: " +
+      error.message
+    );
+
+  }
+
+  state.activity =
+    data || [];
+
+  renderActivity();
+
+}
+
+
+/* =========================================================
+   PROJECT UI
+========================================================= */
+
+function renderProject(){
+
+  const project =
+    state.project;
+
+  if(!project){
+
+    $("projectTitle").textContent =
+      "No project selected";
+
+    $("projectCode").textContent =
+      "—";
+
+    $("projectStage").textContent =
+      "—";
+
+    $("detailProjectCode").textContent =
+      "—";
+
+    $("detailFormat").textContent =
+      "—";
+
+    $("detailGenre").textContent =
+      "—";
+
+    $("detailStage").textContent =
+      "—";
+
+    $("detailStatus").textContent =
+      "—";
+
+    $("detailProgress").textContent =
+      "—";
+
+    return;
+
+  }
+
+  $("projectTitle").textContent =
+    project.title ||
+    "Untitled Project";
+
+  $("projectCode").textContent =
+    project.project_code ||
+    "—";
+
+  $("projectStage").textContent =
+    project.status ||
+    "—";
+
+  $("detailProjectCode").textContent =
+    project.project_code ||
+    "—";
+
+  $("detailFormat").textContent =
+    project.format ||
+    "—";
+
+  $("detailGenre").textContent =
+    project.genre ||
+    "—";
+
+  $("detailStage").textContent =
+    project.status ||
+    "—";
+
+  $("detailStatus").textContent =
+    project.visibility ||
+    project.status ||
+    "—";
+
+  const progress =
+    Number(project.progress_percent);
+
+  $("detailProgress").textContent =
+    Number.isFinite(progress)
+      ? Math.max(
+          0,
+          Math.min(100,progress)
+        ) + "%"
+      : "—";
+
+}
+
+
+/* =========================================================
+   CREATOR
+========================================================= */
+
+function renderCreator(){
+
+  const creator =
+    state.members.find(
+      member =>
+        member.user_id ===
+        state.project?.creator_id
+    );
+
+  const profile =
+    creator?.profile ||
+    (
+      state.profile &&
+      state.user &&
+      state.project &&
+      state.project.creator_id ===
+      state.user.id
+        ? state.profile
+        : null
+    );
+
+  const name =
+    profile?.display_name ||
+    profile?.creator_handle ||
+    (
+      creator?.user_id === state.user?.id
+        ? state.user?.email
+        : "Project Creator"
+    ) ||
+    "Project Creator";
+
+  $("creatorName").textContent =
+    name;
+
+  $("creatorRole").textContent =
+    creator?.role ||
+    profile?.primary_role ||
+    "Original Dream Creator";
+
+  const avatar =
+    $("creatorAvatar");
+
+  if(profile?.avatar_url){
+
+    avatar.innerHTML =
+      `<img src="${escapeHtml(profile.avatar_url)}" alt="">`;
+
+  }else{
+
+    avatar.textContent =
+      initials(name);
+
+  }
+
+}
+
+
+/* =========================================================
+   MEMBERS
+========================================================= */
+
+function renderMembers(){
+
+  const container =
+    $("collaborators");
+
+  const filter =
+    state.activeFilter;
+
+  const search =
+    state.search
+      .toLowerCase()
+      .trim();
+
+  let members =
+    state.members.filter(
+      member =>
+        normalizeStatus(member.status) !==
+        "removed"
+    );
+
+  members =
+    members.filter(member => {
+
+      const category =
+        roleCategory(member.role);
+
+      const matchesFilter =
+        filter === "all" ||
+        category === filter;
+
+      const profile =
+        member.profile;
+
+      const name =
+        profile?.display_name ||
+        profile?.creator_handle ||
+        member.role ||
+        "";
+
+      const matchesSearch =
+        !search ||
+        name
+          .toLowerCase()
+          .includes(search) ||
+        String(member.role || "")
+          .toLowerCase()
+          .includes(search);
+
+      return (
+        matchesFilter &&
+        matchesSearch
+      );
+
     });
 
-  button.classList.add("active");
+  if(!members.length){
 
-  document
-    .querySelectorAll(".collaborator")
-    .forEach(card => {
+    container.innerHTML =
+      `<div class="state" style="grid-column:1/-1">
+        <strong>No Collaborators Found</strong>
+        <span>
+          ${
+            state.members.length
+              ? "No collaborators match the current filter."
+              : "This project does not have any active collaborators yet."
+          }
+        </span>
+      </div>`;
+
+    return;
+
+  }
+
+  container.innerHTML =
+    members.map(member => {
+
+      const profile =
+        member.profile;
+
+      const name =
+        profile?.display_name ||
+        profile?.creator_handle ||
+        (
+          member.user_id === state.user?.id
+            ? state.user.email
+            : "Dream World Creator"
+        );
 
       const role =
-        card.dataset.role;
+        member.role ||
+        profile?.primary_role ||
+        "Collaborator";
 
-      if(filter === "all" || role === filter){
+      const status =
+        normalizeStatus(member.status);
 
-        card.style.display = "grid";
+      const category =
+        roleCategory(role);
+
+      const avatar =
+        profile?.avatar_url
+          ? `<img src="${escapeHtml(profile.avatar_url)}" alt="">`
+          : escapeHtml(initials(name));
+
+      const creatorTag =
+        member.user_id ===
+        state.project?.creator_id
+          ? `<span class="tag creator">Original Creator</span>`
+          : "";
+
+      return `
+        <article
+          class="collaborator"
+          data-role="${escapeHtml(category)}"
+          data-member-id="${escapeHtml(member.id)}"
+        >
+
+          <div class="collabAvatar">
+            ${avatar}
+          </div>
+
+          <div class="collabInfo">
+
+            <strong>
+              ${escapeHtml(name)}
+            </strong>
+
+            <div class="collabRole">
+              ${escapeHtml(role)}
+            </div>
+
+            <div class="collabMeta">
+
+              ${creatorTag}
+
+              <span class="tag ${escapeHtml(status)}">
+                ${escapeHtml(status)}
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="collabActions">
+
+            <button
+              class="iconBtn"
+              type="button"
+              title="View Profile"
+              data-action="profile"
+              data-member-id="${escapeHtml(member.id)}"
+            >
+              ↗
+            </button>
+
+            <button
+              class="iconBtn"
+              type="button"
+              title="Message"
+              data-action="message"
+              data-member-id="${escapeHtml(member.id)}"
+            >
+              ✉
+            </button>
+
+          </div>
+
+        </article>
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   ROLE SUMMARY
+========================================================= */
+
+function renderRoles(){
+
+  const container =
+    $("roleGrid");
+
+  const roles = [
+    {
+      name:"Original Creator",
+      category:"creator",
+      description:
+        "The person whose dream or original concept began the project."
+    },
+    {
+      name:"Writer",
+      category:"writing",
+      description:
+        "Story, screenplay, dialogue, episode and narrative development."
+    },
+    {
+      name:"Producer",
+      category:"production",
+      description:
+        "Development, production planning and project coordination."
+    },
+    {
+      name:"Director",
+      category:"production",
+      description:
+        "Creative direction and eventual production leadership."
+    },
+    {
+      name:"Visual Artist",
+      category:"visual",
+      description:
+        "Characters, environments, concept art and visual development."
+    },
+    {
+      name:"Composer / Audio",
+      category:"audio",
+      description:
+        "Music, sound design, audio identity and sonic storytelling."
+    },
+    {
+      name:"Editor",
+      category:"other",
+      description:
+        "Editorial development, continuity and final production editing."
+    },
+    {
+      name:"Researcher",
+      category:"production",
+      description:
+        "Research, fact checking, worldbuilding and subject-matter support."
+    },
+    {
+      name:"Consultant",
+      category:"other",
+      description:
+        "Specialized creative, technical or production expertise."
+    }
+  ];
+
+  const activeMembers =
+    state.members.filter(
+      member =>
+        normalizeStatus(member.status) ===
+        "active"
+    );
+
+  container.innerHTML =
+    roles.map(role => {
+
+      let count = 0;
+
+      if(role.name === "Original Creator"){
+
+        count =
+          activeMembers.filter(
+            member =>
+              member.user_id ===
+              state.project?.creator_id
+          ).length;
 
       }else{
 
-        card.style.display = "none";
+        count =
+          activeMembers.filter(
+            member =>
+              roleCategory(member.role) ===
+              role.category
+          ).length;
 
       }
 
-    });
+      return `
+        <div class="role">
+
+          <strong>
+            ${escapeHtml(role.name)}
+          </strong>
+
+          <span>
+            ${escapeHtml(role.description)}
+          </span>
+
+          <div class="roleCount">
+            ${count}
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
 
 }
 
 
-/* VIEW COLLABORATOR */
+/* =========================================================
+   REQUESTS
+========================================================= */
 
-function viewCollaborator(name){
+function renderRequests(){
 
-  showToast(
-    "Collaborator Profile",
-    name + " profile would open here."
-  );
+  const container =
+    $("invites");
+
+  const pending =
+    state.requests.filter(
+      request =>
+        [
+          "pending",
+          "reviewing"
+        ].includes(
+          normalizeStatus(request.status)
+        )
+    );
+
+  if(!pending.length){
+
+    container.innerHTML =
+      `<div class="state">
+        <strong>No Pending Requests</strong>
+        <span>
+          There are currently no pending collaboration requests for this project.
+        </span>
+      </div>`;
+
+    return;
+
+  }
+
+  container.innerHTML =
+    pending.map(request => {
+
+      const role =
+        request.role_requested ||
+        "Collaborator";
+
+      const requester =
+        request.requester_id === state.user?.id
+          ? "You"
+          : "Dream World Creator";
+
+      return `
+        <div
+          class="invite"
+          data-request-id="${escapeHtml(request.id)}"
+        >
+
+          <div class="inviteAvatar">
+            ${escapeHtml(initials(requester))}
+          </div>
+
+          <div>
+
+            <strong>
+              ${escapeHtml(role)}
+            </strong>
+
+            <span>
+              Request from
+              ${escapeHtml(requester)}
+              ·
+              ${escapeHtml(
+                relativeTime(request.created_at)
+              )}
+            </span>
+
+          </div>
+
+          <div class="inviteActions">
+
+            ${
+              request.creator_id === state.user?.id &&
+              request.requester_id !== state.user?.id
+                ? `
+                  <button
+                    class="accept"
+                    type="button"
+                    data-request-action="accept"
+                    data-request-id="${escapeHtml(request.id)}"
+                  >
+                    Accept
+                  </button>
+
+                  <button
+                    class="decline"
+                    type="button"
+                    data-request-action="decline"
+                    data-request-id="${escapeHtml(request.id)}"
+                  >
+                    Decline
+                  </button>
+                `
+                : `
+                  <span class="tag pending">
+                    ${escapeHtml(
+                      normalizeStatus(request.status)
+                    )}
+                  </span>
+                `
+            }
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
 
 }
 
 
-/* MESSAGE */
+/* =========================================================
+   ACTIVITY
+========================================================= */
 
-function messageCollaborator(name){
+function renderActivity(){
 
-  showToast(
-    "Message",
-    "Opening conversation with " + name + "."
-  );
+  const container =
+    $("activity");
 
-  /*
-  FUTURE:
+  if(!state.activity.length){
 
-  location.href =
-    "messages.html?project=DW-0001&member=" +
-    encodeURIComponent(memberId);
-  */
+    container.innerHTML =
+      `<div class="state">
+        <strong>No Activity Yet</strong>
+        <span>
+          Collaboration activity will appear here as the project develops.
+        </span>
+      </div>`;
+
+    return;
+
+  }
+
+  container.innerHTML =
+    state.activity.map(item => {
+
+      const type =
+        String(item.activity_type || "ACT")
+          .slice(0,4)
+          .toUpperCase();
+
+      return `
+        <div class="activityItem">
+
+          <div class="activityIcon">
+            ${escapeHtml(type)}
+          </div>
+
+          <div>
+
+            <strong>
+              ${escapeHtml(
+                item.title ||
+                "Project activity"
+              )}
+            </strong>
+
+            <p>
+              ${escapeHtml(
+                item.description ||
+                ""
+              )}
+            </p>
+
+          </div>
+
+          <div class="activityTime">
+            ${escapeHtml(
+              relativeTime(item.created_at)
+            )}
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
 
 }
 
 
-/* INVITE */
+/* =========================================================
+   STATS
+========================================================= */
 
-function sendInvite(){
+function renderStats(){
+
+  const active =
+    state.members.filter(
+      member =>
+        normalizeStatus(member.status) ===
+        "active"
+    );
+
+  const pending =
+    state.requests.filter(
+      request =>
+        [
+          "pending",
+          "reviewing"
+        ].includes(
+          normalizeStatus(request.status)
+        )
+    );
+
+  const categories =
+    new Set(
+      active.map(
+        member =>
+          roleCategory(member.role)
+      )
+    );
+
+  $("statMembers").textContent =
+    active.length;
+
+  $("teamCount").textContent =
+    active.length;
+
+  $("statRoles").textContent =
+    categories.size;
+
+  $("statContributions").textContent =
+    state.activity.length;
+
+  $("statPending").textContent =
+    pending.length;
+
+  $("inviteCount").textContent =
+    pending.length;
+
+}
+
+
+/* =========================================================
+   ERROR STATE
+========================================================= */
+
+function renderGlobalError(message){
+
+  $("globalError").innerHTML =
+    `<div
+      class="state"
+      style="margin-bottom:21px;border-color:rgba(229,9,20,.25);"
+    >
+      <strong>Dream World Data Error</strong>
+      <span>${escapeHtml(message)}</span>
+    </div>`;
+
+}
+
+
+/* =========================================================
+   CLEAR ERROR
+========================================================= */
+
+function clearGlobalError(){
+
+  $("globalError").innerHTML = "";
+
+}
+
+
+/* =========================================================
+   LOAD EVERYTHING
+========================================================= */
+
+async function loadAll(){
+
+  if(state.loading){
+    return;
+  }
+
+  state.loading = true;
+
+  document.body.classList.add("loading");
+
+  $("connectionStatus").textContent =
+    "SYNCING";
+
+  try{
+
+    clearGlobalError();
+
+    await loadProfile();
+
+    await loadProject();
+
+    renderProject();
+
+    if(!state.project){
+
+      renderMembers();
+      renderRoles();
+      renderRequests();
+      renderActivity();
+      renderCreator();
+      renderStats();
+
+      showToast(
+        "No Project Selected",
+        "Create or join a Dream World project to manage collaborators."
+      );
+
+      return;
+
+    }
+
+    await Promise.all([
+      loadMembers(),
+      loadRequests(),
+      loadActivity()
+    ]);
+
+    renderCreator();
+    renderStats();
+
+    $("connectionStatus").textContent =
+      "LIVE";
+
+  }catch(error){
+
+    console.error(error);
+
+    $("connectionStatus").textContent =
+      "ERROR";
+
+    renderGlobalError(
+      error.message ||
+      "Unable to load Dream World collaboration data."
+    );
+
+    showToast(
+      "Connection Error",
+      error.message ||
+      "Unable to load collaboration data."
+    );
+
+  }finally{
+
+    state.loading = false;
+
+    document.body.classList.remove("loading");
+
+  }
+
+}
+
+
+/* =========================================================
+   CREATE COLLABORATION REQUEST
+========================================================= */
+
+async function sendCollaborationRequest(){
+
+  if(!state.user){
+    return;
+  }
+
+  if(!state.project){
+
+    showToast(
+      "No Project",
+      "Select a Dream World project before inviting a collaborator."
+    );
+
+    return;
+
+  }
 
   const email =
-    document
-      .getElementById("inviteEmail")
+    $("inviteEmail")
       .value
-      .trim();
+      .trim()
+      .toLowerCase();
 
   const role =
-    document
-      .getElementById("inviteRole")
+    $("inviteRole")
       .value;
 
   const message =
-    document
-      .getElementById("inviteMessage")
+    $("inviteMessage")
       .value
       .trim();
 
-  const agreement =
-    document
-      .getElementById("inviteAgreement")
+  const acknowledged =
+    $("inviteAgreement")
       .checked;
-
 
   if(!email){
 
@@ -2806,359 +4387,1163 @@ function sendInvite(){
 
   }
 
-
-  if(!agreement){
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
 
     showToast(
-      "Confirmation Required",
-      "Confirm the collaboration terms acknowledgement."
+      "Invalid Email",
+      "Enter a valid email address."
     );
 
     return;
 
   }
 
+  if(!acknowledged){
 
-  closeModal("inviteModal");
+    showToast(
+      "Confirmation Required",
+      "Confirm the collaboration acknowledgement."
+    );
 
-
-  document
-    .getElementById("inviteEmail")
-    .value = "";
-
-  document
-    .getElementById("inviteMessage")
-    .value = "";
-
-  document
-    .getElementById("inviteAgreement")
-    .checked = false;
-
-
-  showToast(
-    "Invitation Sent",
-    role + " invitation sent to " + email + "."
-  );
-
-
-  /*
-  FUTURE SUPABASE:
-
-  const {
-    data:user
-  } = await supabase.auth.getUser();
-
-  await supabase
-    .from("dream_project_invitations")
-    .insert({
-
-      project_id:PROJECT_ID,
-
-      invited_by:user.user.id,
-
-      invitee_email:email,
-
-      role:role,
-
-      message:message,
-
-      status:"pending"
-
-    });
-
-  */
-
-
-  /*
-  FUTURE:
-
-  Trigger notification email
-  through a Supabase Edge Function.
-  */
-
-}
-
-
-/* ACCEPT INVITE */
-
-function acceptInvite(button){
-
-  const invite =
-    button.closest(".invite");
-
-  const name =
-    invite
-      .querySelector("strong")
-      .textContent;
-
-  invite.remove();
-
-  updateInviteCount(-1);
-
-  showToast(
-    "Invitation Accepted",
-    name + " has been added to the project."
-  );
-
-
-  /*
-  FUTURE SUPABASE:
-
-  1. Update invitation status
-  2. Insert dream_project_members
-  3. Insert dream_activity
-  4. Send notification
-  */
-
-}
-
-
-/* DECLINE INVITE */
-
-function declineInvite(button){
-
-  const invite =
-    button.closest(".invite");
-
-  const name =
-    invite
-      .querySelector("strong")
-      .textContent;
-
-  invite.remove();
-
-  updateInviteCount(-1);
-
-  showToast(
-    "Invitation Declined",
-    name + " was removed from pending invitations."
-  );
-
-
-  /*
-  FUTURE SUPABASE:
-
-  await supabase
-    .from("dream_project_invitations")
-    .update({
-      status:"declined",
-      declined_at:new Date().toISOString()
-    })
-    .eq("id",INVITATION_ID);
-
-  */
-
-}
-
-
-/* INVITE COUNT */
-
-function updateInviteCount(delta){
-
-  const element =
-    document.getElementById("inviteCount");
-
-  let value =
-    Number(element.textContent) || 0;
-
-  value =
-    Math.max(0,value + delta);
-
-  element.textContent = value;
-
-}
-
-
-/* EDIT ROLE */
-
-function editRole(name){
-
-  document
-    .getElementById("rolePerson")
-    .value = name;
-
-  openModal("roleModal");
-
-}
-
-
-/* SAVE ROLE */
-
-function saveRole(){
-
-  const person =
-    document
-      .getElementById("rolePerson")
-      .value;
-
-  const role =
-    document
-      .getElementById("roleSelect")
-      .value;
-
-  closeModal("roleModal");
-
-  showToast(
-    "Role Updated",
-    person + " is now assigned as " + role + "."
-  );
-
-
-  /*
-  FUTURE SUPABASE:
-
-  await supabase
-    .from("dream_project_members")
-    .update({
-      role:role,
-      updated_at:new Date().toISOString()
-    })
-    .eq("id",MEMBER_ID);
-
-  */
-
-}
-
-
-/* CLOSE MODALS */
-
-document
-  .querySelectorAll(".modal")
-  .forEach(modal => {
-
-    modal.addEventListener("click",event => {
-
-      if(event.target === modal){
-
-        modal.classList.remove("open");
-
-      }
-
-    });
-
-  });
-
-
-/* ESCAPE */
-
-document.addEventListener("keydown",event => {
-
-  if(event.key === "Escape"){
-
-    document
-      .querySelectorAll(".modal.open")
-      .forEach(modal => {
-
-        modal.classList.remove("open");
-
-      });
+    return;
 
   }
 
-});
+  const button =
+    $("sendInviteBtn");
+
+  button.disabled = true;
+
+  button.textContent =
+    "Sending...";
+
+  try{
+
+    /*
+     Existing schema:
+
+     dream_collaborations
+     project_id
+     requester_id
+     creator_id
+     role_requested
+     message
+     status
+    */
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("dream_collaborations")
+        .insert({
+          project_id:
+            state.project.id,
+
+          requester_id:
+            state.user.id,
+
+          creator_id:
+            state.project.creator_id,
+
+          role_requested:
+            role,
+
+          message:
+            message || null,
+
+          status:
+            "pending"
+        });
+
+    if(error){
+      throw error;
+    }
+
+    await supabaseClient
+      .from("dream_activity")
+      .insert({
+        user_id:
+          state.user.id,
+
+        project_id:
+          state.project.id,
+
+        activity_type:
+          "collaboration_request",
+
+        title:
+          "Collaboration request created",
+
+        description:
+          `${role} collaboration request submitted for ${email}.`,
+
+        visibility:
+          "project"
+      });
+
+    closeModal("inviteModal");
+
+    $("inviteEmail").value = "";
+    $("inviteMessage").value = "";
+    $("inviteAgreement").checked = false;
+
+    showToast(
+      "Request Submitted",
+      `${role} collaboration request has been submitted.`
+    );
+
+    await loadRequests();
+    await loadActivity();
+    renderStats();
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Request Failed",
+      error.message ||
+      "The collaboration request could not be created."
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "Send Request";
+
+  }
+
+}
 
 
-/*
-===========================================================
-FUTURE SUPABASE INITIALIZATION
-===========================================================
+/* =========================================================
+   REQUEST STATUS
+========================================================= */
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+async function updateRequest(
+  requestId,
+  status
+){
 
-const SUPABASE_URL =
-  "https://YOUR-PROJECT.supabase.co";
+  const request =
+    state.requests.find(
+      item =>
+        item.id === requestId
+    );
 
-const SUPABASE_ANON_KEY =
-  "YOUR_PUBLIC_ANON_KEY";
+  if(!request){
+    return;
+  }
 
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
+  /*
+   Only the project creator should be able
+   to approve/decline incoming requests.
+  */
+
+  if(
+    state.project?.creator_id !==
+    state.user?.id
+  ){
+
+    showToast(
+      "Access Restricted",
+      "Only the project creator can process this request."
+    );
+
+    return;
+
+  }
+
+  try{
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("dream_collaborations")
+        .update({
+          status,
+          updated_at:
+            new Date().toISOString()
+        })
+        .eq(
+          "id",
+          requestId
+        )
+        .eq(
+          "creator_id",
+          state.user.id
+        );
+
+    if(error){
+      throw error;
+    }
+
+    /*
+     This page intentionally does not create
+     a project member directly from the browser.
+
+     Membership should be granted by a protected
+     server-side workflow / Edge Function after
+     the collaboration request is approved.
+    */
+
+    await loadRequests();
+    await loadActivity();
+
+    renderStats();
+
+    showToast(
+      status === "approved"
+        ? "Request Approved"
+        : "Request Declined",
+      status === "approved"
+        ? "The collaboration request was approved."
+        : "The collaboration request was declined."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Update Failed",
+      error.message ||
+      "Unable to update the collaboration request."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   PROFILE MODAL
+========================================================= */
+
+function openProfile(member){
+
+  if(!member){
+    return;
+  }
+
+  const profile =
+    member.profile;
+
+  const name =
+    profile?.display_name ||
+    profile?.creator_handle ||
+    "Dream World Creator";
+
+  $("profileName").textContent =
+    name;
+
+  $("profileRole").textContent =
+    member.role ||
+    profile?.primary_role ||
+    "Collaborator";
+
+  $("profileBio").textContent =
+    profile?.show_bio === false
+      ? "This creator has chosen not to display a public biography."
+      : (
+          profile?.bio ||
+          profile?.creator_statement ||
+          "No public creator biography has been provided."
+        );
+
+  const avatar =
+    $("profileAvatar");
+
+  if(profile?.avatar_url){
+
+    avatar.innerHTML =
+      `<img src="${escapeHtml(profile.avatar_url)}" alt="">`;
+
+  }else{
+
+    avatar.textContent =
+      initials(name);
+
+  }
+
+  openModal("profileModal");
+
+}
+
+
+/* =========================================================
+   MEMBER ACTIONS
+========================================================= */
+
+async function handleMemberAction(
+  action,
+  memberId
+){
+
+  const member =
+    state.members.find(
+      item =>
+        item.id === memberId
+    );
+
+  if(!member){
+    return;
+  }
+
+  if(action === "profile"){
+
+    openProfile(member);
+
+    return;
+
+  }
+
+  if(action === "message"){
+
+    const profile =
+      member.profile;
+
+    const name =
+      profile?.display_name ||
+      profile?.creator_handle ||
+      "Collaborator";
+
+    /*
+     Preserve navigation architecture.
+    */
+
+    const url =
+      new URL(
+        "messages.html",
+        window.location.href
+      );
+
+    url.searchParams.set(
+      "project",
+      state.project?.id || ""
+    );
+
+    url.searchParams.set(
+      "member",
+      member.user_id || ""
+    );
+
+    location.href =
+      url.href;
+
+    return;
+
+  }
+
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+function openModal(id){
+
+  const modal =
+    $(id);
+
+  if(!modal){
+    return;
+  }
+
+  modal.classList.add("open");
+
+  const first =
+    modal.querySelector(
+      "input,select,textarea,button"
+    );
+
+  if(first){
+    setTimeout(
+      () => first.focus(),
+      50
+    );
+  }
+
+}
+
+
+function closeModal(id){
+
+  const modal =
+    $(id);
+
+  if(!modal){
+    return;
+  }
+
+  modal.classList.remove("open");
+
+}
+
+
+/* =========================================================
+   MOBILE NAV
+========================================================= */
+
+function toggleMobileNav(){
+
+  const nav =
+    $("navLinks");
+
+  const button =
+    $("mobileMenu");
+
+  if(!nav){
+    return;
+  }
+
+  const open =
+    nav.dataset.open === "true";
+
+  if(open){
+
+    nav.dataset.open =
+      "false";
+
+    nav.style.display =
+      "";
+
+    nav.style.position =
+      "";
+
+    nav.style.top =
+      "";
+
+    nav.style.left =
+      "";
+
+    nav.style.right =
+      "";
+
+    nav.style.flexDirection =
+      "";
+
+    nav.style.padding =
+      "";
+
+    nav.style.background =
+      "";
+
+    nav.style.border =
+      "";
+
+  }else{
+
+    nav.dataset.open =
+      "true";
+
+    nav.style.display =
+      "flex";
+
+    nav.style.flexDirection =
+      "column";
+
+    nav.style.position =
+      "absolute";
+
+    nav.style.top =
+      "76px";
+
+    nav.style.left =
+      "3%";
+
+    nav.style.right =
+      "3%";
+
+    nav.style.padding =
+      "12px";
+
+    nav.style.background =
+      "#0a0a0c";
+
+    nav.style.border =
+      "1px solid rgba(255,255,255,.1)";
+
+  }
+
+  button.setAttribute(
+    "aria-expanded",
+    String(!open)
+  );
+
+}
+
+
+/* =========================================================
+   FILTER EVENTS
+========================================================= */
+
+function setFilter(
+  filter,
+  button
+){
+
+  state.activeFilter =
+    filter;
+
+  document
+    .querySelectorAll(".filter")
+    .forEach(
+      item =>
+        item.classList.remove("active")
+    );
+
+  button.classList.add("active");
+
+  renderMembers();
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function handleSearch(event){
+
+  state.search =
+    event.target.value;
+
+  renderMembers();
+
+}
+
+
+/* =========================================================
+   REALTIME
+========================================================= */
+
+function setupRealtime(){
+
+  if(!state.project){
+    return;
+  }
+
+  if(state.realtimeChannel){
+
+    supabaseClient
+      .removeChannel(
+        state.realtimeChannel
+      );
+
+  }
+
+  state.realtimeChannel =
+    supabaseClient
+      .channel(
+        "dream-world-collaborators-" +
+        state.project.id
+      )
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"dream_project_members",
+          filter:
+            "project_id=eq." +
+            state.project.id
+        },
+        async () => {
+
+          await loadMembers();
+
+          renderCreator();
+          renderStats();
+
+        }
+      )
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"dream_collaborations",
+          filter:
+            "project_id=eq." +
+            state.project.id
+        },
+        async () => {
+
+          await loadRequests();
+
+          renderStats();
+
+        }
+      )
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"dream_activity",
+          filter:
+            "project_id=eq." +
+            state.project.id
+        },
+        async () => {
+
+          await loadActivity();
+
+          renderStats();
+
+        }
+      )
+
+      .subscribe(
+        status => {
+
+          if(status === "SUBSCRIBED"){
+
+            $("connectionStatus").textContent =
+              "LIVE";
+
+          }
+
+        }
+      );
+
+}
+
+
+/* =========================================================
+   HERO PARTICLES
+========================================================= */
+
+function createHeroParticles(){
+
+  const container =
+    $("heroParticles");
+
+  if(!container){
+    return;
+  }
+
+  if(
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+  ){
+    return;
+  }
+
+  const particleCount =
+    window.innerWidth < 650
+      ? 35
+      : 75;
+
+  const fragment =
+    document.createDocumentFragment();
+
+  for(
+    let i = 0;
+    i < particleCount;
+    i++
+  ){
+
+    const particle =
+      document.createElement("span");
+
+    particle.className =
+      "hero-particle" +
+      (
+        Math.random() > .82
+          ? " red"
+          : ""
+      );
+
+    particle.style.left =
+      `${Math.random() * 100}%`;
+
+    particle.style.top =
+      `${65 + Math.random() * 45}%`;
+
+    particle.style.setProperty(
+      "--duration",
+      `${7 + Math.random() * 10}s`
+    );
+
+    particle.style.setProperty(
+      "--delay",
+      `${Math.random() * -12}s`
+    );
+
+    particle.style.setProperty(
+      "--drift",
+      `${-100 + Math.random() * 200}px`
+    );
+
+    const size =
+      Math.random() > .8
+        ? 3
+        : 1 + Math.random();
+
+    particle.style.width =
+      `${size}px`;
+
+    particle.style.height =
+      `${size}px`;
+
+    fragment.appendChild(
+      particle
+    );
+
+  }
+
+  container.appendChild(
+    fragment
+  );
+
+}
+
+
+/* =========================================================
+   HERO PARALLAX
+========================================================= */
+
+function setupHeroParallax(){
+
+  const hero =
+    document.querySelector(".hero");
+
+  if(!hero){
+    return;
+  }
+
+  if(
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+  ){
+    return;
+  }
+
+  let raf = null;
+
+  hero.addEventListener(
+    "pointermove",
+    event => {
+
+      if(raf){
+        cancelAnimationFrame(raf);
+      }
+
+      raf =
+        requestAnimationFrame(
+          () => {
+
+            const rect =
+              hero.getBoundingClientRect();
+
+            const x =
+              (event.clientX - rect.left) /
+              rect.width -
+              .5;
+
+            const y =
+              (event.clientY - rect.top) /
+              rect.height -
+              .5;
+
+            const rings =
+              hero.querySelectorAll(
+                ".hero-ring"
+              );
+
+            rings.forEach(
+              (ring,index) => {
+
+                const amount =
+                  (index + 1) * 7;
+
+                ring.style.marginLeft =
+                  `${x * amount}px`;
+
+                ring.style.marginTop =
+                  `${y * amount}px`;
+
+              }
+            );
+
+          }
+        );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+supabaseClient.auth.onAuthStateChange(
+  (event,session) => {
+
+    if(
+      event === "SIGNED_OUT" ||
+      !session
+    ){
+
+      if(
+        !location.pathname
+          .endsWith("login.html")
+      ){
+
+        const next =
+          encodeURIComponent(
+            location.pathname
+              .split("/")
+              .pop() ||
+            "collaborators.html"
+          );
+
+        location.href =
+          "login.html?next=" +
+          next;
+
+      }
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   EVENT LISTENERS
+========================================================= */
+
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    toggleMobileNav
   );
 
 
-LOAD CURRENT PROJECT MEMBERS:
+$("inviteBtn")
+  .addEventListener(
+    "click",
+    () =>
+      openModal("inviteModal")
+  );
 
-const {
-  data:members,
-  error
-} = await supabaseClient
-  .from("dream_project_members")
-  .select(`
-    *,
-    dream_profiles(
-      id,
-      display_name,
-      avatar_url,
-      bio
-    )
-  `)
-  .eq(
-    "project_id",
-    PROJECT_ID
-  )
-  .eq(
-    "status",
-    "active"
-  )
-  .order(
-    "created_at",
-    {
-      ascending:true
+
+$("inviteHeroBtn")
+  .addEventListener(
+    "click",
+    () =>
+      openModal("inviteModal")
+  );
+
+
+$("refreshBtn")
+  .addEventListener(
+    "click",
+    loadAll
+  );
+
+
+$("refreshRequestsBtn")
+  .addEventListener(
+    "click",
+    async () => {
+
+      try{
+
+        await loadRequests();
+
+        renderStats();
+
+        showToast(
+          "Requests Refreshed",
+          "Collaboration requests are up to date."
+        );
+
+      }catch(error){
+
+        showToast(
+          "Refresh Failed",
+          error.message
+        );
+
+      }
+
     }
   );
 
 
-LOAD INVITATIONS:
+$("memberSearch")
+  .addEventListener(
+    "input",
+    handleSearch
+  );
 
-const {
-  data:invitations
-} = await supabaseClient
-  .from("dream_project_invitations")
-  .select("*")
-  .eq(
-    "project_id",
-    PROJECT_ID
-  )
-  .eq(
-    "status",
-    "pending"
-  )
-  .order(
-    "created_at",
-    {
-      ascending:false
+
+document
+  .querySelectorAll(".filter")
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () =>
+          setFilter(
+            button.dataset.filter,
+            button
+          )
+      );
+
     }
   );
 
 
-REALTIME:
+$("sendInviteBtn")
+  .addEventListener(
+    "click",
+    sendCollaborationRequest
+  );
 
-supabaseClient
-  .channel(
-    "dream-project-collaborators"
-  )
-  .on(
-    "postgres_changes",
-    {
-      event:"*",
-      schema:"public",
-      table:"dream_project_members",
-      filter:
-        "project_id=eq." + PROJECT_ID
-    },
-    payload => {
 
-      loadCollaborators();
+$("closeInvite")
+  .addEventListener(
+    "click",
+    () =>
+      closeModal("inviteModal")
+  );
+
+
+$("cancelInvite")
+  .addEventListener(
+    "click",
+    () =>
+      closeModal("inviteModal")
+  );
+
+
+$("closeProfile")
+  .addEventListener(
+    "click",
+    () =>
+      closeModal("profileModal")
+  );
+
+
+$("profileCloseBtn")
+  .addEventListener(
+    "click",
+    () =>
+      closeModal("profileModal")
+  );
+
+
+$("creatorProfileBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      const creator =
+        state.members.find(
+          member =>
+            member.user_id ===
+            state.project?.creator_id
+        );
+
+      if(creator){
+
+        openProfile(creator);
+
+      }else{
+
+        showToast(
+          "Profile Unavailable",
+          "The project creator profile is not currently available."
+        );
+
+      }
 
     }
-  )
-  .subscribe();
+  );
 
 
-===========================================================
-*/
+$("collaborators")
+  .addEventListener(
+    "click",
+    event => {
+
+      const button =
+        event.target.closest(
+          "[data-action]"
+        );
+
+      if(!button){
+        return;
+      }
+
+      handleMemberAction(
+        button.dataset.action,
+        button.dataset.memberId
+      );
+
+    }
+  );
+
+
+$("invites")
+  .addEventListener(
+    "click",
+    event => {
+
+      const button =
+        event.target.closest(
+          "[data-request-action]"
+        );
+
+      if(!button){
+        return;
+      }
+
+      updateRequest(
+        button.dataset.requestId,
+        button.dataset.requestAction ===
+          "accept"
+          ? "approved"
+          : "declined"
+      );
+
+    }
+  );
+
+
+document
+  .querySelectorAll(".modal")
+  .forEach(
+    modal => {
+
+      modal.addEventListener(
+        "click",
+        event => {
+
+          if(
+            event.target ===
+            modal
+          ){
+
+            modal.classList.remove(
+              "open"
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Escape"){
+
+      document
+        .querySelectorAll(
+          ".modal.open"
+        )
+        .forEach(
+          modal =>
+            modal.classList.remove(
+              "open"
+            )
+        );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+async function init(){
+
+  createHeroParticles();
+  setupHeroParallax();
+
+  try{
+
+    const user =
+      await requireAuth();
+
+    if(!user){
+      return;
+    }
+
+    await loadAll();
+
+    setupRealtime();
+
+  }catch(error){
+
+    console.error(
+      "Dream World initialization:",
+      error
+    );
+
+    $("connectionStatus").textContent =
+      "ERROR";
+
+    renderGlobalError(
+      error.message ||
+      "Dream World could not be initialized."
+    );
+
+  }
+
+}
+
+
+init();
+
+
+/* =========================================================
+   PAGE CLEANUP
+========================================================= */
+
+window.addEventListener(
+  "beforeunload",
+  () => {
+
+    if(state.realtimeChannel){
+
+      supabaseClient
+        .removeChannel(
+          state.realtimeChannel
+        );
+
+    }
+
+  }
+);
+
 </script>
 
 </body>
