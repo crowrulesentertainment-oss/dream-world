@@ -3,2694 +3,414 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>CrowRules Dream World — Creator Dashboard</title>
 <meta name="theme-color" content="#050505">
-<meta name="description" content="CrowRules Dream World Creator Dashboard — Your private workspace for dreams, projects, development, collaborators, agreements, credits and earnings.">
-
+<meta name="description" content="CrowRules Dream World private creator workspace.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{
-  --bg:#050505;
-  --bg2:#0a0a0a;
-  --panel:#101010;
-  --panel2:#151515;
-  --red:#e50914;
-  --red2:#ff2633;
-  --red-dark:#5e080d;
-  --text:#f5f5f5;
-  --muted:#9b9b9b;
-  --line:#292929;
-  --green:#48d597;
-  --yellow:#f5c451;
-  --blue:#5aa9ff;
-  --purple:#ae7cff;
-  --shadow:0 20px 60px rgba(0,0,0,.45);
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  background:
-    radial-gradient(circle at 15% 0%,rgba(229,9,20,.13),transparent 30%),
-    radial-gradient(circle at 90% 15%,rgba(120,20,30,.10),transparent 28%),
-    linear-gradient(180deg,#050505,#080808 45%,#050505);
-  color:var(--text);
-  font-family:Montserrat,Arial,sans-serif;
-  min-height:100vh;
-}
-
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.035;
-  background-image:
-    linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);
-  background-size:60px 60px;
-  mask-image:linear-gradient(to bottom,black,transparent 80%);
-}
-
-/* =========================
-   HEADER
-========================= */
-
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  height:72px;
-  background:rgba(5,5,5,.94);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
-}
-
-.nav{
-  width:min(1500px,94%);
-  height:100%;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
-  color:#fff;
-}
-
-.brand-mark{
-  width:42px;
-  height:42px;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--red);
-  background:linear-gradient(135deg,#190307,#090909);
-  box-shadow:0 0 24px rgba(229,9,20,.18);
-  font-family:Orbitron,sans-serif;
-  font-weight:900;
-  color:var(--red2);
-  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
-}
-
-.brand-text strong{
-  display:block;
-  font-family:Orbitron,sans-serif;
-  font-size:14px;
-  letter-spacing:1px;
-}
-
-.brand-text span{
-  color:var(--red2);
-  font-size:10px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-
-.nav-links a{
-  color:#aaa;
-  text-decoration:none;
-  padding:10px 12px;
-  border-radius:8px;
-  font-size:12px;
-  font-weight:700;
-  transition:.2s;
-}
-
-.nav-links a:hover,
-.nav-links a.active{
-  color:#fff;
-  background:#151515;
-}
-
-.nav-links a.active{
-  box-shadow:inset 0 -2px var(--red);
-}
-
-.user-area{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.notification{
-  width:38px;
-  height:38px;
-  border:1px solid var(--line);
-  background:#101010;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  color:#ddd;
-  cursor:pointer;
-  position:relative;
-}
-
-.notification-dot{
-  width:7px;
-  height:7px;
-  background:var(--red);
-  border-radius:50%;
-  position:absolute;
-  right:6px;
-  top:5px;
-  box-shadow:0 0 10px var(--red);
-}
-
-.avatar{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:
-    linear-gradient(135deg,#3a080d,#150506);
-  border:1px solid #6d1118;
-  color:#fff;
-  font-family:Orbitron,sans-serif;
-  font-size:12px;
-  font-weight:800;
-}
-
-/* =========================
-   LAYOUT
-========================= */
-
-.page{
-  width:min(1500px,94%);
-  margin:auto;
-  padding:40px 0 80px;
-}
-
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:230px 1fr;
-  gap:28px;
-}
-
-/* =========================
-   SIDEBAR
-========================= */
-
-.sidebar{
-  position:sticky;
-  top:100px;
-  align-self:start;
-}
-
-.creator-mini{
-  padding:20px;
-  background:
-    linear-gradient(145deg,rgba(229,9,20,.12),rgba(255,255,255,.015)),
-    var(--panel);
-  border:1px solid var(--line);
-  border-radius:14px;
-  margin-bottom:16px;
-}
-
-.creator-mini-avatar{
-  width:58px;
-  height:58px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:linear-gradient(135deg,#42090d,#100607);
-  border:1px solid #771018;
-  font-family:Orbitron,sans-serif;
-  font-weight:800;
-  margin-bottom:14px;
-}
-
-.creator-mini h3{
-  font-family:Orbitron,sans-serif;
-  font-size:13px;
-  margin-bottom:5px;
-}
-
-.creator-mini p{
-  color:var(--muted);
-  font-size:11px;
-}
-
-.creator-badge{
-  display:inline-block;
-  margin-top:10px;
-  padding:5px 8px;
-  border:1px solid rgba(229,9,20,.35);
-  color:#ff6970;
-  background:rgba(229,9,20,.08);
-  border-radius:5px;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.side-menu{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden;
-}
-
-.side-menu a{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:13px 15px;
-  color:#aaa;
-  text-decoration:none;
-  border-bottom:1px solid #1b1b1b;
-  font-size:11px;
-  font-weight:700;
-  transition:.2s;
-}
-
-.side-menu a:last-child{
-  border-bottom:0;
-}
-
-.side-menu a:hover,
-.side-menu a.active{
-  background:#171717;
-  color:#fff;
-}
-
-.side-menu a.active{
-  border-left:3px solid var(--red);
-  padding-left:12px;
-}
-
-.side-icon{
-  width:22px;
-  text-align:center;
-  font-size:15px;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.dashboard-main{
-  min-width:0;
-}
-
-.eyebrow{
-  color:var(--red2);
-  font-family:Orbitron,sans-serif;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  margin-bottom:10px;
-}
-
-h1{
-  font-family:Orbitron,sans-serif;
-  font-size:clamp(25px,4vw,43px);
-  line-height:1.1;
-  letter-spacing:-1px;
-  margin-bottom:10px;
-}
-
-.hero-sub{
-  color:var(--muted);
-  max-width:720px;
-  font-size:13px;
-  line-height:1.7;
-}
-
-.top-actions{
-  margin-top:22px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-
-.btn{
-  border:1px solid var(--line);
-  background:#111;
-  color:#fff;
-  border-radius:8px;
-  padding:11px 15px;
-  font-size:11px;
-  font-weight:800;
-  text-decoration:none;
-  cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  transition:.2s;
-}
-
-.btn:hover{
-  border-color:#555;
-  transform:translateY(-1px);
-}
-
-.btn-primary{
-  background:var(--red);
-  border-color:var(--red);
-  box-shadow:0 8px 30px rgba(229,9,20,.2);
-}
-
-.btn-primary:hover{
-  background:#ff1722;
-  border-color:#ff1722;
-}
-
-.btn-small{
-  padding:8px 11px;
-  font-size:10px;
-}
-
-/* =========================
-   STATS
-========================= */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-  margin-top:30px;
-}
-
-.stat{
-  background:linear-gradient(145deg,#111,#0b0b0b);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:17px;
-  min-height:100px;
-}
-
-.stat-label{
-  color:#777;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-}
-
-.stat-number{
-  font-family:Orbitron,sans-serif;
-  font-size:25px;
-  font-weight:800;
-  margin-top:8px;
-}
-
-.stat-detail{
-  color:#777;
-  font-size:9px;
-  margin-top:5px;
-}
-
-.stat.red .stat-number{
-  color:var(--red2);
-}
-
-.stat.green .stat-number{
-  color:var(--green);
-}
-
-.stat.blue .stat-number{
-  color:var(--blue);
-}
-
-.stat.purple .stat-number{
-  color:var(--purple);
-}
-
-/* =========================
-   SECTIONS
-========================= */
-
-.section{
-  margin-top:32px;
-}
-
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:20px;
-  margin-bottom:14px;
-}
-
-.section-head h2{
-  font-family:Orbitron,sans-serif;
-  font-size:17px;
-}
-
-.section-head p{
-  color:#777;
-  font-size:10px;
-  margin-top:5px;
-}
-
-.section-link{
-  color:#ff5961;
-  text-decoration:none;
-  font-size:10px;
-  font-weight:800;
-  white-space:nowrap;
-}
-
-/* =========================
-   DREAMS
-========================= */
-
-.dreams-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-
-.dream-card{
-  background:
-    radial-gradient(circle at 100% 0%,rgba(229,9,20,.12),transparent 35%),
-    var(--panel);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:20px;
-  position:relative;
-  overflow:hidden;
-}
-
-.dream-card:after{
-  content:"";
-  position:absolute;
-  left:0;
-  top:0;
-  bottom:0;
-  width:3px;
-  background:var(--red);
-}
-
-.card-top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:start;
-}
-
-.card-code{
-  color:#777;
-  font-family:Orbitron,sans-serif;
-  font-size:8px;
-  letter-spacing:1px;
-}
-
-.status{
-  padding:5px 8px;
-  border-radius:5px;
-  font-size:8px;
-  font-weight:800;
-  letter-spacing:.7px;
-  text-transform:uppercase;
-}
-
-.status.development{
-  color:#ff767d;
-  background:rgba(229,9,20,.1);
-  border:1px solid rgba(229,9,20,.3);
-}
-
-.status.review{
-  color:#f5c451;
-  background:rgba(245,196,81,.08);
-  border:1px solid rgba(245,196,81,.25);
-}
-
-.status.community{
-  color:#5aa9ff;
-  background:rgba(90,169,255,.08);
-  border:1px solid rgba(90,169,255,.25);
-}
-
-.dream-card h3{
-  font-family:Orbitron,sans-serif;
-  font-size:15px;
-  line-height:1.35;
-  margin:17px 0 8px;
-}
-
-.dream-card .description{
-  color:#999;
-  font-size:11px;
-  line-height:1.65;
-}
-
-.meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-top:14px;
-}
-
-.tag{
-  padding:5px 7px;
-  border:1px solid #292929;
-  border-radius:5px;
-  color:#888;
-  font-size:8px;
-  text-transform:uppercase;
-  font-weight:800;
-}
-
-.card-bottom{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-top:18px;
-  padding-top:14px;
-  border-top:1px solid #222;
-}
-
-.card-bottom small{
-  color:#666;
-  font-size:9px;
-}
-
-.actions{
-  display:flex;
-  gap:6px;
-}
-
-/* =========================
-   PROJECT
-========================= */
-
-.project-card{
-  background:
-    linear-gradient(120deg,rgba(229,9,20,.11),transparent 45%),
-    var(--panel);
-  border:1px solid #302020;
-  border-radius:14px;
-  padding:22px;
-}
-
-.project-head{
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  align-items:start;
-}
-
-.project-title{
-  font-family:Orbitron,sans-serif;
-  font-size:18px;
-  line-height:1.4;
-}
-
-.project-id{
-  color:#777;
-  font-size:9px;
-  margin-top:6px;
-}
-
-.progress-wrap{
-  min-width:190px;
-}
-
-.progress-label{
-  display:flex;
-  justify-content:space-between;
-  color:#777;
-  font-size:9px;
-  margin-bottom:7px;
-}
-
-.progress-label strong{
-  color:#fff;
-}
-
-.progress{
-  height:7px;
-  background:#222;
-  border-radius:20px;
-  overflow:hidden;
-}
-
-.progress span{
-  display:block;
-  height:100%;
-  width:38%;
-  background:linear-gradient(90deg,#8c070d,var(--red2));
-  box-shadow:0 0 14px rgba(229,9,20,.35);
-}
-
-.pipeline{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:7px;
-  margin-top:25px;
-}
-
-.stage{
-  padding:11px 8px;
-  border:1px solid #242424;
-  background:#0d0d0d;
-  border-radius:7px;
-  text-align:center;
-  position:relative;
-}
-
-.stage span{
-  display:block;
-  width:20px;
-  height:20px;
-  margin:auto auto 7px;
-  border-radius:50%;
-  border:1px solid #444;
-  font-size:9px;
-  line-height:18px;
-  color:#777;
-}
-
-.stage small{
-  color:#777;
-  font-size:7px;
-  line-height:1.3;
-  display:block;
-}
-
-.stage.complete{
-  border-color:#4c171b;
-}
-
-.stage.complete span{
-  border-color:var(--red);
-  background:var(--red);
-  color:#fff;
-}
-
-.stage.active{
-  border-color:var(--red);
-  background:rgba(229,9,20,.08);
-}
-
-.stage.active span{
-  border-color:var(--red2);
-  color:#fff;
-  box-shadow:0 0 12px rgba(229,9,20,.3);
-}
-
-.project-info{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-top:18px;
-}
-
-.info-box{
-  border:1px solid #242424;
-  border-radius:8px;
-  padding:11px;
-  background:#0c0c0c;
-}
-
-.info-box label{
-  color:#666;
-  display:block;
-  font-size:8px;
-  text-transform:uppercase;
-  font-weight:800;
-  margin-bottom:5px;
-}
-
-.info-box strong{
-  font-size:10px;
-}
-
-/* =========================
-   LOWER GRID
-========================= */
-
-.two-column{
-  display:grid;
-  grid-template-columns:1.4fr 1fr;
-  gap:14px;
-}
-
-.panel{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:20px;
-}
-
-.panel h3{
-  font-family:Orbitron,sans-serif;
-  font-size:13px;
-  margin-bottom:16px;
-}
-
-.list{
-  display:flex;
-  flex-direction:column;
-  gap:0;
-}
-
-.list-item{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:13px 0;
-  border-bottom:1px solid #202020;
-}
-
-.list-item:last-child{
-  border-bottom:0;
-}
-
-.list-icon{
-  width:35px;
-  height:35px;
-  flex:none;
-  display:grid;
-  place-items:center;
-  border:1px solid #2d2d2d;
-  background:#0d0d0d;
-  border-radius:8px;
-  font-size:14px;
-}
-
-.list-content{
-  flex:1;
-  min-width:0;
-}
-
-.list-content strong{
-  display:block;
-  font-size:10px;
-  margin-bottom:4px;
-}
-
-.list-content span{
-  display:block;
-  color:#666;
-  font-size:8px;
-}
-
-.list-arrow{
-  color:#666;
-}
-
-/* =========================
-   NOTIFICATIONS
-========================= */
-
-.notification-item{
-  padding:13px 0;
-  border-bottom:1px solid #202020;
-}
-
-.notification-item:last-child{
-  border-bottom:0;
-}
-
-.notification-item strong{
-  display:block;
-  font-size:10px;
-  margin-bottom:5px;
-}
-
-.notification-item p{
-  color:#777;
-  font-size:9px;
-  line-height:1.5;
-}
-
-.notification-item time{
-  color:#4f4f4f;
-  display:block;
-  margin-top:5px;
-  font-size:8px;
-}
-
-/* =========================
-   DEVELOPMENT JOURNAL
-========================= */
-
-.journal{
-  display:grid;
-  gap:10px;
-}
-
-.journal-entry{
-  padding:14px;
-  background:#0c0c0c;
-  border:1px solid #222;
-  border-radius:9px;
-}
-
-.journal-meta{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  color:#666;
-  font-size:8px;
-  margin-bottom:8px;
-}
-
-.journal-entry h4{
-  font-family:Orbitron,sans-serif;
-  font-size:10px;
-  margin-bottom:6px;
-}
-
-.journal-entry p{
-  color:#888;
-  font-size:9px;
-  line-height:1.6;
-}
-
-/* =========================
-   CREATOR RIGHTS
-========================= */
-
-.rights-box{
-  background:
-    linear-gradient(135deg,rgba(229,9,20,.08),transparent),
-    #0c0c0c;
-  border:1px solid #322022;
-  border-radius:14px;
-  padding:20px;
-}
-
-.rights-box h3{
-  font-family:Orbitron,sans-serif;
-  font-size:13px;
-  margin-bottom:9px;
-}
-
-.rights-box p{
-  color:#888;
-  font-size:10px;
-  line-height:1.7;
-}
-
-.rights-points{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-top:15px;
-}
-
-.right-point{
-  padding:11px;
-  border:1px solid #252525;
-  border-radius:7px;
-  background:#0a0a0a;
-}
-
-.right-point strong{
-  display:block;
-  color:#ddd;
-  font-size:9px;
-  margin-bottom:4px;
-}
-
-.right-point span{
-  color:#666;
-  font-size:8px;
-  line-height:1.4;
-}
-
-/* =========================
-   EMPTY / LOADING
-========================= */
-
-.loading{
-  color:#666;
-  font-size:10px;
-  padding:20px 0;
-}
-
-.toast{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  z-index:2000;
-  background:#171717;
-  border:1px solid #3a3a3a;
-  border-left:3px solid var(--red);
-  padding:13px 16px;
-  border-radius:8px;
-  box-shadow:var(--shadow);
-  color:#ddd;
-  font-size:10px;
-  transform:translateY(30px);
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
-}
-
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-.mobile-menu{
-  display:none;
-  width:38px;
-  height:38px;
-  border:1px solid var(--line);
-  background:#101010;
-  color:#fff;
-  border-radius:8px;
-}
-
-@media(max-width:1100px){
-  .nav-links{
-    display:none;
-  }
-
-  .mobile-menu{
-    display:grid;
-    place-items:center;
-  }
-
-  .stats{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .dashboard-grid{
-    grid-template-columns:190px 1fr;
-  }
-
-  .pipeline{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
-
-@media(max-width:800px){
-  .page{
-    width:92%;
-    padding-top:28px;
-  }
-
-  .dashboard-grid{
-    display:block;
-  }
-
-  .sidebar{
-    position:static;
-    margin-bottom:22px;
-  }
-
-  .side-menu{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .side-menu a{
-    border-right:1px solid #1b1b1b;
-  }
-
-  .creator-mini{
-    display:flex;
-    align-items:center;
-    gap:14px;
-  }
-
-  .creator-mini-avatar{
-    margin:0;
-    width:50px;
-    height:50px;
-  }
-
-  .creator-mini-info{
-    flex:1;
-  }
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .dreams-grid,
-  .two-column{
-    grid-template-columns:1fr;
-  }
-
-  .project-head{
-    display:block;
-  }
-
-  .progress-wrap{
-    margin-top:20px;
-  }
-
-  .project-info{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .rights-points{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:520px){
-  header{
-    height:64px;
-  }
-
-  .brand-text{
-    display:none;
-  }
-
-  .page{
-    width:94%;
-  }
-
-  h1{
-    font-size:25px;
-  }
-
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .stat{
-    min-height:85px;
-  }
-
-  .stat-number{
-    font-size:20px;
-  }
-
-  .dreams-grid{
-    grid-template-columns:1fr;
-  }
-
-  .pipeline{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .project-info{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .side-menu{
-    grid-template-columns:1fr;
-  }
-}
+:root{--bg:#050505;--panel:#101010;--panel2:#151515;--red:#e50914;--red2:#ff3540;--text:#f5f5f5;--muted:#8e8e8e;--line:#292929;--green:#48d597;--blue:#5aa9ff;--purple:#ae7cff;--yellow:#f5c451;--shadow:0 24px 70px rgba(0,0,0,.5)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{min-height:100vh;background:#050505;color:var(--text);font-family:Montserrat,Arial,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:60px 60px;mask-image:linear-gradient(to bottom,#000,transparent 80%);z-index:20}
+header{position:sticky;top:0;z-index:1000;height:72px;background:rgba(5,5,5,.9);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{width:min(1500px,94%);height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
+.brand-mark{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--red);background:linear-gradient(135deg,#220307,#090909);box-shadow:0 0 28px rgba(229,9,20,.2);font:900 13px Orbitron;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.brand-text strong{display:block;font:800 14px Orbitron;letter-spacing:1px}.brand-text span{color:var(--red2);font-size:10px;letter-spacing:2px;text-transform:uppercase}
+.nav-links{display:flex;gap:5px}.nav-links a{color:#aaa;text-decoration:none;padding:10px 12px;border-radius:8px;font-size:12px;font-weight:700}.nav-links a:hover,.nav-links a.active{color:#fff;background:#151515}.nav-links a.active{box-shadow:inset 0 -2px var(--red)}
+.user-area{display:flex;align-items:center;gap:9px}.notification,.mobile-menu{width:38px;height:38px;border:1px solid var(--line);background:#101010;color:#fff;border-radius:50%;display:grid;place-items:center;cursor:pointer;position:relative}.mobile-menu{border-radius:8px;display:none}.notification-dot{width:7px;height:7px;background:var(--red);border-radius:50%;position:absolute;right:6px;top:5px;box-shadow:0 0 10px var(--red)}
+.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#3a080d,#150506);border:1px solid #6d1118;font:800 12px Orbitron}
+.page{width:min(1500px,94%);margin:auto;padding:32px 0 80px}.dashboard-grid{display:grid;grid-template-columns:230px 1fr;gap:28px}.sidebar{position:sticky;top:96px;align-self:start}
+.creator-mini{padding:18px;background:linear-gradient(145deg,rgba(229,9,20,.12),rgba(255,255,255,.015)),var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
+.creator-mini-avatar{width:58px;height:58px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#42090d,#100607);border:1px solid #771018;font:800 14px Orbitron;margin-bottom:12px}
+.creator-mini h3{font:700 13px Orbitron;margin-bottom:5px}.creator-mini p{color:var(--muted);font-size:11px;overflow:hidden;text-overflow:ellipsis}.creator-badge{display:inline-block;margin-top:10px;padding:5px 8px;border:1px solid rgba(229,9,20,.35);color:#ff6970;background:rgba(229,9,20,.08);border-radius:5px;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.side-menu{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}.side-menu a{display:flex;align-items:center;gap:12px;padding:13px 15px;color:#aaa;text-decoration:none;border-bottom:1px solid #1b1b1b;font-size:11px;font-weight:700}.side-menu a:last-child{border:0}.side-menu a:hover,.side-menu a.active{background:#171717;color:#fff}.side-menu a.active{border-left:3px solid var(--red);padding-left:12px}.side-icon{width:22px;text-align:center;font-size:15px}
+.dashboard-main{min-width:0}.eyebrow{color:var(--red2);font:800 10px Orbitron;letter-spacing:3px;text-transform:uppercase;margin-bottom:9px}
+h1{font:800 clamp(25px,4vw,43px)/1.1 Orbitron;letter-spacing:-1px;margin-bottom:10px}.hero-sub{color:var(--muted);max-width:760px;font-size:13px;line-height:1.7}
+.hero{position:relative;min-height:410px;margin:0 0 28px;padding:44px 42px;border:1px solid #3a1b1e;border-radius:22px;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(229,9,20,.11),transparent 27%),linear-gradient(120deg,#0b0607,#070707 50%,#0a0607);box-shadow:var(--shadow)}
+#dreamCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.9}.hero-content{position:relative;z-index:3;max-width:760px}.hero-title{font:900 clamp(32px,6vw,70px)/1.02 Orbitron;letter-spacing:-2px;text-shadow:0 0 40px rgba(255,30,45,.18)}.hero-title span{color:var(--red2)}.hero-copy{margin-top:15px;color:#aaa;font-size:13px;line-height:1.8;max-width:680px}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.hero-orb{position:absolute;right:8%;top:50%;width:230px;height:230px;transform:translateY(-50%);border:1px solid rgba(255,45,55,.25);border-radius:50%;box-shadow:0 0 80px rgba(229,9,20,.08),inset 0 0 60px rgba(229,9,20,.04);animation:floatOrb 8s ease-in-out infinite}.hero-orb:before,.hero-orb:after{content:"";position:absolute;inset:20px;border:1px solid rgba(255,255,255,.08);border-radius:50%;animation:spin 16s linear infinite}.hero-orb:after{inset:48px;border-color:rgba(229,9,20,.22);animation-direction:reverse;animation-duration:10s}.orb-core{position:absolute;inset:92px;border-radius:50%;background:radial-gradient(circle,#ff3944,rgba(229,9,20,.22) 40%,transparent 72%);box-shadow:0 0 45px rgba(229,9,20,.45);animation:pulse 3s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes floatOrb{50%{transform:translateY(calc(-50% - 13px))}}@keyframes pulse{50%{transform:scale(1.18);opacity:.7}}
+.btn{border:1px solid var(--line);background:#111;color:#fff;border-radius:8px;padding:11px 15px;font-size:11px;font-weight:800;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.2s}.btn:hover{border-color:#555;transform:translateY(-1px)}.btn-primary{background:var(--red);border-color:var(--red);box-shadow:0 8px 30px rgba(229,9,20,.2)}.btn-small{padding:8px 11px;font-size:10px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:26px}.stat{background:linear-gradient(145deg,#111,#0b0b0b);border:1px solid var(--line);border-radius:12px;padding:17px;min-height:100px}.stat-label{color:#777;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}.stat-number{font:800 25px Orbitron;margin-top:8px}.stat-detail{color:#777;font-size:9px;margin-top:5px}.stat.red .stat-number{color:var(--red2)}.stat.green .stat-number{color:var(--green)}.stat.blue .stat-number{color:var(--blue)}.stat.purple .stat-number{color:var(--purple)}
+.section{margin-top:32px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:14px}.section-head h2{font:800 17px Orbitron}.section-head p{color:#777;font-size:10px;margin-top:5px}.section-link{color:#ff5961;text-decoration:none;font-size:10px;font-weight:800}
+.dreams-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.dream-card{background:radial-gradient(circle at 100% 0%,rgba(229,9,20,.12),transparent 35%),var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;position:relative;overflow:hidden}.dream-card:after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red)}.card-top{display:flex;justify-content:space-between;gap:10px;align-items:start}.card-code{color:#777;font:8px Orbitron;letter-spacing:1px}.status{padding:5px 8px;border-radius:5px;font-size:8px;font-weight:800;letter-spacing:.7px;text-transform:uppercase}.status.development{color:#ff767d;background:rgba(229,9,20,.1);border:1px solid rgba(229,9,20,.3)}.status.review{color:var(--yellow);background:rgba(245,196,81,.08);border:1px solid rgba(245,196,81,.25)}.status.community{color:var(--blue);background:rgba(90,169,255,.08);border:1px solid rgba(90,169,255,.25)}
+.dream-card h3{font:700 15px/1.35 Orbitron;margin:17px 0 8px}.description{color:#999;font-size:11px;line-height:1.65}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.tag{padding:5px 7px;border:1px solid #292929;border-radius:5px;color:#888;font-size:8px;text-transform:uppercase;font-weight:800}.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px;padding-top:14px;border-top:1px solid #222}.card-bottom small{color:#666;font-size:9px}
+.project-card{background:linear-gradient(120deg,rgba(229,9,20,.11),transparent 45%),var(--panel);border:1px solid #302020;border-radius:14px;padding:22px}.project-head{display:flex;justify-content:space-between;gap:20px;align-items:start}.project-title{font:700 18px/1.4 Orbitron}.project-id{color:#777;font-size:9px;margin-top:6px}.progress-wrap{min-width:210px}.progress-label{display:flex;justify-content:space-between;color:#777;font-size:9px;margin-bottom:7px}.progress-label strong{color:#fff}.progress{height:7px;background:#222;border-radius:20px;overflow:hidden}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#8c070d,var(--red2));box-shadow:0 0 14px rgba(229,9,20,.35);transition:width .8s}.pipeline{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-top:25px}.stage{padding:11px 8px;border:1px solid #242424;background:#0d0d0d;border-radius:7px;text-align:center}.stage span{display:block;width:20px;height:20px;margin:auto auto 7px;border-radius:50%;border:1px solid #444;font-size:9px;line-height:18px;color:#777}.stage small{color:#777;font-size:7px;line-height:1.3;display:block}.stage.complete{border-color:#4c171b}.stage.complete span{border-color:var(--red);background:var(--red);color:#fff}.stage.active{border-color:var(--red);background:rgba(229,9,20,.08)}.stage.active span{border-color:var(--red2);color:#fff;box-shadow:0 0 12px rgba(229,9,20,.3)}.project-info{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.info-box{border:1px solid #242424;border-radius:8px;padding:11px;background:#0c0c0c}.info-box label{color:#666;display:block;font-size:8px;text-transform:uppercase;font-weight:800;margin-bottom:5px}.info-box strong{font-size:10px}
+.two-column{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}.panel h3{font:700 13px Orbitron;margin-bottom:16px}.list{display:flex;flex-direction:column}.list-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #202020}.list-item:last-child{border:0}.list-icon{width:35px;height:35px;flex:none;display:grid;place-items:center;border:1px solid #2d2d2d;background:#0d0d0d;border-radius:8px;font-size:14px}.list-content{flex:1;min-width:0}.list-content strong{display:block;font-size:10px;margin-bottom:4px}.list-content span{display:block;color:#666;font-size:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.list-arrow{color:#666}
+.notification-item{padding:13px 0;border-bottom:1px solid #202020}.notification-item:last-child{border:0}.notification-item strong{display:block;font-size:10px;margin-bottom:5px}.notification-item p{color:#777;font-size:9px;line-height:1.5}.notification-item time{color:#4f4f4f;display:block;margin-top:5px;font-size:8px}
+.journal{display:grid;gap:10px}.journal-entry{padding:14px;background:#0c0c0c;border:1px solid #222;border-radius:9px}.journal-meta{display:flex;justify-content:space-between;gap:10px;color:#666;font-size:8px;margin-bottom:8px}.journal-entry h4{font:700 10px Orbitron;margin-bottom:6px}.journal-entry p{color:#888;font-size:9px;line-height:1.6}
+.rights-box{background:linear-gradient(135deg,rgba(229,9,20,.08),transparent),#0c0c0c;border:1px solid #322022;border-radius:14px;padding:20px}.rights-box h3{font:700 13px Orbitron;margin-bottom:9px}.rights-box p{color:#888;font-size:10px;line-height:1.7}.rights-points{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:15px}.right-point{padding:11px;border:1px solid #252525;border-radius:7px;background:#0a0a0a}.right-point strong{display:block;color:#ddd;font-size:9px;margin-bottom:4px}.right-point span{color:#666;font-size:8px;line-height:1.4}
+.loading{color:#666;font-size:10px;padding:20px 0}.empty{padding:28px;text-align:center;color:#666;font-size:10px;border:1px dashed #292929;border-radius:10px}.error-banner{display:none;margin-bottom:18px;padding:12px 15px;border:1px solid #5a171d;background:rgba(229,9,20,.08);border-radius:9px;color:#ff858b;font-size:10px}.toast{position:fixed;right:20px;bottom:20px;z-index:2000;background:#171717;border:1px solid #3a3a3a;border-left:3px solid var(--red);padding:13px 16px;border-radius:8px;box-shadow:var(--shadow);color:#ddd;font-size:10px;transform:translateY(30px);opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:translateY(0);opacity:1}
+@media(max-width:1100px){.nav-links{display:none}.mobile-menu{display:grid}.stats{grid-template-columns:repeat(3,1fr)}.dashboard-grid{grid-template-columns:190px 1fr}.hero-orb{right:-30px;opacity:.55}.pipeline{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:800px){.page{width:92%;padding-top:22px}.dashboard-grid{display:block}.sidebar{position:static;margin-bottom:22px}.side-menu{display:grid;grid-template-columns:repeat(2,1fr)}.side-menu a{border-right:1px solid #1b1b1b}.creator-mini{display:flex;align-items:center;gap:14px}.creator-mini-avatar{margin:0;width:50px;height:50px}.creator-mini-info{flex:1}.stats{grid-template-columns:repeat(2,1fr)}.dreams-grid,.two-column{grid-template-columns:1fr}.project-head{display:block}.progress-wrap{margin-top:20px}.project-info{grid-template-columns:repeat(2,1fr)}.rights-points{grid-template-columns:1fr}.hero{padding:32px 24px;min-height:390px}.hero-orb{width:180px;height:180px;top:70%;right:-45px}.hero-title{font-size:36px}}
+@media(max-width:520px){header{height:64px}.brand-text{display:none}.page{width:94%}h1{font-size:25px}.stats{grid-template-columns:1fr 1fr}.stat{min-height:85px}.stat-number{font-size:20px}.pipeline{grid-template-columns:repeat(2,1fr)}.project-info{grid-template-columns:1fr 1fr}.side-menu{grid-template-columns:1fr}.hero{min-height:430px}.hero-title{font-size:31px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}.progress span{transition:none}}
 </style>
 </head>
-
 <body>
 
 <header>
-  <nav class="nav">
-
-    <a class="brand" href="index.html">
-      <div class="brand-mark">CR</div>
-      <div class="brand-text">
-        <strong>CROWRULES DREAM WORLD</strong>
-        <span>Creator Workspace</span>
-      </div>
-    </a>
-
-    <div class="nav-links">
-      <a href="index.html">Dream World</a>
-      <a href="dreams.html">Dreams</a>
-      <a href="projects.html">Projects</a>
-      <a href="community.html">Community</a>
-      <a href="creator-dashboard.html" class="active">Dashboard</a>
-    </div>
-
-    <div class="user-area">
-      <button class="notification" onclick="showToast('You have 3 new notifications.')">
-        ♢
-        <span class="notification-dot"></span>
-      </button>
-
-      <div class="avatar" id="navAvatar">CR</div>
-
-      <button class="mobile-menu" onclick="toggleMobileMenu()">☰</button>
-    </div>
-
-  </nav>
+<nav class="nav">
+<a class="brand" href="index.html"><div class="brand-mark">CR</div><div class="brand-text"><strong>CROWRULES DREAM WORLD</strong><span>Creator Workspace</span></div></a>
+<div class="nav-links">
+<a href="index.html">Dream World</a><a href="dreams.html">Dreams</a><a href="projects.html">Projects</a><a href="community.html">Community</a><a href="creator-dashboard.html" class="active">Dashboard</a>
+</div>
+<div class="user-area">
+<button class="notification" id="notificationBtn" aria-label="Notifications">♢<span class="notification-dot" id="notificationDot"></span></button>
+<div class="avatar" id="navAvatar">CR</div>
+<button class="mobile-menu" id="mobileMenuBtn" aria-label="Open menu">☰</button>
+</div>
+</nav>
 </header>
 
 <main class="page">
-
-  <div class="dashboard-grid">
-
-    <!-- =====================
-         SIDEBAR
-    ====================== -->
-
-    <aside class="sidebar">
-
-      <div class="creator-mini">
-
-        <div class="creator-mini-avatar" id="creatorAvatar">
-          CR
-        </div>
-
-        <div class="creator-mini-info">
-          <h3 id="creatorName">Dream Creator</h3>
-          <p id="creatorEmail">creator@example.com</p>
-
-          <span class="creator-badge">
-            Dream Creator
-          </span>
-        </div>
-
-      </div>
-
-      <nav class="side-menu">
-
-        <a href="creator-dashboard.html" class="active">
-          <span class="side-icon">⌂</span>
-          Dashboard
-        </a>
-
-        <a href="my-dreams.html">
-          <span class="side-icon">◉</span>
-          My Dreams
-        </a>
-
-        <a href="my-projects.html">
-          <span class="side-icon">◆</span>
-          My Projects
-        </a>
-
-        <a href="creative-room.html">
-          <span class="side-icon">✦</span>
-          Creative Room
-        </a>
-
-        <a href="collaborators.html">
-          <span class="side-icon">◎</span>
-          Collaborators
-        </a>
-
-        <a href="messages.html">
-          <span class="side-icon">◇</span>
-          Messages
-        </a>
-
-        <a href="files.html">
-          <span class="side-icon">▣</span>
-          Files
-        </a>
-
-        <a href="agreements.html">
-          <span class="side-icon">▤</span>
-          Agreements
-        </a>
-
-        <a href="credits.html">
-          <span class="side-icon">★</span>
-          Credits
-        </a>
-
-        <a href="earnings.html">
-          <span class="side-icon">$</span>
-          Earnings
-        </a>
-
-        <a href="settings.html">
-          <span class="side-icon">⚙</span>
-          Settings
-        </a>
-
-      </nav>
-
-    </aside>
-
-
-    <!-- =====================
-         MAIN DASHBOARD
-    ====================== -->
-
-    <section class="dashboard-main">
-
-      <div class="eyebrow">
-        Private Creator Workspace
-      </div>
-
-      <h1>
-        Welcome Back,
-        <span id="welcomeName">Dream Creator</span>.
-      </h1>
-
-      <p class="hero-sub">
-        This is your private space inside CrowRules Dream World.
-        Track your dreams, develop projects, work with collaborators,
-        review agreements, follow your credits, and watch your ideas
-        move from imagination toward production.
-      </p>
-
-      <div class="top-actions">
-
-        <a class="btn btn-primary" href="submit.html">
-          + Submit New Dream
-        </a>
-
-        <a class="btn" href="my-projects.html">
-          ◆ View My Projects
-        </a>
-
-        <a class="btn" href="creative-room.html">
-          ✦ Open Creative Room
-        </a>
-
-      </div>
-
-
-      <!-- =====================
-           STATS
-      ====================== -->
-
-      <div class="stats">
-
-        <div class="stat red">
-          <div class="stat-label">My Dreams</div>
-          <div class="stat-number" id="dreamCount">4</div>
-          <div class="stat-detail">Submitted ideas</div>
-        </div>
-
-        <div class="stat">
-          <div class="stat-label">Projects</div>
-          <div class="stat-number" id="projectCount">2</div>
-          <div class="stat-detail">In development</div>
-        </div>
-
-        <div class="stat blue">
-          <div class="stat-label">Collaborators</div>
-          <div class="stat-number" id="collabCount">5</div>
-          <div class="stat-detail">Creative team</div>
-        </div>
-
-        <div class="stat purple">
-          <div class="stat-label">Credits</div>
-          <div class="stat-number" id="creditCount">3</div>
-          <div class="stat-detail">Current credits</div>
-        </div>
-
-        <div class="stat green">
-          <div class="stat-label">Earnings</div>
-          <div class="stat-number" id="earningCount">$0</div>
-          <div class="stat-detail">Recorded to date</div>
-        </div>
-
-      </div>
-
-
-      <!-- =====================
-           MY DREAMS
-      ====================== -->
-
-      <section class="section">
-
-        <div class="section-head">
-
-          <div>
-            <h2>MY DREAMS</h2>
-            <p>Your submitted creative universe.</p>
-          </div>
-
-          <a class="section-link" href="my-dreams.html">
-            VIEW ALL →
-          </a>
-
-        </div>
-
-        <div class="dreams-grid" id="dreamsGrid">
-
-          <article class="dream-card">
-
-            <div class="card-top">
-              <span class="card-code">DR-0001</span>
-              <span class="status development">In Development</span>
-            </div>
-
-            <h3>
-              The City That Only Exists While You Sleep
-            </h3>
-
-            <p class="description">
-              Every night, a hidden city appears inside the dreams
-              of people around the world. One person discovers that
-              the city may actually be trying to communicate.
-            </p>
-
-            <div class="meta">
-              <span class="tag">Story</span>
-              <span class="tag">Sci-Fi</span>
-              <span class="tag">Series</span>
-            </div>
-
-            <div class="card-bottom">
-              <small>
-                Updated 2 days ago
-              </small>
-
-              <div class="actions">
-                <a class="btn btn-small" href="project-development.html">
-                  OPEN
-                </a>
-              </div>
-            </div>
-
-          </article>
-
-
-          <article class="dream-card">
-
-            <div class="card-top">
-              <span class="card-code">DR-0002</span>
-              <span class="status review">Under Review</span>
-            </div>
-
-            <h3>
-              The Man Who Woke Up Yesterday
-            </h3>
-
-            <p class="description">
-              A stranger wakes up every morning believing he has
-              traveled backward exactly one day, but nobody else
-              remembers the previous version of reality.
-            </p>
-
-            <div class="meta">
-              <span class="tag">Concept</span>
-              <span class="tag">Thriller</span>
-              <span class="tag">Film</span>
-            </div>
-
-            <div class="card-bottom">
-              <small>
-                Updated 6 days ago
-              </small>
-
-              <div class="actions">
-                <a class="btn btn-small" href="my-dreams.html">
-                  OPEN
-                </a>
-              </div>
-            </div>
-
-          </article>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================
-           FEATURED PROJECT
-      ====================== -->
-
-      <section class="section">
-
-        <div class="section-head">
-
-          <div>
-            <h2>ACTIVE PROJECT</h2>
-            <p>Your most advanced Dream World project.</p>
-          </div>
-
-          <a class="section-link" href="my-projects.html">
-            ALL PROJECTS →
-          </a>
-
-        </div>
-
-        <div class="project-card">
-
-          <div class="project-head">
-
-            <div>
-              <div class="project-title">
-                The City That Only Exists While You Sleep
-              </div>
-
-              <div class="project-id">
-                PROJECT DW-0001 · BASED ON DREAM DR-0001
-              </div>
-            </div>
-
-            <div class="progress-wrap">
-
-              <div class="progress-label">
-                <span>Development Progress</span>
-                <strong>38%</strong>
-              </div>
-
-              <div class="progress">
-                <span></span>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="pipeline">
-
-            <div class="stage complete">
-              <span>✓</span>
-              <small>Original Dream</small>
-            </div>
-
-            <div class="stage complete">
-              <span>✓</span>
-              <small>Discovery</small>
-            </div>
-
-            <div class="stage complete">
-              <span>✓</span>
-              <small>Concept</small>
-            </div>
-
-            <div class="stage active">
-              <span>4</span>
-              <small>Writing</small>
-            </div>
-
-            <div class="stage">
-              <span>5</span>
-              <small>Visual Development</small>
-            </div>
-
-            <div class="stage">
-              <span>6</span>
-              <small>Funding</small>
-            </div>
-
-          </div>
-
-
-          <div class="project-info">
-
-            <div class="info-box">
-              <label>Format</label>
-              <strong>Streaming Series</strong>
-            </div>
-
-            <div class="info-box">
-              <label>Genre</label>
-              <strong>Sci-Fi / Mystery</strong>
-            </div>
-
-            <div class="info-box">
-              <label>Status</label>
-              <strong>Writing</strong>
-            </div>
-
-            <div class="info-box">
-              <label>Started</label>
-              <strong>2026</strong>
-            </div>
-
-          </div>
-
-
-          <div class="top-actions">
-
-            <a class="btn btn-primary" href="project-development.html">
-              OPEN DEVELOPMENT
-            </a>
-
-            <button class="btn" onclick="showToast('Development journal opened.')">
-              DEVELOPMENT JOURNAL
-            </button>
-
-            <button class="btn" onclick="showToast('Project files opened.')">
-              PROJECT FILES
-            </button>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================
-           LOWER COLUMNS
-      ====================== -->
-
-      <section class="section">
-
-        <div class="two-column">
-
-
-          <!-- DEVELOPMENT -->
-
-          <div class="panel">
-
-            <h3>
-              DEVELOPMENT ACTIVITY
-            </h3>
-
-            <div class="list">
-
-              <div class="list-item">
-
-                <div class="list-icon">✎</div>
-
-                <div class="list-content">
-                  <strong>New screenplay revision</strong>
-                  <span>
-                    Episode 1 outline updated by CrowRules Development
-                  </span>
-                </div>
-
-                <div class="list-arrow">›</div>
-
-              </div>
-
-
-              <div class="list-item">
-
-                <div class="list-icon">◎</div>
-
-                <div class="list-content">
-                  <strong>Creator meeting scheduled</strong>
-                  <span>
-                    Discovery session · Tomorrow
-                  </span>
-                </div>
-
-                <div class="list-arrow">›</div>
-
-              </div>
-
-
-              <div class="list-item">
-
-                <div class="list-icon">◇</div>
-
-                <div class="list-content">
-                  <strong>Collaborator joined</strong>
-                  <span>
-                    Visual development team
-                  </span>
-                </div>
-
-                <div class="list-arrow">›</div>
-
-              </div>
-
-
-              <div class="list-item">
-
-                <div class="list-icon">▣</div>
-
-                <div class="list-content">
-                  <strong>New project file</strong>
-                  <span>
-                    Character development notes.pdf
-                  </span>
-                </div>
-
-                <div class="list-arrow">›</div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- NOTIFICATIONS -->
-
-          <div class="panel">
-
-            <h3>
-              NOTIFICATIONS
-            </h3>
-
-            <div class="notification-item">
-              <strong>Development update</strong>
-              <p>
-                Your project has moved into the Writing stage.
-              </p>
-              <time>2 hours ago</time>
-            </div>
-
-            <div class="notification-item">
-              <strong>Creator meeting</strong>
-              <p>
-                A new creative-room session is waiting for your response.
-              </p>
-              <time>Yesterday</time>
-            </div>
-
-            <div class="notification-item">
-              <strong>Agreement reminder</strong>
-              <p>
-                A project agreement is available in your Agreements center.
-              </p>
-              <time>3 days ago</time>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================
-           DEVELOPMENT JOURNAL
-      ====================== -->
-
-      <section class="section">
-
-        <div class="section-head">
-
-          <div>
-            <h2>DEVELOPMENT JOURNAL</h2>
-            <p>A living record of how your dream evolves.</p>
-          </div>
-
-          <a class="section-link" href="project-development.html">
-            OPEN JOURNAL →
-          </a>
-
-        </div>
-
-        <div class="panel">
-
-          <div class="journal">
-
-            <div class="journal-entry">
-
-              <div class="journal-meta">
-                <span>PROJECT DW-0001</span>
-                <span>SEPTEMBER 7, 2026</span>
-              </div>
-
-              <h4>
-                THE WORLD EXPANDS
-              </h4>
-
-              <p>
-                Development discussion expanded the dream-city concept
-                into a larger mythology. New rules for how the city
-                appears and who can enter were established.
-              </p>
-
-            </div>
-
-
-            <div class="journal-entry">
-
-              <div class="journal-meta">
-                <span>PROJECT DW-0001</span>
-                <span>SEPTEMBER 2, 2026</span>
-              </div>
-
-              <h4>
-                FORMAT DISCUSSION
-              </h4>
-
-              <p>
-                The team discussed whether the concept works best as
-                a feature film or serialized streaming story. Current
-                direction favors a limited series.
-              </p>
-
-            </div>
-
-
-            <div class="journal-entry">
-
-              <div class="journal-meta">
-                <span>PROJECT DW-0001</span>
-                <span>AUGUST 24, 2026</span>
-              </div>
-
-              <h4>
-                ORIGINAL DREAM
-              </h4>
-
-              <p>
-                The original dream submission was accepted into
-                development and the first creator discovery conversation
-                began.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================
-           CREATOR RIGHTS
-      ====================== -->
-
-      <section class="section">
-
-        <div class="rights-box">
-
-          <h3>
-            YOUR CREATOR RIGHTS
-          </h3>
-
-          <p>
-            CrowRules Dream World is built around collaboration.
-            A submitted dream does not automatically mean CrowRules
-            owns the creator's work. When a project moves forward,
-            the specific rights, credits, compensation, licensing,
-            ownership and participation terms are established through
-            appropriate written agreements.
-          </p>
-
-          <div class="rights-points">
-
-            <div class="right-point">
-              <strong>MY AGREEMENTS</strong>
-              <span>
-                Review project-specific agreements and terms.
-              </span>
-            </div>
-
-            <div class="right-point">
-              <strong>MY CREDITS</strong>
-              <span>
-                Track approved creator and production credits.
-              </span>
-            </div>
-
-            <div class="right-point">
-              <strong>MY EARNINGS</strong>
-              <span>
-                View compensation recorded under your agreements.
-              </span>
-            </div>
-
-          </div>
-
-          <div class="top-actions">
-
-            <a class="btn" href="agreements.html">
-              VIEW AGREEMENTS
-            </a>
-
-            <a class="btn" href="credits.html">
-              VIEW CREDITS
-            </a>
-
-            <a class="btn" href="earnings.html">
-              VIEW EARNINGS
-            </a>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================
-           LONG TERM
-      ====================== -->
-
-      <section class="section">
-
-        <div class="panel">
-
-          <div class="eyebrow">
-            The Dream World Philosophy
-          </div>
-
-          <h2 style="font-family:Orbitron,sans-serif;font-size:20px;margin-bottom:12px;">
-            DREAMS DON'T HAVE DEADLINES.
-          </h2>
-
-          <p style="color:#888;font-size:11px;line-height:1.8;max-width:850px;">
-            Some ideas can become a short film in months.
-            Others may require years of writing, funding,
-            development, casting, production and revision.
-            A Dream World project can pause, evolve, change format,
-            return to development or continue for five years or more.
-          </p>
-
-          <p style="color:#aaa;font-size:11px;line-height:1.8;max-width:850px;margin-top:12px;">
-            We don't rush dreams.
-            We develop them.
-            We build them together.
-            And when the time is right,
-            we bring them to life.
-          </p>
-
-        </div>
-
-      </section>
-
-    </section>
-
-  </div>
-
+<div class="error-banner" id="errorBanner"></div>
+
+<div class="dashboard-grid">
+<aside class="sidebar">
+<div class="creator-mini">
+<div class="creator-mini-avatar" id="creatorAvatar">CR</div>
+<div class="creator-mini-info"><h3 id="creatorName">Loading creator…</h3><p id="creatorEmail">Checking your session…</p><span class="creator-badge">Dream Creator</span></div>
+</div>
+<nav class="side-menu">
+<a href="creator-dashboard.html" class="active"><span class="side-icon">⌂</span>Dashboard</a>
+<a href="my-dreams.html"><span class="side-icon">◉</span>My Dreams</a>
+<a href="my-projects.html"><span class="side-icon">◆</span>My Projects</a>
+<a href="creative-room.html"><span class="side-icon">✦</span>Creative Room</a>
+<a href="collaborators.html"><span class="side-icon">◎</span>Collaborators</a>
+<a href="messages.html"><span class="side-icon">◇</span>Messages</a>
+<a href="files.html"><span class="side-icon">▣</span>Files</a>
+<a href="agreements.html"><span class="side-icon">▤</span>Agreements</a>
+<a href="credits.html"><span class="side-icon">★</span>Credits</a>
+<a href="earnings.html"><span class="side-icon">$</span>Earnings</a>
+<a href="settings.html"><span class="side-icon">⚙</span>Settings</a>
+<button id="signOutBtn" style="width:100%;border:0;border-top:1px solid #1b1b1b;background:#0d0d0d;color:#aaa;padding:13px 15px;text-align:left;font:700 11px Montserrat;cursor:pointer">↪ Sign Out</button>
+</nav>
+</aside>
+
+<section class="dashboard-main">
+
+<section class="hero">
+<canvas id="dreamCanvas" aria-hidden="true"></canvas>
+<div class="hero-orb" aria-hidden="true"><div class="orb-core"></div></div>
+<div class="hero-content">
+<div class="eyebrow">Private Creator Workspace</div>
+<div class="hero-title">WELCOME TO<br><span>YOUR DREAM WORLD.</span></div>
+<p class="hero-copy">Your ideas live here. Your projects grow here. Follow every step from the first spark of an idea through development, collaboration, rights, credits and the day the dream becomes real.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="submit.html">＋ Submit New Dream</a>
+<a class="btn" href="my-projects.html">◆ View My Projects</a>
+<a class="btn" href="creative-room.html">✦ Open Creative Room</a>
+</div>
+</div>
+</section>
+
+<div class="stats">
+<div class="stat red"><div class="stat-label">My Dreams</div><div class="stat-number" id="dreamCount">—</div><div class="stat-detail">Submitted ideas</div></div>
+<div class="stat"><div class="stat-label">Projects</div><div class="stat-number" id="projectCount">—</div><div class="stat-detail">In your workspace</div></div>
+<div class="stat blue"><div class="stat-label">Collaborators</div><div class="stat-number" id="collabCount">—</div><div class="stat-detail">Active creative team</div></div>
+<div class="stat purple"><div class="stat-label">Credits</div><div class="stat-number" id="creditCount">—</div><div class="stat-detail">Creator credits</div></div>
+<div class="stat green"><div class="stat-label">Earnings</div><div class="stat-number" id="earningCount">$0</div><div class="stat-detail">Recorded to date</div></div>
+</div>
+
+<section class="section">
+<div class="section-head"><div><h2>MY DREAMS</h2><p>Your submitted creative universe.</p></div><a class="section-link" href="my-dreams.html">VIEW ALL →</a></div>
+<div class="dreams-grid" id="dreamsGrid"><div class="loading">Loading your dreams…</div></div>
+</section>
+
+<section class="section">
+<div class="section-head"><div><h2>ACTIVE PROJECT</h2><p>Your most advanced Dream World project.</p></div><a class="section-link" href="my-projects.html">ALL PROJECTS →</a></div>
+<div id="activeProject"><div class="loading">Loading your active project…</div></div>
+</section>
+
+<section class="section">
+<div class="two-column">
+<div class="panel"><h3>DEVELOPMENT ACTIVITY</h3><div class="list" id="activityList"><div class="loading">Loading activity…</div></div></div>
+<div class="panel"><h3>NOTIFICATIONS</h3><div id="notificationList"><div class="loading">Loading notifications…</div></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-head"><div><h2>DEVELOPMENT JOURNAL</h2><p>A living record of how your dream evolves.</p></div><a class="section-link" href="project-development.html">OPEN JOURNAL →</a></div>
+<div class="panel"><div class="journal" id="journal"><div class="loading">Loading journal…</div></div></div>
+</section>
+
+<section class="section">
+<div class="rights-box">
+<h3>YOUR CREATOR RIGHTS</h3>
+<p>CrowRules Dream World is built around collaboration. A submitted dream does not automatically mean CrowRules owns the creator's work. When a project moves forward, specific rights, credits, compensation, licensing, ownership and participation terms are established through appropriate written agreements.</p>
+<div class="rights-points">
+<div class="right-point"><strong>MY AGREEMENTS</strong><span>Review project-specific agreements and negotiated terms.</span></div>
+<div class="right-point"><strong>MY CREDITS</strong><span>Track approved creator and production credits.</span></div>
+<div class="right-point"><strong>MY EARNINGS</strong><span>View compensation recorded under your agreements.</span></div>
+</div>
+<div class="hero-actions"><a class="btn" href="agreements.html">VIEW AGREEMENTS</a><a class="btn" href="credits.html">VIEW CREDITS</a><a class="btn" href="earnings.html">VIEW EARNINGS</a></div>
+</div>
+</section>
+
+<section class="section">
+<div class="panel">
+<div class="eyebrow">The Dream World Philosophy</div>
+<h2 style="font:800 20px Orbitron;margin-bottom:12px">DREAMS DON'T HAVE DEADLINES.</h2>
+<p style="color:#888;font-size:11px;line-height:1.8;max-width:850px">Some ideas can become a short film in months. Others may require years of writing, funding, development, casting, production and revision. A Dream World project can pause, evolve, change format, return to development or continue for five years or more.</p>
+<p style="color:#aaa;font-size:11px;line-height:1.8;max-width:850px;margin-top:12px">We don't rush dreams. We develop them. We build them together. And when the time is right, we bring them to life.</p>
+</div>
+</section>
+</section>
+</div>
 </main>
-
 <div class="toast" id="toast"></div>
 
 <script>
 /* =========================================================
-   CROWRULES DREAM WORLD
-   CREATOR DASHBOARD
-   Supabase-ready architecture
+   CROWRULES DREAM WORLD — PRODUCTION CLIENT
+   Project: cevylpnoexugwgygvtgu
+   Uses only the public/publishable browser key.
+   Never place a Supabase service-role/secret key in this file.
 ========================================================= */
-
-const CONFIG = {
-  SUPABASE_URL: "YOUR_SUPABASE_URL",
-  SUPABASE_ANON_KEY: "YOUR_SUPABASE_ANON_KEY"
-};
-
-
-/* =========================================================
-   DEMO CREATOR
-========================================================= */
-
-const demoCreator = {
-  id: "creator-demo-001",
-  name: "Dream Creator",
-  email: "creator@example.com",
-  initials: "DC"
-};
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  loadDemoCreator();
-
-  /*
-    FUTURE:
-
-    const supabase = window.supabase.createClient(
-      CONFIG.SUPABASE_URL,
-      CONFIG.SUPABASE_ANON_KEY
-    );
-
-    await loadAuthenticatedCreator();
-    await loadCreatorStats();
-    await loadCreatorDreams();
-    await loadCreatorProjects();
-    await loadNotifications();
-    await loadDevelopmentActivity();
-  */
-
+const SUPABASE_URL = "https://cevylpnoexugwgygvtgu.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+  auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
 });
 
+let currentUser = null;
+let toastTimer = null;
 
-/* =========================================================
-   CREATOR DISPLAY
-========================================================= */
-
-function loadDemoCreator(){
-
-  const creator = demoCreator;
-
-  document.getElementById("creatorName").textContent =
-    creator.name;
-
-  document.getElementById("creatorEmail").textContent =
-    creator.email;
-
-  document.getElementById("welcomeName").textContent =
-    creator.name;
-
-  document.getElementById("creatorAvatar").textContent =
-    creator.initials;
-
-  document.getElementById("navAvatar").textContent =
-    creator.initials;
-}
-
-
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-function toggleMobileMenu(){
-
-  const sidebar = document.querySelector(".sidebar");
-
-  if(!sidebar) return;
-
-  sidebar.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-let toastTimer;
+const $ = id => document.getElementById(id);
+const esc = value => String(value ?? "").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+const dateFmt = value => value ? new Date(value).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"}) : "—";
+const initials = name => String(name||"CR").trim().split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase() || "CR";
 
 function showToast(message){
+  const t=$("toast"); t.textContent=message; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove("show"),2800);
+}
+function showError(message){
+  const b=$("errorBanner"); b.textContent=message; b.style.display="block";
+}
+function clearError(){ $("errorBanner").style.display="none"; }
 
-  const toast = document.getElementById("toast");
-
-  toast.textContent = message;
-
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2800);
+function statusClass(status){
+  const s=String(status||"submitted").toLowerCase();
+  if(s.includes("review")) return "review";
+  if(s.includes("community")||s.includes("public")) return "community";
+  return "development";
 }
 
+function creatorNameFromUser(user, profile){
+  return profile?.display_name || profile?.creator_handle || user.user_metadata?.display_name ||
+         user.user_metadata?.full_name || user.user_metadata?.name || user.email?.split("@")[0] || "Dream Creator";
+}
 
-/* =========================================================
-   FUTURE SUPABASE FUNCTIONS
-========================================================= */
-
-/*
-
-async function loadAuthenticatedCreator(){
-
-  const {
-    data:{ user },
-    error
-  } = await supabase.auth.getUser();
-
-  if(error){
-    console.error(error);
-    return;
+async function loadCreatorProfile(){
+  const {data,error}=await supabase.from("dream_profiles")
+    .select("display_name,creator_handle,bio,avatar_url,primary_role,public_profile")
+    .eq("user_id",currentUser.id).maybeSingle();
+  if(error && !String(error.message).toLowerCase().includes("no rows")) console.warn("dream_profiles:",error);
+  const name=creatorNameFromUser(currentUser,data);
+  const avatar=data?.avatar_url;
+  $("creatorName").textContent=name;
+  $("creatorEmail").textContent=currentUser.email || "";
+  $("welcomeName")?.remove();
+  if(avatar){
+    $("creatorAvatar").style.backgroundImage=`url("${esc(avatar)}")`;
+    $("creatorAvatar").style.backgroundSize="cover";
+    $("creatorAvatar").textContent="";
+    $("navAvatar").style.backgroundImage=`url("${esc(avatar)}")`;
+    $("navAvatar").style.backgroundSize="cover";
+    $("navAvatar").textContent="";
+  }else{
+    const ini=initials(name); $("creatorAvatar").textContent=ini; $("navAvatar").textContent=ini;
   }
-
-  if(!user){
-    window.location.href = "login.html";
-    return;
-  }
-
-  // Load creator profile
 }
 
-
-async function loadCreatorStats(){
-
-  // DREAM COUNT
-
-  const { count:dreamCount } =
-    await supabase
-      .from("dream_submissions")
-      .select("*",{count:"exact",head:true})
-      .eq("creator_id",currentUser.id);
-
-  document.getElementById("dreamCount")
-    .textContent = dreamCount || 0;
-
-
-  // PROJECT COUNT
-
-  const { count:projectCount } =
-    await supabase
-      .from("dream_projects")
-      .select("*",{count:"exact",head:true})
-      .eq("creator_id",currentUser.id);
-
-  document.getElementById("projectCount")
-    .textContent = projectCount || 0;
-
-
-  // COLLABORATOR COUNT
-
-  const { count:collabCount } =
-    await supabase
-      .from("dream_collaborations")
-      .select("*",{count:"exact",head:true})
-      .eq("creator_id",currentUser.id)
-      .eq("status","active");
-
-  document.getElementById("collabCount")
-    .textContent = collabCount || 0;
-
-
-  // CREDITS
-
-  const { count:creditCount } =
-    await supabase
-      .from("dream_creator_credits")
-      .select("*",{count:"exact",head:true})
-      .eq("creator_id",currentUser.id);
-
-  document.getElementById("creditCount")
-    .textContent = creditCount || 0;
-
-
-  // EARNINGS
-
-  const { data:earnings } =
-    await supabase
-      .from("dream_creator_compensation")
-      .select("amount")
-      .eq("creator_id",currentUser.id);
-
-  const total = (earnings || [])
-    .reduce((sum,row) => sum + Number(row.amount || 0),0);
-
-  document.getElementById("earningCount")
-    .textContent = "$" + total.toLocaleString();
+async function countQuery(table,column=currentUser.id,extra=null){
+  let q=supabase.from(table).select("*",{count:"exact",head:true}).eq(column,currentUser.id);
+  if(extra) Object.entries(extra).forEach(([k,v])=>q=q.eq(k,v));
+  const {count,error}=await q;
+  if(error) throw error;
+  return count||0;
 }
 
+async function loadStats(){
+  const results=await Promise.allSettled([
+    countQuery("dream_submissions","creator_id"),
+    countQuery("dream_projects","creator_id"),
+    countQuery("dream_creator_collaborations","creator_id",{status:"active"}),
+    countQuery("dream_creator_credits","user_id")
+  ]);
+  $("dreamCount").textContent=results[0].status==="fulfilled"?results[0].value:"0";
+  $("projectCount").textContent=results[1].status==="fulfilled"?results[1].value:"0";
+  $("collabCount").textContent=results[2].status==="fulfilled"?results[2].value:"0";
+  $("creditCount").textContent=results[3].status==="fulfilled"?results[3].value:"0";
 
-async function loadCreatorDreams(){
-
-  const { data, error } =
-    await supabase
-      .from("dream_submissions")
-      .select(`
-        id,
-        dream_code,
-        dream_title,
-        dream_type,
-        description,
-        status,
-        created_at,
-        updated_at
-      `)
-      .eq("creator_id",currentUser.id)
-      .order("updated_at",{ascending:false})
-      .limit(4);
-
-  if(error){
-    console.error(error);
-    return;
-  }
-
-  renderDreams(data || []);
+  const {data,error}=await supabase.from("dream_creator_compensation")
+    .select("amount,currency,status").eq("creator_id",currentUser.id);
+  if(error){console.warn("compensation:",error);$("earningCount").textContent="$0";return}
+  const total=(data||[]).reduce((sum,row)=>sum+Number(row.amount||0),0);
+  $("earningCount").textContent=total.toLocaleString(undefined,{style:"currency",currency:"USD",maximumFractionDigits:2});
 }
 
-
-function renderDreams(dreams){
-
-  const grid = document.getElementById("dreamsGrid");
-
-  grid.innerHTML = "";
-
-  dreams.forEach(dream => {
-
-    const article =
-      document.createElement("article");
-
-    article.className = "dream-card";
-
-    article.innerHTML = `
-      <div class="card-top">
-        <span class="card-code">
-          ${escapeHtml(dream.dream_code || "DREAM")}
-        </span>
-
-        <span class="status development">
-          ${escapeHtml(dream.status || "Submitted")}
-        </span>
-      </div>
-
-      <h3>
-        ${escapeHtml(dream.dream_title)}
-      </h3>
-
-      <p class="description">
-        ${escapeHtml(dream.description || "")}
-      </p>
-
+async function loadDreams(){
+  const {data,error}=await supabase.from("dream_submissions")
+    .select("id,submission_code,dream_title,description,dream_type,format,genre,status,review_status,current_stage,progress_percent,project_id,submitted_at,updated_at")
+    .eq("creator_id",currentUser.id).order("updated_at",{ascending:false}).limit(4);
+  if(error){$("dreamsGrid").innerHTML='<div class="empty">Your dreams could not be loaded. Check your Dream World RLS policies.</div>';console.error(error);return}
+  if(!data?.length){$("dreamsGrid").innerHTML='<div class="empty">No dreams yet. Your first idea can start here.</div>';return}
+  $("dreamsGrid").innerHTML=data.map(d=>`
+    <article class="dream-card">
+      <div class="card-top"><span class="card-code">${esc(d.submission_code||"DREAM")}</span><span class="status ${statusClass(d.review_status||d.status)}">${esc(d.review_status||d.status||"Submitted")}</span></div>
+      <h3>${esc(d.dream_title)}</h3>
+      <p class="description">${esc(d.description||"No description yet.")}</p>
       <div class="meta">
-        <span class="tag">
-          ${escapeHtml(dream.dream_type || "Dream")}
-        </span>
+        ${[d.dream_type,d.format,d.genre].filter(Boolean).slice(0,3).map(x=>`<span class="tag">${esc(x)}</span>`).join("")}
       </div>
-
-      <div class="card-bottom">
-        <small>
-          ${formatDate(dream.updated_at)}
-        </small>
-
-        <div class="actions">
-          <a
-            class="btn btn-small"
-            href="my-dreams.html?id=${encodeURIComponent(dream.id)}">
-            OPEN
-          </a>
-        </div>
-      </div>
-    `;
-
-    grid.appendChild(article);
-  });
+      <div class="card-bottom"><small>Updated ${esc(dateFmt(d.updated_at))}</small><a class="btn btn-small" href="my-dreams.html?id=${encodeURIComponent(d.id)}">OPEN</a></div>
+    </article>`).join("");
 }
 
-
-async function loadCreatorProjects(){
-
-  const { data,error } =
-    await supabase
-      .from("dream_projects")
-      .select(`
-        id,
-        project_code,
-        title,
-        description,
-        format,
-        genre,
-        status,
-        progress_percent,
-        updated_at
-      `)
-      .eq("creator_id",currentUser.id)
-      .order("updated_at",{ascending:false});
-
-  if(error){
-    console.error(error);
-    return;
-  }
-
-  // Render project data.
+async function loadActiveProject(){
+  const {data,error}=await supabase.from("dream_projects")
+    .select("id,project_code,title,description,format,genre,status,progress_percent,started_at,target_date,updated_at")
+    .eq("creator_id",currentUser.id).order("updated_at",{ascending:false}).limit(1).maybeSingle();
+  if(error){$("activeProject").innerHTML='<div class="empty">Active project data could not be loaded.</div>';console.error(error);return}
+  if(!data){$("activeProject").innerHTML='<div class="empty">No active project yet. When a dream enters development, it will appear here.</div>';return}
+  const pct=Math.max(0,Math.min(100,Number(data.progress_percent||0)));
+  const stageNames=["Original Dream","Discovery","Concept","Writing","Visual Development","Funding"];
+  const activeIndex=Math.min(5,Math.floor(pct/17));
+  $("activeProject").innerHTML=`
+    <div class="project-card">
+      <div class="project-head">
+        <div><div class="project-title">${esc(data.title)}</div><div class="project-id">${esc(data.project_code||"PROJECT")} · DREAM WORLD DEVELOPMENT</div></div>
+        <div class="progress-wrap"><div class="progress-label"><span>Development Progress</span><strong>${pct}%</strong></div><div class="progress"><span style="width:${pct}%"></span></div></div>
+      </div>
+      <div class="pipeline">
+        ${stageNames.map((s,i)=>`<div class="stage ${i<activeIndex?"complete":i===activeIndex?"active":""}"><span>${i<activeIndex?"✓":i+1}</span><small>${esc(s)}</small></div>`).join("")}
+      </div>
+      <div class="project-info">
+        <div class="info-box"><label>Format</label><strong>${esc(data.format||"—")}</strong></div>
+        <div class="info-box"><label>Genre</label><strong>${esc(data.genre||"—")}</strong></div>
+        <div class="info-box"><label>Status</label><strong>${esc(data.status||"development")}</strong></div>
+        <div class="info-box"><label>Started</label><strong>${esc(data.started_at?new Date(data.started_at).getFullYear():"—")}</strong></div>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="project-development.html?id=${encodeURIComponent(data.id)}">OPEN DEVELOPMENT</a>
+        <a class="btn" href="files.html?project=${encodeURIComponent(data.id)}">PROJECT FILES</a>
+        <a class="btn" href="creative-room.html?project=${encodeURIComponent(data.id)}">CREATIVE ROOM</a>
+      </div>
+    </div>`;
+  await loadJournal(data.id);
 }
 
+async function loadActivity(){
+  const {data,error}=await supabase.from("dream_activity")
+    .select("id,activity_type,title,description,created_at,project_id,dream_id")
+    .eq("user_id",currentUser.id).order("created_at",{ascending:false}).limit(6);
+  if(error){$("activityList").innerHTML='<div class="empty">Activity unavailable.</div>';console.error(error);return}
+  if(!data?.length){$("activityList").innerHTML='<div class="empty">Your development activity will appear here.</div>';return}
+  const icons={development:"✎",meeting:"◎",collaboration:"◇",file:"▣",message:"◇",credit:"★",agreement:"▤"};
+  $("activityList").innerHTML=data.map(x=>`
+    <div class="list-item"><div class="list-icon">${icons[x.activity_type]||"•"}</div><div class="list-content"><strong>${esc(x.title)}</strong><span>${esc(x.description||"")}</span></div><div class="list-arrow">›</div></div>`).join("");
+}
 
 async function loadNotifications(){
+  const {data,error}=await supabase.from("dream_notifications")
+    .select("id,notification_type,title,body,is_read,created_at,project_id,dream_id")
+    .eq("user_id",currentUser.id).order("created_at",{ascending:false}).limit(6);
+  if(error){$("notificationList").innerHTML='<div class="empty">Notifications unavailable.</div>';console.error(error);return}
+  const unread=(data||[]).filter(x=>!x.is_read).length;
+  $("notificationDot").style.display=unread?"block":"none";
+  if(!data?.length){$("notificationList").innerHTML='<div class="empty">You're all caught up.</div>';return}
+  $("notificationList").innerHTML=data.map(x=>`
+    <div class="notification-item"><strong>${esc(x.title)}</strong><p>${esc(x.body||"")}</p><time>${esc(dateFmt(x.created_at))}${x.is_read?"":" · NEW"}</time></div>`).join("");
+}
 
-  const { data,error } =
-    await supabase
-      .from("dream_notifications")
-      .select("*")
-      .eq("user_id",currentUser.id)
-      .order("created_at",{ascending:false})
-      .limit(10);
+async function loadJournal(projectId){
+  if(!projectId){$("journal").innerHTML='<div class="empty">Your project journal will appear here.</div>';return}
+  const {data,error}=await supabase.from("dream_development_notes")
+    .select("id,note_type,title,body,created_at").eq("project_id",projectId).order("created_at",{ascending:false}).limit(5);
+  if(error){$("journal").innerHTML='<div class="empty">Journal entries could not be loaded.</div>';console.error(error);return}
+  if(!data?.length){
+    const {data:hist}=await supabase.from("dream_production_history").select("id,stage,title,description,event_date,created_at")
+      .eq("project_id",projectId).order("event_date",{ascending:false}).limit(5);
+    if(hist?.length){$("journal").innerHTML=hist.map(x=>`
+      <div class="journal-entry"><div class="journal-meta"><span>${esc(x.stage||"PROJECT")}</span><span>${esc(dateFmt(x.event_date||x.created_at))}</span></div><h4>${esc(x.title)}</h4><p>${esc(x.description||"")}</p></div>`).join("");return}
+    $("journal").innerHTML='<div class="empty">No journal entries yet.</div>';return;
+  }
+  $("journal").innerHTML=data.map(x=>`
+    <div class="journal-entry"><div class="journal-meta"><span>${esc((x.note_type||"DEVELOPMENT").toUpperCase())}</span><span>${esc(dateFmt(x.created_at))}</span></div><h4>${esc(x.title)}</h4><p>${esc(x.body)}</p></div>`).join("");
+}
 
-  if(error){
-    console.error(error);
+async function markNotificationsRead(){
+  const {error}=await supabase.from("dream_notifications").update({is_read:true}).eq("user_id",currentUser.id).eq("is_read",false);
+  if(error) console.warn("notification read update:",error);
+  $("notificationDot").style.display="none";
+  showToast("Notifications marked as read.");
+}
+
+async function signOut(){
+  const {error}=await supabase.auth.signOut();
+  if(error){showToast("Sign out failed.");console.error(error);return}
+  window.location.href="login.html";
+}
+
+async function boot(){
+  clearError();
+  const {data,error}=await supabase.auth.getUser();
+  if(error || !data?.user){
+    window.location.href="login.html?next="+encodeURIComponent("creator-dashboard.html");
     return;
   }
-
-  // Render notifications.
+  currentUser=data.user;
+  await loadCreatorProfile();
+  await Promise.all([loadStats(),loadDreams(),loadActiveProject(),loadActivity(),loadNotifications()]);
 }
 
+$("signOutBtn").addEventListener("click",signOut);
+$("notificationBtn").addEventListener("click",markNotificationsRead);
+$("mobileMenuBtn").addEventListener("click",()=>document.querySelector(".sidebar").scrollIntoView({behavior:"smooth"}));
 
-async function loadDevelopmentActivity(){
+supabase.auth.onAuthStateChange((event,session)=>{
+  if(event==="SIGNED_OUT") window.location.href="login.html";
+  if(event==="TOKEN_REFRESHED" && session?.user) currentUser=session.user;
+});
 
-  const { data,error } =
-    await supabase
-      .from("dream_activity")
-      .select("*")
-      .eq("user_id",currentUser.id)
-      .order("created_at",{ascending:false})
-      .limit(10);
-
-  if(error){
-    console.error(error);
-    return;
+/* Cinematic procedural dream field — no external media required. */
+(function dreamField(){
+  const canvas=$("dreamCanvas"),ctx=canvas.getContext("2d");
+  let w=0,h=0,dpr=1,particles=[];
+  const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function resize(){
+    const r=canvas.getBoundingClientRect(); dpr=Math.min(devicePixelRatio||1,2); w=r.width;h=r.height;
+    canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    particles=Array.from({length:Math.max(70,Math.floor(w/12))},()=>({
+      x:Math.random()*w,y:Math.random()*h,z:Math.random()*1+.2,r:Math.random()*1.8+.2,a:Math.random()*.65+.1,s:(Math.random()-.5)*.12
+    }));
   }
-
-  // Render development activity.
-}
-
-
-function formatDate(value){
-
-  if(!value) return "";
-
-  return new Date(value).toLocaleDateString(
-    undefined,
-    {
-      month:"short",
-      day:"numeric",
-      year:"numeric"
-    }
-  );
-}
-
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-*/
-
-
-/* =========================================================
-   SUPABASE DATA MODEL
-========================================================= */
-
-/*
-
-dream_profiles
-
-id
-user_id
-display_name
-username
-bio
-avatar_url
-creator_type
-website
-created_at
-updated_at
-
-
-dream_submissions
-
-id
-dream_code
-creator_id
-title
-description
-dream_type
-format
-genre
-visibility
-status
-view_count
-vote_count
-comment_count
-submitted_at
-created_at
-updated_at
-
-
-dream_projects
-
-id
-project_code
-dream_id
-creator_id
-title
-description
-logline
-format
-genre
-status
-progress_percent
-visibility
-featured
-started_at
-target_date
-created_at
-updated_at
-
-
-dream_project_members
-
-id
-project_id
-user_id
-role
-status
-joined_at
-left_at
-created_at
-updated_at
-
-
-dream_project_stages
-
-id
-project_id
-stage_name
-stage_order
-status
-progress_percent
-started_at
-completed_at
-notes
-created_at
-updated_at
-
-
-dream_development_notes
-
-id
-project_id
-author_id
-note_type
-title
-body
-visibility
-created_at
-updated_at
-
-
-dream_project_milestones
-
-id
-project_id
-title
-description
-status
-due_date
-completed_at
-sort_order
-created_at
-updated_at
-
-
-dream_files
-
-id
-project_id
-dream_id
-uploaded_by
-file_name
-storage_path
-mime_type
-file_size
-visibility
-created_at
-updated_at
-
-
-dream_collaborations
-
-id
-project_id
-creator_id
-collaborator_id
-role
-status
-invited_at
-accepted_at
-ended_at
-created_at
-updated_at
-
-
-dream_messages
-
-id
-sender_id
-recipient_id
-project_id
-subject
-body
-read_at
-created_at
-
-
-dream_notifications
-
-id
-user_id
-type
-title
-message
-link
-read_at
-created_at
-
-
-dream_creator_agreements
-
-id
-project_id
-creator_id
-agreement_type
-status
-document_path
-effective_date
-expiration_date
-signed_at
-created_at
-updated_at
-
-
-dream_creator_credits
-
-id
-project_id
-creator_id
-credit_type
-credit_text
-status
-approved_at
-created_at
-updated_at
-
-
-dream_creator_compensation
-
-id
-project_id
-creator_id
-compensation_type
-amount
-currency
-status
-payment_date
-notes
-created_at
-updated_at
-
-
-dream_funding
-
-id
-project_id
-funding_type
-target_amount
-raised_amount
-status
-start_date
-end_date
-created_at
-updated_at
-
-
-dream_production_history
-
-id
-project_id
-stage
-event_type
-description
-created_by
-created_at
-
-
-dream_activity
-
-id
-user_id
-project_id
-dream_id
-activity_type
-title
-description
-created_at
-
-*/
-
-
-/* =========================================================
-   SECURITY NOTE
-========================================================= */
-
-/*
-
-IMPORTANT:
-
-Supabase Row Level Security should ensure creators
-can only access their own private creator records.
-
-Recommended policy logic:
-
-auth.uid() = creator_id
-
-or, for project membership:
-
-EXISTS (
-  SELECT 1
-  FROM dream_project_members
-  WHERE dream_project_members.project_id = dream_projects.id
-  AND dream_project_members.user_id = auth.uid()
-)
-
-Never expose the Supabase service-role key in this page.
-
-Use only:
-
-SUPABASE_ANON_KEY
-
-with properly configured RLS policies.
-
-*/
-
-
-/* =========================================================
-   LONG-TERM DASHBOARD ROADMAP
-========================================================= */
-
-/*
-
-FUTURE CREATOR DASHBOARD FEATURES
-
-1. REAL AUTHENTICATION
-   - Supabase Auth
-   - Persistent login
-   - Email verification
-   - Password reset
-   - OAuth
-
-2. CREATOR PROFILE
-   - Avatar
-   - Bio
-   - Portfolio
-   - Creator type
-   - Social links
-
-3. MY DREAMS
-   - Drafts
-   - Submitted
-   - Under review
-   - Approved
-   - Community
-   - Private
-   - Archived
-
-4. MY PROJECTS
-   - Active
-   - Paused
-   - Completed
-   - Released
-   - Archived
-
-5. CREATIVE ROOM
-   - Project chat
-   - Notes
-   - Whiteboard
-   - Story development
-   - Character development
-   - Worldbuilding
-   - Script revisions
-
-6. COLLABORATORS
-   - Writers
-   - Directors
-   - Producers
-   - Artists
-   - Editors
-   - Composers
-   - Developers
-
-7. FILES
-   - Scripts
-   - PDFs
-   - Images
-   - Videos
-   - Audio
-   - Production documents
-
-8. AGREEMENTS
-   - Development agreements
-   - Writer agreements
-   - Producer agreements
-   - License agreements
-   - Option agreements
-   - Production agreements
-
-9. CREDITS
-   - Creator
-   - Co-Creator
-   - Story
-   - Writer
-   - Producer
-   - Executive Producer
-   - Consultant
-
-10. EARNINGS
-    - Development payments
-    - Writing payments
-    - Producer payments
-    - Consulting
-    - Licensing
-    - Bonuses
-    - Revenue participation
-
-11. PROJECT TIMELINE
-    - Dream
-    - Discovery
-    - Concept
-    - Development
-    - Writing
-    - Funding
-    - Pre-production
-    - Production
-    - Post
-    - Release
-
-12. LONG-TERM DEVELOPMENT
-    - Pause project
-    - Resume project
-    - Rework concept
-    - Change format
-    - Replace collaborators
-    - Extend development
-    - Archive project
-
-13. CREATOR NOTIFICATIONS
-    - New message
-    - Agreement
-    - Development update
-    - Meeting
-    - Funding milestone
-    - Production milestone
-    - Credit approval
-    - Payment
-
-14. CREATOR ACTIVITY LOG
-
-    Every important project action can be recorded
-    for a permanent development history.
-
-*/
-
+  function frame(t){
+    ctx.clearRect(0,0,w,h);
+    const cx=w*.66,cy=h*.5;
+    const grd=ctx.createRadialGradient(cx,cy,0,cx,cy,Math.max(w,h)*.55);
+    grd.addColorStop(0,"rgba(229,9,20,.12)");grd.addColorStop(.4,"rgba(229,9,20,.025)");grd.addColorStop(1,"rgba(0,0,0,0)");
+    ctx.fillStyle=grd;ctx.fillRect(0,0,w,h);
+    particles.forEach(p=>{
+      p.x+=p.s+(reduce?0:Math.sin(t*.00035+p.y)*.06); p.y-=p.z*.025;
+      if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r*p.z,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,${70+Math.floor(80*p.z)},${80+Math.floor(80*p.z)},${p.a*p.z})`;ctx.fill();
+    });
+    if(!reduce) requestAnimationFrame(frame);
+  }
+  new ResizeObserver(resize).observe(canvas);resize();frame(0);
+})();
+
+boot().catch(err=>{console.error(err);showError("The Dream World dashboard could not finish loading. Please refresh or sign in again.");});
 </script>
-
 </body>
 </html>
