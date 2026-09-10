@@ -1,9 +1,2520 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project Development · CrowRules Dreamscapes</title><meta name="description" content="CrowRules Dreamscapes — bringing ordinary people's dreams and ideas to life."><link rel="stylesheet" href="assets/css/dreamscapes.css"></head><body>
-<div id="stars"></div><div id="nebula"><div class="neb a"></div><div class="neb b"></div><div class="neb c"></div></div>
-<nav class="nav"><div class="container navin"><a class="brand" href="index.html">CROWRULES <span>DREAMSCAPES</span></a><button class="menu">MENU</button><div class="links">
-<a href="index.html">Home</a><a href="submit.html">Submit a Dream</a><a href="how-it-works.html">How It Works</a><a href="projects.html">Projects</a><a href="creators.html">Creators</a><a href="creator-dashboard.html">Creator Hub</a>
-</div></div></nav>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<main class="page"><div class="container"><div class="title reveal"><div class="eyebrow">DEVELOPMENT TRACK</div><h1>Build the World</h1><p>Development turns the original concept into a coherent property that can eventually be pitched or produced.</p></div>
-<div class="timeline"><div class="event reveal"><b>PHASE 01 · CONCEPT</b><h3>The Spark</h3><p>Core idea, hook, tone and creator intent.</p></div><div class="event reveal"><b>PHASE 02 · WORLD</b><h3>The Universe</h3><p>Setting, lore, rules, history and characters.</p></div><div class="event reveal"><b>PHASE 03 · STORY</b><h3>The Narrative</h3><p>Plot, arcs, episodes, treatments and scripts.</p></div><div class="event reveal"><b>PHASE 04 · PACKAGE</b><h3>The Pitch</h3><p>Visual identity, synopsis, creator information and production concept.</p></div><div class="event reveal"><b>PHASE 05 · GREENLIGHT</b><h3>The Decision</h3><p>Internal evaluation for production readiness and business feasibility.</p></div><div class="event reveal"><b>PHASE 06 · PRODUCTION</b><h3>The Dream Becomes Real</h3><p>CrowRules Entertainment moves the project into an appropriate production division.</p></div></div></div></main>
-<footer><div class="container foot"><div>© <span data-year></span> CrowRules Entertainment · CrowRules Dreamscapes</div><div>One Dream. One World. One Story.</div></div></footer><script src="assets/js/dreamscapes.js"></script></body></html>
+<title>Project Development · CrowRules Dreamscapes</title>
+
+<meta name="description"
+content="CrowRules Dreamscapes — develop dreams, build worlds, write stories and move creative projects toward production.">
+
+<link rel="stylesheet" href="assets/css/dreamscapes.css">
+
+<style>
+:root{
+  --dev-bg:#03040a;
+  --dev-panel:rgba(9,11,23,.78);
+  --dev-border:rgba(255,255,255,.10);
+  --dev-purple:#9b7cff;
+  --dev-cyan:#5ee7ff;
+  --dev-green:#66e3a5;
+  --dev-gold:#ffd76a;
+  --dev-red:#ff7890;
+  --dev-muted:#9ca5bd;
+  --dev-text:#f4f6ff;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  min-height:100vh;
+}
+
+.dev-page{
+  padding:110px 0 90px;
+}
+
+.dev-shell{
+  width:min(1220px,calc(100% - 32px));
+  margin:auto;
+}
+
+
+/* HEADER */
+
+.dev-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:30px;
+  margin-bottom:28px;
+}
+
+.dev-kicker{
+  color:var(--dev-cyan);
+  font:700 .7rem Orbitron,Arial,sans-serif;
+  letter-spacing:.2em;
+  margin-bottom:10px;
+}
+
+.dev-header h1{
+  margin:0;
+  font:500 clamp(2rem,5vw,3.7rem)/1 Orbitron,Arial,sans-serif;
+}
+
+.dev-header p{
+  max-width:730px;
+  color:var(--dev-muted);
+  line-height:1.7;
+  margin:15px 0 0;
+}
+
+.dev-actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.dev-btn{
+  border:1px solid var(--dev-border);
+  border-radius:11px;
+  padding:11px 15px;
+  background:rgba(255,255,255,.04);
+  color:white;
+  cursor:pointer;
+  font:600 .76rem Montserrat,Arial,sans-serif;
+  transition:.2s ease;
+}
+
+.dev-btn:hover{
+  transform:translateY(-2px);
+  border-color:rgba(155,124,255,.5);
+  background:rgba(155,124,255,.1);
+}
+
+.dev-btn.primary{
+  border-color:rgba(155,124,255,.45);
+  background:linear-gradient(
+    135deg,
+    rgba(155,124,255,.25),
+    rgba(94,231,255,.1)
+  );
+}
+
+
+/* PROJECT BAR */
+
+.project-bar{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:20px;
+  padding:19px;
+  margin-bottom:20px;
+  border:1px solid var(--dev-border);
+  border-radius:18px;
+  background:var(--dev-panel);
+  backdrop-filter:blur(18px);
+}
+
+.project-label{
+  color:var(--dev-muted);
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.project-title{
+  margin-top:6px;
+  font:500 1.2rem Orbitron,Arial,sans-serif;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.project-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:10px;
+}
+
+.pill{
+  padding:5px 9px;
+  border:1px solid var(--dev-border);
+  border-radius:999px;
+  color:var(--dev-muted);
+  font-size:.63rem;
+  background:rgba(255,255,255,.03);
+}
+
+.project-score{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.score{
+  font:500 1.5rem Orbitron,Arial,sans-serif;
+}
+
+.score-label{
+  color:var(--dev-muted);
+  font-size:.62rem;
+}
+
+.score-ring{
+  width:66px;
+  height:66px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at center,#070914 58%,transparent 59%),
+    conic-gradient(
+      var(--dev-cyan) 0deg,
+      var(--dev-purple) 0deg,
+      rgba(255,255,255,.08) 0deg
+    );
+}
+
+
+/* PHASES */
+
+.workspace{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 320px;
+  gap:20px;
+}
+
+.phase-panel,
+.side-panel{
+  border:1px solid var(--dev-border);
+  border-radius:19px;
+  background:var(--dev-panel);
+  backdrop-filter:blur(18px);
+}
+
+.panel-head{
+  padding:20px;
+  border-bottom:1px solid var(--dev-border);
+}
+
+.panel-head h2{
+  margin:0;
+  font:500 .98rem Orbitron,Arial,sans-serif;
+}
+
+.panel-head p{
+  margin:7px 0 0;
+  color:var(--dev-muted);
+  font-size:.73rem;
+  line-height:1.55;
+}
+
+
+/* TIMELINE */
+
+.phases{
+  position:relative;
+  padding:22px;
+}
+
+.phases:before{
+  content:"";
+  position:absolute;
+  left:50px;
+  top:43px;
+  bottom:43px;
+  width:1px;
+  background:linear-gradient(
+    to bottom,
+    rgba(94,231,255,.5),
+    rgba(155,124,255,.2),
+    rgba(102,227,165,.5)
+  );
+}
+
+.phase{
+  position:relative;
+  display:grid;
+  grid-template-columns:58px minmax(0,1fr);
+  gap:16px;
+  margin-bottom:18px;
+}
+
+.phase:last-child{
+  margin-bottom:0;
+}
+
+.phase-number{
+  position:relative;
+  z-index:2;
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--dev-border);
+  border-radius:50%;
+  background:#080a15;
+  color:#777f97;
+  font:700 .72rem Orbitron,Arial,sans-serif;
+}
+
+.phase.active .phase-number{
+  color:var(--dev-cyan);
+  border-color:rgba(94,231,255,.5);
+  box-shadow:0 0 20px rgba(94,231,255,.15);
+}
+
+.phase.completed .phase-number{
+  color:var(--dev-green);
+  border-color:rgba(102,227,165,.45);
+}
+
+.phase-card{
+  padding:17px;
+  border:1px solid var(--dev-border);
+  border-radius:15px;
+  background:rgba(255,255,255,.025);
+  transition:.2s ease;
+}
+
+.phase-card:hover{
+  border-color:rgba(155,124,255,.3);
+  transform:translateY(-1px);
+}
+
+.phase.active .phase-card{
+  border-color:rgba(94,231,255,.24);
+  background:rgba(94,231,255,.035);
+}
+
+.phase-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.phase-top h3{
+  margin:0;
+  font:500 .93rem Orbitron,Arial,sans-serif;
+}
+
+.phase-description{
+  margin:8px 0 0;
+  color:var(--dev-muted);
+  font-size:.72rem;
+  line-height:1.55;
+}
+
+.phase-status{
+  flex:0 0 auto;
+  padding:5px 8px;
+  border:1px solid var(--dev-border);
+  border-radius:999px;
+  color:#778096;
+  font-size:.58rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.phase.active .phase-status{
+  color:var(--dev-cyan);
+  border-color:rgba(94,231,255,.3);
+}
+
+.phase.completed .phase-status{
+  color:var(--dev-green);
+  border-color:rgba(102,227,165,.3);
+}
+
+.phase-controls{
+  display:flex;
+  gap:7px;
+  margin-top:13px;
+}
+
+.phase-controls button{
+  border:1px solid var(--dev-border);
+  border-radius:8px;
+  padding:7px 10px;
+  background:rgba(255,255,255,.03);
+  color:#b8bfd2;
+  cursor:pointer;
+  font-size:.63rem;
+}
+
+.phase-controls button:hover{
+  color:white;
+  border-color:rgba(155,124,255,.35);
+}
+
+
+/* SIDEBAR */
+
+.side-panel{
+  margin-bottom:20px;
+}
+
+.side-panel:last-child{
+  margin-bottom:0;
+}
+
+.side-body{
+  padding:18px;
+}
+
+.side-body h3{
+  margin:0 0 14px;
+  font:500 .82rem Orbitron,Arial,sans-serif;
+}
+
+
+/* SNAPSHOT */
+
+.snapshot{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.stat{
+  padding:13px;
+  border:1px solid var(--dev-border);
+  border-radius:11px;
+  background:rgba(255,255,255,.025);
+}
+
+.stat strong{
+  display:block;
+  font:500 1.15rem Orbitron,Arial,sans-serif;
+}
+
+.stat span{
+  display:block;
+  margin-top:5px;
+  color:var(--dev-muted);
+  font-size:.6rem;
+}
+
+
+/* NEXT STEP */
+
+.next-step{
+  padding:14px;
+  border:1px solid rgba(94,231,255,.18);
+  border-radius:12px;
+  background:rgba(94,231,255,.035);
+}
+
+.next-label{
+  color:var(--dev-cyan);
+  font-size:.6rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-weight:700;
+}
+
+.next-step h4{
+  margin:7px 0 5px;
+  font:500 .86rem Orbitron,Arial,sans-serif;
+}
+
+.next-step p{
+  margin:0;
+  color:var(--dev-muted);
+  font-size:.7rem;
+  line-height:1.5;
+}
+
+
+/* NOTES */
+
+.note-list{
+  display:grid;
+  gap:8px;
+}
+
+.note{
+  padding:11px;
+  border:1px solid var(--dev-border);
+  border-radius:10px;
+  background:rgba(255,255,255,.025);
+}
+
+.note-type{
+  color:var(--dev-purple);
+  font-size:.58rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+.note-title{
+  margin-top:5px;
+  font-size:.72rem;
+  font-weight:700;
+}
+
+.note-content{
+  margin-top:5px;
+  color:var(--dev-muted);
+  font-size:.65rem;
+  line-height:1.45;
+}
+
+.note-date{
+  margin-top:7px;
+  color:#626a80;
+  font-size:.58rem;
+}
+
+
+/* MILESTONES */
+
+.milestone{
+  display:flex;
+  gap:9px;
+  align-items:flex-start;
+  padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.milestone:last-child{
+  border-bottom:0;
+}
+
+.milestone-check{
+  width:18px;
+  height:18px;
+  border:1px solid var(--dev-border);
+  border-radius:50%;
+  flex:0 0 auto;
+  cursor:pointer;
+}
+
+.milestone.completed .milestone-check{
+  border-color:rgba(102,227,165,.5);
+  background:rgba(102,227,165,.15);
+}
+
+.milestone-info{
+  min-width:0;
+}
+
+.milestone-title{
+  font-size:.68rem;
+  font-weight:700;
+}
+
+.milestone-date{
+  margin-top:3px;
+  color:var(--dev-muted);
+  font-size:.58rem;
+}
+
+
+/* LOADING */
+
+.loading{
+  min-height:400px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:var(--dev-muted);
+}
+
+.spinner{
+  width:30px;
+  height:30px;
+  margin:0 auto 12px;
+  border:2px solid rgba(255,255,255,.1);
+  border-top-color:var(--dev-cyan);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+
+/* EMPTY */
+
+.empty{
+  padding:70px 25px;
+  text-align:center;
+}
+
+.empty-icon{
+  font-size:2.5rem;
+  margin-bottom:14px;
+}
+
+.empty h2{
+  margin:0 0 10px;
+  font:500 1.25rem Orbitron,Arial,sans-serif;
+}
+
+.empty p{
+  max-width:580px;
+  margin:0 auto 22px;
+  color:var(--dev-muted);
+  line-height:1.65;
+}
+
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:100;
+  max-width:360px;
+  padding:12px 15px;
+  border:1px solid var(--dev-border);
+  border-radius:11px;
+  background:rgba(7,9,18,.95);
+  color:white;
+  font-size:.7rem;
+  box-shadow:0 18px 45px rgba(0,0,0,.4);
+  opacity:0;
+  transform:translateY(15px);
+  pointer-events:none;
+  transition:.25s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:none;
+}
+
+.toast.error{
+  border-color:rgba(255,120,144,.35);
+}
+
+.toast.success{
+  border-color:rgba(102,227,165,.35);
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+  .workspace{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:700px){
+
+  .dev-page{
+    padding-top:90px;
+  }
+
+  .dev-header{
+    display:block;
+  }
+
+  .dev-actions{
+    margin-top:18px;
+  }
+
+  .project-bar{
+    grid-template-columns:1fr;
+  }
+
+  .project-score{
+    justify-content:flex-start;
+  }
+
+  .phases{
+    padding:16px;
+  }
+
+  .phases:before{
+    left:44px;
+  }
+
+}
+
+@media(max-width:450px){
+
+  .dev-shell{
+    width:calc(100% - 20px);
+  }
+
+  .phase{
+    grid-template-columns:48px minmax(0,1fr);
+    gap:10px;
+  }
+
+  .phase-number{
+    width:36px;
+    height:36px;
+  }
+
+  .phases:before{
+    left:34px;
+  }
+
+  .phase-top{
+    display:block;
+  }
+
+  .phase-status{
+    display:inline-block;
+    margin-top:8px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+
+<div id="nebula">
+  <div class="neb a"></div>
+  <div class="neb b"></div>
+  <div class="neb c"></div>
+</div>
+
+
+<nav class="nav">
+
+  <div class="container navin">
+
+    <a class="brand" href="index.html">
+      CROWRULES <span>DREAMSCAPES</span>
+    </a>
+
+    <button class="menu" type="button">
+      MENU
+    </button>
+
+    <div class="links">
+
+      <a href="index.html">Home</a>
+
+      <a href="submit.html">
+        Submit a Dream
+      </a>
+
+      <a href="how-it-works.html">
+        How It Works
+      </a>
+
+      <a href="projects.html">
+        Projects
+      </a>
+
+      <a href="creators.html">
+        Creators
+      </a>
+
+      <a href="creator-dashboard.html">
+        Creator Hub
+      </a>
+
+    </div>
+
+  </div>
+
+</nav>
+
+
+<main class="dev-page">
+
+<div class="dev-shell">
+
+
+  <section class="dev-header reveal">
+
+    <div>
+
+      <div class="dev-kicker">
+        DEVELOPMENT TRACK
+      </div>
+
+      <h1>
+        Build the World
+      </h1>
+
+      <p>
+        Development turns the original dream into a coherent
+        creative property — building the world, shaping the story,
+        organizing the collaborators and preparing the project
+        for a possible CrowRules production.
+      </p>
+
+    </div>
+
+
+    <div class="dev-actions">
+
+      <button
+        class="dev-btn"
+        id="backBtn"
+      >
+        ← My Dreams
+      </button>
+
+      <button
+        class="dev-btn primary"
+        id="refreshBtn"
+      >
+        Refresh
+      </button>
+
+      <button
+        class="dev-btn primary"
+        id="pitchBtn"
+      >
+        Pitch Room
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section
+    id="loading"
+    class="phase-panel loading"
+  >
+
+    <div>
+
+      <div class="spinner"></div>
+
+      Loading your development workspace…
+
+    </div>
+
+  </section>
+
+
+  <section
+    id="empty"
+    class="phase-panel empty"
+    hidden
+  >
+
+    <div class="empty-icon">
+      🌌
+    </div>
+
+    <h2>
+      No Project Selected
+    </h2>
+
+    <p>
+      Open a Dreamscapes project from My Dreams or Creator Hub
+      to begin developing its world.
+    </p>
+
+    <a
+      class="dev-btn primary"
+      href="my-dreams.html"
+    >
+      Open My Dreams
+    </a>
+
+  </section>
+
+
+  <div id="app" hidden>
+
+
+    <section class="project-bar">
+
+      <div>
+
+        <div class="project-label">
+          Current Dream
+        </div>
+
+        <div
+          class="project-title"
+          id="projectTitle"
+        >
+          —
+        </div>
+
+        <div class="project-meta">
+
+          <span
+            class="pill"
+            id="projectStatus"
+          >
+            IDEA
+          </span>
+
+          <span
+            class="pill"
+            id="projectVisibility"
+          >
+            PRIVATE
+          </span>
+
+          <span
+            class="pill"
+            id="projectProgress"
+          >
+            0% DEVELOPED
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="project-score">
+
+        <div>
+
+          <div class="score-label">
+            DEVELOPMENT
+          </div>
+
+          <div
+            class="score"
+            id="developmentScore"
+          >
+            0%
+          </div>
+
+        </div>
+
+        <div
+          class="score-ring"
+          id="scoreRing"
+        >
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <div class="workspace">
+
+
+      <!-- DEVELOPMENT TRACK -->
+
+      <section class="phase-panel">
+
+        <div class="panel-head">
+
+          <h2>
+            The Development Journey
+          </h2>
+
+          <p>
+            Move the project from the original spark toward
+            a production-ready concept one phase at a time.
+          </p>
+
+        </div>
+
+
+        <div
+          class="phases"
+          id="phases"
+        >
+        </div>
+
+      </section>
+
+
+      <!-- SIDEBAR -->
+
+      <aside>
+
+
+        <section class="side-panel">
+
+          <div class="side-body">
+
+            <h3>
+              Project Snapshot
+            </h3>
+
+            <div class="snapshot">
+
+              <div class="stat">
+                <strong id="collaborators">
+                  0
+                </strong>
+                <span>
+                  Collaborators
+                </span>
+              </div>
+
+              <div class="stat">
+                <strong id="documents">
+                  0
+                </strong>
+                <span>
+                  Documents
+                </span>
+              </div>
+
+              <div class="stat">
+                <strong id="characters">
+                  0
+                </strong>
+                <span>
+                  Characters
+                </span>
+              </div>
+
+              <div class="stat">
+                <strong id="worldEntries">
+                  0
+                </strong>
+                <span>
+                  World Entries
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <section class="side-panel">
+
+          <div class="side-body">
+
+            <h3>
+              Next Step
+            </h3>
+
+            <div class="next-step">
+
+              <div class="next-label">
+                Recommended
+              </div>
+
+              <h4 id="nextTitle">
+                Begin with the Concept
+              </h4>
+
+              <p id="nextDescription">
+                Define the spark, hook and creative intent
+                behind the dream.
+              </p>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <section class="side-panel">
+
+          <div class="side-body">
+
+            <h3>
+              Milestones
+            </h3>
+
+            <div
+              class="note-list"
+              id="milestones"
+            >
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <section class="side-panel">
+
+          <div class="side-body">
+
+            <h3>
+              Recent Development Notes
+            </h3>
+
+            <div
+              class="note-list"
+              id="notes"
+            >
+            </div>
+
+          </div>
+
+        </section>
+
+
+      </aside>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+</main>
+
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
+<footer>
+
+  <div class="container foot">
+
+    <div>
+      © <span data-year></span>
+      CrowRules Entertainment · CrowRules Dreamscapes
+    </div>
+
+    <div>
+      One Dream. One World. One Story.
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="assets/js/dreamscapes.js"></script>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://cevylpnoexugwgygvtgu.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
+
+const supabase =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+let currentUser = null;
+let currentProject = null;
+let phases = [];
+let realtimeChannels = [];
+
+
+/* ---------------------------------------------------------
+   DOM
+--------------------------------------------------------- */
+
+const $ =
+  id => document.getElementById(id);
+
+
+/* ---------------------------------------------------------
+   INIT
+--------------------------------------------------------- */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  init
+);
+
+
+async function init(){
+
+  $("backBtn").onclick =
+    () => location.href = "my-dreams.html";
+
+
+  $("refreshBtn").onclick =
+    () => loadWorkspace();
+
+
+  $("pitchBtn").onclick =
+    () => {
+
+      if(!currentProject)
+        return;
+
+      location.href =
+        "pitch-room.html?id=" +
+        encodeURIComponent(
+          currentProject.id
+        );
+
+    };
+
+
+  try{
+
+    const {
+      data:{
+        user
+      },
+      error
+    } =
+      await supabase.auth.getUser();
+
+
+    if(error)
+      throw error;
+
+
+    if(!user){
+
+      showError(
+        "Please sign in to access Project Development."
+      );
+
+      return;
+
+    }
+
+
+    currentUser = user;
+
+    await loadWorkspace();
+
+  }catch(error){
+
+    console.error(error);
+
+    showError(
+      error.message ||
+      "Unable to verify your Dreamscapes account."
+    );
+
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   PROJECT ID
+--------------------------------------------------------- */
+
+function getProjectId(){
+
+  return new URLSearchParams(
+    location.search
+  ).get("id");
+
+}
+
+
+/* ---------------------------------------------------------
+   LOAD WORKSPACE
+--------------------------------------------------------- */
+
+async function loadWorkspace(){
+
+  if(!currentUser)
+    return;
+
+
+  $("loading").hidden = false;
+  $("empty").hidden = true;
+  $("app").hidden = true;
+
+
+  const projectId =
+    getProjectId();
+
+
+  if(!projectId){
+
+    $("loading").hidden = true;
+    $("empty").hidden = false;
+
+    return;
+
+  }
+
+
+  try{
+
+    const {
+      data:project,
+      error
+    } =
+      await supabase
+        .from("ds_projects")
+        .select(`
+          id,
+          owner_id,
+          title,
+          slug,
+          logline,
+          description,
+          status,
+          visibility,
+          progress,
+          created_at,
+          updated_at
+        `)
+        .eq("id",projectId)
+        .single();
+
+
+    if(error)
+      throw error;
+
+
+    if(
+      project.owner_id !==
+      currentUser.id
+    ){
+
+      /*
+        RLS should also protect the row.
+        This additional ownership check keeps
+        this creator workspace intentionally
+        owner-focused.
+      */
+
+      throw new Error(
+        "This project is not owned by your account."
+      );
+
+    }
+
+
+    currentProject =
+      project;
+
+
+    await Promise.all([
+      loadPhases(projectId),
+      loadNotes(projectId),
+      loadMilestones(projectId),
+      loadStats(projectId)
+    ]);
+
+
+    renderProject();
+
+
+    $("loading").hidden = true;
+    $("app").hidden = false;
+
+
+    subscribeRealtime(projectId);
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showError(
+      error.message ||
+      "Unable to load this project."
+    );
+
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   PHASES
+--------------------------------------------------------- */
+
+const defaultPhases = [
+
+  {
+    phase_number:1,
+    phase_key:"concept",
+    title:"The Spark",
+    description:
+      "Core idea, hook, tone and creator intent."
+  },
+
+  {
+    phase_number:2,
+    phase_key:"world",
+    title:"The Universe",
+    description:
+      "Setting, lore, rules, history and characters."
+  },
+
+  {
+    phase_number:3,
+    phase_key:"story",
+    title:"The Narrative",
+    description:
+      "Plot, arcs, episodes, treatments and scripts."
+  },
+
+  {
+    phase_number:4,
+    phase_key:"package",
+    title:"The Pitch",
+    description:
+      "Visual identity, synopsis, creator information and production concept."
+  },
+
+  {
+    phase_number:5,
+    phase_key:"greenlight",
+    title:"The Decision",
+    description:
+      "Internal evaluation for production readiness and business feasibility."
+  },
+
+  {
+    phase_number:6,
+    phase_key:"production",
+    title:"The Dream Becomes Real",
+    description:
+      "CrowRules Entertainment moves the project into an appropriate production division."
+  }
+
+];
+
+
+async function loadPhases(projectId){
+
+  const {
+    data,
+    error
+  } =
+    await supabase
+      .from("ds_development_phases")
+      .select("*")
+      .eq("project_id",projectId)
+      .order("phase_number");
+
+
+  if(error)
+    throw error;
+
+
+  phases =
+    data?.length
+      ? data
+      : [];
+
+
+  /*
+    Normally the migration seeds these.
+    This fallback allows an older project
+    to initialize its own phases.
+  */
+
+  if(!phases.length){
+
+    const rows =
+      defaultPhases.map(
+        phase => ({
+          project_id:projectId,
+          ...phase
+        })
+      );
+
+
+    const {
+      data:created,
+      error:createError
+    } =
+      await supabase
+        .from("ds_development_phases")
+        .insert(rows)
+        .select();
+
+
+    if(createError)
+      throw createError;
+
+
+    phases =
+      created || [];
+
+  }
+
+
+  renderPhases();
+
+}
+
+
+/* ---------------------------------------------------------
+   RENDER PHASES
+--------------------------------------------------------- */
+
+function renderPhases(){
+
+  const container =
+    $("phases");
+
+
+  container.innerHTML =
+    phases.map(
+      phase => {
+
+        const active =
+          phase.status ===
+          "in_progress";
+
+
+        const completed =
+          phase.status ===
+          "completed";
+
+
+        return `
+
+          <article
+            class="phase
+              ${active ? "active" : ""}
+              ${completed ? "completed" : ""}"
+            data-phase="${phase.id}"
+          >
+
+            <div class="phase-number">
+              ${phase.phase_number}
+            </div>
+
+            <div class="phase-card">
+
+              <div class="phase-top">
+
+                <div>
+
+                  <h3>
+                    ${escapeHtml(
+                      phase.title
+                    )}
+                  </h3>
+
+                  <p class="phase-description">
+                    ${escapeHtml(
+                      phase.description
+                    )}
+                  </p>
+
+                </div>
+
+                <div class="phase-status">
+                  ${formatStatus(
+                    phase.status
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="phase-controls">
+
+                ${
+                  phase.status !==
+                  "completed"
+
+                    ? `
+                      <button
+                        onclick="setPhaseStatus(
+                          '${phase.id}',
+                          'in_progress'
+                        )"
+                      >
+                        Work On This
+                      </button>
+
+                      <button
+                        onclick="setPhaseStatus(
+                          '${phase.id}',
+                          'completed'
+                        )"
+                      >
+                        Complete
+                      </button>
+                    `
+
+                    : `
+                      <button
+                        onclick="setPhaseStatus(
+                          '${phase.id}',
+                          'in_progress'
+                        )"
+                      >
+                        Reopen
+                      </button>
+                    `
+                }
+
+              </div>
+
+            </div>
+
+          </article>
+
+        `;
+
+      }
+    ).join("");
+
+
+  updateNextStep();
+
+}
+
+
+/* ---------------------------------------------------------
+   SET PHASE
+--------------------------------------------------------- */
+
+async function setPhaseStatus(
+  phaseId,
+  status
+){
+
+  const phase =
+    phases.find(
+      p => p.id === phaseId
+    );
+
+
+  if(!phase)
+    return;
+
+
+  const update = {
+
+    status,
+
+    completed_at:
+      status === "completed"
+        ? new Date().toISOString()
+        : null
+
+  };
+
+
+  const {
+    data,
+    error
+  } =
+    await supabase
+      .from("ds_development_phases")
+      .update(update)
+      .eq("id",phaseId)
+      .select()
+      .single();
+
+
+  if(error){
+
+    showToast(
+      error.message,
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const index =
+    phases.findIndex(
+      p => p.id === phaseId
+    );
+
+
+  phases[index] =
+    data;
+
+
+  /*
+    Keep the next phase visible
+    when a creator completes one.
+  */
+
+  if(status === "completed"){
+
+    const next =
+      phases.find(
+        p =>
+          p.phase_number ===
+          phase.phase_number + 1
+      );
+
+
+    if(
+      next &&
+      next.status === "not_started"
+    ){
+
+      await supabase
+        .from("ds_development_phases")
+        .update({
+          status:"in_progress"
+        })
+        .eq("id",next.id);
+
+    }
+
+  }
+
+
+  calculateDevelopmentProgress();
+
+
+  renderPhases();
+
+
+  await syncProjectProgress();
+
+
+  showToast(
+    status === "completed"
+      ? "Development phase completed."
+      : "Development phase updated.",
+    "success"
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   PROGRESS
+--------------------------------------------------------- */
+
+function calculateDevelopmentProgress(){
+
+  if(!phases.length)
+    return 0;
+
+
+  const completed =
+    phases.filter(
+      p =>
+        p.status ===
+        "completed"
+    ).length;
+
+
+  const inProgress =
+    phases.filter(
+      p =>
+        p.status ===
+        "in_progress"
+    ).length;
+
+
+  return Math.round(
+    (
+      completed +
+      inProgress * .5
+    ) /
+    phases.length *
+    100
+  );
+
+}
+
+
+async function syncProjectProgress(){
+
+  const progress =
+    calculateDevelopmentProgress();
+
+
+  const {
+    error
+  } =
+    await supabase
+      .from("ds_projects")
+      .update({
+        progress,
+        updated_at:
+          new Date().toISOString()
+      })
+      .eq("id",currentProject.id)
+      .eq("owner_id",currentUser.id);
+
+
+  if(error){
+
+    console.error(
+      "Progress sync:",
+      error
+    );
+
+    return;
+
+  }
+
+
+  currentProject.progress =
+    progress;
+
+
+  renderProject();
+
+}
+
+
+/* ---------------------------------------------------------
+   NOTES
+--------------------------------------------------------- */
+
+async function loadNotes(projectId){
+
+  const {
+    data,
+    error
+  } =
+    await supabase
+      .from("ds_development_notes")
+      .select(`
+        id,
+        project_id,
+        phase_id,
+        author_id,
+        note_type,
+        title,
+        content,
+        created_at,
+        updated_at
+      `)
+      .eq("project_id",projectId)
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(6);
+
+
+  if(error)
+    throw error;
+
+
+  renderNotes(
+    data || []
+  );
+
+}
+
+
+function renderNotes(notes){
+
+  const container =
+    $("notes");
+
+
+  if(!notes.length){
+
+    container.innerHTML = `
+      <div class="note">
+        <div class="note-content">
+          No development notes yet.
+        </div>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    notes.map(
+      note => `
+
+        <div class="note">
+
+          <div class="note-type">
+            ${escapeHtml(
+              note.note_type
+            )}
+          </div>
+
+          <div class="note-title">
+            ${escapeHtml(
+              note.title
+            )}
+          </div>
+
+          <div class="note-content">
+            ${escapeHtml(
+              note.content ||
+              ""
+            )}
+          </div>
+
+          <div class="note-date">
+            ${formatDate(
+              note.created_at
+            )}
+          </div>
+
+        </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* ---------------------------------------------------------
+   MILESTONES
+--------------------------------------------------------- */
+
+async function loadMilestones(projectId){
+
+  const {
+    data,
+    error
+  } =
+    await supabase
+      .from("ds_development_milestones")
+      .select(`
+        id,
+        project_id,
+        phase_id,
+        title,
+        description,
+        status,
+        due_at,
+        completed_at,
+        created_at
+      `)
+      .eq("project_id",projectId)
+      .order(
+        "due_at",
+        {
+          ascending:true,
+          nullsFirst:false
+        }
+      )
+      .limit(8);
+
+
+  if(error)
+    throw error;
+
+
+  renderMilestones(
+    data || []
+  );
+
+}
+
+
+function renderMilestones(items){
+
+  const container =
+    $("milestones");
+
+
+  if(!items.length){
+
+    container.innerHTML = `
+      <div class="note">
+        <div class="note-content">
+          No milestones yet.
+        </div>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    items.map(
+      item => {
+
+        const complete =
+          item.status ===
+          "completed";
+
+
+        return `
+
+          <div
+            class="milestone
+              ${complete ? "completed" : ""}"
+          >
+
+            <div
+              class="milestone-check"
+              title="Toggle milestone"
+              onclick="toggleMilestone(
+                '${item.id}',
+                '${item.status}'
+              )"
+            ></div>
+
+            <div class="milestone-info">
+
+              <div class="milestone-title">
+                ${escapeHtml(
+                  item.title
+                )}
+              </div>
+
+              <div class="milestone-date">
+                ${
+                  item.due_at
+                    ? "Due " +
+                      formatDate(
+                        item.due_at
+                      )
+                    : "No due date"
+                }
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* ---------------------------------------------------------
+   MILESTONE TOGGLE
+--------------------------------------------------------- */
+
+async function toggleMilestone(
+  id,
+  status
+){
+
+  const completed =
+    status ===
+    "completed";
+
+
+  const {
+    error
+  } =
+    await supabase
+      .from("ds_development_milestones")
+      .update({
+
+        status:
+          completed
+            ? "planned"
+            : "completed",
+
+        completed_at:
+          completed
+            ? null
+            : new Date().toISOString()
+
+      })
+      .eq("id",id);
+
+
+  if(error){
+
+    showToast(
+      error.message,
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  await loadMilestones(
+    currentProject.id
+  );
+
+
+  showToast(
+    completed
+      ? "Milestone reopened."
+      : "Milestone completed.",
+    "success"
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   STATS
+--------------------------------------------------------- */
+
+async function loadStats(projectId){
+
+  const [
+    collaborators,
+    documents,
+    characters,
+    world
+  ] =
+  await Promise.all([
+
+    supabase
+      .from("ds_collaborators")
+      .select(
+        "id",
+        {
+          count:"exact",
+          head:true
+        }
+      )
+      .eq("project_id",projectId)
+      .eq("status","active"),
+
+
+    supabase
+      .from("ds_documents")
+      .select(
+        "id",
+        {
+          count:"exact",
+          head:true
+        }
+      )
+      .eq("project_id",projectId),
+
+
+    supabase
+      .from("ds_characters")
+      .select(
+        "id",
+        {
+          count:"exact",
+          head:true
+        }
+      )
+      .eq("project_id",projectId),
+
+
+    supabase
+      .from("ds_world_entries")
+      .select(
+        "id",
+        {
+          count:"exact",
+          head:true
+        }
+      )
+      .eq("project_id",projectId)
+
+  ]);
+
+
+  $("collaborators").textContent =
+    collaborators.count ?? 0;
+
+
+  $("documents").textContent =
+    documents.count ?? 0;
+
+
+  $("characters").textContent =
+    characters.count ?? 0;
+
+
+  $("worldEntries").textContent =
+    world.count ?? 0;
+
+}
+
+
+/* ---------------------------------------------------------
+   PROJECT RENDER
+--------------------------------------------------------- */
+
+function renderProject(){
+
+  $("projectTitle").textContent =
+    currentProject.title;
+
+
+  $("projectStatus").textContent =
+    formatStatus(
+      currentProject.status
+    );
+
+
+  $("projectVisibility").textContent =
+    formatStatus(
+      currentProject.visibility
+    );
+
+
+  $("projectProgress").textContent =
+    (currentProject.progress || 0) +
+    "% DEVELOPED";
+
+
+  $("developmentScore").textContent =
+    (currentProject.progress || 0) +
+    "%";
+
+
+  const percent =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        currentProject.progress || 0
+      )
+    );
+
+
+  $("scoreRing").style.background =
+    `
+    radial-gradient(
+      circle at center,
+      #070914 58%,
+      transparent 59%
+    ),
+    conic-gradient(
+      var(--dev-cyan) ${percent * 3.6}deg,
+      rgba(255,255,255,.08)
+      ${percent * 3.6}deg
+    )
+    `;
+
+}
+
+
+/* ---------------------------------------------------------
+   NEXT STEP
+--------------------------------------------------------- */
+
+function updateNextStep(){
+
+  const next =
+    phases.find(
+      p =>
+        p.status !==
+        "completed"
+    );
+
+
+  if(!next){
+
+    $("nextTitle").textContent =
+      "Ready for Production Review";
+
+
+    $("nextDescription").textContent =
+      "All development phases are complete. Open the Pitch Room to prepare the project for review.";
+
+    return;
+
+  }
+
+
+  $("nextTitle").textContent =
+    next.title;
+
+
+  $("nextDescription").textContent =
+    next.description;
+
+}
+
+
+/* ---------------------------------------------------------
+   REALTIME
+--------------------------------------------------------- */
+
+function subscribeRealtime(
+  projectId
+){
+
+  cleanupRealtime();
+
+
+  const phasesChannel =
+    supabase
+      .channel(
+        "development-phases-" +
+        projectId
+      )
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"ds_development_phases",
+          filter:
+            "project_id=eq." +
+            projectId
+        },
+        async () => {
+
+          await loadPhases(
+            projectId
+          );
+
+        }
+      )
+      .subscribe(
+        (status,error) => {
+
+          if(
+            status ===
+              "CHANNEL_ERROR" ||
+            status ===
+              "TIMED_OUT"
+          ){
+
+            console.error(
+              "Phase realtime:",
+              error
+            );
+
+          }
+
+        }
+      );
+
+
+  const notesChannel =
+    supabase
+      .channel(
+        "development-notes-" +
+        projectId
+      )
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"ds_development_notes",
+          filter:
+            "project_id=eq." +
+            projectId
+        },
+        async () => {
+
+          await loadNotes(
+            projectId
+          );
+
+        }
+      )
+      .subscribe();
+
+
+  const milestonesChannel =
+    supabase
+      .channel(
+        "development-milestones-" +
+        projectId
+      )
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"ds_development_milestones",
+          filter:
+            "project_id=eq." +
+            projectId
+        },
+        async () => {
+
+          await loadMilestones(
+            projectId
+          );
+
+        }
+      )
+      .subscribe();
+
+
+  realtimeChannels = [
+
+    phasesChannel,
+    notesChannel,
+    milestonesChannel
+
+  ];
+
+}
+
+
+/* ---------------------------------------------------------
+   CLEANUP
+--------------------------------------------------------- */
+
+function cleanupRealtime(){
+
+  realtimeChannels.forEach(
+    channel =>
+      supabase.removeChannel(
+        channel
+      )
+  );
+
+
+  realtimeChannels = [];
+
+}
+
+
+window.addEventListener(
+  "beforeunload",
+  cleanupRealtime
+);
+
+
+/* ---------------------------------------------------------
+   HELPERS
+--------------------------------------------------------- */
+
+function formatStatus(value){
+
+  return String(
+    value || ""
+  )
+    .replaceAll("_"," ")
+    .replace(/\b\w/g,c =>
+      c.toUpperCase()
+    );
+
+}
+
+
+function formatDate(value){
+
+  if(!value)
+    return "—";
+
+
+  return new Intl.DateTimeFormat(
+    undefined,
+    {
+      month:"short",
+      day:"numeric",
+      year:"numeric"
+    }
+  ).format(
+    new Date(value)
+  );
+
+}
+
+
+function escapeHtml(value){
+
+  return String(
+    value ?? ""
+  )
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+function showToast(
+  message,
+  type=""
+){
+
+  const toast =
+    $("toast");
+
+
+  toast.textContent =
+    message;
+
+
+  toast.className =
+    "toast show " +
+    type;
+
+
+  clearTimeout(
+    showToast.timer
+  );
+
+
+  showToast.timer =
+    setTimeout(
+      () => {
+        toast.className =
+          "toast";
+      },
+      3500
+    );
+
+}
+
+
+function showError(
+  message
+){
+
+  $("loading").hidden =
+    true;
+
+
+  $("empty").hidden =
+    false;
+
+
+  $("empty").innerHTML = `
+
+    <div class="empty-icon">
+      ⚠️
+    </div>
+
+    <h2>
+      Development Workspace Unavailable
+    </h2>
+
+    <p>
+      ${escapeHtml(message)}
+    </p>
+
+    <a
+      class="dev-btn primary"
+      href="my-dreams.html"
+    >
+      Return to My Dreams
+    </a>
+
+  `;
+
+}
+
+</script>
+
+</body>
+</html>
