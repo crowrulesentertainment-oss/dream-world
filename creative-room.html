@@ -4,4193 +4,680 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#030303">
-<meta name="description" content="CrowRules Dream World Creative Room — cinematic project development workspace.">
+<meta name="description" content="CrowRules Dream World Creative Room — build stories, develop projects, collaborate with creators, and bring dreams to life.">
 <title>CrowRules Dream World — Creative Room</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root{
-  --bg:#030303;
-  --panel:rgba(12,12,14,.88);
-  --panel2:rgba(20,20,23,.78);
-  --line:rgba(255,255,255,.09);
-  --line2:rgba(255,255,255,.05);
-  --text:#f5f5f5;
-  --muted:#96969d;
-  --red:#e21b2d;
-  --red2:#ff4b58;
-  --green:#43e09b;
-  --gold:#e7c56a;
-  --shadow:0 24px 80px rgba(0,0,0,.5);
-  --radius:18px;
+  --bg:#030303;--panel:rgba(12,12,15,.86);--panel2:rgba(20,20,24,.72);
+  --line:rgba(255,255,255,.10);--line2:rgba(255,55,55,.30);
+  --text:#f5f5f5;--muted:#a7a7ad;--dim:#6f6f76;--red:#e11;
+  --red2:#ff3b3b;--green:#50d890;--amber:#f3bd52;
+  --shadow:0 25px 80px rgba(0,0,0,.55);--radius:20px;
 }
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  min-height:100vh;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 50% -15%,#2b1015 0%,#0b0809 25%,#050505 55%,#030303 100%);
-  font-family:Montserrat,Arial,sans-serif;
-}
-
-body::selection{
-  background:var(--red);
-  color:#fff;
-}
-
-button,
-input,
-textarea,
-select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-.hidden{
-  display:none!important;
-}
-
-.container{
-  width:min(1440px,calc(100% - 32px));
-  margin:auto;
-}
-
-/* NAVIGATION */
-
-header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(3,3,3,.72);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--line);
-}
-
-.nav{
-  height:72px;
-  display:flex;
-  align-items:center;
-  gap:24px;
-}
-
-.logo{
-  font-family:Orbitron,sans-serif;
-  font-size:17px;
-  font-weight:900;
-  letter-spacing:1.5px;
-  white-space:nowrap;
-}
-
-.logo span{
-  color:var(--red);
-}
-
-.navlinks{
-  display:flex;
-  gap:5px;
-  margin-left:auto;
-}
-
-.navlinks a{
-  padding:10px 12px;
-  border-radius:10px;
-  color:#999;
-  font-size:12px;
-  font-weight:800;
-}
-
-.navlinks a:hover,
-.navlinks a.active{
-  background:#111113;
-  color:#fff;
-}
-
-.menu{
-  display:none;
-  margin-left:auto;
-  padding:9px 11px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  color:#fff;
-  background:#0d0d0f;
-}
-
-/* CINEMATIC HERO */
-
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Montserrat,Arial,sans-serif;overflow-x:hidden}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.hidden{display:none!important}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;background:linear-gradient(transparent 96%,rgba(255,255,255,.025) 100%);background-size:100% 4px;opacity:.10}
+#cinematicCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.85}
 .hero{
-  position:relative;
-  min-height:530px;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
-  border-bottom:1px solid var(--line);
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:-30%;
+  position:relative;min-height:590px;overflow:hidden;border-bottom:1px solid var(--line);
   background:
-    radial-gradient(circle at 50% 50%,rgba(226,27,45,.17),transparent 23%),
-    radial-gradient(circle at 15% 35%,rgba(255,255,255,.06),transparent 18%),
-    radial-gradient(circle at 85% 65%,rgba(226,27,45,.08),transparent 22%);
-  animation:heroDrift 18s ease-in-out infinite alternate;
-}
-
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,transparent 50%,#030303 100%);
-  pointer-events:none;
-}
-
-.grid{
-  position:absolute;
-  inset:0;
-  opacity:.17;
-  background-image:
-    linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
-  background-size:70px 70px;
-  transform:
-    perspective(500px)
-    rotateX(58deg)
-    scale(1.5)
-    translateY(125px);
-  transform-origin:center bottom;
-}
-
-.orbit{
-  position:absolute;
-  left:50%;
-  top:52%;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:50%;
-  transform:translate(-50%,-50%) rotateX(68deg);
-  animation:orbitSpin 30s linear infinite;
-}
-
-.o1{
-  width:520px;
-  height:520px;
-}
-
-.o2{
-  width:760px;
-  height:350px;
-  animation-duration:40s;
-  animation-direction:reverse;
-}
-
-.o3{
-  width:1000px;
-  height:460px;
-  animation-duration:55s;
-}
-
-.particle{
-  position:absolute;
-  width:3px;
-  height:3px;
-  border-radius:50%;
-  background:#fff;
-  opacity:.45;
-  animation:particleFloat 7s ease-in-out infinite;
-}
-
-.hero-inner{
-  position:relative;
-  z-index:3;
-  width:100%;
-  padding:100px 0 80px;
-  max-width:950px;
-}
-
-.eyebrow{
-  margin-bottom:18px;
-  color:var(--red2);
-  font-family:Orbitron,sans-serif;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:3px;
-  text-transform:uppercase;
-}
-
-.hero h1{
-  margin:0 0 20px;
-  font-family:Orbitron,sans-serif;
-  font-size:clamp(40px,7vw,82px);
-  line-height:1;
-  letter-spacing:-3px;
-  text-transform:uppercase;
-}
-
-.hero h1 em{
-  color:transparent;
-  font-style:normal;
-  -webkit-text-stroke:1px rgba(255,255,255,.65);
-}
-
-.hero p{
-  max-width:760px;
-  margin:0;
-  color:#b5b5bb;
-  font-size:17px;
-  line-height:1.8;
-}
-
-.hero-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:28px;
-}
-
-/* BUTTONS */
-
-.btn{
-  padding:11px 15px;
-  border:1px solid var(--line);
-  border-radius:11px;
-  background:#111113;
-  color:#fff;
-  font-size:11px;
-  font-weight:900;
-  transition:.2s ease;
-}
-
-.btn:hover{
-  border-color:#333;
-  transform:translateY(-1px);
-}
-
-.btn.primary{
-  background:var(--red);
-  border-color:var(--red);
-}
-
-.btn.primary:hover{
-  background:#ff2639;
-}
-
-.btn.ghost{
-  background:transparent;
-}
-
-.btn.danger{
-  color:#ff7c84;
-}
-
-.btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-  transform:none;
-}
-
-/* MAIN */
-
-main{
-  padding:30px 0 80px;
-}
-
-.project-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:20px;
-  margin-bottom:20px;
-}
-
-.project-title{
-  margin:0 0 9px;
-  font-family:Orbitron,sans-serif;
-  font-size:clamp(24px,3vw,38px);
-}
-
-.meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
-
-.pill{
-  padding:6px 9px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:#101012;
-  color:#aaa;
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.pill.red{
-  border-color:rgba(226,27,45,.45);
-  color:#ff6d78;
-}
-
-.pill.green{
-  border-color:rgba(67,224,155,.35);
-  color:#75e9b6;
-}
-
-/* WORKSPACE */
-
-.workspace{
-  display:grid;
-  grid-template-columns:190px minmax(0,1fr) 310px;
-  gap:14px;
-}
-
-.panel{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-}
-
-/* TOOLS */
-
-.tools{
-  position:sticky;
-  top:92px;
-  height:max-content;
-  padding:10px;
-}
-
-.tool{
-  width:100%;
-  margin-bottom:3px;
-  padding:12px;
-  border:0;
-  border-radius:11px;
-  background:transparent;
-  color:#999;
-  text-align:left;
-  font-size:11px;
-  font-weight:800;
-}
-
-.tool:hover{
-  background:#151517;
-  color:#fff;
-}
-
-.tool.active{
-  background:#171719;
-  color:#fff;
-  box-shadow:inset 3px 0 0 var(--red);
-}
-
-/* EDITOR */
-
-.editor{
-  min-height:660px;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-}
-
-.editor-top{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:16px;
-  border-bottom:1px solid var(--line);
-}
-
-.editor-top strong{
-  font-family:Orbitron,sans-serif;
-  font-size:11px;
-  letter-spacing:.8px;
-}
-
-.status{
-  margin-left:auto;
-  color:var(--muted);
-  font-size:10px;
-}
-
-.editor-body{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  padding:16px;
-}
-
-.title-input,
-.body-input,
-.search,
-.field input,
-.field textarea,
-.field select{
-  width:100%;
-  border:1px solid var(--line);
-  outline:none;
-  background:#080809;
-  color:#fff;
-  border-radius:12px;
-}
-
-.title-input{
-  padding:13px 14px;
-}
-
-.body-input{
-  flex:1;
-  min-height:430px;
-  resize:vertical;
-  padding:18px;
-  line-height:1.8;
-}
-
-.title-input:focus,
-.body-input:focus,
-.search:focus,
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
-  border-color:rgba(226,27,45,.7);
-}
-
-.editor-bottom{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  padding:14px 16px;
-  border-top:1px solid var(--line);
-}
-
-/* SIDE PANELS */
-
-.side{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-
-.side-panel{
-  padding:16px;
-}
-
-.side-title{
-  margin-bottom:13px;
-  font-family:Orbitron,sans-serif;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:14px;
-}
-
-.mini-btn{
-  padding:6px 8px;
-  border:1px solid var(--line);
-  border-radius:8px;
-  background:#101012;
-  color:#ddd;
-  font-size:9px;
-  font-weight:900;
-}
-
-.progress{
-  height:7px;
-  overflow:hidden;
-  border-radius:999px;
-  background:#19191b;
-}
-
-.progress i{
-  display:block;
-  width:0;
-  height:100%;
-  background:linear-gradient(90deg,var(--red),#ff7b83);
-  transition:width .5s ease;
-}
-
-.person{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:9px 0;
-  border-bottom:1px solid var(--line2);
-}
-
-.avatar{
-  width:36px;
-  height:36px;
-  flex:0 0 auto;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  border:1px solid var(--line);
-  border-radius:50%;
-  background:#19191b;
-  font-size:10px;
-  font-weight:900;
-}
-
-.avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.person-info{
-  min-width:0;
-}
-
-.person-info strong{
-  display:block;
-  font-size:11px;
-}
-
-.person-info span{
-  display:block;
-  margin-top:3px;
-  overflow:hidden;
-  color:#777;
-  font-size:9px;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.empty{
-  padding:8px 0;
-  color:#777;
-  font-size:11px;
-  line-height:1.6;
-}
-
-.stage{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:9px 0;
-  border-bottom:1px solid var(--line2);
-  font-size:10px;
-}
-
-.stage small{
-  color:#777;
-}
-
-.file{
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  padding:8px 0;
-  border-bottom:1px solid var(--line2);
-  font-size:10px;
-}
-
-.file b{
-  overflow:hidden;
-  font-weight:700;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.file span{
-  color:#777;
-  white-space:nowrap;
-}
-
-/* NOTES */
-
-.notes{
-  margin-top:16px;
-  padding:20px;
-}
-
-.notes h2{
-  margin:0;
-  font-family:Orbitron,sans-serif;
-  font-size:17px;
-}
-
-.note-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-.note{
-  padding:15px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:#0a0a0b;
-}
-
-.note .type{
-  color:var(--red2);
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.note h3{
-  margin:8px 0;
-  font-size:13px;
-}
-
-.note p{
-  margin:0;
-  color:#999;
-  font-size:11px;
-  line-height:1.65;
-}
-
-.note time{
-  display:block;
-  margin-top:10px;
-  color:#666;
-  font-size:9px;
-}
-
-/* BANNER */
-
-.banner{
-  margin-bottom:15px;
-  padding:13px 15px;
-  border:1px solid rgba(226,27,45,.3);
-  border-radius:12px;
-  background:rgba(226,27,45,.07);
-  color:#d8a5aa;
-  font-size:11px;
-  line-height:1.6;
-}
-
-.banner strong{
-  color:#fff;
-}
-
-.banner code{
-  color:#fff;
-}
-
-/* MODAL */
-
-.modal-backdrop{
-  position:fixed;
-  inset:0;
-  z-index:200;
-  display:grid;
-  place-items:center;
-  padding:18px;
-  background:rgba(0,0,0,.78);
-  backdrop-filter:blur(10px);
-}
-
-.modal{
-  width:min(620px,100%);
-  max-height:90vh;
-  overflow:auto;
-  padding:20px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:#0c0c0e;
-  box-shadow:var(--shadow);
-}
-
-.modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.modal h2{
-  margin:0;
-  font-family:Orbitron,sans-serif;
-  font-size:17px;
-}
-
-.close{
-  padding:7px 10px;
-  border:1px solid var(--line);
-  border-radius:9px;
-  background:#151517;
-  color:#aaa;
-}
-
-.field{
-  margin-bottom:13px;
-}
-
-.field label{
-  display:block;
-  margin-bottom:7px;
-  color:#aaa;
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.field input,
-.field textarea,
-.field select{
-  padding:11px 12px;
-}
-
-.field textarea{
-  min-height:100px;
-  resize:vertical;
-}
-
-.creator-results{
-  max-height:270px;
-  overflow:auto;
-  margin-top:8px;
-  border:1px solid var(--line);
-  border-radius:12px;
-}
-
-.creator-result{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px;
-  border-bottom:1px solid var(--line2);
-  cursor:pointer;
-}
-
-.creator-result:last-child{
-  border-bottom:0;
-}
-
-.creator-result:hover,
-.creator-result.selected{
-  background:rgba(226,27,45,.09);
-}
-
-.creator-result.selected{
-  outline:1px solid rgba(226,27,45,.35);
-}
-
-.creator-result .role{
-  margin-left:auto;
-  color:#777;
-  font-size:8px;
-  text-transform:uppercase;
-}
-
-.selected-box{
-  margin-top:10px;
-  padding:10px;
-  border:1px solid rgba(226,27,45,.35);
-  border-radius:11px;
-  background:rgba(226,27,45,.06);
-  color:#ddd;
-  font-size:10px;
-}
-
-/* LOADING */
-
-.loading{
-  display:grid;
-  min-height:150px;
-  place-items:center;
-  color:#777;
-}
-
-.spinner{
-  width:30px;
-  height:30px;
-  border:2px solid #29292b;
-  border-top-color:var(--red);
-  border-radius:50%;
-  animation:spinner 1s linear infinite;
-}
-
-/* TOAST */
-
-.toast{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  z-index:300;
-  max-width:360px;
-  padding:13px 16px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:#101012;
-  color:#fff;
-  box-shadow:var(--shadow);
-  font-size:11px;
-}
-
-.toast.ok{
-  border-color:rgba(67,224,155,.35);
-}
-
-.toast.err{
-  border-color:rgba(226,27,45,.5);
-}
-
-/* ANIMATION */
-
-@keyframes heroDrift{
-  from{
-    transform:translate3d(-1%,-1%,0) scale(1);
-  }
-  to{
-    transform:translate3d(3%,2%,0) scale(1.06);
-  }
-}
-
-@keyframes orbitSpin{
-  from{
-    transform:translate(-50%,-50%) rotateX(68deg) rotateZ(0);
-  }
-  to{
-    transform:translate(-50%,-50%) rotateX(68deg) rotateZ(360deg);
-  }
-}
-
-@keyframes particleFloat{
-  0%,100%{
-    transform:translateY(0);
-    opacity:.15;
-  }
-  50%{
-    transform:translateY(-30px);
-    opacity:.8;
-  }
-}
-
-@keyframes spinner{
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-/* RESPONSIVE */
-
-@media(max-width:1100px){
-  .workspace{
-    grid-template-columns:175px minmax(0,1fr);
-  }
-
-  .side{
-    grid-column:1/-1;
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(max-width:720px){
-  .container{
-    width:min(100% - 20px,1440px);
-  }
-
-  .nav{
-    height:62px;
-  }
-
-  .menu{
-    display:block;
-  }
-
-  .navlinks{
-    position:absolute;
-    top:62px;
-    left:0;
-    right:0;
-    display:none;
-    flex-direction:column;
-    padding:10px;
-    background:#080809;
-    border-bottom:1px solid var(--line);
-  }
-
-  .navlinks.open{
-    display:flex;
-  }
-
-  .hero{
-    min-height:500px;
-  }
-
-  .hero-inner{
-    padding:75px 0;
-  }
-
-  .hero h1{
-    font-size:42px;
-    letter-spacing:-2px;
-  }
-
-  .project-head{
-    flex-direction:column;
-  }
-
-  .workspace{
-    grid-template-columns:1fr;
-  }
-
-  .tools{
-    position:static;
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .tool{
-    margin:0;
-  }
-
-  .side{
-    display:block;
-  }
-
-  .side-panel{
-    margin-bottom:12px;
-  }
-
-  .note-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(prefers-reduced-motion:reduce){
-  *,
-  *::before,
-  *::after{
-    animation:none!important;
-    transition:none!important;
-    scroll-behavior:auto!important;
-  }
-}
+    radial-gradient(circle at 50% 45%,rgba(255,30,30,.16),transparent 28%),
+    radial-gradient(circle at 15% 20%,rgba(120,0,0,.16),transparent 28%),
+    radial-gradient(circle at 85% 70%,rgba(255,0,0,.08),transparent 30%),
+    #020202;
+}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,#030303 100%);pointer-events:none}
+.orbit{position:absolute;left:50%;top:45%;width:520px;height:520px;transform:translate(-50%,-50%) rotateX(62deg);border:1px solid rgba(255,45,45,.22);border-radius:50%;box-shadow:0 0 80px rgba(255,0,0,.08);animation:spin 24s linear infinite}
+.orbit.o2{width:760px;height:760px;opacity:.5;animation-duration:38s;animation-direction:reverse}
+.orbit.o3{width:1020px;height:1020px;opacity:.24;animation-duration:55s}
+.pulse-core{position:absolute;left:50%;top:45%;width:180px;height:180px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#fff 0,#ff3535 5%,rgba(255,0,0,.45) 16%,rgba(255,0,0,.04) 58%,transparent 70%);filter:blur(.3px);animation:pulse 4s ease-in-out infinite}
+.hero-grid{position:absolute;inset:0;opacity:.13;background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);background-size:55px 55px;transform:perspective(700px) rotateX(65deg) scale(1.5) translateY(28%);transform-origin:center bottom}
+.hero-content{position:relative;z-index:5;max-width:1250px;margin:auto;padding:30px 24px 70px;min-height:590px;display:flex;flex-direction:column;justify-content:space-between}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-family:Orbitron;font-weight:800;letter-spacing:.08em;font-size:18px}
+.brand span{color:var(--red2)}
+.navlinks{display:flex;gap:10px;flex-wrap:wrap}
+.navlinks a{padding:10px 13px;border:1px solid transparent;border-radius:10px;color:#cfcfd4;font-size:12px;font-weight:700}
+.navlinks a:hover{border-color:var(--line2);background:rgba(255,0,0,.06);color:#fff}
+.hero-copy{max-width:850px}
+.eyebrow{font-family:Orbitron;color:#ff5454;letter-spacing:.22em;font-size:11px;font-weight:700;margin-bottom:18px}
+.hero h1{font-family:Orbitron;font-size:clamp(38px,7vw,84px);line-height:.98;margin:0 0 20px;text-transform:uppercase;letter-spacing:-.045em;text-shadow:0 0 35px rgba(255,0,0,.18)}
+.hero h1 em{font-style:normal;color:#ff3030}
+.hero-sub{font-size:clamp(15px,2vw,19px);line-height:1.7;color:#bcbcc3;max-width:730px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.btn{border:1px solid var(--line);background:rgba(255,255,255,.045);color:#fff;border-radius:12px;padding:12px 16px;font-weight:800;font-size:12px;transition:.2s}
+.btn:hover{transform:translateY(-2px);border-color:rgba(255,70,70,.55);background:rgba(255,0,0,.08)}
+.btn.primary{background:linear-gradient(135deg,#e00,#7e0000);border-color:#f33;box-shadow:0 10px 35px rgba(200,0,0,.2)}
+.btn.danger{border-color:rgba(255,70,70,.4)}
+.statusline{display:flex;gap:12px;align-items:center;flex-wrap:wrap;color:#a8a8af;font-size:11px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);display:inline-block}
+.dot.amber{background:var(--amber);box-shadow:0 0 12px var(--amber)}
+.dot.red{background:var(--red2);box-shadow:0 0 12px var(--red2)}
+.wrap{max-width:1250px;margin:auto;padding:35px 24px 80px}
+.projectbar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:22px}
+.project-title{font-family:Orbitron;font-size:24px;margin:0 0 7px}
+.project-meta{color:var(--muted);font-size:12px}
+.project-actions{display:flex;gap:8px;flex-wrap:wrap}
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr) 290px;gap:18px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+.panel-head{padding:16px 17px;border-bottom:1px solid var(--line);font-family:Orbitron;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.tools{padding:10px}
+.tool{width:100%;text-align:left;border:1px solid transparent;background:transparent;color:#aaaab0;border-radius:11px;padding:12px 11px;margin:2px 0;font-size:11px;font-weight:700}
+.tool:hover,.tool.active{background:rgba(255,0,0,.08);border-color:rgba(255,60,60,.22);color:#fff}
+.tool.active:before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:#f33;margin:0 8px 1px 0;box-shadow:0 0 10px #f33}
+.editor{min-height:680px}
+.editor-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px;border-bottom:1px solid var(--line)}
+.doc-state{font-size:10px;color:#888}
+.editor-body{padding:20px}
+label{display:block;color:#aaaab0;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px}
+input,textarea,select{width:100%;border:1px solid var(--line);background:rgba(0,0,0,.36);color:#eee;border-radius:12px;padding:12px;outline:none}
+input:focus,textarea:focus,select:focus{border-color:rgba(255,50,50,.6);box-shadow:0 0 0 3px rgba(255,0,0,.06)}
+#docContent{min-height:470px;resize:vertical;line-height:1.75;margin-top:16px}
+.editor-bottom{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:12px}
+.counter{font-size:10px;color:#6f6f76}
+.stack{display:flex;flex-direction:column;gap:18px}
+.side-list{padding:12px}
+.person,.activity,.file-row,.stage{padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.person:last-child,.activity:last-child,.file-row:last-child,.stage:last-child{border-bottom:0}
+.person{display:flex;gap:10px;align-items:center}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#1b1b1d,#680000);border:1px solid rgba(255,60,60,.25);font-family:Orbitron;font-size:10px;overflow:hidden;flex:0 0 auto}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.small{font-size:10px;color:#8d8d95;line-height:1.5}
+.name{font-size:11px;font-weight:800}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 7px;color:#999;font-size:8px;margin-top:4px}
+.notegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:18px}
+.note{padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:18px}
+.note h3{font-size:13px;margin:0 0 8px}
+.note p{font-size:11px;line-height:1.7;color:#9f9fa6;margin:0}
+.section-title{font-family:Orbitron;font-size:14px;margin:35px 0 5px}
+.empty{padding:22px;color:#777;font-size:11px;line-height:1.6;text-align:center}
+.install{margin-bottom:18px;padding:14px 16px;border:1px solid rgba(243,189,82,.3);background:rgba(243,189,82,.06);border-radius:14px;color:#c9b37c;font-size:11px;line-height:1.6}
+.toast{position:fixed;right:18px;bottom:18px;z-index:100;padding:13px 16px;border:1px solid var(--line);border-radius:12px;background:#111;color:#eee;font-size:11px;box-shadow:var(--shadow);max-width:360px}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);z-index:90;display:grid;place-items:center;padding:20px}
+.modal{width:min(650px,100%);max-height:90vh;overflow:auto;background:#0b0b0d;border:1px solid var(--line2);border-radius:20px;box-shadow:0 40px 120px #000}
+.modal-head{display:flex;justify-content:space-between;align-items:center;padding:17px;border-bottom:1px solid var(--line)}
+.modal-head h2{font-family:Orbitron;font-size:14px;margin:0}
+.modal-body{padding:18px}
+.form-row{margin-bottom:15px}
+.creator-results{display:grid;gap:8px;margin-top:10px;max-height:240px;overflow:auto}
+.creator{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
+.creator-info{display:flex;align-items:center;gap:10px;min-width:0}
+.creator-info .text{min-width:0}
+.creator .name,.creator .small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.close{border:0;background:transparent;color:#aaa;font-size:20px}
+@keyframes spin{to{transform:translate(-50%,-50%) rotateX(62deg) rotateZ(360deg)}}
+@keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.18);opacity:.78}}
+@media(max-width:1050px){.layout{grid-template-columns:190px minmax(0,1fr)}.stack{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.navlinks{display:none}.hero{min-height:620px}.hero-content{min-height:620px}.layout{grid-template-columns:1fr}.tools{display:grid;grid-template-columns:repeat(2,1fr)}.stack{display:flex}.notegrid{grid-template-columns:1fr}.projectbar{align-items:flex-start;flex-direction:column}.project-actions{width:100%}.orbit{width:330px;height:330px}.orbit.o2{width:500px;height:500px}.orbit.o3{width:680px;height:680px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 </style>
 </head>
 
 <body>
-
-<header>
-  <div class="container nav">
-
-    <a class="logo" href="index.html">
-      CROW<span>RULES</span>
-    </a>
-
-    <button class="menu" id="menuBtn" type="button">☰</button>
-
-    <nav class="navlinks" id="navLinks">
-      <a href="index.html">Dream World</a>
-      <a href="dreams.html">Dreams</a>
-      <a href="projects.html">Projects</a>
-      <a href="community.html">Community</a>
-      <a href="creator-dashboard.html">Dashboard</a>
-      <a class="active" href="creative-room.html">Creative Room</a>
-    </nav>
-
-  </div>
-</header>
-
-<section class="hero">
-
-  <div class="grid"></div>
-
-  <div class="orbit o1"></div>
-  <div class="orbit o2"></div>
-  <div class="orbit o3"></div>
-
-  <div id="particles"></div>
-
-  <div class="container hero-inner">
-
-    <div class="eyebrow">
-      CROW RULES DREAM WORLD · CREATIVE DEVELOPMENT
+<section class="hero" id="hero">
+  <canvas id="cinematicCanvas"></canvas>
+  <div class="hero-grid"></div><div class="orbit"></div><div class="orbit o2"></div><div class="orbit o3"></div><div class="pulse-core"></div>
+  <div class="hero-content">
+    <div class="nav">
+      <a class="brand" href="index.html">CROW<span>RULES</span> DREAM WORLD</a>
+      <div class="navlinks">
+        <a href="dreams.html">Dreams</a><a href="projects.html">Projects</a><a href="community.html">Community</a>
+        <a href="creator-dashboard.html">Dashboard</a><a href="creative-room.html">Creative Room</a>
+      </div>
     </div>
-
-    <h1>
-      Enter the <em>Creative Room.</em>
-    </h1>
-
-    <p>
-      Where an idea stops being only a dream and starts becoming a real project —
-      one scene, character, document, collaborator and decision at a time.
-    </p>
-
-    <div class="hero-actions">
-      <button class="btn primary" id="heroSave" type="button">
-        Save Document
-      </button>
-
-      <button class="btn ghost" id="heroInvite" type="button">
-        Invite Creator
-      </button>
-
-      <a class="btn ghost" id="heroProject" href="projects.html">
-        Back to Project
-      </a>
+    <div class="hero-copy">
+      <div class="eyebrow">CROWRULES DREAM WORLD · CREATIVE DEVELOPMENT</div>
+      <h1>Build the <em>Dream.</em></h1>
+      <div class="hero-sub">A cinematic workspace for turning an idea into a living project — write, develop, organize, collaborate, and move the dream forward with real creators.</div>
+      <div class="hero-actions">
+        <button class="btn primary" id="heroSave">Save Document</button>
+        <button class="btn" id="heroInvite">Invite Creator</button>
+        <a class="btn" id="heroProject" href="projects.html">Project Hub</a>
+      </div>
     </div>
-
+    <div class="statusline"><span class="dot" id="connectionDot"></span><span id="connectionText">Connecting to Dream World…</span><span>•</span><span id="userText">Checking creator session…</span></div>
   </div>
 </section>
 
-<main>
+<main class="wrap">
+  <div id="installBanner" class="install hidden"></div>
 
-<div class="container">
-
-  <div id="schemaBanner" class="banner hidden"></div>
-
-  <section class="project-head">
-
+  <section class="projectbar">
     <div>
-
-      <div class="eyebrow" id="projectCode">
-        CREATIVE ROOM
-      </div>
-
-      <h2 class="project-title" id="projectTitle">
-        Loading project…
-      </h2>
-
-      <div class="meta" id="projectMeta"></div>
-
+      <div class="eyebrow">CREATIVE ROOM</div>
+      <h2 class="project-title" id="projectTitle">Loading project…</h2>
+      <div class="project-meta" id="projectMeta">Connecting to Supabase</div>
     </div>
-
-    <div class="hero-actions">
-
-      <button class="btn ghost" id="addNoteBtn" type="button">
-        + Development Note
-      </button>
-
-      <button class="btn primary" id="inviteBtn" type="button">
-        + Invite Creator
-      </button>
-
+    <div class="project-actions">
+      <button class="btn primary" id="saveBtn">Save</button>
+      <button class="btn" id="inviteBtn">Invite Creator</button>
+      <a class="btn" id="backProject" href="projects.html">Back to Projects</a>
     </div>
-
   </section>
 
-  <section class="workspace">
-
-    <!-- TOOLS -->
-
-    <aside class="panel tools" id="tools"></aside>
-
-    <!-- EDITOR -->
-
-    <section class="panel editor">
-
-      <div class="editor-top">
-
-        <strong id="toolTitle">
-          Story Development
-        </strong>
-
-        <span class="status" id="saveStatus">
-          Not saved
-        </span>
-
-      </div>
-
-      <div class="editor-body">
-
-        <input
-          id="docTitle"
-          class="title-input"
-          type="text"
-          placeholder="Document title"
-          autocomplete="off"
-        >
-
-        <textarea
-          id="docBody"
-          class="body-input"
-          placeholder="Start developing the dream…"
-        ></textarea>
-
-      </div>
-
-      <div class="editor-bottom">
-
-        <span class="status" id="wordCount">
-          0 words
-        </span>
-
-        <div>
-
-          <button class="btn ghost" id="previewBtn" type="button">
-            Preview
-          </button>
-
-          <button class="btn primary" id="saveBtn" type="button">
-            Save Document
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- SIDEBAR -->
-
-    <aside class="side">
-
-      <section class="panel side-panel">
-
-        <div class="side-title">
-          Project Progress
-        </div>
-
-        <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:8px">
-          <span>Development</span>
-          <b id="progressText">0%</b>
-        </div>
-
-        <div class="progress">
-          <i id="progressBar"></i>
-        </div>
-
-      </section>
-
-      <section class="panel side-panel">
-
-        <div class="section-head">
-
-          <div class="side-title" style="margin:0">
-            Team
-          </div>
-
-          <button class="mini-btn" id="teamInvite" type="button">
-            Invite
-          </button>
-
-        </div>
-
-        <div id="team">
-          <div class="empty">
-            Loading team…
-          </div>
-        </div>
-
-      </section>
-
-      <section class="panel side-panel">
-
-        <div class="side-title">
-          Development Stages
-        </div>
-
-        <div id="stages">
-          <div class="empty">
-            Loading stages…
-          </div>
-        </div>
-
-      </section>
-
-      <section class="panel side-panel">
-
-        <div class="section-head">
-
-          <div class="side-title" style="margin:0">
-            Files
-          </div>
-
-          <button class="mini-btn" id="uploadBtn" type="button">
-            Upload
-          </button>
-
-          <input
-            id="fileInput"
-            class="hidden"
-            type="file"
-          >
-
-        </div>
-
-        <div id="files">
-          <div class="empty">
-            Loading files…
-          </div>
-        </div>
-
-      </section>
-
-      <section class="panel side-panel">
-
-        <div class="side-title">
-          Recent Activity
-        </div>
-
-        <div id="activity">
-          <div class="empty">
-            Loading activity…
-          </div>
-        </div>
-
-      </section>
-
+  <section class="layout">
+    <aside class="panel">
+      <div class="panel-head">Creative Tools</div>
+      <div class="tools" id="tools"></div>
     </aside>
 
-  </section>
-
-  <!-- DEVELOPMENT NOTES -->
-
-  <section class="panel notes">
-
-    <div class="section-head">
-
-      <h2>
-        Development Notes
-      </h2>
-
-      <button class="btn ghost" id="notesBtn" type="button">
-        Add Note
-      </button>
-
-    </div>
-
-    <div class="note-grid" id="notes">
-      <div class="empty">
-        Loading development notes…
+    <section class="panel editor">
+      <div class="editor-toolbar">
+        <div>
+          <strong id="toolName">Story Development</strong>
+          <div class="doc-state" id="docState">No document loaded</div>
+        </div>
+        <button class="btn" id="previewBtn">Preview</button>
       </div>
-    </div>
+      <div class="editor-body">
+        <label for="docTitle">Document Title</label>
+        <input id="docTitle" placeholder="Untitled creative document">
+        <label for="docContent" style="margin-top:15px">Working Draft</label>
+        <textarea id="docContent" placeholder="Start building the dream…"></textarea>
+        <div class="editor-bottom">
+          <div class="counter" id="counter">0 characters</div>
+          <button class="btn primary" id="saveBtnBottom">Save Version</button>
+        </div>
+      </div>
+    </section>
 
+    <aside class="stack">
+      <section class="panel">
+        <div class="panel-head">Creative Team</div>
+        <div class="side-list" id="teamList"><div class="empty">Loading creators…</div></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">Development Stages</div>
+        <div class="side-list" id="stageList"><div class="empty">Loading stages…</div></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">Project Files</div>
+        <div class="side-list" id="fileList"><div class="empty">Loading files…</div></div>
+        <div style="padding:12px;border-top:1px solid var(--line)"><button class="btn" id="uploadBtn" style="width:100%">Upload File</button><input type="file" id="fileInput" class="hidden"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">Recent Activity</div>
+        <div class="side-list" id="activityList"><div class="empty">Loading activity…</div></div>
+      </section>
+    </aside>
   </section>
 
-</div>
+  <h2 class="section-title">Development Notes</h2>
+  <div class="notegrid" id="notesGrid"><div class="note"><h3>Loading…</h3><p>Retrieving project development notes.</p></div></div>
 
+  <h2 class="section-title">Long-Term Development</h2>
+  <section class="panel" style="padding:20px">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+      <div><div class="small">FORMAT</div><strong id="statFormat">—</strong></div>
+      <div><div class="small">GENRE</div><strong id="statGenre">—</strong></div>
+      <div><div class="small">STATUS</div><strong id="statStatus">—</strong></div>
+      <div><div class="small">PROGRESS</div><strong id="statProgress">0%</strong></div>
+    </div>
+  </section>
 </main>
 
-<div id="modalRoot"></div>
-<div id="toastRoot"></div>
+<div class="modal-backdrop hidden" id="inviteModal">
+  <div class="modal">
+    <div class="modal-head"><h2>Invite a Real Creator</h2><button class="close" data-close="inviteModal">×</button></div>
+    <div class="modal-body">
+      <div class="small" style="margin-bottom:14px">Search existing Dream World creator profiles. Invitations are tied to the creator's authenticated account — no arbitrary email-only invitations.</div>
+      <div class="form-row"><label for="creatorSearch">Find Creator</label><input id="creatorSearch" placeholder="Search name or @handle…"></div>
+      <div class="creator-results" id="creatorResults"><div class="empty">Start typing to find creators.</div></div>
+      <div id="selectedCreator" class="hidden" style="margin:15px 0;padding:12px;border:1px solid rgba(255,50,50,.35);border-radius:12px"></div>
+      <div class="form-row"><label for="inviteRole">Role</label><select id="inviteRole">
+        <option>Writer</option><option>Story / Screenplay</option><option>Producer</option><option>Director</option><option>Concept Artist</option><option>Visual Development</option><option>Composer / Sound</option><option>Research / Worldbuilding</option><option>Editor</option><option>Other Creator</option>
+      </select></div>
+      <div class="form-row"><label for="inviteMessage">Message</label><textarea id="inviteMessage" rows="4" placeholder="Why would you like this creator to join the project?"></textarea></div>
+      <button class="btn primary" id="sendInvite" style="width:100%">Send Creator Invitation</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop hidden" id="previewModal">
+  <div class="modal">
+    <div class="modal-head"><h2 id="previewTitle">Document Preview</h2><button class="close" data-close="previewModal">×</button></div>
+    <div class="modal-body"><div id="previewContent" style="white-space:pre-wrap;line-height:1.8;color:#ccc"></div></div>
+  </div>
+</div>
+
+<div class="toast hidden" id="toast"></div>
 
 <script>
 (() => {
-
 "use strict";
 
-/*
-============================================================
-CROWRULES DREAM WORLD — CREATIVE ROOM
-============================================================
-Supabase browser configuration.
-
-IMPORTANT:
-Only the publishable key belongs in browser code.
-Never place a service-role key in this file.
-============================================================
-*/
-
-const SUPABASE_URL =
-  "https://cevylpnoexugwgygvtgu.supabase.co";
-
-const SUPABASE_KEY =
-  "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
-
-if(
-  !window.supabase ||
-  typeof window.supabase.createClient !== "function"
-){
-  document.body.innerHTML = `
-    <div style="
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      padding:30px;
-      background:#030303;
-      color:#fff;
-      font-family:Arial,sans-serif;
-    ">
-      <div style="
-        max-width:600px;
-        padding:30px;
-        border:1px solid #333;
-        border-radius:18px;
-        background:#101010;
-      ">
-        <h2>Supabase failed to load</h2>
-        <p>
-          The Supabase JavaScript library could not be loaded.
-          Check your internet connection or CDN access.
-        </p>
-      </div>
-    </div>
-  `;
-  return;
-}
-
+const SUPABASE_URL = "https://cevylpnoexugwgygvtgu.supabase.co";
+const SUPABASE_KEY = "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
 const { createClient } = window.supabase;
-
-const db = createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-/* =========================================================
-   STATE
-========================================================= */
-
-const state = {
-
-  user:null,
-
-  profile:null,
-
-  project:null,
-
-  projectId:null,
-
-  dream:null,
-
-  currentTool:"story",
-
-  currentDocument:null,
-
-  selectedCreator:null,
-
-  realtimeChannel:null
-
-};
-
-/* =========================================================
-   TOOLS
-========================================================= */
+const sb = createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
+});
 
 const tools = [
-
-  ["story","Story Development"],
-  ["characters","Characters"],
-  ["worldbuilding","Worldbuilding"],
-  ["episodes","Episode Planning"],
-  ["screenplay","Screenplay"],
-  ["visual","Visual Development"],
-  ["music","Music & Audio"],
-  ["production","Production Notes"],
-  ["research","Research"],
-  ["freeform","Freeform"]
-
+  ["story","Story Development"],["characters","Characters"],["worldbuilding","Worldbuilding"],
+  ["episodes","Episode Planning"],["screenplay","Screenplay"],["visual","Visual Development"],
+  ["audio","Music & Audio"],["production","Production Notes"],["research","Research"],["freeform","Freeform"]
 ];
 
-/* =========================================================
-   HELPERS
-========================================================= */
+const state = {
+  user:null, project:null, projectId:null, dream:null, tool:"story", document:null,
+  selectedCreator:null, channel:null, tables:{}
+};
 
-const $ = id =>
-  document.getElementById(id);
-
-const first = (...values) =>
-  values.find(
-    value =>
-      value !== undefined &&
-      value !== null &&
-      value !== ""
-  ) ?? "";
-
-const esc = value =>
-  String(value ?? "").replace(
-    /[&<>"']/g,
-    char => ({
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#039;"
-    })[char]
-  );
-
-const initials = name =>
-  String(name || "?")
-    .trim()
-    .split(/\s+/)
-    .slice(0,2)
-    .map(part => part[0])
-    .join("")
-    .toUpperCase();
-
-const formatDate = value => {
-
+const $ = id => document.getElementById(id);
+const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const first = (...v) => v.find(x => x !== undefined && x !== null && x !== "") ?? "";
+const initials = name => String(name || "C").trim().split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase();
+const fmtDate = value => value ? new Intl.DateTimeFormat(undefined,{month:"short",day:"numeric",year:"numeric"}).format(new Date(value)) : "—";
+const rel = value => {
   if(!value) return "";
-
-  return new Date(value).toLocaleDateString(
-    undefined,
-    {
-      month:"short",
-      day:"numeric",
-      year:"numeric"
-    }
-  );
-
+  const s=Math.max(0,(Date.now()-new Date(value).getTime())/1000);
+  if(s<60)return "just now"; if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return Math.floor(s/86400)+"d ago";
 };
+const slug = value => String(value||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const fileSize = n => { n=Number(n||0); if(!n)return "—"; const u=["B","KB","MB","GB"]; let i=0; while(n>=1024&&i<3){n/=1024;i++} return n.toFixed(i?1:0)+" "+u[i]; };
 
-const relativeTime = value => {
+function toast(msg, good=true){
+  const el=$("toast"); el.textContent=msg; el.classList.remove("hidden");
+  setTimeout(()=>el.classList.add("hidden"),3500);
+}
+function setConnection(text,type="good"){
+  $("connectionText").textContent=text;
+  $("connectionDot").className="dot "+(type==="amber"?"amber":type==="red"?"red":"");
+}
+function showInstall(msg){ $("installBanner").innerHTML=msg; $("installBanner").classList.remove("hidden"); }
+function hideInstall(){ $("installBanner").classList.add("hidden"); }
 
-  if(!value) return "";
-
-  const seconds = Math.max(
-    0,
-    Math.floor(
-      (Date.now() - new Date(value).getTime()) / 1000
-    )
-  );
-
-  if(seconds < 60)
-    return "just now";
-
-  if(seconds < 3600)
-    return Math.floor(seconds / 60) + "m ago";
-
-  if(seconds < 86400)
-    return Math.floor(seconds / 3600) + "h ago";
-
-  if(seconds < 604800)
-    return Math.floor(seconds / 86400) + "d ago";
-
-  return formatDate(value);
-
-};
-
-const fileSize = bytes => {
-
-  let size = Number(bytes || 0);
-
-  if(!size)
-    return "";
-
-  const units = ["B","KB","MB","GB"];
-
-  let index = 0;
-
-  while(
-    size >= 1024 &&
-    index < units.length - 1
-  ){
-
-    size /= 1024;
-    index++;
-
+async function safeTable(table, query){
+  try{
+    const result = await query();
+    state.tables[table] = !result.error;
+    return result;
+  }catch(error){
+    state.tables[table]=false;
+    return {data:null,error};
   }
-
-  return size.toFixed(index ? 1 : 0) +
-    " " +
-    units[index];
-
-};
-
-const toast = (
-  message,
-  type = ""
-) => {
-
-  const node =
-    document.createElement("div");
-
-  node.className =
-    "toast " + type;
-
-  node.textContent =
-    message;
-
-  $("toastRoot")
-    .appendChild(node);
-
-  setTimeout(
-    () => node.remove(),
-    4500
-  );
-
-};
-
-/* =========================================================
-   AUTH
-========================================================= */
-
-async function requireAuth(){
-
-  const {
-    data,
-    error
-  } = await db.auth.getUser();
-
-  if(
-    error ||
-    !data ||
-    !data.user
-  ){
-
-    const current =
-      location.pathname.split("/").pop() +
-      location.search;
-
-    location.replace(
-      "login.html?next=" +
-      encodeURIComponent(current)
-    );
-
-    return false;
-
-  }
-
-  state.user =
-    data.user;
-
-  return true;
-
 }
 
-/* =========================================================
-   PROFILE
-========================================================= */
+async function getProject(){
+  const params = new URLSearchParams(location.search);
+  const requested = params.get("project_id") || params.get("project");
+  if(requested){
+    const r=await sb.from("dream_projects").select("*").eq("id",requested).maybeSingle();
+    if(r.error) throw r.error;
+    return r.data;
+  }
 
-async function loadProfile(){
+  let membership = await sb.from("dream_project_members")
+    .select("project_id,updated_at,created_at,status")
+    .eq("user_id",state.user.id)
+    .in("status",["active","paused","invited"])
+    .order("updated_at",{ascending:false})
+    .limit(1).maybeSingle();
 
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("dream_profiles")
-      .select("*")
-      .eq(
-        "user_id",
-        state.user.id
-      )
-      .maybeSingle();
+  if(!membership.error && membership.data?.project_id){
+    const r=await sb.from("dream_projects").select("*").eq("id",membership.data.project_id).maybeSingle();
+    if(!r.error && r.data) return r.data;
+  }
 
-  if(!error)
-    state.profile = data;
+  const owned = await sb.from("dream_projects").select("*")
+    .eq("creator_id",state.user.id).order("updated_at",{ascending:false}).limit(1).maybeSingle();
+  if(!owned.error && owned.data) return owned.data;
 
+  return null;
 }
-
-/* =========================================================
-   PROJECT RESOLUTION
-========================================================= */
-
-async function resolveProject(){
-
-  const params =
-    new URLSearchParams(
-      location.search
-    );
-
-  const requestedProject =
-    first(
-      params.get("project_id"),
-      params.get("project")
-    );
-
-  /*
-    Preferred route:
-
-    creative-room.html?project_id=UUID
-  */
-
-  if(requestedProject){
-
-    const {
-      data,
-      error
-    } =
-      await db
-        .from("dream_projects")
-        .select("*")
-        .eq("id",requestedProject)
-        .maybeSingle();
-
-    if(error)
-      throw error;
-
-    if(data){
-
-      state.project =
-        data;
-
-      state.projectId =
-        data.id;
-
-      return;
-
-    }
-
-  }
-
-  /*
-    Otherwise find projects where
-    the current creator is a member.
-  */
-
-  const memberResult =
-    await db
-      .from("dream_project_members")
-      .select(
-        "project_id,role,status,updated_at,created_at"
-      )
-      .eq(
-        "user_id",
-        state.user.id
-      )
-      .in(
-        "status",
-        [
-          "active",
-          "paused",
-          "invited"
-        ]
-      )
-      .order(
-        "updated_at",
-        {
-          ascending:false
-        }
-      )
-      .limit(20);
-
-  if(
-    !memberResult.error &&
-    memberResult.data &&
-    memberResult.data.length
-  ){
-
-    for(
-      const member
-      of memberResult.data
-    ){
-
-      const result =
-        await db
-          .from("dream_projects")
-          .select("*")
-          .eq(
-            "id",
-            member.project_id
-          )
-          .maybeSingle();
-
-      if(
-        !result.error &&
-        result.data
-      ){
-
-        state.project =
-          result.data;
-
-        state.projectId =
-          result.data.id;
-
-        return;
-
-      }
-
-    }
-
-  }
-
-  /*
-    Some CrowRules project schemas use
-    creator_id. Others may use owner_id.
-  */
-
-  for(
-    const field
-    of ["creator_id","owner_id"]
-  ){
-
-    const result =
-      await db
-        .from("dream_projects")
-        .select("*")
-        .eq(
-          field,
-          state.user.id
-        )
-        .order(
-          "updated_at",
-          {
-            ascending:false
-          }
-        )
-        .limit(1);
-
-    if(
-      !result.error &&
-      result.data &&
-      result.data[0]
-    ){
-
-      state.project =
-        result.data[0];
-
-      state.projectId =
-        result.data[0].id;
-
-      return;
-
-    }
-
-  }
-
-  throw new Error(
-    "No accessible Dream World project was found. " +
-    "Open Creative Room from a project or use " +
-    "?project_id=PROJECT_UUID."
-  );
-
-}
-
-/* =========================================================
-   DREAM
-========================================================= */
 
 async function loadDream(){
-
-  const dreamId =
-    first(
-      state.project?.dream_id,
-      state.project?.dream_submission_id
-    );
-
-  if(!dreamId)
-    return;
-
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("dream_submissions")
-      .select("*")
-      .eq(
-        "id",
-        dreamId
-      )
-      .maybeSingle();
-
-  if(!error)
-    state.dream =
-      data;
-
+  if(!state.project) return;
+  const dreamId=first(state.project.dream_id,state.project.dream_submission_id,state.project.submission_id);
+  if(!dreamId)return;
+  const r=await sb.from("dream_submissions").select("*").eq("id",dreamId).maybeSingle();
+  if(!r.error) state.dream=r.data;
 }
-
-/* =========================================================
-   RENDER PROJECT
-========================================================= */
-
-function renderProject(){
-
-  const project =
-    state.project || {};
-
-  $("projectTitle").textContent =
-    first(
-      project.title,
-      project.name,
-      "Untitled Dream Project"
-    );
-
-  $("projectCode").textContent =
-    first(
-      project.project_code,
-      "CROW RULES DREAM WORLD"
-    );
-
-  const progress =
-    Math.max(
-      0,
-      Math.min(
-        100,
-        Number(
-          first(
-            project.progress_percent,
-            project.progress,
-            0
-          )
-        )
-      )
-    );
-
-  $("progressText").textContent =
-    progress + "%";
-
-  $("progressBar").style.width =
-    progress + "%";
-
-  const status =
-    String(
-      first(project.status,"")
-    ).toLowerCase();
-
-  $("projectMeta").innerHTML = [
-
-    first(
-      project.format,
-      project.project_format
-    )
-      ? `
-        <span class="pill">
-          ${esc(
-            first(
-              project.format,
-              project.project_format
-            )
-          )}
-        </span>
-      `
-      : "",
-
-    first(project.genre)
-      ? `
-        <span class="pill">
-          ${esc(project.genre)}
-        </span>
-      `
-      : "",
-
-    first(project.status)
-      ? `
-        <span class="pill ${
-          status.includes("develop")
-            ? "red"
-            : "green"
-        }">
-          ${esc(project.status)}
-        </span>
-      `
-      : "",
-
-    first(project.updated_at)
-      ? `
-        <span class="pill">
-          Updated ${esc(
-            relativeTime(
-              project.updated_at
-            )
-          )}
-        </span>
-      `
-      : ""
-
-  ].join("");
-
-  $("heroProject").href =
-    "projects.html?project_id=" +
-    encodeURIComponent(
-      state.projectId
-    );
-
-}
-
-/* =========================================================
-   TEAM
-========================================================= */
-
-async function loadTeam(){
-
-  const result =
-    await db
-      .from("dream_project_members")
-      .select("*")
-      .eq(
-        "project_id",
-        state.projectId
-      )
-      .order(
-        "created_at",
-        {
-          ascending:true
-        }
-      );
-
-  if(result.error){
-
-    $("team").innerHTML =
-      `<div class="empty">
-        Team data is unavailable.
-      </div>`;
-
-    return;
-
-  }
-
-  const members =
-    result.data || [];
-
-  const ids =
-    [
-      ...new Set(
-        members
-          .map(member => member.user_id)
-          .filter(Boolean)
-      )
-    ];
-
-  if(state.project?.creator_id)
-    ids.push(
-      state.project.creator_id
-    );
-
-  let profiles = [];
-
-  if(ids.length){
-
-    const profileResult =
-      await db
-        .from("dream_profiles")
-        .select("*")
-        .in(
-          "user_id",
-          [...new Set(ids)]
-        );
-
-    if(!profileResult.error)
-      profiles =
-        profileResult.data || [];
-
-  }
-
-  const profileMap =
-    new Map(
-      profiles.map(
-        profile => [
-          profile.user_id,
-          profile
-        ]
-      )
-    );
-
-  const rows = [];
-
-  if(state.project?.creator_id){
-
-    const profile =
-      profileMap.get(
-        state.project.creator_id
-      ) || {};
-
-    rows.push({
-      user_id:
-        state.project.creator_id,
-      role:
-        "Project Creator",
-      profile
-    });
-
-  }
-
-  members.forEach(member => {
-
-    if(
-      !rows.some(
-        row =>
-          row.user_id ===
-          member.user_id
-      )
-    ){
-
-      rows.push({
-        ...member,
-        profile:
-          profileMap.get(
-            member.user_id
-          ) || {}
-      });
-
-    }
-
-  });
-
-  if(!rows.length){
-
-    $("team").innerHTML =
-      `<div class="empty">
-        No collaborators yet.
-        Invite a real Dream World creator.
-      </div>`;
-
-    return;
-
-  }
-
-  $("team").innerHTML =
-    rows
-      .map(row =>
-        personHTML(
-          row.profile,
-          first(
-            row.role,
-            row.profile?.creator_type,
-            "Creator"
-          ),
-          row.user_id ===
-            state.user.id
-        )
-      )
-      .join("");
-
-}
-
-function personHTML(
-  profile,
-  role,
-  isCurrentUser
-){
-
-  const name =
-    first(
-      profile.display_name,
-      profile.creator_handle,
-      "Dream World Creator"
-    );
-
-  const avatar =
-    profile.avatar_url
-      ? `
-        <img
-          src="${esc(profile.avatar_url)}"
-          alt=""
-        >
-      `
-      : esc(
-          initials(name)
-        );
-
-  return `
-    <div class="person">
-
-      <div class="avatar">
-        ${avatar}
-      </div>
-
-      <div class="person-info">
-
-        <strong>
-          ${esc(name)}
-          ${isCurrentUser ? " · You" : ""}
-        </strong>
-
-        <span>
-          ${esc(role)}
-        </span>
-
-      </div>
-
-    </div>
-  `;
-
-}
-
-/* =========================================================
-   STAGES
-========================================================= */
-
-async function loadStages(){
-
-  const result =
-    await db
-      .from("dream_project_stages")
-      .select("*")
-      .eq(
-        "project_id",
-        state.projectId
-      );
-
-  if(result.error){
-
-    $("stages").innerHTML =
-      `<div class="empty">
-        Development stages are unavailable.
-      </div>`;
-
-    return;
-
-  }
-
-  const rows =
-    (result.data || [])
-      .sort(
-        (a,b) =>
-          Number(
-            first(
-              a.sort_order,
-              a.position,
-              999
-            )
-          )
-          -
-          Number(
-            first(
-              b.sort_order,
-              b.position,
-              999
-            )
-          )
-      );
-
-  if(!rows.length){
-
-    $("stages").innerHTML =
-      `<div class="empty">
-        No development stages have been added.
-      </div>`;
-
-    return;
-
-  }
-
-  $("stages").innerHTML =
-    rows
-      .map(stage => {
-
-        const status =
-          first(
-            stage.status,
-            stage.stage_status,
-            "planned"
-          );
-
-        return `
-          <div class="stage">
-
-            <b>
-              ${esc(
-                first(
-                  stage.name,
-                  stage.title,
-                  "Stage"
-                )
-              )}
-            </b>
-
-            <small>
-              ${esc(status)}
-            </small>
-
-          </div>
-        `;
-
-      })
-      .join("");
-
-}
-
-/* =========================================================
-   FILES
-========================================================= */
-
-async function loadFiles(){
-
-  const result =
-    await db
-      .from("dream_files")
-      .select("*")
-      .eq(
-        "project_id",
-        state.projectId
-      )
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      )
-      .limit(10);
-
-  if(result.error){
-
-    $("files").innerHTML =
-      `<div class="empty">
-        Project files are unavailable.
-      </div>`;
-
-    return;
-
-  }
-
-  const files =
-    result.data || [];
-
-  if(!files.length){
-
-    $("files").innerHTML =
-      `<div class="empty">
-        No project files yet.
-      </div>`;
-
-    return;
-
-  }
-
-  $("files").innerHTML =
-    files
-      .map(file => {
-
-        const name =
-          first(
-            file.file_name,
-            file.name,
-            file.filename,
-            file.path,
-            "File"
-          );
-
-        return `
-          <div class="file">
-
-            <b title="${esc(name)}">
-              ${esc(name)}
-            </b>
-
-            <span>
-              ${esc(
-                fileSize(
-                  first(
-                    file.size,
-                    file.file_size,
-                    0
-                  )
-                )
-              )}
-            </span>
-
-          </div>
-        `;
-
-      })
-      .join("");
-
-}
-
-/* =========================================================
-   ACTIVITY
-========================================================= */
-
-async function loadActivity(){
-
-  const result =
-    await db
-      .from("dream_activity")
-      .select("*")
-      .eq(
-        "project_id",
-        state.projectId
-      )
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      )
-      .limit(7);
-
-  if(result.error){
-
-    $("activity").innerHTML =
-      `<div class="empty">
-        Activity is unavailable.
-      </div>`;
-
-    return;
-
-  }
-
-  const rows =
-    result.data || [];
-
-  if(!rows.length){
-
-    $("activity").innerHTML =
-      `<div class="empty">
-        No recent activity.
-      </div>`;
-
-    return;
-
-  }
-
-  $("activity").innerHTML =
-    rows
-      .map(item => `
-        <div class="stage">
-
-          <b>
-            ${esc(
-              first(
-                item.title,
-                item.activity_type,
-                "Activity"
-              )
-            )}
-          </b>
-
-          <small>
-            ${esc(
-              relativeTime(
-                item.created_at
-              )
-            )}
-          </small>
-
-        </div>
-      `)
-      .join("");
-
-}
-
-/* =========================================================
-   DEVELOPMENT NOTES
-========================================================= */
-
-async function loadNotes(){
-
-  const result =
-    await db
-      .from("dream_development_notes")
-      .select("*")
-      .eq(
-        "project_id",
-        state.projectId
-      )
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      )
-      .limit(12);
-
-  if(result.error){
-
-    $("notes").innerHTML =
-      `<div class="empty">
-        Development notes are unavailable.
-      </div>`;
-
-    showSchemaNotice(
-      "dream_development_notes",
-      result.error
-    );
-
-    return;
-
-  }
-
-  const notes =
-    result.data || [];
-
-  if(!notes.length){
-
-    $("notes").innerHTML =
-      `<div class="empty">
-        No development notes yet.
-      </div>`;
-
-    return;
-
-  }
-
-  $("notes").innerHTML =
-    notes
-      .map(note => `
-
-        <article class="note">
-
-          <div class="type">
-            ${esc(
-              first(
-                note.note_type,
-                note.category,
-                "Development"
-              )
-            )}
-          </div>
-
-          <h3>
-            ${esc(
-              first(
-                note.title,
-                "Untitled Note"
-              )
-            )}
-          </h3>
-
-          <p>
-            ${esc(
-              first(
-                note.body,
-                note.content,
-                note.description,
-                ""
-              )
-            )}
-          </p>
-
-          <time>
-            ${esc(
-              formatDate(
-                note.created_at
-              )
-            )}
-          </time>
-
-        </article>
-
-      `)
-      .join("");
-
-}
-
-/* =========================================================
-   DOCUMENT
-========================================================= */
-
-async function loadDocument(){
-
-  if(!state.projectId)
-    return;
-
-  $("saveStatus").textContent =
-    "Loading…";
-
-  const result =
-    await db
-      .from("dream_creative_documents")
-      .select("*")
-      .eq(
-        "project_id",
-        state.projectId
-      )
-      .eq(
-        "document_type",
-        state.currentTool
-      )
-      .order(
-        "updated_at",
-        {
-          ascending:false
-        }
-      )
-      .limit(1)
-      .maybeSingle();
-
-  if(result.error){
-
-    $("saveStatus").textContent =
-      "Document schema unavailable";
-
-    showSchemaNotice(
-      "dream_creative_documents",
-      result.error
-    );
-
-    return;
-
-  }
-
-  state.currentDocument =
-    result.data || null;
-
-  $("docTitle").value =
-    first(
-      result.data?.title,
-      tools.find(
-        tool =>
-          tool[0] ===
-          state.currentTool
-      )?.[1],
-      "Untitled Document"
-    );
-
-  $("docBody").value =
-    first(
-      result.data?.content,
-      ""
-    );
-
-  updateWordCount();
-
-  $("saveStatus").textContent =
-    result.data
-      ? "Saved " +
-        relativeTime(
-          result.data.updated_at
-        )
-      : "New document";
-
-}
-
-/* =========================================================
-   SAVE DOCUMENT
-========================================================= */
-
-async function saveDocument(){
-
-  if(
-    !state.projectId ||
-    !state.user
-  ){
-
-    toast(
-      "No accessible project is loaded.",
-      "err"
-    );
-
-    return;
-
-  }
-
-  const title =
-    $("docTitle").value.trim() ||
-    tools.find(
-      tool =>
-        tool[0] ===
-        state.currentTool
-    )?.[1] ||
-    "Untitled Document";
-
-  const content =
-    $("docBody").value;
-
-  $("saveStatus").textContent =
-    "Saving…";
-
-  const payload = {
-
-    project_id:
-      state.projectId,
-
-    dream_id:
-      first(
-        state.project?.dream_id,
-        state.project?.dream_submission_id
-      ) || null,
-
-    author_id:
-      state.user.id,
-
-    document_type:
-      state.currentTool,
-
-    title,
-
-    content,
-
-    status:
-      "draft",
-
-    visibility:
-      "development",
-
-    updated_at:
-      new Date().toISOString()
-
-  };
-
-  let result;
-
-  if(state.currentDocument?.id){
-
-    result =
-      await db
-        .from("dream_creative_documents")
-        .update(payload)
-        .eq(
-          "id",
-          state.currentDocument.id
-        )
-        .select("*")
-        .single();
-
-  }else{
-
-    result =
-      await db
-        .from("dream_creative_documents")
-        .insert(payload)
-        .select("*")
-        .single();
-
-  }
-
-  if(result.error){
-
-    $("saveStatus").textContent =
-      "Save failed";
-
-    showSchemaNotice(
-      "dream_creative_documents",
-      result.error
-    );
-
-    toast(
-      result.error.message ||
-      "Could not save document.",
-      "err"
-    );
-
-    return;
-
-  }
-
-  state.currentDocument =
-    result.data;
-
-  $("saveStatus").textContent =
-    "Saved just now";
-
-  toast(
-    "Document saved.",
-    "ok"
-  );
-
-  /*
-    Version creation is intentionally optional.
-    A missing version table must NEVER break
-    document saving.
-  */
-
-  try{
-
-    const versions =
-      await db
-        .from("dream_document_versions")
-        .select(
-          "version_number"
-        )
-        .eq(
-          "document_id",
-          state.currentDocument.id
-        )
-        .order(
-          "version_number",
-          {
-            ascending:false
-          }
-        )
-        .limit(1);
-
-    const nextVersion =
-      Number(
-        versions.data?.[0]?.version_number || 0
-      ) + 1;
-
-    await db
-      .from("dream_document_versions")
-      .insert({
-
-        document_id:
-          state.currentDocument.id,
-
-        version_number:
-          nextVersion,
-
-        title,
-
-        content,
-
-        created_by:
-          state.user.id
-
-      });
-
-  }catch(error){
-
-    console.debug(
-      "Document versioning unavailable:",
-      error
-    );
-
-  }
-
-  await writeActivity(
-    "document_saved",
-    "Document saved",
-    title
-  );
-
-}
-
-/* =========================================================
-   ACTIVITY WRITE
-========================================================= */
-
-async function writeActivity(
-  activityType,
-  title,
-  description
-){
-
-  try{
-
-    await db
-      .from("dream_activity")
-      .insert({
-
-        project_id:
-          state.projectId,
-
-        user_id:
-          state.user.id,
-
-        activity_type:
-          activityType,
-
-        title,
-
-        description
-
-      });
-
-  }catch(error){
-
-    console.debug(
-      "Activity write skipped:",
-      error
-    );
-
-  }
-
-}
-
-/* =========================================================
-   WORD COUNT
-========================================================= */
-
-function updateWordCount(){
-
-  const text =
-    $("docBody").value.trim();
-
-  const count =
-    text
-      ? text.split(/\s+/).length
-      : 0;
-
-  $("wordCount").textContent =
-    count + " words";
-
-}
-
-/* =========================================================
-   REAL CREATOR INVITATION
-========================================================= */
-
-async function openInvite(){
-
-  state.selectedCreator =
-    null;
-
-  $("modalRoot").innerHTML = `
-
-    <div class="modal-backdrop">
-
-      <div class="modal">
-
-        <div class="modal-head">
-
-          <h2>
-            Invite a Real Creator
-          </h2>
-
-          <button
-            class="close"
-            id="closeInvite"
-            type="button"
-          >
-            ✕
-          </button>
-
-        </div>
-
-        <div class="field">
-
-          <label>
-            Find a Dream World creator
-          </label>
-
-          <input
-            id="creatorSearch"
-            class="search"
-            type="search"
-            placeholder="Search name or @handle…"
-            autocomplete="off"
-          >
-
-        </div>
-
-        <div
-          id="creatorResults"
-          class="creator-results"
-        >
-          <div class="loading">
-            <div class="spinner"></div>
-          </div>
-        </div>
-
-        <div
-          id="selectedCreator"
-          class="selected-box hidden"
-        ></div>
-
-        <div
-          class="field"
-          style="margin-top:14px"
-        >
-
-          <label>
-            Role
-          </label>
-
-          <select id="inviteRole">
-
-            <option>Writer</option>
-            <option>Story / Screenplay</option>
-            <option>Producer</option>
-            <option>Director</option>
-            <option>Concept Artist</option>
-            <option>Visual Development</option>
-            <option>Composer / Sound</option>
-            <option>Research / Worldbuilding</option>
-            <option>Editor</option>
-            <option>Other</option>
-
-          </select>
-
-        </div>
-
-        <div class="field">
-
-          <label>
-            Message
-          </label>
-
-          <textarea
-            id="inviteMessage"
-            placeholder="Tell the creator why you want them involved…"
-          ></textarea>
-
-        </div>
-
-        <div
-          style="
-            display:flex;
-            justify-content:flex-end;
-            gap:9px;
-          "
-        >
-
-          <button
-            class="btn ghost"
-            id="cancelInvite"
-            type="button"
-          >
-            Cancel
-          </button>
-
-          <button
-            class="btn primary"
-            id="sendInvite"
-            type="button"
-          >
-            Send Invitation
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-  `;
-
-  $("closeInvite").onclick =
-    closeModal;
-
-  $("cancelInvite").onclick =
-    closeModal;
-
-  $("creatorSearch").oninput =
-    () =>
-      searchCreators(
-        $("creatorSearch").value
-      );
-
-  $("sendInvite").onclick =
-    sendInvitation;
-
-  await searchCreators("");
-
-}
-
-/* =========================================================
-   SEARCH REAL CREATORS
-========================================================= */
-
-async function searchCreators(
-  searchTerm
-){
-
-  const term =
-    String(
-      searchTerm || ""
-    ).trim();
-
-  /*
-    Search display_name.
-  */
-
-  let nameResults = [];
-
-  const nameQuery =
-    await db
-      .from("dream_profiles")
-      .select("*")
-      .neq(
-        "user_id",
-        state.user.id
-      )
-      .ilike(
-        "display_name",
-        "%" + term + "%"
-      )
-      .limit(15);
-
-  if(!nameQuery.error)
-    nameResults =
-      nameQuery.data || [];
-
-  /*
-    Search creator_handle separately.
-    This avoids fragile PostgREST OR
-    expressions across changing schemas.
-  */
-
-  let handleResults = [];
-
-  const handleQuery =
-    await db
-      .from("dream_profiles")
-      .select("*")
-      .neq(
-        "user_id",
-        state.user.id
-      )
-      .ilike(
-        "creator_handle",
-        "%" + term + "%"
-      )
-      .limit(15);
-
-  if(!handleQuery.error)
-    handleResults =
-      handleQuery.data || [];
-
-  /*
-    If no search term exists,
-    use name results first.
-  */
-
-  let combined =
-    [
-      ...nameResults,
-      ...handleResults
-    ];
-
-  /*
-    Remove duplicate accounts.
-  */
-
-  combined =
-    [
-      ...new Map(
-        combined.map(
-          profile =>
-            [
-              profile.user_id,
-              profile
-            ]
-        )
-      ).values()
-    ];
-
-  renderCreatorResults(
-    combined
-  );
-
-}
-
-/* =========================================================
-   CREATOR RESULTS
-========================================================= */
-
-function renderCreatorResults(
-  profiles
-){
-
-  if(!profiles.length){
-
-    $("creatorResults").innerHTML =
-      `
-        <div
-          class="empty"
-          style="padding:12px"
-        >
-          No matching Dream World creators found.
-        </div>
-      `;
-
-    return;
-
-  }
-
-  $("creatorResults").innerHTML =
-    profiles
-      .map(profile => {
-
-        const name =
-          first(
-            profile.display_name,
-            profile.creator_handle,
-            "Creator"
-          );
-
-        const role =
-          first(
-            profile.creator_type,
-            profile.primary_role,
-            "Dream World Creator"
-          );
-
-        const avatar =
-          profile.avatar_url
-            ? `
-              <img
-                src="${esc(profile.avatar_url)}"
-                alt=""
-              >
-            `
-            : esc(
-                initials(name)
-              );
-
-        return `
-
-          <div
-            class="creator-result"
-            data-user="${esc(
-              profile.user_id
-            )}"
-          >
-
-            <div class="avatar">
-              ${avatar}
-            </div>
-
-            <div class="person-info">
-
-              <strong>
-                ${esc(name)}
-              </strong>
-
-              <span>
-                ${
-                  profile.creator_handle
-                    ? "@" +
-                      esc(
-                        profile.creator_handle
-                      )
-                    : ""
-                }
-              </span>
-
-            </div>
-
-            <span class="role">
-              ${esc(role)}
-            </span>
-
-          </div>
-
-        `;
-
-      })
-      .join("");
-
-  document
-    .querySelectorAll(
-      ".creator-result"
-    )
-    .forEach(element => {
-
-      element.onclick =
-        () => {
-
-          const userId =
-            element.dataset.user;
-
-          const name =
-            element
-              .querySelector("strong")
-              ?.textContent ||
-            "Creator";
-
-          state.selectedCreator = {
-
-            user_id:
-              userId,
-
-            display_name:
-              name
-
-          };
-
-          document
-            .querySelectorAll(
-              ".creator-result"
-            )
-            .forEach(item =>
-              item.classList.remove(
-                "selected"
-              )
-            );
-
-          element.classList.add(
-            "selected"
-          );
-
-          $("selectedCreator")
-            .classList.remove(
-              "hidden"
-            );
-
-          $("selectedCreator")
-            .textContent =
-            "Selected: " +
-            name;
-
-        };
-
-    });
-
-}
-
-/* =========================================================
-   SEND INVITATION
-========================================================= */
-
-async function sendInvitation(){
-
-  if(!state.selectedCreator){
-
-    toast(
-      "Select a real creator first.",
-      "err"
-    );
-
-    return;
-
-  }
-
-  const role =
-    $("inviteRole").value;
-
-  const message =
-    $("inviteMessage")
-      .value
-      .trim();
-
-  /*
-    Preferred secure RPC.
-
-    This allows Supabase to enforce:
-    - authenticated user
-    - project access
-    - real invitee account
-    - duplicate invitation protection
-  */
-
-  const rpc =
-    await db.rpc(
-      "dream_send_project_invitation",
-      {
-
-        p_project_id:
-          state.projectId,
-
-        p_invitee_user_id:
-          state.selectedCreator.user_id,
-
-        p_role:
-          role,
-
-        p_message:
-          message
-
-      }
-    );
-
-  if(!rpc.error){
-
-    closeModal();
-
-    toast(
-      "Invitation sent to " +
-      state.selectedCreator.display_name +
-      ".",
-      "ok"
-    );
-
-    await writeActivity(
-      "creator_invited",
-      "Creator invited",
-      state.selectedCreator.display_name
-    );
-
-    return;
-
-  }
-
-  /*
-    Fallback for installations where
-    the RPC has not yet been installed.
-
-    RLS still decides whether the insert
-    is permitted.
-  */
-
-  const direct =
-    await db
-      .from("dream_project_invitations")
-      .insert({
-
-        project_id:
-          state.projectId,
-
-        invited_by:
-          state.user.id,
-
-        invitee_user_id:
-          state.selectedCreator.user_id,
-
-        role,
-
-        message,
-
-        status:
-          "pending"
-
-      })
-      .select("*")
-      .single();
-
-  if(direct.error){
-
-    toast(
-      direct.error.message ||
-      rpc.error?.message ||
-      "Invitation failed.",
-      "err"
-    );
-
-    showSchemaNotice(
-      "dream_project_invitations",
-      direct.error
-    );
-
-    return;
-
-  }
-
-  closeModal();
-
-  toast(
-    "Invitation sent to " +
-    state.selectedCreator.display_name +
-    ".",
-    "ok"
-  );
-
-}
-
-/* =========================================================
-   DEVELOPMENT NOTE MODAL
-========================================================= */
-
-function openNote(){
-
-  $("modalRoot").innerHTML = `
-
-    <div class="modal-backdrop">
-
-      <div class="modal">
-
-        <div class="modal-head">
-
-          <h2>
-            Development Note
-          </h2>
-
-          <button
-            class="close"
-            id="closeNote"
-            type="button"
-          >
-            ✕
-          </button>
-
-        </div>
-
-        <div class="field">
-
-          <label>
-            Type
-          </label>
-
-          <select id="noteType">
-
-            <option>Story</option>
-            <option>Character</option>
-            <option>Worldbuilding</option>
-            <option>Production</option>
-            <option>Research</option>
-            <option>Meeting</option>
-            <option>General</option>
-
-          </select>
-
-        </div>
-
-        <div class="field">
-
-          <label>
-            Title
-          </label>
-
-          <input
-            id="noteTitle"
-            type="text"
-            placeholder="Note title"
-          >
-
-        </div>
-
-        <div class="field">
-
-          <label>
-            Note
-          </label>
-
-          <textarea
-            id="noteBody"
-            placeholder="Capture the idea, decision, question or next step…"
-          ></textarea>
-
-        </div>
-
-        <div
-          style="
-            display:flex;
-            justify-content:flex-end;
-            gap:9px;
-          "
-        >
-
-          <button
-            class="btn ghost"
-            id="cancelNote"
-            type="button"
-          >
-            Cancel
-          </button>
-
-          <button
-            class="btn primary"
-            id="saveNote"
-            type="button"
-          >
-            Save Note
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-  `;
-
-  $("closeNote").onclick =
-    closeModal;
-
-  $("cancelNote").onclick =
-    closeModal;
-
-  $("saveNote").onclick =
-    saveNote;
-
-}
-
-/* =========================================================
-   SAVE NOTE
-========================================================= */
-
-async function saveNote(){
-
-  const title =
-    $("noteTitle")
-      .value
-      .trim();
-
-  const body =
-    $("noteBody")
-      .value
-      .trim();
-
-  const noteType =
-    $("noteType").value;
-
-  if(!title || !body){
-
-    toast(
-      "Add a title and note.",
-      "err"
-    );
-
-    return;
-
-  }
-
-  const result =
-    await db
-      .from("dream_development_notes")
-      .insert({
-
-        project_id:
-          state.projectId,
-
-        author_id:
-          state.user.id,
-
-        note_type:
-          noteType,
-
-        title,
-
-        body,
-
-        visibility:
-          "development"
-
-      });
-
-  if(result.error){
-
-    toast(
-      result.error.message ||
-      "Could not save note.",
-      "err"
-    );
-
-    return;
-
-  }
-
-  closeModal();
-
-  toast(
-    "Development note saved.",
-    "ok"
-  );
-
-  await loadNotes();
-
-  await writeActivity(
-    "note_created",
-    "Development note created",
-    title
-  );
-
-}
-
-/* =========================================================
-   FILE UPLOAD
-========================================================= */
-
-async function uploadFile(file){
-
-  if(
-    !file ||
-    !state.projectId
-  )
-    return;
-
-  const safeName =
-    file.name.replace(
-      /[^\w.\- ]/g,
-      "_"
-    );
-
-  const path =
-    "projects/" +
-    state.projectId +
-    "/" +
-    crypto.randomUUID() +
-    "-" +
-    safeName;
-
-  /*
-    Storage bucket:
-    dream-world-project-files
-  */
-
-  const upload =
-    await db.storage
-      .from(
-        "dream-world-project-files"
-      )
-      .upload(
-        path,
-        file,
-        {
-          upsert:false
-        }
-      );
-
-  if(upload.error){
-
-    toast(
-      "Upload failed: " +
-      upload.error.message,
-      "err"
-    );
-
-    return;
-
-  }
-
-  const record = {
-
-    project_id:
-      state.projectId,
-
-    user_id:
-      state.user.id,
-
-    name:
-      file.name,
-
-    file_name:
-      file.name,
-
-    path,
-
-    storage_path:
-      path,
-
-    size:
-      file.size,
-
-    mime_type:
-      file.type
-
-  };
-
-  const database =
-    await db
-      .from("dream_files")
-      .insert(record);
-
-  if(database.error){
-
-    /*
-      Prevent orphaned Storage files.
-    */
-
-    await db.storage
-      .from(
-        "dream-world-project-files"
-      )
-      .remove([path]);
-
-    toast(
-      "File uploaded but could not be registered: " +
-      database.error.message,
-      "err"
-    );
-
-    return;
-
-  }
-
-  toast(
-    "File uploaded.",
-    "ok"
-  );
-
-  await loadFiles();
-
-  await writeActivity(
-    "file_uploaded",
-    "File uploaded",
-    file.name
-  );
-
-}
-
-/* =========================================================
-   PREVIEW
-========================================================= */
-
-function openPreview(){
-
-  const title =
-    esc(
-      $("docTitle")
-        .value ||
-      "Untitled Document"
-    );
-
-  const body =
-    esc(
-      $("docBody").value || ""
-    )
-    .replace(
-      /\n/g,
-      "<br>"
-    );
-
-  $("modalRoot").innerHTML = `
-
-    <div class="modal-backdrop">
-
-      <div class="modal">
-
-        <div class="modal-head">
-
-          <h2>
-            ${title}
-          </h2>
-
-          <button
-            class="close"
-            id="closePreview"
-            type="button"
-          >
-            ✕
-          </button>
-
-        </div>
-
-        <div
-          style="
-            color:#bbb;
-            line-height:1.9;
-            font-size:13px;
-          "
-        >
-
-          ${
-            body ||
-            "<span style='color:#666'>No content yet.</span>"
-          }
-
-        </div>
-
-      </div>
-
-    </div>
-  `;
-
-  $("closePreview").onclick =
-    closeModal;
-
-}
-
-/* =========================================================
-   MODAL CLOSE
-========================================================= */
-
-function closeModal(){
-
-  $("modalRoot").innerHTML =
-    "";
-
-}
-
-/* =========================================================
-   SCHEMA NOTICE
-========================================================= */
-
-function showSchemaNotice(
-  table,
-  error
-){
-
-  const message =
-    String(
-      error?.message || ""
-    );
-
-  if(
-    /relation .* does not exist/i.test(message) ||
-    /could not find the table/i.test(message) ||
-    /schema cache/i.test(message)
-  ){
-
-    $("schemaBanner")
-      .classList
-      .remove("hidden");
-
-    $("schemaBanner").innerHTML = `
-
-      <strong>
-        Optional Dream World schema missing:
-      </strong>
-
-      ${esc(table)}
-
-      <br>
-
-      Install the corresponding Dream World
-      Supabase table/function to enable this feature.
-
-    `;
-
-  }
-
-}
-
-/* =========================================================
-   TOOLS
-========================================================= */
 
 function renderTools(){
-
-  $("tools").innerHTML =
-    tools
-      .map(
-        ([id,label]) => `
-
-          <button
-            class="tool ${
-              id === state.currentTool
-                ? "active"
-                : ""
-            }"
-            data-tool="${esc(id)}"
-            type="button"
-          >
-            ${esc(label)}
-          </button>
-
-        `
-      )
-      .join("");
-
-  document
-    .querySelectorAll(".tool")
-    .forEach(button => {
-
-      button.onclick =
-        () =>
-          selectTool(
-            button.dataset.tool
-          );
-
-    });
-
+  $("tools").innerHTML=tools.map(([id,name]) =>
+    `<button class="tool ${state.tool===id?"active":""}" data-tool="${id}">${esc(name)}</button>`).join("");
+  document.querySelectorAll(".tool").forEach(b=>b.onclick=()=>switchTool(b.dataset.tool));
 }
 
-function selectTool(id){
-
-  state.currentTool =
-    id;
-
+async function switchTool(id){
+  state.tool=id;
+  const tool=tools.find(x=>x[0]===id);
+  $("toolName").textContent=tool?.[1]||"Creative Tool";
   renderTools();
-
-  const label =
-    tools.find(
-      tool =>
-        tool[0] === id
-    )?.[1] ||
-    "Creative Development";
-
-  $("toolTitle").textContent =
-    label;
-
-  loadDocument();
-
+  await loadDocument();
 }
 
-/* =========================================================
-   REALTIME
-========================================================= */
-
-function setupRealtime(){
-
-  if(!state.projectId)
+async function loadDocument(){
+  if(!state.projectId){$("docState").textContent="No project selected";return;}
+  const r=await safeTable("dream_creative_documents",()=>sb.from("dream_creative_documents").select("*")
+    .eq("project_id",state.projectId).eq("document_type",state.tool).order("updated_at",{ascending:false}).limit(1).maybeSingle());
+  if(r.error){
+    state.document=null;
+    $("docState").textContent="Document table not installed";
+    $("docTitle").value="";
+    $("docContent").value="";
+    updateCounter();
     return;
-
-  state.realtimeChannel =
-    db
-      .channel(
-        "creative-room-" +
-        state.projectId
-      )
-
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"dream_project_members",
-          filter:
-            "project_id=eq." +
-            state.projectId
-        },
-        () => loadTeam()
-      )
-
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"dream_development_notes",
-          filter:
-            "project_id=eq." +
-            state.projectId
-        },
-        () => loadNotes()
-      )
-
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"dream_activity",
-          filter:
-            "project_id=eq." +
-            state.projectId
-        },
-        () => loadActivity()
-      )
-
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"dream_files",
-          filter:
-            "project_id=eq." +
-            state.projectId
-        },
-        () => loadFiles()
-      )
-
-      .subscribe();
-
+  }
+  state.document=r.data||null;
+  $("docTitle").value=first(r.data?.title,tools.find(x=>x[0]===state.tool)?.[1],"Untitled");
+  $("docContent").value=first(r.data?.content,"");
+  $("docState").textContent=r.data ? `Saved ${rel(r.data.updated_at)}` : "New draft";
+  updateCounter();
 }
 
-/* =========================================================
-   PARTICLES
-========================================================= */
+async function saveDocument(){
+  if(!state.projectId){toast("No project is available to save.",false);return}
+  const title=$("docTitle").value.trim()||tools.find(x=>x[0]===state.tool)?.[1]||"Untitled";
+  const content=$("docContent").value;
+  const payload={
+    project_id:state.projectId,
+    dream_id:first(state.project?.dream_id,state.project?.dream_submission_id,state.project?.submission_id) || null,
+    author_id:state.user.id,
+    document_type:state.tool,
+    title,content,status:"draft",visibility:"development",updated_at:new Date().toISOString()
+  };
 
-function createParticles(){
-
-  const wrapper =
-    $("particles");
-
-  const reducedMotion =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-  const count =
-    reducedMotion
-      ? 8
-      : 36;
-
-  for(
-    let i = 0;
-    i < count;
-    i++
-  ){
-
-    const particle =
-      document.createElement("i");
-
-    particle.className =
-      "particle";
-
-    particle.style.left =
-      Math.random() * 100 +
-      "%";
-
-    particle.style.top =
-      Math.random() * 100 +
-      "%";
-
-    particle.style.animationDelay =
-      Math.random() * 6 +
-      "s";
-
-    particle.style.animationDuration =
-      5 +
-      Math.random() * 8 +
-      "s";
-
-    wrapper.appendChild(
-      particle
-    );
-
+  if(!state.tables.dream_creative_documents){
+    const test=await sb.from("dream_creative_documents").select("id").limit(1);
+    if(test.error){toast("Creative document storage is not installed. Install dream_creative_documents first.",false);return}
+    state.tables.dream_creative_documents=true;
   }
 
+  let r;
+  if(state.document?.id) r=await sb.from("dream_creative_documents").update(payload).eq("id",state.document.id).select("*").single();
+  else r=await sb.from("dream_creative_documents").insert(payload).select("*").single();
+
+  if(r.error){toast("Save failed: "+r.error.message,false);return}
+  state.document=r.data;
+
+  if(state.tables.dream_document_versions !== false){
+    const vr=await sb.from("dream_document_versions").select("version_number")
+      .eq("document_id",state.document.id).order("version_number",{ascending:false}).limit(1).maybeSingle();
+    if(!vr.error){
+      await sb.from("dream_document_versions").insert({
+        document_id:state.document.id,version_number:Number(vr.data?.version_number||0)+1,
+        content,title,created_by:state.user.id
+      });
+    }else state.tables.dream_document_versions=false;
+  }
+
+  await logActivity("document_saved",`Saved ${title}`);
+  $("docState").textContent="Saved just now";
+  toast("Document saved.");
 }
 
-/* =========================================================
-   EVENT BINDINGS
-========================================================= */
-
-function bindEvents(){
-
-  $("menuBtn").onclick =
-    () =>
-      $("navLinks")
-        .classList
-        .toggle("open");
-
-  $("heroSave").onclick =
-    saveDocument;
-
-  $("saveBtn").onclick =
-    saveDocument;
-
-  $("previewBtn").onclick =
-    openPreview;
-
-  $("heroInvite").onclick =
-    openInvite;
-
-  $("inviteBtn").onclick =
-    openInvite;
-
-  $("teamInvite").onclick =
-    openInvite;
-
-  $("addNoteBtn").onclick =
-    openNote;
-
-  $("notesBtn").onclick =
-    openNote;
-
-  $("uploadBtn").onclick =
-    () =>
-      $("fileInput").click();
-
-  $("fileInput").onchange =
-    event =>
-      uploadFile(
-        event.target.files?.[0]
-      );
-
-  $("docBody").oninput =
-    updateWordCount;
-
+async function loadTeam(){
+  if(!state.projectId)return;
+  const r=await safeTable("dream_project_members",()=>sb.from("dream_project_members").select("*").eq("project_id",state.projectId).order("created_at",{ascending:true}));
+  if(r.error){$("teamList").innerHTML='<div class="empty">Team data unavailable.</div>';return}
+  const members=r.data||[];
+  const ids=[...new Set(members.map(m=>m.user_id).filter(Boolean))];
+  let profiles=[];
+  if(ids.length){
+    const p=await sb.from("dream_profiles").select("*").in("user_id",ids);
+    if(!p.error)profiles=p.data||[];
+  }
+  const map=new Map(profiles.map(p=>[p.user_id,p]));
+  $("teamList").innerHTML=members.length ? members.map(m=>{
+    const p=map.get(m.user_id)||{};
+    const name=first(p.display_name,p.creator_handle,"Dream Creator");
+    return `<div class="person"><div class="avatar">${p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="">`:esc(initials(name))}</div><div><div class="name">${esc(name)}</div><div class="small">${esc(first(m.role,p.creator_type,"Creator"))}</div><span class="tag">${esc(first(m.status,"active"))}</span></div></div>`;
+  }).join("") : '<div class="empty">No active collaborators yet.</div>';
 }
 
-/* =========================================================
-   INITIALIZATION
-========================================================= */
+async function loadStages(){
+  if(!state.projectId)return;
+  const r=await safeTable("dream_project_stages",()=>sb.from("dream_project_stages").select("*").eq("project_id",state.projectId));
+  if(r.error){$("stageList").innerHTML='<div class="empty">Stage data unavailable.</div>';return}
+  const rows=(r.data||[]).sort((a,b)=>Number(first(a.sort_order,a.order_index,999))-Number(first(b.sort_order,b.order_index,999)));
+  $("stageList").innerHTML=rows.length ? rows.map(x=>`<div class="stage"><div class="name">${esc(first(x.name,x.title,x.stage_name,"Development Stage"))}</div><div class="small">${esc(first(x.status,"pending"))}${x.progress_percent!=null?" · "+esc(x.progress_percent)+"%":""}</div></div>`).join("") : '<div class="empty">No development stages found.</div>';
+}
+
+async function loadFiles(){
+  if(!state.projectId)return;
+  const r=await safeTable("dream_files",()=>sb.from("dream_files").select("*").eq("project_id",state.projectId).order("created_at",{ascending:false}).limit(12));
+  if(r.error){$("fileList").innerHTML='<div class="empty">File data unavailable.</div>';return}
+  const rows=r.data||[];
+  $("fileList").innerHTML=rows.length ? rows.map(x=>{
+    const name=first(x.file_name,x.name,x.title,"Project File");
+    return `<div class="file-row"><div class="name">${esc(name)}</div><div class="small">${esc(fileSize(first(x.size,x.file_size,0)))} · ${esc(rel(first(x.created_at,x.updated_at)))}</div></div>`;
+  }).join("") : '<div class="empty">No project files yet.</div>';
+}
+
+async function uploadFile(file){
+  if(!file||!state.projectId)return;
+  const path=`projects/${state.projectId}/${crypto.randomUUID()}-${file.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`;
+  const up=await sb.storage.from("dream-world-project-files").upload(path,file,{upsert:false});
+  if(up.error){toast("Upload failed: "+up.error.message,false);return}
+  const insert=await sb.from("dream_files").insert({
+    project_id:state.projectId,uploaded_by:state.user.id,name:file.name,file_name:file.name,
+    storage_path:path,size:file.size,mime_type:file.type
+  });
+  if(insert.error){
+    await sb.storage.from("dream-world-project-files").remove([path]);
+    toast("File uploaded but metadata could not be saved: "+insert.error.message,false);
+    return;
+  }
+  await logActivity("file_uploaded",`Uploaded ${file.name}`);
+  await loadFiles();
+  toast("File uploaded.");
+}
+
+async function loadNotes(){
+  if(!state.projectId)return;
+  const r=await safeTable("dream_development_notes",()=>sb.from("dream_development_notes").select("*").eq("project_id",state.projectId).order("created_at",{ascending:false}).limit(30));
+  if(r.error){$("notesGrid").innerHTML='<div class="note"><h3>Notes unavailable</h3><p>The development notes table is not installed or is not accessible for this project.</p></div>';return}
+  const rows=r.data||[];
+  $("notesGrid").innerHTML=rows.length ? rows.map(x=>`<article class="note"><h3>${esc(first(x.title,x.note_title,"Development Note"))}</h3><p>${esc(first(x.body,x.content,x.note,"No note content."))}</p><div class="small" style="margin-top:10px">${esc(rel(x.created_at))}</div></article>`).join("") : '<div class="note"><h3>No development notes yet</h3><p>Your first creative-room note will appear here when it is saved to Supabase.</p></div>';
+}
+
+async function loadActivity(){
+  if(!state.projectId)return;
+  const r=await safeTable("dream_activity",()=>sb.from("dream_activity").select("*").eq("project_id",state.projectId).order("created_at",{ascending:false}).limit(10));
+  if(r.error){$("activityList").innerHTML='<div class="empty">Activity unavailable.</div>';return}
+  const rows=r.data||[];
+  $("activityList").innerHTML=rows.length ? rows.map(x=>`<div class="activity"><div class="name">${esc(first(x.title,x.activity_type,"Activity"))}</div><div class="small">${esc(first(x.description,""))} · ${esc(rel(x.created_at))}</div></div>`).join("") : '<div class="empty">No recent activity.</div>';
+}
+
+async function logActivity(type,description){
+  if(!state.projectId)return;
+  try{
+    await sb.from("dream_activity").insert({project_id:state.projectId,user_id:state.user.id,activity_type:type,title:description,description,created_at:new Date().toISOString()});
+  }catch(_){}
+}
+
+async function searchCreators(){
+  const q=$("creatorSearch").value.trim();
+  if(q.length<2){$("creatorResults").innerHTML='<div class="empty">Type at least 2 characters.</div>';return}
+  const r=await sb.from("dream_profiles").select("*").or(`display_name.ilike.%${q}%,creator_handle.ilike.%${q}%`).limit(20);
+  if(r.error){$("creatorResults").innerHTML=`<div class="empty">Creator search unavailable: ${esc(r.error.message)}</div>`;return}
+  const rows=(r.data||[]).filter(x=>x.user_id!==state.user.id);
+  $("creatorResults").innerHTML=rows.length ? rows.map(p=>{
+    const name=first(p.display_name,p.creator_handle,"Dream Creator");
+    return `<div class="creator"><div class="creator-info"><div class="avatar">${p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="">`:esc(initials(name))}</div><div class="text"><div class="name">${esc(name)}</div><div class="small">@${esc(first(p.creator_handle,"creator"))}</div></div></div><button class="btn" data-creator="${esc(p.user_id)}">Invite</button></div>`;
+  }).join("") : '<div class="empty">No matching creators found.</div>';
+  document.querySelectorAll("[data-creator]").forEach(b=>b.onclick=()=>{
+    const p=(r.data||[]).find(x=>x.user_id===b.dataset.creator); selectCreator(p);
+  });
+}
+
+function selectCreator(p){
+  state.selectedCreator=p;
+  const name=first(p.display_name,p.creator_handle,"Dream Creator");
+  $("selectedCreator").classList.remove("hidden");
+  $("selectedCreator").innerHTML=`<div class="person" style="padding:0"><div class="avatar">${p.avatar_url?`<img src="${esc(p.avatar_url)}" alt="">`:esc(initials(name))}</div><div><div class="name">${esc(name)}</div><div class="small">@${esc(first(p.creator_handle,"creator"))} · Selected creator</div></div></div>`;
+}
+
+async function sendInvitation(){
+  if(!state.selectedCreator){toast("Select a real creator first.",false);return}
+  if(!state.projectId){toast("No project selected.",false);return}
+  const role=$("inviteRole").value, message=$("inviteMessage").value.trim();
+
+  // Prefer the secure RPC if installed.
+  const rpc=await sb.rpc("dream_send_project_invitation",{
+    p_project_id:state.projectId,p_invitee_user_id:state.selectedCreator.user_id,p_role:role,p_message:message||null
+  });
+  if(!rpc.error){
+    await notifyInvite(state.selectedCreator.user_id,role);
+    await logActivity("creator_invited",`Invited ${first(state.selectedCreator.display_name,state.selectedCreator.creator_handle)} as ${role}`);
+    closeModal("inviteModal"); toast("Creator invitation sent.");
+    return;
+  }
+
+  // Fallback for installations that have the table but not the RPC.
+  const ins=await sb.from("dream_project_invitations").insert({
+    project_id:state.projectId,invited_by:state.user.id,invitee_user_id:state.selectedCreator.user_id,
+    role,message:message||null,status:"pending"
+  });
+  if(ins.error){toast("Invitation failed: "+ins.error.message,false);return}
+  await notifyInvite(state.selectedCreator.user_id,role);
+  closeModal("inviteModal"); toast("Creator invitation sent.");
+}
+
+async function notifyInvite(userId,role){
+  try{
+    await sb.from("dream_notifications").insert({
+      user_id:userId,notification_type:"project_invitation",title:"Dream World project invitation",
+      body:`You have been invited to join a project as ${role}.`,is_read:false
+    });
+  }catch(_){}
+}
+
+function renderProject(){
+  const p=state.project;
+  if(!p){
+    $("projectTitle").textContent="No Project Selected";
+    $("projectMeta").textContent="Open a project from the Projects hub or add ?project_id=<project-id> to this page.";
+    $("statFormat").textContent="—";$("statGenre").textContent="—";$("statStatus").textContent="—";$("statProgress").textContent="0%";
+    return;
+  }
+  const title=first(p.title,p.name,"Untitled Dream Project");
+  $("projectTitle").textContent=title;
+  $("projectMeta").textContent=[first(p.project_code,p.code),first(p.status,"development"),p.updated_at?`Updated ${fmtDate(p.updated_at)}`:""].filter(Boolean).join(" · ");
+  $("statFormat").textContent=first(p.format,p.project_format,"—");
+  $("statGenre").textContent=first(p.genre,"—");
+  $("statStatus").textContent=first(p.status,"—");
+  $("statProgress").textContent=(first(p.progress_percent,0))+"%";
+  $("heroProject").href=`projects.html?project_id=${encodeURIComponent(state.projectId)}`;
+  $("backProject").href=`projects.html?project_id=${encodeURIComponent(state.projectId)}`;
+}
+
+async function loadAll(){
+  state.project=await getProject();
+  state.projectId=state.project?.id||null;
+  renderProject();
+  if(!state.projectId){
+    showInstall("No project is available to this creator. Open a project from the Projects hub, or use a valid project_id in the page URL.");
+    setConnection("Signed in · no project selected","amber");
+    return;
+  }
+  hideInstall();
+  await loadDream();
+  await Promise.all([loadTeam(),loadStages(),loadFiles(),loadNotes(),loadActivity()]);
+  await loadDocument();
+  subscribeRealtime();
+}
+
+function subscribeRealtime(){
+  if(state.channel)sb.removeChannel(state.channel);
+  state.channel=sb.channel("creative-room-"+state.projectId)
+    .on("postgres_changes",{event:"*",schema:"public",table:"dream_project_members",filter:`project_id=eq.${state.projectId}`},loadTeam)
+    .on("postgres_changes",{event:"*",schema:"public",table:"dream_development_notes",filter:`project_id=eq.${state.projectId}`},loadNotes)
+    .on("postgres_changes",{event:"*",schema:"public",table:"dream_creative_documents",filter:`project_id=eq.${state.projectId}`},loadDocument)
+    .on("postgres_changes",{event:"*",schema:"public",table:"dream_activity",filter:`project_id=eq.${state.projectId}`},loadActivity)
+    .subscribe();
+}
+
+function openModal(id){$(id).classList.remove("hidden")}
+function closeModal(id){$(id).classList.add("hidden")}
+
+function updateCounter(){
+  const n=$("docContent").value.length;
+  $("counter").textContent=n.toLocaleString()+" characters";
+}
+
+function initCanvas(){
+  const canvas=$("cinematicCanvas"),ctx=canvas.getContext("2d");
+  let w=0,h=0,dpr=1,particles=[];
+  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function resize(){
+    dpr=Math.min(devicePixelRatio||1,2);w=canvas.clientWidth;h=canvas.clientHeight;
+    canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    particles=Array.from({length:Math.min(100,Math.floor(w/12))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.2,a:Math.random()*.7+.15,s:Math.random()*.35+.05}));
+  }
+  function draw(t){
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p=>{
+      if(!reduced)p.y-=p.s;
+      if(p.y<0)p.y=h;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,${30+Math.random()*35},${30+Math.random()*35},${p.a})`;ctx.fill();
+    });
+    if(!reduced)requestAnimationFrame(draw);
+  }
+  addEventListener("resize",resize);resize();draw(0);
+}
+function initHeroParallax(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  $("hero").addEventListener("pointermove",e=>{
+    const r=$("hero").getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    $("hero").style.setProperty("--mx",x);$("hero").style.setProperty("--my",y);
+    document.querySelectorAll(".orbit").forEach((o,i)=>o.style.marginLeft=`${x*(i+1)*10}px`);
+  });
+}
+
+document.addEventListener("click",e=>{
+  const close=e.target.closest("[data-close]"); if(close)closeModal(close.dataset.close);
+});
+$("saveBtn").onclick=saveDocument;$("saveBtnBottom").onclick=saveDocument;$("heroSave").onclick=saveDocument;
+$("inviteBtn").onclick=()=>{state.selectedCreator=null;$("selectedCreator").classList.add("hidden");$("creatorSearch").value="";$("creatorResults").innerHTML='<div class="empty">Start typing to find creators.</div>';openModal("inviteModal")};
+$("heroInvite").onclick=()=>$("inviteBtn").click();
+$("creatorSearch").addEventListener("input",()=>{clearTimeout(window._searchTimer);window._searchTimer=setTimeout(searchCreators,250)});
+$("sendInvite").onclick=sendInvitation;
+$("previewBtn").onclick=()=>{$("previewTitle").textContent=$("docTitle").value||"Document Preview";$("previewContent").textContent=$("docContent").value||"Nothing written yet.";openModal("previewModal")};
+$("docContent").addEventListener("input",updateCounter);
+$("uploadBtn").onclick=()=>$("fileInput").click();
+$("fileInput").onchange=e=>uploadFile(e.target.files[0]);
 
 async function init(){
-
-  createParticles();
-
-  renderTools();
-
-  bindEvents();
-
-  const authenticated =
-    await requireAuth();
-
-  if(!authenticated)
+  initCanvas();initHeroParallax();renderTools();
+  setConnection("Connecting to Supabase…","amber");
+  const {data,error}=await sb.auth.getUser();
+  if(error||!data.user){
+    location.href=`login.html?next=${encodeURIComponent("creative-room.html"+location.search)}`;
     return;
-
-  try{
-
-    await loadProfile();
-
-    await resolveProject();
-
-    await loadDream();
-
-    renderProject();
-
-    await Promise.all([
-
-      loadTeam(),
-
-      loadStages(),
-
-      loadFiles(),
-
-      loadActivity(),
-
-      loadNotes(),
-
-      loadDocument()
-
-    ]);
-
-    setupRealtime();
-
-  }catch(error){
-
-    console.error(
-      "Creative Room initialization error:",
-      error
-    );
-
-    $("projectTitle").textContent =
-      "No Project Selected";
-
-    $("projectCode").textContent =
-      "CREATIVE ROOM";
-
-    $("schemaBanner")
-      .classList
-      .remove("hidden");
-
-    $("schemaBanner").innerHTML = `
-
-      <strong>
-        Creative Room could not load a project.
-      </strong>
-
-      ${esc(
-        error?.message ||
-        "Unknown error."
-      )}
-
-      <br><br>
-
-      Open Creative Room from a Dream World
-      project or use:
-
-      <code>
-        creative-room.html?project_id=YOUR_PROJECT_UUID
-      </code>
-
-    `;
-
-    $("team").innerHTML =
-      `<div class="empty">
-        Project access required.
-      </div>`;
-
-    $("stages").innerHTML =
-      `<div class="empty">
-        Project access required.
-      </div>`;
-
-    $("files").innerHTML =
-      `<div class="empty">
-        Project access required.
-      </div>`;
-
-    $("activity").innerHTML =
-      `<div class="empty">
-        Project access required.
-      </div>`;
-
-    $("notes").innerHTML =
-      `<div class="empty">
-        Project access required.
-      </div>`;
-
   }
-
+  state.user=data.user;
+  $("userText").textContent=first(data.user.user_metadata?.display_name,data.user.email,"Authenticated creator");
+  setConnection("Dream World connected");
+  try{await loadAll()}catch(e){
+    console.error(e);
+    setConnection("Connected · project data needs attention","amber");
+    showInstall("Creative Room connected to Supabase, but project data could not be loaded: "+esc(e.message||e));
+  }
+  sb.auth.onAuthStateChange((event,session)=>{
+    if(event==="SIGNED_OUT"||!session) location.href="login.html";
+  });
 }
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
-
-db.auth.onAuthStateChange(
-  (event) => {
-
-    if(
-      event ===
-      "SIGNED_OUT"
-    ){
-
-      location.replace(
-        "login.html?next=creative-room.html"
-      );
-
-    }
-
-  }
-);
-
-/* =========================================================
-   CLEANUP
-========================================================= */
-
-window.addEventListener(
-  "beforeunload",
-  () => {
-
-    if(
-      state.realtimeChannel
-    ){
-
-      db.removeChannel(
-        state.realtimeChannel
-      );
-
-    }
-
-  }
-);
-
-/* START */
-
 init();
-
 })();
 </script>
-
 </body>
 </html>
