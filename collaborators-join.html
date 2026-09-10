@@ -1778,77 +1778,88 @@ footer strong {
 
 
 <!-- =====================================================
-     NAV
+     DREAMSCAPES NAVIGATION
 ===================================================== -->
 
-<nav class="nav">
+<nav class="dream-nav" id="dreamNav">
 
-  <div class="container navin">
+    <!-- Brand -->
+    <a href="index.html" class="dream-logo" aria-label="CrowRules Dreamscapes Home">
 
-    <a
-                class="brand"
-                href="index.html"
-                aria-label="CrowRules Dreamscapes Home"
-            >
+        <span class="logo-main">CROWRULES</span>
+        <span class="logo-sub">DREAMSCAPES</span>
 
-                <div class="brand-mark">
-                    🌙
-                </div>
+    </a>
 
-                <div class="brand-text">
 
-                    DREAMSCAPES
+    <!-- Desktop Navigation -->
+    <div class="nav-links" id="navLinks">
 
-                    <span>
-                        CROWRULES ENTERTAINMENT
-                    </span>
-
-                </div>
-
-            </a>
-
-    <div class="nav-links">
-
-        <a href="#creators">
-            Creators
+        <a href="#creators" class="nav-link">
+            <span class="nav-icon">✦</span>
+            <span>Creators</span>
         </a>
 
-        <a href="#projects">
-            Projects
+        <a href="#projects" class="nav-link">
+            <span class="nav-icon">◈</span>
+            <span>Projects</span>
         </a>
 
-        <a href="#dashboard">
-            My Network
+        <a href="#dashboard" class="nav-link">
+            <span class="nav-icon">◎</span>
+            <span>My Network</span>
         </a>
 
-        <a href="#apply">
-            Join
+        <a href="#apply" class="nav-link nav-join">
+            <span class="nav-icon">＋</span>
+            <span>Join</span>
         </a>
 
+
+        <!-- Authentication -->
         <button
             id="authButton"
             class="auth-pill"
             type="button"
+            aria-label="Sign in to Dreamscapes"
         >
 
             <span
                 id="authDot"
                 class="auth-dot"
+                aria-hidden="true"
             ></span>
 
             <span id="authLabel">
                 Sign In
             </span>
 
+            <span class="auth-arrow" aria-hidden="true">
+                ↗
+            </span>
+
         </button>
 
     </div>
 
+
+    <!-- Mobile Menu Button -->
+    <button
+        class="nav-toggle"
+        id="navToggle"
+        type="button"
+        aria-label="Open Dreamscapes navigation"
+        aria-expanded="false"
+        aria-controls="navLinks"
+    >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
 </nav>
-
-
-<main>
-
 
 <!-- =====================================================
      HERO
