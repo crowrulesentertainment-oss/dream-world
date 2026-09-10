@@ -1,0 +1,2162 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<title>Dreamscapes Admin — CrowRules Entertainment</title>
+
+<meta name="description" content="CrowRules Dreamscapes administrative control center.">
+<meta name="theme-color" content="#05050b">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root{
+  --bg:#05050b;
+  --bg2:#090914;
+  --panel:rgba(15,15,29,.82);
+  --panel2:rgba(22,22,40,.92);
+  --line:rgba(255,255,255,.09);
+  --text:#f4f3ff;
+  --muted:#9c9ab0;
+  --purple:#9b7cff;
+  --cyan:#57dcff;
+  --pink:#ff6bd6;
+  --green:#61e6a7;
+  --yellow:#ffd66b;
+  --red:#ff667d;
+  --shadow:0 24px 80px rgba(0,0,0,.45);
+  --radius:20px;
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 15% 10%,rgba(155,124,255,.14),transparent 30%),
+    radial-gradient(circle at 85% 20%,rgba(87,220,255,.10),transparent 28%),
+    radial-gradient(circle at 50% 100%,rgba(255,107,214,.08),transparent 35%),
+    linear-gradient(180deg,#040409,#080812 45%,#040408);
+  font-family:Montserrat,Arial,sans-serif;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.5;
+  background-image:
+    radial-gradient(circle at 10% 20%,rgba(255,255,255,.55) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 75% 30%,rgba(255,255,255,.35) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 35% 70%,rgba(255,255,255,.30) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 90% 85%,rgba(255,255,255,.35) 0 1px,transparent 1.5px);
+  background-size:240px 240px,310px 310px,380px 380px,290px 290px;
+  z-index:-1;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(20px);
+  background:rgba(5,5,11,.82);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  max-width:1500px;
+  margin:auto;
+  min-height:72px;
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width:40px;
+  height:40px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:
+    radial-gradient(circle at 35% 30%,#d7ccff,transparent 18%),
+    linear-gradient(135deg,#6e4cff,#b76dff 50%,#46d8ff);
+  box-shadow:0 0 30px rgba(155,124,255,.35);
+  font-size:19px;
+}
+
+.brand-text strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:14px;
+  letter-spacing:2px;
+}
+
+.brand-text span{
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:1.5px;
+}
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.nav-btn,
+.signout{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  border-radius:12px;
+  padding:10px 14px;
+  transition:.2s ease;
+}
+
+.nav-btn:hover,
+.signout:hover{
+  background:rgba(155,124,255,.12);
+  border-color:rgba(155,124,255,.35);
+}
+
+/* LOGIN */
+
+.login-screen{
+  min-height:calc(100vh - 72px);
+  display:grid;
+  place-items:center;
+  padding:30px;
+}
+
+.login-card{
+  width:min(520px,100%);
+  padding:44px;
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:linear-gradient(145deg,rgba(20,20,40,.92),rgba(9,9,18,.94));
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+
+.login-orbit{
+  width:90px;
+  height:90px;
+  margin:0 auto 25px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(155,124,255,.35);
+  box-shadow:
+    0 0 40px rgba(155,124,255,.22),
+    inset 0 0 30px rgba(87,220,255,.08);
+  font-size:34px;
+}
+
+.login-card h1{
+  font-family:Orbitron,sans-serif;
+  font-size:25px;
+  letter-spacing:2px;
+  margin:0 0 12px;
+}
+
+.login-card p{
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.google-btn{
+  width:100%;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:14px;
+  padding:14px 18px;
+  background:white;
+  color:#15151b;
+  font-weight:700;
+  margin-top:15px;
+}
+
+.notice{
+  margin-top:20px;
+  padding:14px;
+  border-radius:12px;
+  background:rgba(255,102,125,.08);
+  border:1px solid rgba(255,102,125,.18);
+  color:#ffb4c0;
+  font-size:12px;
+  line-height:1.6;
+}
+
+/* ADMIN */
+
+.admin{
+  max-width:1500px;
+  margin:auto;
+  padding:36px 24px 80px;
+}
+
+.hero{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:30px;
+  margin-bottom:30px;
+}
+
+.eyebrow{
+  color:var(--cyan);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.hero h1{
+  margin:8px 0;
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(28px,5vw,48px);
+  letter-spacing:2px;
+}
+
+.hero p{
+  margin:0;
+  max-width:720px;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.admin-badge{
+  white-space:nowrap;
+  padding:10px 14px;
+  border:1px solid rgba(97,230,167,.25);
+  border-radius:999px;
+  background:rgba(97,230,167,.07);
+  color:var(--green);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:14px;
+  margin-bottom:28px;
+}
+
+.stat{
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:var(--panel);
+  box-shadow:0 12px 40px rgba(0,0,0,.2);
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+}
+
+.stat-value{
+  margin-top:8px;
+  font-family:Orbitron,sans-serif;
+  font-size:27px;
+}
+
+.stat-sub{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+/* GRID */
+
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:1.4fr .9fr;
+  gap:18px;
+}
+
+.panel{
+  min-width:0;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--panel);
+  overflow:hidden;
+  box-shadow:0 15px 55px rgba(0,0,0,.22);
+}
+
+.panel.wide{
+  grid-column:1 / -1;
+}
+
+.panel-head{
+  padding:20px 22px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.panel-head h2{
+  margin:0;
+  font-family:Orbitron,sans-serif;
+  font-size:15px;
+  letter-spacing:1px;
+}
+
+.panel-head span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.panel-body{
+  padding:20px;
+}
+
+/* TOOLBAR */
+
+.toolbar{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+
+.search{
+  flex:1;
+  min-width:180px;
+}
+
+.search input,
+.toolbar select{
+  width:100%;
+  background:#0b0b16;
+  border:1px solid var(--line);
+  color:var(--text);
+  border-radius:11px;
+  padding:11px 13px;
+  outline:none;
+}
+
+.search input:focus,
+.toolbar select:focus{
+  border-color:rgba(155,124,255,.55);
+}
+
+/* TABLE */
+
+.table-wrap{
+  width:100%;
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:720px;
+}
+
+th{
+  padding:10px 12px;
+  color:var(--muted);
+  text-align:left;
+  font-size:9px;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+  border-bottom:1px solid var(--line);
+}
+
+td{
+  padding:14px 12px;
+  border-bottom:1px solid rgba(255,255,255,.055);
+  font-size:12px;
+  vertical-align:middle;
+}
+
+tr:hover td{
+  background:rgba(255,255,255,.025);
+}
+
+.title-cell strong{
+  display:block;
+  font-size:12px;
+}
+
+.title-cell small{
+  color:var(--muted);
+  display:block;
+  margin-top:4px;
+  font-size:9px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 8px;
+  border-radius:999px;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.5px;
+  background:rgba(255,255,255,.07);
+  color:#ccc;
+}
+
+.badge.green{
+  color:var(--green);
+  background:rgba(97,230,167,.09);
+}
+
+.badge.yellow{
+  color:var(--yellow);
+  background:rgba(255,214,107,.09);
+}
+
+.badge.red{
+  color:var(--red);
+  background:rgba(255,102,125,.09);
+}
+
+.badge.purple{
+  color:var(--purple);
+  background:rgba(155,124,255,.10);
+}
+
+.badge.cyan{
+  color:var(--cyan);
+  background:rgba(87,220,255,.08);
+}
+
+.action-btn{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  padding:7px 10px;
+  border-radius:8px;
+  font-size:10px;
+}
+
+.action-btn:hover{
+  border-color:rgba(155,124,255,.4);
+  background:rgba(155,124,255,.1);
+}
+
+/* PROJECTS */
+
+.project-list{
+  display:grid;
+  gap:10px;
+}
+
+.project-card{
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:15px;
+  background:rgba(255,255,255,.025);
+}
+
+.project-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.project-card h3{
+  margin:0;
+  font-size:13px;
+}
+
+.project-card p{
+  color:var(--muted);
+  font-size:10px;
+  margin:6px 0 12px;
+}
+
+.progress{
+  height:5px;
+  background:#161625;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress i{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,var(--purple),var(--cyan));
+  border-radius:inherit;
+}
+
+.project-meta{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+  color:var(--muted);
+  font-size:9px;
+}
+
+/* ACTIVITY */
+
+.activity-list{
+  display:grid;
+  gap:2px;
+}
+
+.activity{
+  display:grid;
+  grid-template-columns:34px 1fr;
+  gap:10px;
+  padding:11px 0;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.activity-icon{
+  width:30px;
+  height:30px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  background:rgba(155,124,255,.08);
+}
+
+.activity strong{
+  display:block;
+  font-size:10px;
+  line-height:1.5;
+}
+
+.activity small{
+  display:block;
+  color:var(--muted);
+  margin-top:3px;
+  font-size:9px;
+}
+
+/* EMPTY */
+
+.empty{
+  padding:35px 15px;
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.empty-icon{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  display:none;
+  place-items:center;
+  padding:20px;
+  background:rgba(0,0,0,.76);
+  backdrop-filter:blur(12px);
+}
+
+.modal.open{
+  display:grid;
+}
+
+.modal-card{
+  width:min(680px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:#0b0b16;
+  box-shadow:var(--shadow);
+}
+
+.modal-head{
+  padding:20px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.modal-head h2{
+  margin:0;
+  font-family:Orbitron,sans-serif;
+  font-size:16px;
+}
+
+.close{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:24px;
+}
+
+.modal-body{
+  padding:20px;
+}
+
+.field{
+  margin-bottom:17px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:7px;
+  color:var(--muted);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.field select,
+.field textarea,
+.field input{
+  width:100%;
+  border:1px solid var(--line);
+  background:#070710;
+  color:var(--text);
+  border-radius:11px;
+  padding:11px 13px;
+  outline:none;
+}
+
+.field textarea{
+  min-height:130px;
+  resize:vertical;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:20px;
+}
+
+.primary{
+  border:0;
+  padding:11px 16px;
+  border-radius:11px;
+  color:white;
+  font-weight:700;
+  background:linear-gradient(135deg,#7153ff,#a46bff);
+}
+
+.secondary{
+  border:1px solid var(--line);
+  padding:11px 16px;
+  border-radius:11px;
+  color:var(--text);
+  background:rgba(255,255,255,.04);
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:1000;
+  max-width:380px;
+  padding:14px 17px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#11111d;
+  box-shadow:var(--shadow);
+  font-size:11px;
+  transform:translateY(130%);
+  transition:.3s ease;
+}
+
+.toast.show{
+  transform:translateY(0);
+}
+
+.toast.success{
+  border-color:rgba(97,230,167,.3);
+}
+
+.toast.error{
+  border-color:rgba(255,102,125,.3);
+}
+
+/* MOBILE */
+
+@media(max-width:1150px){
+  .stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:700px){
+  .nav{
+    padding:0 14px;
+  }
+
+  .nav-btn{
+    display:none;
+  }
+
+  .admin{
+    padding:25px 14px 60px;
+  }
+
+  .hero{
+    display:block;
+  }
+
+  .hero h1{
+    font-size:27px;
+  }
+
+  .admin-badge{
+    display:inline-flex;
+    margin-top:15px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stat{
+    padding:15px;
+  }
+
+  .stat-value{
+    font-size:21px;
+  }
+
+  .panel-head{
+    padding:17px;
+  }
+
+  .panel-body{
+    padding:14px;
+  }
+
+  .login-card{
+    padding:30px 22px;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="brand" href="index.html">
+      <div class="logo">✦</div>
+      <div class="brand-text">
+        <strong>DREAMSCAPES</strong>
+        <span>CROWRULES ENTERTAINMENT</span>
+      </div>
+    </a>
+
+<div class="nav-actions">
+  <a class="nav-btn" href="index.html">Dreamscapes</a>
+  <a class="nav-btn" href="creator-dashboard.html">Creator Hub</a>
+  <button class="signout hidden" id="signOutBtn">Sign Out</button>
+</div>
+
+  </nav>
+</header>
+
+<!-- LOGIN -->
+
+<section class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-orbit">✦</div>
+
+<h1>ADMIN ACCESS</h1>
+
+<p>
+  The Dreamscapes administrative control center is restricted
+  to authorized CrowRules personnel.
+</p>
+
+<button class="google-btn" id="googleBtn">
+  Continue with Google
+</button>
+
+<div class="notice" id="loginMessage">
+  Sign in with an authorized CrowRules administrator account.
+</div>
+
+  </div>
+</section>
+
+<!-- ADMIN DASHBOARD -->
+
+<main class="admin hidden" id="adminApp">
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">CrowRules Dreamscapes</div>
+      <h1>Admin Control Center</h1>
+      <p>
+        Manage dream submissions, projects, creators, collaboration,
+        development and the growing Dreamscapes story universe.
+      </p>
+    </div>
+
+<div class="admin-badge">
+  ● ADMINISTRATOR ACCESS
+</div>
+
+  </section>
+
+  <!-- STATS -->
+
+  <section class="stats">
+
+<div class="stat">
+  <div class="stat-label">Total Dreams</div>
+  <div class="stat-value" id="statDreams">—</div>
+  <div class="stat-sub">submissions</div>
+</div>
+
+<div class="stat">
+  <div class="stat-label">Needs Review</div>
+  <div class="stat-value" id="statReview">—</div>
+  <div class="stat-sub">awaiting review</div>
+</div>
+
+<div class="stat">
+  <div class="stat-label">Projects</div>
+  <div class="stat-value" id="statProjects">—</div>
+  <div class="stat-sub">dream projects</div>
+</div>
+
+<div class="stat">
+  <div class="stat-label">Creators</div>
+  <div class="stat-value" id="statCreators">—</div>
+  <div class="stat-sub">creator profiles</div>
+</div>
+
+<div class="stat">
+  <div class="stat-label">Collaborators</div>
+  <div class="stat-value" id="statCollaborators">—</div>
+  <div class="stat-sub">project members</div>
+</div>
+
+<div class="stat">
+  <div class="stat-label">Open Requests</div>
+  <div class="stat-value" id="statRequests">—</div>
+  <div class="stat-sub">collaboration requests</div>
+</div>
+
+  </section>
+
+  <section class="dashboard-grid">
+
+<!-- SUBMISSIONS -->
+<section class="panel wide">
+
+  <div class="panel-head">
+    <div>
+      <h2>Dream Submission Queue</h2>
+      <span>Review and manage incoming creator ideas</span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+
+    <div class="toolbar">
+
+      <div class="search">
+        <input
+          id="submissionSearch"
+          type="search"
+          placeholder="Search submissions..."
+        >
+      </div>
+
+      <div>
+        <select id="submissionFilter">
+          <option value="all">All statuses</option>
+          <option value="submitted">Submitted</option>
+          <option value="under_review">Under Review</option>
+          <option value="approved">Approved</option>
+          <option value="changes_requested">Changes Requested</option>
+          <option value="rejected">Rejected</option>
+          <option value="withdrawn">Withdrawn</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Dream</th>
+            <th>Creator</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Submitted</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody id="submissionRows"></tbody>
+      </table>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="panel">
+
+  <div class="panel-head">
+    <div>
+      <h2>Dream Projects</h2>
+      <span>Current development pipeline</span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="project-list" id="projectList"></div>
+  </div>
+
+</section>
+
+<!-- ACTIVITY -->
+<section class="panel">
+
+  <div class="panel-head">
+    <div>
+      <h2>Recent Activity</h2>
+      <span>Dreamscapes activity stream</span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="activity-list" id="activityList"></div>
+  </div>
+
+</section>
+
+<!-- COLLABORATION -->
+<section class="panel">
+
+  <div class="panel-head">
+    <div>
+      <h2>Collaboration Requests</h2>
+      <span>Creators looking for collaborators</span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Project</th>
+            <th>Role</th>
+            <th>Involvement</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody id="requestRows"></tbody>
+      </table>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section class="panel">
+
+  <div class="panel-head">
+    <div>
+      <h2>Development Pipeline</h2>
+      <span>Project stages</span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+
+    <div id="pipeline"></div>
+
+  </div>
+</section>
+
+  </section>
+
+</main>
+
+<!-- SUBMISSION MODAL -->
+
+<div class="modal" id="submissionModal">
+
+  <div class="modal-card">
+
+<div class="modal-head">
+  <div>
+    <h2>Review Dream</h2>
+  </div>
+
+  <button class="close" id="closeModal">×</button>
+</div>
+
+<div class="modal-body">
+
+  <div id="submissionDetails"></div>
+
+  <div class="field">
+    <label>Status</label>
+
+    <select id="reviewStatus">
+      <option value="submitted">Submitted</option>
+      <option value="under_review">Under Review</option>
+      <option value="approved">Approved</option>
+      <option value="changes_requested">Changes Requested</option>
+      <option value="rejected">Rejected</option>
+      <option value="withdrawn">Withdrawn</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Reviewer Notes</label>
+
+    <textarea
+      id="reviewNotes"
+      placeholder="Add internal or creator-facing review notes..."
+    ></textarea>
+  </div>
+
+  <div class="modal-actions">
+    <button class="secondary" id="cancelModal">
+      Cancel
+    </button>
+
+    <button class="primary" id="saveReview">
+      Save Review
+    </button>
+  </div>
+
+</div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+
+/* ============================================================
+   SUPABASE
+============================================================ */
+
+const SUPABASE_URL =
+  "https://cevylpnoexugwgygvtgu.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+/* ============================================================
+   STATE
+============================================================ */
+
+let currentUser = null;
+let submissions = [];
+let projects = [];
+let currentSubmission = null;
+
+/* ============================================================
+   ELEMENTS
+============================================================ */
+
+const loginScreen =
+  document.getElementById("loginScreen");
+
+const adminApp =
+  document.getElementById("adminApp");
+
+const signOutBtn =
+  document.getElementById("signOutBtn");
+
+const googleBtn =
+  document.getElementById("googleBtn");
+
+const loginMessage =
+  document.getElementById("loginMessage");
+
+const submissionRows =
+  document.getElementById("submissionRows");
+
+const projectList =
+  document.getElementById("projectList");
+
+const activityList =
+  document.getElementById("activityList");
+
+const requestRows =
+  document.getElementById("requestRows");
+
+const pipeline =
+  document.getElementById("pipeline");
+
+const modal =
+  document.getElementById("submissionModal");
+
+const reviewStatus =
+  document.getElementById("reviewStatus");
+
+const reviewNotes =
+  document.getElementById("reviewNotes");
+
+const submissionDetails =
+  document.getElementById("submissionDetails");
+
+/* ============================================================
+   HELPERS
+============================================================ */
+
+function escapeHtml(value){
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function formatDate(value){
+  if(!value) return "—";
+
+  return new Intl.DateTimeFormat(
+    undefined,
+    {
+      month:"short",
+      day:"numeric",
+      year:"numeric"
+    }
+  ).format(new Date(value));
+}
+
+function timeAgo(value){
+  if(!value) return "";
+
+  const diff =
+    Date.now() - new Date(value).getTime();
+
+  const minutes =
+    Math.floor(diff / 60000);
+
+  if(minutes < 1) return "just now";
+  if(minutes < 60) return `${minutes}m ago`;
+
+  const hours =
+    Math.floor(minutes / 60);
+
+  if(hours < 24) return `${hours}h ago`;
+
+  const days =
+    Math.floor(hours / 24);
+
+  return `${days}d ago`;
+}
+
+function statusClass(status){
+  switch(status){
+    case "approved":
+    case "completed":
+      return "green";
+
+    case "under_review":
+    case "changes_requested":
+    case "in_progress":
+      return "yellow";
+
+    case "rejected":
+    case "withdrawn":
+    case "blocked":
+      return "red";
+
+    case "production":
+    case "collaboration":
+      return "cyan";
+
+    default:
+      return "purple";
+  }
+}
+
+function prettyStatus(value){
+  return String(value || "")
+    .replaceAll("_"," ")
+    .replace(/\b\w/g,c => c.toUpperCase());
+}
+
+function showToast(message,type="success"){
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.className =
+    "toast show " + type;
+
+  clearTimeout(showToast.timer);
+
+  showToast.timer =
+    setTimeout(() => {
+      toast.className = "toast";
+    },3500);
+}
+
+/* ============================================================
+   AUTH
+============================================================ */
+
+async function signIn(){
+  googleBtn.disabled = true;
+  googleBtn.textContent = "Connecting...";
+
+  const { error } =
+    await supabaseClient.auth.signInWithOAuth({
+      provider:"google",
+      options:{
+        redirectTo:
+          window.location.href.split("?")[0]
+      }
+    });
+
+  if(error){
+    loginMessage.textContent =
+      error.message;
+
+    googleBtn.disabled = false;
+    googleBtn.textContent =
+      "Continue with Google";
+  }
+}
+
+async function signOut(){
+  await supabaseClient.auth.signOut();
+
+  currentUser = null;
+
+  adminApp.classList.add("hidden");
+  loginScreen.classList.remove("hidden");
+  signOutBtn.classList.add("hidden");
+}
+
+async function checkAdmin(){
+  const {
+    data: { user },
+    error
+  } = await supabaseClient.auth.getUser();
+
+  if(error || !user){
+    showLogin();
+    return;
+  }
+
+  currentUser = user;
+
+  const {
+    data,
+    error: adminError
+  } = await supabaseClient
+    .rpc("ds_is_admin");
+
+  if(adminError){
+    console.error(adminError);
+
+    loginMessage.textContent =
+      "Unable to verify administrator access.";
+
+    showLogin();
+    return;
+  }
+
+  if(data !== true){
+    loginMessage.innerHTML =
+      "This account is authenticated, but it is not currently authorized as a Dreamscapes administrator.";
+    showLogin();
+    return;
+  }
+
+  loginScreen.classList.add("hidden");
+  adminApp.classList.remove("hidden");
+  signOutBtn.classList.remove("hidden");
+
+  await loadDashboard();
+}
+
+function showLogin(){
+  loginScreen.classList.remove("hidden");
+  adminApp.classList.add("hidden");
+  signOutBtn.classList.remove("hidden");
+}
+
+/* ============================================================
+   DASHBOARD LOAD
+============================================================ */
+
+async function loadDashboard(){
+  await Promise.all([
+    loadSubmissions(),
+    loadProjects(),
+    loadCreators(),
+    loadCollaborators(),
+    loadRequests(),
+    loadActivity()
+  ]);
+
+  renderPipeline();
+}
+
+/* ============================================================
+   SUBMISSIONS
+============================================================ */
+
+async function loadSubmissions(){
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("ds_submissions")
+    .select(`
+      id,
+      project_id,
+      submitter_id,
+      title,
+      submission_type,
+      message,
+      status,
+      reviewer_id,
+      reviewer_notes,
+      submitted_at,
+      reviewed_at,
+      creator_name,
+      involvement,
+      updated_at
+    `)
+    .order("submitted_at",{ascending:false})
+    .limit(200);
+
+  if(error){
+    console.error(error);
+
+    submissionRows.innerHTML =
+      `<tr><td colspan="6">
+        <div class="empty">Unable to load submissions.</div>
+      </td></tr>`;
+
+    return;
+  }
+
+  submissions = data || [];
+
+  document.getElementById("statDreams")
+    .textContent = submissions.length;
+
+  document.getElementById("statReview")
+    .textContent =
+      submissions.filter(s =>
+        ["submitted","under_review"]
+          .includes(s.status)
+      ).length;
+
+  renderSubmissions();
+}
+
+function renderSubmissions(){
+
+  const search =
+    document.getElementById("submissionSearch")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const filter =
+    document.getElementById("submissionFilter")
+      .value;
+
+  const rows =
+    submissions.filter(item => {
+
+      const matchesSearch =
+        !search ||
+        String(item.title || "")
+          .toLowerCase()
+          .includes(search) ||
+        String(item.creator_name || "")
+          .toLowerCase()
+          .includes(search) ||
+        String(item.submission_type || "")
+          .toLowerCase()
+          .includes(search);
+
+      const matchesFilter =
+        filter === "all" ||
+        item.status === filter;
+
+      return matchesSearch && matchesFilter;
+    });
+
+  if(!rows.length){
+    submissionRows.innerHTML =
+      `<tr><td colspan="6">
+        <div class="empty">
+          <div class="empty-icon">🌙</div>
+          No submissions match your filters.
+        </div>
+      </td></tr>`;
+
+    return;
+  }
+
+  submissionRows.innerHTML =
+    rows.map(item => `
+      <tr>
+
+        <td class="title-cell">
+          <strong>${escapeHtml(item.title)}</strong>
+          <small>${escapeHtml(item.id.slice(0,8))}</small>
+        </td>
+
+        <td>
+          ${escapeHtml(item.creator_name || "Creator")}
+        </td>
+
+        <td>
+          ${escapeHtml(item.submission_type || "Dream")}
+        </td>
+
+        <td>
+          <span class="badge ${statusClass(item.status)}">
+            ${prettyStatus(item.status)}
+          </span>
+        </td>
+
+        <td>
+          ${formatDate(item.submitted_at)}
+        </td>
+
+        <td>
+          <button
+            class="action-btn"
+            data-review="${escapeHtml(item.id)}">
+            Review
+          </button>
+        </td>
+
+      </tr>
+    `).join("");
+
+  document
+    .querySelectorAll("[data-review]")
+    .forEach(button => {
+
+      button.addEventListener("click",() => {
+
+        const item =
+          submissions.find(
+            x => x.id === button.dataset.review
+          );
+
+        if(item){
+          openSubmission(item);
+        }
+
+      });
+
+    });
+}
+
+/* ============================================================
+   SUBMISSION REVIEW
+============================================================ */
+
+function openSubmission(item){
+
+  currentSubmission = item;
+
+  reviewStatus.value =
+    item.status || "submitted";
+
+  reviewNotes.value =
+    item.reviewer_notes || "";
+
+  submissionDetails.innerHTML = `
+    <div class="project-card" style="margin-bottom:20px">
+
+      <div class="project-top">
+        <h3>${escapeHtml(item.title)}</h3>
+
+        <span class="badge ${statusClass(item.status)}">
+          ${prettyStatus(item.status)}
+        </span>
+      </div>
+
+      <p>
+        ${escapeHtml(
+          item.message || "No submission message."
+        )}
+      </p>
+
+      <div class="project-meta">
+        <span>
+          Creator:
+          ${escapeHtml(item.creator_name || "Creator")}
+        </span>
+
+        <span>
+          ${formatDate(item.submitted_at)}
+        </span>
+      </div>
+
+    </div>
+  `;
+
+  modal.classList.add("open");
+}
+
+function closeSubmission(){
+  modal.classList.remove("open");
+  currentSubmission = null;
+}
+
+async function saveReview(){
+
+  if(!currentSubmission){
+    return;
+  }
+
+  const status =
+    reviewStatus.value;
+
+  const notes =
+    reviewNotes.value.trim();
+
+  const {
+    error
+  } = await supabaseClient
+    .from("ds_submissions")
+    .update({
+      status,
+      reviewer_id:currentUser.id,
+      reviewer_notes:notes || null,
+      reviewed_at:new Date().toISOString()
+    })
+    .eq("id",currentSubmission.id);
+
+  if(error){
+    console.error(error);
+    showToast(
+      "Unable to save the review.",
+      "error"
+    );
+    return;
+  }
+
+  showToast("Submission review saved.");
+
+  closeSubmission();
+
+  await loadSubmissions();
+}
+
+/* ============================================================
+   PROJECTS
+============================================================ */
+
+async function loadProjects(){
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("ds_projects")
+    .select(`
+      id,
+      owner_id,
+      title,
+      slug,
+      logline,
+      description,
+      status,
+      visibility,
+      progress,
+      created_at,
+      updated_at
+    `)
+    .order("updated_at",{ascending:false})
+    .limit(100);
+
+  if(error){
+    console.error(error);
+
+    projectList.innerHTML =
+      `<div class="empty">Unable to load projects.</div>`;
+
+    return;
+  }
+
+  projects = data || [];
+
+  document.getElementById("statProjects")
+    .textContent = projects.length;
+
+  renderProjects();
+}
+
+function renderProjects(){
+
+  if(!projects.length){
+    projectList.innerHTML =
+      `<div class="empty">
+        <div class="empty-icon">🌌</div>
+        No projects yet.
+      </div>`;
+
+    return;
+  }
+
+  projectList.innerHTML =
+    projects.slice(0,12).map(project => {
+
+      const progress =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            Number(project.progress || 0)
+          )
+        );
+
+      return `
+        <div class="project-card">
+
+          <div class="project-top">
+
+            <h3>
+              ${escapeHtml(project.title)}
+            </h3>
+
+            <span class="badge ${statusClass(project.status)}">
+              ${prettyStatus(project.status)}
+            </span>
+
+          </div>
+
+          <p>
+            ${escapeHtml(
+              project.logline ||
+              project.description ||
+              "No project description."
+            ).slice(0,150)}
+          </p>
+
+          <div class="progress">
+            <i style="width:${progress}%"></i>
+          </div>
+
+          <div class="project-meta">
+            <span>${progress}% developed</span>
+            <span>${formatDate(project.updated_at)}</span>
+          </div>
+
+        </div>
+      `;
+    }).join("");
+}
+
+/* ============================================================
+   CREATORS
+============================================================ */
+
+async function loadCreators(){
+
+  const {
+    count,
+    error
+  } = await supabaseClient
+    .from("ds_creator_profiles")
+    .select("*",{count:"exact",head:true});
+
+  if(error){
+    console.error(error);
+    document.getElementById("statCreators")
+      .textContent = "—";
+    return;
+  }
+
+  document.getElementById("statCreators")
+    .textContent = count ?? 0;
+}
+
+/* ============================================================
+   COLLABORATORS
+============================================================ */
+
+async function loadCollaborators(){
+
+  const {
+    count,
+    error
+  } = await supabaseClient
+    .from("ds_collaborators")
+    .select("*",{count:"exact",head:true});
+
+  if(error){
+    console.error(error);
+    document.getElementById("statCollaborators")
+      .textContent = "—";
+    return;
+  }
+
+  document.getElementById("statCollaborators")
+    .textContent = count ?? 0;
+}
+
+/* ============================================================
+   COLLABORATION REQUESTS
+============================================================ */
+
+async function loadRequests(){
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("ds_collaboration_requests")
+    .select(`
+      id,
+      project_id,
+      requester_id,
+      role_needed,
+      description,
+      involvement,
+      matching_requested,
+      status,
+      created_at
+    `)
+    .order("created_at",{ascending:false})
+    .limit(50);
+
+  if(error){
+    console.error(error);
+
+    requestRows.innerHTML =
+      `<tr><td colspan="4">
+        <div class="empty">
+          Unable to load requests.
+        </div>
+      </td></tr>`;
+
+    return;
+  }
+
+  const requests = data || [];
+
+  document.getElementById("statRequests")
+    .textContent =
+      requests.filter(
+        x => ["open","matching"].includes(x.status)
+      ).length;
+
+  if(!requests.length){
+
+    requestRows.innerHTML =
+      `<tr><td colspan="4">
+        <div class="empty">
+          No collaboration requests yet.
+        </div>
+      </td></tr>`;
+
+    return;
+  }
+
+  requestRows.innerHTML =
+    requests.slice(0,15).map(item => {
+
+      const project =
+        projects.find(
+          p => p.id === item.project_id
+        );
+
+      return `
+        <tr>
+
+          <td class="title-cell">
+            <strong>
+              ${escapeHtml(
+                project?.title || "Project"
+              )}
+            </strong>
+          </td>
+
+          <td>
+            ${escapeHtml(
+              item.role_needed || "Any role"
+            )}
+          </td>
+
+          <td>
+            ${prettyStatus(item.involvement)}
+          </td>
+
+          <td>
+            <span class="badge ${statusClass(item.status)}">
+              ${prettyStatus(item.status)}
+            </span>
+          </td>
+
+        </tr>
+      `;
+
+    }).join("");
+}
+
+/* ============================================================
+   ACTIVITY
+============================================================ */
+
+async function loadActivity(){
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("ds_activity")
+    .select(`
+      id,
+      project_id,
+      actor_id,
+      activity_type,
+      entity_type,
+      entity_id,
+      message,
+      metadata,
+      created_at
+    `)
+    .order("created_at",{ascending:false})
+    .limit(15);
+
+  if(error){
+    console.error(error);
+
+    activityList.innerHTML =
+      `<div class="empty">
+        Unable to load activity.
+      </div>`;
+
+    return;
+  }
+
+  const activity =
+    data || [];
+
+  if(!activity.length){
+
+    activityList.innerHTML =
+      `<div class="empty">
+        <div class="empty-icon">✦</div>
+        No activity yet.
+      </div>`;
+
+    return;
+  }
+
+  activityList.innerHTML =
+    activity.map(item => `
+
+      <div class="activity">
+
+        <div class="activity-icon">
+          ✦
+        </div>
+
+        <div>
+
+          <strong>
+            ${escapeHtml(
+              item.message ||
+              prettyStatus(item.activity_type)
+            )}
+          </strong>
+
+          <small>
+            ${timeAgo(item.created_at)}
+          </small>
+
+        </div>
+
+      </div>
+
+    `).join("");
+}
+
+/* ============================================================
+   PIPELINE
+============================================================ */
+
+function renderPipeline(){
+
+  const stages = [
+    "idea",
+    "development",
+    "writing",
+    "collaboration",
+    "pitch",
+    "production",
+    "completed",
+    "archived"
+  ];
+
+  pipeline.innerHTML =
+    stages.map(stage => {
+
+      const count =
+        projects.filter(
+          p => p.status === stage
+        ).length;
+
+      return `
+        <div class="project-meta"
+             style="padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05)">
+
+          <span>
+            ${prettyStatus(stage)}
+          </span>
+
+          <span class="badge ${statusClass(stage)}">
+            ${count}
+          </span>
+
+        </div>
+      `;
+
+    }).join("");
+}
+
+/* ============================================================
+   EVENTS
+============================================================ */
+
+googleBtn.addEventListener(
+  "click",
+  signIn
+);
+
+signOutBtn.addEventListener(
+  "click",
+  signOut
+);
+
+document
+  .getElementById("submissionSearch")
+  .addEventListener(
+    "input",
+    renderSubmissions
+  );
+
+document
+  .getElementById("submissionFilter")
+  .addEventListener(
+    "change",
+    renderSubmissions
+  );
+
+document
+  .getElementById("closeModal")
+  .addEventListener(
+    "click",
+    closeSubmission
+  );
+
+document
+  .getElementById("cancelModal")
+  .addEventListener(
+    "click",
+    closeSubmission
+  );
+
+document
+  .getElementById("saveReview")
+  .addEventListener(
+    "click",
+    saveReview
+  );
+
+modal.addEventListener(
+  "click",
+  event => {
+    if(event.target === modal){
+      closeSubmission();
+    }
+  }
+);
+
+/* ============================================================
+   REALTIME
+============================================================ */
+
+function subscribeRealtime(){
+
+  supabaseClient
+    .channel("dreamscapes-admin")
+    .on(
+      "postgres_changes",
+      {
+        event:"*",
+        schema:"public",
+        table:"ds_submissions"
+      },
+      async () => {
+        await loadSubmissions();
+      }
+    )
+    .on(
+      "postgres_changes",
+      {
+        event:"*",
+        schema:"public",
+        table:"ds_projects"
+      },
+      async () => {
+        await loadProjects();
+        await loadRequests();
+        renderPipeline();
+      }
+    )
+    .on(
+      "postgres_changes",
+      {
+        event:"*",
+        schema:"public",
+        table:"ds_collaboration_requests"
+      },
+      async () => {
+        await loadRequests();
+      }
+    )
+    .on(
+      "postgres_changes",
+      {
+        event:"*",
+        schema:"public",
+        table:"ds_activity"
+      },
+      async () => {
+        await loadActivity();
+      }
+    )
+    .subscribe();
+}
+
+/* ============================================================
+   AUTH STATE
+============================================================ */
+
+supabaseClient.auth.onAuthStateChange(
+  async (_event,session) => {
+
+    if(session?.user){
+      await checkAdmin();
+    }else{
+      showLogin();
+    }
+
+  }
+);
+
+/* ============================================================
+   START
+============================================================ */
+
+(async function init(){
+
+  const {
+    data: { session }
+  } = await supabaseClient.auth.getSession();
+
+  if(session?.user){
+    await checkAdmin();
+  }else{
+    showLogin();
+  }
+
+  subscribeRealtime();
+
+})();
+</script>
+
+</body>
+</html>
