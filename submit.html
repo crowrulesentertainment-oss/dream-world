@@ -7,8 +7,11 @@
 
 <title>Submit a Dream · CrowRules Dreamscapes</title>
 
-<meta name="description"
-   content="Submit your original dream, idea, story or creative concept to CrowRules Dreamscapes.">
+<meta
+name="description"
+content="Submit your original dream, story, idea or creative concept to CrowRules Dreamscapes."
+
+>
 
 <meta name="theme-color" content="#03030a">
 
@@ -16,113 +19,207 @@
 
 <style>
 /* =========================================================
-   DREAMSCAPES SUBMISSION EXPERIENCE
+   SUBMIT PAGE
 ========================================================= */
 
-.submit-shell{
-  max-width:980px;
-  margin:0 auto;
-  padding:40px 20px 90px;
+.submit-page{
+  min-height:calc(100vh - 160px);
+  padding:60px 0 90px;
 }
 
-.submit-intro{
+.submit-container{
+  width:min(980px,calc(100% - 28px));
+  margin:auto;
+}
+
+.submit-header{
   text-align:center;
   max-width:760px;
   margin:0 auto 42px;
 }
 
-.submit-intro .eyebrow{
-  letter-spacing:.24em;
+.submit-eyebrow{
+  font-family:Montserrat,sans-serif;
   font-size:.72rem;
   font-weight:700;
-  opacity:.72;
-  margin-bottom:12px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  opacity:.65;
+  margin-bottom:14px;
 }
 
-.submit-intro h1{
+.submit-header h1{
   margin:0;
   font-family:Orbitron,Montserrat,sans-serif;
   font-size:clamp(2rem,6vw,4rem);
-  line-height:1.05;
-  letter-spacing:.035em;
+  line-height:1.08;
+  letter-spacing:.025em;
 }
 
-.submit-intro p{
-  max-width:680px;
+.submit-header p{
   margin:20px auto 0;
+  max-width:680px;
   line-height:1.8;
-  opacity:.78;
+  opacity:.72;
 }
 
-.dream-card{
+.submit-card{
   position:relative;
-  border:1px solid rgba(159,238,255,.16);
+  overflow:hidden;
+  border:1px solid rgba(159,238,255,.14);
+  border-radius:26px;
+  padding:clamp(20px,4vw,42px);
   background:
     linear-gradient(
       145deg,
       rgba(255,255,255,.045),
-      rgba(255,255,255,.015)
+      rgba(255,255,255,.012)
     );
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.04);
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
-  border-radius:26px;
-  padding:clamp(22px,4vw,42px);
-  box-shadow:
-    0 25px 90px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.04);
-  overflow:hidden;
 }
 
-.dream-card::before{
+.submit-card::before{
   content:"";
   position:absolute;
-  inset:-40%;
-  background:
-    radial-gradient(
-      circle at 30% 20%,
-      rgba(130,90,255,.12),
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(80,220,255,.08),
-      transparent 30%
-    );
+  width:500px;
+  height:500px;
+  left:-280px;
+  top:-300px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(111,95,255,.13),
+    transparent 68%
+  );
   pointer-events:none;
 }
 
-.form-progress{
+.submit-card::after{
+  content:"";
+  position:absolute;
+  width:450px;
+  height:450px;
+  right:-260px;
+  bottom:-280px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(65,220,255,.09),
+    transparent 68%
+  );
+  pointer-events:none;
+}
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+.auth-panel{
   position:relative;
+  z-index:2;
+  text-align:center;
+  padding:35px 15px;
+}
+
+.auth-panel.hidden{
+  display:none;
+}
+
+.auth-orb{
+  width:76px;
+  height:76px;
+  margin:0 auto 20px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(159,238,255,.25);
+  background:radial-gradient(
+    circle,
+    rgba(159,238,255,.13),
+    rgba(159,238,255,.02)
+  );
+  box-shadow:0 0 45px rgba(100,220,255,.08);
+  font-size:1.7rem;
+}
+
+.auth-panel h2{
+  margin:0 0 12px;
+  font-family:Orbitron,Montserrat,sans-serif;
+}
+
+.auth-panel p{
+  max-width:600px;
+  margin:0 auto 24px;
+  line-height:1.7;
+  opacity:.68;
+}
+
+.auth-button{
+  border:1px solid rgba(159,238,255,.28);
+  border-radius:13px;
+  min-height:48px;
+  padding:0 22px;
+  color:inherit;
+  background:rgba(159,238,255,.07);
+  cursor:pointer;
+  font-family:Montserrat,sans-serif;
+  font-weight:700;
+  transition:.2s ease;
+}
+
+.auth-button:hover{
+  transform:translateY(-2px);
+  background:rgba(159,238,255,.11);
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+#dreamForm{
+  position:relative;
+  z-index:2;
+}
+
+#dreamForm.hidden{
+  display:none;
+}
+
+.form-progress{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-bottom:34px;
+  gap:9px;
+  margin-bottom:32px;
 }
 
-.progress-step{
-  padding:12px 10px;
+.progress-item{
   text-align:center;
-  border:1px solid rgba(255,255,255,.08);
+  padding:11px 8px;
+  border:1px solid rgba(255,255,255,.07);
   border-radius:12px;
-  font-size:.72rem;
+  font-size:.68rem;
+  font-weight:700;
   letter-spacing:.08em;
   text-transform:uppercase;
-  opacity:.55;
+  opacity:.48;
 }
 
-.progress-step.active{
+.progress-item.active{
   opacity:1;
-  border-color:rgba(159,238,255,.38);
-  background:rgba(159,238,255,.07);
+  border-color:rgba(159,238,255,.28);
+  background:rgba(159,238,255,.06);
 }
 
 .form-grid{
-  position:relative;
   display:grid;
   gap:22px;
 }
 
-.row{
+.form-row{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:18px;
@@ -135,187 +232,212 @@
 }
 
 .field label{
-  font-size:.78rem;
+  font-family:Montserrat,sans-serif;
+  font-size:.76rem;
   font-weight:700;
-  letter-spacing:.08em;
+  letter-spacing:.07em;
   text-transform:uppercase;
-  opacity:.78;
-}
-
-.field label .optional{
-  font-weight:400;
-  opacity:.5;
-  text-transform:none;
-  letter-spacing:0;
+  opacity:.76;
 }
 
 .field input,
-.field textarea,
-.field select{
+.field select,
+.field textarea{
   width:100%;
   box-sizing:border-box;
-  border:1px solid rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.11);
   border-radius:14px;
   padding:14px 15px;
   color:inherit;
-  background:rgba(0,0,0,.27);
+  background:rgba(0,0,0,.26);
   outline:none;
   font:inherit;
   transition:
     border-color .2s ease,
-    background .2s ease,
-    box-shadow .2s ease;
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+.field input,
+.field select{
+  min-height:50px;
 }
 
 .field textarea{
-  min-height:190px;
+  min-height:210px;
   resize:vertical;
   line-height:1.65;
 }
 
 .field input:focus,
-.field textarea:focus,
-.field select:focus{
-  border-color:rgba(159,238,255,.55);
-  background:rgba(0,0,0,.38);
-  box-shadow:0 0 0 3px rgba(159,238,255,.07);
+.field select:focus,
+.field textarea:focus{
+  border-color:rgba(159,238,255,.48);
+  background:rgba(0,0,0,.34);
+  box-shadow:
+    0 0 0 3px rgba(159,238,255,.055);
 }
 
-.field select{
-  cursor:pointer;
+.field input.invalid,
+.field textarea.invalid,
+.field select.invalid{
+  border-color:rgba(255,120,145,.6);
 }
 
-.character-count{
+.counter{
   text-align:right;
-  font-size:.72rem;
-  opacity:.45;
+  font-size:.7rem;
+  opacity:.42;
   margin-top:-4px;
 }
 
-.involvement-grid{
+/* =========================================================
+   INVOLVEMENT
+========================================================= */
+
+.involvement-options{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:12px;
 }
 
-.involvement-option{
+.involvement{
   position:relative;
 }
 
-.involvement-option input{
+.involvement input{
   position:absolute;
   opacity:0;
   pointer-events:none;
 }
 
-.involvement-option label{
+.involvement label{
   display:block;
   height:100%;
   box-sizing:border-box;
   padding:18px;
-  border:1px solid rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.09);
   border-radius:16px;
-  background:rgba(255,255,255,.025);
+  background:rgba(255,255,255,.02);
   cursor:pointer;
   transition:.2s ease;
 }
 
-.involvement-option label:hover{
-  border-color:rgba(159,238,255,.3);
+.involvement label:hover{
+  border-color:rgba(159,238,255,.25);
   transform:translateY(-2px);
 }
 
-.involvement-option input:checked + label{
-  border-color:rgba(159,238,255,.55);
-  background:rgba(159,238,255,.08);
-  box-shadow:0 0 30px rgba(100,220,255,.06);
+.involvement input:checked + label{
+  border-color:rgba(159,238,255,.5);
+  background:rgba(159,238,255,.07);
+  box-shadow:
+    0 0 30px rgba(100,220,255,.055);
 }
 
 .option-title{
   display:block;
-  font-weight:700;
   margin-bottom:8px;
+  font-family:Montserrat,sans-serif;
+  font-size:.86rem;
+  font-weight:800;
 }
 
-.option-description{
+.option-text{
   display:block;
-  font-size:.78rem;
+  font-size:.76rem;
   line-height:1.55;
-  opacity:.62;
+  opacity:.58;
 }
 
-.rights-note{
-  position:relative;
+/* =========================================================
+   RIGHTS NOTICE
+========================================================= */
+
+.rights-box{
   padding:18px;
+  border:1px solid rgba(255,255,255,.075);
   border-radius:15px;
-  border:1px solid rgba(255,255,255,.08);
   background:rgba(255,255,255,.025);
-  font-size:.8rem;
-  line-height:1.65;
-  opacity:.78;
+  font-size:.78rem;
+  line-height:1.7;
+  opacity:.75;
 }
 
-.rights-note strong{
+.rights-box strong{
   color:#9feeff;
 }
 
-.submit-actions{
-  position:relative;
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.form-actions{
   display:flex;
   align-items:center;
   gap:18px;
-  margin-top:8px;
   flex-wrap:wrap;
 }
 
 .submit-button{
   min-height:52px;
-  padding:0 25px;
+  padding:0 26px;
   border:0;
   border-radius:14px;
   cursor:pointer;
+  color:#061018;
+  background:linear-gradient(
+    135deg,
+    #9feeff,
+    #d9f8ff
+  );
   font-family:Montserrat,sans-serif;
   font-weight:800;
-  letter-spacing:.04em;
-  color:#061018;
-  background:linear-gradient(135deg,#9feeff,#d7f7ff);
-  box-shadow:0 10px 35px rgba(100,220,255,.15);
+  letter-spacing:.03em;
+  box-shadow:
+    0 12px 38px rgba(100,220,255,.13);
   transition:.2s ease;
 }
 
-.submit-button:hover{
+.submit-button:hover:not(:disabled){
   transform:translateY(-2px);
-  box-shadow:0 14px 45px rgba(100,220,255,.22);
+  box-shadow:
+    0 16px 48px rgba(100,220,255,.2);
 }
 
 .submit-button:disabled{
   opacity:.55;
   cursor:wait;
-  transform:none;
 }
 
-.status{
+.form-status{
   min-height:22px;
-  font-size:.82rem;
+  font-size:.8rem;
   line-height:1.5;
 }
 
-.status.success{
+.form-status.error{
+  color:#ff9aaa;
+}
+
+.form-status.success{
   color:#9feeff;
 }
 
-.status.error{
-  color:#ff9eae;
+.form-status.loading{
+  opacity:.65;
 }
 
-.status.loading{
-  opacity:.7;
-}
+/* =========================================================
+   SUCCESS
+========================================================= */
 
 .success-panel{
   display:none;
+  position:relative;
+  z-index:2;
   text-align:center;
-  padding:30px 10px 10px;
+  padding:35px 10px 10px;
 }
 
 .success-panel.show{
@@ -326,24 +448,30 @@
   width:88px;
   height:88px;
   margin:0 auto 24px;
-  border-radius:50%;
   display:grid;
   place-items:center;
+  border-radius:50%;
   border:1px solid rgba(159,238,255,.35);
-  background:radial-gradient(circle,rgba(159,238,255,.18),rgba(159,238,255,.02));
-  box-shadow:0 0 55px rgba(100,220,255,.13);
+  background:radial-gradient(
+    circle,
+    rgba(159,238,255,.16),
+    rgba(159,238,255,.02)
+  );
+  box-shadow:
+    0 0 60px rgba(100,220,255,.11);
   font-size:2rem;
 }
 
 .success-panel h2{
+  margin:0 0 13px;
   font-family:Orbitron,Montserrat,sans-serif;
-  margin:0 0 12px;
+  font-size:clamp(1.4rem,4vw,2.2rem);
 }
 
 .success-panel p{
-  max-width:600px;
+  max-width:620px;
   margin:0 auto;
-  line-height:1.7;
+  line-height:1.75;
   opacity:.7;
 }
 
@@ -352,66 +480,47 @@
   justify-content:center;
   gap:12px;
   flex-wrap:wrap;
-  margin-top:25px;
+  margin-top:26px;
 }
 
 .success-links a{
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   min-height:44px;
   padding:0 18px;
+  border:1px solid rgba(255,255,255,.11);
   border-radius:12px;
-  border:1px solid rgba(255,255,255,.12);
-  text-decoration:none;
-  background:rgba(255,255,255,.035);
-}
-
-.auth-notice{
-  position:relative;
-  display:none;
-  text-align:center;
-  padding:28px;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:18px;
-  background:rgba(255,255,255,.025);
-}
-
-.auth-notice.show{
-  display:block;
-}
-
-.auth-notice h2{
-  font-family:Orbitron,Montserrat,sans-serif;
-  margin-top:0;
-}
-
-.auth-notice p{
-  opacity:.7;
-  line-height:1.7;
-}
-
-.auth-button{
-  border:1px solid rgba(159,238,255,.28);
-  background:rgba(159,238,255,.07);
   color:inherit;
-  padding:12px 20px;
-  border-radius:12px;
-  cursor:pointer;
-  font-weight:700;
+  background:rgba(255,255,255,.035);
+  text-decoration:none;
+  transition:.2s ease;
 }
+
+.success-links a:hover{
+  border-color:rgba(159,238,255,.3);
+  transform:translateY(-2px);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:760px){
-  .row,
-  .involvement-grid{
+
+  .submit-page{
+    padding-top:40px;
+  }
+
+  .form-row{
     grid-template-columns:1fr;
   }
 
-  .submit-shell{
-    padding-left:14px;
-    padding-right:14px;
+  .involvement-options{
+    grid-template-columns:1fr;
   }
 
-  .dream-card{
+  .submit-card{
     border-radius:20px;
   }
 
@@ -419,28 +528,36 @@
     gap:6px;
   }
 
-  .progress-step{
-    font-size:.62rem;
-    padding:10px 5px;
-  }
-}
-
-@media(max-width:460px){
-  .submit-intro h1{
-    font-size:2rem;
+  .progress-item{
+    font-size:.6rem;
+    padding:10px 4px;
   }
 
-  .dream-card{
-    padding:20px 16px;
-  }
-
-  .submit-actions{
+  .form-actions{
     align-items:stretch;
+    flex-direction:column;
   }
 
   .submit-button{
     width:100%;
   }
+
+}
+
+@media(max-width:420px){
+
+  .submit-container{
+    width:min(100% - 20px,980px);
+  }
+
+  .submit-header h1{
+    font-size:1.9rem;
+  }
+
+  .submit-card{
+    padding:18px 14px;
+  }
+
 }
 </style>
 
@@ -456,325 +573,486 @@
   <div class="neb c"></div>
 </div>
 
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
 <nav class="nav">
+
   <div class="container navin">
 
+```
 <a class="brand" href="index.html">
   CROWRULES <span>DREAMSCAPES</span>
 </a>
 
-<button class="menu" type="button">MENU</button>
+<button
+  class="menu"
+  id="menuButton"
+  type="button"
+  aria-label="Open menu"
+>
+  MENU
+</button>
 
-<div class="links">
+<div class="links" id="navLinks">
+
   <a href="index.html">Home</a>
-  <a href="submit.html">Submit a Dream</a>
-  <a href="how-it-works.html">How It Works</a>
-  <a href="projects.html">Projects</a>
-  <a href="creators.html">Creators</a>
-  <a href="creator-dashboard.html">Creator Hub</a>
+
+  <a
+    href="submit.html"
+    aria-current="page"
+  >
+    Submit a Dream
+  </a>
+
+  <a href="how-it-works.html">
+    How It Works
+  </a>
+
+  <a href="projects.html">
+    Projects
+  </a>
+
+  <a href="creators.html">
+    Creators
+  </a>
+
+  <a href="creator-dashboard.html">
+    Creator Hub
+  </a>
+
 </div>
+```
 
   </div>
+
 </nav>
 
-<main class="page">
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
-<section class="submit-shell">
+<main class="submit-page">
 
-  <div class="submit-intro reveal">
+  <div class="submit-container">
 
-<div class="eyebrow">STEP ONE · THE SPARK</div>
+```
+<header class="submit-header reveal">
 
-<h1>Submit Your Dream</h1>
-
-<p>
-  Every world starts somewhere.
-  Maybe yours begins with a character, a strange idea,
-  a scene you cannot stop imagining, or an entire universe
-  waiting to be discovered.
-</p>
-
+  <div class="submit-eyebrow">
+    STEP ONE · THE SPARK
   </div>
 
-  <div class="dream-card reveal">
-
-<!-- AUTHENTICATION NOTICE -->
-<div id="authNotice" class="auth-notice">
-
-  <h2>Enter Dreamscapes</h2>
+  <h1>
+    Submit Your Dream
+  </h1>
 
   <p>
-    To protect your submission and connect it to your Creator Hub,
-    you'll need to sign in before sending your dream into Dreamscapes.
+    Every world begins with an idea.
+    Tell us what you've been imagining and let
+    Dreamscapes become the place where that spark
+    can grow into something bigger.
   </p>
 
-  <button id="signInButton" class="auth-button" type="button">
-    Sign In with Google ✦
-  </button>
+</header>
 
-</div>
 
-<!-- FORM -->
-<form id="dreamForm" class="form-grid" novalidate>
+<section class="submit-card reveal">
 
-  <div class="form-progress">
-    <div class="progress-step active">
-      01 · Dream
+
+  <!-- ===================================================
+       AUTH PANEL
+  ==================================================== -->
+
+  <div
+    id="authPanel"
+    class="auth-panel hidden"
+  >
+
+    <div class="auth-orb">
+      ✦
     </div>
 
-    <div class="progress-step">
-      02 · Discover
-    </div>
+    <h2>
+      Enter Dreamscapes
+    </h2>
 
-    <div class="progress-step">
-      03 · Build
-    </div>
-  </div>
-
-  <div class="row">
-
-    <div class="field">
-
-      <label for="creatorName">
-        Your name / creator name
-      </label>
-
-      <input
-        id="creatorName"
-        name="creatorName"
-        type="text"
-        maxlength="100"
-        autocomplete="name"
-        placeholder="What should we call you?"
-        required
-      >
-
-    </div>
-
-    <div class="field">
-
-      <label for="projectTitle">
-        Project title
-      </label>
-
-      <input
-        id="projectTitle"
-        name="projectTitle"
-        type="text"
-        maxlength="160"
-        placeholder="Give your dream a name"
-        required
-      >
-
-    </div>
-
-  </div>
-
-  <div class="field">
-
-    <label for="submissionType">
-      What are you imagining?
-    </label>
-
-    <select
-      id="submissionType"
-      name="submissionType"
-      required
-    >
-      <option value="story">Story</option>
-      <option value="film">Film</option>
-      <option value="tv_series">TV Series</option>
-      <option value="game">Game</option>
-      <option value="book">Book</option>
-      <option value="comic">Comic</option>
-      <option value="podcast">Podcast</option>
-      <option value="short">Short Film</option>
-      <option value="documentary">Documentary</option>
-      <option value="other">Other</option>
-    </select>
-
-  </div>
-
-  <div class="field">
-
-    <label for="dreamMessage">
-      Your dream
-    </label>
-
-    <textarea
-      id="dreamMessage"
-      name="dreamMessage"
-      maxlength="10000"
-      minlength="20"
-      placeholder="Tell us the idea in your own words. Don't worry about making it perfect. Start wherever your imagination takes you..."
-      required
-    ></textarea>
-
-    <div id="characterCount" class="character-count">
-      0 / 10,000
-    </div>
-
-  </div>
-
-  <div class="field">
-
-    <label>
-      How involved do you want to be?
-    </label>
-
-    <div class="involvement-grid">
-
-      <div class="involvement-option">
-
-        <input
-          id="build"
-          type="radio"
-          name="involvement"
-          value="build_with_crowrules"
-          checked
-        >
-
-        <label for="build">
-
-          <span class="option-title">
-            Build It With CrowRules
-          </span>
-
-          <span class="option-description">
-            I want to stay involved and help develop
-            my dream with the Dreamscapes team.
-          </span>
-
-        </label>
-
-      </div>
-
-      <div class="involvement-option">
-
-        <input
-          id="later"
-          type="radio"
-          name="involvement"
-          value="collaborate_later"
-        >
-
-        <label for="later">
-
-          <span class="option-title">
-            Collaborate Later
-          </span>
-
-          <span class="option-description">
-            I want to submit the idea now and potentially
-            become involved as development progresses.
-          </span>
-
-        </label>
-
-      </div>
-
-      <div class="involvement-option">
-
-        <input
-          id="explore"
-          type="radio"
-          name="involvement"
-          value="explore_without_me"
-        >
-
-        <label for="explore">
-
-          <span class="option-title">
-            Explore Without Me
-          </span>
-
-          <span class="option-description">
-            I'm comfortable with CrowRules exploring
-            the concept without my ongoing participation.
-          </span>
-
-        </label>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="rights-note">
-
-    <strong>Before you submit:</strong>
-    Dreamscapes is a collaborative development environment.
-    Submitting an idea does not automatically mean it will be
-    produced. Your submission will be recorded in your Creator Hub
-    and can be tracked through its development journey.
-
-    Specific rights, credits, agreements, compensation and production
-    participation should be handled through the appropriate CrowRules
-    agreements before protected creative material is developed or
-    produced.
-
-  </div>
-
-  <div class="submit-actions">
+    <p>
+      Sign in to connect your dream to your personal
+      Dreamscapes Creator Hub. Your submission will be
+      associated with your account so you can follow
+      its journey.
+    </p>
 
     <button
-      id="submitButton"
-      class="submit-button"
-      type="submit"
+      id="signInButton"
+      class="auth-button"
+      type="button"
     >
-      Send Into Dreamscapes ✦
+      Sign In with Google ✦
     </button>
 
-    <div
-      id="formStatus"
-      class="status"
-      aria-live="polite"
-    ></div>
-
   </div>
 
-</form>
 
-<!-- SUCCESS -->
-<div id="successPanel" class="success-panel">
+  <!-- ===================================================
+       FORM
+  ==================================================== -->
 
-  <div class="success-orb">
-    ✦
-  </div>
+  <form
+    id="dreamForm"
+    class="hidden"
+    novalidate
+  >
 
-  <h2>Your Dream Has Entered Dreamscapes</h2>
+    <div class="form-progress">
 
-  <p>
-    Your submission has been received and connected to your
-    Dreamscapes project. From here, you can follow its journey
-    from the original spark toward discovery and development.
-  </p>
+      <div class="progress-item active">
+        01 · Dream
+      </div>
 
-  <div class="success-links">
+      <div class="progress-item">
+        02 · Discover
+      </div>
 
-    <a id="statusLink" href="submission-status.html">
-      Track Submission
-    </a>
+      <div class="progress-item">
+        03 · Build
+      </div>
 
-    <a id="projectLink" href="my-dreams.html">
-      My Dreams
-    </a>
+    </div>
 
-  </div>
 
-</div>
+    <div class="form-grid">
+
+
+      <!-- CREATOR + TITLE -->
+
+      <div class="form-row">
+
+        <div class="field">
+
+          <label for="creatorName">
+            Your Name / Creator Name
+          </label>
+
+          <input
+            id="creatorName"
+            name="creatorName"
+            type="text"
+            maxlength="100"
+            autocomplete="name"
+            placeholder="What should we call you?"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="projectTitle">
+            Project Title
+          </label>
+
+          <input
+            id="projectTitle"
+            name="projectTitle"
+            type="text"
+            maxlength="160"
+            placeholder="Give your dream a name"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- TYPE -->
+
+      <div class="field">
+
+        <label for="submissionType">
+          What Are You Imagining?
+        </label>
+
+        <select
+          id="submissionType"
+          name="submissionType"
+          required
+        >
+
+          <option value="story">
+            Story
+          </option>
+
+          <option value="film">
+            Film
+          </option>
+
+          <option value="tv_series">
+            TV Series
+          </option>
+
+          <option value="game">
+            Game
+          </option>
+
+          <option value="book">
+            Book
+          </option>
+
+          <option value="comic">
+            Comic
+          </option>
+
+          <option value="podcast">
+            Podcast
+          </option>
+
+          <option value="short">
+            Short Film
+          </option>
+
+          <option value="documentary">
+            Documentary
+          </option>
+
+          <option value="other">
+            Other
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- DREAM -->
+
+      <div class="field">
+
+        <label for="dreamMessage">
+          Your Dream
+        </label>
+
+        <textarea
+          id="dreamMessage"
+          name="dreamMessage"
+          maxlength="10000"
+          minlength="20"
+          placeholder="Tell us the idea in your own words. It doesn't need to be perfect. Start wherever your imagination takes you..."
+          required
+        ></textarea>
+
+        <div
+          id="characterCount"
+          class="counter"
+        >
+          0 / 10,000
+        </div>
+
+      </div>
+
+
+      <!-- INVOLVEMENT -->
+
+      <div class="field">
+
+        <label>
+          How Involved Do You Want To Be?
+        </label>
+
+        <div class="involvement-options">
+
+
+          <div class="involvement">
+
+            <input
+              id="involvementBuild"
+              type="radio"
+              name="involvement"
+              value="build_with_crowrules"
+              checked
+            >
+
+            <label for="involvementBuild">
+
+              <span class="option-title">
+                Build It With CrowRules
+              </span>
+
+              <span class="option-text">
+                I want to stay involved and help develop
+                my dream with the Dreamscapes team.
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <div class="involvement">
+
+            <input
+              id="involvementLater"
+              type="radio"
+              name="involvement"
+              value="collaborate_later"
+            >
+
+            <label for="involvementLater">
+
+              <span class="option-title">
+                Collaborate Later
+              </span>
+
+              <span class="option-text">
+                I want to submit the idea now and
+                potentially become involved later.
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <div class="involvement">
+
+            <input
+              id="involvementExplore"
+              type="radio"
+              name="involvement"
+              value="explore_without_me"
+            >
+
+            <label for="involvementExplore">
+
+              <span class="option-title">
+                Explore Without Me
+              </span>
+
+              <span class="option-text">
+                I'm comfortable with CrowRules exploring
+                the concept without my ongoing participation.
+              </span>
+
+            </label>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- RIGHTS -->
+
+      <div class="rights-box">
+
+        <strong>Before You Submit</strong><br>
+
+        Dreamscapes is a creative development environment.
+        Submitting an idea does not guarantee production,
+        publication, compensation or acceptance.
+
+        Your submission will be connected to your
+        Dreamscapes project so you can track its journey.
+
+        Specific rights, credits, agreements, compensation
+        and production participation should be established
+        through the appropriate CrowRules agreements before
+        protected creative material is developed or produced.
+
+      </div>
+
+
+      <!-- ACTION -->
+
+      <div class="form-actions">
+
+        <button
+          id="submitButton"
+          class="submit-button"
+          type="submit"
+        >
+          Send Into Dreamscapes ✦
+        </button>
+
+        <div
+          id="formStatus"
+          class="form-status"
+          aria-live="polite"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </form>
+
+
+  <!-- ===================================================
+       SUCCESS PANEL
+  ==================================================== -->
+
+  <div
+    id="successPanel"
+    class="success-panel"
+  >
+
+    <div class="success-orb">
+      ✦
+    </div>
+
+    <h2>
+      Your Dream Has Entered Dreamscapes
+    </h2>
+
+    <p>
+      Your idea has been received and connected to
+      your Dreamscapes project. You can now follow
+      its journey from the original spark toward
+      discovery, development and collaboration.
+    </p>
+
+    <div class="success-links">
+
+      <a
+        id="submissionStatusLink"
+        href="submission-status.html"
+      >
+        Track Submission
+      </a>
+
+      <a
+        id="projectLink"
+        href="my-dreams.html"
+      >
+        My Dreams
+      </a>
+
+    </div>
 
   </div>
 
 </section>
+```
+
+  </div>
 
 </main>
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
 <footer>
 
   <div class="container foot">
 
+```
 <div>
   © <span data-year></span>
   CrowRules Entertainment · CrowRules Dreamscapes
@@ -783,6 +1061,7 @@
 <div>
   One Dream. One World. One Story.
 </div>
+```
 
   </div>
 
@@ -795,36 +1074,60 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+(function(){
+
+"use strict";
+
+
 /* =========================================================
-   CROWRULES DREAMSCAPES
-   SUBMISSION ENGINE
+   CONFIGURATION
 ========================================================= */
 
 const SUPABASE_URL =
   "https://cevylpnoexugwgygvtgu.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
+const SUPABASE_KEY =
   "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
 
-const {
-  createClient
-} = window.supabase;
 
-const supabaseClient = createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
-);
+/* =========================================================
+   SUPABASE INITIALIZATION
+========================================================= */
+
+if(
+  !window.supabase ||
+  typeof window.supabase.createClient !== "function"
+){
+
+  console.error(
+    "Supabase JavaScript library failed to load."
+  );
+
+  showFatalError(
+    "Dreamscapes could not load its connection system. Please refresh the page and try again."
+  );
+
+  return;
+
+}
+
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 
 /* =========================================================
    ELEMENTS
 ========================================================= */
 
-const form =
-  document.getElementById("dreamForm");
+const authPanel =
+  document.getElementById("authPanel");
 
-const authNotice =
-  document.getElementById("authNotice");
+const dreamForm =
+  document.getElementById("dreamForm");
 
 const signInButton =
   document.getElementById("signInButton");
@@ -838,12 +1141,6 @@ const formStatus =
 const successPanel =
   document.getElementById("successPanel");
 
-const dreamMessage =
-  document.getElementById("dreamMessage");
-
-const characterCount =
-  document.getElementById("characterCount");
-
 const creatorName =
   document.getElementById("creatorName");
 
@@ -853,8 +1150,21 @@ const projectTitle =
 const submissionType =
   document.getElementById("submissionType");
 
-const statusLink =
-  document.getElementById("statusLink");
+const dreamMessage =
+  document.getElementById("dreamMessage");
+
+const characterCount =
+  document.getElementById("characterCount");
+
+const submissionStatusLink =
+  document.getElementById(
+    "submissionStatusLink"
+  );
+
+const projectLink =
+  document.getElementById(
+    "projectLink"
+  );
 
 
 /* =========================================================
@@ -863,53 +1173,83 @@ const statusLink =
 
 document
   .querySelectorAll("[data-year]")
-  .forEach(el => {
-    el.textContent =
+  .forEach(function(element){
+
+    element.textContent =
       new Date().getFullYear();
+
   });
 
 
 /* =========================================================
-   CHARACTER COUNTER
+   STATUS
 ========================================================= */
 
-dreamMessage.addEventListener("input", () => {
+function setStatus(
+  message,
+  type
+){
 
-  characterCount.textContent =
-    `${dreamMessage.value.length.toLocaleString()} / 10,000`;
-
-});
-
-
-/* =========================================================
-   STATUS HELPER
-========================================================= */
-
-function setStatus(message, type = "") {
-
-  formStatus.textContent = message;
+  formStatus.textContent =
+    message || "";
 
   formStatus.className =
-    `status ${type}`;
+    "form-status" +
+    (type ? " " + type : "");
+
+}
+
+
+function showFatalError(message){
+
+  if(formStatus){
+
+    setStatus(
+      message,
+      "error"
+    );
+
+  }
+
+  if(authPanel){
+
+    authPanel.classList.remove(
+      "hidden"
+    );
+
+  }
 
 }
 
 
 /* =========================================================
-   AUTH
+   GET CURRENT USER
 ========================================================= */
 
 async function getCurrentUser(){
 
-  const {
-    data,
-    error
-  } = await supabaseClient.auth.getUser();
+  try{
 
-  if(error){
+    const result =
+      await supabaseClient.auth.getUser();
+
+    if(result.error){
+
+      console.error(
+        "Supabase auth error:",
+        result.error
+      );
+
+      return null;
+
+    }
+
+    return result.data?.user || null;
+
+  }catch(error){
 
     console.error(
-      "Auth error:",
+      "Unexpected authentication error:",
       error
     );
 
@@ -917,88 +1257,182 @@ async function getCurrentUser(){
 
   }
 
-  return data.user || null;
-
 }
 
 
-async function updateAuthUI(){
+/* =========================================================
+   LOAD CREATOR PROFILE
+========================================================= */
 
-  const user =
-    await getCurrentUser();
+async function loadCreatorProfile(user){
 
-  if(user){
+  if(!user){
 
-    authNotice.classList.remove("show");
+    return;
 
-    form.style.display = "";
+  }
 
-    /*
-      If the creator already has a Dreamscapes profile,
-      use the display name automatically.
-    */
+  try{
 
-    const {
-      data: profile
-    } =
+    const result =
       await supabaseClient
         .from("ds_creator_profiles")
-        .select("display_name,username")
-        .eq("user_id", user.id)
+        .select(
+          "display_name,username"
+        )
+        .eq(
+          "user_id",
+          user.id
+        )
         .maybeSingle();
 
-    if(profile){
 
-      if(
-        !creatorName.value &&
-        profile.display_name
-      ){
+    if(result.error){
 
-        creatorName.value =
-          profile.display_name;
+      /*
+        A missing profile should NOT prevent
+        submission. The creator can simply
+        enter their name manually.
+      */
 
-      }
+      console.warn(
+        "Creator profile could not be loaded:",
+        result.error
+      );
+
+      return;
 
     }
 
-  }else{
 
-    authNotice.classList.add("show");
+    const profile =
+      result.data;
 
-    form.style.display = "none";
+
+    if(
+      profile &&
+      !creatorName.value
+    ){
+
+      creatorName.value =
+        profile.display_name ||
+        profile.username ||
+        "";
+
+    }
+
+  }catch(error){
+
+    console.warn(
+      "Profile loading failed:",
+      error
+    );
 
   }
 
 }
 
 
-signInButton.addEventListener(
-  "click",
-  async () => {
+/* =========================================================
+   UPDATE AUTH UI
+========================================================= */
 
-    setStatus(
-      "Opening secure sign-in...",
-      "loading"
+async function updateAuthUI(){
+
+  const user =
+    await getCurrentUser();
+
+
+  if(user){
+
+    authPanel.classList.add(
+      "hidden"
     );
 
-    const {
-      error
-    } =
-      await supabaseClient.auth.signInWithOAuth({
-        provider:"google",
-        options:{
-          redirectTo:
-            window.location.href
-        }
-      });
+    dreamForm.classList.remove(
+      "hidden"
+    );
 
-    if(error){
+    await loadCreatorProfile(
+      user
+    );
+
+  }else{
+
+    dreamForm.classList.add(
+      "hidden"
+    );
+
+    authPanel.classList.remove(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   GOOGLE SIGN-IN
+========================================================= */
+
+signInButton.addEventListener(
+  "click",
+  async function(){
+
+    signInButton.disabled =
+      true;
+
+    signInButton.textContent =
+      "Opening Dreamscapes...";
+
+    setStatus(
+      "",
+      ""
+    );
+
+    try{
+
+      const redirectUrl =
+        window.location.origin +
+        window.location.pathname;
+
+      const result =
+        await supabaseClient.auth.signInWithOAuth({
+
+          provider:"google",
+
+          options:{
+            redirectTo:
+              redirectUrl
+          }
+
+        });
+
+
+      if(result.error){
+
+        throw result.error;
+
+      }
+
+    }catch(error){
+
+      console.error(
+        "Google sign-in failed:",
+        error
+      );
 
       setStatus(
-        error.message ||
-        "Unable to start sign-in.",
+        getFriendlyError(error),
         "error"
       );
+
+      signInButton.disabled =
+        false;
+
+      signInButton.textContent =
+        "Sign In with Google ✦";
 
     }
 
@@ -1007,28 +1441,238 @@ signInButton.addEventListener(
 
 
 /* =========================================================
+   CHARACTER COUNTER
+========================================================= */
+
+dreamMessage.addEventListener(
+  "input",
+  function(){
+
+    const count =
+      dreamMessage.value.length;
+
+    characterCount.textContent =
+      count.toLocaleString() +
+      " / 10,000";
+
+  }
+);
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+function clearInvalid(){
+
+  [
+    creatorName,
+    projectTitle,
+    submissionType,
+    dreamMessage
+  ].forEach(function(element){
+
+    element.classList.remove(
+      "invalid"
+    );
+
+  });
+
+}
+
+
+function validateForm(){
+
+  clearInvalid();
+
+
+  const creator =
+    creatorName.value.trim();
+
+  const title =
+    projectTitle.value.trim();
+
+  const message =
+    dreamMessage.value.trim();
+
+
+  if(!creator){
+
+    creatorName.classList.add(
+      "invalid"
+    );
+
+    creatorName.focus();
+
+    setStatus(
+      "Please enter your creator name.",
+      "error"
+    );
+
+    return false;
+
+  }
+
+
+  if(title.length < 2){
+
+    projectTitle.classList.add(
+      "invalid"
+    );
+
+    projectTitle.focus();
+
+    setStatus(
+      "Please give your dream a project title.",
+      "error"
+    );
+
+    return false;
+
+  }
+
+
+  if(message.length < 20){
+
+    dreamMessage.classList.add(
+      "invalid"
+    );
+
+    dreamMessage.focus();
+
+    setStatus(
+      "Please tell us a little more about your dream. At least 20 characters are required.",
+      "error"
+    );
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   FRIENDLY ERRORS
+========================================================= */
+
+function getFriendlyError(error){
+
+  if(!error){
+
+    return "Something went wrong. Please try again.";
+
+  }
+
+
+  const message =
+    String(
+      error.message ||
+      error.error_description ||
+      ""
+    );
+
+
+  if(
+    message.toLowerCase()
+      .includes("not authorized")
+  ){
+
+    return "Your account is not authorized for this action.";
+
+  }
+
+
+  if(
+    message.toLowerCase()
+      .includes("jwt")
+  ){
+
+    return "Your login session has expired. Please sign in again.";
+
+  }
+
+
+  if(
+    message.toLowerCase()
+      .includes("function")
+  ){
+
+    return "The Dreamscapes submission service is not available yet. Please try again shortly.";
+
+  }
+
+
+  if(
+    message.toLowerCase()
+      .includes("permission")
+  ){
+
+    return "Dreamscapes could not save your submission because of an account permission issue.";
+
+  }
+
+
+  return message ||
+    "We couldn't send your dream. Please try again.";
+
+}
+
+
+/* =========================================================
    SUBMIT DREAM
 ========================================================= */
 
-form.addEventListener(
+dreamForm.addEventListener(
   "submit",
-  async event => {
+  async function(event){
 
     event.preventDefault();
 
-    setStatus("");
+
+    if(
+      submitButton.disabled
+    ){
+
+      return;
+
+    }
+
+
+    setStatus(
+      "",
+      ""
+    );
+
 
     const user =
       await getCurrentUser();
 
+
     if(!user){
 
+      dreamForm.classList.add(
+        "hidden"
+      );
+
+      authPanel.classList.remove(
+        "hidden"
+      );
+
       setStatus(
-        "Please sign in before submitting your dream.",
+        "Your login session has ended. Please sign in again.",
         "error"
       );
 
-      updateAuthUI();
+      return;
+
+    }
+
+
+    if(!validateForm()){
 
       return;
 
@@ -1047,56 +1691,13 @@ form.addEventListener(
     const message =
       dreamMessage.value.trim();
 
-    const involvement =
+    const involvementElement =
       document.querySelector(
         'input[name="involvement"]:checked'
-      )?.value;
-
-
-    /* -----------------------------------------
-       CLIENT VALIDATION
-    ----------------------------------------- */
-
-    if(!creator){
-
-      setStatus(
-        "Please enter your creator name.",
-        "error"
       );
 
-      creatorName.focus();
 
-      return;
-
-    }
-
-    if(title.length < 2){
-
-      setStatus(
-        "Please give your dream a project title.",
-        "error"
-      );
-
-      projectTitle.focus();
-
-      return;
-
-    }
-
-    if(message.length < 20){
-
-      setStatus(
-        "Tell us a little more about your dream. A minimum of 20 characters is required.",
-        "error"
-      );
-
-      dreamMessage.focus();
-
-      return;
-
-    }
-
-    if(!involvement){
+    if(!involvementElement){
 
       setStatus(
         "Please choose how involved you would like to be.",
@@ -1108,39 +1709,38 @@ form.addEventListener(
     }
 
 
-    /* -----------------------------------------
-       LOCK FORM
-    ----------------------------------------- */
+    const involvement =
+      involvementElement.value;
 
-    submitButton.disabled = true;
+
+    submitButton.disabled =
+      true;
 
     submitButton.textContent =
       "Sending Your Dream...";
 
+
     setStatus(
-      "Connecting your dream to Dreamscapes...",
+      "Creating your Dreamscapes project...",
       "loading"
     );
 
 
     try{
 
+
       /*
-        One secure Supabase RPC creates:
+        IMPORTANT:
 
-        ds_projects
-        +
-        ds_submissions
-        +
-        ds_submission_events
+        ds_submit_dream is a SECURITY-DEFINER
+        database function intended to perform
+        the project + submission transaction.
 
-        in one database transaction.
+        We intentionally do NOT insert directly
+        into both tables from the browser.
       */
 
-      const {
-        data,
-        error
-      } =
+      const result =
         await supabaseClient.rpc(
           "ds_submit_dream",
           {
@@ -1153,63 +1753,111 @@ form.addEventListener(
         );
 
 
-      if(error){
+      if(result.error){
 
-        console.error(
-          "Dream submission error:",
-          error
-        );
+        throw result.error;
 
-        throw error;
+      }
+
+
+      /*
+        Supabase RPC results can be returned as:
+
+        object:
+        { submission_id, project_id }
+
+        OR an array containing that object.
+
+        Handle both safely.
+      */
+
+      let response =
+        result.data;
+
+
+      if(
+        Array.isArray(response)
+      ){
+
+        response =
+          response[0];
 
       }
 
 
       if(
-        !data ||
-        !data.submission_id ||
-        !data.project_id
+        typeof response === "string"
       ){
 
+        try{
+
+          response =
+            JSON.parse(response);
+
+        }catch(_){
+
+          response = null;
+
+        }
+
+      }
+
+
+      const submissionId =
+        response?.submission_id ||
+        response?.id ||
+        null;
+
+      const projectId =
+        response?.project_id ||
+        null;
+
+
+      if(!submissionId){
+
+        console.error(
+          "Unexpected ds_submit_dream response:",
+          result.data
+        );
+
         throw new Error(
-          "Dream submission completed without returning its project information."
+          "The submission was not confirmed by Dreamscapes."
         );
 
       }
 
 
-      /* -----------------------------------------
-         SUCCESS
-      ----------------------------------------- */
+      /*
+        Build destination links.
+      */
 
-      const submissionId =
-        data.submission_id;
-
-      const projectId =
-        data.project_id;
-
-
-      statusLink.href =
-        `submission-status.html?id=${encodeURIComponent(submissionId)}`;
-
-      document.getElementById(
-        "projectLink"
-      ).href =
-        `project-development.html?id=${encodeURIComponent(projectId)}`;
+      submissionStatusLink.href =
+        "submission-status.html?id=" +
+        encodeURIComponent(
+          submissionId
+        );
 
 
-      form.style.display =
-        "none";
+      if(projectId){
 
-      successPanel.classList.add(
-        "show"
-      );
+        projectLink.href =
+          "project-development.html?id=" +
+          encodeURIComponent(
+            projectId
+          );
+
+      }else{
+
+        projectLink.href =
+          "my-dreams.html";
+
+      }
 
 
       /*
-        Optional local persistence.
-        This lets the next page know the
-        most recently submitted dream.
+        Remember most recent submission locally.
+        This is only a convenience feature;
+        Supabase remains the source of truth.
       */
 
       try{
@@ -1217,23 +1865,44 @@ form.addEventListener(
         localStorage.setItem(
           "dreamscapes:lastSubmission",
           JSON.stringify({
-            submissionId,
-            projectId,
-            createdAt:
+
+            submission_id:
+              submissionId,
+
+            project_id:
+              projectId,
+
+            created_at:
               new Date().toISOString()
+
           })
         );
 
       }catch(_){}
 
 
+      /*
+        Show success.
+      */
+
+      dreamForm.classList.add(
+        "hidden"
+      );
+
+      successPanel.classList.add(
+        "show"
+      );
+
+
     }catch(error){
 
-      console.error(error);
+      console.error(
+        "Dream submission failed:",
+        error
+      );
 
       setStatus(
-        error.message ||
-        "Something went wrong while sending your dream.",
+        getFriendlyError(error),
         "error"
       );
 
@@ -1250,24 +1919,64 @@ form.addEventListener(
 
 
 /* =========================================================
-   AUTH STATE LISTENER
+   AUTH STATE
 ========================================================= */
 
 supabaseClient.auth.onAuthStateChange(
-  (_event, _session) => {
+  function(event){
+
+    console.log(
+      "Dreamscapes auth event:",
+      event
+    );
+
 
     /*
-      Delay UI work slightly so Supabase
-      has completed session persistence.
+      Avoid doing heavy work inside the auth
+      callback itself.
     */
 
     setTimeout(
       updateAuthUI,
-      50
+      100
     );
 
   }
 );
+
+
+/* =========================================================
+   MOBILE NAV
+========================================================= */
+
+const menuButton =
+  document.getElementById(
+    "menuButton"
+  );
+
+const navLinks =
+  document.getElementById(
+    "navLinks"
+  );
+
+
+if(
+  menuButton &&
+  navLinks
+){
+
+  menuButton.addEventListener(
+    "click",
+    function(){
+
+      navLinks.classList.toggle(
+        "open"
+      );
+
+    }
+  );
+
+}
 
 
 /* =========================================================
@@ -1277,30 +1986,7 @@ supabaseClient.auth.onAuthStateChange(
 updateAuthUI();
 
 
-/* =========================================================
-   MOBILE NAV
-========================================================= */
-
-const menuButton =
-  document.querySelector(".menu");
-
-const links =
-  document.querySelector(".links");
-
-if(menuButton && links){
-
-  menuButton.addEventListener(
-    "click",
-    () => {
-
-      links.classList.toggle(
-        "open"
-      );
-
-    }
-  );
-
-}
+})();
 </script>
 
 <script src="assets/js/dreamscapes.js"></script>
