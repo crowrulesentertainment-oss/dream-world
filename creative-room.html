@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#030303">
+<meta name="description" content="CrowRules Dream World Creative Room — cinematic project development workspace.">
 <title>CrowRules Dream World — Creative Room</title>
-<meta name="theme-color" content="#050505">
-<meta name="description" content="CrowRules Dream World Creative Room — cinematic project development workspace for creators and collaborators.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,26 +15,23 @@
 
 <style>
 :root{
-  --bg:#050505;
-  --panel:#101010;
-  --panel2:#151515;
-  --panel3:#0b0b0b;
-  --red:#e50914;
-  --red2:#ff2633;
+  --bg:#030303;
+  --panel:rgba(12,12,14,.88);
+  --panel2:rgba(20,20,23,.78);
+  --line:rgba(255,255,255,.09);
+  --line2:rgba(255,255,255,.05);
   --text:#f5f5f5;
-  --muted:#8d8d8d;
-  --dim:#5c5c5c;
-  --line:#292929;
-  --green:#48d597;
-  --yellow:#f5c451;
-  --blue:#5aa9ff;
-  --purple:#ae7cff;
+  --muted:#96969d;
+  --red:#e21b2d;
+  --red2:#ff4b58;
+  --green:#43e09b;
+  --gold:#e7c56a;
+  --shadow:0 24px 80px rgba(0,0,0,.5);
+  --radius:18px;
 }
 
 *{
   box-sizing:border-box;
-  margin:0;
-  padding:0;
 }
 
 html{
@@ -43,550 +39,269 @@ html{
 }
 
 body{
+  margin:0;
   min-height:100vh;
-  background:
-    radial-gradient(circle at 10% 0%,rgba(229,9,20,.13),transparent 28%),
-    radial-gradient(circle at 90% 5%,rgba(120,20,30,.08),transparent 30%),
-    linear-gradient(180deg,#050505,#080808 45%,#050505);
   color:var(--text);
+  background:
+    radial-gradient(circle at 50% -15%,#2b1015 0%,#0b0809 25%,#050505 55%,#030303 100%);
   font-family:Montserrat,Arial,sans-serif;
-  overflow-x:hidden;
 }
 
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:999;
-  opacity:.025;
-  background-image:
-    linear-gradient(rgba(255,255,255,.55) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.55) 1px,transparent 1px);
-  background-size:60px 60px;
+body::selection{
+  background:var(--red);
+  color:#fff;
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.container{
+  width:min(1440px,calc(100% - 32px));
+  margin:auto;
+}
+
+/* NAVIGATION */
 
 header{
-  height:72px;
   position:sticky;
   top:0;
-  z-index:1000;
-  background:rgba(5,5,5,.94);
-  backdrop-filter:blur(18px);
+  z-index:100;
+  background:rgba(3,3,3,.72);
+  backdrop-filter:blur(20px);
   border-bottom:1px solid var(--line);
 }
 
 .nav{
-  width:min(1550px,94%);
-  height:100%;
-  margin:auto;
+  height:72px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:20px;
+  gap:24px;
 }
 
-.brand{
+.logo{
+  font-family:Orbitron,sans-serif;
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  white-space:nowrap;
+}
+
+.logo span{
+  color:var(--red);
+}
+
+.navlinks{
   display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
+  gap:5px;
+  margin-left:auto;
+}
+
+.navlinks a{
+  padding:10px 12px;
+  border-radius:10px;
+  color:#999;
+  font-size:12px;
+  font-weight:800;
+}
+
+.navlinks a:hover,
+.navlinks a.active{
+  background:#111113;
   color:#fff;
 }
 
-.brand-mark{
-  width:42px;
-  height:42px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,#28070a,#0a0a0a);
-  border:1px solid var(--red);
+.menu{
+  display:none;
+  margin-left:auto;
+  padding:9px 11px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  color:#fff;
+  background:#0d0d0f;
+}
+
+/* CINEMATIC HERO */
+
+.hero{
+  position:relative;
+  min-height:530px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  border-bottom:1px solid var(--line);
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-30%;
+  background:
+    radial-gradient(circle at 50% 50%,rgba(226,27,45,.17),transparent 23%),
+    radial-gradient(circle at 15% 35%,rgba(255,255,255,.06),transparent 18%),
+    radial-gradient(circle at 85% 65%,rgba(226,27,45,.08),transparent 22%);
+  animation:heroDrift 18s ease-in-out infinite alternate;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 50%,#030303 100%);
+  pointer-events:none;
+}
+
+.grid{
+  position:absolute;
+  inset:0;
+  opacity:.17;
+  background-image:
+    linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size:70px 70px;
+  transform:
+    perspective(500px)
+    rotateX(58deg)
+    scale(1.5)
+    translateY(125px);
+  transform-origin:center bottom;
+}
+
+.orbit{
+  position:absolute;
+  left:50%;
+  top:52%;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:50%;
+  transform:translate(-50%,-50%) rotateX(68deg);
+  animation:orbitSpin 30s linear infinite;
+}
+
+.o1{
+  width:520px;
+  height:520px;
+}
+
+.o2{
+  width:760px;
+  height:350px;
+  animation-duration:40s;
+  animation-direction:reverse;
+}
+
+.o3{
+  width:1000px;
+  height:460px;
+  animation-duration:55s;
+}
+
+.particle{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:#fff;
+  opacity:.45;
+  animation:particleFloat 7s ease-in-out infinite;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:3;
+  width:100%;
+  padding:100px 0 80px;
+  max-width:950px;
+}
+
+.eyebrow{
+  margin-bottom:18px;
   color:var(--red2);
   font-family:Orbitron,sans-serif;
   font-size:10px;
   font-weight:900;
-  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
-  box-shadow:0 0 25px rgba(229,9,20,.17);
-}
-
-.brand-text strong{
-  display:block;
-  font-family:Orbitron,sans-serif;
-  font-size:13px;
-  letter-spacing:1px;
-}
-
-.brand-text span{
-  display:block;
-  color:var(--red2);
-  font-size:9px;
-  letter-spacing:2px;
-  margin-top:2px;
+  letter-spacing:3px;
   text-transform:uppercase;
 }
 
-.nav-links{
-  display:flex;
-  gap:4px;
-}
-
-.nav-links a{
-  color:#999;
-  text-decoration:none;
-  padding:10px 12px;
-  border-radius:7px;
-  font-size:10px;
-  font-weight:700;
-}
-
-.nav-links a:hover,
-.nav-links a.active{
-  color:#fff;
-  background:#151515;
-}
-
-.nav-links a.active{
-  box-shadow:inset 0 -2px var(--red);
-}
-
-.user-area{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.notification{
-  position:relative;
-  width:38px;
-  height:38px;
-  border:1px solid var(--line);
-  border-radius:50%;
-  background:#101010;
-  color:#ddd;
-  cursor:pointer;
-}
-
-.notification-dot{
-  position:absolute;
-  top:5px;
-  right:6px;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--red);
-  box-shadow:0 0 10px var(--red);
-}
-
-.avatar{
-  width:40px;
-  height:40px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  border:1px solid #681019;
-  background:linear-gradient(135deg,#40090e,#100506);
+.hero h1{
+  margin:0 0 20px;
   font-family:Orbitron,sans-serif;
-  font-size:10px;
-  font-weight:800;
-}
-
-.mobile-menu{
-  display:none;
-  width:38px;
-  height:38px;
-  background:#111;
-  color:#fff;
-  border:1px solid var(--line);
-  border-radius:8px;
-}
-
-/* =========================================================
-   CINEMATIC HERO
-========================================================= */
-
-.cinematic-hero{
-  position:relative;
-  min-height:440px;
-  margin-bottom:22px;
-  overflow:hidden;
-  border:1px solid #42151a;
-  border-radius:18px;
-  background:
-    radial-gradient(circle at 50% 48%,rgba(229,9,20,.15),transparent 25%),
-    radial-gradient(circle at 15% 30%,rgba(255,30,40,.08),transparent 28%),
-    radial-gradient(circle at 85% 65%,rgba(140,20,30,.09),transparent 30%),
-    #060606;
-  isolation:isolate;
-}
-
-.hero-grid{
-  position:absolute;
-  inset:-30%;
-  background-image:
-    linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);
-  background-size:55px 55px;
-  transform:perspective(600px) rotateX(62deg) translateY(80px);
-  transform-origin:center bottom;
-  opacity:.25;
-  animation:gridDrift 18s linear infinite;
-}
-
-.hero-vignette{
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at center,transparent 20%,rgba(0,0,0,.2) 52%,rgba(0,0,0,.82) 100%);
-  z-index:1;
-}
-
-.hero-orb{
-  position:absolute;
-  border-radius:50%;
-  filter:blur(1px);
-  pointer-events:none;
-}
-
-.hero-orb.one{
-  width:360px;
-  height:360px;
-  left:7%;
-  top:-100px;
-  background:radial-gradient(circle,rgba(229,9,20,.15),transparent 68%);
-  animation:orbFloat 9s ease-in-out infinite;
-}
-
-.hero-orb.two{
-  width:460px;
-  height:460px;
-  right:0;
-  bottom:-220px;
-  background:radial-gradient(circle,rgba(150,15,30,.14),transparent 70%);
-  animation:orbFloat 12s ease-in-out infinite reverse;
-}
-
-.hero-ring{
-  position:absolute;
-  left:50%;
-  top:52%;
-  width:310px;
-  height:310px;
-  transform:translate(-50%,-50%);
-  border:1px solid rgba(229,9,20,.22);
-  border-radius:50%;
-  box-shadow:
-    0 0 80px rgba(229,9,20,.08),
-    inset 0 0 80px rgba(229,9,20,.05);
-  animation:ringSpin 24s linear infinite;
-}
-
-.hero-ring:before,
-.hero-ring:after{
-  content:"";
-  position:absolute;
-  inset:25px;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:50%;
-}
-
-.hero-ring:after{
-  inset:70px;
-  border-color:rgba(229,9,20,.17);
-}
-
-.hero-beam{
-  position:absolute;
-  width:1px;
-  height:120%;
-  top:-10%;
-  background:linear-gradient(transparent,rgba(229,9,20,.35),transparent);
-  opacity:.5;
-  transform-origin:center;
-  z-index:0;
-}
-
-.hero-beam.one{
-  left:35%;
-  transform:rotate(27deg);
-  animation:beamPulse 5s ease-in-out infinite;
-}
-
-.hero-beam.two{
-  right:32%;
-  transform:rotate(-24deg);
-  animation:beamPulse 7s ease-in-out infinite reverse;
-}
-
-.hero-particles{
-  position:absolute;
-  inset:0;
-  z-index:2;
-  pointer-events:none;
-}
-
-.hero-particle{
-  position:absolute;
-  width:2px;
-  height:2px;
-  border-radius:50%;
-  background:#fff;
-  opacity:.25;
-  animation:particleFloat linear infinite;
-}
-
-.hero-content{
-  position:relative;
-  z-index:4;
-  min-height:440px;
-  width:min(1050px,90%);
-  margin:auto;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:70px 0;
-}
-
-.hero-eyebrow{
-  font-family:Orbitron,sans-serif;
-  color:var(--red2);
-  font-size:9px;
-  letter-spacing:4px;
-  font-weight:800;
-  text-transform:uppercase;
-  margin-bottom:18px;
-  opacity:0;
-  animation:heroIn .9s .1s forwards;
-}
-
-.hero-title{
-  font-family:Orbitron,sans-serif;
-  font-size:clamp(35px,7vw,75px);
+  font-size:clamp(40px,7vw,82px);
   line-height:1;
   letter-spacing:-3px;
-  max-width:1000px;
-  text-shadow:
-    0 0 35px rgba(255,255,255,.07),
-    0 0 70px rgba(229,9,20,.1);
-  opacity:0;
-  animation:heroIn 1s .25s forwards;
+  text-transform:uppercase;
 }
 
-.hero-title span{
-  color:var(--red2);
+.hero h1 em{
+  color:transparent;
+  font-style:normal;
+  -webkit-text-stroke:1px rgba(255,255,255,.65);
 }
 
-.hero-copy{
-  max-width:730px;
-  color:#898989;
-  font-size:11px;
-  line-height:1.85;
-  margin-top:20px;
-  opacity:0;
-  animation:heroIn 1s .4s forwards;
+.hero p{
+  max-width:760px;
+  margin:0;
+  color:#b5b5bb;
+  font-size:17px;
+  line-height:1.8;
 }
 
 .hero-actions{
   display:flex;
-  gap:9px;
   flex-wrap:wrap;
-  justify-content:center;
-  margin-top:25px;
-  opacity:0;
-  animation:heroIn 1s .55s forwards;
+  gap:10px;
+  margin-top:28px;
 }
 
-.hero-status{
-  position:absolute;
-  left:24px;
-  bottom:20px;
-  z-index:5;
-  color:#555;
-  font-family:Orbitron,sans-serif;
-  font-size:7px;
-  letter-spacing:2px;
-}
-
-.hero-status strong{
-  color:var(--green);
-}
-
-@keyframes heroIn{
-  from{
-    opacity:0;
-    transform:translateY(22px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-@keyframes gridDrift{
-  from{background-position:0 0;}
-  to{background-position:55px 55px;}
-}
-
-@keyframes orbFloat{
-  0%,100%{transform:translate3d(0,0,0) scale(1);}
-  50%{transform:translate3d(25px,-18px,0) scale(1.08);}
-}
-
-@keyframes ringSpin{
-  from{transform:translate(-50%,-50%) rotate(0deg);}
-  to{transform:translate(-50%,-50%) rotate(360deg);}
-}
-
-@keyframes beamPulse{
-  0%,100%{opacity:.15;}
-  50%{opacity:.6;}
-}
-
-@keyframes particleFloat{
-  from{transform:translateY(30px);opacity:0;}
-  15%{opacity:.25;}
-  80%{opacity:.2;}
-  to{transform:translateY(-160px);opacity:0;}
-}
-
-/* =========================================================
-   PAGE
-========================================================= */
-
-.page{
-  width:min(1550px,94%);
-  margin:auto;
-  padding:35px 0 80px;
-}
-
-/* =========================================================
-   PROJECT HEADER
-========================================================= */
-
-.project-header{
-  background:
-    radial-gradient(circle at 90% 20%,rgba(229,9,20,.16),transparent 32%),
-    linear-gradient(120deg,#130507,#0b0b0b 65%);
-  border:1px solid #40161a;
-  border-radius:15px;
-  padding:24px;
-}
-
-.eyebrow{
-  color:var(--red2);
-  font-family:Orbitron,sans-serif;
-  font-size:9px;
-  letter-spacing:3px;
-  font-weight:800;
-  text-transform:uppercase;
-  margin-bottom:10px;
-}
-
-.project-title-row{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.project-title{
-  font-family:Orbitron,sans-serif;
-  font-size:clamp(23px,4vw,39px);
-  line-height:1.2;
-  letter-spacing:-1px;
-}
-
-.project-code{
-  color:#656565;
-  font-family:Orbitron,sans-serif;
-  font-size:8px;
-  margin-top:7px;
-}
-
-.project-description{
-  max-width:850px;
-  margin-top:12px;
-  color:#8e8e8e;
-  font-size:11px;
-  line-height:1.7;
-}
-
-.project-status{
-  flex:none;
-  padding:7px 10px;
-  border:1px solid rgba(229,9,20,.35);
-  border-radius:5px;
-  color:#ff6b73;
-  background:rgba(229,9,20,.08);
-  font-size:8px;
-  font-weight:800;
-  text-transform:uppercase;
-}
-
-.project-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-top:17px;
-}
-
-.project-meta span{
-  padding:6px 8px;
-  border:1px solid #322326;
-  background:#0b0b0b;
-  color:#888;
-  border-radius:5px;
-  font-size:7px;
-  font-weight:800;
-  text-transform:uppercase;
-}
-
-.project-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:18px;
-}
-
-/* =========================================================
-   BUTTONS
-========================================================= */
+/* BUTTONS */
 
 .btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  padding:10px 13px;
-  background:#111;
+  padding:11px 15px;
   border:1px solid var(--line);
+  border-radius:11px;
+  background:#111113;
   color:#fff;
-  border-radius:7px;
-  font-family:Montserrat,sans-serif;
-  font-size:9px;
-  font-weight:800;
-  cursor:pointer;
-  text-decoration:none;
-  transition:.2s;
+  font-size:11px;
+  font-weight:900;
+  transition:.2s ease;
 }
 
 .btn:hover{
-  border-color:#555;
+  border-color:#333;
   transform:translateY(-1px);
 }
 
-.btn-primary{
+.btn.primary{
   background:var(--red);
   border-color:var(--red);
 }
 
-.btn-primary:hover{
-  background:#ff1823;
+.btn.primary:hover{
+  background:#ff2639;
+}
+
+.btn.ghost{
+  background:transparent;
+}
+
+.btn.danger{
+  color:#ff7c84;
 }
 
 .btn:disabled{
@@ -595,1091 +310,691 @@ header{
   transform:none;
 }
 
-/* =========================================================
-   WORKSPACE
-========================================================= */
+/* MAIN */
+
+main{
+  padding:30px 0 80px;
+}
+
+.project-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+  margin-bottom:20px;
+}
+
+.project-title{
+  margin:0 0 9px;
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(24px,3vw,38px);
+}
+
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+.pill{
+  padding:6px 9px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#101012;
+  color:#aaa;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.pill.red{
+  border-color:rgba(226,27,45,.45);
+  color:#ff6d78;
+}
+
+.pill.green{
+  border-color:rgba(67,224,155,.35);
+  color:#75e9b6;
+}
+
+/* WORKSPACE */
 
 .workspace{
   display:grid;
-  grid-template-columns:220px minmax(0,1fr) 270px;
+  grid-template-columns:190px minmax(0,1fr) 310px;
   gap:14px;
-  margin-top:20px;
 }
 
-.workspace-panel,
-.editor,
-.card{
+.panel{
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:13px;
-  overflow:hidden;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
 }
 
-/* =========================================================
-   LEFT TOOL PANEL
-========================================================= */
+/* TOOLS */
 
-.panel-heading{
-  padding:15px;
-  border-bottom:1px solid #232323;
-  font-family:Orbitron,sans-serif;
-  font-size:10px;
-  letter-spacing:1px;
-}
-
-.tool-list{
-  padding:7px;
+.tools{
+  position:sticky;
+  top:92px;
+  height:max-content;
+  padding:10px;
 }
 
 .tool{
   width:100%;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:11px;
-  margin-bottom:2px;
+  margin-bottom:3px;
+  padding:12px;
   border:0;
-  border-radius:7px;
+  border-radius:11px;
   background:transparent;
-  color:#888;
+  color:#999;
   text-align:left;
-  cursor:pointer;
-  font-family:Montserrat,sans-serif;
-  font-size:9px;
-  font-weight:700;
+  font-size:11px;
+  font-weight:800;
 }
 
-.tool:hover,
-.tool.active{
-  background:#181818;
+.tool:hover{
+  background:#151517;
   color:#fff;
 }
 
 .tool.active{
-  border-left:3px solid var(--red);
-  padding-left:8px;
+  background:#171719;
+  color:#fff;
+  box-shadow:inset 3px 0 0 var(--red);
 }
 
-.tool-icon{
-  width:20px;
-  text-align:center;
-  color:#777;
-  font-size:13px;
-}
+/* EDITOR */
 
-.tool.active .tool-icon{
-  color:var(--red2);
-}
-
-.workspace-note{
-  margin:10px;
-  padding:13px;
-  background:#0c0c0c;
-  border:1px solid #242424;
-  border-radius:8px;
-}
-
-.workspace-note strong{
-  display:block;
-  color:#aaa;
-  font-size:8px;
-  margin-bottom:6px;
-  font-family:Orbitron,sans-serif;
-}
-
-.workspace-note p{
-  color:#666;
-  font-size:8px;
-  line-height:1.6;
-}
-
-/* =========================================================
-   EDITOR
-========================================================= */
-
-.editor-toolbar{
-  min-height:57px;
-  padding:9px 11px;
+.editor{
+  min-height:660px;
   display:flex;
-  justify-content:space-between;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+.editor-top{
+  display:flex;
   align-items:center;
   gap:10px;
-  border-bottom:1px solid #242424;
-  background:#0d0d0d;
+  padding:16px;
+  border-bottom:1px solid var(--line);
 }
 
-.editor-mode{
-  display:flex;
-  gap:4px;
+.editor-top strong{
+  font-family:Orbitron,sans-serif;
+  font-size:11px;
+  letter-spacing:.8px;
 }
 
-.mode{
-  padding:7px 9px;
-  border:1px solid #262626;
-  border-radius:5px;
-  background:#111;
-  color:#666;
-  font-size:7px;
-  font-weight:800;
-  cursor:pointer;
-  text-transform:uppercase;
-}
-
-.mode.active{
-  color:#fff;
-  border-color:#4b1116;
-  background:#190609;
-}
-
-.editor-actions{
-  display:flex;
-  gap:5px;
-}
-
-.icon-button{
-  width:31px;
-  height:31px;
-  display:grid;
-  place-items:center;
-  background:#111;
-  border:1px solid #282828;
-  border-radius:6px;
-  color:#888;
-  cursor:pointer;
-}
-
-.icon-button:hover{
-  color:#fff;
-  border-color:#555;
+.status{
+  margin-left:auto;
+  color:var(--muted);
+  font-size:10px;
 }
 
 .editor-body{
-  padding:25px;
-  min-height:560px;
-}
-
-.editor-label{
-  color:#5e5e5e;
-  font-size:8px;
-  font-weight:800;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-bottom:10px;
-}
-
-.editor-title{
-  width:100%;
-  border:0;
-  outline:0;
-  background:transparent;
-  color:#fff;
-  font-family:Orbitron,sans-serif;
-  font-size:23px;
-  line-height:1.4;
-  resize:none;
-  margin-bottom:18px;
-}
-
-.editor-content{
-  width:100%;
-  min-height:360px;
-  padding:0;
-  border:0;
-  outline:0;
-  resize:vertical;
-  background:transparent;
-  color:#aaa;
-  font-family:Montserrat,sans-serif;
-  font-size:11px;
-  line-height:1.9;
-}
-
-.editor-content::placeholder,
-.editor-title::placeholder{
-  color:#414141;
-}
-
-.save-bar{
-  padding:11px 15px;
+  flex:1;
   display:flex;
-  align-items:center;
+  flex-direction:column;
+  gap:12px;
+  padding:16px;
+}
+
+.title-input,
+.body-input,
+.search,
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  border:1px solid var(--line);
+  outline:none;
+  background:#080809;
+  color:#fff;
+  border-radius:12px;
+}
+
+.title-input{
+  padding:13px 14px;
+}
+
+.body-input{
+  flex:1;
+  min-height:430px;
+  resize:vertical;
+  padding:18px;
+  line-height:1.8;
+}
+
+.title-input:focus,
+.body-input:focus,
+.search:focus,
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+  border-color:rgba(226,27,45,.7);
+}
+
+.editor-bottom{
+  display:flex;
   justify-content:space-between;
+  align-items:center;
   gap:10px;
-  border-top:1px solid #222;
-  background:#0c0c0c;
+  padding:14px 16px;
+  border-top:1px solid var(--line);
 }
 
-.save-state{
-  color:#555;
-  font-size:8px;
-}
+/* SIDE PANELS */
 
-.save-state.saved{
-  color:var(--green);
-}
-
-/* =========================================================
-   RIGHT
-========================================================= */
-
-.right-stack{
+.side{
   display:flex;
   flex-direction:column;
   gap:14px;
 }
 
-.card-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  padding:14px;
-  border-bottom:1px solid #222;
-}
-
-.card-head h3{
-  font-family:Orbitron,sans-serif;
-  font-size:10px;
-}
-
-.card-head a{
-  color:#777;
-  font-size:8px;
-  text-decoration:none;
-}
-
-.card-body{
-  padding:14px;
-}
-
-/* =========================================================
-   TEAM
-========================================================= */
-
-.team-member{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  padding:9px 0;
-  border-bottom:1px solid #202020;
-}
-
-.team-member:last-child{
-  border-bottom:0;
-}
-
-.team-avatar{
-  width:31px;
-  height:31px;
-  display:grid;
-  place-items:center;
-  flex:none;
-  border-radius:50%;
-  background:#181818;
-  border:1px solid #343434;
-  color:#bbb;
-  font-family:Orbitron,sans-serif;
-  font-size:7px;
-  font-weight:800;
-}
-
-.team-info{
-  min-width:0;
-  flex:1;
-}
-
-.team-info strong{
-  display:block;
-  color:#ccc;
-  font-size:8px;
-  margin-bottom:3px;
-}
-
-.team-info span{
-  display:block;
-  color:#555;
-  font-size:7px;
-}
-
-.online{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--green);
-}
-
-/* =========================================================
-   STAGES
-========================================================= */
-
-.stage-list{
-  display:flex;
-  flex-direction:column;
-}
-
-.stage-item{
-  position:relative;
-  display:flex;
-  gap:10px;
-  padding:9px 0;
-}
-
-.stage-item:not(:last-child):after{
-  content:"";
-  position:absolute;
-  left:9px;
-  top:27px;
-  bottom:-2px;
-  width:1px;
-  background:#292929;
-}
-
-.stage-dot{
-  width:19px;
-  height:19px;
-  display:grid;
-  place-items:center;
-  flex:none;
-  border-radius:50%;
-  border:1px solid #383838;
-  background:#0b0b0b;
-  color:#666;
-  font-size:7px;
-  z-index:2;
-}
-
-.stage-item.complete .stage-dot{
-  background:var(--red);
-  border-color:var(--red);
-  color:#fff;
-}
-
-.stage-item.current .stage-dot{
-  border-color:var(--red2);
-  color:#fff;
-  box-shadow:0 0 12px rgba(229,9,20,.25);
-}
-
-.stage-text strong{
-  display:block;
-  font-size:8px;
-  margin-bottom:3px;
-}
-
-.stage-text span{
-  color:#555;
-  font-size:7px;
-}
-
-/* =========================================================
-   FILES / ACTIVITY
-========================================================= */
-
-.file,
-.activity{
-  display:flex;
-  gap:9px;
-  padding:9px 0;
-  border-bottom:1px solid #202020;
-}
-
-.file:last-child,
-.activity:last-child{
-  border-bottom:0;
-}
-
-.file-icon{
-  width:29px;
-  height:29px;
-  display:grid;
-  place-items:center;
-  border:1px solid #292929;
-  background:#0b0b0b;
-  border-radius:6px;
-  color:#777;
-  font-size:11px;
-  flex:none;
-}
-
-.file-info{
-  flex:1;
-  min-width:0;
-}
-
-.file-info strong{
-  display:block;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  font-size:8px;
-}
-
-.file-info span{
-  display:block;
-  color:#555;
-  font-size:7px;
-  margin-top:3px;
-}
-
-.activity-marker{
-  width:6px;
-  height:6px;
-  margin-top:4px;
-  border-radius:50%;
-  background:var(--red);
-  flex:none;
-}
-
-.activity strong{
-  display:block;
-  font-size:8px;
-  margin-bottom:3px;
-}
-
-.activity p{
-  color:#666;
-  font-size:7px;
-  line-height:1.5;
-}
-
-.activity time{
-  display:block;
-  color:#444;
-  font-size:7px;
-  margin-top:4px;
-}
-
-/* =========================================================
-   NOTES
-========================================================= */
-
-.notes-section{
-  margin-top:18px;
-}
-
-.section-heading{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:15px;
-  margin-bottom:12px;
-}
-
-.section-heading h2{
-  font-family:Orbitron,sans-serif;
-  font-size:16px;
-}
-
-.section-heading p{
-  color:#666;
-  font-size:8px;
-  margin-top:5px;
-}
-
-.notes-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:11px;
-}
-
-.note-card{
-  background:#101010;
-  border:1px solid var(--line);
-  border-radius:11px;
+.side-panel{
   padding:16px;
 }
 
-.note-type{
-  color:var(--red2);
-  font-family:Orbitron,sans-serif;
-  font-size:7px;
-  letter-spacing:1.5px;
-  font-weight:800;
-  text-transform:uppercase;
-}
-
-.note-card h3{
+.side-title{
+  margin-bottom:13px;
   font-family:Orbitron,sans-serif;
   font-size:10px;
-  margin:9px 0 6px;
-}
-
-.note-card p{
-  color:#777;
-  font-size:8px;
-  line-height:1.65;
-}
-
-.note-footer{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  margin-top:12px;
-  padding-top:9px;
-  border-top:1px solid #222;
-  color:#4f4f4f;
-  font-size:7px;
-}
-
-/* =========================================================
-   LONG TERM
-========================================================= */
-
-.long-term{
-  margin-top:18px;
-  padding:21px;
-  border:1px solid #35181b;
-  border-radius:12px;
-  background:
-    linear-gradient(135deg,rgba(229,9,20,.08),transparent),
-    #0d0d0d;
-}
-
-.long-term h3{
-  font-family:Orbitron,sans-serif;
-  font-size:12px;
-  margin-bottom:8px;
-}
-
-.long-term p{
-  max-width:900px;
-  color:#777;
-  font-size:9px;
-  line-height:1.75;
-}
-
-.long-term strong{
-  color:#bbb;
-}
-
-/* =========================================================
-   MODALS
-========================================================= */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:5000;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(0,0,0,.78);
-  backdrop-filter:blur(10px);
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  width:min(760px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:#101010;
-  border:1px solid #3b171b;
-  border-radius:13px;
-  box-shadow:0 30px 100px rgba(0,0,0,.7);
-}
-
-.modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:16px;
-  border-bottom:1px solid #252525;
-  position:sticky;
-  top:0;
-  background:#101010;
-  z-index:2;
-}
-
-.modal-head h3{
-  font-family:Orbitron,sans-serif;
-  font-size:12px;
-}
-
-.close{
-  width:30px;
-  height:30px;
-  border:1px solid #2a2a2a;
-  border-radius:6px;
-  background:#111;
-  color:#888;
-  cursor:pointer;
-}
-
-.modal-body{
-  padding:18px;
-}
-
-.form-row{
-  margin-bottom:14px;
-}
-
-.form-row label{
-  display:block;
-  color:#777;
-  font-size:8px;
   font-weight:800;
   letter-spacing:1px;
   text-transform:uppercase;
-  margin-bottom:6px;
 }
 
-.form-row input,
-.form-row select,
-.form-row textarea{
-  width:100%;
-  background:#090909;
-  border:1px solid #292929;
-  border-radius:7px;
-  color:#fff;
-  outline:0;
-  padding:10px;
-  font-family:Montserrat,sans-serif;
-  font-size:9px;
-}
-
-.form-row textarea{
-  min-height:120px;
-  resize:vertical;
-}
-
-.form-row input:focus,
-.form-row select:focus,
-.form-row textarea:focus{
-  border-color:#681019;
-}
-
-.modal-footer{
+.section-head{
   display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  padding:14px 18px;
-  border-top:1px solid #252525;
-  position:sticky;
-  bottom:0;
-  background:#101010;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
 }
 
-/* =========================================================
-   REAL CREATOR DIRECTORY
-========================================================= */
-
-.creator-search{
-  display:grid;
-  grid-template-columns:1fr 180px;
-  gap:8px;
-  margin-bottom:12px;
-}
-
-.creator-search input,
-.creator-search select{
-  width:100%;
-  padding:11px;
-  background:#080808;
-  border:1px solid #292929;
-  border-radius:7px;
-  color:#fff;
-  outline:0;
-  font-family:Montserrat,sans-serif;
+.mini-btn{
+  padding:6px 8px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#101012;
+  color:#ddd;
   font-size:9px;
+  font-weight:900;
 }
 
-.creator-search input:focus,
-.creator-search select:focus{
-  border-color:#681019;
+.progress{
+  height:7px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#19191b;
 }
 
-.creator-results{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  max-height:380px;
-  overflow:auto;
+.progress i{
+  display:block;
+  width:0;
+  height:100%;
+  background:linear-gradient(90deg,var(--red),#ff7b83);
+  transition:width .5s ease;
 }
 
-.creator-result{
+.person{
   display:flex;
   align-items:center;
-  gap:11px;
-  padding:12px;
-  border:1px solid #252525;
-  background:#0b0b0b;
-  border-radius:9px;
-  cursor:pointer;
-  transition:.2s;
+  gap:10px;
+  padding:9px 0;
+  border-bottom:1px solid var(--line2);
 }
 
-.creator-result:hover{
-  border-color:#64131a;
-  background:#110607;
-  transform:translateX(2px);
-}
-
-.creator-result.selected{
-  border-color:var(--red);
-  background:#160608;
-  box-shadow:0 0 20px rgba(229,9,20,.08);
-}
-
-.creator-result-avatar{
-  width:43px;
-  height:43px;
-  border-radius:50%;
-  flex:none;
+.avatar{
+  width:36px;
+  height:36px;
+  flex:0 0 auto;
   display:grid;
   place-items:center;
   overflow:hidden;
-  border:1px solid #3b3b3b;
-  background:linear-gradient(135deg,#31090d,#101010);
-  color:#bbb;
-  font-family:Orbitron,sans-serif;
-  font-size:8px;
-  font-weight:800;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:#19191b;
+  font-size:10px;
+  font-weight:900;
 }
 
-.creator-result-avatar img{
+.avatar img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-.creator-result-info{
+.person-info{
   min-width:0;
-  flex:1;
 }
 
-.creator-result-info strong{
+.person-info strong{
   display:block;
-  color:#eee;
+  font-size:11px;
+}
+
+.person-info span{
+  display:block;
+  margin-top:3px;
+  overflow:hidden;
+  color:#777;
   font-size:9px;
-  margin-bottom:4px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-.creator-result-info .handle{
-  color:var(--red2);
-  font-size:7px;
-  margin-bottom:5px;
-}
-
-.creator-result-info .role{
+.empty{
+  padding:8px 0;
   color:#777;
-  font-size:7px;
+  font-size:11px;
+  line-height:1.6;
 }
 
-.creator-availability{
-  padding:5px 7px;
-  border-radius:5px;
-  font-size:6px;
-  font-weight:800;
-  text-transform:uppercase;
-  background:#151515;
-  color:#777;
-}
-
-.creator-availability.available{
-  color:var(--green);
-  border:1px solid rgba(72,213,151,.2);
-}
-
-.creator-availability.invite_only{
-  color:var(--yellow);
-  border:1px solid rgba(245,196,81,.2);
-}
-
-.creator-availability.busy{
-  color:var(--yellow);
-}
-
-.creator-empty{
-  padding:25px;
-  text-align:center;
-  border:1px dashed #292929;
-  border-radius:9px;
-  color:#555;
-  font-size:8px;
-  line-height:1.7;
-}
-
-.creator-empty strong{
-  display:block;
-  color:#999;
-  font-family:Orbitron,sans-serif;
+.stage{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:9px 0;
+  border-bottom:1px solid var(--line2);
   font-size:10px;
-  margin-bottom:8px;
 }
 
-.selected-creator{
-  display:none;
-  padding:12px;
-  margin-top:12px;
-  border:1px solid #541017;
-  border-radius:8px;
-  background:#130608;
+.stage small{
+  color:#777;
 }
 
-.selected-creator.show{
+.file{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  padding:8px 0;
+  border-bottom:1px solid var(--line2);
+  font-size:10px;
+}
+
+.file b{
+  overflow:hidden;
+  font-weight:700;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.file span{
+  color:#777;
+  white-space:nowrap;
+}
+
+/* NOTES */
+
+.notes{
+  margin-top:16px;
+  padding:20px;
+}
+
+.notes h2{
+  margin:0;
+  font-family:Orbitron,sans-serif;
+  font-size:17px;
+}
+
+.note-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.note{
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#0a0a0b;
+}
+
+.note .type{
+  color:var(--red2);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.note h3{
+  margin:8px 0;
+  font-size:13px;
+}
+
+.note p{
+  margin:0;
+  color:#999;
+  font-size:11px;
+  line-height:1.65;
+}
+
+.note time{
+  display:block;
+  margin-top:10px;
+  color:#666;
+  font-size:9px;
+}
+
+/* BANNER */
+
+.banner{
+  margin-bottom:15px;
+  padding:13px 15px;
+  border:1px solid rgba(226,27,45,.3);
+  border-radius:12px;
+  background:rgba(226,27,45,.07);
+  color:#d8a5aa;
+  font-size:11px;
+  line-height:1.6;
+}
+
+.banner strong{
+  color:#fff;
+}
+
+.banner code{
+  color:#fff;
+}
+
+/* MODAL */
+
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(10px);
+}
+
+.modal{
+  width:min(620px,100%);
+  max-height:90vh;
+  overflow:auto;
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#0c0c0e;
+  box-shadow:var(--shadow);
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.modal h2{
+  margin:0;
+  font-family:Orbitron,sans-serif;
+  font-size:17px;
+}
+
+.close{
+  padding:7px 10px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:#151517;
+  color:#aaa;
+}
+
+.field{
+  margin-bottom:13px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:7px;
+  color:#aaa;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.field input,
+.field textarea,
+.field select{
+  padding:11px 12px;
+}
+
+.field textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.creator-results{
+  max-height:270px;
+  overflow:auto;
+  margin-top:8px;
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+
+.creator-result{
   display:flex;
   align-items:center;
   gap:10px;
+  padding:10px;
+  border-bottom:1px solid var(--line2);
+  cursor:pointer;
 }
 
-.selected-creator strong{
-  font-size:9px;
+.creator-result:last-child{
+  border-bottom:0;
 }
 
-.selected-creator span{
-  display:block;
-  color:#666;
-  font-size:7px;
-  margin-top:3px;
+.creator-result:hover,
+.creator-result.selected{
+  background:rgba(226,27,45,.09);
 }
 
-/* =========================================================
-   TOAST
-========================================================= */
+.creator-result.selected{
+  outline:1px solid rgba(226,27,45,.35);
+}
+
+.creator-result .role{
+  margin-left:auto;
+  color:#777;
+  font-size:8px;
+  text-transform:uppercase;
+}
+
+.selected-box{
+  margin-top:10px;
+  padding:10px;
+  border:1px solid rgba(226,27,45,.35);
+  border-radius:11px;
+  background:rgba(226,27,45,.06);
+  color:#ddd;
+  font-size:10px;
+}
+
+/* LOADING */
+
+.loading{
+  display:grid;
+  min-height:150px;
+  place-items:center;
+  color:#777;
+}
+
+.spinner{
+  width:30px;
+  height:30px;
+  border:2px solid #29292b;
+  border-top-color:var(--red);
+  border-radius:50%;
+  animation:spinner 1s linear infinite;
+}
+
+/* TOAST */
 
 .toast{
   position:fixed;
   right:20px;
   bottom:20px;
-  z-index:6000;
-  max-width:390px;
+  z-index:300;
+  max-width:360px;
   padding:13px 16px;
-  border:1px solid #333;
-  border-left:3px solid var(--red);
-  border-radius:7px;
-  background:#171717;
-  color:#ddd;
-  font-size:9px;
-  box-shadow:0 20px 60px rgba(0,0,0,.6);
-  opacity:0;
-  transform:translateY(20px);
-  pointer-events:none;
-  transition:.25s;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#101012;
+  color:#fff;
+  box-shadow:var(--shadow);
+  font-size:11px;
 }
 
-.toast.show{
-  opacity:1;
-  transform:translateY(0);
+.toast.ok{
+  border-color:rgba(67,224,155,.35);
 }
 
-/* =========================================================
-   LOADING
-========================================================= */
-
-.loading-screen{
-  position:fixed;
-  inset:0;
-  z-index:9000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#050505;
+.toast.err{
+  border-color:rgba(226,27,45,.5);
 }
 
-.loading-screen.hidden{
-  display:none;
+/* ANIMATION */
+
+@keyframes heroDrift{
+  from{
+    transform:translate3d(-1%,-1%,0) scale(1);
+  }
+  to{
+    transform:translate3d(3%,2%,0) scale(1.06);
+  }
 }
 
-.loader{
-  text-align:center;
+@keyframes orbitSpin{
+  from{
+    transform:translate(-50%,-50%) rotateX(68deg) rotateZ(0);
+  }
+  to{
+    transform:translate(-50%,-50%) rotateX(68deg) rotateZ(360deg);
+  }
 }
 
-.loader-ring{
-  width:48px;
-  height:48px;
-  margin:auto;
-  border:2px solid #241014;
-  border-top-color:var(--red);
-  border-radius:50%;
-  animation:spin .8s linear infinite;
+@keyframes particleFloat{
+  0%,100%{
+    transform:translateY(0);
+    opacity:.15;
+  }
+  50%{
+    transform:translateY(-30px);
+    opacity:.8;
+  }
 }
 
-.loader strong{
-  display:block;
-  margin-top:14px;
-  font-family:Orbitron,sans-serif;
-  font-size:9px;
-  letter-spacing:2px;
+@keyframes spinner{
+  to{
+    transform:rotate(360deg);
+  }
 }
 
-.loader span{
-  display:block;
-  margin-top:6px;
-  color:#555;
-  font-size:7px;
-}
+/* RESPONSIVE */
 
-@keyframes spin{
-  to{transform:rotate(360deg);}
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:1200px){
-
+@media(max-width:1100px){
   .workspace{
-    grid-template-columns:190px minmax(0,1fr);
+    grid-template-columns:175px minmax(0,1fr);
   }
 
-  .right-stack{
-    grid-column:1 / -1;
+  .side{
+    grid-column:1/-1;
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
-
 }
 
-@media(max-width:950px){
-
-  .nav-links{
-    display:none;
+@media(max-width:720px){
+  .container{
+    width:min(100% - 20px,1440px);
   }
 
-  .mobile-menu{
-    display:grid;
-    place-items:center;
+  .nav{
+    height:62px;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  .navlinks{
+    position:absolute;
+    top:62px;
+    left:0;
+    right:0;
+    display:none;
+    flex-direction:column;
+    padding:10px;
+    background:#080809;
+    border-bottom:1px solid var(--line);
+  }
+
+  .navlinks.open{
+    display:flex;
+  }
+
+  .hero{
+    min-height:500px;
+  }
+
+  .hero-inner{
+    padding:75px 0;
+  }
+
+  .hero h1{
+    font-size:42px;
+    letter-spacing:-2px;
+  }
+
+  .project-head{
+    flex-direction:column;
   }
 
   .workspace{
     grid-template-columns:1fr;
   }
 
-  .right-stack{
-    grid-column:auto;
+  .tools{
+    position:static;
     display:grid;
     grid-template-columns:repeat(2,1fr);
   }
 
-  .notes-grid{
-    grid-template-columns:1fr 1fr;
+  .tool{
+    margin:0;
   }
 
-}
-
-@media(max-width:700px){
-
-  .page{
-    width:92%;
-    padding-top:25px;
-  }
-
-  .cinematic-hero{
-    min-height:390px;
-  }
-
-  .hero-content{
-    min-height:390px;
-  }
-
-  .hero-title{
-    letter-spacing:-2px;
-  }
-
-  .hero-ring{
-    width:240px;
-    height:240px;
-  }
-
-  .project-title-row{
+  .side{
     display:block;
   }
 
-  .project-status{
-    display:inline-block;
-    margin-top:12px;
+  .side-panel{
+    margin-bottom:12px;
   }
 
-  .workspace{
-    display:flex;
-    flex-direction:column;
-  }
-
-  .workspace-panel{
-    order:2;
-  }
-
-  .editor{
-    order:1;
-  }
-
-  .right-stack{
-    order:3;
-    display:grid;
+  .note-grid{
     grid-template-columns:1fr;
   }
-
-  .notes-grid{
-    grid-template-columns:1fr;
-  }
-
-  .creator-search{
-    grid-template-columns:1fr;
-  }
-
 }
 
-@media(max-width:500px){
-
-  .brand-text{
-    display:none;
-  }
-
-  .editor-body{
-    padding:17px;
-  }
-
-  .editor-title{
-    font-size:18px;
-  }
-
-  .editor-content{
-    font-size:10px;
-  }
-
-  .editor-toolbar{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .editor-actions{
-    justify-content:flex-end;
-  }
-
-  .project-actions{
-    display:grid;
-    grid-template-columns:1fr;
-  }
-
-  .project-actions .btn{
-    width:100%;
-  }
-
-  .hero-actions{
-    display:grid;
-    width:100%;
-  }
-
-  .hero-actions .btn{
-    width:100%;
-  }
-
-}
-
-/* Reduced motion */
 @media(prefers-reduced-motion:reduce){
-
   *,
-  *:before,
-  *:after{
-    animation-duration:.001ms !important;
-    animation-iteration-count:1 !important;
-    scroll-behavior:auto !important;
+  *::before,
+  *::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
   }
 }
 </style>
@@ -1687,4170 +1002,449 @@ header{
 
 <body>
 
-<div class="loading-screen" id="loadingScreen">
-  <div class="loader">
-    <div class="loader-ring"></div>
-    <strong>ENTERING CREATIVE ROOM</strong>
-    <span>Connecting to Dream World...</span>
-  </div>
-</div>
-
 <header>
-<nav class="nav">
+  <div class="container nav">
 
-  <a href="index.html" class="brand">
-    <div class="brand-mark">CR</div>
-    <div class="brand-text">
-      <strong>CROWRULES DREAM WORLD</strong>
-      <span>Creative Room</span>
-    </div>
-  </a>
+    <a class="logo" href="index.html">
+      CROW<span>RULES</span>
+    </a>
 
-  <div class="nav-links">
-    <a href="index.html">Dream World</a>
-    <a href="dreams.html">Dreams</a>
-    <a href="projects.html">Projects</a>
-    <a href="community.html">Community</a>
-    <a href="creator-dashboard.html">Dashboard</a>
-    <a href="creative-room.html" class="active">Creative Room</a>
-  </div>
+    <button class="menu" id="menuBtn" type="button">☰</button>
 
-  <div class="user-area">
-
-    <button class="notification" onclick="openNotifications()" title="Notifications">
-      ♢
-      <span class="notification-dot" id="notificationDot"></span>
-    </button>
-
-    <div class="avatar" id="userAvatar">CR</div>
-
-    <button
-      class="mobile-menu"
-      onclick="document.querySelector('.workspace-panel').scrollIntoView({behavior:'smooth'})">
-      ☰
-    </button>
+    <nav class="navlinks" id="navLinks">
+      <a href="index.html">Dream World</a>
+      <a href="dreams.html">Dreams</a>
+      <a href="projects.html">Projects</a>
+      <a href="community.html">Community</a>
+      <a href="creator-dashboard.html">Dashboard</a>
+      <a class="active" href="creative-room.html">Creative Room</a>
+    </nav>
 
   </div>
-
-</nav>
 </header>
 
+<section class="hero">
 
-<main class="page">
+  <div class="grid"></div>
 
+  <div class="orbit o1"></div>
+  <div class="orbit o2"></div>
+  <div class="orbit o3"></div>
 
-<!-- =====================================================
-     CINEMATIC HERO
-===================================================== -->
+  <div id="particles"></div>
 
-<section class="cinematic-hero" id="cinematicHero">
+  <div class="container hero-inner">
 
-  <div class="hero-grid"></div>
-
-  <div class="hero-orb one"></div>
-  <div class="hero-orb two"></div>
-
-  <div class="hero-ring"></div>
-
-  <div class="hero-beam one"></div>
-  <div class="hero-beam two"></div>
-
-  <div class="hero-particles" id="heroParticles"></div>
-
-  <div class="hero-vignette"></div>
-
-  <div class="hero-content">
-
-    <div class="hero-eyebrow">
-      DREAM WORLD · CREATIVE DEVELOPMENT NETWORK
+    <div class="eyebrow">
+      CROW RULES DREAM WORLD · CREATIVE DEVELOPMENT
     </div>
 
-    <h1 class="hero-title">
-      Build It <span>Together.</span>
+    <h1>
+      Enter the <em>Creative Room.</em>
     </h1>
 
-    <p class="hero-copy">
-      The Creative Room is where ideas become projects.
-      Bring the right creators into the room, develop the story,
-      build the world, document the process and preserve every
-      creative decision along the way.
+    <p>
+      Where an idea stops being only a dream and starts becoming a real project —
+      one scene, character, document, collaborator and decision at a time.
     </p>
 
     <div class="hero-actions">
-
-      <button
-        class="btn btn-primary"
-        onclick="openCreatorInvite()">
-        + INVITE REAL CREATOR
+      <button class="btn primary" id="heroSave" type="button">
+        Save Document
       </button>
 
-      <button
-        class="btn"
-        onclick="refreshWorkspace()">
-        ↻ REFRESH ROOM
+      <button class="btn ghost" id="heroInvite" type="button">
+        Invite Creator
       </button>
 
-      <a
-        href="collaborators.html"
-        class="btn">
-        MANAGE TEAM
+      <a class="btn ghost" id="heroProject" href="projects.html">
+        Back to Project
       </a>
-
     </div>
 
   </div>
-
-  <div class="hero-status">
-    DREAM WORLD NETWORK · <strong>CONNECTED</strong>
-  </div>
-
 </section>
 
+<main>
 
-<!-- =====================================================
-     PROJECT HEADER
-===================================================== -->
+<div class="container">
 
-<section class="project-header">
+  <div id="schemaBanner" class="banner hidden"></div>
 
-  <div class="eyebrow">
-    Private Development Workspace
-  </div>
-
-  <div class="project-title-row">
+  <section class="project-head">
 
     <div>
 
-      <h1 class="project-title" id="projectTitle">
-        Loading project...
-      </h1>
-
-      <div class="project-code" id="projectCode">
-        PROJECT —
+      <div class="eyebrow" id="projectCode">
+        CREATIVE ROOM
       </div>
 
-    </div>
-
-    <div class="project-status" id="projectStatus">
-      CONNECTING
-    </div>
-
-  </div>
-
-  <p class="project-description" id="projectDescription">
-    Connecting this Creative Room to the selected Dream World project.
-  </p>
-
-  <div class="project-meta">
-
-    <span id="creatorMeta">
-      Creator: —
-    </span>
-
-    <span id="formatMeta">
-      Format: —
-    </span>
-
-    <span id="genreMeta">
-      Genre: —
-    </span>
-
-    <span id="progressMeta">
-      Development: —
-    </span>
-
-  </div>
-
-  <div class="project-actions">
-
-    <a
-      href="project-development.html"
-      id="projectOverviewLink"
-      class="btn">
-      ← PROJECT OVERVIEW
-    </a>
-
-    <button
-      class="btn btn-primary"
-      onclick="saveDocument()">
-      SAVE DOCUMENT
-    </button>
-
-    <button
-      class="btn"
-      onclick="openCreatorInvite()">
-      + INVITE CREATOR
-    </button>
-
-    <button
-      class="btn"
-      onclick="openModal('meetingModal')">
-      + CREATOR MEETING
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     WORKSPACE
-===================================================== -->
-
-<section class="workspace">
-
-
-<!-- =====================================================
-     LEFT TOOLBOX
-===================================================== -->
-
-<aside class="workspace-panel">
-
-  <div class="panel-heading">
-    CREATIVE TOOLS
-  </div>
-
-  <div class="tool-list">
-
-    <button class="tool active" onclick="selectTool(this,'Story Development')">
-      <span class="tool-icon">✎</span>
-      Story Development
-    </button>
-
-    <button class="tool" onclick="selectTool(this,'Characters')">
-      <span class="tool-icon">◎</span>
-      Characters
-    </button>
-
-    <button class="tool" onclick="selectTool(this,'Worldbuilding')">
-      <span class="tool-icon">◇</span>
-      Worldbuilding
-    </button>
-
-    <button class="tool" onclick="selectTool(this,'Episode Planning')">
-      <span class="tool-icon">▤</span>
-      Episode Planning
-    </button>
-
-    <button class="tool" onclick="selectTool(this,'Screenplay')">
-      <span class="tool-icon">▣</span>
-      Screenplay
-    </button>
-
-    <button class="tool" onclick="selectTool(this,'Visual Development')">
-      <span class="tool-icon">◈</span>
-      Visual Development
-    </button>
-
-    <button class="tool" onclick="selectTool(this,'Music & Audio')">
-      <span class="tool-icon">♫</span>
-      Music & Audio
-    </button>
-
-    <button class="tool" onclick="selectTool(this,'Production Notes')">
-      <span class="tool-icon">◆</span>
-      Production Notes
-    </button>
-
-    <button class="tool" onclick="selectTool(this,'Research')">
-      <span class="tool-icon">⌕</span>
-      Research
-    </button>
-
-    <button class="tool" onclick="selectTool(this,'Freeform')">
-      <span class="tool-icon">✦</span>
-      Freeform
-    </button>
-
-  </div>
-
-  <div class="workspace-note">
-
-    <strong>CREATIVE ROOM</strong>
-
-    <p>
-      This space belongs to the development process.
-      Ideas can change, grow, be rewritten, or be completely
-      reimagined as the project evolves.
-    </p>
-
-  </div>
-
-</aside>
-
-
-<!-- =====================================================
-     EDITOR
-===================================================== -->
-
-<section class="editor">
-
-  <div class="editor-toolbar">
-
-    <div class="editor-mode">
-
-      <button class="mode active">
-        EDIT
-      </button>
-
-      <button
-        class="mode"
-        onclick="previewDocument()">
-        PREVIEW
-      </button>
-
-    </div>
-
-    <div class="editor-actions">
-
-      <button
-        class="icon-button"
-        title="Bold"
-        onclick="formatText('bold')">
-        B
-      </button>
-
-      <button
-        class="icon-button"
-        title="Italic"
-        onclick="formatText('italic')">
-        I
-      </button>
-
-      <button
-        class="icon-button"
-        title="Save"
-        onclick="saveDocument()">
-        ✓
-      </button>
-
-    </div>
-
-  </div>
-
-  <div class="editor-body">
-
-    <div class="editor-label" id="editorLabel">
-      STORY DEVELOPMENT
-    </div>
-
-    <textarea
-      id="documentTitle"
-      class="editor-title"
-      placeholder="Untitled creative document..."></textarea>
-
-    <textarea
-      id="documentContent"
-      class="editor-content"
-      placeholder="Start developing the idea here..."></textarea>
-
-  </div>
-
-  <div class="save-bar">
-
-    <span class="save-state" id="saveState">
-      No document loaded
-    </span>
-
-    <button
-      class="btn btn-primary"
-      onclick="saveDocument()">
-      SAVE DOCUMENT
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     RIGHT STACK
-===================================================== -->
-
-<aside class="right-stack">
-
-
-<!-- TEAM -->
-
-<div class="card">
-
-  <div class="card-head">
-
-    <h3>
-      DEVELOPMENT TEAM
-    </h3>
-
-    <a href="collaborators.html">
-      MANAGE
-    </a>
-
-  </div>
-
-  <div class="card-body" id="teamList">
-
-    <div class="creator-empty">
-      Loading team...
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- STAGES -->
-
-<div class="card">
-
-  <div class="card-head">
-
-    <h3>
-      DEVELOPMENT STAGES
-    </h3>
-
-    <a href="project-development.html">
-      VIEW
-    </a>
-
-  </div>
-
-  <div class="card-body">
-
-    <div class="stage-list" id="stageList">
-
-      <div class="creator-empty">
-        Loading stages...
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- FILES -->
-
-<div class="card">
-
-  <div class="card-head">
-
-    <h3>
-      PROJECT FILES
-    </h3>
-
-    <a href="files.html">
-      ALL
-    </a>
-
-  </div>
-
-  <div class="card-body" id="fileList">
-
-    <div class="creator-empty">
-      Loading files...
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ACTIVITY -->
-
-<div class="card">
-
-  <div class="card-head">
-
-    <h3>
-      RECENT ACTIVITY
-    </h3>
-
-  </div>
-
-  <div class="card-body" id="activityList">
-
-    <div class="creator-empty">
-      Loading activity...
-    </div>
-
-  </div>
-
-</div>
-
-</aside>
-
-</section>
-
-
-<!-- =====================================================
-     DEVELOPMENT NOTES
-===================================================== -->
-
-<section class="notes-section">
-
-  <div class="section-heading">
-
-    <div>
-
-      <h2>
-        DEVELOPMENT NOTES
+      <h2 class="project-title" id="projectTitle">
+        Loading project…
       </h2>
 
-      <p>
-        Important creative decisions become part of the project's history.
-      </p>
+      <div class="meta" id="projectMeta"></div>
 
     </div>
 
-    <button
-      class="btn btn-primary"
-      onclick="openModal('noteModal')">
-      + NEW NOTE
-    </button>
+    <div class="hero-actions">
 
-  </div>
+      <button class="btn ghost" id="addNoteBtn" type="button">
+        + Development Note
+      </button>
 
-  <div class="notes-grid" id="notesGrid">
-
-    <div class="creator-empty">
-      Loading development notes...
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     LONG TERM
-===================================================== -->
-
-<section class="long-term">
-
-  <h3>
-    DREAMS CAN TAKE YEARS TO BUILD
-  </h3>
-
-  <p>
-    This project is not required to move at artificial speed.
-    Development can take months or years. The project may be
-    <strong>paused</strong>, resumed, rewritten, restructured,
-    change formats, receive new collaborators, enter additional
-    funding phases, or return to an earlier stage.
-    The Creative Room preserves that history.
-  </p>
-
-  <div class="project-actions">
-
-    <button
-      class="btn"
-      onclick="pauseDevelopment()">
-      PAUSE DEVELOPMENT
-    </button>
-
-    <button
-      class="btn"
-      onclick="window.location.href='project-development.html'">
-      VIEW FULL TIMELINE
-    </button>
-
-    <a
-      href="agreements.html"
-      class="btn">
-      VIEW AGREEMENTS
-    </a>
-
-  </div>
-
-</section>
-
-</main>
-
-
-<!-- =====================================================
-     REAL CREATOR INVITATION MODAL
-===================================================== -->
-
-<div class="modal" id="creatorInviteModal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <h3>
-        INVITE A REAL CREATOR
-      </h3>
-
-      <button
-        class="close"
-        onclick="closeModal('creatorInviteModal')">
-        ×
+      <button class="btn primary" id="inviteBtn" type="button">
+        + Invite Creator
       </button>
 
     </div>
 
-    <div class="modal-body">
+  </section>
 
-      <p style="
-        color:#666;
-        font-size:8px;
-        line-height:1.7;
-        margin-bottom:15px;
-      ">
-        Search the Dream World creator directory and choose an
-        actual creator account. Invitations are tied directly to
-        the creator's authenticated user account — not merely an
-        email address.
-      </p>
+  <section class="workspace">
 
-      <div class="creator-search">
+    <!-- TOOLS -->
+
+    <aside class="panel tools" id="tools"></aside>
+
+    <!-- EDITOR -->
+
+    <section class="panel editor">
+
+      <div class="editor-top">
+
+        <strong id="toolTitle">
+          Story Development
+        </strong>
+
+        <span class="status" id="saveStatus">
+          Not saved
+        </span>
+
+      </div>
+
+      <div class="editor-body">
 
         <input
-          id="creatorSearch"
-          type="search"
-          placeholder="Search creator name, handle, role or location..."
-          autocomplete="off">
+          id="docTitle"
+          class="title-input"
+          type="text"
+          placeholder="Document title"
+          autocomplete="off"
+        >
 
-        <select id="creatorRoleFilter">
-
-          <option value="">
-            All creative roles
-          </option>
-
-          <option value="Writer">
-            Writer
-          </option>
-
-          <option value="Director">
-            Director
-          </option>
-
-          <option value="Producer">
-            Producer
-          </option>
-
-          <option value="Actor">
-            Actor
-          </option>
-
-          <option value="Artist">
-            Artist
-          </option>
-
-          <option value="Composer">
-            Composer
-          </option>
-
-          <option value="Editor">
-            Editor
-          </option>
-
-          <option value="Designer">
-            Designer
-          </option>
-
-          <option value="Researcher">
-            Researcher
-          </option>
-
-        </select>
+        <textarea
+          id="docBody"
+          class="body-input"
+          placeholder="Start developing the dream…"
+        ></textarea>
 
       </div>
 
-      <div
-        class="creator-results"
-        id="creatorResults">
+      <div class="editor-bottom">
 
-        <div class="creator-empty">
-          <strong>CREATOR DIRECTORY</strong>
-          Search the Dream World creator network.
-        </div>
-
-      </div>
-
-      <div
-        class="selected-creator"
-        id="selectedCreator">
-
-        <div
-          class="creator-result-avatar"
-          id="selectedCreatorAvatar">
-          CR
-        </div>
+        <span class="status" id="wordCount">
+          0 words
+        </span>
 
         <div>
-          <strong id="selectedCreatorName">
-            —
-          </strong>
 
-          <span id="selectedCreatorRole">
-            —
-          </span>
-        </div>
+          <button class="btn ghost" id="previewBtn" type="button">
+            Preview
+          </button>
 
-      </div>
-
-
-      <div class="form-row" style="margin-top:18px;">
-
-        <label>
-          Project Role
-        </label>
-
-        <select id="inviteRole">
-
-          <option>
-            Writer
-          </option>
-
-          <option>
-            Story Editor
-          </option>
-
-          <option>
-            Screenwriter
-          </option>
-
-          <option>
-            Director
-          </option>
-
-          <option>
-            Producer
-          </option>
-
-          <option>
-            Concept Artist
-          </option>
-
-          <option>
-            Character Artist
-          </option>
-
-          <option>
-            Environment Artist
-          </option>
-
-          <option>
-            Composer
-          </option>
-
-          <option>
-            Sound Designer
-          </option>
-
-          <option>
-            Editor
-          </option>
-
-          <option>
-            Research Consultant
-          </option>
-
-          <option>
-            Worldbuilding Consultant
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-row">
-
-        <label>
-          Message
-        </label>
-
-        <textarea
-          id="inviteMessage"
-          placeholder="Tell the creator why you think they would be a good fit for this project..."></textarea>
-
-      </div>
-
-    </div>
-
-    <div class="modal-footer">
-
-      <button
-        class="btn"
-        onclick="closeModal('creatorInviteModal')">
-        CANCEL
-      </button>
-
-      <button
-        class="btn btn-primary"
-        id="sendInviteButton"
-        onclick="sendCreatorInvitation()"
-        disabled>
-        SEND CREATOR INVITATION
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================================
-     MEETING MODAL
-===================================================== -->
-
-<div class="modal" id="meetingModal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <h3>
-        REQUEST CREATOR MEETING
-      </h3>
-
-      <button
-        class="close"
-        onclick="closeModal('meetingModal')">
-        ×
-      </button>
-
-    </div>
-
-    <div class="modal-body">
-
-      <div class="form-row">
-
-        <label>
-          Meeting Type
-        </label>
-
-        <select id="meetingType">
-
-          <option>Story Development</option>
-          <option>Character Development</option>
-          <option>Worldbuilding</option>
-          <option>Screenplay Review</option>
-          <option>Production Planning</option>
-          <option>General Creator Meeting</option>
-
-        </select>
-
-      </div>
-
-      <div class="form-row">
-
-        <label>
-          Preferred Date
-        </label>
-
-        <input
-          type="date"
-          id="meetingDate">
-
-      </div>
-
-      <div class="form-row">
-
-        <label>
-          Message
-        </label>
-
-        <textarea
-          id="meetingMessage"
-          placeholder="What would you like to discuss?"></textarea>
-
-      </div>
-
-    </div>
-
-    <div class="modal-footer">
-
-      <button
-        class="btn"
-        onclick="closeModal('meetingModal')">
-        CANCEL
-      </button>
-
-      <button
-        class="btn btn-primary"
-        onclick="requestMeeting()">
-        SEND REQUEST
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================================
-     NOTE MODAL
-===================================================== -->
-
-<div class="modal" id="noteModal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <h3>
-        ADD DEVELOPMENT NOTE
-      </h3>
-
-      <button
-        class="close"
-        onclick="closeModal('noteModal')">
-        ×
-      </button>
-
-    </div>
-
-    <div class="modal-body">
-
-      <div class="form-row">
-
-        <label>
-          Note Type
-        </label>
-
-        <select id="noteType">
-
-          <option>Story</option>
-          <option>Character</option>
-          <option>Worldbuilding</option>
-          <option>Format</option>
-          <option>Visual</option>
-          <option>Production</option>
-          <option>Creator</option>
-          <option>Research</option>
-
-        </select>
-
-      </div>
-
-      <div class="form-row">
-
-        <label>
-          Title
-        </label>
-
-        <input
-          type="text"
-          id="noteTitle"
-          placeholder="Note title">
-
-      </div>
-
-      <div class="form-row">
-
-        <label>
-          Note
-        </label>
-
-        <textarea
-          id="noteBody"
-          placeholder="Write the development note..."></textarea>
-
-      </div>
-
-    </div>
-
-    <div class="modal-footer">
-
-      <button
-        class="btn"
-        onclick="closeModal('noteModal')">
-        CANCEL
-      </button>
-
-      <button
-        class="btn btn-primary"
-        onclick="addNote()">
-        ADD NOTE
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<div class="toast" id="toast"></div>
-
-
-<script>
-/* =========================================================
-   CROWRULES DREAM WORLD
-   CREATIVE ROOM — PRODUCTION CONNECTION
-========================================================= */
-
-const CONFIG = {
-  SUPABASE_URL:
-    "https://cevylpnoexugwgygvtgu.supabase.co",
-
-  SUPABASE_PUBLISHABLE_KEY:
-    "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-"
-};
-
-const supabaseClient =
-  window.supabase.createClient(
-    CONFIG.SUPABASE_URL,
-    CONFIG.SUPABASE_PUBLISHABLE_KEY
-  );
-
-
-let currentUser = null;
-let currentProject = null;
-let currentDream = null;
-let currentProfile = null;
-let currentTool = "Story Development";
-let currentDocument = null;
-let selectedCreator = null;
-let creatorProfiles = [];
-let realtimeChannels = [];
-let saveTimer = null;
-
-
-/* =========================================================
-   DOM
-========================================================= */
-
-const titleField =
-  document.getElementById("documentTitle");
-
-const contentField =
-  document.getElementById("documentContent");
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  initializeCreativeRoom
-);
-
-
-async function initializeCreativeRoom(){
-
-  try{
-
-    createHeroParticles();
-
-    bindEvents();
-
-    const {
-      data:{
-        user
-      }
-    } =
-      await supabaseClient.auth.getUser();
-
-    if(!user){
-
-      const next =
-        encodeURIComponent(
-          window.location.pathname.split("/").pop() ||
-          "creative-room.html"
-        );
-
-      window.location.href =
-        "login.html?next=" + next;
-
-      return;
-    }
-
-    currentUser = user;
-
-    await loadCurrentUserProfile();
-
-    await loadProject();
-
-    if(!currentProject){
-
-      hideLoading();
-
-      showToast(
-        "No Dream World project is available for your account."
-      );
-
-      return;
-    }
-
-    await loadWorkspace();
-
-    setupRealtime();
-
-    hideLoading();
-
-  }catch(error){
-
-    console.error(
-      "Creative Room initialization failed:",
-      error
-    );
-
-    hideLoading();
-
-    showToast(
-      "Creative Room could not finish loading."
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   EVENTS
-========================================================= */
-
-function bindEvents(){
-
-  titleField.addEventListener(
-    "input",
-    markUnsaved
-  );
-
-  contentField.addEventListener(
-    "input",
-    markUnsaved
-  );
-
-  document
-    .getElementById("creatorSearch")
-    .addEventListener(
-      "input",
-      filterCreators
-    );
-
-  document
-    .getElementById("creatorRoleFilter")
-    .addEventListener(
-      "change",
-      filterCreators
-    );
-
-  document.addEventListener(
-    "keydown",
-    event => {
-
-      if(event.key === "Escape"){
-
-        document
-          .querySelectorAll(".modal.show")
-          .forEach(modal =>
-            modal.classList.remove("show")
-          );
-
-      }
-
-    }
-  );
-
-  document
-    .querySelectorAll(".modal")
-    .forEach(modal => {
-
-      modal.addEventListener(
-        "click",
-        event => {
-
-          if(event.target === modal){
-
-            modal.classList.remove("show");
-
-          }
-
-        }
-      );
-
-    });
-
-}
-
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-async function loadCurrentUserProfile(){
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("dream_profiles")
-      .select("*")
-      .eq("user_id",currentUser.id)
-      .maybeSingle();
-
-  if(error){
-
-    console.warn(
-      "Profile lookup:",
-      error.message
-    );
-
-  }
-
-  currentProfile = data || null;
-
-  const name =
-    currentProfile?.display_name ||
-    currentUser.user_metadata?.display_name ||
-    currentUser.email?.split("@")[0] ||
-    "Creator";
-
-  document
-    .getElementById("userAvatar")
-    .textContent =
-      initials(name);
-
-}
-
-
-/* =========================================================
-   PROJECT
-========================================================= */
-
-async function loadProject(){
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
-  const requestedProject =
-    params.get("project") ||
-    params.get("project_id");
-
-
-  let project = null;
-
-
-  /*
-    Explicit project:
-    Supabase RLS determines whether
-    this authenticated user may see it.
-  */
-
-  if(requestedProject){
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("dream_projects")
-        .select("*")
-        .eq("id",requestedProject)
-        .maybeSingle();
-
-    if(error){
-
-      console.warn(
-        "Requested project lookup:",
-        error.message
-      );
-
-    }
-
-    project = data || null;
-
-  }
-
-
-  /*
-    If no URL project was supplied, first look
-    for a project the current creator owns.
-  */
-
-  if(!project){
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("dream_projects")
-        .select("*")
-        .eq("creator_id",currentUser.id)
-        .order("updated_at",{
-          ascending:false
-        })
-        .limit(1)
-        .maybeSingle();
-
-    if(error){
-
-      console.warn(
-        "Owner project lookup:",
-        error.message
-      );
-
-    }
-
-    project = data || null;
-
-  }
-
-
-  /*
-    Then try a project membership.
-  */
-
-  if(!project){
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("dream_project_members")
-        .select("project_id,status,updated_at")
-        .eq("user_id",currentUser.id)
-        .in(
-          "status",
-          ["active","paused"]
-        )
-        .order("updated_at",{
-          ascending:false
-        })
-        .limit(1)
-        .maybeSingle();
-
-    if(error){
-
-      console.warn(
-        "Membership lookup:",
-        error.message
-      );
-
-    }
-
-    if(data?.project_id){
-
-      const result =
-        await supabaseClient
-          .from("dream_projects")
-          .select("*")
-          .eq("id",data.project_id)
-          .maybeSingle();
-
-      if(!result.error){
-
-        project =
-          result.data || null;
-
-      }
-
-    }
-
-  }
-
-
-  currentProject = project;
-
-
-  if(!project){
-
-    renderProjectEmpty();
-
-    return;
-
-  }
-
-
-  renderProject(project);
-
-
-  /*
-    Load the original dream if connected.
-  */
-
-  if(project.id){
-
-    const {
-      data
-    } =
-      await supabaseClient
-        .from("dream_submissions")
-        .select("*")
-        .eq("project_id",project.id)
-        .order("created_at",{
-          ascending:true
-        })
-        .limit(1)
-        .maybeSingle();
-
-    currentDream =
-      data || null;
-
-  }
-
-}
-
-
-function renderProject(project){
-
-  document
-    .getElementById("projectTitle")
-    .textContent =
-      project.title ||
-      "Untitled Dream World Project";
-
-  document
-    .getElementById("projectCode")
-    .textContent =
-      "PROJECT " +
-      (project.project_code || "UNASSIGNED");
-
-  document
-    .getElementById("projectStatus")
-    .textContent =
-      formatLabel(
-        project.status ||
-        "development"
-      );
-
-  document
-    .getElementById("projectDescription")
-    .textContent =
-      project.description ||
-      project.logline ||
-      "No project description has been added yet.";
-
-  document
-    .getElementById("formatMeta")
-    .textContent =
-      "Format: " +
-      (project.format || "—");
-
-  document
-    .getElementById("genreMeta")
-    .textContent =
-      "Genre: " +
-      (project.genre || "—");
-
-  document
-    .getElementById("progressMeta")
-    .textContent =
-      "Development: " +
-      Number(
-        project.progress_percent || 0
-      ) +
-      "%";
-
-  document
-    .getElementById("projectOverviewLink")
-    .href =
-      "project-development.html?project=" +
-      encodeURIComponent(project.id);
-
-}
-
-
-/* =========================================================
-   WORKSPACE
-========================================================= */
-
-async function loadWorkspace(){
-
-  await Promise.all([
-    loadTeam(),
-    loadStages(),
-    loadFiles(),
-    loadActivity(),
-    loadNotes(),
-    loadDocument()
-  ]);
-
-}
-
-
-async function loadTeam(){
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("dream_project_members")
-      .select("*")
-      .eq("project_id",currentProject.id)
-      .order("created_at",{
-        ascending:true
-      });
-
-  if(error){
-
-    console.warn(
-      "Team:",
-      error.message
-    );
-
-    renderEmpty(
-      "teamList",
-      "TEAM DATA UNAVAILABLE"
-    );
-
-    return;
-
-  }
-
-  const members =
-    data || [];
-
-  const userIds =
-    members
-      .map(member => member.user_id)
-      .filter(Boolean);
-
-  let profiles = [];
-
-  if(userIds.length){
-
-    const result =
-      await supabaseClient
-        .from("dream_profiles")
-        .select("*")
-        .in("user_id",userIds);
-
-    if(!result.error){
-
-      profiles =
-        result.data || [];
-
-    }
-
-  }
-
-  const profileMap =
-    new Map(
-      profiles.map(
-        profile =>
-          [profile.user_id,profile]
-      )
-    );
-
-
-  const creatorId =
-    currentProject.creator_id;
-
-  let creatorProfile =
-    creatorId
-      ? profileMap.get(creatorId)
-      : null;
-
-
-  if(
-    creatorId &&
-    !creatorProfile
-  ){
-
-    const result =
-      await supabaseClient
-        .from("dream_profiles")
-        .select("*")
-        .eq("user_id",creatorId)
-        .maybeSingle();
-
-    creatorProfile =
-      result.data || null;
-
-  }
-
-
-  document
-    .getElementById("creatorMeta")
-    .textContent =
-      "Creator: " +
-      (
-        creatorProfile?.display_name ||
-        (
-          creatorId === currentUser.id
-            ? currentProfile?.display_name
-            : "Project Creator"
-        ) ||
-        "—"
-      );
-
-
-  if(!members.length){
-
-    renderEmpty(
-      "teamList",
-      "NO COLLABORATORS YET"
-    );
-
-    return;
-
-  }
-
-
-  document
-    .getElementById("teamList")
-    .innerHTML =
-      members
-        .map(member => {
-
-          const profile =
-            profileMap.get(
-              member.user_id
-            );
-
-          const name =
-            profile?.display_name ||
-            (
-              member.user_id === currentUser.id
-                ? currentProfile?.display_name
-                : "Dream World Creator"
-            );
-
-          const role =
-            member.role ||
-            "Collaborator";
-
-          return `
-
-            <div class="team-member">
-
-              <div class="team-avatar">
-
-                ${
-                  profile?.avatar_url
-                    ? `
-                      <img
-                        src="${escapeHtml(profile.avatar_url)}"
-                        alt=""
-                        style="
-                          width:100%;
-                          height:100%;
-                          object-fit:cover;
-                          border-radius:50%;
-                        "
-                      >
-                    `
-                    : escapeHtml(
-                        initials(name)
-                      )
-                }
-
-              </div>
-
-              <div class="team-info">
-
-                <strong>
-                  ${escapeHtml(name)}
-                </strong>
-
-                <span>
-                  ${escapeHtml(role)}
-                </span>
-
-              </div>
-
-              <span
-                class="online"
-                title="${escapeHtml(member.status || "active")}">
-              </span>
-
-            </div>
-
-          `;
-
-        })
-        .join("");
-
-}
-
-
-async function loadStages(){
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("dream_project_stages")
-      .select("*")
-      .eq("project_id",currentProject.id)
-      .order("stage_order",{
-        ascending:true
-      });
-
-  if(error){
-
-    renderEmpty(
-      "stageList",
-      "STAGES UNAVAILABLE"
-    );
-
-    return;
-
-  }
-
-  const stages =
-    data || [];
-
-
-  if(!stages.length){
-
-    renderEmpty(
-      "stageList",
-      "NO DEVELOPMENT STAGES"
-    );
-
-    return;
-
-  }
-
-
-  document
-    .getElementById("stageList")
-    .innerHTML =
-      stages
-        .map(
-          (stage,index) => {
-
-            const status =
-              String(
-                stage.status || ""
-              ).toLowerCase();
-
-            const complete =
-              [
-                "complete",
-                "completed",
-                "done"
-              ].includes(status);
-
-            const current =
-              [
-                "current",
-                "active",
-                "in_progress"
-              ].includes(status);
-
-            return `
-
-              <div class="stage-item
-                ${complete ? "complete" : ""}
-                ${current ? "current" : ""}">
-
-                <div class="stage-dot">
-
-                  ${
-                    complete
-                      ? "✓"
-                      : stage.stage_order ||
-                        index + 1
-                  }
-
-                </div>
-
-                <div class="stage-text">
-
-                  <strong>
-                    ${escapeHtml(
-                      stage.stage_name ||
-                      "Development Stage"
-                    )}
-                  </strong>
-
-                  <span>
-                    ${escapeHtml(
-                      formatLabel(
-                        stage.status ||
-                        "pending"
-                      )
-                    )}
-                    ${
-                      stage.progress_percent != null
-                        ? " · " +
-                          Number(
-                            stage.progress_percent
-                          ) +
-                          "%"
-                        : ""
-                    }
-                  </span>
-
-                </div>
-
-              </div>
-
-            `;
-
-          }
-        )
-        .join("");
-
-}
-
-
-async function loadFiles(){
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("dream_files")
-      .select("*")
-      .eq("project_id",currentProject.id)
-      .order("updated_at",{
-        ascending:false
-      })
-      .limit(5);
-
-  if(error){
-
-    renderEmpty(
-      "fileList",
-      "FILES UNAVAILABLE"
-    );
-
-    return;
-
-  }
-
-  const files =
-    data || [];
-
-
-  if(!files.length){
-
-    document
-      .getElementById("fileList")
-      .innerHTML = `
-
-        <div class="creator-empty">
-
-          <strong>NO PROJECT FILES</strong>
-
-          Files uploaded to this project
-          will appear here.
-
-          <button
-            class="btn"
-            style="margin-top:12px;width:100%;"
-            onclick="window.location.href='files.html?project=${encodeURIComponent(currentProject.id)}'">
-            OPEN FILES
+          <button class="btn primary" id="saveBtn" type="button">
+            Save Document
           </button>
 
         </div>
 
-    `;
+      </div>
 
-    return;
+    </section>
 
-  }
+    <!-- SIDEBAR -->
 
+    <aside class="side">
 
-  document
-    .getElementById("fileList")
-    .innerHTML =
-      files
-        .map(file => `
+      <section class="panel side-panel">
 
-          <div class="file">
+        <div class="side-title">
+          Project Progress
+        </div>
 
-            <div class="file-icon">
-              ▣
-            </div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:8px">
+          <span>Development</span>
+          <b id="progressText">0%</b>
+        </div>
 
-            <div class="file-info">
+        <div class="progress">
+          <i id="progressBar"></i>
+        </div>
 
-              <strong>
-                ${escapeHtml(
-                  file.file_name ||
-                  "Project File"
-                )}
-              </strong>
+      </section>
 
-              <span>
-                ${escapeHtml(
-                  formatBytes(
-                    file.file_size
-                  )
-                )}
-                ·
-                ${relativeTime(
-                  file.updated_at ||
-                  file.created_at
-                )}
-              </span>
+      <section class="panel side-panel">
 
-            </div>
+        <div class="section-head">
 
+          <div class="side-title" style="margin:0">
+            Team
           </div>
 
-        `)
-        .join("") +
+          <button class="mini-btn" id="teamInvite" type="button">
+            Invite
+          </button>
 
-      `
+        </div>
 
-        <button
-          class="btn"
-          style="width:100%;margin-top:10px;"
-          onclick="window.location.href='files.html?project=${encodeURIComponent(currentProject.id)}'">
-          OPEN PROJECT FILES
-        </button>
+        <div id="team">
+          <div class="empty">
+            Loading team…
+          </div>
+        </div>
 
-      `;
+      </section>
 
-}
+      <section class="panel side-panel">
 
+        <div class="side-title">
+          Development Stages
+        </div>
 
-async function loadActivity(){
+        <div id="stages">
+          <div class="empty">
+            Loading stages…
+          </div>
+        </div>
 
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("dream_activity")
-      .select("*")
-      .eq("project_id",currentProject.id)
-      .order("created_at",{
-        ascending:false
-      })
-      .limit(5);
+      </section>
 
-  if(error){
+      <section class="panel side-panel">
 
-    renderEmpty(
-      "activityList",
-      "ACTIVITY UNAVAILABLE"
-    );
+        <div class="section-head">
 
-    return;
-
-  }
-
-  const activities =
-    data || [];
-
-
-  if(!activities.length){
-
-    renderEmpty(
-      "activityList",
-      "NO ACTIVITY YET"
-    );
-
-    return;
-
-  }
-
-
-  document
-    .getElementById("activityList")
-    .innerHTML =
-      activities
-        .map(activity => `
-
-          <div class="activity">
-
-            <span class="activity-marker"></span>
-
-            <div>
-
-              <strong>
-                ${escapeHtml(
-                  activity.title ||
-                  formatLabel(
-                    activity.activity_type ||
-                    "Project Activity"
-                  )
-                )}
-              </strong>
-
-              <p>
-                ${escapeHtml(
-                  activity.description ||
-                  ""
-                )}
-              </p>
-
-              <time>
-                ${escapeHtml(
-                  relativeTime(
-                    activity.created_at
-                  )
-                )}
-              </time>
-
-            </div>
-
+          <div class="side-title" style="margin:0">
+            Files
           </div>
 
-        `)
-        .join("");
+          <button class="mini-btn" id="uploadBtn" type="button">
+            Upload
+          </button>
 
-}
+          <input
+            id="fileInput"
+            class="hidden"
+            type="file"
+          >
 
+        </div>
 
-async function loadNotes(){
+        <div id="files">
+          <div class="empty">
+            Loading files…
+          </div>
+        </div>
 
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("dream_development_notes")
-      .select("*")
-      .eq("project_id",currentProject.id)
-      .order("created_at",{
-        ascending:false
-      })
-      .limit(12);
+      </section>
 
-  if(error){
+      <section class="panel side-panel">
 
-    renderEmpty(
-      "notesGrid",
-      "DEVELOPMENT NOTES UNAVAILABLE"
-    );
+        <div class="side-title">
+          Recent Activity
+        </div>
 
-    return;
+        <div id="activity">
+          <div class="empty">
+            Loading activity…
+          </div>
+        </div>
 
-  }
+      </section>
 
-  const notes =
-    data || [];
+    </aside>
 
+  </section>
 
-  if(!notes.length){
+  <!-- DEVELOPMENT NOTES -->
 
-    renderEmpty(
-      "notesGrid",
-      "NO DEVELOPMENT NOTES YET"
-    );
+  <section class="panel notes">
 
-    return;
+    <div class="section-head">
 
-  }
+      <h2>
+        Development Notes
+      </h2>
 
+      <button class="btn ghost" id="notesBtn" type="button">
+        Add Note
+      </button>
 
-  document
-    .getElementById("notesGrid")
-    .innerHTML =
-      notes
-        .map(note => `
+    </div>
 
-          <article class="note-card">
+    <div class="note-grid" id="notes">
+      <div class="empty">
+        Loading development notes…
+      </div>
+    </div>
 
-            <div class="note-type">
-              ${escapeHtml(
-                note.note_type ||
-                "Development"
-              )}
-            </div>
+  </section>
 
-            <h3>
-              ${escapeHtml(
-                note.title ||
-                "Untitled Note"
-              )}
-            </h3>
+</div>
 
-            <p>
-              ${escapeHtml(
-                note.body ||
-                ""
-              )}
-            </p>
+</main>
 
-            <div class="note-footer">
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
 
-              <span>
-                ${note.author_id === currentUser.id
-                  ? "You"
-                  : "Creator"}
-              </span>
+<script>
+(() => {
 
-              <span>
-                ${escapeHtml(
-                  formatDate(
-                    note.created_at
-                  )
-                )}
-              </span>
+"use strict";
 
-            </div>
+/*
+============================================================
+CROWRULES DREAM WORLD — CREATIVE ROOM
+============================================================
+Supabase browser configuration.
 
-          </article>
+IMPORTANT:
+Only the publishable key belongs in browser code.
+Never place a service-role key in this file.
+============================================================
+*/
 
-        `)
-        .join("");
+const SUPABASE_URL =
+  "https://cevylpnoexugwgygvtgu.supabase.co";
 
-}
+const SUPABASE_KEY =
+  "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
 
-
-/* =========================================================
-   CREATIVE DOCUMENT
-========================================================= */
-
-async function loadDocument(){
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("dream_creative_documents")
-      .select("*")
-      .eq("project_id",currentProject.id)
-      .eq(
-        "document_type",
-        documentTypeForTool(
-          currentTool
-        )
-      )
-      .order("updated_at",{
-        ascending:false
-      })
-      .limit(1)
-      .maybeSingle();
-
-
-  if(error){
-
-    console.warn(
-      "Creative document:",
-      error.message
-    );
-
-    document
-      .getElementById("saveState")
-      .textContent =
-        "New document";
-
-    return;
-
-  }
-
-
-  currentDocument =
-    data || null;
-
-
-  if(currentDocument){
-
-    titleField.value =
-      currentDocument.title ||
-      "";
-
-    contentField.value =
-      currentDocument.content ||
-      "";
-
-    document
-      .getElementById("saveState")
-      .textContent =
-        "Saved " +
-        relativeTime(
-          currentDocument.updated_at
-        );
-
-    document
-      .getElementById("saveState")
-      .classList.add("saved");
-
-  }else{
-
-    titleField.value = "";
-    contentField.value = "";
-
-    document
-      .getElementById("saveState")
-      .textContent =
-        "New creative document";
-
-  }
-
-}
-
-
-/* =========================================================
-   SAVE DOCUMENT
-========================================================= */
-
-function markUnsaved(){
-
-  const state =
-    document.getElementById("saveState");
-
-  state.textContent =
-    "Unsaved changes";
-
-  state.classList.remove("saved");
-
-  clearTimeout(saveTimer);
-
-  saveTimer =
-    setTimeout(
-      () => saveDocument(true),
-      3000
-    );
-
-}
-
-
-async function saveDocument(
-  autoSave=false
+if(
+  !window.supabase ||
+  typeof window.supabase.createClient !== "function"
 ){
-
-  if(!currentUser || !currentProject){
-
-    showToast(
-      "No project is currently loaded."
-    );
-
-    return;
-
-  }
-
-
-  const title =
-    titleField.value.trim();
-
-  const body =
-    contentField.value.trim();
-
-
-  if(!title){
-
-    if(!autoSave){
-
-      showToast(
-        "Please enter a document title."
-      );
-
-    }
-
-    return;
-
-  }
-
-
-  const payload = {
-
-    project_id:
-      currentProject.id,
-
-    dream_id:
-      currentDream?.id ||
-      null,
-
-    author_id:
-      currentUser.id,
-
-    document_type:
-      documentTypeForTool(
-        currentTool
-      ),
-
-    title,
-
-    content:
-      body,
-
-    version_number:
-      currentDocument?.version_number ||
-      1,
-
-    status:
-      "draft",
-
-    visibility:
-      "project_team",
-
-    updated_at:
-      new Date().toISOString()
-
-  };
-
-
-  let result;
-
-
-  if(currentDocument?.id){
-
-    result =
-      await supabaseClient
-        .from("dream_creative_documents")
-        .update(payload)
-        .eq(
-          "id",
-          currentDocument.id
-        )
-        .select()
-        .single();
-
-  }else{
-
-    result =
-      await supabaseClient
-        .from("dream_creative_documents")
-        .insert(payload)
-        .select()
-        .single();
-
-  }
-
-
-  if(result.error){
-
-    console.error(
-      "Document save:",
-      result.error
-    );
-
-    if(!autoSave){
-
-      showToast(
-        "Could not save document: " +
-        result.error.message
-      );
-
-    }
-
-    return;
-
-  }
-
-
-  currentDocument =
-    result.data;
-
-
-  const state =
-    document.getElementById("saveState");
-
-  state.textContent =
-    autoSave
-      ? "Auto-saved just now"
-      : "Saved just now";
-
-  state.classList.add("saved");
-
-
-  if(!autoSave){
-
-    showToast(
-      "Creative document saved."
-    );
-
-  }
-
+  document.body.innerHTML = `
+    <div style="
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding:30px;
+      background:#030303;
+      color:#fff;
+      font-family:Arial,sans-serif;
+    ">
+      <div style="
+        max-width:600px;
+        padding:30px;
+        border:1px solid #333;
+        border-radius:18px;
+        background:#101010;
+      ">
+        <h2>Supabase failed to load</h2>
+        <p>
+          The Supabase JavaScript library could not be loaded.
+          Check your internet connection or CDN access.
+        </p>
+      </div>
+    </div>
+  `;
+  return;
 }
 
+const { createClient } = window.supabase;
+
+const db = createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+/* =========================================================
+   STATE
+========================================================= */
+
+const state = {
+
+  user:null,
+
+  profile:null,
+
+  project:null,
+
+  projectId:null,
+
+  dream:null,
+
+  currentTool:"story",
+
+  currentDocument:null,
+
+  selectedCreator:null,
+
+  realtimeChannel:null
+
+};
 
 /* =========================================================
    TOOLS
 ========================================================= */
 
-function selectTool(
-  button,
-  tool
-){
-
-  document
-    .querySelectorAll(".tool")
-    .forEach(item =>
-      item.classList.remove("active")
-    );
-
-  button.classList.add("active");
-
-  currentTool =
-    tool;
-
-  document
-    .getElementById("editorLabel")
-    .textContent =
-      tool.toUpperCase();
-
-  currentDocument =
-    null;
-
-  loadDocument();
-
-}
-
-
-function documentTypeForTool(tool){
-
-  const map = {
-
-    "Story Development":
-      "story",
-
-    "Characters":
-      "character",
-
-    "Worldbuilding":
-      "world",
-
-    "Episode Planning":
-      "episode",
-
-    "Screenplay":
-      "screenplay",
-
-    "Visual Development":
-      "visual",
-
-    "Music & Audio":
-      "music",
-
-    "Production Notes":
-      "production",
-
-    "Research":
-      "research",
-
-    "Freeform":
-      "freeform"
-
-  };
-
-  return map[tool] || "freeform";
-
-}
-
-
-/* =========================================================
-   REAL CREATOR DIRECTORY
-========================================================= */
-
-async function openCreatorInvite(){
-
-  if(!currentProject){
-
-    showToast(
-      "Load a project before inviting a creator."
-    );
-
-    return;
-
-  }
-
-
-  selectedCreator =
-    null;
-
-  document
-    .getElementById("selectedCreator")
-    .classList.remove("show");
-
-  document
-    .getElementById("sendInviteButton")
-    .disabled =
-      true;
-
-  document
-    .getElementById("creatorSearch")
-    .value = "";
-
-  document
-    .getElementById("creatorRoleFilter")
-    .value = "";
-
-
-  openModal(
-    "creatorInviteModal"
-  );
-
-
-  await loadCreatorDirectory();
-
-}
-
-
-async function loadCreatorDirectory(){
-
-  const results =
-    document.getElementById(
-      "creatorResults"
-    );
-
-  results.innerHTML = `
-
-    <div class="creator-empty">
-      <strong>SEARCHING CREATOR NETWORK</strong>
-      Loading real public Dream World creator profiles...
-    </div>
-
-  `;
-
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("dream_profiles")
-      .select(`
-        id,
-        user_id,
-        display_name,
-        creator_handle,
-        bio,
-        location,
-        avatar_url,
-        primary_role,
-        secondary_roles,
-        availability,
-        public_profile,
-        allow_collaboration_requests,
-        updated_at
-      `)
-      .eq("public_profile",true)
-      .eq("allow_collaboration_requests",true)
-      .order("updated_at",{
-        ascending:false
-      })
-      .limit(100);
-
-
-  if(error){
-
-    console.error(
-      "Creator directory:",
-      error
-    );
-
-    results.innerHTML = `
-
-      <div class="creator-empty">
-
-        <strong>
-          CREATOR DIRECTORY UNAVAILABLE
-        </strong>
-
-        ${escapeHtml(
-          error.message
-        )}
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  creatorProfiles =
-    (data || [])
-      .filter(
-        profile =>
-          profile.user_id &&
-          profile.user_id !== currentUser.id
-      );
-
-
-  filterCreators();
-
-}
-
-
-function filterCreators(){
-
-  const query =
-    document
-      .getElementById(
-        "creatorSearch"
-      )
-      .value
-      .trim()
-      .toLowerCase();
-
-  const role =
-    document
-      .getElementById(
-        "creatorRoleFilter"
-      )
-      .value
-      .toLowerCase();
-
-
-  const filtered =
-    creatorProfiles.filter(
-      profile => {
-
-        const secondary =
-          Array.isArray(
-            profile.secondary_roles
-          )
-            ? profile.secondary_roles
-            : [];
-
-        const searchText = [
-
-          profile.display_name,
-          profile.creator_handle,
-          profile.primary_role,
-          profile.location,
-          profile.bio,
-          ...secondary
-
-        ]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase();
-
-
-        const roleText = [
-
-          profile.primary_role,
-          ...secondary
-
-        ]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase();
-
-
-        return (
-
-          (!query ||
-            searchText.includes(query))
-
-          &&
-
-          (!role ||
-            roleText.includes(role))
-
-        );
-
-      }
-    );
-
-
-  renderCreatorResults(
-    filtered
-  );
-
-}
-
-
-function renderCreatorResults(
-  creators
-){
-
-  const container =
-    document.getElementById(
-      "creatorResults"
-    );
-
-
-  if(!creators.length){
-
-    container.innerHTML = `
-
-      <div class="creator-empty">
-
-        <strong>
-          NO REAL CREATORS FOUND
-        </strong>
-
-        There are currently no public Dream World
-        creator profiles matching this search.
-
-        <br><br>
-
-        Creators must create a Dream World profile,
-        make it public and allow collaboration requests
-        before they can be invited.
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  container.innerHTML =
-    creators
-      .map(
-        profile => {
-
-          const name =
-            profile.display_name ||
-            "Dream World Creator";
-
-          const role =
-            profile.primary_role ||
-            "Creator";
-
-          const availability =
-            String(
-              profile.availability ||
-              "available"
-            ).toLowerCase();
-
-
-          return `
-
-            <div
-              class="creator-result"
-              data-user-id="${escapeHtml(profile.user_id)}"
-              onclick="selectCreator('${escapeJs(profile.user_id)}')">
-
-              <div class="creator-result-avatar">
-
-                ${
-                  profile.avatar_url
-                    ? `
-                      <img
-                        src="${escapeHtml(profile.avatar_url)}"
-                        alt=""
-                      >
-                    `
-                    : escapeHtml(
-                        initials(name)
-                      )
-                }
-
-              </div>
-
-              <div class="creator-result-info">
-
-                <strong>
-                  ${escapeHtml(name)}
-                </strong>
-
-                ${
-                  profile.creator_handle
-                    ? `
-                      <div class="handle">
-                        @${escapeHtml(
-                          profile.creator_handle
-                        )}
-                      </div>
-                    `
-                    : ""
-                }
-
-                <div class="role">
-                  ${escapeHtml(role)}
-                  ${
-                    profile.location
-                      ? " · " +
-                        escapeHtml(
-                          profile.location
-                        )
-                      : ""
-                  }
-                </div>
-
-              </div>
-
-              <span
-                class="creator-availability ${escapeHtml(availability)}">
-
-                ${escapeHtml(
-                  formatLabel(
-                    availability
-                  )
-                )}
-
-              </span>
-
-            </div>
-
-          `;
-
-        }
-      )
-      .join("");
-
-}
-
-
-function selectCreator(
-  userId
-){
-
-  selectedCreator =
-    creatorProfiles.find(
-      profile =>
-        profile.user_id === userId
-    );
-
-
-  if(!selectedCreator){
-
-    return;
-
-  }
-
-
-  document
-    .querySelectorAll(
-      ".creator-result"
-    )
-    .forEach(item =>
-      item.classList.toggle(
-        "selected",
-        item.dataset.userId === userId
-      )
-    );
-
-
-  const name =
-    selectedCreator.display_name ||
-    "Dream World Creator";
-
-  const role =
-    selectedCreator.primary_role ||
-    "Creator";
-
-
-  document
-    .getElementById(
-      "selectedCreatorName"
-    )
-    .textContent =
-      name;
-
-
-  document
-    .getElementById(
-      "selectedCreatorRole"
-    )
-    .textContent =
-      role;
-
-
-  const avatar =
-    document.getElementById(
-      "selectedCreatorAvatar"
-    );
-
-
-  if(selectedCreator.avatar_url){
-
-    avatar.innerHTML = `
-
-      <img
-        src="${escapeHtml(
-          selectedCreator.avatar_url
-        )}"
-        alt=""
-      >
-
-    `;
-
-  }else{
-
-    avatar.textContent =
-      initials(name);
-
-  }
-
-
-  document
-    .getElementById(
-      "selectedCreator"
-    )
-    .classList.add("show");
-
-
-  document
-    .getElementById(
-      "sendInviteButton"
-    )
-    .disabled =
-      false;
-
-}
-
-
-/* =========================================================
-   SEND REAL CREATOR INVITATION
-========================================================= */
-
-async function sendCreatorInvitation(){
-
-  if(!selectedCreator){
-
-    showToast(
-      "Select a real creator first."
-    );
-
-    return;
-
-  }
-
-
-  if(!currentProject){
-
-    showToast(
-      "No project selected."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    selectedCreator.user_id ===
-    currentUser.id
-  ){
-
-    showToast(
-      "You cannot invite yourself."
-    );
-
-    return;
-
-  }
-
-
-  const role =
-    document
-      .getElementById(
-        "inviteRole"
-      )
-      .value;
-
-  const message =
-    document
-      .getElementById(
-        "inviteMessage"
-      )
-      .value
-      .trim();
-
-
-  const button =
-    document
-      .getElementById(
-        "sendInviteButton"
-      );
-
-
-  button.disabled =
-    true;
-
-  button.textContent =
-    "SENDING...";
-
-
-  /*
-    Check whether this creator is
-    already a member.
-  */
-
-  const memberResult =
-    await supabaseClient
-      .from("dream_project_members")
-      .select("id,status")
-      .eq(
-        "project_id",
-        currentProject.id
-      )
-      .eq(
-        "user_id",
-        selectedCreator.user_id
-      )
-      .maybeSingle();
-
-
-  if(memberResult.data){
-
-    button.disabled =
-      false;
-
-    button.textContent =
-      "SEND CREATOR INVITATION";
-
-    showToast(
-      "This creator is already connected to the project."
-    );
-
-    return;
-
-  }
-
-
-  /*
-    Prevent duplicate pending invitations.
-  */
-
-  const existing =
-    await supabaseClient
-      .from("dream_project_invitations")
-      .select("id,status")
-      .eq(
-        "project_id",
-        currentProject.id
-      )
-      .eq(
-        "invitee_user_id",
-        selectedCreator.user_id
-      )
-      .eq(
-        "status",
-        "pending"
-      )
-      .maybeSingle();
-
-
-  if(existing.data){
-
-    button.disabled =
-      false;
-
-    button.textContent =
-      "SEND CREATOR INVITATION";
-
-    showToast(
-      "A pending invitation already exists for this creator."
-    );
-
-    return;
-
-  }
-
-
-  /*
-    IMPORTANT:
-    invitee_user_id is the REAL authenticated
-    Dream World creator account.
-  */
-
-  const invitationPayload = {
-
-    project_id:
-      currentProject.id,
-
-    invited_by:
-      currentUser.id,
-
-    invitee_user_id:
-      selectedCreator.user_id,
-
-    role,
-
-    message:
-      message || null,
-
-    status:
-      "pending",
-
-    expires_at:
-      new Date(
-        Date.now() +
-        14 * 24 * 60 * 60 * 1000
-      ).toISOString()
-
-  };
-
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("dream_project_invitations")
-      .insert(
-        invitationPayload
-      )
-      .select()
-      .single();
-
-
-  if(error){
-
-    console.error(
-      "Invitation:",
-      error
-    );
-
-    button.disabled =
-      false;
-
-    button.textContent =
-      "SEND CREATOR INVITATION";
-
-    showToast(
-      "Invitation failed: " +
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  /*
-    Create a notification for the real
-    recipient. RLS permits the recipient
-    to own their notification row.
-  */
-
-  const projectName =
-    currentProject.title ||
-    "Dream World Project";
-
-
-  const notification =
-    await supabaseClient
-      .from("dream_notifications")
-      .insert({
-
-        user_id:
-          selectedCreator.user_id,
-
-        notification_type:
-          "project_invitation",
-
-        title:
-          "New Dream World Project Invitation",
-
-        body:
-          "You have been invited to join " +
-          projectName +
-          " as " +
-          role +
-          ".",
-
-        project_id:
-          currentProject.id,
-
-        is_read:
-          false
-
-      });
-
-
-  if(notification.error){
-
-    /*
-      Notification failure should not
-      invalidate the invitation itself.
-    */
-
-    console.warn(
-      "Notification could not be created:",
-      notification.error.message
-    );
-
-  }
-
-
-  /*
-    Log project activity.
-  */
-
-  await supabaseClient
-    .from("dream_activity")
-    .insert({
-
-      user_id:
-        currentUser.id,
-
-      project_id:
-        currentProject.id,
-
-      dream_id:
-        currentDream?.id ||
-        null,
-
-      activity_type:
-        "collaborator_invited",
-
-      title:
-        "Creator invitation sent",
-
-      description:
-        "Invited " +
-        (
-          selectedCreator.display_name ||
-          "a Dream World creator"
-        ) +
-        " as " +
-        role +
-        ".",
-
-      visibility:
-        "private"
-
-    });
-
-
-  closeModal(
-    "creatorInviteModal"
-  );
-
-
-  button.disabled =
-    false;
-
-  button.textContent =
-    "SEND CREATOR INVITATION";
-
-
-  showToast(
-    "Invitation sent to " +
-    (
-      selectedCreator.display_name ||
-      "the selected creator"
-    ) +
-    "."
-  );
-
-
-  selectedCreator =
-    null;
-
-
-  await loadActivity();
-
-}
-
-
-/* =========================================================
-   MEETING
-========================================================= */
-
-async function requestMeeting(){
-
-  if(!currentProject){
-
-    showToast(
-      "No project is loaded."
-    );
-
-    return;
-
-  }
-
-
-  const type =
-    document
-      .getElementById(
-        "meetingType"
-      )
-      .value;
-
-  const date =
-    document
-      .getElementById(
-        "meetingDate"
-      )
-      .value;
-
-  const message =
-    document
-      .getElementById(
-        "meetingMessage"
-      )
-      .value
-      .trim();
-
-
-  if(!date){
-
-    showToast(
-      "Please select a preferred date."
-    );
-
-    return;
-
-  }
-
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("dream_meetings")
-      .insert({
-
-        project_id:
-          currentProject.id,
-
-        creator_id:
-          currentProject.creator_id,
-
-        requested_by:
-          currentUser.id,
-
-        meeting_type:
-          type,
-
-        requested_date:
-          date,
-
-        message:
-          message || null,
-
-        status:
-          "requested"
-
-      });
-
-
-  if(error){
-
-    showToast(
-      "Meeting request failed: " +
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  closeModal(
-    "meetingModal"
-  );
-
-
-  showToast(
-    "Creator meeting request submitted."
-  );
-
-}
-
-
-/* =========================================================
-   DEVELOPMENT NOTE
-========================================================= */
-
-async function addNote(){
-
-  const type =
-    document
-      .getElementById(
-        "noteType"
-      )
-      .value;
-
-  const title =
-    document
-      .getElementById(
-        "noteTitle"
-      )
-      .value
-      .trim();
-
-  const body =
-    document
-      .getElementById(
-        "noteBody"
-      )
-      .value
-      .trim();
-
-
-  if(!title || !body){
-
-    showToast(
-      "Enter a title and note."
-    );
-
-    return;
-
-  }
-
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("dream_development_notes")
-      .insert({
-
-        project_id:
-          currentProject.id,
-
-        author_id:
-          currentUser.id,
-
-        note_type:
-          type,
-
-        title,
-
-        body,
-
-        visibility:
-          "project_team"
-
-      });
-
-
-  if(error){
-
-    showToast(
-      "Could not add note: " +
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  document
-    .getElementById(
-      "noteTitle"
-    )
-    .value = "";
-
-  document
-    .getElementById(
-      "noteBody"
-    )
-    .value = "";
-
-
-  closeModal(
-    "noteModal"
-  );
-
-
-  await loadNotes();
-  await loadActivity();
-
-
-  showToast(
-    "Development note added."
-  );
-
-}
-
-
-/* =========================================================
-   PREVIEW
-========================================================= */
-
-function previewDocument(){
-
-  const title =
-    escapeHtml(
-      titleField.value ||
-      "Untitled Document"
-    );
-
-  const body =
-    escapeHtml(
-      contentField.value
-    ).replace(
-      /\n/g,
-      "<br>"
-    );
-
-
-  const modal =
-    document.createElement(
-      "div"
-    );
-
-  modal.className =
-    "modal show";
-
-  modal.innerHTML = `
-
-    <div class="modal-box">
-
-      <div class="modal-head">
-
-        <h3>
-          DOCUMENT PREVIEW
-        </h3>
-
-        <button
-          class="close"
-          onclick="this.closest('.modal').remove()">
-          ×
-        </button>
-
-      </div>
-
-      <div class="modal-body">
-
-        <div class="eyebrow">
-          ${escapeHtml(currentTool)}
-        </div>
-
-        <h2 style="
-          font-family:Orbitron,sans-serif;
-          font-size:20px;
-          line-height:1.4;
-          margin-bottom:15px;
-        ">
-          ${title}
-        </h2>
-
-        <div style="
-          color:#999;
-          font-size:10px;
-          line-height:1.9;
-        ">
-          ${body}
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
-
-  document.body.appendChild(
-    modal
-  );
-
-}
-
-
-/* =========================================================
-   FORMAT
-========================================================= */
-
-function formatText(type){
-
-  showToast(
-    type.toUpperCase() +
-    " formatting will be available when the
-    rich-text editor is enabled."
-  );
-
-}
-
-
-/* =========================================================
-   PAUSE DEVELOPMENT
-========================================================= */
-
-async function pauseDevelopment(){
-
-  if(!currentProject){
-
-    return;
-
-  }
-
-
-  const confirmed =
-    window.confirm(
-      "Pause development for this project?"
-    );
-
-
-  if(!confirmed){
-
-    return;
-
-  }
-
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("dream_projects")
-      .update({
-
-        status:
-          "on_hold",
-
-        updated_at:
-          new Date().toISOString()
-
-      })
-      .eq(
-        "id",
-        currentProject.id
-      );
-
-
-  if(error){
-
-    showToast(
-      "Could not pause project: " +
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  currentProject.status =
-    "on_hold";
-
-
-  renderProject(
-    currentProject
-  );
-
-
-  showToast(
-    "Project development paused."
-  );
-
-}
-
-
-/* =========================================================
-   REFRESH
-========================================================= */
-
-async function refreshWorkspace(){
-
-  showToast(
-    "Refreshing Creative Room..."
-  );
-
-  await loadProject();
-
-  if(currentProject){
-
-    await loadWorkspace();
-
-  }
-
-}
-
-
-/* =========================================================
-   NOTIFICATIONS
-========================================================= */
-
-async function openNotifications(){
-
-  if(!currentUser){
-
-    return;
-
-  }
-
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("dream_notifications")
-      .select("*")
-      .eq(
-        "user_id",
-        currentUser.id
-      )
-      .eq(
-        "is_read",
-        false
-      )
-      .order("created_at",{
-        ascending:false
-      })
-      .limit(10);
-
-
-  if(error){
-
-    showToast(
-      "Notifications unavailable."
-    );
-
-    return;
-
-  }
-
-
-  if(!data?.length){
-
-    showToast(
-      "No unread Dream World notifications."
-    );
-
-    return;
-
-  }
-
-
-  showToast(
-    data.length +
-    " unread Dream World notification" +
-    (
-      data.length === 1
-        ? ""
-        : "s"
-    ) +
-    "."
-  );
-
-}
-
-
-/* =========================================================
-   REALTIME
-========================================================= */
-
-function setupRealtime(){
-
-  if(!currentProject){
-
-    return;
-
-  }
-
-
-  realtimeChannels.forEach(
-    channel =>
-      supabaseClient
-        .removeChannel(channel)
-  );
-
-  realtimeChannels = [];
-
-
-  const membersChannel =
-    supabaseClient
-      .channel(
-        "creative-room-members-" +
-        currentProject.id
-      )
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"dream_project_members",
-          filter:
-            "project_id=eq." +
-            currentProject.id
-        },
-        () => loadTeam()
-      )
-      .subscribe();
-
-
-  const documentsChannel =
-    supabaseClient
-      .channel(
-        "creative-room-documents-" +
-        currentProject.id
-      )
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"dream_creative_documents",
-          filter:
-            "project_id=eq." +
-            currentProject.id
-        },
-        () => loadDocument()
-      )
-      .subscribe();
-
-
-  const notesChannel =
-    supabaseClient
-      .channel(
-        "creative-room-notes-" +
-        currentProject.id
-      )
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"dream_development_notes",
-          filter:
-            "project_id=eq." +
-            currentProject.id
-        },
-        () => loadNotes()
-      )
-      .subscribe();
-
-
-  const activityChannel =
-    supabaseClient
-      .channel(
-        "creative-room-activity-" +
-        currentProject.id
-      )
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"dream_activity",
-          filter:
-            "project_id=eq." +
-            currentProject.id
-        },
-        () => loadActivity()
-      )
-      .subscribe();
-
-
-  realtimeChannels.push(
-    membersChannel,
-    documentsChannel,
-    notesChannel,
-    activityChannel
-  );
-
-}
-
-
-/* =========================================================
-   MODALS
-========================================================= */
-
-function openModal(id){
-
-  const modal =
-    document.getElementById(id);
-
-  if(modal){
-
-    modal.classList.add("show");
-
-  }
-
-}
-
-
-function closeModal(id){
-
-  const modal =
-    document.getElementById(id);
-
-  if(modal){
-
-    modal.classList.remove("show");
-
-  }
-
-}
-
-
-/* =========================================================
-   HERO PARTICLES
-========================================================= */
-
-function createHeroParticles(){
-
-  const container =
-    document.getElementById(
-      "heroParticles"
-    );
-
-  if(!container){
-
-    return;
-
-  }
-
-
-  const count =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches
-      ? 15
-      : 70;
-
-
-  for(let i=0;i<count;i++){
-
-    const particle =
-      document.createElement(
-        "span"
-      );
-
-    particle.className =
-      "hero-particle";
-
-    particle.style.left =
-      Math.random() * 100 +
-      "%";
-
-    particle.style.top =
-      40 +
-      Math.random() * 65 +
-      "%";
-
-    particle.style.animationDuration =
-      5 +
-      Math.random() * 9 +
-      "s";
-
-    particle.style.animationDelay =
-      Math.random() * 8 +
-      "s";
-
-    particle.style.opacity =
-      .08 +
-      Math.random() * .25;
-
-    container.appendChild(
-      particle
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-function hideLoading(){
-
-  document
-    .getElementById(
-      "loadingScreen"
-    )
-    .classList.add("hidden");
-
-}
-
-
-/* =========================================================
-   EMPTY
-========================================================= */
-
-function renderEmpty(
-  elementId,
-  message
-){
-
-  const element =
-    document.getElementById(
-      elementId
-    );
-
-  if(!element){
-
-    return;
-
-  }
-
-
-  element.innerHTML = `
-
-    <div class="creator-empty">
-
-      ${escapeHtml(message)}
-
-    </div>
-
-  `;
-
-}
-
-
-function renderProjectEmpty(){
-
-  document
-    .getElementById(
-      "projectTitle"
-    )
-    .textContent =
-      "No Project Selected";
-
-  document
-    .getElementById(
-      "projectCode"
-    )
-    .textContent =
-      "OPEN A DREAM WORLD PROJECT";
-
-  document
-    .getElementById(
-      "projectDescription"
-    )
-    .textContent =
-      "Create or join a Dream World project before entering the Creative Room.";
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-let toastTimer;
-
-function showToast(message){
-
-  const toast =
-    document.getElementById(
-      "toast"
-    );
-
-  toast.textContent =
-    message;
-
-  toast.classList.add(
-    "show"
-  );
-
-  clearTimeout(
-    toastTimer
-  );
-
-  toastTimer =
-    setTimeout(
-      () =>
-        toast.classList.remove(
-          "show"
-        ),
-      3500
-    );
-
-}
-
+const tools = [
+
+  ["story","Story Development"],
+  ["characters","Characters"],
+  ["worldbuilding","Worldbuilding"],
+  ["episodes","Episode Planning"],
+  ["screenplay","Screenplay"],
+  ["visual","Visual Development"],
+  ["music","Music & Audio"],
+  ["production","Production Notes"],
+  ["research","Research"],
+  ["freeform","Freeform"]
+
+];
 
 /* =========================================================
    HELPERS
 ========================================================= */
 
-function escapeHtml(value){
+const $ = id =>
+  document.getElementById(id);
 
-  return String(
-    value ?? ""
-  )
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+const first = (...values) =>
+  values.find(
+    value =>
+      value !== undefined &&
+      value !== null &&
+      value !== ""
+  ) ?? "";
 
-}
+const esc = value =>
+  String(value ?? "").replace(
+    /[&<>"']/g,
+    char => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    })[char]
+  );
 
+const initials = name =>
+  String(name || "?")
+    .trim()
+    .split(/\s+/)
+    .slice(0,2)
+    .map(part => part[0])
+    .join("")
+    .toUpperCase();
 
-function escapeJs(value){
+const formatDate = value => {
 
-  return String(
-    value ?? ""
-  )
-    .replace(
-      /\\/g,
-      "\\\\"
-    )
-    .replace(
-      /'/g,
-      "\\'"
-    )
-    .replace(
-      /"/g,
-      '\\"'
-    );
+  if(!value) return "";
 
-}
-
-
-function initials(name){
-
-  const words =
-    String(
-      name || "CR"
-    )
-      .trim()
-      .split(/\s+/)
-      .filter(Boolean);
-
-
-  if(words.length === 1){
-
-    return words[0]
-      .slice(0,2)
-      .toUpperCase();
-
-  }
-
-
-  return (
-    words[0][0] +
-    words[words.length - 1][0]
-  ).toUpperCase();
-
-}
-
-
-function formatLabel(value){
-
-  return String(
-    value || ""
-  )
-    .replace(
-      /[_-]+/g,
-      " "
-    )
-    .replace(
-      /\b\w/g,
-      letter =>
-        letter.toUpperCase()
-    );
-
-}
-
-
-function formatDate(value){
-
-  if(!value){
-
-    return "—";
-
-  }
-
-
-  const date =
-    new Date(value);
-
-  if(
-    Number.isNaN(
-      date.getTime()
-    )
-  ){
-
-    return "—";
-
-  }
-
-
-  return date.toLocaleDateString(
+  return new Date(value).toLocaleDateString(
     undefined,
     {
       month:"short",
@@ -5859,149 +1453,2743 @@ function formatDate(value){
     }
   );
 
-}
+};
 
+const relativeTime = value => {
 
-function relativeTime(value){
+  if(!value) return "";
 
-  if(!value){
-
-    return "—";
-
-  }
-
-
-  const time =
-    new Date(value)
-      .getTime();
-
-  if(!Number.isFinite(time)){
-
-    return "—";
-
-  }
-
-
-  const diff =
-    Date.now() -
-    time;
-
-  const seconds =
+  const seconds = Math.max(
+    0,
     Math.floor(
-      diff / 1000
-    );
+      (Date.now() - new Date(value).getTime()) / 1000
+    )
+  );
 
-  if(seconds < 60){
-
+  if(seconds < 60)
     return "just now";
 
+  if(seconds < 3600)
+    return Math.floor(seconds / 60) + "m ago";
+
+  if(seconds < 86400)
+    return Math.floor(seconds / 3600) + "h ago";
+
+  if(seconds < 604800)
+    return Math.floor(seconds / 86400) + "d ago";
+
+  return formatDate(value);
+
+};
+
+const fileSize = bytes => {
+
+  let size = Number(bytes || 0);
+
+  if(!size)
+    return "";
+
+  const units = ["B","KB","MB","GB"];
+
+  let index = 0;
+
+  while(
+    size >= 1024 &&
+    index < units.length - 1
+  ){
+
+    size /= 1024;
+    index++;
+
   }
 
+  return size.toFixed(index ? 1 : 0) +
+    " " +
+    units[index];
 
-  const minutes =
-    Math.floor(
-      seconds / 60
+};
+
+const toast = (
+  message,
+  type = ""
+) => {
+
+  const node =
+    document.createElement("div");
+
+  node.className =
+    "toast " + type;
+
+  node.textContent =
+    message;
+
+  $("toastRoot")
+    .appendChild(node);
+
+  setTimeout(
+    () => node.remove(),
+    4500
+  );
+
+};
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+async function requireAuth(){
+
+  const {
+    data,
+    error
+  } = await db.auth.getUser();
+
+  if(
+    error ||
+    !data ||
+    !data.user
+  ){
+
+    const current =
+      location.pathname.split("/").pop() +
+      location.search;
+
+    location.replace(
+      "login.html?next=" +
+      encodeURIComponent(current)
     );
 
-  if(minutes < 60){
-
-    return minutes +
-      "m ago";
+    return false;
 
   }
 
+  state.user =
+    data.user;
 
-  const hours =
-    Math.floor(
-      minutes / 60
+  return true;
+
+}
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+async function loadProfile(){
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from("dream_profiles")
+      .select("*")
+      .eq(
+        "user_id",
+        state.user.id
+      )
+      .maybeSingle();
+
+  if(!error)
+    state.profile = data;
+
+}
+
+/* =========================================================
+   PROJECT RESOLUTION
+========================================================= */
+
+async function resolveProject(){
+
+  const params =
+    new URLSearchParams(
+      location.search
     );
 
-  if(hours < 24){
-
-    return hours +
-      "h ago";
-
-  }
-
-
-  const days =
-    Math.floor(
-      hours / 24
+  const requestedProject =
+    first(
+      params.get("project_id"),
+      params.get("project")
     );
 
-  if(days < 30){
+  /*
+    Preferred route:
 
-    return days +
-      "d ago";
+    creative-room.html?project_id=UUID
+  */
+
+  if(requestedProject){
+
+    const {
+      data,
+      error
+    } =
+      await db
+        .from("dream_projects")
+        .select("*")
+        .eq("id",requestedProject)
+        .maybeSingle();
+
+    if(error)
+      throw error;
+
+    if(data){
+
+      state.project =
+        data;
+
+      state.projectId =
+        data.id;
+
+      return;
+
+    }
 
   }
 
+  /*
+    Otherwise find projects where
+    the current creator is a member.
+  */
 
-  return formatDate(
-    value
+  const memberResult =
+    await db
+      .from("dream_project_members")
+      .select(
+        "project_id,role,status,updated_at,created_at"
+      )
+      .eq(
+        "user_id",
+        state.user.id
+      )
+      .in(
+        "status",
+        [
+          "active",
+          "paused",
+          "invited"
+        ]
+      )
+      .order(
+        "updated_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(20);
+
+  if(
+    !memberResult.error &&
+    memberResult.data &&
+    memberResult.data.length
+  ){
+
+    for(
+      const member
+      of memberResult.data
+    ){
+
+      const result =
+        await db
+          .from("dream_projects")
+          .select("*")
+          .eq(
+            "id",
+            member.project_id
+          )
+          .maybeSingle();
+
+      if(
+        !result.error &&
+        result.data
+      ){
+
+        state.project =
+          result.data;
+
+        state.projectId =
+          result.data.id;
+
+        return;
+
+      }
+
+    }
+
+  }
+
+  /*
+    Some CrowRules project schemas use
+    creator_id. Others may use owner_id.
+  */
+
+  for(
+    const field
+    of ["creator_id","owner_id"]
+  ){
+
+    const result =
+      await db
+        .from("dream_projects")
+        .select("*")
+        .eq(
+          field,
+          state.user.id
+        )
+        .order(
+          "updated_at",
+          {
+            ascending:false
+          }
+        )
+        .limit(1);
+
+    if(
+      !result.error &&
+      result.data &&
+      result.data[0]
+    ){
+
+      state.project =
+        result.data[0];
+
+      state.projectId =
+        result.data[0].id;
+
+      return;
+
+    }
+
+  }
+
+  throw new Error(
+    "No accessible Dream World project was found. " +
+    "Open Creative Room from a project or use " +
+    "?project_id=PROJECT_UUID."
   );
 
 }
 
+/* =========================================================
+   DREAM
+========================================================= */
 
-function formatBytes(bytes){
+async function loadDream(){
 
-  if(
-    bytes == null ||
-    bytes === ""
-  ){
+  const dreamId =
+    first(
+      state.project?.dream_id,
+      state.project?.dream_submission_id
+    );
 
-    return "Size unknown";
+  if(!dreamId)
+    return;
 
-  }
+  const {
+    data,
+    error
+  } =
+    await db
+      .from("dream_submissions")
+      .select("*")
+      .eq(
+        "id",
+        dreamId
+      )
+      .maybeSingle();
 
-
-  const number =
-    Number(bytes);
-
-  if(!Number.isFinite(number)){
-
-    return "Size unknown";
-
-  }
-
-
-  if(number < 1024){
-
-    return number +
-      " B";
-
-  }
-
-
-  if(number < 1024 * 1024){
-
-    return (
-      number / 1024
-    ).toFixed(1) +
-      " KB";
-
-  }
-
-
-  if(number < 1024 * 1024 * 1024){
-
-    return (
-      number /
-      (1024 * 1024)
-    ).toFixed(1) +
-      " MB";
-
-  }
-
-
-  return (
-    number /
-    (1024 * 1024 * 1024)
-  ).toFixed(1) +
-    " GB";
+  if(!error)
+    state.dream =
+      data;
 
 }
+
+/* =========================================================
+   RENDER PROJECT
+========================================================= */
+
+function renderProject(){
+
+  const project =
+    state.project || {};
+
+  $("projectTitle").textContent =
+    first(
+      project.title,
+      project.name,
+      "Untitled Dream Project"
+    );
+
+  $("projectCode").textContent =
+    first(
+      project.project_code,
+      "CROW RULES DREAM WORLD"
+    );
+
+  const progress =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        Number(
+          first(
+            project.progress_percent,
+            project.progress,
+            0
+          )
+        )
+      )
+    );
+
+  $("progressText").textContent =
+    progress + "%";
+
+  $("progressBar").style.width =
+    progress + "%";
+
+  const status =
+    String(
+      first(project.status,"")
+    ).toLowerCase();
+
+  $("projectMeta").innerHTML = [
+
+    first(
+      project.format,
+      project.project_format
+    )
+      ? `
+        <span class="pill">
+          ${esc(
+            first(
+              project.format,
+              project.project_format
+            )
+          )}
+        </span>
+      `
+      : "",
+
+    first(project.genre)
+      ? `
+        <span class="pill">
+          ${esc(project.genre)}
+        </span>
+      `
+      : "",
+
+    first(project.status)
+      ? `
+        <span class="pill ${
+          status.includes("develop")
+            ? "red"
+            : "green"
+        }">
+          ${esc(project.status)}
+        </span>
+      `
+      : "",
+
+    first(project.updated_at)
+      ? `
+        <span class="pill">
+          Updated ${esc(
+            relativeTime(
+              project.updated_at
+            )
+          )}
+        </span>
+      `
+      : ""
+
+  ].join("");
+
+  $("heroProject").href =
+    "projects.html?project_id=" +
+    encodeURIComponent(
+      state.projectId
+    );
+
+}
+
+/* =========================================================
+   TEAM
+========================================================= */
+
+async function loadTeam(){
+
+  const result =
+    await db
+      .from("dream_project_members")
+      .select("*")
+      .eq(
+        "project_id",
+        state.projectId
+      )
+      .order(
+        "created_at",
+        {
+          ascending:true
+        }
+      );
+
+  if(result.error){
+
+    $("team").innerHTML =
+      `<div class="empty">
+        Team data is unavailable.
+      </div>`;
+
+    return;
+
+  }
+
+  const members =
+    result.data || [];
+
+  const ids =
+    [
+      ...new Set(
+        members
+          .map(member => member.user_id)
+          .filter(Boolean)
+      )
+    ];
+
+  if(state.project?.creator_id)
+    ids.push(
+      state.project.creator_id
+    );
+
+  let profiles = [];
+
+  if(ids.length){
+
+    const profileResult =
+      await db
+        .from("dream_profiles")
+        .select("*")
+        .in(
+          "user_id",
+          [...new Set(ids)]
+        );
+
+    if(!profileResult.error)
+      profiles =
+        profileResult.data || [];
+
+  }
+
+  const profileMap =
+    new Map(
+      profiles.map(
+        profile => [
+          profile.user_id,
+          profile
+        ]
+      )
+    );
+
+  const rows = [];
+
+  if(state.project?.creator_id){
+
+    const profile =
+      profileMap.get(
+        state.project.creator_id
+      ) || {};
+
+    rows.push({
+      user_id:
+        state.project.creator_id,
+      role:
+        "Project Creator",
+      profile
+    });
+
+  }
+
+  members.forEach(member => {
+
+    if(
+      !rows.some(
+        row =>
+          row.user_id ===
+          member.user_id
+      )
+    ){
+
+      rows.push({
+        ...member,
+        profile:
+          profileMap.get(
+            member.user_id
+          ) || {}
+      });
+
+    }
+
+  });
+
+  if(!rows.length){
+
+    $("team").innerHTML =
+      `<div class="empty">
+        No collaborators yet.
+        Invite a real Dream World creator.
+      </div>`;
+
+    return;
+
+  }
+
+  $("team").innerHTML =
+    rows
+      .map(row =>
+        personHTML(
+          row.profile,
+          first(
+            row.role,
+            row.profile?.creator_type,
+            "Creator"
+          ),
+          row.user_id ===
+            state.user.id
+        )
+      )
+      .join("");
+
+}
+
+function personHTML(
+  profile,
+  role,
+  isCurrentUser
+){
+
+  const name =
+    first(
+      profile.display_name,
+      profile.creator_handle,
+      "Dream World Creator"
+    );
+
+  const avatar =
+    profile.avatar_url
+      ? `
+        <img
+          src="${esc(profile.avatar_url)}"
+          alt=""
+        >
+      `
+      : esc(
+          initials(name)
+        );
+
+  return `
+    <div class="person">
+
+      <div class="avatar">
+        ${avatar}
+      </div>
+
+      <div class="person-info">
+
+        <strong>
+          ${esc(name)}
+          ${isCurrentUser ? " · You" : ""}
+        </strong>
+
+        <span>
+          ${esc(role)}
+        </span>
+
+      </div>
+
+    </div>
+  `;
+
+}
+
+/* =========================================================
+   STAGES
+========================================================= */
+
+async function loadStages(){
+
+  const result =
+    await db
+      .from("dream_project_stages")
+      .select("*")
+      .eq(
+        "project_id",
+        state.projectId
+      );
+
+  if(result.error){
+
+    $("stages").innerHTML =
+      `<div class="empty">
+        Development stages are unavailable.
+      </div>`;
+
+    return;
+
+  }
+
+  const rows =
+    (result.data || [])
+      .sort(
+        (a,b) =>
+          Number(
+            first(
+              a.sort_order,
+              a.position,
+              999
+            )
+          )
+          -
+          Number(
+            first(
+              b.sort_order,
+              b.position,
+              999
+            )
+          )
+      );
+
+  if(!rows.length){
+
+    $("stages").innerHTML =
+      `<div class="empty">
+        No development stages have been added.
+      </div>`;
+
+    return;
+
+  }
+
+  $("stages").innerHTML =
+    rows
+      .map(stage => {
+
+        const status =
+          first(
+            stage.status,
+            stage.stage_status,
+            "planned"
+          );
+
+        return `
+          <div class="stage">
+
+            <b>
+              ${esc(
+                first(
+                  stage.name,
+                  stage.title,
+                  "Stage"
+                )
+              )}
+            </b>
+
+            <small>
+              ${esc(status)}
+            </small>
+
+          </div>
+        `;
+
+      })
+      .join("");
+
+}
+
+/* =========================================================
+   FILES
+========================================================= */
+
+async function loadFiles(){
+
+  const result =
+    await db
+      .from("dream_files")
+      .select("*")
+      .eq(
+        "project_id",
+        state.projectId
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(10);
+
+  if(result.error){
+
+    $("files").innerHTML =
+      `<div class="empty">
+        Project files are unavailable.
+      </div>`;
+
+    return;
+
+  }
+
+  const files =
+    result.data || [];
+
+  if(!files.length){
+
+    $("files").innerHTML =
+      `<div class="empty">
+        No project files yet.
+      </div>`;
+
+    return;
+
+  }
+
+  $("files").innerHTML =
+    files
+      .map(file => {
+
+        const name =
+          first(
+            file.file_name,
+            file.name,
+            file.filename,
+            file.path,
+            "File"
+          );
+
+        return `
+          <div class="file">
+
+            <b title="${esc(name)}">
+              ${esc(name)}
+            </b>
+
+            <span>
+              ${esc(
+                fileSize(
+                  first(
+                    file.size,
+                    file.file_size,
+                    0
+                  )
+                )
+              )}
+            </span>
+
+          </div>
+        `;
+
+      })
+      .join("");
+
+}
+
+/* =========================================================
+   ACTIVITY
+========================================================= */
+
+async function loadActivity(){
+
+  const result =
+    await db
+      .from("dream_activity")
+      .select("*")
+      .eq(
+        "project_id",
+        state.projectId
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(7);
+
+  if(result.error){
+
+    $("activity").innerHTML =
+      `<div class="empty">
+        Activity is unavailable.
+      </div>`;
+
+    return;
+
+  }
+
+  const rows =
+    result.data || [];
+
+  if(!rows.length){
+
+    $("activity").innerHTML =
+      `<div class="empty">
+        No recent activity.
+      </div>`;
+
+    return;
+
+  }
+
+  $("activity").innerHTML =
+    rows
+      .map(item => `
+        <div class="stage">
+
+          <b>
+            ${esc(
+              first(
+                item.title,
+                item.activity_type,
+                "Activity"
+              )
+            )}
+          </b>
+
+          <small>
+            ${esc(
+              relativeTime(
+                item.created_at
+              )
+            )}
+          </small>
+
+        </div>
+      `)
+      .join("");
+
+}
+
+/* =========================================================
+   DEVELOPMENT NOTES
+========================================================= */
+
+async function loadNotes(){
+
+  const result =
+    await db
+      .from("dream_development_notes")
+      .select("*")
+      .eq(
+        "project_id",
+        state.projectId
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(12);
+
+  if(result.error){
+
+    $("notes").innerHTML =
+      `<div class="empty">
+        Development notes are unavailable.
+      </div>`;
+
+    showSchemaNotice(
+      "dream_development_notes",
+      result.error
+    );
+
+    return;
+
+  }
+
+  const notes =
+    result.data || [];
+
+  if(!notes.length){
+
+    $("notes").innerHTML =
+      `<div class="empty">
+        No development notes yet.
+      </div>`;
+
+    return;
+
+  }
+
+  $("notes").innerHTML =
+    notes
+      .map(note => `
+
+        <article class="note">
+
+          <div class="type">
+            ${esc(
+              first(
+                note.note_type,
+                note.category,
+                "Development"
+              )
+            )}
+          </div>
+
+          <h3>
+            ${esc(
+              first(
+                note.title,
+                "Untitled Note"
+              )
+            )}
+          </h3>
+
+          <p>
+            ${esc(
+              first(
+                note.body,
+                note.content,
+                note.description,
+                ""
+              )
+            )}
+          </p>
+
+          <time>
+            ${esc(
+              formatDate(
+                note.created_at
+              )
+            )}
+          </time>
+
+        </article>
+
+      `)
+      .join("");
+
+}
+
+/* =========================================================
+   DOCUMENT
+========================================================= */
+
+async function loadDocument(){
+
+  if(!state.projectId)
+    return;
+
+  $("saveStatus").textContent =
+    "Loading…";
+
+  const result =
+    await db
+      .from("dream_creative_documents")
+      .select("*")
+      .eq(
+        "project_id",
+        state.projectId
+      )
+      .eq(
+        "document_type",
+        state.currentTool
+      )
+      .order(
+        "updated_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(1)
+      .maybeSingle();
+
+  if(result.error){
+
+    $("saveStatus").textContent =
+      "Document schema unavailable";
+
+    showSchemaNotice(
+      "dream_creative_documents",
+      result.error
+    );
+
+    return;
+
+  }
+
+  state.currentDocument =
+    result.data || null;
+
+  $("docTitle").value =
+    first(
+      result.data?.title,
+      tools.find(
+        tool =>
+          tool[0] ===
+          state.currentTool
+      )?.[1],
+      "Untitled Document"
+    );
+
+  $("docBody").value =
+    first(
+      result.data?.content,
+      ""
+    );
+
+  updateWordCount();
+
+  $("saveStatus").textContent =
+    result.data
+      ? "Saved " +
+        relativeTime(
+          result.data.updated_at
+        )
+      : "New document";
+
+}
+
+/* =========================================================
+   SAVE DOCUMENT
+========================================================= */
+
+async function saveDocument(){
+
+  if(
+    !state.projectId ||
+    !state.user
+  ){
+
+    toast(
+      "No accessible project is loaded.",
+      "err"
+    );
+
+    return;
+
+  }
+
+  const title =
+    $("docTitle").value.trim() ||
+    tools.find(
+      tool =>
+        tool[0] ===
+        state.currentTool
+    )?.[1] ||
+    "Untitled Document";
+
+  const content =
+    $("docBody").value;
+
+  $("saveStatus").textContent =
+    "Saving…";
+
+  const payload = {
+
+    project_id:
+      state.projectId,
+
+    dream_id:
+      first(
+        state.project?.dream_id,
+        state.project?.dream_submission_id
+      ) || null,
+
+    author_id:
+      state.user.id,
+
+    document_type:
+      state.currentTool,
+
+    title,
+
+    content,
+
+    status:
+      "draft",
+
+    visibility:
+      "development",
+
+    updated_at:
+      new Date().toISOString()
+
+  };
+
+  let result;
+
+  if(state.currentDocument?.id){
+
+    result =
+      await db
+        .from("dream_creative_documents")
+        .update(payload)
+        .eq(
+          "id",
+          state.currentDocument.id
+        )
+        .select("*")
+        .single();
+
+  }else{
+
+    result =
+      await db
+        .from("dream_creative_documents")
+        .insert(payload)
+        .select("*")
+        .single();
+
+  }
+
+  if(result.error){
+
+    $("saveStatus").textContent =
+      "Save failed";
+
+    showSchemaNotice(
+      "dream_creative_documents",
+      result.error
+    );
+
+    toast(
+      result.error.message ||
+      "Could not save document.",
+      "err"
+    );
+
+    return;
+
+  }
+
+  state.currentDocument =
+    result.data;
+
+  $("saveStatus").textContent =
+    "Saved just now";
+
+  toast(
+    "Document saved.",
+    "ok"
+  );
+
+  /*
+    Version creation is intentionally optional.
+    A missing version table must NEVER break
+    document saving.
+  */
+
+  try{
+
+    const versions =
+      await db
+        .from("dream_document_versions")
+        .select(
+          "version_number"
+        )
+        .eq(
+          "document_id",
+          state.currentDocument.id
+        )
+        .order(
+          "version_number",
+          {
+            ascending:false
+          }
+        )
+        .limit(1);
+
+    const nextVersion =
+      Number(
+        versions.data?.[0]?.version_number || 0
+      ) + 1;
+
+    await db
+      .from("dream_document_versions")
+      .insert({
+
+        document_id:
+          state.currentDocument.id,
+
+        version_number:
+          nextVersion,
+
+        title,
+
+        content,
+
+        created_by:
+          state.user.id
+
+      });
+
+  }catch(error){
+
+    console.debug(
+      "Document versioning unavailable:",
+      error
+    );
+
+  }
+
+  await writeActivity(
+    "document_saved",
+    "Document saved",
+    title
+  );
+
+}
+
+/* =========================================================
+   ACTIVITY WRITE
+========================================================= */
+
+async function writeActivity(
+  activityType,
+  title,
+  description
+){
+
+  try{
+
+    await db
+      .from("dream_activity")
+      .insert({
+
+        project_id:
+          state.projectId,
+
+        user_id:
+          state.user.id,
+
+        activity_type:
+          activityType,
+
+        title,
+
+        description
+
+      });
+
+  }catch(error){
+
+    console.debug(
+      "Activity write skipped:",
+      error
+    );
+
+  }
+
+}
+
+/* =========================================================
+   WORD COUNT
+========================================================= */
+
+function updateWordCount(){
+
+  const text =
+    $("docBody").value.trim();
+
+  const count =
+    text
+      ? text.split(/\s+/).length
+      : 0;
+
+  $("wordCount").textContent =
+    count + " words";
+
+}
+
+/* =========================================================
+   REAL CREATOR INVITATION
+========================================================= */
+
+async function openInvite(){
+
+  state.selectedCreator =
+    null;
+
+  $("modalRoot").innerHTML = `
+
+    <div class="modal-backdrop">
+
+      <div class="modal">
+
+        <div class="modal-head">
+
+          <h2>
+            Invite a Real Creator
+          </h2>
+
+          <button
+            class="close"
+            id="closeInvite"
+            type="button"
+          >
+            ✕
+          </button>
+
+        </div>
+
+        <div class="field">
+
+          <label>
+            Find a Dream World creator
+          </label>
+
+          <input
+            id="creatorSearch"
+            class="search"
+            type="search"
+            placeholder="Search name or @handle…"
+            autocomplete="off"
+          >
+
+        </div>
+
+        <div
+          id="creatorResults"
+          class="creator-results"
+        >
+          <div class="loading">
+            <div class="spinner"></div>
+          </div>
+        </div>
+
+        <div
+          id="selectedCreator"
+          class="selected-box hidden"
+        ></div>
+
+        <div
+          class="field"
+          style="margin-top:14px"
+        >
+
+          <label>
+            Role
+          </label>
+
+          <select id="inviteRole">
+
+            <option>Writer</option>
+            <option>Story / Screenplay</option>
+            <option>Producer</option>
+            <option>Director</option>
+            <option>Concept Artist</option>
+            <option>Visual Development</option>
+            <option>Composer / Sound</option>
+            <option>Research / Worldbuilding</option>
+            <option>Editor</option>
+            <option>Other</option>
+
+          </select>
+
+        </div>
+
+        <div class="field">
+
+          <label>
+            Message
+          </label>
+
+          <textarea
+            id="inviteMessage"
+            placeholder="Tell the creator why you want them involved…"
+          ></textarea>
+
+        </div>
+
+        <div
+          style="
+            display:flex;
+            justify-content:flex-end;
+            gap:9px;
+          "
+        >
+
+          <button
+            class="btn ghost"
+            id="cancelInvite"
+            type="button"
+          >
+            Cancel
+          </button>
+
+          <button
+            class="btn primary"
+            id="sendInvite"
+            type="button"
+          >
+            Send Invitation
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  $("closeInvite").onclick =
+    closeModal;
+
+  $("cancelInvite").onclick =
+    closeModal;
+
+  $("creatorSearch").oninput =
+    () =>
+      searchCreators(
+        $("creatorSearch").value
+      );
+
+  $("sendInvite").onclick =
+    sendInvitation;
+
+  await searchCreators("");
+
+}
+
+/* =========================================================
+   SEARCH REAL CREATORS
+========================================================= */
+
+async function searchCreators(
+  searchTerm
+){
+
+  const term =
+    String(
+      searchTerm || ""
+    ).trim();
+
+  /*
+    Search display_name.
+  */
+
+  let nameResults = [];
+
+  const nameQuery =
+    await db
+      .from("dream_profiles")
+      .select("*")
+      .neq(
+        "user_id",
+        state.user.id
+      )
+      .ilike(
+        "display_name",
+        "%" + term + "%"
+      )
+      .limit(15);
+
+  if(!nameQuery.error)
+    nameResults =
+      nameQuery.data || [];
+
+  /*
+    Search creator_handle separately.
+    This avoids fragile PostgREST OR
+    expressions across changing schemas.
+  */
+
+  let handleResults = [];
+
+  const handleQuery =
+    await db
+      .from("dream_profiles")
+      .select("*")
+      .neq(
+        "user_id",
+        state.user.id
+      )
+      .ilike(
+        "creator_handle",
+        "%" + term + "%"
+      )
+      .limit(15);
+
+  if(!handleQuery.error)
+    handleResults =
+      handleQuery.data || [];
+
+  /*
+    If no search term exists,
+    use name results first.
+  */
+
+  let combined =
+    [
+      ...nameResults,
+      ...handleResults
+    ];
+
+  /*
+    Remove duplicate accounts.
+  */
+
+  combined =
+    [
+      ...new Map(
+        combined.map(
+          profile =>
+            [
+              profile.user_id,
+              profile
+            ]
+        )
+      ).values()
+    ];
+
+  renderCreatorResults(
+    combined
+  );
+
+}
+
+/* =========================================================
+   CREATOR RESULTS
+========================================================= */
+
+function renderCreatorResults(
+  profiles
+){
+
+  if(!profiles.length){
+
+    $("creatorResults").innerHTML =
+      `
+        <div
+          class="empty"
+          style="padding:12px"
+        >
+          No matching Dream World creators found.
+        </div>
+      `;
+
+    return;
+
+  }
+
+  $("creatorResults").innerHTML =
+    profiles
+      .map(profile => {
+
+        const name =
+          first(
+            profile.display_name,
+            profile.creator_handle,
+            "Creator"
+          );
+
+        const role =
+          first(
+            profile.creator_type,
+            profile.primary_role,
+            "Dream World Creator"
+          );
+
+        const avatar =
+          profile.avatar_url
+            ? `
+              <img
+                src="${esc(profile.avatar_url)}"
+                alt=""
+              >
+            `
+            : esc(
+                initials(name)
+              );
+
+        return `
+
+          <div
+            class="creator-result"
+            data-user="${esc(
+              profile.user_id
+            )}"
+          >
+
+            <div class="avatar">
+              ${avatar}
+            </div>
+
+            <div class="person-info">
+
+              <strong>
+                ${esc(name)}
+              </strong>
+
+              <span>
+                ${
+                  profile.creator_handle
+                    ? "@" +
+                      esc(
+                        profile.creator_handle
+                      )
+                    : ""
+                }
+              </span>
+
+            </div>
+
+            <span class="role">
+              ${esc(role)}
+            </span>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+  document
+    .querySelectorAll(
+      ".creator-result"
+    )
+    .forEach(element => {
+
+      element.onclick =
+        () => {
+
+          const userId =
+            element.dataset.user;
+
+          const name =
+            element
+              .querySelector("strong")
+              ?.textContent ||
+            "Creator";
+
+          state.selectedCreator = {
+
+            user_id:
+              userId,
+
+            display_name:
+              name
+
+          };
+
+          document
+            .querySelectorAll(
+              ".creator-result"
+            )
+            .forEach(item =>
+              item.classList.remove(
+                "selected"
+              )
+            );
+
+          element.classList.add(
+            "selected"
+          );
+
+          $("selectedCreator")
+            .classList.remove(
+              "hidden"
+            );
+
+          $("selectedCreator")
+            .textContent =
+            "Selected: " +
+            name;
+
+        };
+
+    });
+
+}
+
+/* =========================================================
+   SEND INVITATION
+========================================================= */
+
+async function sendInvitation(){
+
+  if(!state.selectedCreator){
+
+    toast(
+      "Select a real creator first.",
+      "err"
+    );
+
+    return;
+
+  }
+
+  const role =
+    $("inviteRole").value;
+
+  const message =
+    $("inviteMessage")
+      .value
+      .trim();
+
+  /*
+    Preferred secure RPC.
+
+    This allows Supabase to enforce:
+    - authenticated user
+    - project access
+    - real invitee account
+    - duplicate invitation protection
+  */
+
+  const rpc =
+    await db.rpc(
+      "dream_send_project_invitation",
+      {
+
+        p_project_id:
+          state.projectId,
+
+        p_invitee_user_id:
+          state.selectedCreator.user_id,
+
+        p_role:
+          role,
+
+        p_message:
+          message
+
+      }
+    );
+
+  if(!rpc.error){
+
+    closeModal();
+
+    toast(
+      "Invitation sent to " +
+      state.selectedCreator.display_name +
+      ".",
+      "ok"
+    );
+
+    await writeActivity(
+      "creator_invited",
+      "Creator invited",
+      state.selectedCreator.display_name
+    );
+
+    return;
+
+  }
+
+  /*
+    Fallback for installations where
+    the RPC has not yet been installed.
+
+    RLS still decides whether the insert
+    is permitted.
+  */
+
+  const direct =
+    await db
+      .from("dream_project_invitations")
+      .insert({
+
+        project_id:
+          state.projectId,
+
+        invited_by:
+          state.user.id,
+
+        invitee_user_id:
+          state.selectedCreator.user_id,
+
+        role,
+
+        message,
+
+        status:
+          "pending"
+
+      })
+      .select("*")
+      .single();
+
+  if(direct.error){
+
+    toast(
+      direct.error.message ||
+      rpc.error?.message ||
+      "Invitation failed.",
+      "err"
+    );
+
+    showSchemaNotice(
+      "dream_project_invitations",
+      direct.error
+    );
+
+    return;
+
+  }
+
+  closeModal();
+
+  toast(
+    "Invitation sent to " +
+    state.selectedCreator.display_name +
+    ".",
+    "ok"
+  );
+
+}
+
+/* =========================================================
+   DEVELOPMENT NOTE MODAL
+========================================================= */
+
+function openNote(){
+
+  $("modalRoot").innerHTML = `
+
+    <div class="modal-backdrop">
+
+      <div class="modal">
+
+        <div class="modal-head">
+
+          <h2>
+            Development Note
+          </h2>
+
+          <button
+            class="close"
+            id="closeNote"
+            type="button"
+          >
+            ✕
+          </button>
+
+        </div>
+
+        <div class="field">
+
+          <label>
+            Type
+          </label>
+
+          <select id="noteType">
+
+            <option>Story</option>
+            <option>Character</option>
+            <option>Worldbuilding</option>
+            <option>Production</option>
+            <option>Research</option>
+            <option>Meeting</option>
+            <option>General</option>
+
+          </select>
+
+        </div>
+
+        <div class="field">
+
+          <label>
+            Title
+          </label>
+
+          <input
+            id="noteTitle"
+            type="text"
+            placeholder="Note title"
+          >
+
+        </div>
+
+        <div class="field">
+
+          <label>
+            Note
+          </label>
+
+          <textarea
+            id="noteBody"
+            placeholder="Capture the idea, decision, question or next step…"
+          ></textarea>
+
+        </div>
+
+        <div
+          style="
+            display:flex;
+            justify-content:flex-end;
+            gap:9px;
+          "
+        >
+
+          <button
+            class="btn ghost"
+            id="cancelNote"
+            type="button"
+          >
+            Cancel
+          </button>
+
+          <button
+            class="btn primary"
+            id="saveNote"
+            type="button"
+          >
+            Save Note
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  $("closeNote").onclick =
+    closeModal;
+
+  $("cancelNote").onclick =
+    closeModal;
+
+  $("saveNote").onclick =
+    saveNote;
+
+}
+
+/* =========================================================
+   SAVE NOTE
+========================================================= */
+
+async function saveNote(){
+
+  const title =
+    $("noteTitle")
+      .value
+      .trim();
+
+  const body =
+    $("noteBody")
+      .value
+      .trim();
+
+  const noteType =
+    $("noteType").value;
+
+  if(!title || !body){
+
+    toast(
+      "Add a title and note.",
+      "err"
+    );
+
+    return;
+
+  }
+
+  const result =
+    await db
+      .from("dream_development_notes")
+      .insert({
+
+        project_id:
+          state.projectId,
+
+        author_id:
+          state.user.id,
+
+        note_type:
+          noteType,
+
+        title,
+
+        body,
+
+        visibility:
+          "development"
+
+      });
+
+  if(result.error){
+
+    toast(
+      result.error.message ||
+      "Could not save note.",
+      "err"
+    );
+
+    return;
+
+  }
+
+  closeModal();
+
+  toast(
+    "Development note saved.",
+    "ok"
+  );
+
+  await loadNotes();
+
+  await writeActivity(
+    "note_created",
+    "Development note created",
+    title
+  );
+
+}
+
+/* =========================================================
+   FILE UPLOAD
+========================================================= */
+
+async function uploadFile(file){
+
+  if(
+    !file ||
+    !state.projectId
+  )
+    return;
+
+  const safeName =
+    file.name.replace(
+      /[^\w.\- ]/g,
+      "_"
+    );
+
+  const path =
+    "projects/" +
+    state.projectId +
+    "/" +
+    crypto.randomUUID() +
+    "-" +
+    safeName;
+
+  /*
+    Storage bucket:
+    dream-world-project-files
+  */
+
+  const upload =
+    await db.storage
+      .from(
+        "dream-world-project-files"
+      )
+      .upload(
+        path,
+        file,
+        {
+          upsert:false
+        }
+      );
+
+  if(upload.error){
+
+    toast(
+      "Upload failed: " +
+      upload.error.message,
+      "err"
+    );
+
+    return;
+
+  }
+
+  const record = {
+
+    project_id:
+      state.projectId,
+
+    user_id:
+      state.user.id,
+
+    name:
+      file.name,
+
+    file_name:
+      file.name,
+
+    path,
+
+    storage_path:
+      path,
+
+    size:
+      file.size,
+
+    mime_type:
+      file.type
+
+  };
+
+  const database =
+    await db
+      .from("dream_files")
+      .insert(record);
+
+  if(database.error){
+
+    /*
+      Prevent orphaned Storage files.
+    */
+
+    await db.storage
+      .from(
+        "dream-world-project-files"
+      )
+      .remove([path]);
+
+    toast(
+      "File uploaded but could not be registered: " +
+      database.error.message,
+      "err"
+    );
+
+    return;
+
+  }
+
+  toast(
+    "File uploaded.",
+    "ok"
+  );
+
+  await loadFiles();
+
+  await writeActivity(
+    "file_uploaded",
+    "File uploaded",
+    file.name
+  );
+
+}
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function openPreview(){
+
+  const title =
+    esc(
+      $("docTitle")
+        .value ||
+      "Untitled Document"
+    );
+
+  const body =
+    esc(
+      $("docBody").value || ""
+    )
+    .replace(
+      /\n/g,
+      "<br>"
+    );
+
+  $("modalRoot").innerHTML = `
+
+    <div class="modal-backdrop">
+
+      <div class="modal">
+
+        <div class="modal-head">
+
+          <h2>
+            ${title}
+          </h2>
+
+          <button
+            class="close"
+            id="closePreview"
+            type="button"
+          >
+            ✕
+          </button>
+
+        </div>
+
+        <div
+          style="
+            color:#bbb;
+            line-height:1.9;
+            font-size:13px;
+          "
+        >
+
+          ${
+            body ||
+            "<span style='color:#666'>No content yet.</span>"
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  $("closePreview").onclick =
+    closeModal;
+
+}
+
+/* =========================================================
+   MODAL CLOSE
+========================================================= */
+
+function closeModal(){
+
+  $("modalRoot").innerHTML =
+    "";
+
+}
+
+/* =========================================================
+   SCHEMA NOTICE
+========================================================= */
+
+function showSchemaNotice(
+  table,
+  error
+){
+
+  const message =
+    String(
+      error?.message || ""
+    );
+
+  if(
+    /relation .* does not exist/i.test(message) ||
+    /could not find the table/i.test(message) ||
+    /schema cache/i.test(message)
+  ){
+
+    $("schemaBanner")
+      .classList
+      .remove("hidden");
+
+    $("schemaBanner").innerHTML = `
+
+      <strong>
+        Optional Dream World schema missing:
+      </strong>
+
+      ${esc(table)}
+
+      <br>
+
+      Install the corresponding Dream World
+      Supabase table/function to enable this feature.
+
+    `;
+
+  }
+
+}
+
+/* =========================================================
+   TOOLS
+========================================================= */
+
+function renderTools(){
+
+  $("tools").innerHTML =
+    tools
+      .map(
+        ([id,label]) => `
+
+          <button
+            class="tool ${
+              id === state.currentTool
+                ? "active"
+                : ""
+            }"
+            data-tool="${esc(id)}"
+            type="button"
+          >
+            ${esc(label)}
+          </button>
+
+        `
+      )
+      .join("");
+
+  document
+    .querySelectorAll(".tool")
+    .forEach(button => {
+
+      button.onclick =
+        () =>
+          selectTool(
+            button.dataset.tool
+          );
+
+    });
+
+}
+
+function selectTool(id){
+
+  state.currentTool =
+    id;
+
+  renderTools();
+
+  const label =
+    tools.find(
+      tool =>
+        tool[0] === id
+    )?.[1] ||
+    "Creative Development";
+
+  $("toolTitle").textContent =
+    label;
+
+  loadDocument();
+
+}
+
+/* =========================================================
+   REALTIME
+========================================================= */
+
+function setupRealtime(){
+
+  if(!state.projectId)
+    return;
+
+  state.realtimeChannel =
+    db
+      .channel(
+        "creative-room-" +
+        state.projectId
+      )
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"dream_project_members",
+          filter:
+            "project_id=eq." +
+            state.projectId
+        },
+        () => loadTeam()
+      )
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"dream_development_notes",
+          filter:
+            "project_id=eq." +
+            state.projectId
+        },
+        () => loadNotes()
+      )
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"dream_activity",
+          filter:
+            "project_id=eq." +
+            state.projectId
+        },
+        () => loadActivity()
+      )
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"dream_files",
+          filter:
+            "project_id=eq." +
+            state.projectId
+        },
+        () => loadFiles()
+      )
+
+      .subscribe();
+
+}
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+function createParticles(){
+
+  const wrapper =
+    $("particles");
+
+  const reducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+  const count =
+    reducedMotion
+      ? 8
+      : 36;
+
+  for(
+    let i = 0;
+    i < count;
+    i++
+  ){
+
+    const particle =
+      document.createElement("i");
+
+    particle.className =
+      "particle";
+
+    particle.style.left =
+      Math.random() * 100 +
+      "%";
+
+    particle.style.top =
+      Math.random() * 100 +
+      "%";
+
+    particle.style.animationDelay =
+      Math.random() * 6 +
+      "s";
+
+    particle.style.animationDuration =
+      5 +
+      Math.random() * 8 +
+      "s";
+
+    wrapper.appendChild(
+      particle
+    );
+
+  }
+
+}
+
+/* =========================================================
+   EVENT BINDINGS
+========================================================= */
+
+function bindEvents(){
+
+  $("menuBtn").onclick =
+    () =>
+      $("navLinks")
+        .classList
+        .toggle("open");
+
+  $("heroSave").onclick =
+    saveDocument;
+
+  $("saveBtn").onclick =
+    saveDocument;
+
+  $("previewBtn").onclick =
+    openPreview;
+
+  $("heroInvite").onclick =
+    openInvite;
+
+  $("inviteBtn").onclick =
+    openInvite;
+
+  $("teamInvite").onclick =
+    openInvite;
+
+  $("addNoteBtn").onclick =
+    openNote;
+
+  $("notesBtn").onclick =
+    openNote;
+
+  $("uploadBtn").onclick =
+    () =>
+      $("fileInput").click();
+
+  $("fileInput").onchange =
+    event =>
+      uploadFile(
+        event.target.files?.[0]
+      );
+
+  $("docBody").oninput =
+    updateWordCount;
+
+}
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+async function init(){
+
+  createParticles();
+
+  renderTools();
+
+  bindEvents();
+
+  const authenticated =
+    await requireAuth();
+
+  if(!authenticated)
+    return;
+
+  try{
+
+    await loadProfile();
+
+    await resolveProject();
+
+    await loadDream();
+
+    renderProject();
+
+    await Promise.all([
+
+      loadTeam(),
+
+      loadStages(),
+
+      loadFiles(),
+
+      loadActivity(),
+
+      loadNotes(),
+
+      loadDocument()
+
+    ]);
+
+    setupRealtime();
+
+  }catch(error){
+
+    console.error(
+      "Creative Room initialization error:",
+      error
+    );
+
+    $("projectTitle").textContent =
+      "No Project Selected";
+
+    $("projectCode").textContent =
+      "CREATIVE ROOM";
+
+    $("schemaBanner")
+      .classList
+      .remove("hidden");
+
+    $("schemaBanner").innerHTML = `
+
+      <strong>
+        Creative Room could not load a project.
+      </strong>
+
+      ${esc(
+        error?.message ||
+        "Unknown error."
+      )}
+
+      <br><br>
+
+      Open Creative Room from a Dream World
+      project or use:
+
+      <code>
+        creative-room.html?project_id=YOUR_PROJECT_UUID
+      </code>
+
+    `;
+
+    $("team").innerHTML =
+      `<div class="empty">
+        Project access required.
+      </div>`;
+
+    $("stages").innerHTML =
+      `<div class="empty">
+        Project access required.
+      </div>`;
+
+    $("files").innerHTML =
+      `<div class="empty">
+        Project access required.
+      </div>`;
+
+    $("activity").innerHTML =
+      `<div class="empty">
+        Project access required.
+      </div>`;
+
+    $("notes").innerHTML =
+      `<div class="empty">
+        Project access required.
+      </div>`;
+
+  }
+
+}
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+db.auth.onAuthStateChange(
+  (event) => {
+
+    if(
+      event ===
+      "SIGNED_OUT"
+    ){
+
+      location.replace(
+        "login.html?next=creative-room.html"
+      );
+
+    }
+
+  }
+);
+
+/* =========================================================
+   CLEANUP
+========================================================= */
+
+window.addEventListener(
+  "beforeunload",
+  () => {
+
+    if(
+      state.realtimeChannel
+    ){
+
+      db.removeChannel(
+        state.realtimeChannel
+      );
+
+    }
+
+  }
+);
+
+/* START */
+
+init();
+
+})();
 </script>
 
 </body>
