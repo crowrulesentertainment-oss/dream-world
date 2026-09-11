@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
 
     <meta
@@ -10,25 +8,41 @@
         content="width=device-width, initial-scale=1, viewport-fit=cover"
     >
 
+    <meta
+        name="theme-color"
+        content="#05030d"
+    >
+
+    <meta
+        name="description"
+        content="CrowRules Dreamscapes — Bringing Stories to Life. A creative development network within CrowRules Entertainment where ordinary people can submit dreams, ideas, stories and worlds, collaborate with creators, and help transform them into productions."
+    >
+
+    <meta
+        name="keywords"
+        content="CrowRules Entertainment, CrowRules Dreamscapes, creative network, storytelling, writers, filmmakers, world building, creators, dream library, original stories"
+    >
+
+    <meta
+        property="og:title"
+        content="CrowRules Dreamscapes — Bringing Stories to Life"
+    >
+
+    <meta
+        property="og:description"
+        content="One Dream. One World. One Story. Dreamscapes is a creative development network within CrowRules Entertainment."
+    >
+
+    <meta
+        property="og:type"
+        content="website"
+    >
+
     <title>
         CrowRules Dreamscapes | Bringing Stories to Life
     </title>
 
-    <meta
-        name="description"
-        content="CrowRules Dreamscapes is a creator network where dreams, ideas, stories and worlds are developed collaboratively and brought to life."
-    >
-
-    <meta
-        name="theme-color"
-        content="#020207"
-    >
-
-    <meta
-        name="color-scheme"
-        content="dark"
-    >
-
+    <!-- Fonts -->
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -41,2825 +55,1922 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet"
     >
 
+    <!-- Existing Dreamscapes stylesheet -->
     <link
         rel="stylesheet"
         href="assets/css/dreamscapes.css"
     >
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-        defer
-    ></script>
-
-
     <style>
 
+        /* =========================================================
+           CROWRULES DREAMSCAPES
+           CINEMATIC ECOSYSTEM UPGRADE
+        ========================================================= */
+
         :root {
+            --dream-black: #05030d;
+            --dream-deep: #080515;
+            --dream-purple: #7c3cff;
+            --dream-violet: #a855f7;
+            --dream-cyan: #22d3ee;
+            --dream-pink: #ec4899;
+            --dream-gold: #f5c451;
+            --dream-white: #f8f7ff;
+            --dream-muted: #aaa7bd;
 
-            --bg:
-                #020207;
+            --glass:
+                rgba(255,255,255,.045);
 
-            --bg-soft:
-                #050510;
-
-            --panel:
-                rgba(255,255,255,.035);
-
-            --panel-strong:
-                rgba(255,255,255,.055);
-
-            --line:
+            --glass-border:
                 rgba(255,255,255,.10);
 
-            --line-bright:
-                rgba(105,234,255,.28);
+            --glow-purple:
+                0 0 40px rgba(124,60,255,.25);
 
-            --text:
-                #f5f7ff;
-
-            --muted:
-                #a8aec4;
-
-            --cyan:
-                #69eaff;
-
-            --purple:
-                #a98cff;
-
-            --pink:
-                #ff82d8;
-
-            --green:
-                #73f5b1;
-
-            --gold:
-                #ffd978;
-
-            --shadow:
-                0 30px 100px rgba(0,0,0,.45);
-
-            --radius:
-                26px;
-
-            --max:
-                1180px;
-
+            --glow-cyan:
+                0 0 40px rgba(34,211,238,.20);
         }
-
 
         * {
-            box-sizing:border-box;
+            box-sizing: border-box;
         }
-
 
         html {
-            scroll-behavior:smooth;
+            scroll-behavior: smooth;
         }
-
 
         body {
-
-            margin:0;
-
-            min-height:100vh;
-
-            overflow-x:hidden;
-
-            color:var(--text);
-
+            margin: 0;
             background:
-
                 radial-gradient(
-                    circle at 50% -10%,
-                    rgba(105,234,255,.08),
-                    transparent 32%
+                    circle at 20% 10%,
+                    rgba(124,60,255,.13),
+                    transparent 35%
                 ),
-
                 radial-gradient(
-                    circle at 10% 40%,
-                    rgba(169,140,255,.055),
-                    transparent 30%
+                    circle at 80% 25%,
+                    rgba(34,211,238,.08),
+                    transparent 35%
                 ),
+                #05030d;
 
-                radial-gradient(
-                    circle at 90% 70%,
-                    rgba(255,130,216,.035),
-                    transparent 28%
-                ),
-
-                var(--bg);
-
-            font-family:
-                Montserrat,
-                sans-serif;
-
+            color: var(--dream-white);
+            font-family: "Montserrat", sans-serif;
+            overflow-x: hidden;
         }
 
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-        body::before {
+        button {
+            font-family: inherit;
+        }
 
-            content:"";
+        /* =========================================================
+           CINEMATIC OPENING
+        ========================================================= */
 
-            position:fixed;
+        .dream-opening {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
 
-            inset:0;
-
-            pointer-events:none;
-
-            z-index:-1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             background:
-
-                linear-gradient(
-                    rgba(255,255,255,.012) 1px,
-                    transparent 1px
+                radial-gradient(
+                    circle at center,
+                    rgba(124,60,255,.16),
+                    transparent 35%
                 ),
+                #03020a;
 
+            pointer-events: none;
+
+            animation:
+                openingFade 1.4s ease 2.8s forwards;
+        }
+
+        .opening-core {
+            position: relative;
+            text-align: center;
+        }
+
+        .opening-orbit {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border:
+                1px solid rgba(124,60,255,.35);
+
+            border-radius: 50%;
+
+            animation:
+                orbitSpin 8s linear infinite;
+        }
+
+        .opening-orbit::before,
+        .opening-orbit::after {
+            content: "";
+            position: absolute;
+
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: var(--dream-cyan);
+
+            box-shadow:
+                0 0 20px var(--dream-cyan);
+        }
+
+        .opening-orbit::before {
+            top: -4px;
+            left: 50%;
+        }
+
+        .opening-orbit::after {
+            bottom: 20px;
+            right: 8px;
+
+            background: var(--dream-pink);
+
+            box-shadow:
+                0 0 20px var(--dream-pink);
+        }
+
+        .opening-eyebrow {
+            position: relative;
+            z-index: 2;
+
+            font-family: "Orbitron", sans-serif;
+            font-size: .7rem;
+            letter-spacing: .35em;
+
+            color: var(--dream-cyan);
+
+            text-transform: uppercase;
+
+            animation:
+                openingRise .9s ease forwards;
+        }
+
+        .opening-title {
+            position: relative;
+            z-index: 2;
+
+            margin: 18px 0 8px;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size:
+                clamp(2.7rem, 9vw, 7rem);
+
+            letter-spacing: .08em;
+
+            background:
                 linear-gradient(
                     90deg,
-                    rgba(255,255,255,.012) 1px,
-                    transparent 1px
+                    var(--dream-cyan),
+                    #fff,
+                    var(--dream-violet),
+                    var(--dream-pink)
+                );
+
+            background-size: 300% 100%;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            animation:
+                dreamGradient 5s linear infinite,
+                openingRise 1s ease .15s both;
+        }
+
+        .opening-subtitle {
+            position: relative;
+            z-index: 2;
+
+            color: var(--dream-muted);
+
+            font-size: .8rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+
+            animation:
+                openingRise 1s ease .3s both;
+        }
+
+        @keyframes openingFade {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @keyframes openingRise {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes orbitSpin {
+            to {
+                transform:
+                    translate(-50%, -50%)
+                    rotate(360deg);
+            }
+        }
+
+        @keyframes dreamGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* =========================================================
+           STAR FIELD
+        ========================================================= */
+
+        #stars,
+        #stars2 {
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: -3;
+        }
+
+        #stars {
+            background-image:
+                radial-gradient(
+                    1px 1px at 20px 30px,
+                    rgba(255,255,255,.7),
+                    transparent
+                ),
+                radial-gradient(
+                    1px 1px at 100px 140px,
+                    rgba(255,255,255,.45),
+                    transparent
+                ),
+                radial-gradient(
+                    1px 1px at 180px 80px,
+                    rgba(34,211,238,.6),
+                    transparent
                 );
 
             background-size:
-                70px 70px;
-
-            mask-image:
-                linear-gradient(
-                    to bottom,
-                    black,
-                    transparent 80%
-                );
-
-        }
-
-
-        a {
-            color:inherit;
-            text-decoration:none;
-        }
-
-
-        button,
-        a {
-            -webkit-tap-highlight-color:transparent;
-        }
-
-
-        img {
-            max-width:100%;
-        }
-
-
-        .container {
-
-            width:
-                min(
-                    calc(100% - 40px),
-                    var(--max)
-                );
-
-            margin-inline:auto;
-
-        }
-
-
-        /* =====================================================
-           STAR FIELD
-        ===================================================== */
-
-        #stars {
-
-            position:fixed;
-
-            inset:0;
-
-            z-index:-3;
-
-            overflow:hidden;
-
-            pointer-events:none;
-
-        }
-
-
-        .star {
-
-            position:absolute;
-
-            width:2px;
-            height:2px;
-
-            border-radius:50%;
-
-            background:#fff;
-
-            opacity:.45;
+                240px 240px;
 
             animation:
-                twinkle
-                var(--duration)
-                ease-in-out
-                infinite alternate;
-
+                starDrift 70s linear infinite;
         }
 
+        #stars2 {
+            opacity: .35;
 
-        @keyframes twinkle {
-
-            from {
-                opacity:.15;
-                transform:scale(.7);
-            }
-
-            to {
-                opacity:.9;
-                transform:scale(1.35);
-            }
-
-        }
-
-
-        #nebula {
-
-            position:fixed;
-
-            inset:-20%;
-
-            z-index:-2;
-
-            pointer-events:none;
-
-            background:
-
+            background-image:
                 radial-gradient(
-                    ellipse at 30% 25%,
-                    rgba(105,234,255,.08),
-                    transparent 25%
+                    2px 2px at 60px 90px,
+                    rgba(168,85,247,.5),
+                    transparent
                 ),
-
                 radial-gradient(
-                    ellipse at 70% 35%,
-                    rgba(169,140,255,.08),
-                    transparent 28%
-                ),
-
-                radial-gradient(
-                    ellipse at 50% 80%,
-                    rgba(255,130,216,.05),
-                    transparent 25%
+                    1px 1px at 220px 180px,
+                    rgba(236,72,153,.5),
+                    transparent
                 );
 
-            filter:
-                blur(55px);
+            background-size:
+                340px 340px;
 
             animation:
-                nebulaFloat
-                22s
-                ease-in-out
-                infinite alternate;
-
+                starDrift 110s linear infinite reverse;
         }
 
-
-        @keyframes nebulaFloat {
-
-            from {
-                transform:scale(1) translate3d(0,0,0);
-            }
-
+        @keyframes starDrift {
             to {
-                transform:scale(1.08) translate3d(2%, -1%, 0);
+                transform:
+                    translate3d(-200px, -160px, 0);
             }
-
         }
 
+        /* =========================================================
+           LAUNCH BAR
+        ========================================================= */
 
-        /* =====================================================
-           NAVIGATION
-        ===================================================== */
+        .launch-bar {
+            position: relative;
+            z-index: 2000;
 
-        .site-nav {
+            min-height: 42px;
 
-            position:fixed;
-
-            top:0;
-            left:0;
-            right:0;
-
-            z-index:100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             padding:
-                16px 0;
+                9px 20px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(124,60,255,.16),
+                    rgba(34,211,238,.10),
+                    rgba(236,72,153,.14)
+                );
 
             border-bottom:
-                1px solid
-                rgba(255,255,255,.07);
+                1px solid rgba(255,255,255,.08);
+
+            text-align: center;
+
+            font-size: .72rem;
+            letter-spacing: .08em;
+
+            color: #d9d5e8;
+        }
+
+        .launch-bar strong {
+            color: white;
+            font-family: "Orbitron", sans-serif;
+        }
+
+        .launch-bar a {
+            margin-left: 10px;
+
+            color: var(--dream-cyan);
+
+            font-weight: 700;
+
+            transition:
+                color .25s ease,
+                text-shadow .25s ease;
+        }
+
+        .launch-bar a:hover {
+            color: white;
+
+            text-shadow:
+                0 0 16px var(--dream-cyan);
+        }
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        .site-nav {
+            position: sticky;
+            top: 0;
+
+            z-index: 1500;
 
             background:
-                rgba(2,2,7,.78);
+                rgba(5,3,13,.76);
 
             backdrop-filter:
-                blur(22px);
+                blur(18px);
 
+            -webkit-backdrop-filter:
+                blur(18px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,.07);
         }
-
 
         .nav-inner {
+            width: min(1280px, calc(100% - 32px));
 
-            display:flex;
+            min-height: 76px;
 
-            align-items:center;
+            margin: auto;
 
-            justify-content:space-between;
-
-            gap:20px;
-
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
         }
-
 
         .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
 
-            display:flex;
-
-            align-items:center;
-
-            gap:11px;
-
-            flex-shrink:0;
-
+            min-width: max-content;
         }
 
+        .brand-symbol {
+            width: 38px;
+            height: 38px;
 
-        .brand-mark {
-
-            width:38px;
-            height:38px;
-
-            display:grid;
-
-            place-items:center;
+            display: grid;
+            place-items: center;
 
             border:
-                1px solid
-                rgba(105,234,255,.25);
+                1px solid rgba(124,60,255,.55);
 
-            border-radius:12px;
+            border-radius: 50%;
 
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(105,234,255,.11),
-                    rgba(169,140,255,.08)
-                );
+            color: var(--dream-cyan);
 
             box-shadow:
-                0 0 30px
-                rgba(105,234,255,.08);
+                0 0 22px rgba(34,211,238,.12);
 
-            font-size:17px;
+            font-family: "Orbitron", sans-serif;
 
+            animation:
+                brandPulse 4s ease-in-out infinite;
         }
 
+        @keyframes brandPulse {
+            50% {
+                box-shadow:
+                    0 0 35px rgba(124,60,255,.28);
+            }
+        }
 
         .brand-text {
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:.72rem;
-
-            font-weight:700;
-
-            letter-spacing:.08em;
-
+            font-family: "Orbitron", sans-serif;
+            font-weight: 800;
+            letter-spacing: .12em;
+            font-size: .88rem;
         }
 
+        .brand-text small {
+            display: block;
 
-        .brand-text span {
+            margin-top: 3px;
 
-            display:block;
+            color: var(--dream-muted);
 
-            color:var(--cyan);
+            font-family: "Montserrat", sans-serif;
 
-            font-size:.5rem;
+            font-size: .53rem;
 
-            letter-spacing:.2em;
-
-            margin-top:3px;
-
+            letter-spacing: .16em;
         }
-
 
         .nav-links {
-
-            display:flex;
-
-            align-items:center;
-
-            gap:6px;
-
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
-
         .nav-links a {
+            position: relative;
 
             padding:
-                9px 11px;
+                10px 12px;
 
-            color:
-                var(--muted);
+            border-radius: 9px;
 
-            border-radius:10px;
+            color: #c8c5d4;
 
-            font-size:.67rem;
-
-            font-weight:500;
+            font-size: .76rem;
+            font-weight: 600;
 
             transition:
                 color .25s ease,
                 background .25s ease;
-
         }
-
 
         .nav-links a:hover {
-
-            color:#fff;
-
-            background:
-                rgba(255,255,255,.045);
-
-        }
-
-
-        .nav-links .nav-join {
-
-            color:#020207;
+            color: white;
 
             background:
-                linear-gradient(
-                    135deg,
-                    var(--cyan),
-                    #a9f4ff
-                );
-
-            font-weight:700;
-
+                rgba(255,255,255,.055);
         }
 
-
-        .nav-toggle {
-
-            display:none;
-
-            width:42px;
-            height:42px;
+        .nav-links .company-link {
+            color: var(--dream-cyan);
 
             border:
-                1px solid
-                var(--line);
-
-            border-radius:12px;
+                1px solid rgba(34,211,238,.16);
 
             background:
-                rgba(255,255,255,.035);
-
-            color:#fff;
-
-            cursor:pointer;
-
+                rgba(34,211,238,.035);
         }
 
+        .nav-links .company-link:hover {
+            color: white;
 
-/* =====================================================
-   HERO
-===================================================== */
+            border-color:
+                rgba(34,211,238,.4);
 
-.hero {
-    min-height: 100svh;
-    width: 100%;
-    position: relative;
+            box-shadow:
+                0 0 20px rgba(34,211,238,.08);
+        }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        .mobile-toggle {
+            display: none;
 
-    padding: 130px 20px 80px;
+            width: 44px;
+            height: 44px;
 
-    text-align: center;
+            border:
+                1px solid rgba(255,255,255,.12);
 
-    overflow: hidden;
+            border-radius: 10px;
 
-    isolation: isolate;
-}
+            background:
+                rgba(255,255,255,.04);
 
+            color: white;
 
-/* =====================================================
-   ANIMATED DREAMSCAPE BACKGROUND
-===================================================== */
+            cursor: pointer;
+        }
 
-.hero::before {
-    content: "";
+        /* =========================================================
+           HERO
+        ========================================================= */
 
-    position: absolute;
-    inset: -25%;
+        .hero {
+            position: relative;
 
-    z-index: -3;
+            min-height:
+                calc(100vh - 118px);
 
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(105,234,255,.12),
-            transparent 18%
-        ),
-        radial-gradient(
-            circle at 25% 30%,
-            rgba(100,120,255,.12),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 75% 65%,
-            rgba(169,140,255,.13),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 45% 80%,
-            rgba(55,210,230,.08),
-            transparent 25%
-        );
-
-    filter: blur(30px);
-
-    animation:
-        dreamscapeDrift
-        22s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-
-@keyframes dreamscapeDrift {
-
-    0% {
-        transform:
-            scale(1)
-            translate3d(-2%, 1%, 0)
-            rotate(0deg);
-    }
-
-    50% {
-        transform:
-            scale(1.08)
-            translate3d(2%, -2%, 0)
-            rotate(1deg);
-    }
-
-    100% {
-        transform:
-            scale(1.15)
-            translate3d(-1%, -3%, 0)
-            rotate(-1deg);
-    }
-
-}
-
-
-/* =====================================================
-   MOVING LIGHT / DREAM CLOUD
-===================================================== */
-
-.hero::after {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    bottom: -1px;
-
-    width: min(800px, 80vw);
-    height: 1px;
-
-    transform: translateX(-50%);
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(105,234,255,.35),
-            transparent
-        );
-
-    box-shadow:
-        0 -100px 160px
-        rgba(105,234,255,.035);
-
-    z-index: -1;
-}
-
-
-/* =====================================================
-   HERO CONTENT
-===================================================== */
-
-.hero-content {
-    position: relative;
-
-    width: 100%;
-    max-width: 980px;
-
-    margin: 0 auto;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-}
-
-
-/* =====================================================
-   EYEBROW
-===================================================== */
-
-.hero-eyebrow {
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 9px;
-
-    margin:
-        0 auto 24px;
-
-    padding:
-        8px 13px;
-
-    border:
-        1px solid
-        rgba(105,234,255,.18);
-
-    border-radius: 999px;
-
-    background:
-        rgba(105,234,255,.035);
-
-    color: var(--cyan);
-
-    font-family:
-        Orbitron,
-        sans-serif;
-
-    font-size: .58rem;
-
-    font-weight: 600;
-
-    letter-spacing: .18em;
-
-    text-align: center;
-}
-
-
-.hero-eyebrow::before {
-    content: "";
-
-    width: 6px;
-    height: 6px;
-
-    flex: 0 0 6px;
-
-    border-radius: 50%;
-
-    background:
-        var(--cyan);
-
-    box-shadow:
-        0 0 14px
-        var(--cyan);
-}
-
-
-/* =====================================================
-   DREAMSCAPES TITLE
-===================================================== */
-
-.hero-title {
-    width: auto;
-    max-width: 115%;
-
-    margin: 0 auto;
-
-    padding: 0;
-
-    display: block;
-
-    color: #fff;
-
-    font-family:
-        Orbitron,
-        sans-serif;
-
-    /*
-       The title scales with the viewport but is capped.
-       This keeps DREAMSCAPES completely visible.
-    */
-    font-size:
-        clamp(
-            2rem,
-            8.4vw,
-            6.8rem
-        );
-
-    font-weight: 700;
-
-    line-height: 1;
-
-    letter-spacing:
-        clamp(
-            .01em,
-            .55vw,
-            .07em
-        );
-
-    text-align: center;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-shadow:
-        0 0 35px
-        rgba(105,234,255,.12),
-
-        0 0 80px
-        rgba(169,140,255,.08);
-
-    animation:
-        titleGlow
-        5s
-        ease-in-out
-        infinite;
-}
-
-
-@keyframes titleGlow {
-
-    0%,
-    100% {
-        text-shadow:
-            0 0 30px
-            rgba(105,234,255,.08),
-
-            0 0 70px
-            rgba(169,140,255,.05);
-    }
-
-    50% {
-        text-shadow:
-            0 0 42px
-            rgba(105,234,255,.18),
-
-            0 0 100px
-            rgba(169,140,255,.12);
-    }
-
-}
-
-
-/* =====================================================
-   TITLE ACCENT
-===================================================== */
-
-.hero-title .accent {
-
-    background:
-        linear-gradient(
-            100deg,
-            #fff,
-            var(--cyan),
-            #fff
-        );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    color: transparent;
-
-    background-size:
-        200% auto;
-
-    animation:
-        titleAccent
-        6s
-        ease-in-out
-        infinite;
-}
-
-
-@keyframes titleAccent {
-
-    0% {
-        background-position:
-            0% center;
-    }
-
-    50% {
-        background-position:
-            100% center;
-    }
-
-    100% {
-        background-position:
-            0% center;
-    }
-
-}
-
-
-/* =====================================================
-   TAGLINE
-===================================================== */
-
-.hero-tagline {
-    width: 100%;
-    max-width: 720px;
-
-    margin:
-        25px auto 0;
-
-    padding:
-        0 10px;
-
-    font-family:
-        Orbitron,
-        sans-serif;
-
-    font-size:
-        clamp(
-            .68rem,
-            1.8vw,
-            1rem
-        );
-
-    line-height: 1.5;
-
-    letter-spacing:
-        clamp(
-            .08em,
-            .4vw,
-            .18em
-        );
-
-    text-transform: uppercase;
-
-    color:
-        rgba(255,255,255,.72);
-
-    text-align: center;
-}
-
-
-/* =====================================================
-   DESCRIPTION
-===================================================== */
-
-.hero-description {
-    width: 100%;
-    max-width: 820px;
-
-    margin:
-        30px auto 0;
-
-    padding:
-        0 10px;
-
-    color: var(--muted);
-
-    font-size:
-        clamp(
-            .86rem,
-            1.6vw,
-            1rem
-        );
-
-    line-height: 1.9;
-
-    text-align: center;
-
-    overflow-wrap: break-word;
-}
-
-
-.hero-description strong {
-    color: #fff;
-
-    font-weight: 600;
-}
-
-
-/* =====================================================
-   ACTIONS
-===================================================== */
-
-.hero-actions {
-    width: 100%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    gap: 12px;
-
-    margin:
-        34px auto 0;
-}
-
-
-/* =====================================================
-   BUTTONS
-===================================================== */
-
-.button {
-    min-height: 48px;
-
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 9px;
-
-    padding:
-        13px 21px;
-
-    border-radius: 13px;
-
-    border:
-        1px solid
-        var(--line);
-
-    font-size: .72rem;
-
-    font-weight: 600;
-
-    letter-spacing: .02em;
-
-    text-align: center;
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        border-color .25s ease,
-        background .25s ease;
-}
-
-
-.button:hover {
-    transform:
-        translateY(-2px);
-}
-
-
-.button-primary {
-    color: #020207;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--cyan),
-            #b8f6ff
-        );
-
-    box-shadow:
-        0 12px 35px
-        rgba(105,234,255,.10);
-}
-
-
-.button-primary:hover {
-    box-shadow:
-        0 16px 45px
-        rgba(105,234,255,.18);
-}
-
-
-.button-secondary {
-    color: #fff;
-
-    background:
-        rgba(255,255,255,.035);
-}
-
-
-.button-secondary:hover {
-    border-color:
-        rgba(105,234,255,.28);
-
-    background:
-        rgba(105,234,255,.055);
-}
-
-
-.button-purple {
-    color: #fff;
-
-    border-color:
-        rgba(169,140,255,.22);
-
-    background:
-        rgba(169,140,255,.065);
-}
-
-
-/* =====================================================
-   HERO NOTE
-===================================================== */
-
-.hero-note {
-    margin-top: 22px;
-
-    color:
-        rgba(168,174,196,.75);
-
-    font-size: .65rem;
-
-    text-align: center;
-}
-
-
-.hero-note strong {
-    color: var(--gold);
-}
-
-
-/* =====================================================
-   SCROLL CUE
-===================================================== */
-
-.scroll-cue {
-    position: absolute;
-
-    left: 50%;
-    bottom: 27px;
-
-    transform:
-        translateX(-50%);
-
-    color:
-        rgba(255,255,255,.38);
-
-    font-family:
-        Orbitron,
-        sans-serif;
-
-    font-size: .5rem;
-
-    letter-spacing: .18em;
-
-    text-transform: uppercase;
-
-    white-space: nowrap;
-}
-
-
-.scroll-cue::after {
-    content: "";
-
-    display: block;
-
-    width: 1px;
-    height: 28px;
-
-    margin:
-        9px auto 0;
-
-    background:
-        linear-gradient(
-            var(--cyan),
-            transparent
-        );
-
-    animation:
-        scrollPulse
-        2s
-        ease-in-out
-        infinite;
-}
-
-
-@keyframes scrollPulse {
-
-    0%,
-    100% {
-        opacity: .35;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 600px) {
-
-    .hero {
-        min-height: 100svh;
-
-        padding:
-            115px 10px 70px;
-    }
-
-
-    .hero-content {
-        width: 100%;
-        max-width: 100%;
-    }
-
-
-    .hero-eyebrow {
-        margin-bottom: 18px;
-
-        padding:
-            7px 10px;
-
-        font-size:
-            .49rem;
-
-        letter-spacing:
-            .12em;
-    }
-
-
-    /*
-       Critical title fix.
-
-       The 8vw sizing keeps the complete
-       word inside narrow phone screens.
-    */
-
-    .hero-title {
-        width: 100%;
-
-        font-size:
-            min(
-                8vw,
-                3.8rem
-            );
-
-        letter-spacing:
-            .005em;
-
-        line-height: 1;
-
-        white-space: nowrap;
-
-        overflow: hidden;
-    }
-
-
-    .hero-tagline {
-        margin-top: 20px;
-
-        padding:
-            0 5px;
-
-        font-size:
-            .63rem;
-
-        line-height: 1.65;
-
-        letter-spacing:
-            .09em;
-    }
-
-
-    .hero-description {
-        margin-top: 24px;
-
-        padding:
-            0 4px;
-
-        font-size:
-            .83rem;
-
-        line-height: 1.72;
-    }
-
-
-    .hero-actions {
-        flex-direction: column;
-
-        margin-top: 28px;
-    }
-
-
-    .hero-actions .button {
-        width:
-            min(
-                100%,
-                320px
-            );
-    }
-
-
-    .scroll-cue {
-        bottom: 16px;
-    }
-
-}
-
-
-/* =====================================================
-   EXTRA SMALL PHONES
-===================================================== */
-
-@media (max-width: 350px) {
-
-    .hero {
-        padding-left: 7px;
-        padding-right: 7px;
-    }
-
-
-    .hero-title {
-        font-size:
-            7.7vw;
-
-        letter-spacing:
-            0;
-    }
-
-
-    .hero-eyebrow {
-        font-size:
-            .45rem;
-    }
-
-
-    .hero-tagline {
-        font-size:
-            .57rem;
-    }
-
-
-    .hero-description {
-        font-size:
-            .78rem;
-    }
-
-}
-
-
-/* =====================================================
-   REDUCED MOTION
-===================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .hero::before,
-    .hero-title,
-    .hero-title .accent,
-    .scroll-cue::after {
-
-        animation: none !important;
-    }
-
-}
-
-
-        /* =====================================================
-           GENERAL SECTIONS
-        ===================================================== */
-
-        section {
-
-            position:relative;
+            display: flex;
+            align-items: center;
 
             padding:
-                105px 0;
+                100px 20px 130px;
 
+            overflow: hidden;
         }
 
+        .hero::before {
+            content: "";
 
-        .section-heading {
+            position: absolute;
 
-            max-width:760px;
+            width: 850px;
+            height: 850px;
 
-            margin:
-                0 auto 45px;
+            left: 50%;
+            top: 50%;
 
-            text-align:center;
+            transform:
+                translate(-50%, -50%);
 
-        }
-
-
-        .eyebrow {
-
-            margin-bottom:13px;
-
-            color:var(--cyan);
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:.57rem;
-
-            font-weight:600;
-
-            letter-spacing:.18em;
-
-        }
-
-
-        .section-heading h2 {
-
-            margin:0;
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:
-                clamp(
-                    1.7rem,
-                    4vw,
-                    3rem
-                );
-
-            line-height:1.15;
-
-        }
-
-
-        .section-heading p {
-
-            margin:
-                20px auto 0;
-
-            color:var(--muted);
-
-            font-size:.87rem;
-
-            line-height:1.8;
-
-        }
-
-
-        /* =====================================================
-           DREAMSCAPES JOURNEY
-        ===================================================== */
-
-        .journey {
-
-            border-top:
-                1px solid
-                rgba(255,255,255,.045);
-
-        }
-
-
-        .journey-orbit {
-
-            position:relative;
-
-            max-width:900px;
-
-            min-height:260px;
-
-            margin:auto;
-
-            display:grid;
-
-            grid-template-columns:
-                repeat(7,1fr);
-
-            align-items:center;
-
-            gap:8px;
-
-        }
-
-
-        .journey-line {
-
-            position:absolute;
-
-            top:50%;
-
-            left:6%;
-
-            right:6%;
-
-            height:1px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(105,234,255,.22),
-                    rgba(169,140,255,.25),
-                    transparent
-                );
-
-            z-index:0;
-
-        }
-
-
-        .journey-step {
-
-            position:relative;
-
-            z-index:1;
-
-            display:flex;
-
-            flex-direction:column;
-
-            align-items:center;
-
-            text-align:center;
-
-        }
-
-
-        .journey-icon {
-
-            width:65px;
-            height:65px;
-
-            display:grid;
-
-            place-items:center;
-
-            border:
-                1px solid
-                rgba(105,234,255,.17);
-
-            border-radius:50%;
+            border-radius: 50%;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(105,234,255,.09),
-                    rgba(2,2,7,.96)
+                    rgba(124,60,255,.15),
+                    rgba(124,60,255,.05) 30%,
+                    transparent 67%
                 );
 
-            box-shadow:
-                0 0 35px
-                rgba(105,234,255,.055);
+            filter:
+                blur(12px);
 
-            font-size:1.25rem;
-
+            animation:
+                heroPulse 7s ease-in-out infinite;
         }
 
-
-        .journey-step:nth-child(3) .journey-icon,
-        .journey-step:nth-child(5) .journey-icon {
-
-            border-color:
-                rgba(169,140,255,.25);
-
+        @keyframes heroPulse {
+            50% {
+                transform:
+                    translate(-50%, -50%)
+                    scale(1.12);
+            }
         }
 
+        .hero-orbit {
+            position: absolute;
 
-        .journey-step strong {
+            width: 700px;
+            height: 700px;
 
-            margin-top:14px;
+            left: 50%;
+            top: 50%;
 
-            font-family:Orbitron,sans-serif;
-
-            font-size:.58rem;
-
-            letter-spacing:.07em;
-
-        }
-
-
-        .journey-step span {
-
-            margin-top:5px;
-
-            color:var(--muted);
-
-            font-size:.55rem;
-
-        }
-
-
-        /* =====================================================
-           THREE PILLARS
-        ===================================================== */
-
-        .cards {
-
-            display:grid;
-
-            grid-template-columns:
-                repeat(3,1fr);
-
-            gap:18px;
-
-        }
-
-
-        .card {
-
-            position:relative;
-
-            padding:30px;
-
-            min-height:300px;
-
-            overflow:hidden;
+            transform:
+                translate(-50%, -50%);
 
             border:
-                1px solid
-                var(--line);
+                1px solid rgba(124,60,255,.12);
 
-            border-radius:
-                var(--radius);
+            border-radius: 50%;
+
+            animation:
+                heroOrbit 30s linear infinite;
+        }
+
+        .hero-orbit::before {
+            content: "";
+
+            position: absolute;
+
+            width: 12px;
+            height: 12px;
+
+            top: 15%;
+            left: 3%;
+
+            border-radius: 50%;
+
+            background:
+                var(--dream-cyan);
+
+            box-shadow:
+                0 0 30px var(--dream-cyan);
+        }
+
+        @keyframes heroOrbit {
+            to {
+                transform:
+                    translate(-50%, -50%)
+                    rotate(360deg);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+
+            width: min(1050px, 100%);
+
+            margin: auto;
+
+            text-align: center;
+        }
+
+        .company-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding:
+                9px 15px;
+
+            margin-bottom: 22px;
+
+            border:
+                1px solid rgba(34,211,238,.20);
+
+            border-radius: 999px;
+
+            background:
+                rgba(34,211,238,.045);
+
+            color:
+                #c9f8ff;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: .62rem;
+            letter-spacing: .15em;
+
+            text-transform: uppercase;
+        }
+
+        .company-badge span {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                var(--dream-cyan);
+
+            box-shadow:
+                0 0 12px var(--dream-cyan);
+        }
+
+        .hero-eyebrow {
+            margin-bottom: 18px;
+
+            color:
+                var(--dream-violet);
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: .72rem;
+
+            letter-spacing: .28em;
+
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            margin: 0;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size:
+                clamp(3.5rem, 12vw, 10rem);
+
+            line-height: .88;
+
+            letter-spacing: .055em;
 
             background:
                 linear-gradient(
-                    145deg,
-                    rgba(255,255,255,.045),
-                    rgba(255,255,255,.018)
+                    100deg,
+                    #fff 5%,
+                    var(--dream-cyan) 30%,
+                    var(--dream-violet) 55%,
+                    var(--dream-pink) 80%,
+                    #fff 100%
+                );
+
+            background-size:
+                300% 100%;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+
+            animation:
+                dreamGradient 8s ease infinite;
+
+            text-shadow:
+                0 0 50px rgba(124,60,255,.08);
+        }
+
+        .hero-tagline {
+            margin:
+                28px auto 20px;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size:
+                clamp(1rem, 2.4vw, 1.5rem);
+
+            letter-spacing: .16em;
+
+            color: white;
+        }
+
+        .hero-description {
+            width: min(780px, 100%);
+
+            margin:
+                0 auto 35px;
+
+            color:
+                var(--dream-muted);
+
+            font-size:
+                clamp(.9rem, 1.5vw, 1.05rem);
+
+            line-height: 1.85;
+        }
+
+        .hero-actions {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+        }
+
+        .button {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-height: 50px;
+
+            padding:
+                0 22px;
+
+            border:
+                1px solid rgba(255,255,255,.13);
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,255,255,.045);
+
+            color: white;
+
+            font-size: .78rem;
+            font-weight: 700;
+
+            letter-spacing: .04em;
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                border-color .25s ease,
+                background .25s ease;
+        }
+
+        .button:hover {
+            transform:
+                translateY(-3px);
+
+            border-color:
+                rgba(255,255,255,.28);
+
+            box-shadow:
+                0 12px 35px rgba(0,0,0,.25);
+        }
+
+        .button-primary {
+            border-color:
+                rgba(124,60,255,.45);
+
+            background:
+                linear-gradient(
+                    100deg,
+                    rgba(124,60,255,.75),
+                    rgba(168,85,247,.48)
                 );
 
             box-shadow:
-                var(--shadow);
+                0 0 30px rgba(124,60,255,.16);
+        }
+
+        .button-primary:hover {
+            box-shadow:
+                0 0 40px rgba(124,60,255,.3);
+        }
+
+        .button-company {
+            border-color:
+                rgba(34,211,238,.30);
+
+            background:
+                linear-gradient(
+                    100deg,
+                    rgba(34,211,238,.10),
+                    rgba(124,60,255,.10)
+                );
+
+            color:
+                #d9fbff;
+        }
+
+        .button-company:hover {
+            border-color:
+                rgba(34,211,238,.55);
+
+            box-shadow:
+                0 0 35px rgba(34,211,238,.14);
+        }
+
+        /* =========================================================
+           SECTION SYSTEM
+        ========================================================= */
+
+        .section {
+            position: relative;
+
+            width: min(1180px, calc(100% - 32px));
+
+            margin: auto;
+
+            padding:
+                110px 0;
+        }
+
+        .section-header {
+            max-width: 760px;
+
+            margin-bottom: 45px;
+        }
+
+        .section-label {
+            margin-bottom: 13px;
+
+            color:
+                var(--dream-cyan);
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: .62rem;
+
+            letter-spacing: .25em;
+
+            text-transform: uppercase;
+        }
+
+        .section h2 {
+            margin:
+                0 0 15px;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size:
+                clamp(1.8rem, 4vw, 3.5rem);
+
+            line-height: 1.05;
+        }
+
+        .section-header p {
+            margin: 0;
+
+            color:
+                var(--dream-muted);
+
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           COMPANY CONNECTION
+        ========================================================= */
+
+        .company-section {
+            padding-top: 50px;
+        }
+
+        .company-card {
+            position: relative;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns:
+                1.3fr .7fr;
+
+            gap: 30px;
+
+            padding: 42px;
+
+            border:
+                1px solid rgba(34,211,238,.14);
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(34,211,238,.055),
+                    rgba(124,60,255,.075),
+                    rgba(236,72,153,.035)
+                );
+
+            box-shadow:
+                var(--glow-purple);
+        }
+
+        .company-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+            height: 350px;
+
+            right: -120px;
+            top: -160px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(34,211,238,.14),
+                    transparent 70%
+                );
+        }
+
+        .company-card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .company-card h2 {
+            font-size:
+                clamp(1.7rem, 4vw, 2.7rem);
+        }
+
+        .company-card h2 span {
+            color:
+                var(--dream-cyan);
+        }
+
+        .company-card p {
+            color:
+                var(--dream-muted);
+
+            line-height: 1.85;
+
+            margin-bottom: 24px;
+        }
+
+        .company-portal {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portal-ring {
+            position: relative;
+
+            width: 220px;
+            height: 220px;
+
+            display: grid;
+            place-items: center;
+
+            border:
+                1px solid rgba(124,60,255,.45);
+
+            border-radius: 50%;
+
+            box-shadow:
+                inset 0 0 40px rgba(124,60,255,.08),
+                0 0 45px rgba(124,60,255,.12);
+
+            animation:
+                portalFloat 5s ease-in-out infinite;
+        }
+
+        .portal-ring::before,
+        .portal-ring::after {
+            content: "";
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            border:
+                1px solid rgba(34,211,238,.25);
+        }
+
+        .portal-ring::before {
+            inset: 18px;
+
+            animation:
+                orbitSpin 12s linear infinite;
+        }
+
+        .portal-ring::after {
+            inset: 38px;
+
+            border-color:
+                rgba(236,72,153,.25);
+
+            animation:
+                orbitSpin 8s linear infinite reverse;
+        }
+
+        .portal-center {
+            position: relative;
+            z-index: 3;
+
+            width: 105px;
+            height: 105px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(124,60,255,.30),
+                    rgba(5,3,13,.96)
+                );
+
+            border:
+                1px solid rgba(255,255,255,.12);
+
+            box-shadow:
+                0 0 40px rgba(124,60,255,.20);
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: .63rem;
+            letter-spacing: .1em;
+        }
+
+        @keyframes portalFloat {
+            50% {
+                transform:
+                    translateY(-8px)
+                    rotate(2deg);
+            }
+        }
+
+        /* =========================================================
+           DREAM PATH
+        ========================================================= */
+
+        .path-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+        }
+
+        .path-card {
+            position: relative;
+
+            padding: 27px;
+
+            min-height: 225px;
+
+            border:
+                1px solid var(--glass-border);
+
+            border-radius: 18px;
+
+            background:
+                var(--glass);
 
             transition:
                 transform .3s ease,
-                border-color .3s ease;
-
+                border-color .3s ease,
+                background .3s ease;
         }
 
-
-        .card:hover {
-
+        .path-card:hover {
             transform:
-                translateY(-5px);
+                translateY(-7px);
 
             border-color:
-                rgba(105,234,255,.20);
-
-        }
-
-
-        .card::after {
-
-            content:"";
-
-            position:absolute;
-
-            width:180px;
-            height:180px;
-
-            right:-80px;
-            bottom:-80px;
-
-            border-radius:50%;
+                rgba(124,60,255,.35);
 
             background:
-                rgba(105,234,255,.055);
-
-            filter:blur(20px);
-
+                rgba(124,60,255,.055);
         }
 
-
-        .card-number {
-
-            color:var(--cyan);
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:.6rem;
-
-            letter-spacing:.15em;
-
-        }
-
-
-        .card-icon {
-
-            margin:
-                25px 0 17px;
-
-            font-size:2rem;
-
-        }
-
-
-        .card h3 {
-
-            margin:0;
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:1.05rem;
-
-        }
-
-
-        .card p {
-
-            color:var(--muted);
-
-            font-size:.78rem;
-
-            line-height:1.8;
-
-        }
-
-
-        /* =====================================================
-           VOLUNTEER CREATOR NETWORK
-        ===================================================== */
-
-        .volunteer {
-
-            border-top:
-                1px solid
-                rgba(255,255,255,.045);
-
-            border-bottom:
-                1px solid
-                rgba(255,255,255,.045);
-
-        }
-
-
-        .volunteer-panel {
-
-            max-width:1080px;
-
-            margin:auto;
-
-            padding:
-                clamp(25px,5vw,48px);
-
-            border:
-                1px solid
-                rgba(115,245,177,.16);
-
-            border-radius:
-                30px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(115,245,177,.045),
-                    rgba(105,234,255,.025),
-                    rgba(255,255,255,.015)
-                );
-
-            box-shadow:
-                0 30px 100px
-                rgba(0,0,0,.35);
-
-        }
-
-
-        .volunteer-badge {
-
-            display:inline-flex;
-
-            align-items:center;
-
-            padding:
-                8px 13px;
-
-            border:
-                1px solid
-                rgba(115,245,177,.22);
-
-            border-radius:999px;
-
-            color:var(--green);
-
-            background:
-                rgba(115,245,177,.045);
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:.57rem;
-
-            letter-spacing:.13em;
-
-        }
-
-
-        .volunteer-panel h3 {
-
-            max-width:700px;
-
-            margin:
-                22px 0 15px;
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:
-                clamp(
-                    1.5rem,
-                    4vw,
-                    2.5rem
-                );
-
-            line-height:1.2;
-
-        }
-
-
-        .volunteer-panel > p {
-
-            max-width:850px;
-
-            color:var(--muted);
-
-            font-size:.82rem;
-
-            line-height:1.85;
-
-        }
-
-
-        .volunteer-panel > p strong {
-
-            color:#fff;
-
-        }
-
-
-        .volunteer-grid {
-
-            display:grid;
-
-            grid-template-columns:
-                repeat(4,1fr);
-
-            gap:13px;
-
-            margin-top:32px;
-
-        }
-
-
-        .volunteer-item {
-
-            padding:22px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.08);
-
-            border-radius:18px;
-
-            background:
-                rgba(255,255,255,.025);
-
-        }
-
-
-        .volunteer-item .number {
-
-            display:block;
-
-            color:var(--green);
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:.58rem;
-
-            margin-bottom:14px;
-
-        }
-
-
-        .volunteer-item strong {
-
-            display:block;
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:.67rem;
-
-            line-height:1.5;
-
-        }
-
-
-        .volunteer-item p {
-
-            margin:
-                9px 0 0;
-
-            color:var(--muted);
-
-            font-size:.68rem;
-
-            line-height:1.65;
-
-        }
-
-
-        .future-opportunity {
-
-            display:grid;
-
-            grid-template-columns:
-                58px 1fr;
-
-            gap:18px;
-
-            margin-top:25px;
-
-            padding:23px;
-
-            border:
-                1px solid
-                rgba(169,140,255,.18);
-
-            border-radius:20px;
-
-            background:
-                rgba(169,140,255,.04);
-
-        }
-
-
-        .future-icon {
-
-            width:55px;
-            height:55px;
-
-            display:grid;
-
-            place-items:center;
-
-            border-radius:15px;
-
-            background:
-                rgba(169,140,255,.08);
-
-            color:var(--purple);
-
-            font-size:1.3rem;
-
-        }
-
-
-        .future-opportunity strong {
-
-            display:block;
-
-            margin-bottom:9px;
-
-            color:var(--purple);
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:.61rem;
-
-            letter-spacing:.12em;
-
-        }
-
-
-        .future-opportunity p {
-
-            margin:
-                7px 0;
-
-            color:var(--muted);
-
-            font-size:.69rem;
-
-            line-height:1.75;
-
-        }
-
-
-        .volunteer-note {
-
-            display:flex;
-
-            gap:12px;
-
-            margin-top:18px;
-
-            padding:
-                15px 18px;
-
-            border:
-                1px solid
-                rgba(255,217,120,.14);
-
-            border-radius:15px;
-
-            background:
-                rgba(255,217,120,.025);
-
-            color:var(--muted);
-
-            font-size:.65rem;
-
-            line-height:1.7;
-
-        }
-
-
-        .volunteer-note strong {
-
-            flex-shrink:0;
-
-            color:var(--gold);
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:.58rem;
-
-        }
-
-
-        /* =====================================================
-           COLLABORATORS
-        ===================================================== */
-
-        .collaborators {
-
-            overflow:hidden;
-
-        }
-
-
-        .collaborator-layout {
-
-            display:grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap:22px;
-
-        }
-
-
-        .collaborator-panel {
-
-            padding:34px;
-
-            border:
-                1px solid
-                var(--line);
-
-            border-radius:25px;
-
-            background:
-                var(--panel);
-
-        }
-
-
-        .collaborator-panel.featured {
-
-            border-color:
-                rgba(105,234,255,.18);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(105,234,255,.055),
-                    rgba(169,140,255,.035)
-                );
-
-        }
-
-
-        .collaborator-panel .icon {
-
-            font-size:1.8rem;
-
-            margin-bottom:20px;
-
-        }
-
-
-        .collaborator-panel h3 {
-
-            margin:0 0 12px;
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:1rem;
-
-        }
-
-
-        .collaborator-panel p {
-
-            color:var(--muted);
-
-            font-size:.76rem;
-
-            line-height:1.8;
-
-        }
-
-
-        .role-list {
-
-            display:flex;
-
-            flex-wrap:wrap;
-
-            gap:7px;
-
-            margin:
-                22px 0 25px;
-
-        }
-
-
-        .role {
-
-            padding:
-                7px 10px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.08);
-
-            border-radius:999px;
+        .path-number {
+            font-family: "Orbitron", sans-serif;
 
             color:
-                rgba(255,255,255,.72);
+                var(--dream-violet);
 
-            background:
-                rgba(255,255,255,.025);
+            font-size: .65rem;
 
-            font-size:.58rem;
-
+            letter-spacing: .15em;
         }
 
+        .path-card h3 {
+            margin:
+                18px 0 10px;
 
-        /* =====================================================
-           HOW IT WORKS
-        ===================================================== */
+            font-family: "Orbitron", sans-serif;
 
-        .process-list {
-
-            max-width:900px;
-
-            margin:auto;
-
+            font-size: 1rem;
         }
 
+        .path-card p {
+            margin: 0;
 
-        .process {
+            color:
+                var(--dream-muted);
 
-            display:grid;
+            line-height: 1.7;
+
+            font-size: .82rem;
+        }
+
+        /* =========================================================
+           CREATOR NETWORK
+        ========================================================= */
+
+        .creator-grid {
+            display: grid;
 
             grid-template-columns:
-                65px 1fr;
+                repeat(3, 1fr);
 
-            gap:22px;
-
-            padding:
-                24px 0;
-
-            border-bottom:
-                1px solid
-                rgba(255,255,255,.07);
-
+            gap: 16px;
         }
 
-
-        .process:last-child {
-            border-bottom:0;
-        }
-
-
-        .process-number {
-
-            width:55px;
-            height:55px;
-
-            display:grid;
-
-            place-items:center;
+        .creator-card {
+            padding: 30px;
 
             border:
-                1px solid
-                rgba(105,234,255,.18);
+                1px solid var(--glass-border);
 
-            border-radius:17px;
-
-            color:var(--cyan);
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:.7rem;
+            border-radius: 20px;
 
             background:
-                rgba(105,234,255,.035);
-
-        }
-
-
-        .process h3 {
-
-            margin:
-                3px 0 8px;
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:.85rem;
-
-        }
-
-
-        .process p {
-
-            margin:0;
-
-            color:var(--muted);
-
-            font-size:.73rem;
-
-            line-height:1.75;
-
-        }
-
-
-        /* =====================================================
-           CREATOR CTA
-        ===================================================== */
-
-        .cta {
-
-            padding-top:80px;
-
-        }
-
-
-        .cta-box {
-
-            position:relative;
-
-            overflow:hidden;
-
-            max-width:1000px;
-
-            margin:auto;
-
-            padding:
-                clamp(35px,6vw,65px);
-
-            text-align:center;
-
-            border:
-                1px solid
-                rgba(105,234,255,.20);
-
-            border-radius:32px;
-
-            background:
-
-                radial-gradient(
-                    circle at 50% 0%,
-                    rgba(105,234,255,.08),
-                    transparent 45%
-                ),
-
                 linear-gradient(
                     145deg,
                     rgba(255,255,255,.045),
                     rgba(255,255,255,.018)
                 );
-
         }
 
+        .creator-icon {
+            width: 52px;
+            height: 52px;
 
-        .cta-box::before {
+            display: grid;
+            place-items: center;
 
-            content:"";
+            border-radius: 14px;
 
-            position:absolute;
-
-            width:300px;
-            height:300px;
-
-            left:50%;
-            top:-220px;
-
-            transform:
-                translateX(-50%);
-
-            border-radius:50%;
+            background:
+                rgba(124,60,255,.09);
 
             border:
-                1px solid
-                rgba(105,234,255,.08);
+                1px solid rgba(124,60,255,.18);
 
-            box-shadow:
-                0 0 80px
-                rgba(105,234,255,.06);
-
-        }
-
-
-        .cta-box h2 {
-
-            position:relative;
-
-            margin:0;
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:
-                clamp(
-                    1.7rem,
-                    5vw,
-                    3.3rem
-                );
-
-        }
-
-
-        .cta-box p {
-
-            max-width:700px;
-
-            margin:
-                20px auto 28px;
-
-            color:var(--muted);
-
-            font-size:.82rem;
-
-            line-height:1.8;
-
-        }
-
-
-        .cta-actions {
-
-            display:flex;
-
-            justify-content:center;
-
-            flex-wrap:wrap;
-
-            gap:10px;
-
-        }
-
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        footer {
-
-            padding:
-                50px 0 35px;
-
-            border-top:
-                1px solid
-                rgba(255,255,255,.055);
-
-        }
-
-
-        .footer-main {
-
-            display:flex;
-
-            justify-content:space-between;
-
-            align-items:flex-start;
-
-            gap:30px;
-
-        }
-
-
-        .footer-brand {
-
-            max-width:420px;
-
-        }
-
-
-        .footer-brand h3 {
-
-            margin:0;
-
-            font-family:Orbitron,sans-serif;
-
-            font-size:.85rem;
-
-        }
-
-
-        .footer-brand p {
-
-            margin-top:12px;
-
-            color:var(--muted);
-
-            font-size:.68rem;
-
-            line-height:1.75;
-
-        }
-
-
-        .footer-links {
-
-            display:flex;
-
-            flex-wrap:wrap;
-
-            justify-content:flex-end;
-
-            gap:8px;
-
-        }
-
-
-        .footer-links a {
-
-            padding:
-                8px 10px;
-
-            color:var(--muted);
-
-            font-size:.62rem;
-
-        }
-
-
-        .footer-links a:hover {
-
-            color:#fff;
-
-        }
-
-
-        .footer-bottom {
-
-            display:flex;
-
-            justify-content:space-between;
-
-            gap:20px;
-
-            margin-top:40px;
-
-            padding-top:20px;
-
-            border-top:
-                1px solid
-                rgba(255,255,255,.05);
+            font-family: "Orbitron", sans-serif;
 
             color:
-                rgba(168,174,196,.55);
-
-            font-size:.58rem;
-
+                var(--dream-cyan);
         }
 
+        .creator-card h3 {
+            margin:
+                20px 0 10px;
 
-        /* =====================================================
+            font-family: "Orbitron", sans-serif;
+            font-size: 1rem;
+        }
+
+        .creator-card p {
+            margin: 0;
+
+            color:
+                var(--dream-muted);
+
+            line-height: 1.75;
+
+            font-size: .84rem;
+        }
+
+        /* =========================================================
+           RIGHTS / VOLUNTEER
+        ========================================================= */
+
+        .split-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .info-card {
+            padding: 35px;
+
+            border:
+                1px solid var(--glass-border);
+
+            border-radius: 22px;
+
+            background:
+                rgba(255,255,255,.035);
+        }
+
+        .info-card h3 {
+            margin:
+                0 0 15px;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 1.1rem;
+        }
+
+        .info-card p {
+            color:
+                var(--dream-muted);
+
+            line-height: 1.8;
+        }
+
+        .info-list {
+            margin:
+                20px 0 0;
+
+            padding: 0;
+
+            list-style: none;
+        }
+
+        .info-list li {
+            position: relative;
+
+            padding:
+                9px 0 9px 22px;
+
+            color:
+                #d5d2df;
+
+            font-size: .85rem;
+
+            line-height: 1.6;
+        }
+
+        .info-list li::before {
+            content: "◆";
+
+            position: absolute;
+
+            left: 0;
+
+            color:
+                var(--dream-cyan);
+
+            font-size: .55rem;
+        }
+
+        /* =========================================================
+           DREAM LIBRARY
+        ========================================================= */
+
+        .library-preview {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 50px;
+
+            border-radius: 28px;
+
+            border:
+                1px solid rgba(168,85,247,.18);
+
+            background:
+                radial-gradient(
+                    circle at 20% 30%,
+                    rgba(124,60,255,.14),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 70%,
+                    rgba(236,72,153,.09),
+                    transparent 30%
+                ),
+                rgba(255,255,255,.025);
+        }
+
+        .library-preview h2 {
+            max-width: 700px;
+        }
+
+        .library-preview p {
+            max-width: 700px;
+
+            color:
+                var(--dream-muted);
+
+            line-height: 1.85;
+        }
+
+        .dream-tags {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 9px;
+
+            margin:
+                25px 0 30px;
+        }
+
+        .dream-tag {
+            padding:
+                8px 12px;
+
+            border:
+                1px solid rgba(255,255,255,.09);
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            color:
+                #c8c4d5;
+
+            font-size: .7rem;
+        }
+
+        /* =========================================================
+           FINAL CTA
+        ========================================================= */
+
+        .final-cta {
+            position: relative;
+
+            width:
+                min(1050px, calc(100% - 32px));
+
+            margin:
+                30px auto 110px;
+
+            padding:
+                85px 30px;
+
+            text-align: center;
+
+            border-radius: 30px;
+
+            border:
+                1px solid rgba(124,60,255,.20);
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(124,60,255,.13),
+                    rgba(34,211,238,.035) 35%,
+                    transparent 70%
+                );
+        }
+
+        .final-cta h2 {
+            margin: 0 0 18px;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size:
+                clamp(2rem, 5vw, 4rem);
+        }
+
+        .final-cta p {
+            width:
+                min(700px, 100%);
+
+            margin:
+                0 auto 30px;
+
+            color:
+                var(--dream-muted);
+
+            line-height: 1.8;
+        }
+
+        .final-actions {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            padding:
+                55px 20px 35px;
+
+            border-top:
+                1px solid rgba(255,255,255,.07);
+
+            background:
+                rgba(0,0,0,.22);
+        }
+
+        .footer-inner {
+            width:
+                min(1180px, 100%);
+
+            margin: auto;
+        }
+
+        .footer-top {
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr 1fr;
+
+            gap: 40px;
+
+            padding-bottom: 40px;
+        }
+
+        .footer-brand {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 1rem;
+
+            letter-spacing: .12em;
+        }
+
+        .footer-brand span {
+            color:
+                var(--dream-cyan);
+        }
+
+        .footer-description {
+            max-width: 500px;
+
+            color:
+                var(--dream-muted);
+
+            font-size: .8rem;
+
+            line-height: 1.8;
+
+            margin-top: 14px;
+        }
+
+        .footer-column h4 {
+            margin:
+                0 0 15px;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: .7rem;
+
+            letter-spacing: .15em;
+
+            text-transform: uppercase;
+        }
+
+        .footer-column a {
+            display: block;
+
+            margin:
+                8px 0;
+
+            color:
+                var(--dream-muted);
+
+            font-size: .78rem;
+
+            transition:
+                color .2s ease;
+        }
+
+        .footer-column a:hover {
+            color:
+                var(--dream-cyan);
+        }
+
+        .footer-company {
+            color:
+                var(--dream-cyan) !important;
+        }
+
+        .footer-bottom {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding-top: 25px;
+
+            border-top:
+                1px solid rgba(255,255,255,.06);
+
+            color:
+                #777487;
+
+            font-size: .7rem;
+        }
+
+        /* =========================================================
            RESPONSIVE
-        ===================================================== */
+        ========================================================= */
 
-        @media(max-width:950px) {
-
-            .nav-links a {
-
-                padding:
-                    8px 7px;
-
-                font-size:.59rem;
-
-            }
-
-
-            .volunteer-grid {
-
-                grid-template-columns:
-                    repeat(2,1fr);
-
-            }
-
-
-            .journey-orbit {
-
-                grid-template-columns:
-                    repeat(4,1fr);
-
-                row-gap:25px;
-
-            }
-
-
-            .journey-line {
-
-                display:none;
-
-            }
-
-        }
-
-
-        @media(max-width:760px) {
-
-            .container {
-
-                width:
-                    min(
-                        calc(100% - 28px),
-                        var(--max)
-                    );
-
-            }
-
-
-            .site-nav {
-
-                padding:11px 0;
-
-            }
-
-
-            .nav-toggle {
-
-                display:block;
-
-            }
-
+        @media (max-width: 1000px) {
 
             .nav-links {
+                display: none;
+            }
 
-                position:absolute;
+            .mobile-toggle {
+                display: grid;
+                place-items: center;
+            }
 
-                left:14px;
-                right:14px;
-                top:65px;
+            .nav-links.mobile-open {
+                position: absolute;
 
-                display:none;
+                top: 100%;
+                left: 0;
+                right: 0;
 
-                flex-direction:column;
+                display: flex;
 
-                align-items:stretch;
+                flex-direction: column;
 
-                padding:10px;
+                align-items: stretch;
 
-                border:
-                    1px solid
-                    rgba(255,255,255,.09);
-
-                border-radius:18px;
+                padding: 15px;
 
                 background:
-                    rgba(4,4,12,.96);
+                    rgba(5,3,13,.96);
 
-                backdrop-filter:
-                    blur(25px);
-
-                box-shadow:
-                    0 25px 70px
-                    rgba(0,0,0,.5);
-
+                border-bottom:
+                    1px solid rgba(255,255,255,.08);
             }
 
-
-            .nav-links.open {
-                display:flex;
+            .nav-links.mobile-open a {
+                padding: 14px;
             }
 
-
-            .nav-links a {
-
-                padding:
-                    13px;
-
-                font-size:.7rem;
-
+            .company-card {
+                grid-template-columns:
+                    1fr;
             }
 
+            .company-portal {
+                min-height: 230px;
+            }
+
+            .path-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .creator-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .footer-top {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .launch-bar {
+                font-size: .61rem;
+                line-height: 1.5;
+            }
+
+            .launch-bar a {
+                display: block;
+                margin: 2px 0 0;
+            }
 
             .hero {
+                min-height:
+                    calc(100vh - 115px);
 
                 padding:
-                    115px 0
-                    75px;
-
+                    80px 18px 100px;
             }
 
-
-            .hero-title {
-
+            .hero h1 {
                 font-size:
-                    clamp(
-                        2rem,
-                        13vw,
-                        4.5rem
-                    );
+                    clamp(3rem, 16vw, 5.8rem);
 
-                letter-spacing:
-                    .055em;
-
+                letter-spacing: .02em;
             }
-
 
             .hero-tagline {
-
-                line-height:1.6;
-
+                font-size: .86rem;
+                letter-spacing: .1em;
             }
-
 
             .hero-description {
-
-                font-size:.78rem;
-
-                line-height:1.8;
-
+                font-size: .86rem;
             }
 
+            .hero-actions,
+            .final-actions {
+                flex-direction: column;
+            }
 
-            section {
+            .hero-actions .button,
+            .final-actions .button {
+                width: 100%;
+            }
 
+            .section {
                 padding:
-                    75px 0;
-
+                    80px 0;
             }
 
-
-            .cards {
-
-                grid-template-columns:1fr;
-
+            .company-card {
+                padding: 28px;
             }
 
-
-            .card {
-
-                min-height:auto;
-
+            .portal-ring {
+                width: 185px;
+                height: 185px;
             }
 
-
-            .volunteer-grid {
-
-                grid-template-columns:1fr;
-
-            }
-
-
-            .collaborator-layout {
-
-                grid-template-columns:1fr;
-
-            }
-
-
-            .journey-orbit {
-
+            .path-grid,
+            .creator-grid,
+            .split-grid {
                 grid-template-columns:
-                    repeat(2,1fr);
-
-                gap:20px;
-
+                    1fr;
             }
 
+            .library-preview {
+                padding: 30px;
+            }
 
-            .process {
-
+            .footer-top {
                 grid-template-columns:
-                    52px 1fr;
-
-                gap:15px;
-
+                    1fr;
             }
-
-
-            .process-number {
-
-                width:45px;
-                height:45px;
-
-            }
-
-
-            .future-opportunity {
-
-                grid-template-columns:1fr;
-
-            }
-
-
-            .volunteer-note {
-
-                flex-direction:column;
-
-            }
-
-
-            .footer-main {
-
-                flex-direction:column;
-
-            }
-
-
-            .footer-links {
-
-                justify-content:flex-start;
-
-            }
-
 
             .footer-bottom {
-
-                flex-direction:column;
-
-                gap:7px;
-
+                flex-direction: column;
             }
-
         }
 
-
-        @media(max-width:420px) {
+        @media (max-width: 420px) {
 
             .brand-text {
-
-                font-size:.62rem;
-
+                font-size: .74rem;
             }
 
-
-            .brand-text span {
-
-                font-size:.43rem;
-
+            .brand-text small {
+                font-size: .45rem;
             }
 
-
-            .hero-title {
-
+            .hero h1 {
                 font-size:
-                    clamp(
-                        1.85rem,
-                        12vw,
-                        3.2rem
-                    );
-
-                letter-spacing:.035em;
-
+                    clamp(2.8rem, 17vw, 4.5rem);
             }
 
-
-            .hero-actions {
-
-                flex-direction:column;
-
+            .company-badge {
+                font-size: .52rem;
             }
 
-
-            .button {
-
-                width:100%;
-
+            .opening-title {
+                font-size: 2.8rem;
             }
-
-
-            .journey-orbit {
-
-                grid-template-columns:1fr 1fr;
-
-            }
-
         }
 
-
-        /* =====================================================
-           REDUCED MOTION
-        ===================================================== */
-
-        @media(prefers-reduced-motion:reduce) {
-
-            html {
-                scroll-behavior:auto;
-            }
+        @media (prefers-reduced-motion: reduce) {
 
             *,
             *::before,
             *::after {
-
-                animation-duration:
-                    .01ms !important;
-
-                animation-iteration-count:
-                    1 !important;
-
-                transition-duration:
-                    .01ms !important;
-
+                animation-duration: .001ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
             }
 
+            .dream-opening {
+                display: none;
+            }
         }
 
     </style>
-
 </head>
-
 
 <body>
 
+    <!-- =========================================================
+         CINEMATIC OPENING
+    ========================================================= -->
 
-    <!-- =====================================================
+    <div
+        class="dream-opening"
+        aria-hidden="true"
+    >
+        <div class="opening-core">
+
+            <div class="opening-orbit"></div>
+
+            <div class="opening-eyebrow">
+                A CrowRules Creative Network
+            </div>
+
+            <div class="opening-title">
+                DREAMSCAPES
+            </div>
+
+            <div class="opening-subtitle">
+                Bringing Stories to Life
+            </div>
+
+        </div>
+    </div>
+
+    <!-- =========================================================
          BACKGROUND
-    ===================================================== -->
+    ========================================================= -->
 
-    <div id="stars" aria-hidden="true"></div>
+    <div id="stars"></div>
+    <div id="stars2"></div>
 
-    <div id="nebula" aria-hidden="true"></div>
+    <!-- =========================================================
+         LAUNCH BAR
+    ========================================================= -->
 
+    <div class="launch-bar">
 
-    <!-- =====================================================
+        <strong>
+            DREAMSCAPES IS LAUNCHING WITH CROWRULES ENTERTAINMENT
+        </strong>
+
+        <a
+            href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
+            aria-label="Visit CrowRules Entertainment"
+        >
+            Enter CrowRules Entertainment →
+        </a>
+
+    </div>
+
+    <!-- =========================================================
          NAVIGATION
-    ===================================================== -->
+    ========================================================= -->
 
-    <header class="site-nav">
+    <nav
+        class="site-nav"
+        aria-label="Main navigation"
+    >
 
-        <div class="container nav-inner">
+        <div class="nav-inner">
 
             <a
-                class="brand"
                 href="index.html"
-                aria-label="CrowRules Dreamscapes Home"
+                class="brand"
+                aria-label="CrowRules Dreamscapes home"
             >
 
-                <div class="brand-mark">
-                    🌙
+                <div class="brand-symbol">
+                    ◈
                 </div>
 
                 <div class="brand-text">
 
                     DREAMSCAPES
 
-                    <span>
+                    <small>
                         CROWRULES ENTERTAINMENT
-                    </span>
+                    </small>
 
                 </div>
 
             </a>
 
-
             <button
-                class="nav-toggle"
-                id="navToggle"
-                type="button"
+                class="mobile-toggle"
+                id="mobileToggle"
                 aria-label="Open navigation"
                 aria-expanded="false"
             >
                 ☰
             </button>
 
-
-            <nav
+            <div
                 class="nav-links"
                 id="navLinks"
-                aria-label="Dreamscapes navigation"
             >
+
+                <a
+                    class="company-link"
+                    href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
+                >
+                    CrowRules Entertainment
+                </a>
 
                 <a href="index.html">
                     Home
                 </a>
 
                 <a href="submit.html">
-                    Submit
+                    Submit a Dream
                 </a>
 
                 <a href="how-it-works.html">
@@ -2874,49 +1985,52 @@
                     Creators
                 </a>
 
-                <a href="#volunteer">
-                    Volunteer
+                <a href="collaborators-join.html">
+                    Join
                 </a>
 
-                <a
-                    href="collaborators-join.html"
-                    class="nav-join"
-                >
-                    Join Network
+                <a href="creator-rights.html">
+                    Creator Rights
                 </a>
 
-            </nav>
+                <a href="creator-hub.html">
+                    Creator Hub
+                </a>
+
+            </div>
 
         </div>
 
-    </header>
-
+    </nav>
 
     <main>
 
-
-        <!-- =================================================
+        <!-- =====================================================
              HERO
-        ================================================== -->
+        ====================================================== -->
 
         <section class="hero">
 
-            <div class="container hero-content">
+            <div class="hero-orbit"></div>
 
-                <div class="hero-eyebrow">
-                    A CROWRULES CREATIVE NETWORK
+            <div class="hero-content">
+
+                <div class="company-badge">
+                    <span></span>
+                    A CrowRules Entertainment Creative Network
                 </div>
 
+                <div class="hero-eyebrow">
+                    Imagine • Create • Collaborate • Build
+                </div>
 
-                <h1 class="hero-title">
-                    DREAM<span class="accent">SCAPES</span>
+                <h1>
+                    DREAMSCAPES
                 </h1>
-
 
                 <div class="hero-tagline">
                     One Dream. One World. One Story.
                 </div>
-
 
                 <p class="hero-description">
 
@@ -2924,1142 +2038,705 @@
 
                     A story they have imagined.
 
-                    A character they can't stop thinking about.
+                    A character they have created.
 
-                    A world that exists somewhere in their mind.
-
-                    Maybe it's only a sentence.
-
-                    Maybe it's pages of notes.
-
-                    Maybe it's something they've carried
-                    with them for years.
+                    A world that exists somewhere inside their mind.
 
                     <br><br>
 
                     <strong>
-                        Dreamscapes is where that idea can
-                        begin to become real.
+                        Dreamscapes is where those ideas begin to take shape.
                     </strong>
 
-                    <br><br>
-
-                    Bring us your dream, your concept,
-                    your characters, your strange idea,
-                    or the story you've always wanted to tell.
-
-                    Together, we can explore it, develop it,
-                    build its world, create its characters,
-                    shape its lore, write its story,
-                    and discover what it could become.
-
-                    <br><br>
-
-                    And you don't have to build it alone.
-
-                    Dreamscapes brings together writers,
-                    artists, world-builders, storytellers,
-                    filmmakers, designers, researchers,
-                    producers and other dreamers who want
-                    to create.
-
-                    <br><br>
-
-                    <strong>
-                        The original dreamer remains at the
-                        heart of the journey.
-                    </strong>
-
-                    If you want to be involved, you can
-                    collaborate with the people helping
-                    develop your idea every step of the way.
+                    Submit your dream, develop the concept, write the lore,
+                    build the world, collaborate with other creators and,
+                    when the time is right, explore what that story could
+                    become through CrowRules Entertainment.
 
                 </p>
-
 
                 <div class="hero-actions">
 
                     <a
-                        href="submit.html"
                         class="button button-primary"
+                        href="submit.html"
                     >
-                        🌙 Submit Your Dream
+                        ✦ Submit Your Dream
                     </a>
 
+                    <a
+                        class="button"
+                        href="collaborators-join.html"
+                    >
+                        ◈ Join the Creator Network
+                    </a>
+
+                    <a
+                        class="button button-company"
+                        href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
+                    >
+                        ↗ CrowRules Entertainment
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             COMPANY CONNECTION
+        ====================================================== -->
+
+        <section class="section company-section">
+
+            <div class="company-card">
+
+                <div class="company-card-content">
+
+                    <div class="section-label">
+                        The Bigger Universe
+                    </div>
+
+                    <h2>
+                        Dreamscapes is part of
+                        <span>
+                            CrowRules Entertainment.
+                        </span>
+                    </h2>
+
+                    <p>
+
+                        Dreamscapes is designed to be the creative-development
+                        side of the CrowRules universe — a place where ideas
+                        can begin before they become finished productions.
+
+                        <br><br>
+
+                        CrowRules Entertainment is building the larger
+                        entertainment ecosystem.
+
+                        Dreamscapes is one of the places where the stories
+                        that could eventually live inside that ecosystem
+                        can begin.
+
+                    </p>
+
+                    <a
+                        href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
+                        class="button button-company"
+                    >
+                        Enter the CrowRules Entertainment Universe →
+                    </a>
+
+                </div>
+
+                <div class="company-portal">
+
+                    <div class="portal-ring">
+
+                        <div class="portal-center">
+                            CROWRULES<br>
+                            ENTERTAINMENT
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             HOW THE DREAM BECOMES A STORY
+        ====================================================== -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <div class="section-label">
+                    The Journey
+                </div>
+
+                <h2>
+                    From an idea to a world.
+                </h2>
+
+                <p>
+                    Dreamscapes isn't about simply submitting an idea and
+                    walking away. The goal is to create a collaborative
+                    development journey around the people and ideas behind
+                    each dream.
+                </p>
+
+            </div>
+
+            <div class="path-grid">
+
+                <article class="path-card">
+
+                    <div class="path-number">
+                        01 / DREAM
+                    </div>
+
+                    <h3>
+                        Imagine It
+                    </h3>
+
+                    <p>
+                        Submit the idea, dream, character, story concept or
+                        world that has been living in your imagination.
+                    </p>
+
+                </article>
+
+                <article class="path-card">
+
+                    <div class="path-number">
+                        02 / DEVELOP
+                    </div>
+
+                    <h3>
+                        Build It
+                    </h3>
+
+                    <p>
+                        Explore characters, locations, mythology, history,
+                        themes, rules and everything that makes the world
+                        feel alive.
+                    </p>
+
+                </article>
+
+                <article class="path-card">
+
+                    <div class="path-number">
+                        03 / COLLABORATE
+                    </div>
+
+                    <h3>
+                        Create Together
+                    </h3>
+
+                    <p>
+                        Writers, artists, designers, filmmakers and other
+                        creators can work alongside the original dreamer.
+                    </p>
+
+                </article>
+
+                <article class="path-card">
+
+                    <div class="path-number">
+                        04 / PRODUCE
+                    </div>
+
+                    <h3>
+                        Bring It to Life
+                    </h3>
+
+                    <p>
+                        Some projects may eventually move toward production
+                        or another CrowRules Entertainment creative format.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             CREATOR NETWORK
+        ====================================================== -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <div class="section-label">
+                    The Network
+                </div>
+
+                <h2>
+                    You don't have to build the dream alone.
+                </h2>
+
+                <p>
+                    Great worlds can take many different kinds of creators.
+                    Dreamscapes is intended to connect people who want to
+                    contribute their talents to the development process.
+                </p>
+
+            </div>
+
+            <div class="creator-grid">
+
+                <article class="creator-card">
+
+                    <div class="creator-icon">
+                        W
+                    </div>
+
+                    <h3>
+                        Writers
+                    </h3>
+
+                    <p>
+                        Help turn concepts into scripts, scenes, dialogue,
+                        characters, lore and complete stories.
+                    </p>
+
+                </article>
+
+                <article class="creator-card">
+
+                    <div class="creator-icon">
+                        A
+                    </div>
+
+                    <h3>
+                        Artists & Designers
+                    </h3>
+
+                    <p>
+                        Explore visual identities, characters, locations,
+                        concepts, posters and worlds.
+                    </p>
+
+                </article>
+
+                <article class="creator-card">
+
+                    <div class="creator-icon">
+                        F
+                    </div>
+
+                    <h3>
+                        Filmmakers
+                    </h3>
+
+                    <p>
+                        Help imagine how Dreamscapes projects could move from
+                        the page into film, television or digital production.
+                    </p>
+
+                </article>
+
+                <article class="creator-card">
+
+                    <div class="creator-icon">
+                        L
+                    </div>
+
+                    <h3>
+                        Lore Builders
+                    </h3>
+
+                    <p>
+                        Develop histories, mythology, timelines, cultures,
+                        technology and the deeper rules of a world.
+                    </p>
+
+                </article>
+
+                <article class="creator-card">
+
+                    <div class="creator-icon">
+                        C
+                    </div>
+
+                    <h3>
+                        Creative Collaborators
+                    </h3>
+
+                    <p>
+                        Bring ideas, feedback, brainstorming, research and
+                        different creative perspectives.
+                    </p>
+
+                </article>
+
+                <article class="creator-card">
+
+                    <div class="creator-icon">
+                        P
+                    </div>
+
+                    <h3>
+                        Future Production Teams
+                    </h3>
+
+                    <p>
+                        As CrowRules grows, some projects may eventually
+                        involve larger production teams and professional
+                        opportunities.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================================
+             CREATOR RIGHTS / VOLUNTEER
+        ====================================================== -->
+
+        <section class="section">
+
+            <div class="split-grid">
+
+                <article class="info-card">
+
+                    <div class="section-label">
+                        Creator First
+                    </div>
+
+                    <h3>
+                        The dreamer stays connected to the dream.
+                    </h3>
+
+                    <p>
+                        The original person who submits an idea can remain
+                        involved throughout development if they want to be.
+                        Dreamscapes is designed around collaboration rather
+                        than taking an idea and disappearing with it.
+                    </p>
+
+                    <ul class="info-list">
+
+                        <li>
+                            Participate in development discussions.
+                        </li>
+
+                        <li>
+                            Help shape characters and world-building.
+                        </li>
+
+                        <li>
+                            Work with other creators.
+                        </li>
+
+                        <li>
+                            Follow the project's development journey.
+                        </li>
+
+                    </ul>
+
+                    <a
+                        href="creator-rights.html"
+                        class="button"
+                        style="margin-top:22px;"
+                    >
+                        Explore Creator Rights
+                    </a>
+
+                </article>
+
+                <article class="info-card">
+
+                    <div class="section-label">
+                        Grow With Us
+                    </div>
+
+                    <h3>
+                        Build now. Grow together.
+                    </h3>
+
+                    <p>
+                        Dreamscapes may begin with volunteers and independent
+                        collaborators while CrowRules Entertainment is being
+                        built. Participation is not a promise of future
+                        employment or payment.
+                    </p>
+
+                    <p>
+                        As CrowRules grows and projects develop, opportunities
+                        for paid creative work may become possible where
+                        appropriate.
+                    </p>
 
                     <a
                         href="collaborators-join.html"
-                        class="button button-purple"
+                        class="button button-primary"
+                        style="margin-top:8px;"
                     >
-                        🤝 Join the Creator Network
+                        Join Dreamscapes
                     </a>
 
-
-                    <a
-                        href="how-it-works.html"
-                        class="button button-secondary"
-                    >
-                        🔭 Explore Dreamscapes
-                    </a>
-
-                </div>
-
-
-                <div class="hero-note">
-
-                    <strong>
-                        STARTING FROM THE GROUND UP:
-                    </strong>
-
-                    Dreamscapes Creator Network participation
-                    is currently volunteer-based.
-
-                </div>
-
-            </div>
-
-
-            <div class="scroll-cue">
-                Explore
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             JOURNEY
-        ================================================== -->
-
-        <section class="journey" id="journey">
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <div class="eyebrow">
-                        THE DREAMSCAPES JOURNEY
-                    </div>
-
-                    <h2>
-                        From a spark to a universe.
-                    </h2>
-
-                    <p>
-                        Every project can take a different path.
-                        Dreamscapes provides the space to discover
-                        what each idea wants to become.
-                    </p>
-
-                </div>
-
-
-                <div class="journey-orbit">
-
-                    <div class="journey-line"></div>
-
-
-                    <div class="journey-step">
-
-                        <div class="journey-icon">
-                            💭
-                        </div>
-
-                        <strong>
-                            DREAM
-                        </strong>
-
-                        <span>
-                            The spark
-                        </span>
-
-                    </div>
-
-
-                    <div class="journey-step">
-
-                        <div class="journey-icon">
-                            🔭
-                        </div>
-
-                        <strong>
-                            DISCOVER
-                        </strong>
-
-                        <span>
-                            Explore
-                        </span>
-
-                    </div>
-
-
-                    <div class="journey-step">
-
-                        <div class="journey-icon">
-                            🌌
-                        </div>
-
-                        <strong>
-                            BUILD
-                        </strong>
-
-                        <span>
-                            The world
-                        </span>
-
-                    </div>
-
-
-                    <div class="journey-step">
-
-                        <div class="journey-icon">
-                            🤝
-                        </div>
-
-                        <strong>
-                            COLLABORATE
-                        </strong>
-
-                        <span>
-                            Together
-                        </span>
-
-                    </div>
-
-
-                    <div class="journey-step">
-
-                        <div class="journey-icon">
-                            ✍️
-                        </div>
-
-                        <strong>
-                            WRITE
-                        </strong>
-
-                        <span>
-                            The story
-                        </span>
-
-                    </div>
-
-
-                    <div class="journey-step">
-
-                        <div class="journey-icon">
-                            🎬
-                        </div>
-
-                        <strong>
-                            PRODUCE
-                        </strong>
-
-                        <span>
-                            Create
-                        </span>
-
-                    </div>
-
-
-                    <div class="journey-step">
-
-                        <div class="journey-icon">
-                            🚀
-                        </div>
-
-                        <strong>
-                            RELEASE
-                        </strong>
-
-                        <span>
-                            Share
-                        </span>
-
-                    </div>
-
-                </div>
+                </article>
 
             </div>
 
         </section>
 
+        <!-- =====================================================
+             DREAM LIBRARY
+        ====================================================== -->
 
-        <!-- =================================================
-             THREE PILLARS
-        ================================================== -->
+        <section class="section">
 
-        <section id="projects">
+            <div class="library-preview">
 
-            <div class="container">
+                <div class="section-label">
+                    The Dream Library
+                </div>
 
-                <div class="section-heading">
+                <h2>
+                    Start building a library of worlds.
+                </h2>
 
-                    <div class="eyebrow">
-                        THE FOUNDATION
-                    </div>
+                <p>
 
-                    <h2>
-                        Imagine. Build. Bring it to life.
-                    </h2>
+                    Every submission can become the beginning of something
+                    bigger.
 
-                    <p>
-                        Dreamscapes isn't just a place to submit
-                        an idea. It's a place where ideas can
-                        continue growing.
-                    </p>
+                    A science-fiction universe.
+
+                    A fantasy kingdom.
+
+                    A horror story.
+
+                    A comedy.
+
+                    A television concept.
+
+                    A film.
+
+                    A game.
+
+                    A completely new world.
+
+                    <br><br>
+
+                    The Dream Library is where those possibilities can begin
+                    to live.
+
+                </p>
+
+                <div class="dream-tags">
+
+                    <span class="dream-tag">
+                        Science Fiction
+                    </span>
+
+                    <span class="dream-tag">
+                        Fantasy
+                    </span>
+
+                    <span class="dream-tag">
+                        Horror
+                    </span>
+
+                    <span class="dream-tag">
+                        Drama
+                    </span>
+
+                    <span class="dream-tag">
+                        Comedy
+                    </span>
+
+                    <span class="dream-tag">
+                        Adventure
+                    </span>
+
+                    <span class="dream-tag">
+                        Animation
+                    </span>
+
+                    <span class="dream-tag">
+                        Television
+                    </span>
+
+                    <span class="dream-tag">
+                        Film
+                    </span>
+
+                    <span class="dream-tag">
+                        Games
+                    </span>
+
+                    <span class="dream-tag">
+                        Original Worlds
+                    </span>
 
                 </div>
 
-
-                <div class="cards">
-
-
-                    <article class="card">
-
-                        <div class="card-number">
-                            01 / DREAM
-                        </div>
-
-                        <div class="card-icon">
-                            💭
-                        </div>
-
-                        <h3>
-                            Imagine
-                        </h3>
-
-                        <p>
-                            Submit a dream, story idea,
-                            character, world, concept,
-                            strange thought or creative
-                            spark you've always wanted
-                            to explore.
-                        </p>
-
-                        <p>
-                            It doesn't have to be perfect.
-                            It just has to begin somewhere.
-                        </p>
-
-                    </article>
-
-
-                    <article class="card">
-
-                        <div class="card-number">
-                            02 / BUILD
-                        </div>
-
-                        <div class="card-icon">
-                            🌎
-                        </div>
-
-                        <h3>
-                            Build
-                        </h3>
-
-                        <p>
-                            Develop characters, locations,
-                            lore, histories, storylines,
-                            documents, artwork, concepts
-                            and the deeper world surrounding
-                            the original idea.
-                        </p>
-
-                        <p>
-                            The dream becomes a living
-                            creative project.
-                        </p>
-
-                    </article>
-
-
-                    <article class="card">
-
-                        <div class="card-number">
-                            03 / PRODUCE
-                        </div>
-
-                        <div class="card-icon">
-                            🎬
-                        </div>
-
-                        <h3>
-                            Bring It To Life
-                        </h3>
-
-                        <p>
-                            Some projects may eventually
-                            become scripts, films, series,
-                            shows, books, games, visual
-                            experiences or other productions.
-                        </p>
-
-                        <p>
-                            The destination is discovered
-                            along the journey.
-                        </p>
-
-                    </article>
-
-
-                </div>
+                <a
+                    href="projects.html"
+                    class="button button-primary"
+                >
+                    Explore Dreamscapes Projects →
+                </a>
 
             </div>
 
         </section>
 
-
-        <!-- =================================================
-             VOLUNTEER NETWORK
-        ================================================== -->
-
-        <section
-            class="volunteer"
-            id="volunteer"
-        >
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <div class="eyebrow">
-                        BUILDING THE FOUNDATION
-                    </div>
-
-                    <h2>
-                        Build With Us From The Beginning.
-                    </h2>
-
-                    <p>
-                        Dreamscapes is starting from the ground
-                        up. The first people who join aren't
-                        stepping into a finished company.
-                        They're helping build the creative
-                        network itself.
-                    </p>
-
-                </div>
-
-
-                <div class="volunteer-panel">
-
-                    <div class="volunteer-badge">
-                        ✦ VOLUNTEER CREATOR NETWORK
-                    </div>
-
-
-                    <h3>
-                        Volunteer Today. Grow With The Dream.
-                    </h3>
-
-
-                    <p>
-                        When you join the Dreamscapes Creator
-                        Network right now, you are joining as
-                        a <strong>volunteer creator</strong>.
-                    </p>
-
-
-                    <p>
-                        You can contribute your ideas, skills,
-                        creativity, experience and time to
-                        appropriate Dreamscapes projects and
-                        collaborative development.
-                    </p>
-
-
-                    <p>
-                        At this stage,
-                        <strong>
-                            participation is unpaid and voluntary.
-                        </strong>
-                        Joining Dreamscapes does not guarantee
-                        employment, compensation, a paid position,
-                        or that a particular project will
-                        eventually be produced.
-                    </p>
-
-
-                    <div class="volunteer-grid">
-
-
-                        <div class="volunteer-item">
-
-                            <span class="number">
-                                01
-                            </span>
-
-                            <strong>
-                                START TOGETHER
-                            </strong>
-
-                            <p>
-                                Help build Dreamscapes while
-                                the network is still growing.
-                            </p>
-
-                        </div>
-
-
-                        <div class="volunteer-item">
-
-                            <span class="number">
-                                02
-                            </span>
-
-                            <strong>
-                                CREATE
-                            </strong>
-
-                            <p>
-                                Bring your creative skills
-                                into collaborative projects.
-                            </p>
-
-                        </div>
-
-
-                        <div class="volunteer-item">
-
-                            <span class="number">
-                                03
-                            </span>
-
-                            <strong>
-                                CONNECT
-                            </strong>
-
-                            <p>
-                                Meet other writers, artists,
-                                filmmakers and dreamers.
-                            </p>
-
-                        </div>
-
-
-                        <div class="volunteer-item">
-
-                            <span class="number">
-                                04
-                            </span>
-
-                            <strong>
-                                GROW
-                            </strong>
-
-                            <p>
-                                Continue developing your
-                                creative experience as the
-                                network evolves.
-                            </p>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="future-opportunity">
-
-                        <div class="future-icon">
-                            ◈
-                        </div>
-
-
-                        <div>
-
-                            <strong>
-                                WHAT COULD HAPPEN LATER?
-                            </strong>
-
-                            <p>
-                                As CrowRules Entertainment grows,
-                                develops revenue and begins
-                                producing more projects, new
-                                opportunities may become possible.
-                            </p>
-
-                            <p>
-                                Depending on the company's needs
-                                and available resources, future
-                                opportunities could include paid
-                                creative positions, freelance work,
-                                production roles, contracts,
-                                project-based work or other
-                                compensated opportunities.
-                            </p>
-
-                            <p>
-                                Those opportunities are not
-                                guaranteed. They would be separate
-                                opportunities with their own terms,
-                                requirements and compensation.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="volunteer-note">
-
-                        <strong>
-                            IMPORTANT
-                        </strong>
-
-                        <span>
-                            Volunteer participation is optional.
-                            Only contribute time, ideas or creative
-                            work that you are comfortable providing
-                            without current compensation.
-                        </span>
-
-                    </div>
-
-
-                    <div
-                        class="hero-actions"
-                        style="margin-top:28px;"
-                    >
-
-                        <a
-                            href="collaborators-join.html"
-                            class="button button-primary"
-                        >
-                            🤝 Become a Collaborator
-                        </a>
-
-                        <a
-                            href="creators.html"
-                            class="button button-secondary"
-                        >
-                            Explore the Creator Network
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             COLLABORATORS
-        ================================================== -->
-
-        <section
-            class="collaborators"
-            id="creators"
-        >
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <div class="eyebrow">
-                        YOU DON'T HAVE TO BUILD ALONE
-                    </div>
-
-                    <h2>
-                        Find Your Creative People.
-                    </h2>
-
-                    <p>
-                        A dream can start with one person.
-                        Building a world can take many.
-                    </p>
-
-                </div>
-
-
-                <div class="collaborator-layout">
-
-
-                    <div class="collaborator-panel featured">
-
-                        <div class="icon">
-                            🤝
-                        </div>
-
-                        <h3>
-                            Join Dreamscapes
-                        </h3>
-
-                        <p>
-                            Become part of a growing network
-                            of people who want to help develop
-                            ideas and make creative projects
-                            possible.
-                        </p>
-
-                        <div class="role-list">
-
-                            <span class="role">
-                                Writers
-                            </span>
-
-                            <span class="role">
-                                Screenwriters
-                            </span>
-
-                            <span class="role">
-                                Artists
-                            </span>
-
-                            <span class="role">
-                                World Builders
-                            </span>
-
-                            <span class="role">
-                                Character Writers
-                            </span>
-
-                            <span class="role">
-                                Filmmakers
-                            </span>
-
-                            <span class="role">
-                                Directors
-                            </span>
-
-                            <span class="role">
-                                Editors
-                            </span>
-
-                            <span class="role">
-                                Designers
-                            </span>
-
-                            <span class="role">
-                                Researchers
-                            </span>
-
-                            <span class="role">
-                                Producers
-                            </span>
-
-                            <span class="role">
-                                Dreamers
-                            </span>
-
-                        </div>
-
-                        <a
-                            href="collaborators-join.html"
-                            class="button button-primary"
-                        >
-                            Join the Network →
-                        </a>
-
-                    </div>
-
-
-                    <div class="collaborator-panel">
-
-                        <div class="icon">
-                            🌌
-                        </div>
-
-                        <h3>
-                            The Original Dreamer Matters
-                        </h3>
-
-                        <p>
-                            Dreamscapes isn't about taking an
-                            idea away from the person who imagined
-                            it.
-                        </p>
-
-                        <p>
-                            The original dreamer can remain at
-                            the center of the project and,
-                            when they choose, collaborate with
-                            the people helping develop it.
-                        </p>
-
-                        <p>
-                            That can mean participating in
-                            story development, world-building,
-                            character creation, writing,
-                            creative decisions and other
-                            appropriate parts of the process.
-                        </p>
-
-                        <a
-                            href="creator-rights.html"
-                            class="button button-secondary"
-                        >
-                            Explore Creator Rights →
-                        </a>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             HOW IT WORKS
-        ================================================== -->
-
-        <section id="process">
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <div class="eyebrow">
-                        HOW DREAMSCAPES WORKS
-                    </div>
-
-                    <h2>
-                        The idea is only the beginning.
-                    </h2>
-
-                    <p>
-                        Projects can grow through a series of
-                        creative stages, with room for discovery
-                        along the way.
-                    </p>
-
-                </div>
-
-
-                <div class="process-list">
-
-
-                    <div class="process">
-
-                        <div class="process-number">
-                            01
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Submit The Dream
-                            </h3>
-
-                            <p>
-                                Share the idea, story, world,
-                                character or concept you've been
-                                carrying around.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="process">
-
-                        <div class="process-number">
-                            02
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Discover The Possibilities
-                            </h3>
-
-                            <p>
-                                Explore what the idea could become,
-                                what kind of story it might tell
-                                and what creative direction makes
-                                sense.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="process">
-
-                        <div class="process-number">
-                            03
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Build The World
-                            </h3>
-
-                            <p>
-                                Develop characters, locations,
-                                lore, histories, rules, concepts
-                                and the details that make the
-                                world feel alive.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="process">
-
-                        <div class="process-number">
-                            04
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Bring In Collaborators
-                            </h3>
-
-                            <p>
-                                Writers, artists, designers,
-                                filmmakers and other creators
-                                can join when their skills fit
-                                the project's needs.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="process">
-
-                        <div class="process-number">
-                            05
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Write And Develop
-                            </h3>
-
-                            <p>
-                                Shape the concept into stories,
-                                scripts, documents, pitches,
-                                visual concepts and other
-                                development materials.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="process">
-
-                        <div class="process-number">
-                            06
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Explore Production
-                            </h3>
-
-                            <p>
-                                Some projects may eventually
-                                move toward production, depending
-                                on readiness, resources,
-                                opportunities and creative goals.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="process">
-
-                        <div class="process-number">
-                            07
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Share The Story
-                            </h3>
-
-                            <p>
-                                When a project reaches its
-                                destination, the goal is to
-                                bring the finished creation
-                                to an audience.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
+        <!-- =====================================================
              FINAL CTA
-        ================================================== -->
+        ====================================================== -->
 
-        <section class="cta">
+        <section class="final-cta">
 
-            <div class="container">
+            <div class="section-label">
+                The First Step
+            </div>
 
-                <div class="cta-box">
+            <h2>
+                What is your dream?
+            </h2>
 
-                    <div class="eyebrow">
-                        THE DREAM IS WAITING
-                    </div>
+            <p>
 
+                You don't need to be famous.
 
-                    <h2>
-                        What will you create?
-                    </h2>
+                You don't need to have a studio.
 
+                You don't need to already be a professional creator.
 
-                    <p>
-                        Maybe you have the next great story.
+                <br><br>
 
-                        Maybe you have a character.
+                You just need an idea worth exploring.
 
-                        Maybe you have a world.
+                Dreamscapes is where the journey can begin.
 
-                        Maybe you simply have an idea you
-                        can't stop thinking about.
+            </p>
 
-                        Start there.
+            <div class="final-actions">
 
-                        Dreamscapes exists to explore
-                        what could come next.
-                    </p>
+                <a
+                    href="submit.html"
+                    class="button button-primary"
+                >
+                    ✦ Submit Your Dream
+                </a>
 
+                <a
+                    href="collaborators-join.html"
+                    class="button"
+                >
+                    ◈ Become a Collaborator
+                </a>
 
-                    <div class="cta-actions">
-
-                        <a
-                            href="submit.html"
-                            class="button button-primary"
-                        >
-                            🌙 Submit Your Dream
-                        </a>
-
-
-                        <a
-                            href="collaborators-join.html"
-                            class="button button-purple"
-                        >
-                            🤝 Join the Creator Network
-                        </a>
-
-
-                        <a
-                            href="projects.html"
-                            class="button button-secondary"
-                        >
-                            Explore Projects
-                        </a>
-
-                    </div>
-
-                </div>
+                <a
+                    href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
+                    class="button button-company"
+                >
+                    ↗ Enter CrowRules Entertainment
+                </a>
 
             </div>
 
         </section>
-
 
     </main>
 
-
-    <!-- =====================================================
+    <!-- =========================================================
          FOOTER
-    ====================================================== -->
+    ========================================================= -->
 
     <footer>
 
-        <div class="container">
+        <div class="footer-inner">
 
-            <div class="footer-main">
+            <div class="footer-top">
 
+                <div>
 
-                <div class="footer-brand">
+                    <div class="footer-brand">
+                        CROWRULES <span>DREAMSCAPES</span>
+                    </div>
 
-                    <h3>
-                        CROWRULES DREAMSCAPES
-                    </h3>
+                    <p class="footer-description">
 
-                    <p>
-                        Bringing stories to life.
-                        A creative development network
-                        where dreams become worlds,
-                        worlds become stories, and stories
+                        CrowRules Dreamscapes is a creative development
+                        network within CrowRules Entertainment where dreams
+                        become worlds, worlds become stories, and stories
                         can become productions.
+
                     </p>
+
+                    <a
+                        href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
+                        class="button button-company"
+                        style="margin-top:15px;"
+                    >
+                        Visit CrowRules Entertainment →
+                    </a>
 
                 </div>
 
+                <div class="footer-column">
 
-                <div class="footer-links">
+                    <h4>
+                        Dreamscapes
+                    </h4>
 
                     <a href="index.html">
                         Home
                     </a>
 
                     <a href="submit.html">
-                        Submit
-                    </a>
-
-                    <a href="how-it-works.html">
-                        How It Works
+                        Submit a Dream
                     </a>
 
                     <a href="projects.html">
                         Projects
                     </a>
 
-                    <a href="creators.html">
-                        Creators
-                    </a>
-
-                    <a href="collaborators-join.html">
-                        Join
+                    <a href="how-it-works.html">
+                        How It Works
                     </a>
 
                     <a href="creator-rights.html">
                         Creator Rights
                     </a>
 
-                    <a href="creator-dashboard.html">
+                </div>
+
+                <div class="footer-column">
+
+                    <h4>
+                        Creators
+                    </h4>
+
+                    <a href="creators.html">
+                        Creator Network
+                    </a>
+
+                    <a href="collaborators-join.html">
+                        Join Dreamscapes
+                    </a>
+
+                    <a href="creator-hub.html">
                         Creator Hub
+                    </a>
+
+                    <a
+                        href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
+                        class="footer-company"
+                    >
+                        CrowRules Entertainment
                     </a>
 
                 </div>
 
             </div>
 
-
             <div class="footer-bottom">
 
-                <span>
-                    © <span id="footerYear"></span>
-                    CrowRules Entertainment.
-                    All rights reserved.
-                </span>
+                <div>
+                    © <span id="year"></span>
+                    CrowRules Entertainment. All rights reserved.
+                </div>
 
-                <span>
-                    One Dream. One World. One Story.
-                </span>
+                <div>
+                    CrowRules Dreamscapes · Bringing Stories to Life
+                </div>
 
             </div>
 
@@ -4067,178 +2744,62 @@
 
     </footer>
 
-
-    <!-- =====================================================
+    <!-- =========================================================
          JAVASCRIPT
-    ====================================================== -->
+    ========================================================= -->
 
     <script>
 
-        /* =====================================================
-           SUPABASE
-        ===================================================== */
+        /* ---------------------------------------------------------
+           MOBILE NAVIGATION
+        --------------------------------------------------------- */
 
-        const SUPABASE_URL =
-            "https://cevylpnoexugwgygvtgu.supabase.co";
+        const mobileToggle =
+            document.getElementById("mobileToggle");
 
-        const SUPABASE_PUBLISHABLE_KEY =
-            "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
+        const navLinks =
+            document.getElementById("navLinks");
 
+        if (mobileToggle && navLinks) {
 
-        let supabaseClient = null;
-
-
-        function initializeSupabase() {
-
-            if (
-                window.supabase &&
-                SUPABASE_URL &&
-                SUPABASE_PUBLISHABLE_KEY
-            ) {
-
-                supabaseClient =
-                    window.supabase.createClient(
-                        SUPABASE_URL,
-                        SUPABASE_PUBLISHABLE_KEY
-                    );
-
-            }
-
-        }
-
-
-        /* =====================================================
-           STAR FIELD
-        ===================================================== */
-
-        function createStars() {
-
-            const container =
-                document.getElementById("stars");
-
-            if (!container) return;
-
-
-            const fragment =
-                document.createDocumentFragment();
-
-
-            const count =
-                window.innerWidth < 700
-                    ? 80
-                    : 150;
-
-
-            for (
-                let i = 0;
-                i < count;
-                i++
-            ) {
-
-                const star =
-                    document.createElement("span");
-
-
-                star.className =
-                    "star";
-
-
-                star.style.left =
-                    Math.random() * 100 + "%";
-
-
-                star.style.top =
-                    Math.random() * 100 + "%";
-
-
-                const size =
-                    Math.random() > .88
-                        ? 3
-                        : 1 + Math.random();
-
-
-                star.style.width =
-                    size + "px";
-
-
-                star.style.height =
-                    size + "px";
-
-
-                star.style.setProperty(
-                    "--duration",
-                    (2 + Math.random() * 5) + "s"
-                );
-
-
-                star.style.animationDelay =
-                    (-Math.random() * 5) + "s";
-
-
-                fragment.appendChild(star);
-
-            }
-
-
-            container.appendChild(fragment);
-
-        }
-
-
-        /* =====================================================
-           MOBILE NAV
-        ===================================================== */
-
-        function initializeNavigation() {
-
-            const toggle =
-                document.getElementById("navToggle");
-
-            const links =
-                document.getElementById("navLinks");
-
-
-            if (!toggle || !links) return;
-
-
-            toggle.addEventListener(
+            mobileToggle.addEventListener(
                 "click",
                 () => {
 
                     const open =
-                        links.classList.toggle("open");
+                        navLinks.classList.toggle(
+                            "mobile-open"
+                        );
 
-
-                    toggle.setAttribute(
+                    mobileToggle.setAttribute(
                         "aria-expanded",
                         String(open)
                     );
 
-
-                    toggle.textContent =
-                        open
-                            ? "✕"
-                            : "☰";
+                    mobileToggle.textContent =
+                        open ? "×" : "☰";
 
                 }
             );
 
-
-            links.querySelectorAll("a")
+            navLinks
+                .querySelectorAll("a")
                 .forEach(link => {
 
                     link.addEventListener(
                         "click",
                         () => {
 
-                            links.classList.remove("open");
+                            navLinks.classList.remove(
+                                "mobile-open"
+                            );
 
-                            toggle.setAttribute(
+                            mobileToggle.setAttribute(
                                 "aria-expanded",
                                 "false"
                             );
 
-                            toggle.textContent =
+                            mobileToggle.textContent =
                                 "☰";
 
                         }
@@ -4246,70 +2807,68 @@
 
                 });
 
+        }
+
+        /* ---------------------------------------------------------
+           CURRENT YEAR
+        --------------------------------------------------------- */
+
+        const year =
+            document.getElementById("year");
+
+        if (year) {
+            year.textContent =
+                new Date().getFullYear();
+        }
+
+        /* ---------------------------------------------------------
+           SMALL PARALLAX EFFECT
+        --------------------------------------------------------- */
+
+        const heroOrbit =
+            document.querySelector(".hero-orbit");
+
+        if (
+            heroOrbit &&
+            !window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches
+        ) {
 
             window.addEventListener(
-                "resize",
-                () => {
+                "mousemove",
+                event => {
 
-                    if (
-                        window.innerWidth > 760
-                    ) {
+                    const x =
+                        (event.clientX /
+                        window.innerWidth -
+                        .5) * 12;
 
-                        links.classList.remove("open");
+                    const y =
+                        (event.clientY /
+                        window.innerHeight -
+                        .5) * 12;
 
-                        toggle.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
+                    heroOrbit.style.transform =
+                        `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
 
-                        toggle.textContent =
-                            "☰";
-
-                    }
-
-                }
+                },
+                { passive: true }
             );
 
         }
 
+        /* ---------------------------------------------------------
+           CLOSE OPENING FROM MEMORY / RETURN VISITS
+        --------------------------------------------------------- */
 
-        /* =====================================================
-           FOOTER YEAR
-        ===================================================== */
-
-        function setFooterYear() {
-
-            const year =
-                document.getElementById(
-                    "footerYear"
-                );
-
-
-            if (year) {
-
-                year.textContent =
-                    new Date().getFullYear();
-
-            }
-
-        }
-
-
-        /* =====================================================
-           INITIALIZE
-        ===================================================== */
-
-        document.addEventListener(
-            "DOMContentLoaded",
+        window.addEventListener(
+            "load",
             () => {
 
-                initializeSupabase();
-
-                createStars();
-
-                initializeNavigation();
-
-                setFooterYear();
+                document.body.classList.add(
+                    "dreamscapes-loaded"
+                );
 
             }
         );
@@ -4317,5 +2876,4 @@
     </script>
 
 </body>
-
 </html>
