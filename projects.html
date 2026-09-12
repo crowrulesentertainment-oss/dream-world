@@ -1,1840 +1,3212 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-
-<title>Dream Projects · CrowRules Dreamscapes</title>
-
-<meta name="description"
-      content="Explore the CrowRules Dreamscapes library — ordinary people's dreams, ideas, worlds and stories becoming something more.">
-
-<meta name="theme-color" content="#05050a">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@500;600;700;800&display=swap"
-      rel="stylesheet">
-
-<link rel="stylesheet" href="assets/css/dreamscapes.css">
-
-<style>
-
-:root{
-  --bg:#05050a;
-  --panel:rgba(13,13,24,.78);
-  --panel2:rgba(20,20,36,.86);
-  --line:rgba(255,255,255,.10);
-  --text:#f5f3ff;
-  --muted:#aaa7bc;
-  --accent:#9d7cff;
-  --accent2:#57d9ff;
-  --success:#67e8b0;
-  --warning:#ffd166;
-  --danger:#ff7d9b;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 20% 10%,rgba(110,70,255,.13),transparent 35%),
-    radial-gradient(circle at 85% 20%,rgba(50,200,255,.09),transparent 32%),
-    var(--bg);
-  color:var(--text);
-  font-family:Montserrat,Arial,sans-serif;
-}
-
-button,
-input,
-select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-/* --------------------------------
-   BACKGROUND
--------------------------------- */
-
-#stars{
-  position:fixed;
-  inset:0;
-  z-index:-5;
-  pointer-events:none;
-  overflow:hidden;
-}
-
-.star{
-  position:absolute;
-  width:2px;
-  height:2px;
-  border-radius:50%;
-  background:white;
-  opacity:.55;
-  animation:twinkle 4s ease-in-out infinite;
-}
-
-@keyframes twinkle{
-  0%,100%{opacity:.2;transform:scale(.8)}
-  50%{opacity:.9;transform:scale(1.5)}
-}
-
-#nebula{
-  position:fixed;
-  inset:0;
-  z-index:-4;
-  pointer-events:none;
-  overflow:hidden;
-}
-
-.neb{
-  position:absolute;
-  width:45vw;
-  height:45vw;
-  border-radius:50%;
-  filter:blur(80px);
-  opacity:.13;
-}
-
-.neb.a{
-  left:-15vw;
-  top:10vh;
-  background:#7b4dff;
-}
-
-.neb.b{
-  right:-15vw;
-  top:25vh;
-  background:#28b9ff;
-}
-
-.neb.c{
-  left:30vw;
-  bottom:-25vw;
-  background:#ff4fa3;
-}
-
-/* --------------------------------
-   NAV
--------------------------------- */
-
-.nav{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(5,5,10,.82);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
-}
-
-.navin{
-  min-height:72px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.container{
-  width:min(1180px,calc(100% - 32px));
-  margin:auto;
-}
-
-.brand{
-  font-family:Orbitron,sans-serif;
-  font-weight:800;
-  letter-spacing:.06em;
-  font-size:.92rem;
-  white-space:nowrap;
-}
-
-.brand span{
-  color:var(--accent);
-}
-
-.links{
-  display:flex;
-  align-items:center;
-  gap:20px;
-}
-
-.links a{
-  color:#bbb8ca;
-  font-size:.82rem;
-  font-weight:600;
-  transition:.2s ease;
-}
-
-.links a:hover,
-.links a.active{
-  color:#fff;
-}
-
-.menu{
-  display:none;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.05);
-  color:#fff;
-  border-radius:10px;
-  padding:9px 13px;
-}
-
-/* --------------------------------
-   PAGE
--------------------------------- */
-
-.page{
-  padding:75px 0 90px;
-}
-
-.title{
-  text-align:center;
-  max-width:820px;
-  margin:0 auto 45px;
-}
-
-.eyebrow{
-  font-family:Orbitron,sans-serif;
-  font-size:.72rem;
-  letter-spacing:.24em;
-  color:var(--accent2);
-  margin-bottom:15px;
-}
-
-.title h1{
-  margin:0;
-  font-family:Orbitron,sans-serif;
-  font-size:clamp(2rem,5vw,4rem);
-  letter-spacing:.03em;
-  line-height:1.05;
-}
-
-.title p{
-  color:var(--muted);
-  line-height:1.8;
-  margin:20px auto 0;
-  max-width:700px;
-}
-
-/* --------------------------------
-   LIBRARY TOOLBAR
--------------------------------- */
-
-.library-tools{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:18px;
-  margin-bottom:30px;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
-}
-
-.tool-row{
-  display:grid;
-  grid-template-columns:1.7fr 1fr 1fr auto;
-  gap:12px;
-}
-
-.field{
-  position:relative;
-}
-
-.field input,
-.field select{
-  width:100%;
-  min-height:48px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.11);
-  background:rgba(0,0,0,.28);
-  color:#fff;
-  padding:0 14px;
-  outline:none;
-}
-
-.field input:focus,
-.field select:focus{
-  border-color:rgba(157,124,255,.7);
-  box-shadow:0 0 0 3px rgba(157,124,255,.10);
-}
-
-.field select option{
-  background:#10101a;
-  color:white;
-}
-
-.clear-btn,
-.refresh-btn{
-  min-height:48px;
-  border-radius:12px;
-  border:1px solid var(--line);
-  color:white;
-  background:rgba(255,255,255,.06);
-  padding:0 16px;
-  font-weight:700;
-}
-
-.clear-btn:hover,
-.refresh-btn:hover{
-  background:rgba(255,255,255,.11);
-}
-
-/* --------------------------------
-   LIBRARY META
--------------------------------- */
-
-.library-meta{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:18px;
-  color:var(--muted);
-  font-size:.84rem;
-}
-
-.library-meta strong{
-  color:#fff;
-}
-
-.loading{
-  text-align:center;
-  padding:70px 20px;
-  color:var(--muted);
-}
-
-.spinner{
-  width:32px;
-  height:32px;
-  margin:0 auto 15px;
-  border-radius:50%;
-  border:3px solid rgba(255,255,255,.10);
-  border-top-color:var(--accent);
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
-
-/* --------------------------------
-   PROJECT GRID
--------------------------------- */
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:20px;
-}
-
-.project-card{
-  position:relative;
-  min-height:360px;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015)),
-    var(--panel);
-  transition:
-    transform .25s ease,
-    border-color .25s ease,
-    box-shadow .25s ease;
-}
-
-.project-card:hover{
-  transform:translateY(-5px);
-  border-color:rgba(157,124,255,.45);
-  box-shadow:0 25px 70px rgba(0,0,0,.35);
-}
-
-.project-cover{
-  height:145px;
-  position:relative;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 25% 35%,rgba(157,124,255,.35),transparent 35%),
-    radial-gradient(circle at 75% 70%,rgba(87,217,255,.22),transparent 40%),
-    linear-gradient(135deg,#101020,#08080e);
-}
-
-.project-cover img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.project-cover::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,transparent 25%,rgba(5,5,10,.85));
-}
-
-.featured{
-  position:absolute;
-  z-index:2;
-  top:13px;
-  left:13px;
-  padding:7px 10px;
-  border-radius:999px;
-  background:rgba(157,124,255,.88);
-  color:white;
-  font-family:Orbitron,sans-serif;
-  font-size:.58rem;
-  letter-spacing:.1em;
-}
-
-.project-body{
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-  flex:1;
-}
-
-.project-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:10px;
-}
-
-.project-title{
-  margin:0;
-  font-family:Orbitron,sans-serif;
-  font-size:1.05rem;
-  line-height:1.3;
-}
-
-.status{
-  flex-shrink:0;
-  font-size:.58rem;
-  font-family:Orbitron,sans-serif;
-  letter-spacing:.08em;
-  padding:6px 8px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.10);
-  color:#d8d5e4;
-  background:rgba(255,255,255,.04);
-}
-
-.logline{
-  color:#aaa7bc;
-  font-size:.84rem;
-  line-height:1.65;
-  margin:13px 0;
-}
-
-.creator{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-top:auto;
-  padding-top:12px;
-}
-
-.avatar{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  object-fit:cover;
-  background:linear-gradient(135deg,#7457d9,#2b9ec2);
-  display:grid;
-  place-items:center;
-  font-family:Orbitron,sans-serif;
-  font-size:.7rem;
-  font-weight:700;
-}
-
-.creator-name{
-  font-size:.75rem;
-  color:#d7d3e4;
-}
-
-.creator-name small{
-  display:block;
-  color:#858294;
-  margin-top:2px;
-}
-
-.tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin:13px 0 5px;
-}
-
-.tag{
-  font-size:.59rem;
-  padding:5px 8px;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:999px;
-  color:#aaa7bc;
-  background:rgba(255,255,255,.035);
-}
-
-.progress-wrap{
-  margin-top:14px;
-}
-
-.progress-head{
-  display:flex;
-  justify-content:space-between;
-  color:#858294;
-  font-size:.62rem;
-  margin-bottom:7px;
-}
-
-.progress{
-  height:5px;
-  background:rgba(255,255,255,.08);
-  border-radius:99px;
-  overflow:hidden;
-}
-
-.progress-bar{
-  height:100%;
-  width:0;
-  border-radius:inherit;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  transition:width .5s ease;
-}
-
-.project-actions{
-  display:flex;
-  gap:8px;
-  margin-top:16px;
-}
-
-.project-actions a,
-.follow-btn{
-  flex:1;
-  min-height:40px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:10px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.045);
-  color:#fff;
-  font-size:.68rem;
-  font-weight:700;
-}
-
-.project-actions a:hover,
-.follow-btn:hover{
-  background:rgba(255,255,255,.09);
-}
-
-.follow-btn.following{
-  border-color:rgba(103,232,176,.35);
-  color:var(--success);
-}
-
-/* --------------------------------
-   EMPTY / ERROR
--------------------------------- */
-
-.empty{
-  grid-column:1/-1;
-  text-align:center;
-  padding:80px 20px;
-  border:1px dashed rgba(255,255,255,.12);
-  border-radius:20px;
-  background:rgba(255,255,255,.025);
-}
-
-.empty-icon{
-  font-size:3rem;
-  margin-bottom:15px;
-}
-
-.empty h3{
-  font-family:Orbitron,sans-serif;
-  margin:0 0 10px;
-}
-
-.empty p{
-  color:var(--muted);
-  max-width:520px;
-  margin:0 auto 20px;
-  line-height:1.7;
-}
-
-.primary{
-  display:inline-flex;
-  min-height:44px;
-  align-items:center;
-  justify-content:center;
-  padding:0 18px;
-  border-radius:10px;
-  background:linear-gradient(135deg,#8060ec,#4dbddd);
-  color:white;
-  font-weight:700;
-  font-size:.75rem;
-}
-
-/* --------------------------------
-   FOOTER
--------------------------------- */
-
-footer{
-  border-top:1px solid var(--line);
-  background:rgba(0,0,0,.2);
-}
-
-.foot{
-  min-height:90px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  color:#777486;
-  font-size:.7rem;
-}
-
-/* --------------------------------
-   MOBILE
--------------------------------- */
-
-@media(max-width:900px){
-
-  .links{
-    display:none;
-  }
-
-  .menu{
-    display:block;
-  }
-
-  .tool-row{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-}
-
-@media(max-width:640px){
-
-  .container{
-    width:min(100% - 22px,1180px);
-  }
-
-  .page{
-    padding:50px 0 65px;
-  }
-
-  .title{
-    margin-bottom:30px;
-  }
-
-  .title h1{
-    font-size:clamp(1.75rem,9vw,2.5rem);
-  }
-
-  .title p{
-    font-size:.83rem;
-  }
-
-  .tool-row{
-    grid-template-columns:1fr;
-  }
-
-  .library-meta{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .project-card{
-    min-height:350px;
-  }
-
-  .foot{
-    padding:25px 0;
-    flex-direction:column;
-    text-align:center;
-  }
-
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CrowRules Dreamscapes | Project Library</title>
+
+  <meta
+    name="description"
+    content="Explore the CrowRules Dreamscapes public project library — original dreams, stories and worlds being developed with creators."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    :root {
+      --bg: #05030b;
+      --bg2: #090612;
+
+      --panel: rgba(14, 10, 27, 0.88);
+      --panel2: rgba(21, 15, 39, 0.95);
+
+      --text: #f8f5ff;
+      --muted: #aaa3ba;
+
+      --cyan: #54e9ff;
+      --purple: #9b6cff;
+      --pink: #ff63c3;
+      --gold: #ffd36b;
+      --green: #65e6a1;
+
+      --line: rgba(255,255,255,0.10);
+
+      --radius: 20px;
+
+      --shadow:
+        0 18px 60px rgba(0,0,0,.40);
+
+      --glow:
+        0 0 35px rgba(84,233,255,.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      color: var(--text);
+
+      font-family:
+        Montserrat,
+        Arial,
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(84,233,255,.12),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 85% 15%,
+          rgba(155,108,255,.13),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 50% 90%,
+          rgba(255,99,195,.09),
+          transparent 32%
+        ),
+        linear-gradient(
+          180deg,
+          #05030b,
+          #07040e 50%,
+          #040208
+        );
+
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::before {
+      background-image:
+        radial-gradient(#fff 1px, transparent 1px),
+        radial-gradient(#fff 1px, transparent 1px);
+
+      background-size:
+        95px 95px,
+        155px 155px;
+
+      background-position:
+        0 0,
+        40px 60px;
+
+      opacity: .10;
+    }
+
+    body::after {
+      background:
+        radial-gradient(
+          ellipse at center,
+          transparent 30%,
+          rgba(0,0,0,.42) 100%
+        );
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1180px, 92vw);
+      margin: 0 auto;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      border-bottom: 1px solid var(--line);
+
+      background:
+        rgba(5,3,11,.78);
+
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      min-height: 70px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .brand {
+      text-decoration: none;
+
+      font-family: Orbitron, sans-serif;
+      font-weight: 800;
+
+      letter-spacing: .08em;
+      font-size: 1rem;
+
+      white-space: nowrap;
+    }
+
+    .brand span {
+      color: var(--cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+
+      text-decoration: none;
+
+      font-size: .82rem;
+      font-weight: 600;
+
+      transition: .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      padding: 82px 0 45px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+
+      font-family: Orbitron, sans-serif;
+      font-size: .72rem;
+      font-weight: 800;
+
+      letter-spacing: .20em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 15px 0 18px;
+
+      font-family: Orbitron, sans-serif;
+      font-size: clamp(2.4rem, 7vw, 5.5rem);
+      line-height: 1.02;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--cyan),
+          #fff,
+          var(--pink)
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 760px;
+      margin: 0 auto;
+
+      color: var(--muted);
+
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+
+      flex-wrap: wrap;
+    }
+
+    .primary,
+    .secondary,
+    .ghost {
+      border-radius: 999px;
+
+      padding: 12px 19px;
+
+      text-decoration: none;
+
+      transition: .2s ease;
+    }
+
+    .primary {
+      border: 0;
+
+      color: white;
+
+      font-weight: 700;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+
+      box-shadow:
+        0 10px 30px rgba(155,108,255,.18);
+    }
+
+    .primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .secondary {
+      border: 1px solid rgba(84,233,255,.30);
+
+      color: var(--cyan);
+
+      background:
+        rgba(84,233,255,.07);
+    }
+
+    .secondary:hover {
+      background:
+        rgba(84,233,255,.13);
+    }
+
+    /* =========================
+       NOTICE
+    ========================= */
+
+    .notice {
+      display: none;
+
+      margin-bottom: 20px;
+
+      padding: 13px 16px;
+
+      border-radius: 12px;
+
+      border: 1px solid
+        rgba(255,211,107,.28);
+
+      background:
+        rgba(255,211,107,.07);
+
+      color: #e8ddc2;
+
+      font-size: .84rem;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       TOOLBAR
+    ========================= */
+
+    .toolbar {
+      margin: 20px 0 28px;
+
+      padding: 18px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:
+        var(--radius);
+
+      background:
+        var(--panel);
+
+      box-shadow:
+        var(--shadow),
+        var(--glow);
+    }
+
+    .controls {
+      display: grid;
+
+      grid-template-columns:
+        minmax(250px, 2fr)
+        repeat(4, minmax(130px, 1fr));
+
+      gap: 10px;
+    }
+
+    .control input,
+    .control select {
+      width: 100%;
+
+      padding: 12px 13px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 12px;
+
+      background:
+        #0b0815;
+
+      color: var(--text);
+
+      outline: none;
+    }
+
+    .control input::placeholder {
+      color: #777082;
+    }
+
+    .control input:focus,
+    .control select:focus {
+      border-color: var(--cyan);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(84,233,255,.08);
+    }
+
+    .toolbar-bottom {
+      margin-top: 14px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+
+      flex-wrap: wrap;
+    }
+
+    .stats {
+      color: var(--muted);
+
+      font-size: .82rem;
+    }
+
+    .stats strong {
+      color: var(--text);
+    }
+
+    .toolbar-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .small {
+      padding: 9px 13px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 10px;
+
+      background:
+        rgba(255,255,255,.04);
+
+      color: var(--text);
+
+      transition: .2s ease;
+    }
+
+    .small:hover {
+      border-color:
+        rgba(84,233,255,.30);
+
+      color: var(--cyan);
+    }
+
+    /* =========================
+       PROJECT GRID
+    ========================= */
+
+    .grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 20px;
+    }
+
+    .project-card {
+      position: relative;
+
+      overflow: hidden;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:
+        var(--radius);
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(20,15,38,.96),
+          rgba(8,6,16,.97)
+        );
+
+      box-shadow:
+        var(--shadow);
+
+      transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+
+      border-color:
+        rgba(84,233,255,.32);
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.48),
+        0 0 30px rgba(84,233,255,.05);
+    }
+
+    .project-cover {
+      height: 175px;
+
+      position: relative;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(84,233,255,.18),
+          rgba(155,108,255,.20) 45%,
+          rgba(255,99,195,.18)
+        ),
+        radial-gradient(
+          circle at 20% 30%,
+          rgba(255,255,255,.13),
+          transparent 24%
+        ),
+        #0b0715;
+    }
+
+    .project-cover::before {
+      content: "";
+
+      position: absolute;
+      inset: -40%;
+
+      background:
+        repeating-linear-gradient(
+          135deg,
+          transparent 0 16px,
+          rgba(255,255,255,.025) 17px 18px
+        );
+
+      transform: rotate(-8deg);
+    }
+
+    .project-cover::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          transparent 25%,
+          rgba(0,0,0,.70)
+        );
+    }
+
+    .cover-title {
+      position: absolute;
+
+      left: 18px;
+      right: 18px;
+      bottom: 16px;
+
+      z-index: 3;
+
+      font-family: Orbitron, sans-serif;
+      font-size: 1.12rem;
+      font-weight: 800;
+
+      line-height: 1.25;
+    }
+
+    .badges {
+      position: absolute;
+
+      top: 12px;
+      left: 12px;
+      right: 12px;
+
+      z-index: 5;
+
+      display: flex;
+      gap: 7px;
+
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 6px 8px;
+
+      border-radius: 999px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.15);
+
+      background:
+        rgba(5,3,11,.72);
+
+      backdrop-filter:
+        blur(8px);
+
+      font-size: .65rem;
+      font-weight: 800;
+    }
+
+    .badge.featured {
+      color: var(--gold);
+
+      border-color:
+        rgba(255,211,107,.35);
+    }
+
+    .badge.trending {
+      color: var(--pink);
+
+      border-color:
+        rgba(255,99,195,.35);
+    }
+
+    .badge.live {
+      color: var(--green);
+
+      border-color:
+        rgba(101,230,161,.35);
+    }
+
+    .project-body {
+      padding: 18px;
+    }
+
+    .project-meta {
+      display: flex;
+
+      gap: 7px;
+
+      flex-wrap: wrap;
+
+      margin-bottom: 10px;
+
+      color: var(--muted);
+
+      font-size: .70rem;
+    }
+
+    .project-title {
+      margin: 0 0 9px;
+
+      font-family: Orbitron, sans-serif;
+
+      font-size: 1.12rem;
+      font-weight: 800;
+    }
+
+    .project-title a {
+      text-decoration: none;
+    }
+
+    .project-title a:hover {
+      color: var(--cyan);
+    }
+
+    .logline {
+      min-height: 70px;
+
+      color: #d4cfdf;
+
+      font-size: .86rem;
+
+      line-height: 1.65;
+    }
+
+    .tags {
+      display: flex;
+
+      gap: 6px;
+
+      flex-wrap: wrap;
+
+      margin: 14px 0;
+    }
+
+    .tag {
+      padding: 5px 7px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 999px;
+
+      color: #c7c0d5;
+
+      background:
+        rgba(255,255,255,.025);
+
+      font-size: .64rem;
+    }
+
+    .creator {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 10px 0;
+
+      border-top:
+        1px solid var(--line);
+
+      border-bottom:
+        1px solid var(--line);
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+
+      flex: 0 0 36px;
+
+      display: grid;
+      place-items: center;
+
+      overflow: hidden;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--cyan),
+          var(--purple)
+        );
+
+      color: #05030b;
+
+      font-weight: 800;
+      font-size: .78rem;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .creator-info {
+      min-width: 0;
+    }
+
+    .creator-name {
+      font-size: .80rem;
+      font-weight: 700;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .creator-handle {
+      margin-top: 2px;
+
+      color: var(--muted);
+
+      font-size: .68rem;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .progress-row {
+      display: flex;
+
+      justify-content: space-between;
+
+      margin:
+        14px 0 6px;
+
+      color: var(--muted);
+
+      font-size: .68rem;
+    }
+
+    .progress-row strong {
+      color: var(--text);
+    }
+
+    .progress {
+      height: 7px;
+
+      overflow: hidden;
+
+      border-radius: 999px;
+
+      background:
+        rgba(255,255,255,.08);
+    }
+
+    .progress i {
+      display: block;
+
+      height: 100%;
+
+      border-radius: inherit;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--cyan),
+          var(--purple),
+          var(--pink)
+        );
+
+      transition:
+        width .5s ease;
+    }
+
+    .project-actions {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 8px;
+
+      margin-top: 15px;
+    }
+
+    .project-actions a,
+    .project-actions button {
+      min-width: 0;
+
+      padding: 10px 8px;
+
+      border-radius: 10px;
+
+      text-align: center;
+
+      text-decoration: none;
+
+      font-size: .72rem;
+      font-weight: 700;
+    }
+
+    .project-actions a {
+      grid-column: 1 / -1;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--pink)
+        );
+    }
+
+    .project-actions button {
+      border:
+        1px solid
+        rgba(84,233,255,.22);
+
+      color: var(--text);
+
+      background:
+        rgba(84,233,255,.06);
+    }
+
+    .project-actions button:hover {
+      background:
+        rgba(84,233,255,.12);
+    }
+
+    .project-actions button.following {
+      color: var(--pink);
+
+      border-color:
+        rgba(255,99,195,.40);
+    }
+
+    .project-actions button:disabled {
+      opacity: .55;
+      cursor: wait;
+    }
+
+    /* =========================
+       LOADING / EMPTY
+    ========================= */
+
+    .loading,
+    .empty,
+    .error {
+      padding: 55px 20px;
+
+      text-align: center;
+
+      border:
+        1px dashed var(--line);
+
+      border-radius:
+        var(--radius);
+
+      background:
+        var(--panel);
+    }
+
+    .loading[hidden],
+    .empty[hidden] {
+      display: none;
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+
+      margin: 0 auto 15px;
+
+      border:
+        3px solid
+        rgba(255,255,255,.12);
+
+      border-top-color:
+        var(--cyan);
+
+      border-radius: 50%;
+
+      animation:
+        spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .empty-icon {
+      margin-bottom: 8px;
+
+      font-size: 2rem;
+    }
+
+    .empty h3,
+    .error h3 {
+      margin: 10px 0;
+    }
+
+    .empty p,
+    .error p {
+      max-width: 580px;
+
+      margin: 0 auto 20px;
+
+      color: var(--muted);
+
+      font-size: .85rem;
+
+      line-height: 1.7;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      margin: 80px 0 35px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: .74rem;
+
+      line-height: 1.8;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1050px) {
+      .controls {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .search-control {
+        grid-column: 1 / -1;
+      }
+
+      .grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .nav-inner {
+        justify-content: center;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 55px;
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .search-control {
+        grid-column: auto;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-cover {
+        height: 190px;
+      }
+
+      .toolbar-bottom {
+        align-items: stretch;
+      }
+
+      .toolbar-buttons {
+        width: 100%;
+      }
+
+      .toolbar-buttons button {
+        flex: 1;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div id="stars"></div>
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
 
-<div id="nebula">
-  <div class="neb a"></div>
-  <div class="neb b"></div>
-  <div class="neb c"></div>
-</div>
-
-<nav class="nav">
-  <div class="container navin">
+<nav>
+  <div class="container nav-inner">
 
     <a class="brand" href="index.html">
-      CROWRULES <span>DREAMSCAPES</span>
+      CROW<span>RULES</span> DREAMSCAPES
     </a>
 
-    <button class="menu" id="menuBtn">
-      MENU
-    </button>
-
-    <div class="links" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="submit.html">Submit a Dream</a>
-      <a href="how-it-works.html">How It Works</a>
-      <a class="active" href="projects.html">Projects</a>
+    <div class="nav-links">
+      <a href="about.html">About</a>
       <a href="creators.html">Creators</a>
-      <a href="creator-dashboard.html">Creator Hub</a>
+      <a href="projects.html">Projects</a>
+      <a href="trending.html">Trending</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="creator-portal.html">Creator Portal</a>
     </div>
 
   </div>
 </nav>
 
 
-<main class="page">
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
-<div class="container">
+<main>
 
-  <section class="title">
+  <!-- HERO -->
+
+  <section class="hero container">
 
     <div class="eyebrow">
-      THE DREAM LIBRARY
+      The Dream Library
     </div>
 
     <h1>
-      Projects in Motion
+      Ideas become worlds.
     </h1>
 
-    <p>
-      Every great world begins with a spark.
-      Explore dreams, stories, characters and universes
-      being developed inside CrowRules Dreamscapes.
+    <p class="hero-description">
+      Explore the public CrowRules Dreamscapes project library —
+      original dreams, stories, concepts and worlds being developed
+      with creators.
     </p>
+
+    <div class="hero-actions">
+
+      <a
+        class="primary"
+        href="creator-portal.html"
+      >
+        Submit a Dream
+      </a>
+
+      <a
+        class="secondary"
+        href="creators.html"
+      >
+        Meet the Creators
+      </a>
+
+    </div>
 
   </section>
 
 
-  <!-- LIBRARY CONTROLS -->
+  <!-- LIBRARY -->
 
-  <section class="library-tools">
+  <section class="container">
 
-    <div class="tool-row">
+    <div
+      id="notice"
+      class="notice"
+      role="status"
+      aria-live="polite"
+    ></div>
 
-      <div class="field">
-        <input
-          id="search"
-          type="search"
-          placeholder="Search dreams, stories, worlds..."
-          autocomplete="off">
+
+    <!-- FILTER BAR -->
+
+    <div class="toolbar">
+
+      <div class="controls">
+
+        <div class="control search-control">
+
+          <input
+            id="search"
+            type="search"
+            placeholder="Search dreams, stories, creators, tags..."
+            autocomplete="off"
+            aria-label="Search projects"
+          >
+
+        </div>
+
+
+        <div class="control">
+
+          <select
+            id="statusFilter"
+            aria-label="Filter by project status"
+          >
+
+            <option value="">
+              All stages
+            </option>
+
+            <option value="idea">
+              Idea
+            </option>
+
+            <option value="development">
+              Development
+            </option>
+
+            <option value="writing">
+              Writing
+            </option>
+
+            <option value="collaboration">
+              Collaboration
+            </option>
+
+            <option value="pitch">
+              Pitch
+            </option>
+
+            <option value="production">
+              Production
+            </option>
+
+            <option value="completed">
+              Completed
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="control">
+
+          <select
+            id="genreFilter"
+            aria-label="Filter by genre"
+          >
+
+            <option value="">
+              All genres
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="control">
+
+          <select
+            id="formatFilter"
+            aria-label="Filter by format"
+          >
+
+            <option value="">
+              All formats
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="control">
+
+          <select
+            id="sortFilter"
+            aria-label="Sort projects"
+          >
+
+            <option value="newest">
+              Newest
+            </option>
+
+            <option value="updated">
+              Recently Updated
+            </option>
+
+            <option value="progress">
+              Progress
+            </option>
+
+            <option value="featured">
+              Featured
+            </option>
+
+            <option value="trending">
+              Trending
+            </option>
+
+          </select>
+
+        </div>
+
       </div>
 
-      <div class="field">
-        <select id="statusFilter">
-          <option value="">All stages</option>
-          <option value="idea">Idea</option>
-          <option value="development">Development</option>
-          <option value="writing">Writing</option>
-          <option value="collaboration">Collaboration</option>
-          <option value="pitch">Pitch</option>
-          <option value="production">Production</option>
-          <option value="completed">Completed</option>
-        </select>
+
+      <div class="toolbar-bottom">
+
+        <div class="stats">
+          <strong id="projectCount">0</strong>
+          public projects
+        </div>
+
+        <div class="toolbar-buttons">
+
+          <button
+            class="small"
+            id="clearBtn"
+            type="button"
+          >
+            Clear Filters
+          </button>
+
+          <button
+            class="small"
+            id="refreshBtn"
+            type="button"
+          >
+            Refresh
+          </button>
+
+        </div>
+
       </div>
 
-      <div class="field">
-        <select id="sortFilter">
-          <option value="newest">Newest</option>
-          <option value="updated">Recently Updated</option>
-          <option value="progress">Most Developed</option>
-          <option value="featured">Featured</option>
-        </select>
+    </div>
+
+
+    <!-- LOADING -->
+
+    <section
+      id="loading"
+      class="loading"
+    >
+
+      <div class="spinner"></div>
+
+      <strong>
+        Opening the Dream Library...
+      </strong>
+
+      <p class="stats">
+        Connecting to CrowRules Dreamscapes.
+      </p>
+
+    </section>
+
+
+    <!-- EMPTY -->
+
+    <section
+      id="emptyState"
+      class="empty"
+      hidden
+    >
+
+      <div class="empty-icon">
+        🌌
       </div>
 
-      <button class="clear-btn" id="clearBtn">
-        Clear
+      <h3>
+        No dreams found
+      </h3>
+
+      <p>
+        Try changing your search or filters,
+        or become a creator and add a new dream
+        to the library.
+      </p>
+
+      <button
+        class="primary"
+        type="button"
+        id="emptyClearBtn"
+      >
+        Clear Filters
       </button>
 
-    </div>
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section
+      id="projectGrid"
+      class="grid"
+      aria-live="polite"
+    ></section>
 
   </section>
-
-
-  <div class="library-meta">
-
-    <div>
-      <strong id="projectCount">0</strong>
-      dreams in the library
-    </div>
-
-    <button class="refresh-btn" id="refreshBtn">
-      ↻ Refresh
-    </button>
-
-  </div>
-
-
-  <section id="loading" class="loading">
-
-    <div class="spinner"></div>
-
-    <div>
-      Opening the Dream Library...
-    </div>
-
-  </section>
-
-
-  <section id="projectGrid" class="grid"></section>
-
-
-  <section id="emptyState" class="empty" hidden>
-
-    <div class="empty-icon">
-      🌙
-    </div>
-
-    <h3>
-      No dreams found
-    </h3>
-
-    <p>
-      Nothing in the current library matches those filters.
-      Try another search or become the person who starts the next dream.
-    </p>
-
-    <a class="primary" href="submit.html">
-      Submit a Dream
-    </a>
-
-  </section>
-
-</div>
 
 </main>
 
 
-<footer>
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
-  <div class="container foot">
+<footer class="container">
 
-    <div>
-      © <span data-year></span>
-      CrowRules Entertainment · CrowRules Dreamscapes
-    </div>
+  <div>
+    © <span id="year"></span>
+    CrowRules Entertainment · CrowRules Dreamscapes
+  </div>
 
-    <div>
-      One Dream. One World. One Story.
-    </div>
-
+  <div>
+    Writing together · Building together · Bringing Stories to Life
   </div>
 
 </footer>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
 <script>
 
-/* =========================================
-   SUPABASE
-========================================= */
+(() => {
 
-const SUPABASE_URL =
-  "https://cevylpnoexugwgygvtgu.supabase.co";
-
-const SUPABASE_KEY =
-  "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
-
-const db =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+  "use strict";
 
 
-/* =========================================
-   STATE
-========================================= */
+  /* ========================================================
+     SUPABASE
+  ======================================================== */
 
-let allProjects = [];
-let currentUser = null;
-let following = new Set();
+  const SUPABASE_URL =
+    "https://cevylpnoexugwgygvtgu.supabase.co";
 
-
-/* =========================================
-   HELPERS
-========================================= */
-
-const $ = id =>
-  document.getElementById(id);
+  const SUPABASE_KEY =
+    "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
 
 
-function escapeHtml(value){
+  if (!window.supabase) {
 
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-
-function initials(name){
-
-  if(!name) return "CR";
-
-  return name
-    .split(/\s+/)
-    .slice(0,2)
-    .map(x => x[0])
-    .join("")
-    .toUpperCase();
-
-}
-
-
-function formatStatus(status){
-
-  if(!status) return "Dream";
-
-  return status
-    .replaceAll("_"," ")
-    .replace(/\b\w/g,x => x.toUpperCase());
-
-}
-
-
-/* =========================================
-   STAR FIELD
-========================================= */
-
-function createStars(){
-
-  const container =
-    $("stars");
-
-  for(let i=0;i<100;i++){
-
-    const star =
-      document.createElement("span");
-
-    star.className = "star";
-
-    star.style.left =
-      Math.random()*100 + "%";
-
-    star.style.top =
-      Math.random()*100 + "%";
-
-    star.style.animationDelay =
-      Math.random()*4 + "s";
-
-    star.style.animationDuration =
-      (3 + Math.random()*4) + "s";
-
-    container.appendChild(star);
-
-  }
-
-}
-
-
-/* =========================================
-   AUTH
-========================================= */
-
-async function loadUser(){
-
-  const {
-    data
-  } = await db.auth.getUser();
-
-  currentUser =
-    data?.user || null;
-
-}
-
-
-/* =========================================
-   FOLLOWING
-========================================= */
-
-async function loadFollowing(){
-
-  following.clear();
-
-  if(!currentUser)
-    return;
-
-  const {
-    data,
-    error
-  } = await db
-    .from("ds_project_followers")
-    .select("project_id")
-    .eq("user_id",currentUser.id);
-
-  if(error){
-
-    console.warn(
-      "Following lookup:",
-      error.message
+    console.error(
+      "Supabase JavaScript library failed to load."
     );
 
     return;
+  }
+
+
+  const db =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY,
+      {
+        auth: {
+          autoRefreshToken: true,
+          persistSession: true,
+          detectSessionInUrl: true
+        }
+      }
+    );
+
+
+  /* ========================================================
+     STATE
+  ======================================================== */
+
+  const state = {
+
+    allProjects: [],
+
+    profiles: {},
+
+    showcases: {},
+
+    tags: {},
+
+    follows: new Set(),
+
+    user: null,
+
+    loading: false,
+
+    reloadTimer: null,
+
+    realtimeChannel: null
+
+  };
+
+
+  /* ========================================================
+     HELPERS
+  ======================================================== */
+
+  const $ =
+    id => document.getElementById(id);
+
+
+  function escapeHTML(value) {
+
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+
+  function slugify(value) {
+
+    return String(value || "")
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+
+  function statusLabel(status) {
+
+    const labels = {
+
+      idea: "Idea",
+
+      development: "Development",
+
+      writing: "Writing",
+
+      collaboration: "Collaboration",
+
+      pitch: "Pitch",
+
+      production: "Production",
+
+      completed: "Completed",
+
+      archived: "Archived"
+
+    };
+
+    return labels[status] ||
+      String(status || "Project");
+  }
+
+
+  function showNotice(message) {
+
+    const notice =
+      $("notice");
+
+    notice.textContent =
+      message || "";
+
+    notice.style.display =
+      message ? "block" : "none";
+  }
+
+
+  function setLoading(value) {
+
+    $("loading").hidden =
+      !value;
+  }
+
+
+  /* ========================================================
+     PROJECT URL
+  ======================================================== */
+
+  function getProjectURL(project) {
+
+    if (project.slug) {
+
+      return (
+        "project-development.html?slug=" +
+        encodeURIComponent(project.slug)
+      );
+
+    }
+
+    return (
+      "project-development.html?id=" +
+      encodeURIComponent(project.id)
+    );
+  }
+
+
+  /* ========================================================
+     DATA LOOKUPS
+  ======================================================== */
+
+  function creatorFor(project) {
+
+    return (
+      state.profiles[project.owner_id] ||
+      null
+    );
+  }
+
+
+  function showcaseFor(project) {
+
+    return (
+      state.showcases[project.id] ||
+      {}
+    );
+  }
+
+
+  function tagsFor(project) {
+
+    return (
+      state.tags[project.id] ||
+      []
+    );
+  }
+
+
+  /* ========================================================
+     LOAD PROJECTS
+  ======================================================== */
+
+  async function loadProjects() {
+
+    if (state.loading) {
+      return;
+    }
+
+
+    state.loading = true;
+
+    setLoading(true);
+
+    showNotice("");
+
+
+    try {
+
+      /*
+       * IMPORTANT:
+       *
+       * Dreamscapes public projects use:
+       *
+       * visibility = 'public'
+       *
+       * NOT 'community'.
+       */
+
+      const {
+        data,
+        error
+      } = await db
+
+        .from("ds_projects")
+
+        .select(`
+          id,
+          owner_id,
+          title,
+          slug,
+          logline,
+          description,
+          status,
+          visibility,
+          progress,
+          created_at,
+          updated_at
+        `)
+
+        .eq(
+          "visibility",
+          "public"
+        )
+
+        .neq(
+          "status",
+          "archived"
+        )
+
+        .order(
+          "updated_at",
+          {
+            ascending: false
+          }
+        );
+
+
+      if (error) {
+        throw error;
+      }
+
+
+      state.allProjects =
+        data || [];
+
+
+      /*
+       * Load related public data.
+       */
+
+      await Promise.all([
+
+        loadProfiles(),
+
+        loadShowcases(),
+
+        loadTags()
+
+      ]);
+
+
+      /*
+       * Follow data requires authentication.
+       */
+
+      await loadFollows();
+
+
+      populateFilterOptions();
+
+      applyFilters();
+
+
+      console.log(
+        "Dream Library loaded:",
+        state.allProjects.length
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Dream Library load error:",
+        error
+      );
+
+
+      state.allProjects =
+        [];
+
+
+      $("projectCount")
+        .textContent = "0";
+
+
+      $("projectGrid")
+        .innerHTML = `
+
+          <div class="error">
+
+            <div class="empty-icon">
+              ⚠️
+            </div>
+
+            <h3>
+              Dream Library unavailable
+            </h3>
+
+            <p>
+              We couldn't load the public
+              Dreamscapes project library right now.
+              Please try again.
+            </p>
+
+            <button
+              class="primary"
+              type="button"
+              onclick="window.DreamscapesProjects.load()"
+            >
+              Try Again
+            </button>
+
+          </div>
+
+        `;
+
+
+      showNotice(
+        error?.message ||
+        "There was a problem connecting to Dreamscapes."
+      );
+
+
+    } finally {
+
+      state.loading = false;
+
+      setLoading(false);
+
+    }
 
   }
 
-  (data || []).forEach(row => {
 
-    following.add(row.project_id);
+  /* ========================================================
+     CREATOR PROFILES
+  ======================================================== */
 
-  });
+  async function loadProfiles() {
 
-}
-
-
-/* =========================================
-   LOAD PROJECTS
-========================================= */
-
-async function loadProjects(){
-
-  $("loading").hidden = false;
-
-  $("projectGrid").innerHTML = "";
-
-  $("emptyState").hidden = true;
-
-  const {
-    data,
-    error
-  } = await db
-    .from("ds_projects")
-    .select(`
-      id,
-      owner_id,
-      title,
-      slug,
-      logline,
-      description,
-      status,
-      visibility,
-      progress,
-      created_at,
-      updated_at
-    `)
-    .eq("visibility","community")
-    .neq("status","archived")
-    .order("updated_at",{ascending:false});
-
-  $("loading").hidden = true;
-
-  if(error){
-
-    console.error(error);
-
-    $("projectGrid").innerHTML = `
-      <div class="empty">
-        <div class="empty-icon">⚠️</div>
-        <h3>Dream Library unavailable</h3>
-        <p>
-          We couldn't connect to the Dreamscapes project library.
-          Please refresh and try again.
-        </p>
-      </div>
-    `;
-
-    return;
-
-  }
-
-  allProjects =
-    data || [];
+    state.profiles = {};
 
 
-  await enrichProjects();
-
-  applyFilters();
-
-}
-
-
-/* =========================================
-   ENRICH PROJECTS
-========================================= */
-
-async function enrichProjects(){
-
-  if(!allProjects.length)
-    return;
+    const ownerIds = [
+      ...new Set(
+        state.allProjects
+          .map(project => project.owner_id)
+          .filter(Boolean)
+      )
+    ];
 
 
-  const ownerIds =
-    [...new Set(
-      allProjects
-        .map(p => p.owner_id)
-        .filter(Boolean)
-    )];
+    if (!ownerIds.length) {
+      return;
+    }
 
 
-  const projectIds =
-    allProjects.map(p => p.id);
-
-
-  let profiles = {};
-  let showcases = {};
-  let tags = {};
-
-
-  /* CREATOR PROFILES */
-
-  if(ownerIds.length){
+    /*
+     * IMPORTANT:
+     *
+     * ds_projects.owner_id points to
+     * ds_creator_profiles.user_id.
+     */
 
     const {
-      data
+      data,
+      error
     } = await db
+
       .from("ds_creator_profiles")
+
       .select(`
         id,
+        user_id,
         display_name,
         username,
         avatar_url,
-        headline
+        headline,
+        is_discoverable
       `)
-      .in("id",ownerIds);
+
+      .in(
+        "user_id",
+        ownerIds
+      )
+
+      .eq(
+        "is_discoverable",
+        true
+      );
+
+
+    if (error) {
+
+      console.warn(
+        "Creator profile lookup:",
+        error.message
+      );
+
+      return;
+    }
+
 
     (data || []).forEach(profile => {
 
-      profiles[profile.id] =
-        profile;
+      state.profiles[
+        profile.user_id
+      ] = profile;
 
     });
 
   }
 
 
-  /* SHOWCASE DATA */
+  /* ========================================================
+     SHOWCASE
+  ======================================================== */
 
-  if(projectIds.length){
+  async function loadShowcases() {
+
+    state.showcases = {};
+
+
+    const projectIds =
+      state.allProjects
+        .map(project => project.id);
+
+
+    if (!projectIds.length) {
+      return;
+    }
+
 
     const {
-      data
+      data,
+      error
     } = await db
+
       .from("ds_project_showcase")
+
       .select(`
         project_id,
         featured,
         trending,
-        cover_url,
         tagline,
         genre,
         format,
         audience,
-        public_description
+        public_description,
+        published_at
       `)
-      .in("project_id",projectIds);
+
+      .in(
+        "project_id",
+        projectIds
+      );
+
+
+    if (error) {
+
+      console.warn(
+        "Showcase lookup:",
+        error.message
+      );
+
+      return;
+    }
+
 
     (data || []).forEach(row => {
 
-      showcases[row.project_id] =
-        row;
+      state.showcases[
+        row.project_id
+      ] = row;
 
     });
 
+  }
 
-    /* TAGS */
+
+  /* ========================================================
+     TAGS
+  ======================================================== */
+
+  async function loadTags() {
+
+    state.tags = {};
+
+
+    const projectIds =
+      state.allProjects
+        .map(project => project.id);
+
+
+    if (!projectIds.length) {
+      return;
+    }
+
 
     const {
-      data:tagRows
-    } = await db
-      .from("ds_project_tags")
-      .select("project_id,tag")
-      .in("project_id",projectIds);
-
-    (tagRows || []).forEach(row => {
-
-      if(!tags[row.project_id])
-        tags[row.project_id] = [];
-
-      tags[row.project_id].push(row.tag);
-
-    });
-
-  }
-
-
-  allProjects =
-    allProjects.map(project => ({
-
-      ...project,
-
-      creator:
-        profiles[project.owner_id] || null,
-
-      showcase:
-        showcases[project.id] || null,
-
-      tags:
-        tags[project.id] || []
-
-    }));
-
-}
-
-
-/* =========================================
-   FILTERING
-========================================= */
-
-function applyFilters(){
-
-  const search =
-    $("search")
-      .value
-      .trim()
-      .toLowerCase();
-
-  const status =
-    $("statusFilter").value;
-
-  const sort =
-    $("sortFilter").value;
-
-
-  let projects =
-    allProjects.filter(project => {
-
-      const searchable = [
-
-        project.title,
-
-        project.logline,
-
-        project.description,
-
-        project.status,
-
-        project.showcase?.tagline,
-
-        project.showcase?.genre,
-
-        project.showcase?.format,
-
-        ...(project.tags || [])
-
-      ]
-      .filter(Boolean)
-      .join(" ")
-      .toLowerCase();
-
-
-      const matchesSearch =
-        !search ||
-        searchable.includes(search);
-
-
-      const matchesStatus =
-        !status ||
-        project.status === status;
-
-
-      return (
-        matchesSearch &&
-        matchesStatus
-      );
-
-    });
-
-
-  if(sort === "newest"){
-
-    projects.sort(
-      (a,b) =>
-        new Date(b.created_at) -
-        new Date(a.created_at)
-    );
-
-  }
-
-
-  if(sort === "updated"){
-
-    projects.sort(
-      (a,b) =>
-        new Date(b.updated_at) -
-        new Date(a.updated_at)
-    );
-
-  }
-
-
-  if(sort === "progress"){
-
-    projects.sort(
-      (a,b) =>
-        (b.progress || 0) -
-        (a.progress || 0)
-    );
-
-  }
-
-
-  if(sort === "featured"){
-
-    projects.sort(
-      (a,b) =>
-        Number(b.showcase?.featured || false) -
-        Number(a.showcase?.featured || false)
-    );
-
-  }
-
-
-  renderProjects(projects);
-
-}
-
-
-/* =========================================
-   RENDER
-========================================= */
-
-function renderProjects(projects){
-
-  $("projectCount").textContent =
-    projects.length;
-
-
-  if(!projects.length){
-
-    $("projectGrid").innerHTML = "";
-
-    $("emptyState").hidden = false;
-
-    return;
-
-  }
-
-
-  $("emptyState").hidden = true;
-
-
-  $("projectGrid").innerHTML =
-    projects
-      .map(renderProject)
-      .join("");
-
-}
-
-
-function renderProject(project){
-
-  const showcase =
-    project.showcase || {};
-
-  const creator =
-    project.creator || {};
-
-  const progress =
-    Math.max(
-      0,
-      Math.min(
-        100,
-        Number(project.progress || 0)
-      )
-    );
-
-
-  const isFollowing =
-    following.has(project.id);
-
-
-  const cover =
-    showcase.cover_url
-      ? `
-        <img
-          src="${escapeHtml(showcase.cover_url)}"
-          alt="">
-      `
-      : "";
-
-
-  const featured =
-    showcase.featured
-      ? `<span class="featured">FEATURED DREAM</span>`
-      : "";
-
-
-  const projectTags =
-    (project.tags || [])
-      .slice(0,5)
-      .map(tag =>
-        `<span class="tag">${escapeHtml(tag)}</span>`
-      )
-      .join("");
-
-
-  const creatorAvatar =
-    creator.avatar_url
-      ? `
-        <img
-          class="avatar"
-          src="${escapeHtml(creator.avatar_url)}"
-          alt="">
-      `
-      : `
-        <div class="avatar">
-          ${escapeHtml(
-            initials(
-              creator.display_name ||
-              creator.username
-            )
-          )}
-        </div>
-      `;
-
-
-  const creatorName =
-    creator.display_name ||
-    creator.username ||
-    "Dream Creator";
-
-
-  const description =
-    showcase.public_description ||
-    showcase.tagline ||
-    project.logline ||
-    project.description ||
-    "A dream waiting to become something more.";
-
-
-  return `
-
-    <article class="project-card">
-
-      <div class="project-cover">
-
-        ${cover}
-
-        ${featured}
-
-      </div>
-
-
-      <div class="project-body">
-
-        <div class="project-top">
-
-          <h3 class="project-title">
-            ${escapeHtml(project.title)}
-          </h3>
-
-          <span class="status">
-            ${escapeHtml(
-              formatStatus(project.status)
-            )}
-          </span>
-
-        </div>
-
-
-        <p class="logline">
-          ${escapeHtml(description)}
-        </p>
-
-
-        ${
-          projectTags
-            ? `
-              <div class="tags">
-                ${projectTags}
-              </div>
-            `
-            : ""
-        }
-
-
-        <div class="creator">
-
-          ${creatorAvatar}
-
-          <div class="creator-name">
-
-            ${escapeHtml(creatorName)}
-
-            ${
-              creator.headline
-                ? `
-                  <small>
-                    ${escapeHtml(creator.headline)}
-                  </small>
-                `
-                : `
-                  <small>
-                    Dreamscapes Creator
-                  </small>
-                `
-            }
-
-          </div>
-
-        </div>
-
-
-        <div class="progress-wrap">
-
-          <div class="progress-head">
-
-            <span>
-              DEVELOPMENT
-            </span>
-
-            <span>
-              ${progress}%
-            </span>
-
-          </div>
-
-          <div class="progress">
-
-            <div
-              class="progress-bar"
-              style="width:${progress}%">
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="project-actions">
-
-          <a
-            href="project-development.html?id=${encodeURIComponent(project.id)}">
-
-            Explore Dream
-
-          </a>
-
-
-          ${
-            currentUser
-              ? `
-                <button
-                  class="follow-btn ${isFollowing ? "following" : ""}"
-                  data-follow="${escapeHtml(project.id)}">
-
-                  ${isFollowing
-                    ? "✓ Following"
-                    : "☆ Follow"}
-
-                </button>
-              `
-              : ""
-          }
-
-        </div>
-
-      </div>
-
-    </article>
-
-  `;
-
-}
-
-
-/* =========================================
-   FOLLOW / UNFOLLOW
-========================================= */
-
-async function toggleFollow(projectId,button){
-
-  if(!currentUser){
-
-    alert(
-      "Sign in to follow Dreamscapes projects."
-    );
-
-    return;
-
-  }
-
-
-  button.disabled = true;
-
-
-  if(following.has(projectId)){
-
-    const {
+      data,
       error
     } = await db
-      .from("ds_project_followers")
-      .delete()
-      .eq("project_id",projectId)
-      .eq("user_id",currentUser.id);
 
+      .from("ds_project_tags")
 
-    if(error){
+      .select(`
+        project_id,
+        tag
+      `)
 
-      console.error(error);
-
-      alert(
-        "We couldn't remove that follow."
+      .in(
+        "project_id",
+        projectIds
       );
 
-      button.disabled = false;
+
+    if (error) {
+
+      console.warn(
+        "Tag lookup:",
+        error.message
+      );
 
       return;
+    }
+
+
+    (data || []).forEach(row => {
+
+      if (
+        !state.tags[row.project_id]
+      ) {
+
+        state.tags[row.project_id] = [];
+
+      }
+
+
+      state.tags[
+        row.project_id
+      ].push(row.tag);
+
+    });
+
+  }
+
+
+  /* ========================================================
+     FOLLOWERS
+  ======================================================== */
+
+  async function loadFollows() {
+
+    state.follows =
+      new Set();
+
+
+    const {
+      data: {
+        user
+      }
+    } =
+      await db.auth.getUser();
+
+
+    state.user =
+      user || null;
+
+
+    if (
+      !user ||
+      !state.allProjects.length
+    ) {
+
+      return;
+    }
+
+
+    const projectIds =
+      state.allProjects
+        .map(project => project.id);
+
+
+    const {
+      data,
+      error
+    } = await db
+
+      .from("ds_project_followers")
+
+      .select(`
+        project_id
+      `)
+
+      .eq(
+        "user_id",
+        user.id
+      )
+
+      .in(
+        "project_id",
+        projectIds
+      );
+
+
+    if (error) {
+
+      console.warn(
+        "Follower lookup:",
+        error.message
+      );
+
+      return;
+    }
+
+
+    (data || []).forEach(row => {
+
+      state.follows.add(
+        row.project_id
+      );
+
+    });
+
+  }
+
+
+  /* ========================================================
+     FILTER OPTIONS
+  ======================================================== */
+
+  function populateFilterOptions() {
+
+    const genres =
+      new Set();
+
+    const formats =
+      new Set();
+
+
+    state.allProjects.forEach(project => {
+
+      const showcase =
+        showcaseFor(project);
+
+
+      if (showcase.genre) {
+
+        genres.add(
+          showcase.genre
+        );
+
+      }
+
+
+      if (showcase.format) {
+
+        formats.add(
+          showcase.format
+        );
+
+      }
+
+    });
+
+
+    const genreSelect =
+      $("genreFilter");
+
+    const formatSelect =
+      $("formatFilter");
+
+
+    const oldGenre =
+      genreSelect.value;
+
+    const oldFormat =
+      formatSelect.value;
+
+
+    genreSelect.innerHTML =
+      `<option value="">
+        All genres
+      </option>` +
+
+      [...genres]
+        .sort()
+        .map(
+          value =>
+            `<option value="${escapeHTML(value)}">
+              ${escapeHTML(value)}
+            </option>`
+        )
+        .join("");
+
+
+    formatSelect.innerHTML =
+      `<option value="">
+        All formats
+      </option>` +
+
+      [...formats]
+        .sort()
+        .map(
+          value =>
+            `<option value="${escapeHTML(value)}">
+              ${escapeHTML(value)}
+            </option>`
+        )
+        .join("");
+
+
+    if (
+      [...genres].includes(oldGenre)
+    ) {
+
+      genreSelect.value =
+        oldGenre;
 
     }
 
 
-    following.delete(projectId);
+    if (
+      [...formats].includes(oldFormat)
+    ) {
 
-    button.textContent =
-      "☆ Follow";
+      formatSelect.value =
+        oldFormat;
 
-    button.classList.remove(
-      "following"
+    }
+
+  }
+
+
+  /* ========================================================
+     SEARCH TEXT
+  ======================================================== */
+
+  function searchableText(project) {
+
+    const showcase =
+      showcaseFor(project);
+
+    const creator =
+      creatorFor(project);
+
+
+    return [
+
+      project.title,
+
+      project.logline,
+
+      project.description,
+
+      project.status,
+
+      showcase.tagline,
+
+      showcase.genre,
+
+      showcase.format,
+
+      showcase.audience,
+
+      creator?.display_name,
+
+      creator?.username,
+
+      creator?.headline,
+
+      ...tagsFor(project)
+
+    ]
+
+      .filter(Boolean)
+
+      .join(" ")
+
+      .toLowerCase();
+
+  }
+
+
+  /* ========================================================
+     APPLY FILTERS
+  ======================================================== */
+
+  function applyFilters() {
+
+    const search =
+      $("search")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const status =
+      $("statusFilter").value;
+
+
+    const genre =
+      $("genreFilter").value;
+
+
+    const format =
+      $("formatFilter").value;
+
+
+    const sort =
+      $("sortFilter").value;
+
+
+    let projects =
+      state.allProjects.filter(
+        project => {
+
+          const showcase =
+            showcaseFor(project);
+
+
+          const matchesSearch =
+            !search ||
+            searchableText(project)
+              .includes(search);
+
+
+          const matchesStatus =
+            !status ||
+            project.status === status;
+
+
+          const matchesGenre =
+            !genre ||
+            showcase.genre === genre;
+
+
+          const matchesFormat =
+            !format ||
+            showcase.format === format;
+
+
+          return (
+            matchesSearch &&
+            matchesStatus &&
+            matchesGenre &&
+            matchesFormat
+          );
+
+        }
+      );
+
+
+    /* =====================
+       SORTING
+    ===================== */
+
+    projects.sort(
+      (a, b) => {
+
+        const showcaseA =
+          showcaseFor(a);
+
+        const showcaseB =
+          showcaseFor(b);
+
+
+        if (
+          sort === "progress"
+        ) {
+
+          return (
+            Number(b.progress || 0) -
+            Number(a.progress || 0)
+          );
+
+        }
+
+
+        if (
+          sort === "featured"
+        ) {
+
+          return (
+            Number(!!showcaseB.featured) -
+            Number(!!showcaseA.featured)
+          ) ||
+
+          (
+            new Date(b.updated_at) -
+            new Date(a.updated_at)
+          );
+
+        }
+
+
+        if (
+          sort === "trending"
+        ) {
+
+          return (
+            Number(!!showcaseB.trending) -
+            Number(!!showcaseA.trending)
+          ) ||
+
+          (
+            new Date(b.updated_at) -
+            new Date(a.updated_at)
+          );
+
+        }
+
+
+        if (
+          sort === "newest"
+        ) {
+
+          return (
+            new Date(b.created_at) -
+            new Date(a.created_at)
+          );
+
+        }
+
+
+        return (
+          new Date(b.updated_at) -
+          new Date(a.updated_at)
+        );
+
+      }
     );
 
-  }else{
 
-    const {
-      error
-    } = await db
-      .from("ds_project_followers")
-      .insert({
+    $("projectCount")
+      .textContent =
+      projects.length;
 
-        project_id:projectId,
 
-        user_id:currentUser.id
+    $("emptyState").hidden =
+      projects.length !== 0;
+
+
+    renderProjects(
+      projects
+    );
+
+  }
+
+
+  /* ========================================================
+     RENDER PROJECTS
+  ======================================================== */
+
+  function renderProjects(projects) {
+
+    const grid =
+      $("projectGrid");
+
+
+    grid.innerHTML =
+      projects
+        .map(renderProject)
+        .join("");
+
+
+    grid
+      .querySelectorAll("[data-follow]")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            toggleFollow(
+              button.dataset.follow,
+              button
+            );
+
+          }
+        );
 
       });
 
 
-    if(error){
+    grid
+      .querySelectorAll("[data-share]")
+      .forEach(button => {
 
-      console.error(error);
+        button.addEventListener(
+          "click",
+          () => {
 
-      alert(
-        "We couldn't follow that project."
-      );
+            shareProject(
+              button.dataset.share
+            );
 
-      button.disabled = false;
+          }
+        );
 
-      return;
-
-    }
-
-
-    following.add(projectId);
-
-    button.textContent =
-      "✓ Following";
-
-    button.classList.add(
-      "following"
-    );
+      });
 
   }
 
 
-  button.disabled = false;
+  /* ========================================================
+     RENDER SINGLE PROJECT
+  ======================================================== */
 
-}
+  function renderProject(project) {
 
-
-/* =========================================
-   PROJECT VIEW ANALYTICS
-========================================= */
-
-async function recordProjectViews(){
-
-  /*
-    This page records a lightweight library view.
-    Individual project pages can record their own
-    detailed project views later.
-  */
-
-  if(!currentUser)
-    return;
-
-  const sessionKey =
-    sessionStorage.getItem(
-      "ds_library_session"
-    ) ||
-    crypto.randomUUID();
+    const showcase =
+      showcaseFor(project);
 
 
-  sessionStorage.setItem(
-    "ds_library_session",
-    sessionKey
-  );
-
-}
+    const creator =
+      creatorFor(project);
 
 
-/* =========================================
-   EVENTS
-========================================= */
-
-$("search")
-  .addEventListener(
-    "input",
-    applyFilters
-  );
+    const tags =
+      tagsFor(project);
 
 
-$("statusFilter")
-  .addEventListener(
-    "change",
-    applyFilters
-  );
+    const progress =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          Number(project.progress) || 0
+        )
+      );
 
 
-$("sortFilter")
-  .addEventListener(
-    "change",
-    applyFilters
-  );
+    const following =
+      state.follows.has(
+        project.id
+      );
 
 
-$("clearBtn")
-  .addEventListener(
-    "click",
-    () => {
+    const projectURL =
+      getProjectURL(project);
 
-      $("search").value = "";
 
-      $("statusFilter").value = "";
+    const creatorName =
+      creator?.display_name ||
+      "Dream Creator";
 
-      $("sortFilter").value = "newest";
+
+    const initials =
+      creatorName
+
+        .split(/\s+/)
+
+        .filter(Boolean)
+
+        .slice(0, 2)
+
+        .map(
+          word =>
+            word[0]
+        )
+
+        .join("")
+
+        .toUpperCase() ||
+
+      "DC";
+
+
+    const description =
+      showcase.public_description ||
+      showcase.tagline ||
+      project.logline ||
+      project.description ||
+      "A new Dreamscapes project is taking shape.";
+
+
+    return `
+
+      <article
+        class="project-card"
+        data-project-id="${escapeHTML(project.id)}"
+      >
+
+        <div class="project-cover">
+
+          <div class="badges">
+
+            ${
+              showcase.featured
+                ? `
+                  <span class="badge featured">
+                    ★ Featured
+                  </span>
+                `
+                : ""
+            }
+
+
+            ${
+              showcase.trending
+                ? `
+                  <span class="badge trending">
+                    ↗ Trending
+                  </span>
+                `
+                : ""
+            }
+
+
+            <span class="badge">
+              ${escapeHTML(
+                statusLabel(project.status)
+              )}
+            </span>
+
+          </div>
+
+
+          <div class="cover-title">
+            ${escapeHTML(project.title)}
+          </div>
+
+        </div>
+
+
+        <div class="project-body">
+
+          <div class="project-meta">
+
+            ${
+              showcase.format
+                ? `
+                  <span>
+                    ${escapeHTML(
+                      showcase.format
+                    )}
+                  </span>
+                `
+                : ""
+            }
+
+
+            ${
+              showcase.genre
+                ? `
+                  <span>
+                    •
+                    ${escapeHTML(
+                      showcase.genre
+                    )}
+                  </span>
+                `
+                : ""
+            }
+
+          </div>
+
+
+          <h2 class="project-title">
+
+            <a href="${escapeHTML(projectURL)}">
+
+              ${escapeHTML(
+                project.title
+              )}
+
+            </a>
+
+          </h2>
+
+
+          <div class="logline">
+
+            ${escapeHTML(description)}
+
+          </div>
+
+
+          ${
+            tags.length
+              ? `
+                <div class="tags">
+
+                  ${tags
+                    .slice(0, 7)
+                    .map(
+                      tag =>
+                        `
+                        <span class="tag">
+                          #${escapeHTML(tag)}
+                        </span>
+                        `
+                    )
+                    .join("")}
+
+                </div>
+              `
+              : ""
+          }
+
+
+          <div class="creator">
+
+            <div class="avatar">
+
+              ${
+                creator?.avatar_url
+                  ? `
+                    <img
+                      src="${escapeHTML(
+                        creator.avatar_url
+                      )}"
+                      alt=""
+                      loading="lazy"
+                    >
+                  `
+                  : escapeHTML(initials)
+              }
+
+            </div>
+
+
+            <div class="creator-info">
+
+              <div class="creator-name">
+
+                ${escapeHTML(
+                  creatorName
+                )}
+
+              </div>
+
+
+              <div class="creator-handle">
+
+                ${
+                  creator?.username
+                    ? "@" +
+                      escapeHTML(
+                        creator.username
+                      )
+                    : escapeHTML(
+                        creator?.headline ||
+                        "Creator"
+                      )
+                }
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="progress-row">
+
+            <span>
+              Development progress
+            </span>
+
+            <strong>
+              ${progress}%
+            </strong>
+
+          </div>
+
+
+          <div class="progress">
+
+            <i
+              style="width:${progress}%"
+            ></i>
+
+          </div>
+
+
+          <div class="project-actions">
+
+            <a
+              href="${escapeHTML(projectURL)}"
+            >
+              Open Project
+            </a>
+
+
+            <button
+              type="button"
+              data-follow="${escapeHTML(project.id)}"
+              class="${
+                following
+                  ? "following"
+                  : ""
+              }"
+            >
+
+              ${
+                following
+                  ? "Following"
+                  : "Follow"
+              }
+
+            </button>
+
+
+            <button
+              type="button"
+              data-share="${escapeHTML(project.id)}"
+            >
+              Share
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    `;
+
+  }
+
+
+  /* ========================================================
+     FOLLOW / UNFOLLOW
+  ======================================================== */
+
+  async function toggleFollow(
+    projectId,
+    button
+  ) {
+
+    const {
+      data: {
+        user
+      }
+    } =
+      await db.auth.getUser();
+
+
+    state.user =
+      user || null;
+
+
+    if (!user) {
+
+      showNotice(
+        "Sign in to follow Dreamscapes projects."
+      );
+
+      setTimeout(
+        () => showNotice(""),
+        3500
+      );
+
+      return;
+    }
+
+
+    button.disabled =
+      true;
+
+
+    try {
+
+      if (
+        state.follows.has(projectId)
+      ) {
+
+        const {
+          error
+        } = await db
+
+          .from(
+            "ds_project_followers"
+          )
+
+          .delete()
+
+          .eq(
+            "user_id",
+            user.id
+          )
+
+          .eq(
+            "project_id",
+            projectId
+          );
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        state.follows.delete(
+          projectId
+        );
+
+      } else {
+
+        const {
+          error
+        } = await db
+
+          .from(
+            "ds_project_followers"
+          )
+
+          .upsert(
+
+            {
+              user_id:
+                user.id,
+
+              project_id:
+                projectId
+            },
+
+            {
+              onConflict:
+                "user_id,project_id"
+            }
+
+          );
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        state.follows.add(
+          projectId
+        );
+
+      }
+
 
       applyFilters();
 
+
+    } catch (error) {
+
+      console.error(
+        "Follow error:",
+        error
+      );
+
+
+      showNotice(
+        error?.message ||
+        "We couldn't update your follow right now."
+      );
+
+
+    } finally {
+
+      button.disabled =
+        false;
+
     }
-  );
+
+  }
 
 
-$("refreshBtn")
-  .addEventListener(
-    "click",
-    async () => {
+  /* ========================================================
+     SHARE
+  ======================================================== */
 
-      await loadUser();
+  async function shareProject(
+    projectId
+  ) {
 
-      await loadFollowing();
+    const project =
+      state.allProjects.find(
+        item =>
+          item.id === projectId
+      );
 
-      await loadProjects();
 
+    if (!project) {
+      return;
     }
-  );
 
 
-$("projectGrid")
-  .addEventListener(
-    "click",
-    event => {
+    const url =
+      new URL(
+        getProjectURL(project),
+        window.location.href
+      ).href;
 
-      const button =
-        event.target.closest(
-          "[data-follow]"
+
+    const showcase =
+      showcaseFor(project);
+
+
+    const shareData = {
+
+      title:
+        project.title,
+
+      text:
+        showcase.tagline ||
+        project.logline ||
+        "A CrowRules Dreamscapes project.",
+
+      url
+
+    };
+
+
+    try {
+
+      if (
+        navigator.share
+      ) {
+
+        await navigator.share(
+          shareData
         );
 
-      if(!button)
-        return;
+      } else {
 
-      toggleFollow(
-        button.dataset.follow,
-        button
+        await navigator.clipboard.writeText(
+          url
+        );
+
+
+        showNotice(
+          "Project link copied to your clipboard."
+        );
+
+
+        setTimeout(
+          () => showNotice(""),
+          2500
+        );
+
+      }
+
+    } catch (error) {
+
+      if (
+        error?.name !==
+        "AbortError"
+      ) {
+
+        console.warn(
+          "Share failed:",
+          error
+        );
+
+      }
+
+    }
+
+  }
+
+
+  /* ========================================================
+     CLEAR FILTERS
+  ======================================================== */
+
+  function clearFilters() {
+
+    $("search").value =
+      "";
+
+    $("statusFilter").value =
+      "";
+
+    $("genreFilter").value =
+      "";
+
+    $("formatFilter").value =
+      "";
+
+    $("sortFilter").value =
+      "newest";
+
+
+    applyFilters();
+
+  }
+
+
+  /* ========================================================
+     REALTIME DEBOUNCE
+  ======================================================== */
+
+  function scheduleReload() {
+
+    clearTimeout(
+      state.reloadTimer
+    );
+
+
+    state.reloadTimer =
+      setTimeout(
+        () => {
+
+          loadProjects();
+
+        },
+        700
+      );
+
+  }
+
+
+  /* ========================================================
+     REALTIME
+  ======================================================== */
+
+  function setupRealtime() {
+
+    if (
+      state.realtimeChannel
+    ) {
+
+      db.removeChannel(
+        state.realtimeChannel
       );
 
     }
+
+
+    state.realtimeChannel =
+
+      db
+
+        .channel(
+          "dream-project-library"
+        )
+
+        .on(
+          "postgres_changes",
+          {
+            event: "*",
+            schema: "public",
+            table: "ds_projects"
+          },
+          scheduleReload
+        )
+
+        .on(
+          "postgres_changes",
+          {
+            event: "*",
+            schema: "public",
+            table: "ds_project_showcase"
+          },
+          scheduleReload
+        )
+
+        .on(
+          "postgres_changes",
+          {
+            event: "*",
+            schema: "public",
+            table: "ds_project_tags"
+          },
+          scheduleReload
+        )
+
+        .subscribe(
+          status => {
+
+            console.log(
+              "Dreamscapes realtime:",
+              status
+            );
+
+          }
+        );
+
+  }
+
+
+  /* ========================================================
+     EVENT LISTENERS
+  ======================================================== */
+
+  $("search")
+    .addEventListener(
+      "input",
+      applyFilters
+    );
+
+
+  $("statusFilter")
+    .addEventListener(
+      "change",
+      applyFilters
+    );
+
+
+  $("genreFilter")
+    .addEventListener(
+      "change",
+      applyFilters
+    );
+
+
+  $("formatFilter")
+    .addEventListener(
+      "change",
+      applyFilters
+    );
+
+
+  $("sortFilter")
+    .addEventListener(
+      "change",
+      applyFilters
+    );
+
+
+  $("clearBtn")
+    .addEventListener(
+      "click",
+      clearFilters
+    );
+
+
+  $("emptyClearBtn")
+    .addEventListener(
+      "click",
+      clearFilters
+    );
+
+
+  $("refreshBtn")
+    .addEventListener(
+      "click",
+      loadProjects
+    );
+
+
+  $("year")
+    .textContent =
+    new Date().getFullYear();
+
+
+  /* ========================================================
+     AUTH STATE
+  ======================================================== */
+
+  db.auth.onAuthStateChange(
+    (_event, session) => {
+
+      state.user =
+        session?.user || null;
+
+
+      /*
+       * Refresh only the follow state instead
+       * of unnecessarily rebuilding the public
+       * project library.
+       */
+
+      loadFollows()
+        .then(
+          applyFilters
+        );
+
+    }
   );
 
 
-/* =========================================
-   MOBILE MENU
-========================================= */
+  /* ========================================================
+     CLEANUP
+  ======================================================== */
 
-$("menuBtn")
-  .addEventListener(
-    "click",
+  window.addEventListener(
+    "beforeunload",
     () => {
 
-      const links =
-        $("navLinks");
+      if (
+        state.realtimeChannel
+      ) {
 
-      const open =
-        links.style.display === "flex";
-
-      links.style.display =
-        open ? "" : "flex";
-
-      if(!open){
-
-        links.style.position =
-          "absolute";
-
-        links.style.top =
-          "72px";
-
-        links.style.left =
-          "12px";
-
-        links.style.right =
-          "12px";
-
-        links.style.padding =
-          "15px";
-
-        links.style.flexDirection =
-          "column";
-
-        links.style.alignItems =
-          "stretch";
-
-        links.style.background =
-          "rgba(8,8,14,.97)";
-
-        links.style.border =
-          "1px solid rgba(255,255,255,.1)";
-
-        links.style.borderRadius =
-          "14px";
+        db.removeChannel(
+          state.realtimeChannel
+        );
 
       }
 
@@ -1842,125 +3214,33 @@ $("menuBtn")
   );
 
 
-/* =========================================
-   REALTIME
-========================================= */
+  /* ========================================================
+     PUBLIC API
+  ======================================================== */
 
-let realtimeChannel;
+  window.DreamscapesProjects = {
 
+    load:
+      loadProjects,
 
-function subscribeToChanges(){
+    clear:
+      clearFilters,
 
-  realtimeChannel =
-    db
-      .channel(
-        "dream-project-library"
-      )
+    refresh:
+      loadProjects
 
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"ds_projects"
-        },
-        async () => {
-
-          await loadProjects();
-
-        }
-      )
-
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"ds_project_showcase"
-        },
-        async () => {
-
-          await loadProjects();
-
-        }
-      )
-
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"ds_project_tags"
-        },
-        async () => {
-
-          await loadProjects();
-
-        }
-      )
-
-      .subscribe(
-        status => {
-
-          console.log(
-            "Dream Library realtime:",
-            status
-          );
-
-        }
-      );
-
-}
+  };
 
 
-/* =========================================
-   INIT
-========================================= */
+  /* ========================================================
+     START
+  ======================================================== */
 
-async function init(){
+  setupRealtime();
 
-  $("projectCount")
-    .textContent = "0";
+  loadProjects();
 
-  document
-    .querySelector("[data-year]")
-    .textContent =
-      new Date().getFullYear();
-
-
-  createStars();
-
-
-  await loadUser();
-
-  await loadFollowing();
-
-  await loadProjects();
-
-  await recordProjectViews();
-
-  subscribeToChanges();
-
-}
-
-
-window.addEventListener(
-  "beforeunload",
-  () => {
-
-    if(realtimeChannel){
-
-      db.removeChannel(
-        realtimeChannel
-      );
-
-    }
-
-  }
-);
-
-
-init();
+})();
 
 </script>
 
