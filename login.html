@@ -1,0 +1,2278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<title>Dreamscapes Network Login | CrowRules Entertainment</title>
+
+<meta
+  name="description"
+  content="Join the CrowRules Dreamscapes Creator Network. Sign in or create your creator account."
+>
+
+<meta name="theme-color" content="#05050b">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap"
+  rel="stylesheet"
+>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+:root{
+  --bg:#05050b;
+  --panel:rgba(12,12,25,.86);
+  --panel2:rgba(18,15,38,.9);
+  --border:rgba(255,255,255,.10);
+
+  --cyan:#00eaff;
+  --purple:#8b5cff;
+  --pink:#ff3cac;
+  --gold:#ffd166;
+
+  --text:#f7f7ff;
+  --muted:#a7a7bd;
+
+  --danger:#ff5f6d;
+  --success:#47e6a1;
+
+  --shadow:
+    0 30px 100px rgba(0,0,0,.65);
+
+  --radius:24px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family:Montserrat,Arial,sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(139,92,255,.18),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(0,234,255,.13),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(255,60,172,.10),
+      transparent 40%
+    ),
+    #05050b;
+
+  overflow-x:hidden;
+}
+
+/* =========================
+   STARFIELD
+========================= */
+
+#stars{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  overflow:hidden;
+}
+
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  border-radius:50%;
+  background:white;
+  opacity:.35;
+  animation:twinkle 4s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+
+  0%,100%{
+    opacity:.15;
+    transform:scale(.7);
+  }
+
+  50%{
+    opacity:.8;
+    transform:scale(1.5);
+  }
+
+}
+
+/* =========================
+   AMBIENT ORBS
+========================= */
+
+.orb{
+  position:fixed;
+  border-radius:50%;
+  pointer-events:none;
+  filter:blur(2px);
+  opacity:.45;
+  z-index:0;
+}
+
+.orb.one{
+  width:320px;
+  height:320px;
+  left:-150px;
+  top:10%;
+  background:radial-gradient(circle,rgba(139,92,255,.30),transparent 70%);
+}
+
+.orb.two{
+  width:400px;
+  height:400px;
+  right:-200px;
+  top:35%;
+  background:radial-gradient(circle,rgba(0,234,255,.22),transparent 70%);
+}
+
+.orb.three{
+  width:300px;
+  height:300px;
+  left:35%;
+  bottom:-180px;
+  background:radial-gradient(circle,rgba(255,60,172,.20),transparent 70%);
+}
+
+/* =========================
+   NAV
+========================= */
+
+nav{
+  position:relative;
+  z-index:10;
+
+  width:min(1200px,calc(100% - 40px));
+  margin:20px auto;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:14px 18px;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:rgba(5,5,11,.65);
+  backdrop-filter:blur(20px);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  text-decoration:none;
+  color:white;
+}
+
+.brand-mark{
+  width:42px;
+  height:42px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:12px;
+
+  font-family:Orbitron,sans-serif;
+  font-weight:900;
+
+  color:#05050b;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--cyan),
+      var(--purple),
+      var(--pink)
+    );
+
+  box-shadow:
+    0 0 25px rgba(0,234,255,.25);
+}
+
+.brand-text strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:13px;
+  letter-spacing:2px;
+}
+
+.brand-text span{
+  display:block;
+  margin-top:2px;
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:1.5px;
+}
+
+.nav-links{
+  display:flex;
+  gap:10px;
+}
+
+.nav-links a{
+  color:#dcdcf0;
+  text-decoration:none;
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.nav-links a:hover{
+  background:rgba(255,255,255,.06);
+  color:white;
+}
+
+@media(max-width:700px){
+
+  .nav-links{
+    display:none;
+  }
+
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+  position:relative;
+  z-index:2;
+
+  width:min(1100px,calc(100% - 30px));
+  margin:50px auto 80px;
+
+  display:grid;
+  grid-template-columns:1fr 1.05fr;
+  gap:30px;
+  align-items:stretch;
+}
+
+@media(max-width:850px){
+
+  .page{
+    grid-template-columns:1fr;
+    margin-top:25px;
+  }
+
+}
+
+/* =========================
+   INTRO
+========================= */
+
+.intro{
+  position:relative;
+
+  padding:45px 35px;
+
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(139,92,255,.12),
+      rgba(0,234,255,.04)
+    ),
+    rgba(8,8,18,.72);
+
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+}
+
+.intro:after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  right:-150px;
+  top:-150px;
+
+  background:radial-gradient(
+    circle,
+    rgba(0,234,255,.15),
+    transparent 70%
+  );
+}
+
+.eyebrow{
+  font-family:Orbitron,sans-serif;
+  font-size:11px;
+  letter-spacing:4px;
+  color:var(--cyan);
+  margin-bottom:20px;
+}
+
+.intro h1{
+  margin:0;
+
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(35px,5vw,65px);
+  line-height:1.02;
+  letter-spacing:-2px;
+}
+
+.gradient{
+  background:
+    linear-gradient(
+      90deg,
+      var(--cyan),
+      var(--purple),
+      var(--pink)
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.intro p{
+  color:#bcbcd0;
+  line-height:1.8;
+  font-size:15px;
+  margin:25px 0;
+}
+
+.network-list{
+  display:grid;
+  gap:12px;
+  margin-top:30px;
+}
+
+.network-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:13px;
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.06);
+
+  color:#d9d9e9;
+  font-size:13px;
+}
+
+.network-icon{
+  width:34px;
+  height:34px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:10px;
+
+  background:rgba(0,234,255,.08);
+  color:var(--cyan);
+  font-size:15px;
+}
+
+/* =========================
+   AUTH CARD
+========================= */
+
+.auth-card{
+  position:relative;
+
+  padding:30px;
+
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18,15,38,.94),
+      rgba(7,7,15,.94)
+    );
+
+  box-shadow:var(--shadow);
+
+  backdrop-filter:blur(25px);
+}
+
+.auth-header{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.auth-header h2{
+  margin:0 0 8px;
+
+  font-family:Orbitron,sans-serif;
+  font-size:27px;
+}
+
+.auth-header p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* =========================
+   TABS
+========================= */
+
+.tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  padding:5px;
+  margin-bottom:25px;
+
+  border-radius:13px;
+
+  background:rgba(255,255,255,.045);
+}
+
+.tab{
+  border:0;
+  background:transparent;
+
+  color:#9292a8;
+
+  padding:12px;
+
+  border-radius:9px;
+
+  font-family:Montserrat,sans-serif;
+  font-weight:700;
+  font-size:12px;
+
+  cursor:pointer;
+}
+
+.tab.active{
+  color:white;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,234,255,.16),
+      rgba(139,92,255,.18)
+    );
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+/* =========================
+   FORMS
+========================= */
+
+.auth-form{
+  display:none;
+}
+
+.auth-form.active{
+  display:block;
+}
+
+.field{
+  margin-bottom:15px;
+}
+
+.field label{
+  display:block;
+
+  margin-bottom:7px;
+
+  color:#cfcfe0;
+
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.8px;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:12px;
+
+  background:rgba(255,255,255,.045);
+
+  color:white;
+
+  padding:13px 14px;
+
+  font-family:Montserrat,sans-serif;
+  font-size:13px;
+
+  outline:none;
+
+  transition:
+    border-color .2s,
+    box-shadow .2s,
+    background .2s;
+}
+
+.field textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:rgba(0,234,255,.6);
+
+  background:rgba(0,234,255,.035);
+
+  box-shadow:
+    0 0 0 3px rgba(0,234,255,.08);
+}
+
+.field select option{
+  background:#10101b;
+  color:white;
+}
+
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+@media(max-width:520px){
+
+  .two{
+    grid-template-columns:1fr;
+  }
+
+}
+
+.check-row{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+
+  color:#a9a9bc;
+
+  font-size:11px;
+  line-height:1.5;
+
+  margin:14px 0;
+}
+
+.check-row input{
+  margin-top:3px;
+  accent-color:var(--cyan);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.primary-btn{
+  width:100%;
+
+  border:0;
+  border-radius:13px;
+
+  padding:14px 18px;
+
+  font-family:Orbitron,sans-serif;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1px;
+
+  color:#05050b;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--cyan),
+      #8eeaff,
+      var(--purple)
+    );
+
+  cursor:pointer;
+
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    opacity .2s;
+}
+
+.primary-btn:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 12px 30px rgba(0,234,255,.18);
+}
+
+.primary-btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.secondary-btn{
+  width:100%;
+
+  margin-top:10px;
+
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:12px;
+
+  padding:12px;
+
+  background:rgba(255,255,255,.035);
+  color:#d6d6e4;
+
+  cursor:pointer;
+
+  font-family:Montserrat,sans-serif;
+  font-weight:700;
+  font-size:11px;
+}
+
+.secondary-btn:hover{
+  background:rgba(255,255,255,.07);
+}
+
+/* =========================
+   EXTRA LINKS
+========================= */
+
+.form-options{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin:5px 0 16px;
+
+  font-size:11px;
+}
+
+.remember{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:#9292a8;
+}
+
+.remember input{
+  accent-color:var(--cyan);
+}
+
+.link{
+  color:var(--cyan);
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.link:hover{
+  text-decoration:underline;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+  display:none;
+
+  padding:12px 14px;
+
+  border-radius:12px;
+
+  margin-bottom:15px;
+
+  font-size:12px;
+  line-height:1.5;
+}
+
+.status.show{
+  display:block;
+}
+
+.status.success{
+  color:#baffdf;
+  background:rgba(71,230,161,.08);
+  border:1px solid rgba(71,230,161,.2);
+}
+
+.status.error{
+  color:#ffd0d5;
+  background:rgba(255,95,109,.08);
+  border:1px solid rgba(255,95,109,.22);
+}
+
+.status.info{
+  color:#d2f9ff;
+  background:rgba(0,234,255,.07);
+  border:1px solid rgba(0,234,255,.18);
+}
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  margin:18px 0;
+
+  color:#68687b;
+
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.divider:before,
+.divider:after{
+  content:"";
+  height:1px;
+  flex:1;
+
+  background:rgba(255,255,255,.08);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  position:relative;
+  z-index:2;
+
+  text-align:center;
+
+  padding:0 20px 40px;
+
+  color:#66667a;
+
+  font-size:10px;
+  line-height:1.7;
+}
+
+footer strong{
+  color:#9a9aae;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+  position:relative;
+}
+
+.loading:after{
+  content:"";
+
+  position:absolute;
+
+  width:15px;
+  height:15px;
+
+  right:15px;
+  top:50%;
+
+  margin-top:-7.5px;
+
+  border:2px solid rgba(5,5,11,.3);
+  border-top-color:#05050b;
+
+  border-radius:50%;
+
+  animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+
+<div class="orb one"></div>
+<div class="orb two"></div>
+<div class="orb three"></div>
+
+<nav>
+
+  <a class="brand" href="index.html">
+
+    <div class="brand-mark">
+      CR
+    </div>
+
+    <div class="brand-text">
+      <strong>CROWRULES DREAMSCAPES</strong>
+      <span>BRINGING STORIES TO LIFE</span>
+    </div>
+
+  </a>
+
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="creators.html">Creators</a>
+  </div>
+
+</nav>
+
+
+<main class="page">
+
+  <!-- =========================
+       LEFT
+  ========================== -->
+
+  <section class="intro">
+
+    <div class="eyebrow">
+      THE CREATOR NETWORK
+    </div>
+
+    <h1>
+      DON'T JUST HAVE
+      <span class="gradient">A DREAM.</span>
+    </h1>
+
+    <p>
+      Bring it into the Dreamscapes.
+      Connect with creators, writers, artists,
+      filmmakers, storytellers and builders who
+      want to turn ideas into worlds.
+    </p>
+
+    <div class="network-list">
+
+      <div class="network-item">
+        <div class="network-icon">✦</div>
+        <div>
+          <strong>Submit Your Dreams</strong><br>
+          <span>Turn an idea into the beginning of something bigger.</span>
+        </div>
+      </div>
+
+      <div class="network-item">
+        <div class="network-icon">◈</div>
+        <div>
+          <strong>Build With Others</strong><br>
+          <span>Find people who can help develop your vision.</span>
+        </div>
+      </div>
+
+      <div class="network-item">
+        <div class="network-icon">◎</div>
+        <div>
+          <strong>Create Worlds</strong><br>
+          <span>Develop characters, stories, lore and productions.</span>
+        </div>
+      </div>
+
+      <div class="network-item">
+        <div class="network-icon">★</div>
+        <div>
+          <strong>Grow With CrowRules</strong><br>
+          <span>Build toward shows, movies and original productions.</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       AUTH
+  ========================== -->
+
+  <section class="auth-card">
+
+    <div class="auth-header">
+
+      <h2>ENTER THE NETWORK</h2>
+
+      <p>
+        Sign in to your Dreamscapes creator account
+        or create your place in the network.
+      </p>
+
+    </div>
+
+
+    <div id="status" class="status"></div>
+
+
+    <div class="tabs">
+
+      <button
+        type="button"
+        class="tab active"
+        data-tab="login"
+      >
+        SIGN IN
+      </button>
+
+      <button
+        type="button"
+        class="tab"
+        data-tab="signup"
+      >
+        JOIN
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         LOGIN
+    ========================== -->
+
+    <form
+      id="loginForm"
+      class="auth-form active"
+      novalidate
+    >
+
+      <div class="field">
+
+        <label for="loginEmail">
+          EMAIL
+        </label>
+
+        <input
+          id="loginEmail"
+          type="email"
+          autocomplete="email"
+          placeholder="you@example.com"
+          required
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="loginPassword">
+          PASSWORD
+        </label>
+
+        <input
+          id="loginPassword"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Your password"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-options">
+
+        <label class="remember">
+
+          <input
+            id="rememberMe"
+            type="checkbox"
+          >
+
+          Remember me
+
+        </label>
+
+        <a
+          class="link"
+          id="forgotPassword"
+          href="#"
+        >
+          Forgot password?
+        </a>
+
+      </div>
+
+
+      <button
+        id="loginButton"
+        class="primary-btn"
+        type="submit"
+      >
+        ENTER DREAMSCAPES
+      </button>
+
+
+      <div class="divider">
+        OR
+      </div>
+
+
+      <button
+        id="magicLinkButton"
+        class="secondary-btn"
+        type="button"
+      >
+        SEND MAGIC LOGIN LINK
+      </button>
+
+    </form>
+
+
+    <!-- =========================
+         SIGNUP
+    ========================== -->
+
+    <form
+      id="signupForm"
+      class="auth-form"
+      novalidate
+    >
+
+      <div class="two">
+
+        <div class="field">
+
+          <label for="signupName">
+            DISPLAY NAME
+          </label>
+
+          <input
+            id="signupName"
+            type="text"
+            autocomplete="name"
+            placeholder="Your name"
+            maxlength="80"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="signupUsername">
+            CREATOR USERNAME
+          </label>
+
+          <input
+            id="signupUsername"
+            type="text"
+            autocomplete="username"
+            placeholder="yourcreatorname"
+            maxlength="30"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="signupEmail">
+          EMAIL
+        </label>
+
+        <input
+          id="signupEmail"
+          type="email"
+          autocomplete="email"
+          placeholder="you@example.com"
+          required
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="signupRole">
+          PRIMARY CREATIVE ROLE
+        </label>
+
+        <select
+          id="signupRole"
+          required
+        >
+
+          <option value="">
+            Select your primary role
+          </option>
+
+          <option value="writer">
+            Writer
+          </option>
+
+          <option value="director">
+            Director
+          </option>
+
+          <option value="producer">
+            Producer
+          </option>
+
+          <option value="actor">
+            Actor
+          </option>
+
+          <option value="artist">
+            Artist
+          </option>
+
+          <option value="animator">
+            Animator
+          </option>
+
+          <option value="filmmaker">
+            Filmmaker
+          </option>
+
+          <option value="musician">
+            Musician
+          </option>
+
+          <option value="photographer">
+            Photographer
+          </option>
+
+          <option value="designer">
+            Designer
+          </option>
+
+          <option value="editor">
+            Editor
+          </option>
+
+          <option value="world_builder">
+            World Builder
+          </option>
+
+          <option value="storyteller">
+            Storyteller
+          </option>
+
+          <option value="other">
+            Other
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="signupBio">
+          SHORT CREATOR BIO
+        </label>
+
+        <textarea
+          id="signupBio"
+          maxlength="1000"
+          placeholder="Tell us a little about yourself and what you create..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="two">
+
+        <div class="field">
+
+          <label for="signupPassword">
+            PASSWORD
+          </label>
+
+          <input
+            id="signupPassword"
+            type="password"
+            autocomplete="new-password"
+            placeholder="At least 8 characters"
+            minlength="8"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="signupPasswordConfirm">
+            CONFIRM PASSWORD
+          </label>
+
+          <input
+            id="signupPasswordConfirm"
+            type="password"
+            autocomplete="new-password"
+            placeholder="Repeat password"
+            minlength="8"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <label class="check-row">
+
+        <input
+          id="terms"
+          type="checkbox"
+          required
+        >
+
+        <span>
+          I understand that Dreamscapes is a creator
+          network and that submitting an idea does not
+          automatically mean CrowRules Entertainment
+          will produce it. Creator rights and agreements
+          will be handled separately.
+        </span>
+
+      </label>
+
+
+      <button
+        id="signupButton"
+        class="primary-btn"
+        type="submit"
+      >
+        CREATE CREATOR ACCOUNT
+      </button>
+
+    </form>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <strong>CrowRules Dreamscapes</strong>
+  —
+  Bringing Stories to Life.
+
+  <br>
+
+  Part of CrowRules Entertainment.
+
+</footer>
+
+
+<script>
+
+/* ============================================================
+   CROWRULES DREAMSCAPES
+   SUPABASE CONFIGURATION
+============================================================ */
+
+/*
+ IMPORTANT:
+
+ Replace ONLY the publishable key below.
+
+ NEVER put a Supabase secret/service_role key here.
+
+ Your public browser key should begin with:
+
+ sb_publishable_
+
+ Older projects may still provide an anon key.
+ Supabase currently recommends the publishable key.
+*/
+
+const SUPABASE_URL =
+  "https://zauxdqyssratvzmomozf.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
+
+
+/* ============================================================
+   DREAMSCAPES PATHS
+============================================================ */
+
+const DREAMSCAPES_BASE =
+  new URL("./", window.location.href).href;
+
+const AUTH_CALLBACK =
+  new URL("auth-callback.html", DREAMSCAPES_BASE).href;
+
+const RESET_PASSWORD =
+  new URL("reset-password.html", DREAMSCAPES_BASE).href;
+
+const CREATOR_PORTAL =
+  new URL("creator-portal.html", DREAMSCAPES_BASE).href;
+
+
+/* ============================================================
+   SUPABASE CLIENT
+============================================================ */
+
+if (
+  !window.supabase ||
+  SUPABASE_PUBLISHABLE_KEY.includes("PASTE_YOUR")
+) {
+
+  console.warn(
+    "Dreamscapes Supabase is not configured yet. Add the publishable key."
+  );
+
+}
+
+const supabaseClient =
+  window.supabase
+    ? window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY,
+        {
+          auth: {
+            autoRefreshToken: true,
+            persistSession: true,
+            detectSessionInUrl: true
+          }
+        }
+      )
+    : null;
+
+
+/* ============================================================
+   ELEMENTS
+============================================================ */
+
+const statusBox =
+  document.getElementById("status");
+
+const loginForm =
+  document.getElementById("loginForm");
+
+const signupForm =
+  document.getElementById("signupForm");
+
+const loginButton =
+  document.getElementById("loginButton");
+
+const signupButton =
+  document.getElementById("signupButton");
+
+const magicLinkButton =
+  document.getElementById("magicLinkButton");
+
+
+/* ============================================================
+   STATUS
+============================================================ */
+
+function showStatus(
+  message,
+  type = "info"
+){
+
+  statusBox.textContent = message;
+
+  statusBox.className =
+    "status show " + type;
+
+}
+
+function clearStatus(){
+
+  statusBox.textContent = "";
+
+  statusBox.className =
+    "status";
+
+}
+
+
+/* ============================================================
+   LOADING
+============================================================ */
+
+function setLoading(
+  button,
+  loading,
+  text
+){
+
+  if (!button) return;
+
+  button.disabled = loading;
+
+  button.classList.toggle(
+    "loading",
+    loading
+  );
+
+  if (loading){
+
+    button.dataset.originalText =
+      button.textContent;
+
+    button.textContent = text;
+
+  }else{
+
+    button.textContent =
+      button.dataset.originalText || text;
+
+  }
+
+}
+
+
+/* ============================================================
+   STARS
+============================================================ */
+
+function createStars(){
+
+  const container =
+    document.getElementById("stars");
+
+  const count =
+    window.innerWidth < 600
+      ? 70
+      : 130;
+
+  for(let i = 0; i < count; i++){
+
+    const star =
+      document.createElement("div");
+
+    star.className = "star";
+
+    star.style.left =
+      Math.random() * 100 + "%";
+
+    star.style.top =
+      Math.random() * 100 + "%";
+
+    star.style.animationDelay =
+      Math.random() * 5 + "s";
+
+    star.style.animationDuration =
+      2 + Math.random() * 5 + "s";
+
+    container.appendChild(star);
+
+  }
+
+}
+
+createStars();
+
+
+/* ============================================================
+   TABS
+============================================================ */
+
+document
+  .querySelectorAll(".tab")
+  .forEach(tab => {
+
+    tab.addEventListener(
+      "click",
+      () => {
+
+        clearStatus();
+
+        document
+          .querySelectorAll(".tab")
+          .forEach(item =>
+            item.classList.remove("active")
+          );
+
+        tab.classList.add("active");
+
+        const selected =
+          tab.dataset.tab;
+
+        document
+          .querySelectorAll(".auth-form")
+          .forEach(form =>
+            form.classList.remove("active")
+          );
+
+        document
+          .getElementById(
+            selected === "login"
+              ? "loginForm"
+              : "signupForm"
+          )
+          .classList.add("active");
+
+      }
+
+    );
+
+  });
+
+
+/* ============================================================
+   USERNAME NORMALIZATION
+============================================================ */
+
+function normalizeUsername(value){
+
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9_]/g, "")
+    .slice(0, 30);
+
+}
+
+
+/* ============================================================
+   SESSION CHECK
+============================================================ */
+
+async function checkExistingSession(){
+
+  if (!supabaseClient){
+    return;
+  }
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.getSession();
+
+    if (error){
+      console.error(error);
+      return;
+    }
+
+    if (data.session){
+
+      window.location.replace(
+        CREATOR_PORTAL
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Session check failed:",
+      error
+    );
+
+  }
+
+}
+
+checkExistingSession();
+
+
+/* ============================================================
+   LOGIN
+============================================================ */
+
+loginForm.addEventListener(
+  "submit",
+  async event => {
+
+    event.preventDefault();
+
+    clearStatus();
+
+    if (!supabaseClient){
+
+      showStatus(
+        "Supabase is not configured. Add your publishable key first.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    const email =
+      document
+        .getElementById("loginEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const password =
+      document
+        .getElementById("loginPassword")
+        .value;
+
+    if (!email || !password){
+
+      showStatus(
+        "Enter your email and password.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    setLoading(
+      loginButton,
+      true,
+      "SIGNING IN..."
+    );
+
+    try{
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient.auth
+          .signInWithPassword({
+            email,
+            password
+          });
+
+      if (error){
+        throw error;
+      }
+
+      if (!data.session){
+
+        showStatus(
+          "Your account was found, but no active session was created.",
+          "error"
+        );
+
+        return;
+
+      }
+
+      showStatus(
+        "Welcome back. Entering Dreamscapes...",
+        "success"
+      );
+
+      setTimeout(
+        () => {
+          window.location.replace(
+            CREATOR_PORTAL
+          );
+        },
+        600
+      );
+
+    }catch(error){
+
+      console.error(error);
+
+      showStatus(
+        friendlyAuthError(error),
+        "error"
+      );
+
+    }finally{
+
+      setLoading(
+        loginButton,
+        false,
+        "ENTER DREAMSCAPES"
+      );
+
+    }
+
+  }
+);
+
+
+/* ============================================================
+   SIGN UP
+============================================================ */
+
+signupForm.addEventListener(
+  "submit",
+  async event => {
+
+    event.preventDefault();
+
+    clearStatus();
+
+    if (!supabaseClient){
+
+      showStatus(
+        "Supabase is not configured. Add your publishable key first.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    const displayName =
+      document
+        .getElementById("signupName")
+        .value
+        .trim();
+
+    const username =
+      normalizeUsername(
+        document
+          .getElementById("signupUsername")
+          .value
+      );
+
+    const email =
+      document
+        .getElementById("signupEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const role =
+      document
+        .getElementById("signupRole")
+        .value;
+
+    const bio =
+      document
+        .getElementById("signupBio")
+        .value
+        .trim();
+
+    const password =
+      document
+        .getElementById("signupPassword")
+        .value;
+
+    const confirmPassword =
+      document
+        .getElementById("signupPasswordConfirm")
+        .value;
+
+    const terms =
+      document
+        .getElementById("terms")
+        .checked;
+
+
+    /* VALIDATION */
+
+    if (!displayName){
+
+      showStatus(
+        "Enter your display name.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    if (
+      username.length < 3 ||
+      !/^[a-z0-9_]+$/.test(username)
+    ){
+
+      showStatus(
+        "Creator usernames must be 3–30 characters using letters, numbers, and underscores.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    if (!email){
+
+      showStatus(
+        "Enter your email address.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    if (!role){
+
+      showStatus(
+        "Select your primary creative role.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    if (password.length < 8){
+
+      showStatus(
+        "Your password must be at least 8 characters.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    if (password !== confirmPassword){
+
+      showStatus(
+        "Your passwords do not match.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    if (!terms){
+
+      showStatus(
+        "Please accept the Dreamscapes creator-network terms.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    setLoading(
+      signupButton,
+      true,
+      "CREATING ACCOUNT..."
+    );
+
+
+    try{
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient.auth
+          .signUp({
+
+            email,
+
+            password,
+
+            options: {
+
+              emailRedirectTo:
+                AUTH_CALLBACK,
+
+              data: {
+
+                display_name:
+                  displayName,
+
+                username:
+                  username,
+
+                creator_role:
+                  role,
+
+                bio:
+                  bio
+
+              }
+
+            }
+
+          });
+
+
+      if (error){
+        throw error;
+      }
+
+
+      /*
+       Supabase may require email confirmation.
+       In that case data.session is null.
+      */
+
+      if (!data.session){
+
+        showStatus(
+          "Your account has been created. Check your email to confirm your Dreamscapes account, then return here to sign in.",
+          "success"
+        );
+
+        signupForm.reset();
+
+        return;
+
+      }
+
+
+      showStatus(
+        "Creator account created. Welcome to Dreamscapes.",
+        "success"
+      );
+
+
+      setTimeout(
+        () => {
+
+          window.location.replace(
+            CREATOR_PORTAL
+          );
+
+        },
+        700
+      );
+
+
+    }catch(error){
+
+      console.error(error);
+
+      showStatus(
+        friendlyAuthError(error),
+        "error"
+      );
+
+    }finally{
+
+      setLoading(
+        signupButton,
+        false,
+        "CREATE CREATOR ACCOUNT"
+      );
+
+    }
+
+  }
+);
+
+
+/* ============================================================
+   MAGIC LINK
+============================================================ */
+
+magicLinkButton.addEventListener(
+  "click",
+  async () => {
+
+    clearStatus();
+
+    if (!supabaseClient){
+
+      showStatus(
+        "Supabase is not configured.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    const email =
+      document
+        .getElementById("loginEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+    if (!email){
+
+      showStatus(
+        "Enter your email address first.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    setLoading(
+      magicLinkButton,
+      true,
+      "SENDING..."
+    );
+
+    try{
+
+      const {
+        error
+      } =
+        await supabaseClient.auth
+          .signInWithOtp({
+
+            email,
+
+            options: {
+
+              emailRedirectTo:
+                AUTH_CALLBACK,
+
+              shouldCreateUser:
+                false
+
+            }
+
+          });
+
+      if (error){
+        throw error;
+      }
+
+      showStatus(
+        "Magic login link sent. Check your email.",
+        "success"
+      );
+
+    }catch(error){
+
+      console.error(error);
+
+      showStatus(
+        friendlyAuthError(error),
+        "error"
+      );
+
+    }finally{
+
+      setLoading(
+        magicLinkButton,
+        false,
+        "SEND MAGIC LOGIN LINK"
+      );
+
+    }
+
+  }
+);
+
+
+/* ============================================================
+   FORGOT PASSWORD
+============================================================ */
+
+document
+  .getElementById("forgotPassword")
+  .addEventListener(
+    "click",
+    async event => {
+
+      event.preventDefault();
+
+      clearStatus();
+
+      if (!supabaseClient){
+
+        showStatus(
+          "Supabase is not configured.",
+          "error"
+        );
+
+        return;
+
+      }
+
+      const email =
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim()
+          .toLowerCase();
+
+      if (!email){
+
+        showStatus(
+          "Enter your email address first.",
+          "error"
+        );
+
+        return;
+
+      }
+
+      try{
+
+        const {
+          error
+        } =
+          await supabaseClient.auth
+            .resetPasswordForEmail(
+              email,
+              {
+                redirectTo:
+                  RESET_PASSWORD
+              }
+            );
+
+        if (error){
+          throw error;
+        }
+
+        showStatus(
+          "Password reset instructions have been sent to your email.",
+          "success"
+        );
+
+      }catch(error){
+
+        console.error(error);
+
+        showStatus(
+          friendlyAuthError(error),
+          "error"
+        );
+
+      }
+
+    }
+  );
+
+
+/* ============================================================
+   AUTH ERROR HANDLING
+============================================================ */
+
+function friendlyAuthError(error){
+
+  const message =
+    String(
+      error?.message || error || ""
+    );
+
+  const lower =
+    message.toLowerCase();
+
+
+  if (
+    lower.includes("invalid login credentials")
+  ){
+
+    return "The email or password is incorrect.";
+
+  }
+
+
+  if (
+    lower.includes("email not confirmed")
+  ){
+
+    return "Please confirm your email address before signing in.";
+
+  }
+
+
+  if (
+    lower.includes("password")
+    &&
+    lower.includes("characters")
+  ){
+
+    return message;
+
+  }
+
+
+  if (
+    lower.includes("already registered")
+    ||
+    lower.includes("already been registered")
+  ){
+
+    return "An account with that email already exists. Try signing in.";
+
+  }
+
+
+  if (
+    lower.includes("rate limit")
+  ){
+
+    return "Too many attempts. Please wait a moment and try again.";
+
+  }
+
+
+  if (
+    lower.includes("username")
+  ){
+
+    return "That creator username may already be in use. Try another.";
+
+  }
+
+
+  return message ||
+    "Something went wrong. Please try again.";
+
+}
+
+
+/* ============================================================
+   AUTH STATE
+============================================================ */
+
+if (supabaseClient){
+
+  supabaseClient.auth
+    .onAuthStateChange(
+      (event, session) => {
+
+        console.log(
+          "Dreamscapes auth:",
+          event
+        );
+
+      }
+    );
+
+}
+
+</script>
+
+</body>
+</html>
