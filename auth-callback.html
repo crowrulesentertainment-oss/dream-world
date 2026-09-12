@@ -1,0 +1,187 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>Entering Dreamscapes...</title>
+
+<style>
+
+html,
+body{
+  margin:0;
+  width:100%;
+  height:100%;
+  background:#05050b;
+  color:white;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  display:grid;
+  place-items:center;
+}
+
+.box{
+  text-align:center;
+}
+
+.spinner{
+  width:50px;
+  height:50px;
+
+  margin:0 auto 25px;
+
+  border:3px solid rgba(255,255,255,.12);
+  border-top-color:#00eaff;
+
+  border-radius:50%;
+
+  animation:spin .8s linear infinite;
+}
+
+h1{
+  font-family:Arial,sans-serif;
+  letter-spacing:3px;
+}
+
+p{
+  color:#999;
+}
+
+@keyframes spin{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+
+<body>
+
+<div class="box">
+
+  <div class="spinner"></div>
+
+  <h1>ENTERING DREAMSCAPES</h1>
+
+  <p>
+    Verifying your creator account...
+  </p>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+  "https://zauxdqyssratvzmomozf.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY,
+    {
+      auth:{
+        autoRefreshToken:true,
+        persistSession:true,
+        detectSessionInUrl:true
+      }
+    }
+  );
+
+async function enterDreamscapes(){
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.getSession();
+
+    if (error){
+      throw error;
+    }
+
+    if (data.session){
+
+      window.location.replace(
+        "creator-portal.html"
+      );
+
+      return;
+
+    }
+
+    /*
+      Give Supabase a moment to process
+      the confirmation/recovery URL.
+    */
+
+    setTimeout(
+      async () => {
+
+        const {
+          data
+        } =
+          await supabaseClient.auth.getSession();
+
+        if (data.session){
+
+          window.location.replace(
+            "creator-portal.html"
+          );
+
+        }else{
+
+          window.location.replace(
+            "login.html"
+          );
+
+        }
+
+      },
+      1200
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    setTimeout(
+      () => {
+        window.location.replace(
+          "login.html"
+        );
+      },
+      1500
+    );
+
+  }
+
+}
+
+enterDreamscapes();
+
+</script>
+
+</body>
+
+</html>
