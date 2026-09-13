@@ -1,4376 +1,3034 @@
 <!doctype html>
 <html lang="en">
 <head>
-
-<meta charset="utf-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,viewport-fit=cover"
->
-
-<title>
-  CrowRules Dreamscapes — Bringing Stories to Life
-</title>
-
-<meta
-  name="description"
-  content="CrowRules Dreamscapes is a creative development network where ordinary people bring dreams, ideas, worlds and stories to life with writers, artists, filmmakers, designers and storytellers."
->
-
-<meta
-  name="theme-color"
-  content="#03030a"
->
-
-<link
-  rel="preconnect"
-  href="https://fonts.googleapis.com"
->
-
-<link
-  rel="preconnect"
-  href="https://fonts.gstatic.com"
-  crossorigin
->
-
-<link
-  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
-  rel="stylesheet"
->
-
-<style>
-
-/* =========================================================
-   CROWRULES DREAMSCAPES
-   INDEX
-   CINEMATIC LANDING EXPERIENCE
-   ========================================================= */
-
-:root{
-
-  --bg:#03030a;
-  --bg2:#070711;
-
-  --panel:rgba(11,11,28,.72);
-  --panel-strong:rgba(13,13,32,.90);
-
-  --line:rgba(255,255,255,.09);
-  --line-strong:rgba(255,255,255,.16);
-
-  --text:#f8f8ff;
-  --muted:#9ea1bb;
-  --soft:#c9cbdc;
-
-  --purple:#9b7cff;
-  --blue:#5db7ff;
-  --cyan:#62e7ff;
-  --pink:#ff70c8;
-  --green:#62e6a7;
-  --gold:#ffd76a;
-
-  --max:1380px;
-
-  --radius:24px;
-  --radius-small:15px;
-
-  --shadow:
-    0 30px 100px rgba(0,0,0,.45);
-
-}
-
-
-/* =========================================================
-   RESET
-   ========================================================= */
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-
-  margin:0;
-
-  min-height:100vh;
-
-  color:var(--text);
-
-  background:
-    radial-gradient(
-      circle at 12% 8%,
-      rgba(111,74,255,.14),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 88% 18%,
-      rgba(55,190,255,.10),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 50% 100%,
-      rgba(255,72,194,.08),
-      transparent 34%
-    ),
-    var(--bg);
-
-  font-family:
-    Montserrat,
-    Arial,
-    sans-serif;
-
-  overflow-x:hidden;
-
-}
-
-body.menu-open{
-  overflow:hidden;
-}
-
-button,
-input,
-textarea,
-select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-
-/* =========================================================
-   GLOBAL CONTAINER
-   ========================================================= */
-
-.container{
-
-  width:
-    min(
-      var(--max),
-      calc(100% - 40px)
-    );
-
-  margin-inline:auto;
-
-}
-
-
-/* =========================================================
-   STARFIELD
-   ========================================================= */
-
-#stars{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:-10;
-
-  pointer-events:none;
-
-  overflow:hidden;
-
-}
-
-.star{
-
-  position:absolute;
-
-  width:2px;
-  height:2px;
-
-  border-radius:50%;
-
-  background:#fff;
-
-  opacity:.25;
-
-  animation:
-    starTwinkle
-    4s
-    ease-in-out
-    infinite;
-
-}
-
-@keyframes starTwinkle{
-
-  0%,
-  100%{
-    opacity:.12;
-    transform:scale(.7);
-  }
-
-  50%{
-    opacity:.85;
-    transform:scale(1.5);
-  }
-
-}
-
-
-/* =========================================================
-   NEBULA
-   ========================================================= */
-
-#nebula{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:-9;
-
-  pointer-events:none;
-
-  overflow:hidden;
-
-}
-
-.nebula{
-
-  position:absolute;
-
-  border-radius:50%;
-
-  filter:blur(90px);
-
-  opacity:.13;
-
-  animation:
-    nebulaFloat
-    22s
-    ease-in-out
-    infinite
-    alternate;
-
-}
-
-.nebula-one{
-
-  width:560px;
-  height:560px;
-
-  left:-220px;
-  top:100px;
-
-  background:#623cff;
-
-}
-
-.nebula-two{
-
-  width:500px;
-  height:500px;
-
-  right:-200px;
-  top:280px;
-
-  background:#19bfff;
-
-  animation-delay:-7s;
-
-}
-
-.nebula-three{
-
-  width:430px;
-  height:430px;
-
-  left:40%;
-  bottom:-220px;
-
-  background:#ff3db8;
-
-  animation-delay:-13s;
-
-}
-
-@keyframes nebulaFloat{
-
-  from{
-    transform:
-      translate3d(-25px,-15px,0)
-      scale(1);
-  }
-
-  to{
-    transform:
-      translate3d(35px,35px,0)
-      scale(1.12);
-  }
-
-}
-
-
-/* =========================================================
-   CINEMATIC INTRO
-   ========================================================= */
-
-#intro{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:9999;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  overflow:hidden;
-
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(106,73,255,.18),
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at center,
-      rgba(42,206,255,.06),
-      transparent 52%
-    ),
-    #020208;
-
-  transition:
-    opacity 1s ease,
-    visibility 1s ease;
-
-}
-
-#intro.hide{
-
-  opacity:0;
-
-  visibility:hidden;
-
-  pointer-events:none;
-
-}
-
-.intro-orbit{
-
-  position:absolute;
-
-  width:
-    min(
-      700px,
-      82vw
-    );
-
-  aspect-ratio:1;
-
-  border:
-    1px solid
-    rgba(155,124,255,.12);
-
-  border-radius:50%;
-
-  animation:
-    introSpin
-    25s
-    linear
-    infinite;
-
-}
-
-.intro-orbit::before,
-.intro-orbit::after{
-
-  content:"";
-
-  position:absolute;
-
-  border-radius:50%;
-
-  border:1px solid;
-
-}
-
-.intro-orbit::before{
-
-  inset:10%;
-
-  border-color:
-    rgba(98,231,255,.10);
-
-}
-
-.intro-orbit::after{
-
-  inset:25%;
-
-  border-color:
-    rgba(255,112,200,.08);
-
-}
-
-@keyframes introSpin{
-
-  to{
-    transform:rotate(360deg);
-  }
-
-}
-
-.intro-content{
-
-  position:relative;
-
-  z-index:2;
-
-  width:
-    min(
-      920px,
-      calc(100% - 40px)
-    );
-
-  padding:30px 20px;
-
-  text-align:center;
-
-}
-
-.intro-eyebrow{
-
-  margin-bottom:22px;
-
-  color:var(--cyan);
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:10px;
-
-  letter-spacing:.34em;
-
-  text-transform:uppercase;
-
-}
-
-.intro-brand{
-
-  margin:0;
-
-  /*
-   * Fluid sizing.
-   * Never allows the brand to overflow.
-   */
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:
-    clamp(
-      0.35rem,
-      6.5vw,
-      4.4rem
-    );
-
-  line-height:.88;
-
-  font-weight:800;
-
-  letter-spacing:
-    clamp(
-      0.15rem,
-      1.5vw,
-      1.4rem
-    );
-
-  white-space:nowrap;
-
-  background:
-    linear-gradient(
-      110deg,
-      #ffffff 0%,
-      #b8a8ff 30%,
-      #69e8ff 64%,
-      #ff82d5 100%
-    );
-
-  -webkit-background-clip:text;
-  background-clip:text;
-
-  color:transparent;
-
-  filter:
-    drop-shadow(
-      0 0 30px
-      rgba(125,103,255,.22)
-    );
-
-}
-
-.intro-title{
-
-  margin:20px 0 0;
-
-  color:#fff;
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:
-    clamp(
-      0.75rem,
-      4.5vw,
-      2.4rem
-    );
-
-  letter-spacing:
-    clamp(
-      .12em,
-      .45vw,
-      .24em
-    );
-
-  text-transform:uppercase;
-
-}
-
-.intro-copy{
-
-  width:
-    min(
-      630px,
-      100%
-    );
-
-  margin:
-    22px auto 0;
-
-  color:#bfc1d4;
-
-  font-size:14px;
-
-  line-height:1.85;
-
-}
-
-.intro-progress{
-
-  width:
-    min(
-      280px,
-      70vw
-    );
-
-  height:2px;
-
-  margin:38px auto 0;
-
-  overflow:hidden;
-
-  background:
-    rgba(255,255,255,.10);
-
-}
-
-.intro-progress span{
-
-  display:block;
-
-  width:0;
-  height:100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--purple),
-      var(--cyan),
-      var(--pink)
-    );
-
-  animation:
-    introProgress
-    2.4s
-    ease
-    forwards;
-
-}
-
-@keyframes introProgress{
-
-  to{
-    width:100%;
-  }
-
-}
-
-.skip-intro{
-
-  position:absolute;
-
-  right:24px;
-  bottom:24px;
-
-  padding:10px 16px;
-
-  border:
-    1px solid
-    var(--line);
-
-  border-radius:999px;
-
-  color:#999bb1;
-
-  background:
-    rgba(255,255,255,.04);
-
-  font-size:10px;
-
-  letter-spacing:.1em;
-
-}
-
-.skip-intro:hover{
-
-  color:#fff;
-
-  border-color:
-    rgba(98,231,255,.35);
-
-}
-
-
-/* =========================================================
-   TOP LAUNCH BAR
-   ========================================================= */
-
-.launch-bar{
-
-  position:relative;
-
-  z-index:1001;
-
-  border-bottom:
-    1px solid
-    rgba(98,231,255,.12);
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(155,124,255,.08),
-      rgba(98,231,255,.06),
-      rgba(255,112,200,.06)
-    );
-
-}
-
-.launch-inner{
-
-  min-height:40px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:12px;
-
-  padding:8px 0;
-
-  text-align:center;
-
-  font-size:10px;
-
-  letter-spacing:.08em;
-
-}
-
-.launch-dot{
-
-  width:6px;
-  height:6px;
-
-  flex:0 0 6px;
-
-  border-radius:50%;
-
-  background:var(--green);
-
-  box-shadow:
-    0 0 12px
-    rgba(98,230,167,.75);
-
-  animation:
-    pulseDot
-    2s
-    ease-in-out
-    infinite;
-
-}
-
-@keyframes pulseDot{
-
-  0%,
-  100%{
-    opacity:.5;
-    transform:scale(.8);
-  }
-
-  50%{
-    opacity:1;
-    transform:scale(1.25);
-  }
-
-}
-
-.launch-inner span{
-
-  color:#aaaec2;
-
-}
-
-.launch-inner strong{
-
-  color:#fff;
-
-}
-
-.launch-inner a{
-
-  color:var(--cyan);
-
-  font-weight:700;
-
-  transition:.25s;
-
-}
-
-.launch-inner a:hover{
-
-  color:#fff;
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-
-.nav{
-
-  position:sticky;
-
-  top:0;
-
-  z-index:1000;
-
-  border-bottom:
-    1px solid
-    var(--line);
-
-  background:
-    rgba(3,3,10,.78);
-
-  backdrop-filter:blur(20px);
-
-}
-
-.nav-inner{
-
-  min-height:72px;
-
-  display:flex;
-
-  align-items:center;
-
-  gap:28px;
-
-}
-
-.brand{
-
-  flex-shrink:0;
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:15px;
-
-  font-weight:800;
-
-  letter-spacing:.08em;
-
-}
-
-.brand-small{
-
-  display:block;
-
-  margin-top:3px;
-
-  color:var(--purple);
-
-  font-size:9px;
-
-  letter-spacing:.3em;
-
-}
-
-.nav-links{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:flex-end;
-
-  gap:18px;
-
-  margin-left:auto;
-
-}
-
-.nav-links a{
-
-  color:#aeb0c4;
-
-  font-size:11px;
-
-  white-space:nowrap;
-
-  transition:
-    color .25s ease,
-    transform .25s ease;
-
-}
-
-.nav-links a:hover{
-
-  color:#fff;
-
-  transform:translateY(-1px);
-
-}
-
-.nav-links a.company{
-
-  color:var(--cyan);
-
-}
-
-.nav-links a.active{
-
-  color:#fff;
-
-}
-
-.menu-button{
-
-  display:none;
-
-  margin-left:auto;
-
-  padding:9px 13px;
-
-  border:
-    1px solid
-    var(--line);
-
-  border-radius:10px;
-
-  color:#fff;
-
-  background:
-    rgba(255,255,255,.04);
-
-  font-size:10px;
-
-  letter-spacing:.1em;
-
-}
-
-
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.hero{
-
-  position:relative;
-
-  min-height:
-    calc(
-      100vh - 112px
-    );
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:
-    80px 0
-    100px;
-
-  text-align:center;
-
-}
-
-.hero::before{
-
-  content:"";
-
-  position:absolute;
-
-  left:50%;
-
-  top:50%;
-
-  width:
-    min(
-      900px,
-      100vw
-    );
-
-  aspect-ratio:1;
-
-  transform:
-    translate(-50%,-50%);
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(111,83,255,.13),
-      rgba(67,197,255,.05) 35%,
-      transparent 68%
-    );
-
-  pointer-events:none;
-
-}
-
-.hero-content{
-
-  position:relative;
-
-  z-index:2;
-
-  width:
-    min(
-      1120px,
-      100%
-    );
-
-}
-
-
-/* =========================================================
-   HERO EYEBROW
-   ========================================================= */
-
-.hero-eyebrow{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:11px;
-
-  margin-bottom:24px;
-
-  color:var(--cyan);
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:10px;
-
-  letter-spacing:.26em;
-
-  text-transform:uppercase;
-
-}
-
-.hero-eyebrow::before,
-.hero-eyebrow::after{
-
-  content:"";
-
-  width:
-    clamp(
-      25px,
-      7vw,
-      70px
-    );
-
-  height:1px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      var(--cyan)
-    );
-
-}
-
-.hero-eyebrow::after{
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--cyan),
-      transparent
-    );
-
-}
-
-
-/* =========================================================
-   HERO DREAMSCAPES
-   ========================================================= */
-
-/*
- * THIS IS THE MAIN FIX.
- *
- * DREAMSCAPES is:
- * - fluid
- * - centered
- * - never allowed to wrap
- * - sized with clamp()
- * - letter spacing reduced as viewport shrinks
- * - contained inside overflow-safe wrapper
- */
-
-.hero-brand-wrap{
-
-  width:auto;
-
-  overflow:hidden;
-
-  padding:
-    8px 0
-    14px;
-
-}
-
-.hero-brand{
-
-  display:block;
-
-  width:100%;
-
-  margin:0;
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:
-    clamp(
-      0.45rem,
-      8.5vw,
-      6.4rem
-    );
-
-  line-height:.86;
-
-  font-weight:800;
-
-  letter-spacing:
-    clamp(
-      -.025em,
-      .25vw,
-      .055em
-    );
-
-  white-space:nowrap;
-
-  text-align:center;
-
-  background:
-    linear-gradient(
-      105deg,
-      #ffffff 0%,
-      #b8a7ff 30%,
-      #68e8ff 63%,
-      #ff82d4 100%
-    );
-
-  -webkit-background-clip:text;
-  background-clip:text;
-
-  color:transparent;
-
-  filter:
-    drop-shadow(
-      0 0 32px
-      rgba(120,103,255,.18)
-    );
-
-  animation:
-    heroBrandReveal
-    1.3s
-    ease both;
-
-}
-
-@keyframes heroBrandReveal{
-
-  from{
-
-    opacity:0;
-
-    transform:
-      scale(.96)
-      translateY(12px);
-
-    filter:
-      blur(10px)
-      drop-shadow(
-        0 0 32px
-        rgba(120,103,255,.18)
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+  <title>CrowRules Dreamscapes — Bringing Stories to Life</title>
+
+  <meta
+    name="description"
+    content="CrowRules Dreamscapes is a creator network where dreams, ideas and original concepts become stories, worlds, shows and movies."
+  >
+
+  <meta
+    name="theme-color"
+    content="#05050b"
+  >
+
+  <meta
+    property="og:title"
+    content="CrowRules Dreamscapes — Bringing Stories to Life"
+  >
+
+  <meta
+    property="og:description"
+    content="Writing together. Building together. Bringing stories to life."
+  >
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:url"
+    content="https://crowrulesentertainment-oss.github.io/dreamscapes/"
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    :root{
+      --bg:#05050b;
+      --bg2:#090817;
+      --panel:rgba(15,14,29,.72);
+      --panel-strong:rgba(14,13,27,.9);
+
+      --text:#f5f3ff;
+      --muted:#a4a5bd;
+      --dim:#686b82;
+
+      --cyan:#58e8ff;
+      --purple:#a875ff;
+      --pink:#ff63c3;
+      --gold:#ffd166;
+
+      --line:rgba(255,255,255,.10);
+      --line-bright:rgba(88,232,255,.32);
+
+      --max:1180px;
+
+      --shadow:
+        0 35px 100px rgba(0,0,0,.45);
+
+      --glow:
+        0 0 45px rgba(88,232,255,.12);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(88,232,255,.10),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 85% 15%,
+          rgba(168,117,255,.12),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 50% 80%,
+          rgba(255,99,195,.06),
+          transparent 32%
+        ),
+        linear-gradient(
+          180deg,
+          #05050b 0%,
+          #080715 45%,
+          #05050b 100%
+        );
+
+      color:var(--text);
+
+      font-family:
+        Montserrat,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+
+      opacity:.35;
+
+      background-image:
+        radial-gradient(
+          circle,
+          rgba(255,255,255,.85) 0 1px,
+          transparent 1.5px
+        ),
+        radial-gradient(
+          circle,
+          rgba(88,232,255,.55) 0 1px,
+          transparent 1.5px
+        ),
+        radial-gradient(
+          circle,
+          rgba(168,117,255,.45) 0 1px,
+          transparent 1.5px
+        );
+
+      background-size:
+        170px 170px,
+        250px 250px,
+        320px 320px;
+
+      background-position:
+        20px 30px,
+        100px 120px,
+        50px 200px;
+
+      animation:
+        starsDrift 35s linear infinite;
+    }
+
+    @keyframes starsDrift{
+      from{
+        transform:translateY(0);
+      }
+
+      to{
+        transform:translateY(-170px);
+      }
+    }
+
+    a{
+      color:inherit;
+    }
+
+    button,
+    a{
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    .container{
+      width:min(
+        calc(100% - 40px),
+        var(--max)
       );
 
-  }
+      margin:0 auto;
+    }
+
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+
+
+    /* =========================================================
+       INTRO
+       ========================================================= */
+
+    #intro{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(168,117,255,.14),
+          transparent 32%
+        ),
+        #05050b;
+
+      transition:
+        opacity .9s ease,
+        visibility .9s ease;
+    }
+
+    #intro.hidden{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+
+    .intro-inner{
+      text-align:center;
+      padding:30px;
+    }
+
+    .intro-eyebrow{
+      margin-bottom:18px;
+
+      color:var(--cyan);
+
+      font-family:Orbitron,sans-serif;
+      font-size:10px;
+      font-weight:800;
+
+      letter-spacing:.35em;
+    }
+
+    .intro-title{
+      font-family:Orbitron,sans-serif;
+      font-size:clamp(35px,8vw,90px);
+      font-weight:800;
+      line-height:1;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--cyan),
+          var(--purple),
+          var(--pink)
+        );
+
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+
+      animation:introPulse 2.5s ease-in-out infinite;
+    }
+
+    .intro-subtitle{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+
+    @keyframes introPulse{
+      0%,100%{
+        filter:drop-shadow(
+          0 0 10px rgba(88,232,255,.05)
+        );
+      }
+
+      50%{
+        filter:drop-shadow(
+          0 0 35px rgba(168,117,255,.18)
+        );
+      }
+    }
+
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+
+    .site-nav{
+      position:sticky;
+      top:0;
+      z-index:1000;
+
+      border-bottom:1px solid var(--line);
+
+      background:rgba(5,5,11,.76);
+      backdrop-filter:blur(18px);
+    }
+
+    .nav-inner{
+      min-height:72px;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:25px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+
+      text-decoration:none;
+    }
+
+    .brand-mark{
+      width:38px;
+      height:38px;
+
+      display:grid;
+      place-items:center;
 
-  to{
+      border:1px solid rgba(88,232,255,.35);
+      border-radius:12px;
 
-    opacity:1;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(88,232,255,.13),
+          rgba(168,117,255,.15)
+        );
 
-    transform:
-      scale(1)
-      translateY(0);
+      color:var(--cyan);
 
-    filter:
-      blur(0)
-      drop-shadow(
-        0 0 32px
-        rgba(120,103,255,.18)
-      );
+      font-family:Orbitron,sans-serif;
+      font-size:13px;
+      font-weight:900;
 
-  }
+      box-shadow:var(--glow);
+    }
 
-}
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+    }
 
+    .brand-name{
+      font-family:Orbitron,sans-serif;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+    }
 
-/* =========================================================
-   HERO DIVISION LINE
-   ========================================================= */
+    .brand-sub{
+      color:var(--dim);
+      font-size:8px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
 
-.hero-connection{
+    .nav-links{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+      gap:7px;
+    }
 
-  display:inline-flex;
+    .nav-links a{
+      padding:9px 11px;
 
-  align-items:center;
+      border:1px solid transparent;
+      border-radius:999px;
 
-  justify-content:center;
+      color:#c9cad8;
 
-  gap:9px;
+      font-size:9px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-decoration:none;
+      text-transform:uppercase;
 
-  margin-top:8px;
+      transition:.2s ease;
+    }
 
-  padding:7px 13px;
+    .nav-links a:hover{
+      color:#fff;
+      border-color:var(--line);
+      background:rgba(255,255,255,.04);
+    }
 
-  border:
-    1px solid
-    rgba(155,124,255,.20);
+    .nav-support{
+      color:var(--cyan)!important;
+      border-color:rgba(88,232,255,.25)!important;
+      background:rgba(88,232,255,.05);
+    }
 
-  border-radius:999px;
 
-  background:
-    rgba(155,124,255,.045);
+    /* =========================================================
+       HERO
+       ========================================================= */
 
-  color:#bfc1d3;
+    .hero{
+      position:relative;
+      min-height:calc(100vh - 72px);
 
-  font-size:10px;
+      display:flex;
+      align-items:center;
 
-  letter-spacing:.12em;
+      padding:
+        100px 0
+        110px;
 
-  text-transform:uppercase;
+      overflow:hidden;
+    }
 
-}
+    .hero::before{
+      content:"";
 
-.hero-connection strong{
+      position:absolute;
+
+      width:650px;
+      height:650px;
+
+      left:-260px;
+      top:-180px;
+
+      border-radius:50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(88,232,255,.11),
+          transparent 68%
+        );
+
+      filter:blur(5px);
+      pointer-events:none;
+    }
+
+    .hero::after{
+      content:"";
+
+      position:absolute;
+
+      width:700px;
+      height:700px;
+
+      right:-300px;
+      bottom:-350px;
 
-  color:#fff;
+      border-radius:50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(168,117,255,.13),
+          transparent 68%
+        );
 
-}
+      pointer-events:none;
+    }
 
-.hero-connection a{
+    .hero-grid{
+      position:relative;
+      z-index:2;
 
-  color:var(--cyan);
+      display:grid;
+      grid-template-columns:
+        minmax(0,1.2fr)
+        minmax(300px,.8fr);
 
-  font-weight:700;
+      align-items:center;
+      gap:70px;
+    }
 
-}
+    .hero-eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
 
-.hero-connection a:hover{
+      margin-bottom:24px;
 
-  color:#fff;
+      color:var(--cyan);
+
+      font-family:Orbitron,sans-serif;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.22em;
+    }
 
-}
+    .hero-eyebrow::before{
+      content:"";
+
+      width:35px;
+      height:1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--cyan)
+        );
+    }
+
+    .hero h1{
+      max-width:900px;
+
+      font-family:Orbitron,sans-serif;
+      font-size:clamp(45px,7vw,90px);
+      font-weight:800;
+      line-height:1.02;
+      letter-spacing:-.04em;
+    }
+
+    .gradient-text{
+      background:
+        linear-gradient(
+          90deg,
+          var(--cyan),
+          var(--purple),
+          var(--pink)
+        );
 
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
 
-/* =========================================================
-   HERO TAGLINE
-   ========================================================= */
+    .hero-lead{
+      max-width:720px;
+      margin-top:28px;
 
-.hero-tagline{
+      color:#b7b8ca;
 
-  margin:
-    30px auto
-    0;
+      font-size:clamp(16px,2vw,20px);
+      line-height:1.8;
+    }
 
-  font-family:Orbitron,sans-serif;
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
 
-  font-size:
-    clamp(
-      1rem,
-      2.3vw,
-      1.65rem
-    );
+      margin-top:34px;
+    }
 
-  line-height:1.5;
+    .button{
+      min-height:48px;
 
-  letter-spacing:
-    clamp(
-      .04em,
-      .2vw,
-      .10em
-    );
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
 
-  color:#fff;
+      padding:13px 21px;
 
-}
+      border:1px solid rgba(255,255,255,.13);
+      border-radius:999px;
 
-.hero-tagline span{
+      background:rgba(255,255,255,.035);
 
-  color:var(--purple);
+      color:#fff;
 
-}
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.10em;
+      text-decoration:none;
+      text-transform:uppercase;
 
+      cursor:pointer;
 
-/* =========================================================
-   HERO DESCRIPTION
-   ========================================================= */
+      transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+    }
 
-.hero-description{
+    .button:hover{
+      transform:translateY(-2px);
+      border-color:rgba(88,232,255,.55);
+      background:rgba(88,232,255,.06);
+      box-shadow:0 12px 35px rgba(0,0,0,.25);
+    }
 
-  width:
-    min(
-      760px,
-      100%
-    );
+    .button-primary{
+      border-color:rgba(88,232,255,.38);
 
-  margin:
-    22px auto
-    0;
+      background:
+        linear-gradient(
+          100deg,
+          rgba(88,232,255,.14),
+          rgba(168,117,255,.18)
+        );
 
-  color:var(--muted);
+      box-shadow:
+        0 0 35px rgba(88,232,255,.07);
+    }
 
-  font-size:15px;
+    .button-donate{
+      border-color:rgba(88,232,255,.35);
+      background:rgba(88,232,255,.06);
+      color:#fff;
+    }
 
-  line-height:1.9;
+    .button-donate:hover{
+      border-color:rgba(88,232,255,.75);
+      background:rgba(88,232,255,.12);
+      box-shadow:0 0 30px rgba(88,232,255,.12);
+    }
 
-}
+    .hero-note{
+      margin-top:22px;
 
+      color:#66697f;
 
-/* =========================================================
-   HERO ACTIONS
-   ========================================================= */
+      font-size:9px;
+      letter-spacing:.06em;
+    }
 
-.hero-actions{
 
-  display:flex;
+    /* HERO ORBIT */
 
-  flex-wrap:wrap;
+    .hero-visual{
+      position:relative;
+      min-height:480px;
 
-  justify-content:center;
+      display:grid;
+      place-items:center;
+    }
 
-  gap:12px;
+    .orbit{
+      position:relative;
 
-  margin-top:32px;
+      width:min(430px,80vw);
+      aspect-ratio:1;
 
-}
+      border:
+        1px solid
+        rgba(88,232,255,.14);
 
-.button{
+      border-radius:50%;
 
-  min-height:48px;
+      box-shadow:
+        0 0 100px rgba(88,232,255,.06),
+        inset 0 0 80px rgba(168,117,255,.04);
 
-  display:inline-flex;
+      animation:orbitFloat 8s ease-in-out infinite;
+    }
 
-  align-items:center;
+    .orbit::before,
+    .orbit::after{
+      content:"";
 
-  justify-content:center;
+      position:absolute;
+      inset:12%;
 
-  gap:8px;
+      border:
+        1px solid
+        rgba(168,117,255,.16);
 
-  padding:
-    0 20px;
+      border-radius:50%;
 
-  border:
-    1px solid
-    var(--line);
+      transform:rotate(58deg) scaleX(.55);
+    }
 
-  border-radius:13px;
+    .orbit::after{
+      inset:20%;
 
-  background:
-    rgba(255,255,255,.045);
+      border-color:
+        rgba(255,99,195,.12);
 
-  color:#fff;
+      transform:
+        rotate(-38deg)
+        scaleX(.72);
+    }
 
-  font-size:12px;
+    .orbit-center{
+      position:absolute;
+      inset:28%;
 
-  font-weight:700;
+      display:grid;
+      place-items:center;
 
-  transition:
-    transform .25s ease,
-    border-color .25s ease,
-    background .25s ease,
-    box-shadow .25s ease;
+      border:
+        1px solid
+        rgba(88,232,255,.32);
 
-}
+      border-radius:50%;
 
-.button:hover{
+      background:
+        radial-gradient(
+          circle,
+          rgba(88,232,255,.13),
+          rgba(168,117,255,.09),
+          rgba(5,5,11,.92)
+        );
 
-  transform:translateY(-2px);
+      box-shadow:
+        0 0 80px rgba(88,232,255,.10),
+        inset 0 0 50px rgba(168,117,255,.08);
+    }
 
-  border-color:
-    var(--line-strong);
+    .orbit-center span{
+      font-family:Orbitron,sans-serif;
+      font-size:clamp(25px,4vw,45px);
+      font-weight:900;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--cyan),
+          var(--purple),
+          var(--pink)
+        );
 
-  background:
-    rgba(255,255,255,.08);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
 
-}
+    .orbit-label{
+      position:absolute;
 
-.button-primary{
+      padding:8px 11px;
 
-  border-color:
-    rgba(155,124,255,.55);
+      border:1px solid var(--line);
+      border-radius:999px;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(126,89,255,.58),
-      rgba(70,184,255,.28)
-    );
+      background:rgba(5,5,11,.75);
+      backdrop-filter:blur(10px);
 
-  box-shadow:
-    0 15px 45px
-    rgba(92,67,255,.14);
+      color:#aaaabd;
 
-}
+      font-family:Orbitron,sans-serif;
+      font-size:7px;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
 
-.button-primary:hover{
+    .label-one{
+      top:10%;
+      left:0;
+    }
 
-  box-shadow:
-    0 20px 60px
-    rgba(92,67,255,.25);
+    .label-two{
+      top:24%;
+      right:-7%;
+    }
 
-}
+    .label-three{
+      bottom:13%;
+      left:-6%;
+    }
 
-.button-company{
+    .label-four{
+      bottom:5%;
+      right:8%;
+    }
 
-  border-color:
-    rgba(98,231,255,.30);
+    @keyframes orbitFloat{
+      0%,100%{
+        transform:translateY(0) rotate(0deg);
+      }
 
-  color:var(--cyan);
+      50%{
+        transform:translateY(-12px) rotate(2deg);
+      }
+    }
 
-  background:
-    rgba(98,231,255,.045);
+
+    /* =========================================================
+       SECTIONS
+       ========================================================= */
 
-}
+    .section{
+      padding:105px 0;
+    }
 
+    .section-header{
+      max-width:760px;
+      margin-bottom:50px;
+    }
 
-/* =========================================================
-   HERO SCROLL
-   ========================================================= */
+    .section-eyebrow{
+      margin-bottom:14px;
 
-.hero-scroll{
+      color:var(--cyan);
 
-  position:absolute;
+      font-family:Orbitron,sans-serif;
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:.25em;
+    }
 
-  left:50%;
+    .section-title{
+      font-family:Orbitron,sans-serif;
+      font-size:clamp(30px,5vw,55px);
+      font-weight:800;
+      line-height:1.12;
+    }
 
-  bottom:28px;
+    .section-copy{
+      margin-top:18px;
+      color:var(--muted);
+      line-height:1.9;
+    }
 
-  transform:
-    translateX(-50%);
 
-  display:flex;
+    /* =========================================================
+       MISSION
+       ========================================================= */
 
-  flex-direction:column;
+    .mission-grid{
+      display:grid;
+      grid-template-columns:
+        minmax(0,1fr)
+        minmax(0,1fr);
 
-  align-items:center;
+      gap:25px;
+    }
 
-  gap:8px;
+    .glass-card{
+      padding:30px;
 
-  color:#6e718a;
+      border:1px solid var(--line);
+      border-radius:24px;
 
-  font-size:9px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.045),
+          rgba(255,255,255,.018)
+        );
 
-  letter-spacing:.2em;
+      box-shadow:var(--shadow);
 
-  text-transform:uppercase;
+      backdrop-filter:blur(14px);
+    }
 
-}
+    .card-eyebrow{
+      color:var(--purple);
 
-.scroll-line{
+      font-family:Orbitron,sans-serif;
+      font-size:8px;
+      font-weight:800;
+      letter-spacing:.18em;
+    }
 
-  width:1px;
+    .glass-card h3{
+      margin-top:12px;
 
-  height:38px;
+      font-family:Orbitron,sans-serif;
+      font-size:20px;
+      line-height:1.3;
+    }
 
-  background:
-    linear-gradient(
-      var(--cyan),
-      transparent
-    );
+    .glass-card p{
+      margin-top:14px;
+      color:var(--muted);
+      line-height:1.85;
+    }
 
-  animation:
-    scrollPulse
-    2s
-    ease-in-out
-    infinite;
+    .dream-quote{
+      margin-top:25px;
+      padding:20px;
 
-}
+      border-left:
+        2px solid
+        var(--cyan);
 
-@keyframes scrollPulse{
+      color:#d5d5e3;
 
-  0%,
-  100%{
-    opacity:.35;
-    transform:scaleY(.65);
-    transform-origin:top;
-  }
+      font-family:Orbitron,sans-serif;
+      font-size:13px;
+      line-height:1.8;
+    }
 
-  50%{
-    opacity:1;
-    transform:scaleY(1);
-  }
 
-}
+    /* =========================================================
+       PROCESS
+       ========================================================= */
 
+    .process-grid{
+      display:grid;
 
-/* =========================================================
-   SECTIONS
-   ========================================================= */
+      grid-template-columns:
+        repeat(4,minmax(0,1fr));
 
-.section{
+      gap:15px;
+    }
 
-  position:relative;
+    .process-card{
+      min-height:260px;
+      padding:25px;
 
-  padding:
-    110px 0;
+      border:
+        1px solid
+        var(--line);
 
-}
+      border-radius:20px;
 
-.section-header{
+      background:
+        rgba(255,255,255,.025);
 
-  width:
-    min(
-      820px,
-      100%
-    );
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+    }
 
-  margin:
-    0 auto
-    50px;
+    .process-card:hover{
+      transform:translateY(-5px);
 
-  text-align:center;
+      border-color:
+        rgba(88,232,255,.25);
 
-}
+      background:
+        rgba(88,232,255,.035);
+    }
 
-.section-eyebrow{
+    .process-number{
+      color:var(--cyan);
 
-  margin-bottom:13px;
+      font-family:Orbitron,sans-serif;
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.15em;
+    }
 
-  color:var(--cyan);
+    .process-card h3{
+      margin-top:35px;
 
-  font-family:Orbitron,sans-serif;
+      font-family:Orbitron,sans-serif;
+      font-size:16px;
+    }
 
-  font-size:9px;
+    .process-card p{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.8;
+    }
 
-  letter-spacing:.28em;
 
-  text-transform:uppercase;
+    /* =========================================================
+       CREATOR NETWORK
+       ========================================================= */
 
-}
+    .creator-grid{
+      display:grid;
 
-.section-title{
+      grid-template-columns:
+        repeat(3,minmax(0,1fr));
 
-  margin:0;
+      gap:18px;
+    }
 
-  font-family:Orbitron,sans-serif;
+    .creator-card{
+      padding:28px;
 
-  font-size:
-    clamp(
-      1.8rem,
-      4vw,
-      3.2rem
-    );
+      border:
+        1px solid
+        var(--line);
 
-  line-height:1.15;
+      border-radius:22px;
 
-}
+      background:
+        linear-gradient(
+          145deg,
+          rgba(168,117,255,.05),
+          rgba(255,255,255,.018)
+        );
+    }
 
-.section-copy{
+    .creator-icon{
+      width:50px;
+      height:50px;
 
-  margin:
-    18px auto
-    0;
+      display:grid;
+      place-items:center;
 
-  color:var(--muted);
+      border:
+        1px solid
+        rgba(168,117,255,.3);
 
-  font-size:14px;
+      border-radius:15px;
 
-  line-height:1.85;
+      color:var(--purple);
 
-}
+      font-family:Orbitron,sans-serif;
+      font-size:15px;
 
+      background:
+        rgba(168,117,255,.07);
+    }
 
-/* =========================================================
-   DREAMSCAPES MISSION
-   ========================================================= */
+    .creator-card h3{
+      margin-top:20px;
 
-.mission-grid{
+      font-family:Orbitron,sans-serif;
+      font-size:16px;
+    }
 
-  display:grid;
+    .creator-card p{
+      margin-top:11px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.8;
+    }
 
-  grid-template-columns:
-    1.1fr
-    .9fr;
 
-  gap:22px;
+    /* =========================================================
+       CREATOR RIGHTS
+       ========================================================= */
 
-}
+    .rights-layout{
+      display:grid;
 
-.glass-card{
+      grid-template-columns:
+        minmax(0,.8fr)
+        minmax(0,1.2fr);
 
-  position:relative;
+      gap:30px;
+      align-items:stretch;
+    }
 
-  overflow:hidden;
+    .rights-list{
+      display:grid;
+      gap:12px;
+    }
 
-  padding:32px;
+    .rights-item{
+      padding:18px 20px;
 
-  border:
-    1px solid
-    var(--line);
+      border:
+        1px solid
+        var(--line);
 
-  border-radius:
-    var(--radius);
+      border-radius:16px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.055),
-      rgba(255,255,255,.018)
-    );
+      background:
+        rgba(255,255,255,.025);
+    }
 
-  box-shadow:var(--shadow);
+    .rights-item strong{
+      display:block;
 
-}
+      font-family:Orbitron,sans-serif;
+      font-size:11px;
+      letter-spacing:.05em;
+    }
 
-.glass-card::before{
+    .rights-item span{
+      display:block;
 
-  content:"";
+      margin-top:6px;
 
-  position:absolute;
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.7;
+    }
 
-  width:220px;
-  height:220px;
 
-  right:-110px;
-  top:-110px;
+    /* =========================================================
+       VOLUNTEER
+       ========================================================= */
 
-  border-radius:50%;
+    .volunteer{
+      border:
+        1px solid
+        rgba(255,99,195,.14);
 
-  background:
-    radial-gradient(
-      circle,
-      rgba(130,94,255,.13),
-      transparent 70%
-    );
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(255,99,195,.07),
+          transparent 30%
+        ),
+        rgba(255,255,255,.018);
+    }
 
-}
+    .role-grid{
+      display:grid;
 
-.card-eyebrow{
+      grid-template-columns:
+        repeat(3,minmax(0,1fr));
 
-  color:var(--purple);
+      gap:12px;
 
-  font-family:Orbitron,sans-serif;
+      margin-top:25px;
+    }
 
-  font-size:9px;
+    .role{
+      padding:15px;
 
-  letter-spacing:.2em;
+      border:
+        1px solid
+        rgba(255,255,255,.08);
 
-  text-transform:uppercase;
+      border-radius:14px;
 
-}
+      color:#b9bac9;
 
-.glass-card h3{
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.06em;
+    }
 
-  margin:
-    16px 0
-    12px;
 
-  font-family:Orbitron,sans-serif;
+    /* =========================================================
+       SUPPORT / DONATIONS
+       ========================================================= */
 
-  font-size:20px;
+    #support-crowrules{
+      position:relative;
+    }
 
-}
+    .support-box{
+      max-width:850px;
+      margin:0 auto;
 
-.glass-card p{
+      padding:45px 35px;
 
-  margin:0;
+      text-align:center;
 
-  color:var(--muted);
+      border:
+        1px solid
+        rgba(88,232,255,.18);
 
-  font-size:13px;
+      border-radius:28px;
 
-  line-height:1.85;
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(88,232,255,.07),
+          transparent 40%
+        ),
+        rgba(255,255,255,.025);
 
-}
+      box-shadow:
+        0 40px 120px rgba(0,0,0,.42);
+    }
 
-.mission-points{
+    .support-icon{
+      width:65px;
+      height:65px;
 
-  display:grid;
+      margin:0 auto 20px;
 
-  gap:12px;
+      display:grid;
+      place-items:center;
 
-  margin-top:24px;
+      border:
+        1px solid
+        rgba(88,232,255,.35);
 
-}
+      border-radius:50%;
 
-.mission-point{
+      color:var(--cyan);
 
-  display:flex;
+      background:
+        rgba(88,232,255,.06);
 
-  gap:12px;
+      font-size:25px;
 
-  align-items:flex-start;
+      box-shadow:
+        0 0 45px
+        rgba(88,232,255,.10);
+    }
 
-}
+    .support-box h3{
+      margin-top:10px;
 
-.point-icon{
+      font-family:Orbitron,sans-serif;
+      font-size:clamp(22px,4vw,34px);
+    }
 
-  width:28px;
-  height:28px;
+    .support-box > p{
+      max-width:650px;
+      margin:16px auto 0;
 
-  flex:0 0 28px;
+      color:var(--muted);
+      line-height:1.8;
+    }
 
-  display:grid;
+    .donation-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
 
-  place-items:center;
+      margin-top:30px;
+    }
 
-  border:
-    1px solid
-    rgba(98,231,255,.18);
+    .donation-button{
+      min-width:92px;
+    }
 
-  border-radius:9px;
+    .donation-custom{
+      border-color:
+        rgba(168,117,255,.35);
 
-  color:var(--cyan);
+      background:
+        rgba(168,117,255,.07);
+    }
 
-  background:
-    rgba(98,231,255,.045);
+    #donationStatus{
+      min-height:20px;
 
-  font-size:11px;
+      margin-top:22px;
 
-}
+      color:#777a92;
 
-.point-text strong{
+      font-size:10px;
+      line-height:1.7;
+    }
 
-  display:block;
+    .support-disclaimer{
+      max-width:650px;
 
-  margin-bottom:4px;
+      margin:22px auto 0;
 
-  font-size:12px;
+      color:#5f6277;
 
-}
+      font-size:9px;
+      line-height:1.7;
+    }
 
-.point-text span{
 
-  color:#7f829a;
+    /* =========================================================
+       CROWRULES CONNECTION
+       ========================================================= */
 
-  font-size:11px;
+    .connection{
+      padding-bottom:120px;
+    }
 
-  line-height:1.6;
+    .connection-card{
+      position:relative;
 
-}
+      overflow:hidden;
 
+      padding:55px 40px;
 
-/* =========================================================
-   PROCESS
-   ========================================================= */
+      border:
+        1px solid
+        rgba(168,117,255,.18);
 
-.process-grid{
+      border-radius:28px;
 
-  display:grid;
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(88,232,255,.07),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 85% 80%,
+          rgba(168,117,255,.09),
+          transparent 30%
+        ),
+        rgba(255,255,255,.018);
 
-  grid-template-columns:
-    repeat(4,1fr);
+      text-align:center;
+    }
 
-  gap:15px;
+    .connection-card h2{
+      font-family:Orbitron,sans-serif;
+      font-size:clamp(28px,5vw,50px);
+    }
 
-}
+    .connection-card p{
+      max-width:720px;
+      margin:18px auto 0;
 
-.process-card{
+      color:var(--muted);
+      line-height:1.9;
+    }
 
-  padding:25px;
 
-  border:
-    1px solid
-    var(--line);
+    /* =========================================================
+       FINAL CTA
+       ========================================================= */
 
-  border-radius:
-    var(--radius);
+    .final-cta{
+      padding:100px 0 120px;
 
-  background:
-    rgba(255,255,255,.025);
+      text-align:center;
 
-}
+      border-top:
+        1px solid
+        var(--line);
 
-.process-number{
+      background:
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(168,117,255,.09),
+          transparent 42%
+        );
+    }
 
-  color:var(--purple);
+    .final-cta .section-eyebrow{
+      margin-bottom:15px;
+    }
 
-  font-family:Orbitron,sans-serif;
+    .final-cta h2{
+      max-width:900px;
+      margin:0 auto;
 
-  font-size:12px;
+      font-family:Orbitron,sans-serif;
+      font-size:clamp(34px,6vw,65px);
+      line-height:1.1;
+    }
 
-  letter-spacing:.12em;
+    .final-cta p{
+      max-width:650px;
+      margin:20px auto 0;
 
-}
+      color:var(--muted);
+      line-height:1.9;
+    }
 
-.process-card h3{
+    .final-actions{
+      justify-content:center;
+    }
 
-  margin:
-    18px 0
-    10px;
 
-  font-family:Orbitron,sans-serif;
+    /* =========================================================
+       FOOTER
+       ========================================================= */
 
-  font-size:15px;
+    footer{
+      border-top:
+        1px solid
+        var(--line);
 
-}
+      background:
+        rgba(3,3,8,.65);
+    }
 
-.process-card p{
+    .footer-inner{
+      padding:45px 0;
 
-  margin:0;
+      display:grid;
 
-  color:var(--muted);
+      grid-template-columns:
+        1.2fr
+        1fr
+        1fr;
 
-  font-size:11px;
+      gap:40px;
+    }
 
-  line-height:1.75;
+    .footer-brand{
+      font-family:Orbitron,sans-serif;
+      font-size:14px;
+      font-weight:800;
+    }
 
-}
+    .footer-copy{
+      max-width:400px;
 
+      margin-top:12px;
 
-/* =========================================================
-   CREATOR NETWORK
-   ========================================================= */
+      color:var(--dim);
 
-.network-grid{
+      font-size:10px;
+      line-height:1.8;
+    }
 
-  display:grid;
+    .footer-column h4{
+      color:#d9d9e5;
 
-  grid-template-columns:
-    repeat(3,1fr);
+      font-family:Orbitron,sans-serif;
+      font-size:9px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
 
-  gap:18px;
+    .footer-links{
+      display:grid;
+      gap:8px;
 
-}
+      margin-top:13px;
+    }
 
-.network-card{
+    .footer-links a{
+      color:#777a91;
 
-  padding:28px;
+      font-size:10px;
+      text-decoration:none;
+    }
 
-  border:
-    1px solid
-    var(--line);
+    .footer-links a:hover{
+      color:var(--cyan);
+    }
 
-  border-radius:
-    var(--radius);
+    .footer-bottom{
+      padding:
+        20px 0
+        30px;
 
-  background:
-    rgba(255,255,255,.025);
+      border-top:
+        1px solid
+        rgba(255,255,255,.05);
 
-  transition:
-    transform .3s ease,
-    border-color .3s ease,
-    background .3s ease;
+      color:#55586c;
 
-}
+      font-size:8px;
+      letter-spacing:.08em;
 
-.network-card:hover{
+      text-align:center;
+    }
 
-  transform:translateY(-5px);
 
-  border-color:
-    rgba(155,124,255,.28);
+    /* =========================================================
+       MOBILE
+       ========================================================= */
 
-  background:
-    rgba(255,255,255,.045);
+    @media(max-width:950px){
 
-}
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
 
-.network-icon{
+      .hero-content{
+        text-align:center;
+      }
 
-  font-size:25px;
+      .hero-eyebrow{
+        justify-content:center;
+      }
 
-  margin-bottom:18px;
+      .hero-lead{
+        margin-left:auto;
+        margin-right:auto;
+      }
 
-}
+      .hero-actions{
+        justify-content:center;
+      }
 
-.network-card h3{
+      .hero-visual{
+        min-height:400px;
+      }
 
-  margin:
-    0 0
-    9px;
+      .mission-grid,
+      .rights-layout{
+        grid-template-columns:1fr;
+      }
 
-  font-family:Orbitron,sans-serif;
+      .process-grid{
+        grid-template-columns:
+          repeat(2,minmax(0,1fr));
+      }
 
-  font-size:15px;
+      .creator-grid{
+        grid-template-columns:
+          repeat(2,minmax(0,1fr));
+      }
 
-}
+      .footer-inner{
+        grid-template-columns:1fr 1fr;
+      }
+    }
 
-.network-card p{
+    @media(max-width:700px){
 
-  margin:0;
+      .container{
+        width:min(
+          calc(100% - 28px),
+          var(--max)
+        );
+      }
 
-  color:var(--muted);
+      .nav-inner{
+        min-height:64px;
+      }
 
-  font-size:11px;
+      .brand-sub{
+        display:none;
+      }
 
-  line-height:1.75;
+      .nav-links{
+        display:none;
+      }
 
-}
+      .hero{
+        min-height:auto;
+        padding:
+          85px 0
+          90px;
+      }
 
+      .hero h1{
+        font-size:
+          clamp(
+            40px,
+            12vw,
+            70px
+          );
+      }
 
-/* =========================================================
-   CREATOR RIGHTS
-   ========================================================= */
+      .hero-actions .button{
+        width:100%;
+      }
 
-.rights-grid{
+      .hero-visual{
+        min-height:320px;
+      }
 
-  display:grid;
+      .orbit{
+        width:min(330px,82vw);
+      }
 
-  grid-template-columns:
-    repeat(2,1fr);
+      .label-two{
+        right:-3%;
+      }
 
-  gap:18px;
+      .label-three{
+        left:-2%;
+      }
 
-}
+      .section{
+        padding:75px 0;
+      }
 
-.right-card{
+      .process-grid,
+      .creator-grid,
+      .role-grid{
+        grid-template-columns:1fr;
+      }
 
-  padding:30px;
+      .process-card{
+        min-height:auto;
+      }
 
-  border:
-    1px solid
-    rgba(98,230,167,.12);
+      .support-box,
+      .connection-card{
+        padding:
+          35px 20px;
+      }
 
-  border-radius:
-    var(--radius);
+      .donation-buttons{
+        display:grid;
+        grid-template-columns:
+          repeat(2,1fr);
+      }
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(98,230,167,.045),
-      rgba(255,255,255,.018)
-    );
+      .donation-button,
+      .donation-custom{
+        width:100%;
+      }
 
-}
+      .footer-inner{
+        grid-template-columns:1fr;
+      }
+    }
 
-.right-card h3{
-
-  margin:
-    0 0
-    10px;
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:16px;
-
-}
-
-.right-card p{
-
-  margin:0;
-
-  color:var(--muted);
-
-  font-size:12px;
-
-  line-height:1.8;
-
-}
-
-
-/* =========================================================
-   VOLUNTEER
-   ========================================================= */
-
-.volunteer{
-
-  border:
-    1px solid
-    rgba(255,215,106,.14);
-
-  border-radius:
-    var(--radius);
-
-  padding:
-    35px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,215,106,.045),
-      rgba(155,124,255,.035),
-      rgba(255,255,255,.015)
-    );
-
-}
-
-.volunteer-grid{
-
-  display:grid;
-
-  grid-template-columns:
-    1fr
-    auto;
-
-  gap:30px;
-
-  align-items:center;
-
-}
-
-.volunteer h3{
-
-  margin:
-    0 0
-    10px;
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:21px;
-
-}
-
-.volunteer p{
-
-  margin:0;
-
-  color:var(--muted);
-
-  font-size:12px;
-
-  line-height:1.8;
-
-}
-
-.volunteer-note{
-
-  margin-top:15px;
-
-  color:#777a91;
-
-  font-size:10px;
-
-  line-height:1.7;
-
-}
-
-.volunteer-badge{
-
-  min-width:180px;
-
-  padding:20px;
-
-  text-align:center;
-
-  border:
-    1px solid
-    rgba(255,215,106,.20);
-
-  border-radius:15px;
-
-  background:
-    rgba(255,215,106,.045);
-
-}
-
-.volunteer-badge strong{
-
-  display:block;
-
-  color:var(--gold);
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:13px;
-
-}
-
-.volunteer-badge span{
-
-  display:block;
-
-  margin-top:6px;
-
-  color:#898b9f;
-
-  font-size:9px;
-
-  line-height:1.5;
-
-}
-
-
-/* =========================================================
-   COMPANY CONNECTION
-   ========================================================= */
-
-.company-portal{
-
-  position:relative;
-
-  overflow:hidden;
-
-  padding:
-    55px
-    35px;
-
-  border:
-    1px solid
-    rgba(98,231,255,.15);
-
-  border-radius:
-    30px;
-
-  text-align:center;
-
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(98,231,255,.06),
-      transparent 45%
-    ),
-    linear-gradient(
-      145deg,
-      rgba(155,124,255,.07),
-      rgba(255,255,255,.02)
-    );
-
-}
-
-.company-portal::before{
-
-  content:"";
-
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  width:450px;
-  height:450px;
-
-  transform:
-    translate(-50%,-50%);
-
-  border:
-    1px solid
-    rgba(98,231,255,.06);
-
-  border-radius:50%;
-
-  animation:
-    portalRotate
-    25s
-    linear
-    infinite;
-
-}
-
-@keyframes portalRotate{
-
-  to{
-    transform:
-      translate(-50%,-50%)
-      rotate(360deg);
-  }
-
-}
-
-.company-content{
-
-  position:relative;
-
-  z-index:2;
-
-}
-
-.company-eyebrow{
-
-  color:var(--cyan);
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:9px;
-
-  letter-spacing:.25em;
-
-  text-transform:uppercase;
-
-}
-
-.company-title{
-
-  margin:
-    14px 0
-    12px;
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:
-    clamp(
-      1.7rem,
-      4vw,
-      3rem
-    );
-
-}
-
-.company-title span{
-
-  background:
-    linear-gradient(
-      90deg,
-      #fff,
-      var(--purple),
-      var(--cyan)
-    );
-
-  -webkit-background-clip:text;
-  background-clip:text;
-
-  color:transparent;
-
-}
-
-.company-copy{
-
-  width:
-    min(
-      650px,
-      100%
-    );
-
-  margin:
-    0 auto;
-
-  color:var(--muted);
-
-  font-size:13px;
-
-  line-height:1.8;
-
-}
-
-
-/* =========================================================
-   FINAL CTA
-   ========================================================= */
-
-.final-cta{
-
-  padding:
-    100px 0
-    130px;
-
-  text-align:center;
-
-}
-
-.final-title{
-
-  margin:0;
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:
-    clamp(
-      2rem,
-      5vw,
-      4.2rem
-    );
-
-  line-height:1.1;
-
-}
-
-.final-copy{
-
-  width:
-    min(
-      650px,
-      100%
-    );
-
-  margin:
-    20px auto
-    0;
-
-  color:var(--muted);
-
-  font-size:13px;
-
-  line-height:1.85;
-
-}
-
-.final-actions{
-
-  display:flex;
-
-  justify-content:center;
-
-  flex-wrap:wrap;
-
-  gap:12px;
-
-  margin-top:30px;
-
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-footer{
-
-  border-top:
-    1px solid
-    var(--line);
-
-  background:
-    rgba(0,0,0,.20);
-
-}
-
-.footer-main{
-
-  padding:
-    45px 0
-    30px;
-
-  display:grid;
-
-  grid-template-columns:
-    1.5fr
-    repeat(3,1fr);
-
-  gap:35px;
-
-}
-
-.footer-brand{
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:15px;
-
-  font-weight:800;
-
-  letter-spacing:.08em;
-
-}
-
-.footer-brand span{
-
-  display:block;
-
-  margin-top:4px;
-
-  color:var(--purple);
-
-  font-size:9px;
-
-  letter-spacing:.3em;
-
-}
-
-.footer-description{
-
-  max-width:390px;
-
-  margin-top:15px;
-
-  color:#777a91;
-
-  font-size:10px;
-
-  line-height:1.8;
-
-}
-
-.footer-column h4{
-
-  margin:
-    0 0
-    13px;
-
-  color:#fff;
-
-  font-family:Orbitron,sans-serif;
-
-  font-size:10px;
-
-  letter-spacing:.1em;
-
-  text-transform:uppercase;
-
-}
-
-.footer-column a{
-
-  display:block;
-
-  margin-bottom:9px;
-
-  color:#777a91;
-
-  font-size:10px;
-
-  transition:.2s;
-
-}
-
-.footer-column a:hover{
-
-  color:#fff;
-
-}
-
-.footer-company{
-
-  color:var(--cyan)!important;
-
-}
-
-.footer-bottom{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:20px;
-
-  padding:
-    20px 0;
-
-  border-top:
-    1px solid
-    var(--line);
-
-  color:#686b81;
-
-  font-size:9px;
-
-}
-
-
-/* =========================================================
-   MOBILE NAV
-   ========================================================= */
-
-.mobile-overlay{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:998;
-
-  display:none;
-
-  background:
-    rgba(0,0,0,.65);
-
-  backdrop-filter:blur(8px);
-
-}
-
-.mobile-overlay.show{
-
-  display:block;
-
-}
-
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media(max-width:1120px){
-
-  .nav-links{
-    display:none;
-  }
-
-  .menu-button{
-    display:block;
-  }
-
-  .nav-links.mobile-open{
-
-    position:absolute;
-
-    left:20px;
-    right:20px;
-
-    top:calc(100% + 8px);
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:stretch;
-
-    gap:0;
-
-    padding:10px;
-
-    border:
-      1px solid
-      var(--line-strong);
-
-    border-radius:18px;
-
-    background:
-      rgba(7,7,18,.97);
-
-    box-shadow:
-      0 30px 90px
-      rgba(0,0,0,.55);
-
-  }
-
-  .nav-links.mobile-open a{
-
-    padding:14px;
-
-    border-radius:10px;
-
-  }
-
-  .nav-links.mobile-open a:hover{
-
-    background:
-      rgba(255,255,255,.05);
-
-    transform:none;
-
-  }
-
-  .mission-grid{
-    grid-template-columns:1fr;
-  }
-
-  .process-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .footer-main{
-    grid-template-columns:1.5fr 1fr 1fr;
-  }
-
-}
-
-@media(max-width:800px){
-
-  .hero{
-
-    min-height:auto;
-
-    padding:
-      90px 0
-      110px;
-
-  }
-
-  .hero-brand{
-
-    font-size:
-      clamp(
-        2.3rem,
-        12vw,
-        5.8rem
-      );
-
-    letter-spacing:
-      -.035em;
-
-  }
-
-  .hero-connection{
-
-    font-size:8px;
-
-  }
-
-  .network-grid{
-    grid-template-columns:1fr;
-  }
-
-  .rights-grid{
-    grid-template-columns:1fr;
-  }
-
-  .volunteer-grid{
-    grid-template-columns:1fr;
-  }
-
-  .volunteer-badge{
-    width:100%;
-  }
-
-  .footer-main{
-    grid-template-columns:1fr 1fr;
-  }
-
-}
-
-@media(max-width:560px){
-
-  .container{
-
-    width:
-      calc(100% - 26px);
-
-  }
-
-  .launch-inner{
-
-    padding:
-      9px 12px;
-
-    font-size:8px;
-
-    line-height:1.5;
-
-  }
-
-  .launch-dot{
-    display:none;
-  }
-
-  .nav-inner{
-
-    min-height:65px;
-
-  }
-
-  .brand{
-
-    font-size:13px;
-
-  }
-
-  .brand-small{
-
-    font-size:8px;
-
-  }
-
-  .hero{
-
-    padding:
-      75px 0
-      90px;
-
-  }
-
-  /*
-   * Mobile DREAMSCAPES.
-   *
-   * The negative letter spacing allows
-   * the entire word to remain one line.
-   */
-
-  .hero-brand-wrap{
-
-    padding:
-      5px 0
-      10px;
-
-  }
-
-  .hero-brand{
-
-    font-size:
-      clamp(
-        2rem,
-        13.8vw,
-        4.8rem
-      );
-
-    letter-spacing:
-      -.055em;
-
-    line-height:.9;
-
-  }
-
-  .hero-eyebrow{
-
-    font-size:8px;
-
-    letter-spacing:.16em;
-
-  }
-
-  .hero-eyebrow::before,
-  .hero-eyebrow::after{
-
-    width:20px;
-
-  }
-
-  .hero-connection{
-
-    max-width:100%;
-
-    padding:
-      7px 10px;
-
-    font-size:7px;
-
-    letter-spacing:.07em;
-
-  }
-
-  .hero-tagline{
-
-    margin-top:24px;
-
-    font-size:14px;
-
-  }
-
-  .hero-description{
-
-    font-size:12px;
-
-  }
-
-  .hero-actions{
-
-    flex-direction:column;
-
-  }
-
-  .button{
-
-    width:100%;
-
-  }
-
-  .hero-scroll{
-    display:none;
-  }
-
-  .section{
-
-    padding:
-      75px 0;
-
-  }
-
-  .section-header{
-
-    margin-bottom:35px;
-
-  }
-
-  .glass-card{
-
-    padding:24px;
-
-  }
-
-  .process-grid{
-
-    grid-template-columns:1fr;
-
-  }
-
-  .volunteer{
-
-    padding:25px;
-
-  }
-
-  .company-portal{
-
-    padding:
-      45px 22px;
-
-  }
-
-  .company-portal::before{
-
-    width:300px;
-    height:300px;
-
-  }
-
-  .final-cta{
-
-    padding:
-      80px 0
-      100px;
-
-  }
-
-  .footer-main{
-
-    grid-template-columns:1fr;
-
-    gap:25px;
-
-  }
-
-  .footer-bottom{
-
-    flex-direction:column;
-
-    align-items:flex-start;
-
-  }
-
-}
-
-@media(max-width:380px){
-
-  .hero-brand{
-
-    /*
-     * Extra-small screen safeguard.
-     */
-
-    font-size:
-      clamp(
-        1.8rem,
-        13.4vw,
-        3.5rem
-      );
-
-    letter-spacing:
-      -.07em;
-
-  }
-
-  .hero-connection{
-
-    font-size:6.5px;
-
-  }
-
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-  *,
-  *::before,
-  *::after{
-
-    animation-duration:.01ms!important;
-
-    animation-iteration-count:1!important;
-
-    scroll-behavior:auto!important;
-
-    transition:none!important;
-
-  }
-
-}
-
-</style>
+  </style>
 </head>
-
 
 <body>
 
 
-<!-- =======================================================
-     CINEMATIC INTRO
-     ======================================================= -->
+  <!-- =======================================================
+       CINEMATIC INTRO
+       ======================================================== -->
 
-<section id="intro" aria-label="Dreamscapes introduction">
+  <div id="intro">
 
-  <div class="intro-orbit"></div>
+    <div class="intro-inner">
 
-  <div class="intro-content">
+      <div class="intro-eyebrow">
+        CROWRULES ENTERTAINMENT PRESENTS
+      </div>
 
-    <div class="intro-eyebrow">
-      A CROWRULES ENTERTAINMENT CREATIVE NETWORK
-    </div>
-
-    <h1 class="intro-brand">
-      DREAMSCAPES
-    </h1>
-
-    <div class="intro-title">
-      Bringing Stories to Life
-    </div>
-
-    <p class="intro-copy">
-      Everyone has a dream.
-      Some dreams deserve to become stories.
-      Some stories deserve to become worlds.
-      Dreamscapes is where those possibilities begin.
-    </p>
-
-    <div class="intro-progress">
-      <span></span>
-    </div>
-
-  </div>
-
-  <button
-    class="skip-intro"
-    id="skipIntro"
-    type="button"
-  >
-    SKIP INTRO
-  </button>
-
-</section>
-
-
-<!-- =======================================================
-     BACKGROUND
-     ======================================================= -->
-
-<div id="stars" aria-hidden="true"></div>
-
-<div id="nebula" aria-hidden="true">
-
-  <div class="nebula nebula-one"></div>
-
-  <div class="nebula nebula-two"></div>
-
-  <div class="nebula nebula-three"></div>
-
-</div>
-
-
-<!-- =======================================================
-     LAUNCH BAR
-     ======================================================= -->
-
-<div class="launch-bar">
-
-  <div class="container launch-inner">
-
-    <span class="launch-dot"></span>
-
-    <span>
-      Dreamscapes is launching as part of
-      <strong>CrowRules Entertainment</strong>
-    </span>
-
-    <a
-      href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
-      aria-label="Visit CrowRules Entertainment"
-    >
-      ENTER CROWRULES →
-    </a>
-
-  </div>
-
-</div>
-
-
-<!-- =======================================================
-     NAVIGATION
-     ======================================================= -->
-
-<nav class="nav">
-
-  <div class="container nav-inner">
-
-    <a
-      href="index.html"
-      class="brand"
-      aria-label="CrowRules Dreamscapes home"
-    >
-
-      CROWRULES
-
-      <span class="brand-small">
+      <div class="intro-title">
         DREAMSCAPES
-      </span>
+      </div>
 
-    </a>
+      <div class="intro-subtitle">
+        Bringing Stories to Life
+      </div>
 
+    </div>
 
-    <button
-      class="menu-button"
-      id="menuButton"
-      type="button"
-      aria-label="Open navigation menu"
-      aria-expanded="false"
-    >
-      MENU
-    </button>
+  </div>
 
 
-    <div
-      class="nav-links"
-      id="navLinks"
-    >
+  <!-- =======================================================
+       NAVIGATION
+       ======================================================== -->
+
+  <nav class="site-nav">
+
+    <div class="container nav-inner">
 
       <a
+        class="brand"
         href="index.html"
-        class="active"
+        aria-label="CrowRules Dreamscapes Home"
       >
-        Home
-      </a>
 
-      <a href="submit.html">
-        Submit a Dream
-      </a>
-
-      <a href="how-it-works.html">
-        How It Works
-      </a>
-
-      <a href="projects.html">
-        Projects
-      </a>
-
-      <a href="creators.html">
-        Creators
-      </a>
-
-      <a href="collaborators-join.html">
-        Join
-      </a>
-
-      <a href="creator-portal.html">
-        Creator Portal
-      </a>
-
-      <a href="creator-dashboard.html">
-        Creator Hub
-      </a>
-
-      <a
-        href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
-        class="company"
-      >
-        CrowRules Entertainment
-      </a>
-
-    </div>
-
-  </div>
-
-</nav>
-
-
-<div
-  class="mobile-overlay"
-  id="mobileOverlay"
-></div>
-
-
-<!-- =======================================================
-     HERO
-     ======================================================= -->
-
-<main>
-
-
-<section class="hero">
-
-  <div class="container hero-content">
-
-
-    <div class="hero-eyebrow">
-
-      A CROWRULES CREATIVE NETWORK
-
-    </div>
-
-
-    <div class="hero-brand-wrap">
-
-      <h1 class="hero-brand">
-        DREAMSCAPES
-      </h1>
-
-    </div>
-
-
-    <div class="hero-connection">
-
-      <span>
-        A CREATIVE NETWORK OF
-      </span>
-
-      <strong>
-        CROWRULES ENTERTAINMENT
-      </strong>
-
-      <span>·</span>
-
-      <a
-        href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
-      >
-        VISIT →
-      </a>
-
-    </div>
-
-
-    <div class="hero-tagline">
-
-      One Dream.
-      <span>One World.</span>
-      One Story.
-
-    </div>
-
-
-    <p class="hero-description">
-
-      Dreamscapes is a place where ordinary people can bring
-      extraordinary ideas to life. Submit a dream, concept,
-      character, world, story or creative spark. Then work
-      alongside writers, artists, filmmakers, designers,
-      storytellers and other creators to develop it.
-
-      <br><br>
-
-      When a project is ready, CrowRules Entertainment can help
-      take that world beyond the page and toward production.
-
-    </p>
-
-
-    <div class="hero-actions">
-
-      <a
-        class="button button-primary"
-        href="submit.html"
-      >
-        ✦ Submit Your Dream
-      </a>
-
-      <a
-        class="button"
-        href="collaborators-join.html"
-      >
-        ◈ Join the Creator Network
-      </a>
-
-      <a
-        class="button button-company"
-        href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
-      >
-        ↗ CrowRules Entertainment
-      </a>
-
-    </div>
-
-  </div>
-
-
-  <div class="hero-scroll">
-
-    <span>
-      Explore
-    </span>
-
-    <span class="scroll-line"></span>
-
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     MISSION
-     ======================================================= -->
-
-<section class="section">
-
-  <div class="container">
-
-
-    <header class="section-header">
-
-      <div class="section-eyebrow">
-        THE DREAMSCAPES IDEA
-      </div>
-
-      <h2 class="section-title">
-        Every great story starts somewhere.
-      </h2>
-
-      <p class="section-copy">
-
-        It could start with a dream you had last night.
-        A character you've carried in your head for years.
-        A world you've never known how to build.
-        A scene you can't stop imagining.
-
-        Dreamscapes gives those ideas a place to begin.
-
-      </p>
-
-    </header>
-
-
-    <div class="mission-grid">
-
-
-      <article class="glass-card">
-
-        <div class="card-eyebrow">
-          THE MISSION
+        <div class="brand-mark">
+          CR
         </div>
 
-        <h3>
-          From imagination to creation.
-        </h3>
+        <div class="brand-text">
 
-        <p>
+          <span class="brand-name">
+            DREAMSCAPES
+          </span>
 
-          Dreamscapes connects original dreamers with people
-          who love building stories. The person who submits an
-          idea doesn't have to disappear once the idea is
-          submitted.
-
-          <br><br>
-
-          If they want to participate, they can remain involved
-          throughout development. Helping shape the characters,
-          lore, scripts, world and direction of their project.
-
-        </p>
-
-
-        <div class="mission-points">
-
-
-          <div class="mission-point">
-
-            <div class="point-icon">
-              ✦
-            </div>
-
-            <div class="point-text">
-
-              <strong>
-                Your idea starts the journey.
-              </strong>
-
-              <span>
-                Dreams, concepts and original ideas can become
-                the foundation for something much bigger.
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <div class="mission-point">
-
-            <div class="point-icon">
-              ◈
-            </div>
-
-            <div class="point-text">
-
-              <strong>
-                Collaboration builds the world.
-              </strong>
-
-              <span>
-                Writers, artists, designers and storytellers
-                can help transform the original concept.
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <div class="mission-point">
-
-            <div class="point-icon">
-              ∞
-            </div>
-
-            <div class="point-text">
-
-              <strong>
-                Production can take it further.
-              </strong>
-
-              <span>
-                Projects may eventually move toward CrowRules
-                Entertainment production opportunities.
-              </span>
-
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </article>
-
-
-      <article class="glass-card">
-
-        <div class="card-eyebrow">
-          THE DREAM LIBRARY
-        </div>
-
-        <h3>
-          A growing universe of possibilities.
-        </h3>
-
-        <p>
-
-          Dreamscapes is designed to become a living library
-          of original concepts and developing worlds.
-
-          <br><br>
-
-          Some ideas may become short stories.
-          Some may become screenplays.
-          Some may become series, films, games, books,
-          characters or completely new creative experiences.
-
-          <br><br>
-
-          The destination is not always known when the dream
-          begins.
-
-        </p>
-
-      </article>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     HOW IT WORKS
-     ======================================================= -->
-
-<section class="section">
-
-  <div class="container">
-
-
-    <header class="section-header">
-
-      <div class="section-eyebrow">
-        THE JOURNEY
-      </div>
-
-      <h2 class="section-title">
-        Dream. Build. Develop. Create.
-      </h2>
-
-      <p class="section-copy">
-
-        Dreamscapes is built around a collaborative creative
-        development process.
-
-      </p>
-
-    </header>
-
-
-    <div class="process-grid">
-
-
-      <article class="process-card">
-
-        <div class="process-number">
-          01 · DREAM
-        </div>
-
-        <h3>
-          Submit the idea
-        </h3>
-
-        <p>
-          Share the dream, concept, character, world or story
-          you want to explore.
-        </p>
-
-      </article>
-
-
-      <article class="process-card">
-
-        <div class="process-number">
-          02 · BUILD
-        </div>
-
-        <h3>
-          Build the world
-        </h3>
-
-        <p>
-          Develop characters, settings, lore, mythology,
-          concepts and the foundations of the project.
-        </p>
-
-      </article>
-
-
-      <article class="process-card">
-
-        <div class="process-number">
-          03 · DEVELOP
-        </div>
-
-        <h3>
-          Write together
-        </h3>
-
-        <p>
-          Turn concepts into outlines, stories, scripts,
-          treatments and creative development materials.
-        </p>
-
-      </article>
-
-
-      <article class="process-card">
-
-        <div class="process-number">
-          04 · CREATE
-        </div>
-
-        <h3>
-          Explore production
-        </h3>
-
-        <p>
-          When a project is ready, explore how it could move
-          toward a CrowRules Entertainment production.
-        </p>
-
-      </article>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     CREATOR NETWORK
-     ======================================================= -->
-
-<section class="section">
-
-  <div class="container">
-
-
-    <header class="section-header">
-
-      <div class="section-eyebrow">
-        THE CREATOR NETWORK
-      </div>
-
-      <h2 class="section-title">
-        You don't have to build the dream alone.
-      </h2>
-
-      <p class="section-copy">
-
-        Dreamscapes is designed to bring different creative
-        skills together around original ideas.
-
-      </p>
-
-    </header>
-
-
-    <div class="network-grid">
-
-
-      <article class="network-card">
-
-        <div class="network-icon">
-          ✎
-        </div>
-
-        <h3>
-          Writers
-        </h3>
-
-        <p>
-          Help transform concepts into stories, treatments,
-          screenplays, dialogue and narrative worlds.
-        </p>
-
-      </article>
-
-
-      <article class="network-card">
-
-        <div class="network-icon">
-          ◉
-        </div>
-
-        <h3>
-          World Builders
-        </h3>
-
-        <p>
-          Develop lore, history, cultures, locations,
-          mythology, rules and the deeper structure of a world.
-        </p>
-
-      </article>
-
-
-      <article class="network-card">
-
-        <div class="network-icon">
-          ✦
-        </div>
-
-        <h3>
-          Artists & Designers
-        </h3>
-
-        <p>
-          Help visualize characters, environments, logos,
-          concepts, props and the visual identity of a project.
-        </p>
-
-      </article>
-
-
-      <article class="network-card">
-
-        <div class="network-icon">
-          🎬
-        </div>
-
-        <h3>
-          Filmmakers
-        </h3>
-
-        <p>
-          Explore directing, cinematography, editing,
-          production concepts and visual storytelling.
-        </p>
-
-      </article>
-
-
-      <article class="network-card">
-
-        <div class="network-icon">
-          ◎
-        </div>
-
-        <h3>
-          Storytellers
-        </h3>
-
-        <p>
-          Help shape characters, emotional arcs, themes,
-          structure and the heart of the story.
-        </p>
-
-      </article>
-
-
-      <article class="network-card">
-
-        <div class="network-icon">
-          ∞
-        </div>
-
-        <h3>
-          Dreamers
-        </h3>
-
-        <p>
-          The original submitters. The people whose ideas
-          become the starting point for the journey.
-        </p>
-
-      </article>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     CREATOR RIGHTS
-     ======================================================= -->
-
-<section class="section">
-
-  <div class="container">
-
-
-    <header class="section-header">
-
-      <div class="section-eyebrow">
-        CREATOR PARTICIPATION
-      </div>
-
-      <h2 class="section-title">
-        The dreamer stays part of the dream.
-      </h2>
-
-      <p class="section-copy">
-
-        Dreamscapes is designed around transparent collaboration
-        and clear project participation.
-
-      </p>
-
-    </header>
-
-
-    <div class="rights-grid">
-
-
-      <article class="right-card">
-
-        <h3>
-          Original Creator
-        </h3>
-
-        <p>
-
-          The person who submits an idea can remain involved
-          throughout the development process if they choose.
-
-        </p>
-
-      </article>
-
-
-      <article class="right-card">
-
-        <h3>
-          Creative Collaboration
-        </h3>
-
-        <p>
-
-          Collaborators contribute their skills while working
-          together to develop the project's creative direction.
-
-        </p>
-
-      </article>
-
-
-      <article class="right-card">
-
-        <h3>
-          Project Records
-        </h3>
-
-        <p>
-
-          Dreamscapes can maintain development records,
-          contributor information, credits and project history.
-
-        </p>
-
-      </article>
-
-
-      <article class="right-card">
-
-        <h3>
-          Clear Agreements
-        </h3>
-
-        <p>
-
-          Project-specific participation, rights, credits and
-          production arrangements should be documented clearly
-          when appropriate.
-
-        </p>
-
-      </article>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     VOLUNTEER NETWORK
-     ======================================================= -->
-
-<section class="section">
-
-  <div class="container">
-
-
-    <div class="volunteer">
-
-      <div class="volunteer-grid">
-
-
-        <div>
-
-          <h3>
-            Help build Dreamscapes.
-          </h3>
-
-          <p>
-
-            Dreamscapes is beginning as a growing creative
-            community. Some early collaborators may participate
-            on a volunteer, unpaid basis while the network and
-            CrowRules Entertainment develop.
-
-          </p>
-
-          <div class="volunteer-note">
-
-            Volunteer participation does not guarantee future
-            employment, payment or a paid position. Any future
-            paid work would be handled separately through
-            appropriate employment or contractor arrangements.
-
-          </div>
-
-        </div>
-
-
-        <div class="volunteer-badge">
-
-          <strong>
-            BUILD WITH US
-          </strong>
-
-          <span>
-            Writers · Artists · Designers ·
-            Storytellers · Filmmakers
+          <span class="brand-sub">
+            CrowRules Entertainment
           </span>
 
         </div>
 
+      </a>
+
+
+      <div class="nav-links">
+
+        <a href="#mission">
+          Mission
+        </a>
+
+        <a href="#process">
+          How It Works
+        </a>
+
+        <a href="#creators">
+          Creators
+        </a>
+
+        <a href="#rights">
+          Rights
+        </a>
+
+        <a href="#volunteers">
+          Join
+        </a>
+
+        <a
+          class="nav-support"
+          href="#support-crowrules"
+        >
+          ♥ Support
+        </a>
 
       </div>
 
     </div>
 
-  </div>
-
-</section>
+  </nav>
 
 
-<!-- =======================================================
-     CROWRULES ENTERTAINMENT CONNECTION
-     ======================================================= -->
+  <!-- =======================================================
+       HERO
+       ======================================================== -->
 
-<section class="section">
+  <main>
 
-  <div class="container">
+    <section class="hero">
 
+      <div class="container hero-grid">
 
-    <div class="company-portal">
+        <div class="hero-content">
 
-      <div class="company-content">
+          <div class="hero-eyebrow">
+            JOIN THE DREAMSCAPES CREATOR NETWORK
+          </div>
 
+          <h1>
+            Your dream.
+            <span class="gradient-text">
+              Your story.
+            </span>
+            Your world.
+          </h1>
 
-        <div class="company-eyebrow">
-          THE LARGER UNIVERSE
+          <p class="hero-lead">
+            CrowRules Dreamscapes is a creator network where
+            ordinary people can bring extraordinary ideas to life.
+            Share a dream, concept or story idea and work with
+            CrowRules to develop it into something bigger.
+          </p>
+
+          <div class="hero-actions">
+
+            <a
+              class="button button-primary"
+              href="creator-portal.html"
+            >
+              ✦ Submit Your Dream
+            </a>
+
+            <a
+              class="button"
+              href="creators.html"
+            >
+              Join the Creator Network
+            </a>
+
+            <a
+              class="button button-donate"
+              href="#support-crowrules"
+            >
+              ♥ Support CrowRules
+            </a>
+
+          </div>
+
+          <div class="hero-note">
+            WRITING TOGETHER · BUILDING TOGETHER · BRINGING STORIES TO LIFE
+          </div>
+
         </div>
 
 
-        <h2 class="company-title">
+        <div class="hero-visual">
 
-          Dreamscapes is part of
-          <span>CrowRules Entertainment.</span>
+          <div class="orbit">
 
+            <div class="orbit-center">
+              <span>
+                DREAM
+              </span>
+            </div>
+
+            <div class="orbit-label label-one">
+              IDEA
+            </div>
+
+            <div class="orbit-label label-two">
+              STORY
+            </div>
+
+            <div class="orbit-label label-three">
+              WORLD
+            </div>
+
+            <div class="orbit-label label-four">
+              PRODUCTION
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MISSION
+         ====================================================== -->
+
+    <section
+      class="section"
+      id="mission"
+    >
+
+      <div class="container">
+
+        <header class="section-header">
+
+          <div class="section-eyebrow">
+            THE MISSION
+          </div>
+
+          <h2 class="section-title">
+            Everyone has a dream.
+            <span class="gradient-text">
+              Some dreams become stories.
+            </span>
+          </h2>
+
+          <p class="section-copy">
+            Dreamscapes exists to create a bridge between people
+            with ideas and the creative process needed to develop
+            those ideas into real entertainment.
+          </p>
+
+        </header>
+
+
+        <div class="mission-grid">
+
+          <article class="glass-card">
+
+            <div class="card-eyebrow">
+              THE DREAM LIBRARY
+            </div>
+
+            <h3>
+              A growing collection of original ideas.
+            </h3>
+
+            <p>
+              Dreamscapes is designed to become a library of
+              dreams, concepts, characters, worlds and stories
+              submitted by creators and dreamers.
+            </p>
+
+            <div class="dream-quote">
+              A dream becomes an idea.
+              An idea becomes a story.
+              A story can become a world.
+            </div>
+
+          </article>
+
+
+          <article class="glass-card">
+
+            <div class="card-eyebrow">
+              THE CROWRULES CONNECTION
+            </div>
+
+            <h3>
+              From creator idea to finished production.
+            </h3>
+
+            <p>
+              When an idea has potential, CrowRules Entertainment
+              can work with the original creator to develop the
+              concept, write the story, build the lore and explore
+              its future as a show, movie or other production.
+            </p>
+
+            <p>
+              Development may take time. Some projects could take
+              years. The goal is to build them correctly rather
+              than rush them.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         HOW IT WORKS
+         ====================================================== -->
+
+    <section
+      class="section"
+      id="process"
+    >
+
+      <div class="container">
+
+        <header class="section-header">
+
+          <div class="section-eyebrow">
+            HOW IT WORKS
+          </div>
+
+          <h2 class="section-title">
+            From imagination
+            <span class="gradient-text">
+              to production.
+            </span>
+          </h2>
+
+          <p class="section-copy">
+            Dreamscapes is built around collaboration. The person
+            who brings the original idea does not simply disappear
+            once the submission is made.
+          </p>
+
+        </header>
+
+
+        <div class="process-grid">
+
+          <article class="process-card">
+
+            <div class="process-number">
+              01 · DREAM
+            </div>
+
+            <h3>
+              Share the Idea
+            </h3>
+
+            <p>
+              Submit a dream, story concept, character, world,
+              memory, experience or completely original idea.
+            </p>
+
+          </article>
+
+
+          <article class="process-card">
+
+            <div class="process-number">
+              02 · BUILD
+            </div>
+
+            <h3>
+              Develop Together
+            </h3>
+
+            <p>
+              Work with writers, creators and collaborators to
+              expand the original idea into a deeper concept.
+            </p>
+
+          </article>
+
+
+          <article class="process-card">
+
+            <div class="process-number">
+              03 · CREATE
+            </div>
+
+            <h3>
+              Build the World
+            </h3>
+
+            <p>
+              Characters, lore, scripts, locations, seasons,
+              episodes and production plans begin taking shape.
+            </p>
+
+          </article>
+
+
+          <article class="process-card">
+
+            <div class="process-number">
+              04 · PRODUCE
+            </div>
+
+            <h3>
+              Bring It to Life
+            </h3>
+
+            <p>
+              Selected projects can move toward CrowRules
+              Entertainment production as shows, movies or
+              other creative projects.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CREATORS
+         ====================================================== -->
+
+    <section
+      class="section"
+      id="creators"
+    >
+
+      <div class="container">
+
+        <header class="section-header">
+
+          <div class="section-eyebrow">
+            CREATOR NETWORK
+          </div>
+
+          <h2 class="section-title">
+            You don't have to
+            <span class="gradient-text">
+              create alone.
+            </span>
+          </h2>
+
+          <p class="section-copy">
+            Dreamscapes is designed to bring people together.
+            Writers, world builders, artists, producers,
+            researchers and storytellers can contribute to the
+            development process.
+          </p>
+
+        </header>
+
+
+        <div class="creator-grid">
+
+          <article class="creator-card">
+
+            <div class="creator-icon">
+              WR
+            </div>
+
+            <h3>
+              Writers
+            </h3>
+
+            <p>
+              Help transform ideas into stories, scripts,
+              characters, dialogue and episode concepts.
+            </p>
+
+          </article>
+
+
+          <article class="creator-card">
+
+            <div class="creator-icon">
+              WB
+            </div>
+
+            <h3>
+              World Builders
+            </h3>
+
+            <p>
+              Develop fictional worlds, locations, history,
+              mythology, technology and lore.
+            </p>
+
+          </article>
+
+
+          <article class="creator-card">
+
+            <div class="creator-icon">
+              AR
+            </div>
+
+            <h3>
+              Artists
+            </h3>
+
+            <p>
+              Help visualize characters, environments, concepts,
+              logos, props and other creative elements.
+            </p>
+
+          </article>
+
+
+          <article class="creator-card">
+
+            <div class="creator-icon">
+              PR
+            </div>
+
+            <h3>
+              Producers
+            </h3>
+
+            <p>
+              Help organize development, production planning,
+              schedules, resources and creative teams.
+            </p>
+
+          </article>
+
+
+          <article class="creator-card">
+
+            <div class="creator-icon">
+              RS
+            </div>
+
+            <h3>
+              Researchers
+            </h3>
+
+            <p>
+              Help investigate subjects, locations, history,
+              science, culture and other story details.
+            </p>
+
+          </article>
+
+
+          <article class="creator-card">
+
+            <div class="creator-icon">
+              CR
+            </div>
+
+            <h3>
+              Creators
+            </h3>
+
+            <p>
+              Bring your own original ideas and participate in
+              the journey from concept to production.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RIGHTS
+         ====================================================== -->
+
+    <section
+      class="section"
+      id="rights"
+    >
+
+      <div class="container">
+
+        <div class="rights-layout">
+
+          <div>
+
+            <div class="section-eyebrow">
+              CREATOR RIGHTS
+            </div>
+
+            <h2 class="section-title">
+              Your idea matters.
+            </h2>
+
+            <p class="section-copy">
+              Dreamscapes is intended to build a transparent
+              relationship between original creators and the
+              people helping develop their ideas.
+            </p>
+
+            <div class="hero-actions">
+
+              <a
+                class="button button-primary"
+                href="creator-rights.html"
+              >
+                Learn About Creator Rights
+              </a>
+
+              <a
+                class="button"
+                href="agreements.html"
+              >
+                Agreements
+              </a>
+
+            </div>
+
+          </div>
+
+
+          <div class="rights-list">
+
+            <div class="rights-item">
+
+              <strong>
+                ORIGINAL CREATOR
+              </strong>
+
+              <span>
+                Track who originated an idea and maintain a clear
+                development history.
+              </span>
+
+            </div>
+
+
+            <div class="rights-item">
+
+              <strong>
+                PARTICIPATION
+              </strong>
+
+              <span>
+                Creators can choose whether they want to be
+                involved in the development process.
+              </span>
+
+            </div>
+
+
+            <div class="rights-item">
+
+              <strong>
+                CREDITS
+              </strong>
+
+              <span>
+                Development and production records can preserve
+                appropriate creator credits.
+              </span>
+
+            </div>
+
+
+            <div class="rights-item">
+
+              <strong>
+                AGREEMENTS
+              </strong>
+
+              <span>
+                Projects can use written agreements defining
+                rights, responsibilities and participation.
+              </span>
+
+            </div>
+
+
+            <div class="rights-item">
+
+              <strong>
+                EARNINGS
+              </strong>
+
+              <span>
+                When a project generates revenue, applicable
+                creator compensation can be handled according
+                to the project's agreements.
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         VOLUNTEERS
+         ====================================================== -->
+
+    <section
+      class="section"
+      id="volunteers"
+    >
+
+      <div class="container">
+
+        <div class="glass-card volunteer">
+
+          <div class="section-eyebrow">
+            JOIN THE TEAM
+          </div>
+
+          <h2 class="section-title">
+            Help build the dream library.
+          </h2>
+
+          <p class="section-copy">
+            Dreamscapes can grow through people who want to help
+            build something new. Early opportunities may begin as
+            volunteer creative roles while CrowRules Entertainment
+            develops its production infrastructure.
+          </p>
+
+          <p class="section-copy">
+            Volunteer participation does not automatically mean
+            employment or paid work. Future paid positions,
+            contracts or production opportunities would be handled
+            separately with appropriate agreements.
+          </p>
+
+
+          <div class="role-grid">
+
+            <div class="role">
+              WRITING
+            </div>
+
+            <div class="role">
+              STORY DEVELOPMENT
+            </div>
+
+            <div class="role">
+              WORLD BUILDING
+            </div>
+
+            <div class="role">
+              CREATIVE RESEARCH
+            </div>
+
+            <div class="role">
+              PRODUCTION
+            </div>
+
+            <div class="role">
+              COMMUNITY
+            </div>
+
+          </div>
+
+
+          <div class="hero-actions">
+
+            <a
+              class="button button-primary"
+              href="creators.html"
+            >
+              Join the Network
+            </a>
+
+            <a
+              class="button"
+              href="collaborators.html"
+            >
+              Find Collaborators
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUPPORT CROW RULES
+         ====================================================== -->
+
+    <section
+      class="section"
+      id="support-crowrules"
+    >
+
+      <div class="container">
+
+        <header class="section-header">
+
+          <div class="section-eyebrow">
+            SUPPORT THE DREAM
+          </div>
+
+          <h2 class="section-title">
+            Help build
+            <span class="gradient-text">
+              Dreamscapes.
+            </span>
+          </h2>
+
+          <p class="section-copy">
+            Your support helps CrowRules Entertainment continue
+            building the Dreamscapes creator network, developing
+            original ideas, creating digital infrastructure and
+            bringing new stories and worlds to life.
+          </p>
+
+        </header>
+
+
+        <div class="support-box">
+
+          <div class="support-icon">
+            ♥
+          </div>
+
+          <div class="card-eyebrow">
+            CROWRULES ENTERTAINMENT
+          </div>
+
+          <h3>
+            Choose Your Support Amount
+          </h3>
+
+          <p>
+            Payments are securely processed through Stripe.
+            Choose an amount below or enter your own amount.
+          </p>
+
+
+          <div class="donation-buttons">
+
+            <button
+              class="button button-donate donation-button"
+              type="button"
+              onclick="startDonation(5)"
+            >
+              ♥ $5
+            </button>
+
+            <button
+              class="button button-donate donation-button"
+              type="button"
+              onclick="startDonation(10)"
+            >
+              ♥ $10
+            </button>
+
+            <button
+              class="button button-donate donation-button"
+              type="button"
+              onclick="startDonation(25)"
+            >
+              ♥ $25
+            </button>
+
+            <button
+              class="button button-donate donation-button"
+              type="button"
+              onclick="startDonation(50)"
+            >
+              ♥ $50
+            </button>
+
+            <button
+              class="button donation-custom"
+              type="button"
+              onclick="customDonation()"
+            >
+              ✦ Custom Amount
+            </button>
+
+          </div>
+
+
+          <div
+            id="donationStatus"
+            aria-live="polite"
+          ></div>
+
+
+          <div class="support-disclaimer">
+            Support payments are processed through Stripe.
+            CrowRules Entertainment should not describe these
+            payments as tax-deductible charitable donations unless
+            it has the appropriate legal status to do so.
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CROWRULES CONNECTION
+         ====================================================== -->
+
+    <section
+      class="section connection"
+    >
+
+      <div class="container">
+
+        <div class="connection-card">
+
+          <div class="section-eyebrow">
+            PART OF THE CROWRULES UNIVERSE
+          </div>
+
+          <h2>
+            One company.
+            <span class="gradient-text">
+              One universe.
+            </span>
+          </h2>
+
+          <p>
+            Dreamscapes is being developed as part of CrowRules
+            Entertainment — a growing entertainment universe
+            spanning television, sports, podcasting, music,
+            yearbooks, studios, social experiences and original
+            storytelling.
+          </p>
+
+          <div class="hero-actions final-actions">
+
+            <a
+              class="button button-primary"
+              href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/index.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              CrowRules Entertainment
+            </a>
+
+            <a
+              class="button"
+              href="creator-portal.html"
+            >
+              Enter Creator Portal
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINAL CTA
+         ====================================================== -->
+
+    <section class="final-cta">
+
+      <div class="container">
+
+        <div class="section-eyebrow">
+          THE DREAM STARTS HERE
+        </div>
+
+        <h2>
+          What if your idea became
+          <span class="gradient-text">
+            the next story?
+          </span>
         </h2>
 
-
-        <p class="company-copy">
-
-          CrowRules Dreamscapes is being developed as a creative
-          network within the larger CrowRules Entertainment
-          universe — a place to discover ideas, develop stories,
-          connect creators and explore projects that may
-          eventually become productions.
-
+        <p>
+          Dreamscapes is being built for dreamers, creators and
+          storytellers who believe an idea can become something
+          bigger.
         </p>
 
-
-        <div class="hero-actions">
+        <div class="hero-actions final-actions">
 
           <a
-            class="button button-company"
-            href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
+            class="button button-primary"
+            href="creator-portal.html"
           >
-            ↗ Enter CrowRules Entertainment
+            ✦ Submit Your Dream
+          </a>
+
+          <a
+            class="button button-donate"
+            href="#support-crowrules"
+          >
+            ♥ Support the Dream
           </a>
 
         </div>
 
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================== -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div>
+
+        <div class="footer-brand">
+          CROWRULES DREAMSCAPES
+        </div>
+
+        <p class="footer-copy">
+          Bringing stories to life through collaboration,
+          imagination and original ideas.
+        </p>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>
+          Dreamscapes
+        </h4>
+
+        <div class="footer-links">
+
+          <a href="index.html">
+            Home
+          </a>
+
+          <a href="about.html">
+            About
+          </a>
+
+          <a href="creators.html">
+            Creators
+          </a>
+
+          <a href="projects.html">
+            Projects
+          </a>
+
+          <a href="how-it-works.html">
+            How It Works
+          </a>
+
+          <a href="creator-portal.html">
+            Creator Portal
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>
+          Creator
+        </h4>
+
+        <div class="footer-links">
+
+          <a href="my-dreams.html">
+            My Dreams
+          </a>
+
+          <a href="creative-room.html">
+            Creative Room
+          </a>
+
+          <a href="collaborators.html">
+            Collaborators
+          </a>
+
+          <a href="agreements.html">
+            Agreements
+          </a>
+
+          <a href="creator-rights.html">
+            Creator Rights
+          </a>
+
+          <a href="earnings.html">
+            Earnings
+          </a>
+
+        </div>
 
       </div>
 
     </div>
 
-  </div>
 
-</section>
+    <div class="footer-bottom">
 
+      <div class="container">
 
-<!-- =======================================================
-     FINAL CTA
-     ======================================================= -->
+        © 2026 CrowRules Entertainment · CrowRules Dreamscapes
 
-<section class="final-cta">
+        <br><br>
 
-  <div class="container">
-
-
-    <h2 class="final-title">
-      What will you dream up?
-    </h2>
-
-
-    <p class="final-copy">
-
-      Your idea doesn't have to be perfect.
-      It doesn't have to be finished.
-      It just has to exist.
-
-      <br><br>
-
-      Bring it to Dreamscapes.
-
-    </p>
-
-
-    <div class="final-actions">
-
-
-      <a
-        class="button button-primary"
-        href="submit.html"
-      >
-        ✦ Submit a Dream
-      </a>
-
-
-      <a
-        class="button"
-        href="collaborators-join.html"
-      >
-        ◈ Join Dreamscapes
-      </a>
-
-
-      <a
-        class="button button-company"
-        href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
-      >
-        ↗ CrowRules Entertainment
-      </a>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-</main>
-
-
-<!-- =======================================================
-     FOOTER
-     ======================================================= -->
-
-<footer>
-
-  <div class="container footer-main">
-
-
-    <div>
-
-      <div class="footer-brand">
-
-        CROWRULES
-
-        <span>
-          DREAMSCAPES
-        </span>
-
-      </div>
-
-
-      <div class="footer-description">
-
-        CrowRules Dreamscapes is a creative development
-        network where dreams become worlds, worlds become
-        stories, and stories can become productions.
+        WRITING TOGETHER · BUILDING TOGETHER · BRINGING STORIES TO LIFE
 
       </div>
 
     </div>
 
+  </footer>
 
-    <div class="footer-column">
 
-      <h4>
-        Dreamscapes
-      </h4>
+  <!-- =======================================================
+       JAVASCRIPT
+       ======================================================== -->
 
-      <a href="index.html">
-        Home
-      </a>
+  <script>
 
-      <a href="submit.html">
-        Submit a Dream
-      </a>
+    /* =======================================================
+       CONFIGURATION
+       ======================================================== */
 
-      <a href="how-it-works.html">
-        How It Works
-      </a>
+    const SUPABASE_URL =
+      "https://cevylpnoexugwgygvtgu.supabase.co";
 
-      <a href="projects.html">
-        Projects
-      </a>
+    /*
+      Keep the Supabase anon/publishable key here only if
+      another Dreamscapes feature on this page requires it.
 
-    </div>
+      NEVER place the Stripe secret key in this file.
+    */
 
+    const SUPABASE_ANON_KEY =
+      "YOUR_SUPABASE_ANON_OR_PUBLISHABLE_KEY";
 
-    <div class="footer-column">
 
-      <h4>
-        Creators
-      </h4>
+    /* =======================================================
+       STRIPE DONATION CHECKOUT
+       ======================================================== */
 
-      <a href="creators.html">
-        Creators
-      </a>
+    const DONATION_CHECKOUT_FUNCTION =
+      "https://cevylpnoexugwgygvtgu.supabase.co/functions/v1/create-donation-checkout";
 
-      <a href="collaborators-join.html">
-        Join the Network
-      </a>
 
-      <a href="creator-rights.html">
-        Creator Rights
-      </a>
+    const DREAMSCAPES_SUCCESS_URL =
+      "https://crowrulesentertainment-oss.github.io/dreamscapes/donation-success.html";
 
-      <a href="creator-dashboard.html">
-        Creator Hub
-      </a>
 
-    </div>
+    const DREAMSCAPES_CANCEL_URL =
+      "https://crowrulesentertainment-oss.github.io/dreamscapes/donation-cancel.html";
 
 
-    <div class="footer-column">
+    async function startDonation(amount){
 
-      <h4>
-        CrowRules
-      </h4>
+      const status =
+        document.getElementById("donationStatus");
 
-      <a
-        class="footer-company"
-        href="https://crowrulesentertainment-oss.github.io/crowrulesentertainment/"
-      >
-        CrowRules Entertainment
-      </a>
 
-      <a href="agreements.html">
-        Agreements
-      </a>
+      if(status){
 
-      <a href="projects.html">
-        Dream Library
-      </a>
+        status.textContent =
+          "Opening secure Stripe Checkout...";
 
-    </div>
+      }
 
 
-  </div>
+      const numericAmount =
+        Number(amount);
 
 
-  <div class="container footer-bottom">
+      if(
+        !Number.isFinite(numericAmount) ||
+        numericAmount < 1 ||
+        numericAmount > 1000000
+      ){
 
-    <div>
+        if(status){
 
-      ©
-      <span id="year"></span>
-      CrowRules Entertainment ·
-      CrowRules Dreamscapes
+          status.textContent =
+            "Please enter a valid support amount between $1 and $1,000,000.";
 
-    </div>
+        }
 
-    <div>
+        return;
 
-      One Dream.
-      One World.
-      One Story.
+      }
 
-    </div>
 
-  </div>
+      try{
 
-</footer>
+        const response =
+          await fetch(
+            DONATION_CHECKOUT_FUNCTION,
+            {
+              method:"POST",
 
+              headers:{
+                "Content-Type":
+                  "application/json"
+              },
 
-<!-- =======================================================
-     SUPABASE
-     ======================================================= -->
+              body:
+                JSON.stringify({
 
-<script
-  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-></script>
+                  amount_cents:
+                    Math.round(
+                      numericAmount * 100
+                    ),
 
+                  campaign:
+                    "CrowRules Dreamscapes",
 
-<script>
+                  purpose:
+                    "Support CrowRules Dreamscapes",
 
-/* =========================================================
-   CROWRULES DREAMSCAPES
-   HOMEPAGE JAVASCRIPT
-   ========================================================= */
+                  success_url:
+                    DREAMSCAPES_SUCCESS_URL,
 
+                  cancel_url:
+                    DREAMSCAPES_CANCEL_URL
 
-/* =========================================================
-   SUPABASE CONFIG
-   =========================================================
+                })
 
-   The homepage does not require Supabase to display.
+            }
+          );
 
-   Add your publishable/anon key if this page later needs
-   authentication or creator-specific functionality.
 
-   NEVER place a service_role or secret key in public HTML.
-   ========================================================= */
+        const data =
+          await response.json();
 
-const SUPABASE_URL =
-  "https://cevylpnoexugwgygvtgu.supabase.co";
 
-const SUPABASE_ANON_KEY =
-  "YOUR_SUPABASE_ANON_OR_PUBLISHABLE_KEY";
+        if(!response.ok){
 
-let supabaseClient = null;
+          throw new Error(
+            data.error ||
+            "Unable to create donation checkout."
+          );
 
-if(
-  window.supabase &&
-  SUPABASE_URL &&
-  SUPABASE_ANON_KEY &&
-  !SUPABASE_ANON_KEY.startsWith("YOUR_")
-){
+        }
 
-  supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
-    );
 
-}
+        if(!data.checkout_url){
 
+          throw new Error(
+            "Stripe did not return a checkout URL."
+          );
 
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
+        }
 
-const intro =
-  document.getElementById("intro");
 
-const skipIntro =
-  document.getElementById("skipIntro");
+        if(status){
 
-const stars =
-  document.getElementById("stars");
+          status.textContent =
+            "Redirecting to secure Stripe Checkout...";
 
-const menuButton =
-  document.getElementById("menuButton");
+        }
 
-const navLinks =
-  document.getElementById("navLinks");
 
-const mobileOverlay =
-  document.getElementById("mobileOverlay");
+        window.location.href =
+          data.checkout_url;
 
-const year =
-  document.getElementById("year");
+      }
 
+      catch(error){
 
-/* =========================================================
-   YEAR
-   ========================================================= */
+        console.error(
+          "CrowRules donation error:",
+          error
+        );
 
-if(year){
 
-  year.textContent =
-    new Date().getFullYear();
+        if(status){
 
-}
+          status.textContent =
+            "Unable to open Stripe Checkout. Please try again.";
 
+        }
 
-/* =========================================================
-   STARFIELD
-   ========================================================= */
-
-function createStars(){
-
-  if(!stars){
-    return;
-  }
-
-  const fragment =
-    document.createDocumentFragment();
-
-  for(
-    let i = 0;
-    i < 150;
-    i++
-  ){
-
-    const star =
-      document.createElement("div");
-
-    star.className =
-      "star";
-
-    star.style.left =
-      Math.random() * 100 + "%";
-
-    star.style.top =
-      Math.random() * 100 + "%";
-
-    star.style.animationDelay =
-      Math.random() * 5 + "s";
-
-    star.style.animationDuration =
-      (3 + Math.random() * 4) + "s";
-
-    star.style.opacity =
-      (
-        .12 +
-        Math.random() * .55
-      ).toFixed(2);
-
-    fragment.appendChild(star);
-
-  }
-
-  stars.appendChild(fragment);
-
-}
-
-
-/* =========================================================
-   INTRO
-   ========================================================= */
-
-function closeIntro(){
-
-  if(!intro){
-    return;
-  }
-
-  intro.classList.add("hide");
-
-  try{
-
-    sessionStorage.setItem(
-      "dreamscapes_intro_seen",
-      "1"
-    );
-
-  }catch(error){
-
-    console.warn(
-      "Session storage unavailable.",
-      error
-    );
-
-  }
-
-}
-
-
-function startIntro(){
-
-  let alreadySeen =
-    false;
-
-  try{
-
-    alreadySeen =
-      sessionStorage.getItem(
-        "dreamscapes_intro_seen"
-      ) === "1";
-
-  }catch(error){
-
-    alreadySeen = false;
-
-  }
-
-
-  if(alreadySeen){
-
-    intro?.classList.add("hide");
-
-    return;
-
-  }
-
-
-  window.setTimeout(
-    closeIntro,
-    3000
-  );
-
-}
-
-
-skipIntro?.addEventListener(
-  "click",
-  closeIntro
-);
-
-
-/* =========================================================
-   MOBILE MENU
-   ========================================================= */
-
-function openMenu(){
-
-  navLinks?.classList.add(
-    "mobile-open"
-  );
-
-  mobileOverlay?.classList.add(
-    "show"
-  );
-
-  menuButton?.setAttribute(
-    "aria-expanded",
-    "true"
-  );
-
-  document.body.classList.add(
-    "menu-open"
-  );
-
-}
-
-
-function closeMenu(){
-
-  navLinks?.classList.remove(
-    "mobile-open"
-  );
-
-  mobileOverlay?.classList.remove(
-    "show"
-  );
-
-  menuButton?.setAttribute(
-    "aria-expanded",
-    "false"
-  );
-
-  document.body.classList.remove(
-    "menu-open"
-  );
-
-}
-
-
-menuButton?.addEventListener(
-  "click",
-  () => {
-
-    const open =
-      navLinks?.classList.contains(
-        "mobile-open"
-      );
-
-    if(open){
-
-      closeMenu();
-
-    }else{
-
-      openMenu();
+      }
 
     }
 
-  }
-);
+
+    /* =======================================================
+       CUSTOM DONATION
+       ======================================================== */
+
+    function customDonation(){
+
+      const amount =
+        window.prompt(
+          "Enter your CrowRules support amount in USD:"
+        );
 
 
-mobileOverlay?.addEventListener(
-  "click",
-  closeMenu
-);
+      if(amount === null){
+
+        return;
+
+      }
 
 
-navLinks?.querySelectorAll("a")
-  .forEach(link => {
-
-    link.addEventListener(
-      "click",
-      closeMenu
-    );
-
-  });
+      const value =
+        Number(
+          String(amount)
+            .replace(/[$,\s]/g,"")
+        );
 
 
-document.addEventListener(
-  "keydown",
-  event => {
+      if(
+        !Number.isFinite(value) ||
+        value < 1
+      ){
 
-    if(event.key === "Escape"){
-
-      closeMenu();
-
-      closeIntro();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   CLOSE MOBILE MENU ON RESIZE
-   ========================================================= */
-
-window.addEventListener(
-  "resize",
-  () => {
-
-    if(window.innerWidth > 1120){
-
-      closeMenu();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   INITIALIZE
-   ========================================================= */
-
-createStars();
-
-startIntro();
-
-
-/* =========================================================
-   OPTIONAL SUPABASE CONNECTION
-   ========================================================= */
-
-if(supabaseClient){
-
-  supabaseClient.auth
-    .getSession()
-    .then(({data,error}) => {
-
-      if(error){
-
-        console.warn(
-          "Dreamscapes session check:",
-          error.message
+        window.alert(
+          "Please enter an amount of at least $1."
         );
 
         return;
 
       }
 
-      if(data?.session){
 
-        document.documentElement
-          .dataset
-          .authenticated = "true";
+      if(value > 1000000){
+
+        window.alert(
+          "Please enter an amount of $1,000,000 or less."
+        );
+
+        return;
 
       }
 
-    })
-    .catch(error => {
 
-      console.warn(
-        "Dreamscapes authentication check failed:",
-        error
-      );
+      startDonation(value);
 
-    });
+    }
 
-}
 
-</script>
+    /* =======================================================
+       CINEMATIC INTRO
+       ======================================================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function(){
+
+        const intro =
+          document.getElementById("intro");
+
+
+        if(!intro){
+
+          return;
+
+        }
+
+
+        setTimeout(
+          function(){
+
+            intro.classList.add(
+              "hidden"
+            );
+
+          },
+          2200
+        );
+
+      }
+    );
+
+
+    /* =======================================================
+       ESCAPE KEY FOR INTRO
+       ======================================================== */
+
+    document.addEventListener(
+      "keydown",
+      function(event){
+
+        if(event.key === "Escape"){
+
+          const intro =
+            document.getElementById("intro");
+
+          if(intro){
+
+            intro.classList.add(
+              "hidden"
+            );
+
+          }
+
+        }
+
+      }
+    );
+
+
+    /* =======================================================
+       PREVENT DOUBLE DONATION CLICKS
+       ======================================================== */
+
+    let donationOpening =
+      false;
+
+
+    const originalStartDonation =
+      startDonation;
+
+
+    window.startDonation =
+      async function(amount){
+
+        if(donationOpening){
+
+          return;
+
+        }
+
+
+        donationOpening =
+          true;
+
+
+        try{
+
+          await originalStartDonation(
+            amount
+          );
+
+        }
+
+        finally{
+
+          setTimeout(
+            function(){
+
+              donationOpening =
+                false;
+
+            },
+            3000
+          );
+
+        }
+
+      };
+
+
+  </script>
 
 </body>
 </html>
