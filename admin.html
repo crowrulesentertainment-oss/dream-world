@@ -26,28 +26,20 @@
 <style>
 :root{
   --bg:#05050b;
-  --bg2:#080811;
-  --panel:#0c0c17;
-  --panel2:#11111e;
-  --panel3:#151525;
-
-  --line:rgba(255,255,255,.09);
-  --line2:rgba(255,255,255,.14);
-
-  --text:#f7f7fb;
-  --muted:#9898ad;
-
-  --cyan:#00e5ff;
+  --panel:#0b0b15;
+  --panel2:#101021;
+  --panel3:#15152a;
+  --border:rgba(255,255,255,.09);
+  --text:#f4f4ff;
+  --muted:#9494ae;
+  --cyan:#00eaff;
   --purple:#9d5cff;
   --pink:#ff4fd8;
-  --gold:#ffd166;
-  --green:#48e58b;
-  --red:#ff5f6d;
-
-  --shadow:
-    0 20px 70px rgba(0,0,0,.38);
-
-  --radius:18px;
+  --gold:#ffc857;
+  --green:#35e58a;
+  --red:#ff5577;
+  --blue:#5c9dff;
+  --shadow:0 20px 70px rgba(0,0,0,.45);
 }
 
 *{
@@ -60,60 +52,26 @@ html{
 
 body{
   margin:0;
-  min-height:100vh;
-  color:var(--text);
-  font-family:Montserrat,system-ui,sans-serif;
-
   background:
-    radial-gradient(
-      circle at 10% 0%,
-      rgba(0,229,255,.10),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 90% 5%,
-      rgba(157,92,255,.12),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 50% 100%,
-      rgba(255,79,216,.06),
-      transparent 30%
-    ),
-    linear-gradient(
-      180deg,
-      var(--bg),
-      var(--bg2) 55%,
-      var(--bg)
-    );
+    radial-gradient(circle at 10% 0%,rgba(157,92,255,.12),transparent 30%),
+    radial-gradient(circle at 90% 10%,rgba(0,234,255,.08),transparent 30%),
+    linear-gradient(180deg,#05050b,#080810 50%,#05050b);
+  color:var(--text);
+  font-family:Montserrat,Arial,sans-serif;
+  min-height:100vh;
 }
 
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  z-index:-1;
   pointer-events:none;
-
-  opacity:.20;
-
+  opacity:.25;
   background-image:
-    linear-gradient(
-      rgba(255,255,255,.018) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.018) 1px,
-      transparent 1px
-    );
-
-  background-size:44px 44px;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
+    radial-gradient(circle at 20% 30%,rgba(255,255,255,.6) 0 1px,transparent 1px),
+    radial-gradient(circle at 70% 20%,rgba(255,255,255,.4) 0 1px,transparent 1px),
+    radial-gradient(circle at 40% 80%,rgba(255,255,255,.35) 0 1px,transparent 1px);
+  background-size:180px 180px,240px 240px,310px 310px;
 }
 
 button,
@@ -128,882 +86,647 @@ button{
 }
 
 .hidden{
-  display:none !important;
-}
-
-/* --------------------------------------------------
-   GLOBAL
--------------------------------------------------- */
-
-.container{
-  width:min(1500px,calc(100% - 32px));
-  margin:auto;
+  display:none!important;
 }
 
 .muted{
   color:var(--muted);
 }
 
-code{
-  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
-  color:#cfcfe2;
-  font-size:.9em;
+.small{
+  font-size:12px;
 }
 
-/* --------------------------------------------------
-   TOP BAR
--------------------------------------------------- */
+.errorbox{
+  border:1px solid rgba(255,85,119,.35);
+  background:rgba(255,85,119,.08);
+  color:#ffb4c2;
+  padding:16px;
+  border-radius:12px;
+}
+
+.successbox{
+  border:1px solid rgba(53,229,138,.3);
+  background:rgba(53,229,138,.08);
+  color:#a7ffd0;
+  padding:16px;
+  border-radius:12px;
+}
+
+/* LOGIN */
+
+#loginScreen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+}
+
+.login-card{
+  width:min(520px,100%);
+  background:rgba(11,11,21,.92);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:40px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(20px);
+  text-align:center;
+}
+
+.logo-mark{
+  width:78px;
+  height:78px;
+  margin:0 auto 20px;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    linear-gradient(135deg,rgba(0,234,255,.18),rgba(157,92,255,.25));
+  border:1px solid rgba(0,234,255,.3);
+  color:var(--cyan);
+  font-family:Orbitron,sans-serif;
+  font-size:26px;
+  font-weight:800;
+  box-shadow:
+    0 0 40px rgba(0,234,255,.08),
+    inset 0 0 30px rgba(157,92,255,.08);
+}
+
+.login-card h1{
+  font-family:Orbitron,sans-serif;
+  font-size:27px;
+  margin:0 0 10px;
+}
+
+.login-card p{
+  color:var(--muted);
+  line-height:1.7;
+  margin:0 0 26px;
+}
+
+/* APP */
+
+#adminApp{
+  min-height:100vh;
+}
 
 .topbar{
   position:sticky;
   top:0;
-  z-index:100;
-
-  border-bottom:1px solid var(--line);
-
+  z-index:50;
   background:rgba(5,5,11,.88);
   backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
 }
 
-.nav{
-  min-height:74px;
-
+.topbar-inner{
+  width:min(1500px,calc(100% - 32px));
+  margin:auto;
+  min-height:76px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  gap:18px;
+  gap:20px;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:12px;
-
-  min-width:0;
+  gap:14px;
 }
 
-.logo{
-  width:44px;
-  height:44px;
-
-  flex:0 0 auto;
-
-  display:grid;
-  place-items:center;
-
-  border:1px solid rgba(0,229,255,.40);
-  border-radius:13px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(0,229,255,.16),
-      rgba(157,92,255,.20)
-    );
-
-  box-shadow:
-    0 0 28px rgba(0,229,255,.10);
-
-  font-family:Orbitron;
-  font-weight:800;
-  letter-spacing:.04em;
-}
-
-.brand strong{
-  display:block;
-
-  font-family:Orbitron;
-  letter-spacing:.05em;
-
-  white-space:nowrap;
-}
-
-.brand small{
-  display:block;
-  color:var(--muted);
-  margin-top:3px;
-  font-size:11px;
-}
-
-.navlinks{
+.brand-icon{
+  width:42px;
+  height:42px;
+  border-radius:12px;
   display:flex;
   align-items:center;
-  justify-content:flex-end;
-
-  gap:7px;
-  flex-wrap:wrap;
+  justify-content:center;
+  border:1px solid rgba(0,234,255,.3);
+  color:var(--cyan);
+  font-family:Orbitron,sans-serif;
+  font-weight:800;
 }
 
-.navlinks a,
-.navlinks button{
-  padding:9px 12px;
+.brand-text strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:14px;
+  letter-spacing:.8px;
+}
 
-  border:1px solid transparent;
-  border-radius:10px;
-
-  background:none;
-
+.brand-text span{
+  display:block;
   color:var(--muted);
-}
-
-.navlinks a:hover,
-.navlinks button:hover{
-  color:var(--text);
-
-  border-color:var(--line);
-
-  background:rgba(255,255,255,.04);
-}
-
-.status{
-  display:inline-flex;
-  align-items:center;
-
-  gap:7px;
-
-  color:var(--muted);
-
   font-size:11px;
-  white-space:nowrap;
+  margin-top:3px;
 }
 
-.dot{
-  width:8px;
-  height:8px;
-
-  border-radius:50%;
-
-  background:var(--red);
-
-  box-shadow:0 0 10px currentColor;
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.status.online .dot{
-  background:var(--green);
+.user-pill{
+  padding:8px 12px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  color:var(--muted);
+  font-size:12px;
 }
 
-/* --------------------------------------------------
-   MAIN
--------------------------------------------------- */
-
-main{
-  padding:36px 0 80px;
+.container{
+  width:min(1500px,calc(100% - 32px));
+  margin:0 auto;
+  padding:30px 0 80px;
 }
 
 .hero{
   display:flex;
   justify-content:space-between;
   align-items:flex-end;
-
-  gap:30px;
-
-  margin-bottom:25px;
+  gap:20px;
+  margin-bottom:28px;
 }
 
-.kicker{
-  color:var(--cyan);
-
-  font-size:11px;
-  font-weight:800;
-
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-
-h1,
-h2,
-h3{
-  margin:0;
-  font-family:Orbitron;
-}
-
-h1{
-  margin-top:8px;
-
-  font-size:
-    clamp(
-      28px,
-      4vw,
-      50px
-    );
-
-  line-height:1.05;
+.hero h1{
+  font-family:Orbitron,sans-serif;
+  margin:0 0 8px;
+  font-size:clamp(28px,4vw,46px);
 }
 
 .hero p{
-  max-width:850px;
-
-  margin:13px 0 0;
-
+  margin:0;
   color:var(--muted);
-
-  line-height:1.75;
 }
 
-.actions{
+.connection{
   display:flex;
   align-items:center;
-
-  gap:9px;
-
-  flex-wrap:wrap;
+  gap:8px;
+  padding:8px 12px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  color:var(--muted);
+  font-size:12px;
 }
 
-/* --------------------------------------------------
-   BUTTONS
--------------------------------------------------- */
+.connection-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 12px currentColor;
+}
+
+.connection.online .connection-dot{
+  background:var(--green);
+}
+
+.connection.offline .connection-dot{
+  background:var(--red);
+}
+
+/* BUTTONS */
 
 .btn{
-  padding:10px 14px;
-
-  border:1px solid var(--line);
-  border-radius:11px;
-
+  border:1px solid var(--border);
+  background:#111121;
   color:var(--text);
-
-  background:rgba(255,255,255,.045);
-
-  transition:
-    .18s ease;
+  padding:10px 14px;
+  border-radius:10px;
+  transition:.2s ease;
 }
 
 .btn:hover{
-  background:rgba(255,255,255,.08);
-
-  border-color:var(--line2);
-
   transform:translateY(-1px);
+  border-color:rgba(0,234,255,.35);
+  background:#17172a;
 }
 
 .btn.primary{
-  border-color:
-    rgba(0,229,255,.34);
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(0,229,255,.15),
-      rgba(157,92,255,.18)
-    );
+  background:linear-gradient(135deg,#0b9eb0,#7040bd);
+  border-color:rgba(255,255,255,.14);
 }
 
 .btn.danger{
-  color:#ffb1b8;
-
-  border-color:
-    rgba(255,95,109,.30);
+  border-color:rgba(255,85,119,.3);
+  color:#ffb0bf;
 }
 
-/* --------------------------------------------------
-   STATISTICS
--------------------------------------------------- */
+.btn.small-btn{
+  padding:7px 10px;
+  font-size:12px;
+}
+
+/* STATS */
 
 .stats{
   display:grid;
-
-  grid-template-columns:
-    repeat(8,minmax(0,1fr));
-
-  gap:12px;
-
-  margin-bottom:20px;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:14px;
+  margin-bottom:28px;
 }
 
 .stat{
-  min-width:0;
-
-  padding:17px;
-
-  border:1px solid var(--line);
+  background:rgba(11,11,21,.82);
+  border:1px solid var(--border);
   border-radius:16px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.055),
-      rgba(255,255,255,.018)
-    );
-
-  box-shadow:var(--shadow);
+  padding:18px;
+  min-height:120px;
 }
 
-.stat .label{
+.stat-label{
   color:var(--muted);
-
-  font-size:10px;
-  font-weight:700;
-
-  letter-spacing:.12em;
+  font-size:11px;
   text-transform:uppercase;
+  letter-spacing:1px;
 }
 
-.stat .value{
-  margin-top:9px;
-
-  font-family:Orbitron;
-
-  font-size:24px;
-
-  white-space:nowrap;
-
-  overflow:hidden;
-  text-overflow:ellipsis;
+.stat-value{
+  font-family:Orbitron,sans-serif;
+  font-size:27px;
+  margin-top:14px;
 }
 
-.value.cyan{
-  color:var(--cyan);
+.stat-sub{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:5px;
 }
 
-.value.green{
-  color:var(--green);
-}
-
-.value.gold{
-  color:var(--gold);
-}
-
-.value.pink{
-  color:var(--pink);
-}
-
-/* --------------------------------------------------
-   GRID / PANELS
--------------------------------------------------- */
+/* GRID */
 
 .grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:18px;
 }
 
 .panel{
+  background:rgba(11,11,21,.84);
+  border:1px solid var(--border);
+  border-radius:18px;
   overflow:hidden;
-
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-
-  background:
-    rgba(10,10,20,.84);
-
-  box-shadow:var(--shadow);
+  box-shadow:0 12px 40px rgba(0,0,0,.18);
 }
 
-.panel.wide{
+.panel.full{
   grid-column:1 / -1;
 }
 
-.panelhead{
+.panel-head{
+  padding:18px 20px;
+  border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
   justify-content:space-between;
-
   gap:15px;
-
-  padding:18px 20px;
-
-  border-bottom:1px solid var(--line);
 }
 
-.panelhead h2{
-  font-size:16px;
+.panel-head h2{
+  margin:0;
+  font-family:Orbitron,sans-serif;
+  font-size:15px;
+  letter-spacing:.5px;
 }
 
-.panelhead p{
+.panel-head p{
   margin:5px 0 0;
-
   color:var(--muted);
-
   font-size:11px;
 }
 
-.panelbody{
+.panel-body{
   padding:18px 20px;
 }
 
-/* --------------------------------------------------
-   QUICK ACTIONS
--------------------------------------------------- */
-
-.quick{
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
-
-  gap:10px;
+.panel-tools{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
-.quick button{
-  padding:15px;
-
-  text-align:left;
-
-  border:1px solid var(--line);
-  border-radius:13px;
-
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid var(--border);
+  background:#080811;
   color:var(--text);
-
-  background:
-    rgba(255,255,255,.025);
-
-  transition:.18s ease;
+  border-radius:10px;
+  padding:11px 12px;
+  outline:none;
 }
 
-.quick button:hover{
-  border-color:
-    rgba(0,229,255,.30);
-
-  background:
-    rgba(0,229,255,.035);
-
-  transform:translateY(-1px);
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:rgba(0,234,255,.45);
+  box-shadow:0 0 0 3px rgba(0,234,255,.06);
 }
 
-.quick b{
-  display:block;
-
-  font-size:13px;
+.search{
+  max-width:300px;
 }
-
-.quick span{
-  display:block;
-
-  margin-top:5px;
-
-  color:var(--muted);
-
-  font-size:10px;
-}
-
-/* --------------------------------------------------
-   TABLES
--------------------------------------------------- */
 
 .tablewrap{
+  width:100%;
   overflow:auto;
 }
 
 .table{
   width:100%;
-
   border-collapse:collapse;
-
-  min-width:680px;
-}
-
-.table th,
-.table td{
-  padding:12px 10px;
-
-  border-bottom:
-    1px solid rgba(255,255,255,.06);
-
-  text-align:left;
-
-  vertical-align:top;
-
-  font-size:12px;
+  min-width:760px;
 }
 
 .table th{
+  text-align:left;
   color:var(--muted);
-
-  font-size:9px;
-  font-weight:800;
-
-  letter-spacing:.12em;
-
+  font-size:10px;
   text-transform:uppercase;
+  letter-spacing:1px;
+  padding:12px;
+  border-bottom:1px solid var(--border);
+}
+
+.table td{
+  padding:14px 12px;
+  border-bottom:1px solid rgba(255,255,255,.055);
+  vertical-align:top;
+  font-size:12px;
 }
 
 .table tr:last-child td{
   border-bottom:0;
 }
 
-.table td b{
-  font-weight:700;
-}
-
-.table td small{
+.empty{
+  padding:35px;
+  text-align:center;
   color:var(--muted);
 }
 
-/* --------------------------------------------------
-   BADGES
--------------------------------------------------- */
+/* BADGES */
 
 .badge{
   display:inline-flex;
   align-items:center;
-
+  gap:5px;
   padding:5px 8px;
-
   border-radius:999px;
-
-  background:
-    rgba(255,255,255,.06);
-
-  font-size:9px;
-  font-weight:800;
-
-  white-space:nowrap;
-}
-
-.badge.green{
-  color:var(--green);
-
-  background:
-    rgba(72,229,139,.10);
-}
-
-.badge.red{
-  color:var(--red);
-
-  background:
-    rgba(255,95,109,.10);
-}
-
-.badge.gold{
-  color:var(--gold);
-
-  background:
-    rgba(255,209,102,.10);
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  border:1px solid rgba(255,255,255,.08);
 }
 
 .badge.cyan{
   color:var(--cyan);
-
-  background:
-    rgba(0,229,255,.10);
+  background:rgba(0,234,255,.08);
 }
 
-.badge.pink{
-  color:var(--pink);
-
-  background:
-    rgba(255,79,216,.10);
+.badge.green{
+  color:var(--green);
+  background:rgba(53,229,138,.08);
 }
 
-/* --------------------------------------------------
-   SEARCH
--------------------------------------------------- */
-
-.searchbar{
-  display:flex;
-
-  gap:10px;
-
-  margin-bottom:13px;
+.badge.gold{
+  color:var(--gold);
+  background:rgba(255,200,87,.08);
 }
 
-.searchbar input,
-.searchbar select{
-  width:100%;
-
-  padding:10px 12px;
-
-  border:1px solid var(--line);
-  border-radius:10px;
-
-  outline:none;
-
-  color:var(--text);
-
-  background:#080811;
+.badge.red{
+  color:var(--red);
+  background:rgba(255,85,119,.08);
 }
 
-.searchbar input:focus,
-.searchbar select:focus{
-  border-color:
-    rgba(0,229,255,.38);
-
-  box-shadow:
-    0 0 0 3px rgba(0,229,255,.06);
+.badge.purple{
+  color:#c69dff;
+  background:rgba(157,92,255,.1);
 }
 
-/* --------------------------------------------------
-   EMPTY / ERROR
--------------------------------------------------- */
-
-.empty{
-  padding:32px 20px;
-
-  text-align:center;
-
-  color:var(--muted);
-
-  line-height:1.7;
+.badge.blue{
+  color:#9bc1ff;
+  background:rgba(92,157,255,.08);
 }
 
-.errorbox{
-  padding:14px;
-
-  border:
-    1px solid rgba(255,95,109,.22);
-
-  border-radius:12px;
-
-  color:#ffb5bc;
-
-  background:
-    rgba(255,95,109,.055);
-
-  font-size:12px;
-
-  line-height:1.65;
+.progress{
+  width:120px;
+  height:7px;
+  border-radius:999px;
+  overflow:hidden;
+  background:#1b1b2a;
 }
 
-/* --------------------------------------------------
-   PIPELINE
--------------------------------------------------- */
-
-.pipeline{
-  display:grid;
-
-  grid-template-columns:
-    repeat(8,minmax(0,1fr));
-
-  gap:9px;
-}
-
-.stage{
-  padding:12px;
-
-  border:1px solid var(--line);
-  border-radius:12px;
-
-  background:
-    rgba(255,255,255,.025);
-}
-
-.stage b{
-  font-family:Orbitron;
-  font-size:17px;
-}
-
-.stage span{
+.progress span{
   display:block;
-
-  margin-top:5px;
-
-  color:var(--muted);
-
-  font-size:9px;
+  height:100%;
+  background:linear-gradient(90deg,var(--cyan),var(--purple));
 }
 
-/* --------------------------------------------------
-   LOGIN
--------------------------------------------------- */
+/* ACTIVITY */
 
-.login{
-  min-height:100vh;
+.activity{
+  display:flex;
+  flex-direction:column;
+}
 
+.activity-item{
+  display:flex;
+  gap:12px;
+  padding:13px 0;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.activity-item:last-child{
+  border-bottom:0;
+}
+
+.activity-icon{
+  width:32px;
+  height:32px;
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  background:rgba(0,234,255,.08);
+  color:var(--cyan);
+  font-size:11px;
+}
+
+.activity-message{
+  font-size:12px;
+  line-height:1.5;
+}
+
+.activity-time{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+
+/* SYSTEM */
+
+.system-list{
   display:grid;
-  place-items:center;
-
-  padding:25px;
+  gap:10px;
 }
 
-.loginbox{
-  width:min(520px,100%);
-
-  padding:42px;
-
-  text-align:center;
-
-  border:1px solid var(--line);
-  border-radius:24px;
-
-  background:
-    rgba(10,10,20,.90);
-
-  box-shadow:var(--shadow);
+.system-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:12px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:10px;
 }
 
-.loginbox .logo{
-  width:64px;
-  height:64px;
-
-  margin:0 auto 18px;
-
-  font-size:17px;
-}
-
-.loginbox h1{
-  font-size:32px;
-}
-
-.loginbox p{
+.system-name{
   color:var(--muted);
-
-  line-height:1.7;
+  font-size:12px;
 }
 
-/* --------------------------------------------------
-   MODAL
--------------------------------------------------- */
+.system-value{
+  font-size:12px;
+}
+
+/* MODAL */
 
 .modal{
   position:fixed;
   inset:0;
-
-  z-index:500;
-
-  display:grid;
-  place-items:center;
-
-  padding:18px;
-
-  background:
-    rgba(0,0,0,.72);
-
-  backdrop-filter:blur(12px);
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(10px);
 }
 
-.modalbox{
-  width:min(800px,100%);
+.modal.open{
+  display:flex;
+}
 
+.modal-card{
+  width:min(760px,100%);
   max-height:90vh;
-
   overflow:auto;
-
-  border:1px solid var(--line);
+  background:#0b0b15;
+  border:1px solid var(--border);
   border-radius:20px;
-
-  background:#0a0a13;
-
   box-shadow:var(--shadow);
 }
 
-.modalhead{
+.modal-head{
   display:flex;
-
-  align-items:center;
   justify-content:space-between;
-
   gap:15px;
-
-  padding:18px;
-
-  border-bottom:1px solid var(--line);
+  padding:20px;
+  border-bottom:1px solid var(--border);
 }
 
-.modalhead h2{
+.modal-head h2{
+  margin:0;
+  font-family:Orbitron,sans-serif;
   font-size:17px;
 }
 
-.modalbody{
+.modal-body{
   padding:20px;
 }
 
 .field{
-  margin-bottom:15px;
+  margin-bottom:18px;
 }
 
 .field label{
   display:block;
-
-  margin-bottom:7px;
-
   color:var(--muted);
-
-  font-size:10px;
-  font-weight:800;
-
-  letter-spacing:.10em;
-
-  text-transform:uppercase;
-}
-
-.field textarea,
-.field select{
-  width:100%;
-
-  padding:11px;
-
-  border:1px solid var(--line);
-  border-radius:10px;
-
-  outline:none;
-
-  color:var(--text);
-
-  background:#06060d;
+  font-size:11px;
+  margin-bottom:7px;
 }
 
 .field textarea{
-  min-height:120px;
+  min-height:150px;
   resize:vertical;
 }
 
-/* --------------------------------------------------
-   TOAST
--------------------------------------------------- */
-
-.toast{
-  position:fixed;
-
-  right:18px;
-  bottom:18px;
-
-  z-index:1000;
-
-  display:none;
-
-  max-width:400px;
-
-  padding:13px 16px;
-
-  border:1px solid var(--line);
+.detail{
+  background:#080811;
+  border:1px solid rgba(255,255,255,.06);
   border-radius:12px;
+  padding:14px;
+  line-height:1.7;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
 
-  color:var(--text);
+.modal-foot{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  padding:18px 20px;
+  border-top:1px solid var(--border);
+}
 
-  background:#11111d;
+/* TOAST */
 
+#toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:200;
+  min-width:260px;
+  max-width:420px;
+  padding:14px 16px;
+  background:#111121;
+  border:1px solid var(--border);
+  border-radius:12px;
   box-shadow:var(--shadow);
-
+  display:none;
   font-size:12px;
 }
 
-.toast.show{
+#toast.show{
   display:block;
 }
 
-/* --------------------------------------------------
-   RESPONSIVE
--------------------------------------------------- */
+/* QUICK ACTIONS */
 
-@media(max-width:1350px){
+.quick-actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
 
+.quick-actions .btn{
+  text-align:left;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
   .stats{
-    grid-template-columns:
-      repeat(4,minmax(0,1fr));
-  }
-
-  .pipeline{
-    grid-template-columns:
-      repeat(4,minmax(0,1fr));
+    grid-template-columns:repeat(3,1fr);
   }
 }
 
 @media(max-width:900px){
-
   .grid{
     grid-template-columns:1fr;
   }
 
-  .panel.wide{
+  .panel.full{
     grid-column:auto;
-  }
-
-  .quick{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
   }
 
   .hero{
@@ -1011,65 +734,38 @@ h1{
     flex-direction:column;
   }
 
-  .nav{
-    align-items:flex-start;
-
-    padding:
-      9px 0;
-  }
-
-  .navlinks{
-    justify-content:flex-end;
+  .topbar-inner{
+    flex-wrap:wrap;
+    padding:12px 0;
   }
 }
 
-@media(max-width:600px){
-
-  .container{
-    width:
-      min(
-        calc(100% - 20px),
-        1500px
-      );
+@media(max-width:650px){
+  .container,
+  .topbar-inner{
+    width:min(100% - 20px,1500px);
   }
 
   .stats{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .quick{
-    grid-template-columns:1fr;
+  .login-card{
+    padding:28px 20px;
   }
 
-  .pipeline{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
-  }
-
-  .panelhead{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .searchbar{
-    flex-direction:column;
-  }
-
-  .brand strong{
-    font-size:12px;
-  }
-
-  .brand small{
-    font-size:9px;
-  }
-
-  .navlinks a{
+  .user-pill{
     display:none;
   }
 
-  .loginbox{
-    padding:30px 20px;
+  .quick-actions{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:430px){
+  .stats{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -1077,695 +773,34 @@ h1{
 
 <body>
 
-<!-- ==================================================
-     LOGIN
-================================================== -->
+<!-- LOGIN -->
 
-<section id="loginScreen" class="login">
+<section id="loginScreen">
 
-  <div class="loginbox">
+  <div class="login-card">
 
-    <div class="logo">
-      CR
-    </div>
+    <div class="logo-mark">DS</div>
 
-    <div class="kicker">
-      CrowRules Entertainment
-    </div>
-
-    <h1>
-      Dreamscapes Admin
-    </h1>
+    <h1>DREAMSCAPES ADMIN</h1>
 
     <p>
-      Administrative command center for dreams, creators,
-      projects, collaboration, development and community support.
+      CrowRules Entertainment administrative command center.
+      Sign in with the authorized CrowRules administrator account.
     </p>
 
     <button
-      id="googleBtn"
+      id="loginBtn"
       class="btn primary"
-      style="width:100%;margin-top:12px"
+      type="button"
+      onclick="signIn()"
     >
-      Continue with Google
+      Sign in with Google
     </button>
 
-    <p
-      id="loginMsg"
-      style="font-size:12px"
-    ></p>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     ADMIN APPLICATION
-================================================== -->
-
-<div id="adminApp" class="hidden">
-
-<header class="topbar">
-
-  <div class="container nav">
-
-    <a
-      class="brand"
-      href="#"
-    >
-
-      <div class="logo">
-        CR
-      </div>
-
-      <div>
-        <strong>
-          Dreamscapes Admin
-        </strong>
-
-        <small>
-          CrowRules Entertainment
-        </small>
-      </div>
-
-    </a>
-
-
-    <div class="navlinks">
-
-      <span
-        id="connection"
-        class="status"
-      >
-        <i class="dot"></i>
-        <span>
-          Connecting
-        </span>
-      </span>
-
-      <a href="index.html">
-        Dreamscapes
-      </a>
-
-      <a href="creator-dashboard.html">
-        Creator Hub
-      </a>
-
-      <button id="signOutBtn">
-        Sign Out
-      </button>
-
-    </div>
-
-  </div>
-
-</header>
-
-
-<main class="container">
-
-<!-- ==================================================
-     HERO
-================================================== -->
-
-<section class="hero">
-
-  <div>
-
-    <div class="kicker">
-      Administrative Command Center
-    </div>
-
-    <h1>
-      Dreamscapes Control Center
-    </h1>
-
-    <p>
-      Manage the Dreamscapes creator network and keep the path
-      from dream → story → development → production visible
-      in one place.
-    </p>
-
-  </div>
-
-
-  <div class="actions">
-
-    <button
-      class="btn"
-      id="refreshBtn"
-    >
-      ↻ Refresh
-    </button>
-
-    <button
-      class="btn primary"
-      id="systemBtn"
-    >
-      System Status
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     STATISTICS
-================================================== -->
-
-<section class="stats">
-
-  <div class="stat">
-
-    <div class="label">
-      Total Dreams
-    </div>
-
     <div
-      id="statDreams"
-      class="value cyan"
-    >
-      —
-    </div>
-
-  </div>
-
-
-  <div class="stat">
-
-    <div class="label">
-      Needs Review
-    </div>
-
-    <div
-      id="statReview"
-      class="value gold"
-    >
-      —
-    </div>
-
-  </div>
-
-
-  <div class="stat">
-
-    <div class="label">
-      Projects
-    </div>
-
-    <div
-      id="statProjects"
-      class="value"
-    >
-      —
-    </div>
-
-  </div>
-
-
-  <div class="stat">
-
-    <div class="label">
-      Creators
-    </div>
-
-    <div
-      id="statCreators"
-      class="value"
-    >
-      —
-    </div>
-
-  </div>
-
-
-  <div class="stat">
-
-    <div class="label">
-      Collaborators
-    </div>
-
-    <div
-      id="statCollaborators"
-      class="value"
-    >
-      —
-    </div>
-
-  </div>
-
-
-  <div class="stat">
-
-    <div class="label">
-      Open Requests
-    </div>
-
-    <div
-      id="statRequests"
-      class="value"
-    >
-      —
-    </div>
-
-  </div>
-
-
-  <!-- NEW: DONATION TOTAL -->
-
-  <div class="stat">
-
-    <div class="label">
-      Donation Total
-    </div>
-
-    <div
-      id="statDonationTotal"
-      class="value green"
-    >
-      $0.00
-    </div>
-
-  </div>
-
-
-  <!-- NEW: SUCCESSFUL DONATIONS -->
-
-  <div class="stat">
-
-    <div class="label">
-      Successful Gifts
-    </div>
-
-    <div
-      id="statDonationCount"
-      class="value gold"
-    >
-      0
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     QUICK ACTIONS
-================================================== -->
-
-<section
-  class="panel"
-  style="margin-bottom:18px"
->
-
-  <div class="panelhead">
-
-    <div>
-
-      <h2>
-        Quick Actions
-      </h2>
-
-      <p>
-        Jump directly to an administrative area.
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <div class="panelbody">
-
-    <div class="quick">
-
-      <button
-        onclick="focusPanel('submissionsPanel')"
-      >
-        <b>
-          Dream Queue
-        </b>
-
-        <span>
-          Review incoming dreams
-        </span>
-      </button>
-
-
-      <button
-        onclick="focusPanel('projectsPanel')"
-      >
-        <b>
-          Projects
-        </b>
-
-        <span>
-          Monitor development
-        </span>
-      </button>
-
-
-      <button
-        onclick="focusPanel('collabPanel')"
-      >
-        <b>
-          Collaboration
-        </b>
-
-        <span>
-          Open creator requests
-        </span>
-      </button>
-
-
-      <button
-        onclick="focusPanel('donationsPanel')"
-      >
-        <b>
-          Donations
-        </b>
-
-        <span>
-          Review CrowRules support
-        </span>
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     CONTENT GRID
-================================================== -->
-
-<section class="grid">
-
-
-<!-- ==================================================
-     DREAM SUBMISSIONS
-================================================== -->
-
-<section
-  id="submissionsPanel"
-  class="panel"
->
-
-  <div class="panelhead">
-
-    <div>
-
-      <h2>
-        Dream Submission Queue
-      </h2>
-
-      <p>
-        Latest records from ds_submissions.
-      </p>
-
-    </div>
-
-    <button
-      class="btn"
-      onclick="loadSubmissions()"
-    >
-      Refresh
-    </button>
-
-  </div>
-
-
-  <div class="panelbody">
-
-    <div class="searchbar">
-
-      <input
-        id="submissionSearch"
-        placeholder="Search dreams, creators, status..."
-        oninput="renderSubmissions()"
-      >
-
-    </div>
-
-    <div id="submissionRows">
-      <div class="empty">
-        Loading submissions…
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     PROJECTS
-================================================== -->
-
-<section
-  id="projectsPanel"
-  class="panel"
->
-
-  <div class="panelhead">
-
-    <div>
-
-      <h2>
-        Dream Projects
-      </h2>
-
-      <p>
-        Latest development records.
-      </p>
-
-    </div>
-
-    <button
-      class="btn"
-      onclick="loadProjects()"
-    >
-      Refresh
-    </button>
-
-  </div>
-
-
-  <div class="panelbody">
-
-    <div id="projectRows">
-      <div class="empty">
-        Loading projects…
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     DONATION CENTER
-================================================== -->
-
-<section
-  id="donationsPanel"
-  class="panel wide"
->
-
-  <div class="panelhead">
-
-    <div>
-
-      <h2>
-        Donation Center
-      </h2>
-
-      <p>
-        CrowRules support activity from cr_donations.
-      </p>
-
-    </div>
-
-
-    <div class="actions">
-
-      <button
-        class="btn"
-        onclick="loadDonations()"
-      >
-        Refresh
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <div class="panelbody">
-
-    <div class="searchbar">
-
-      <input
-        id="donationSearch"
-        placeholder="Search donor, email, campaign, reference..."
-        oninput="renderDonations()"
-      >
-
-
-      <select
-        id="donationFilter"
-        onchange="renderDonations()"
-      >
-
-        <option value="">
-          All statuses
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div
-      id="donationSummary"
-      class="muted"
-      style="
-        font-size:12px;
-        margin-bottom:12px;
-      "
-    >
-      Loading donation information…
-    </div>
-
-
-    <div id="donationRows">
-
-      <div class="empty">
-        Loading donations…
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     ACTIVITY
-================================================== -->
-
-<section
-  id="activityPanel"
-  class="panel"
->
-
-  <div class="panelhead">
-
-    <div>
-
-      <h2>
-        Recent Activity
-      </h2>
-
-      <p>
-        Dreamscapes administrative activity.
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <div class="panelbody">
-
-    <div id="activityRows">
-
-      <div class="empty">
-        Loading activity…
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     COLLABORATION
-================================================== -->
-
-<section
-  id="collabPanel"
-  class="panel"
->
-
-  <div class="panelhead">
-
-    <div>
-
-      <h2>
-        Collaboration Requests
-      </h2>
-
-      <p>
-        Creators and collaborators looking for connections.
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <div class="panelbody">
-
-    <div id="collabRows">
-
-      <div class="empty">
-        Loading collaboration requests…
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-     PIPELINE
-================================================== -->
-
-<section class="panel wide">
-
-  <div class="panelhead">
-
-    <div>
-
-      <h2>
-        Development Pipeline
-      </h2>
-
-      <p>
-        Projects by current stage.
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <div class="panelbody">
-
-    <div
-      id="pipeline"
-      class="pipeline"
+      id="loginError"
+      class="errorbox hidden"
+      style="margin-top:18px;text-align:left"
     ></div>
 
   </div>
@@ -1773,120 +808,506 @@ h1{
 </section>
 
 
-<!-- ==================================================
-     SYSTEM
-================================================== -->
+<!-- ADMIN APP -->
 
-<section class="panel wide">
+<section id="adminApp" class="hidden">
 
-  <div class="panelhead">
+  <header class="topbar">
 
-    <div>
+    <div class="topbar-inner">
 
-      <h2>
-        Dreamscapes System
-      </h2>
+      <div class="brand">
 
-      <p>
-        Current administrative session and backend connectivity.
-      </p>
+        <div class="brand-icon">DS</div>
+
+        <div class="brand-text">
+          <strong>CROWRULES DREAMSCAPES</strong>
+          <span>Administrative Command Center</span>
+        </div>
+
+      </div>
+
+      <div class="top-actions">
+
+        <div
+          id="connection"
+          class="connection"
+        >
+          <span class="connection-dot"></span>
+          <span id="connectionText">Connecting</span>
+        </div>
+
+        <div
+          id="userPill"
+          class="user-pill"
+        >
+          Administrator
+        </div>
+
+        <button
+          class="btn small-btn"
+          onclick="loadAll()"
+          type="button"
+        >
+          Refresh
+        </button>
+
+        <button
+          class="btn small-btn danger"
+          onclick="signOut()"
+          type="button"
+        >
+          Sign Out
+        </button>
+
+      </div>
 
     </div>
 
-  </div>
+  </header>
 
 
-  <div
-    class="panelbody"
-    id="systemInfo"
-  ></div>
+  <main class="container">
 
-</section>
-
-
-</section>
-
-</main>
-
-</div>
-
-
-<!-- ==================================================
-     REVIEW MODAL
-================================================== -->
-
-<div
-  id="reviewModal"
-  class="modal hidden"
->
-
-  <div class="modalbox">
-
-    <div class="modalhead">
+    <section class="hero">
 
       <div>
 
-        <h2>
-          Review Dream
-        </h2>
+        <h1>Dreamscapes Command Center</h1>
 
-        <p class="muted">
-          Administrative review
+        <p>
+          Manage dreams, creators, projects, collaboration,
+          development and CrowRules donations.
         </p>
 
       </div>
 
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="stats">
+
+      <div class="stat">
+        <div class="stat-label">Dream Submissions</div>
+        <div id="statSubmissions" class="stat-value">—</div>
+        <div class="stat-sub">Total submissions</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Projects</div>
+        <div id="statProjects" class="stat-value">—</div>
+        <div class="stat-sub">Dreamscapes projects</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Creators</div>
+        <div id="statCreators" class="stat-value">—</div>
+        <div class="stat-sub">Creator profiles</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Collaboration</div>
+        <div id="statCollaboration" class="stat-value">—</div>
+        <div class="stat-sub">Open requests</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Donation Total</div>
+        <div id="statDonationTotal" class="stat-value">$0</div>
+        <div class="stat-sub">Successful donations</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Successful Gifts</div>
+        <div id="statDonationCount" class="stat-value">0</div>
+        <div class="stat-sub">Completed donations</div>
+      </div>
+
+    </section>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <section class="panel full" style="margin-bottom:18px">
+
+      <div class="panel-head">
+
+        <div>
+          <h2>Quick Actions</h2>
+          <p>Jump directly into the administrative areas.</p>
+        </div>
+
+      </div>
+
+      <div class="panel-body">
+
+        <div class="quick-actions">
+
+          <button
+            class="btn"
+            onclick="document.getElementById('submissionsPanel').scrollIntoView({behavior:'smooth'})"
+          >
+            📝 Review Dreams
+          </button>
+
+          <button
+            class="btn"
+            onclick="document.getElementById('projectsPanel').scrollIntoView({behavior:'smooth'})"
+          >
+            🎬 View Projects
+          </button>
+
+          <button
+            class="btn"
+            onclick="document.getElementById('donationsPanel').scrollIntoView({behavior:'smooth'})"
+          >
+            💜 Donations
+          </button>
+
+          <button
+            class="btn"
+            onclick="document.getElementById('collaborationPanel').scrollIntoView({behavior:'smooth'})"
+          >
+            🤝 Collaboration
+          </button>
+
+          <button
+            class="btn"
+            onclick="document.getElementById('activityPanel').scrollIntoView({behavior:'smooth'})"
+          >
+            ⚡ Activity
+          </button>
+
+          <button
+            class="btn"
+            onclick="document.getElementById('systemPanel').scrollIntoView({behavior:'smooth'})"
+          >
+            🛠 System Status
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="grid">
+
+
+      <!-- SUBMISSIONS -->
+
+      <section
+        id="submissionsPanel"
+        class="panel full"
+      >
+
+        <div class="panel-head">
+
+          <div>
+            <h2>Dream Queue</h2>
+            <p>
+              Review incoming Dreamscapes submissions.
+            </p>
+          </div>
+
+          <div class="panel-tools">
+
+            <input
+              id="submissionSearch"
+              class="search"
+              type="search"
+              placeholder="Search dreams..."
+              oninput="renderSubmissions()"
+            >
+
+          </div>
+
+        </div>
+
+        <div
+          id="submissionRows"
+          class="panel-body"
+        >
+          <div class="empty">Loading submissions…</div>
+        </div>
+
+      </section>
+
+
+      <!-- PROJECTS -->
+
+      <section
+        id="projectsPanel"
+        class="panel"
+      >
+
+        <div class="panel-head">
+
+          <div>
+            <h2>Development Pipeline</h2>
+            <p>Current Dreamscapes projects.</p>
+          </div>
+
+        </div>
+
+        <div
+          id="projectRows"
+          class="panel-body"
+        >
+          <div class="empty">Loading projects…</div>
+        </div>
+
+      </section>
+
+
+      <!-- DONATIONS -->
+
+      <section
+        id="donationsPanel"
+        class="panel"
+      >
+
+        <div class="panel-head">
+
+          <div>
+            <h2>Donation Center</h2>
+            <p>CrowRules funding and supporter activity.</p>
+          </div>
+
+          <div class="panel-tools">
+
+            <select
+              id="donationStatusFilter"
+              onchange="renderDonations()"
+            >
+              <option value="all">All statuses</option>
+              <option value="succeeded">Succeeded</option>
+              <option value="pending">Pending</option>
+              <option value="failed">Failed</option>
+              <option value="canceled">Canceled</option>
+              <option value="refunded">Refunded</option>
+            </select>
+
+          </div>
+
+        </div>
+
+        <div
+          id="donationRows"
+          class="panel-body"
+        >
+          <div class="empty">Loading donations…</div>
+        </div>
+
+      </section>
+
+
+      <!-- ACTIVITY -->
+
+      <section
+        id="activityPanel"
+        class="panel"
+      >
+
+        <div class="panel-head">
+
+          <div>
+            <h2>Activity</h2>
+            <p>Latest Dreamscapes events.</p>
+          </div>
+
+        </div>
+
+        <div
+          id="activityRows"
+          class="panel-body"
+        >
+          <div class="empty">Loading activity…</div>
+        </div>
+
+      </section>
+
+
+      <!-- COLLABORATION -->
+
+      <section
+        id="collaborationPanel"
+        class="panel"
+      >
+
+        <div class="panel-head">
+
+          <div>
+            <h2>Collaboration</h2>
+            <p>Creator matching and collaboration requests.</p>
+          </div>
+
+        </div>
+
+        <div
+          id="collaborationRows"
+          class="panel-body"
+        >
+          <div class="empty">Loading collaboration…</div>
+        </div>
+
+      </section>
+
+
+      <!-- SYSTEM -->
+
+      <section
+        id="systemPanel"
+        class="panel"
+      >
+
+        <div class="panel-head">
+
+          <div>
+            <h2>System Status</h2>
+            <p>Dreamscapes backend health.</p>
+          </div>
+
+        </div>
+
+        <div
+          id="systemRows"
+          class="panel-body"
+        ></div>
+
+      </section>
+
+
+    </section>
+
+  </main>
+
+</section>
+
+
+<!-- REVIEW MODAL -->
+
+<div
+  id="reviewModal"
+  class="modal"
+>
+
+  <div class="modal-card">
+
+    <div class="modal-head">
+
+      <div>
+        <h2>Review Dream Submission</h2>
+        <div
+          id="reviewSubtitle"
+          class="muted small"
+          style="margin-top:5px"
+        ></div>
+      </div>
+
       <button
-        class="btn"
+        class="btn small-btn"
         onclick="closeReview()"
+        type="button"
       >
         Close
       </button>
 
     </div>
 
-
-    <div class="modalbody">
-
-      <div id="reviewContent"></div>
-
+    <div class="modal-body">
 
       <div class="field">
 
-        <label>
-          Admin Note
-        </label>
+        <label>Dream Title</label>
 
-        <textarea
-          id="reviewNote"
-          placeholder="Add an internal review note..."
-        ></textarea>
+        <div
+          id="reviewTitle"
+          class="detail"
+        ></div>
 
       </div>
 
 
       <div class="field">
 
-        <label>
-          Decision
-        </label>
+        <label>Creator</label>
+
+        <div
+          id="reviewCreator"
+          class="detail"
+        ></div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Submission Type</label>
+
+        <div
+          id="reviewType"
+          class="detail"
+        ></div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Creator Involvement</label>
+
+        <div
+          id="reviewInvolvement"
+          class="detail"
+        ></div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Submission Message</label>
+
+        <div
+          id="reviewMessage"
+          class="detail"
+        ></div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Status</label>
 
         <select id="reviewStatus">
+
+          <option value="submitted">
+            Submitted
+          </option>
+
+          <option value="under_review">
+            Under Review
+          </option>
 
           <option value="approved">
             Approved
           </option>
 
-          <option value="needs_review">
-            Needs Review
+          <option value="changes_requested">
+            Changes Requested
           </option>
 
           <option value="rejected">
             Rejected
           </option>
 
-          <option value="development">
-            Move to Development
+          <option value="withdrawn">
+            Withdrawn
           </option>
 
         </select>
@@ -1894,9 +1315,35 @@ h1{
       </div>
 
 
+      <div class="field">
+
+        <label>Reviewer Notes</label>
+
+        <textarea
+          id="reviewNotes"
+          placeholder="Add internal review notes..."
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-foot">
+
       <button
+        class="btn"
+        onclick="closeReview()"
+        type="button"
+      >
+        Cancel
+      </button>
+
+      <button
+        id="saveReviewBtn"
         class="btn primary"
         onclick="saveReview()"
+        type="button"
       >
         Save Review
       </button>
@@ -1908,21 +1355,14 @@ h1{
 </div>
 
 
-<!-- ==================================================
-     TOAST
-================================================== -->
-
-<div
-  id="toast"
-  class="toast"
-></div>
+<div id="toast"></div>
 
 
 <script>
-
-/* =====================================================
-   SUPABASE
-===================================================== */
+/* =========================================================
+   CROWRULES DREAMSCAPES ADMIN
+   Supabase configuration
+========================================================= */
 
 const SUPABASE_URL =
   "https://cevylpnoexugwgygvtgu.supabase.co";
@@ -1930,156 +1370,109 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_AdfM5y6RqvF3tbvEVzDZSg_JuGTQLD-";
 
-const {
-  createClient
-} = window.supabase;
-
 const sb =
-  createClient(
+  window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
   );
 
 
-/* =====================================================
-   APPLICATION STATE
-===================================================== */
-
-let currentUser = null;
-
-let currentSubmission = null;
+/* =========================================================
+   STATE
+========================================================= */
 
 let submissions = [];
-
 let projects = [];
-
 let donations = [];
+let activity = [];
+let collaborationRequests = [];
 
-let activities = [];
-
-let collaborations = [];
-
+let currentReviewId = null;
 let realtimeChannel = null;
 
 
-/* =====================================================
-   DOM HELPER
-===================================================== */
+/* =========================================================
+   HELPERS
+========================================================= */
 
-const $ = id =>
-  document.getElementById(id);
+function $(id){
+  return document.getElementById(id);
+}
 
-
-/* =====================================================
-   HTML ESCAPING
-===================================================== */
 
 function escapeHtml(value){
 
-  return String(value ?? "")
-    .replace(
-      /[&<>"']/g,
-      char => ({
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
-      }[char])
-    );
+  if(value === null || value === undefined){
+    return "";
+  }
 
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
-
-/* =====================================================
-   STATUS HELPERS
-===================================================== */
 
 function prettyStatus(value){
 
-  return String(
-    value ?? "unknown"
-  )
-  .replace(
-    /[_-]+/g,
-    " "
-  )
-  .replace(
-    /\b\w/g,
-    char => char.toUpperCase()
-  );
+  if(!value){
+    return "Unknown";
+  }
 
+  return String(value)
+    .replaceAll("_"," ")
+    .replace(/\b\w/g,c => c.toUpperCase());
 }
 
 
-function statusClass(value){
+function statusClass(status){
 
-  const status =
-    String(
-      value ?? ""
-    ).toLowerCase();
+  const value =
+    String(status || "").toLowerCase();
 
-  if(
-    [
-      "approved",
-      "completed",
-      "complete",
-      "success",
-      "succeeded",
-      "paid",
-      "active",
-      "production"
-    ].some(
-      value =>
-        status.includes(value)
-    )
-  ){
+  if([
+    "approved",
+    "succeeded",
+    "active",
+    "completed",
+    "published"
+  ].includes(value)){
     return "green";
   }
 
-
-  if(
-    [
-      "rejected",
-      "failed",
-      "cancelled",
-      "canceled",
-      "refunded",
-      "archived"
-    ].some(
-      value =>
-        status.includes(value)
-    )
-  ){
-    return "red";
-  }
-
-
-  if(
-    [
-      "pending",
-      "review",
-      "needs",
-      "development",
-      "writing",
-      "pitch"
-    ].some(
-      value =>
-        status.includes(value)
-    )
-  ){
+  if([
+    "pending",
+    "submitted",
+    "under_review",
+    "in_development"
+  ].includes(value)){
     return "gold";
   }
 
+  if([
+    "rejected",
+    "failed",
+    "canceled",
+    "cancelled",
+    "withdrawn",
+    "archived"
+  ].includes(value)){
+    return "red";
+  }
+
+  if([
+    "changes_requested",
+    "review",
+    "matching"
+  ].includes(value)){
+    return "purple";
+  }
 
   return "cyan";
-
 }
 
-
-/* =====================================================
-   DATE HELPERS
-===================================================== */
 
 function formatDate(value){
 
@@ -2090,11 +1483,7 @@ function formatDate(value){
   const date =
     new Date(value);
 
-  if(
-    Number.isNaN(
-      date.getTime()
-    )
-  ){
+  if(Number.isNaN(date.getTime())){
     return "—";
   }
 
@@ -2106,7 +1495,6 @@ function formatDate(value){
       day:"numeric"
     }
   );
-
 }
 
 
@@ -2119,11 +1507,7 @@ function formatDateTime(value){
   const date =
     new Date(value);
 
-  if(
-    Number.isNaN(
-      date.getTime()
-    )
-  ){
+  if(Number.isNaN(date.getTime())){
     return "—";
   }
 
@@ -2137,7 +1521,6 @@ function formatDateTime(value){
       minute:"2-digit"
     }
   );
-
 }
 
 
@@ -2147,93 +1530,51 @@ function timeAgo(value){
     return "—";
   }
 
-  const timestamp =
-    new Date(value).getTime();
+  const date =
+    new Date(value);
 
-  if(!Number.isFinite(timestamp)){
+  if(Number.isNaN(date.getTime())){
     return "—";
   }
 
-  const difference =
-    Date.now() -
-    timestamp;
-
-  const minutes =
+  const seconds =
     Math.floor(
-      difference /
-      60000
+      (Date.now() - date.getTime()) / 1000
     );
 
-  if(minutes < 1){
+  if(seconds < 60){
     return "just now";
   }
+
+  const minutes =
+    Math.floor(seconds / 60);
 
   if(minutes < 60){
     return `${minutes}m ago`;
   }
 
   const hours =
-    Math.floor(
-      minutes / 60
-    );
+    Math.floor(minutes / 60);
 
   if(hours < 24){
     return `${hours}h ago`;
   }
 
   const days =
-    Math.floor(
-      hours / 24
-    );
+    Math.floor(hours / 24);
 
-  return `${days}d ago`;
+  if(days < 30){
+    return `${days}d ago`;
+  }
 
+  return formatDate(value);
 }
 
 
-/* =====================================================
-   GENERIC RECORD HELPER
-===================================================== */
+function money(cents,currency="USD"){
 
-function candidate(
-  row,
-  names,
-  fallback = ""
-){
-
-  if(!row){
-    return fallback;
-  }
-
-  for(
-    const name of names
-  ){
-
-    if(
-      row[name] !== undefined &&
-      row[name] !== null &&
-      row[name] !== ""
-    ){
-
-      return row[name];
-
-    }
-
-  }
-
-  return fallback;
-
-}
-
-
-/* =====================================================
-   MONEY
-===================================================== */
-
-function money(
-  amount,
-  currency = "USD"
-){
+  const amount =
+    Number(cents || 0) / 100;
 
   try{
 
@@ -2241,218 +1582,20 @@ function money(
       undefined,
       {
         style:"currency",
-        currency:String(
-          currency || "USD"
-        ).toUpperCase()
+        currency:
+          String(currency || "USD").toUpperCase()
       }
-    ).format(
-      Number(amount || 0)
-    );
+    ).format(amount);
 
   }catch{
 
-    return "$" +
-      Number(
-        amount || 0
-      ).toFixed(2);
+    return `$${amount.toFixed(2)}`;
 
   }
-
 }
 
 
-/* =====================================================
-   DONATION FIELD DETECTION
-===================================================== */
-
-/*
-  These helpers intentionally support several common
-  column names so the admin page can work with an existing
-  cr_donations table without requiring the frontend to
-  assume one exact naming convention.
-*/
-
-function donationAmount(row){
-
-  const value =
-    candidate(
-      row,
-      [
-        "amount",
-        "amount_usd",
-        "donation_amount",
-        "gross_amount",
-        "total_amount",
-        "value"
-      ],
-      0
-    );
-
-  let number =
-    Number(value);
-
-  if(
-    !Number.isFinite(number)
-  ){
-    return 0;
-  }
-
-  const unit =
-    String(
-      candidate(
-        row,
-        [
-          "amount_unit",
-          "unit",
-          "currency_unit"
-        ],
-        ""
-      )
-    ).toLowerCase();
-
-  if(
-    unit === "cent" ||
-    unit === "cents"
-  ){
-
-    number =
-      number / 100;
-
-  }
-
-  return number;
-
-}
-
-
-function donationCurrency(row){
-
-  return String(
-    candidate(
-      row,
-      [
-        "currency",
-        "currency_code"
-      ],
-      "USD"
-    )
-  ).toUpperCase();
-
-}
-
-
-function donationStatus(row){
-
-  return String(
-    candidate(
-      row,
-      [
-        "status",
-        "payment_status",
-        "donation_status",
-        "state"
-      ],
-      "unknown"
-    )
-  );
-
-}
-
-
-function donationDate(row){
-
-  return candidate(
-    row,
-    [
-      "created_at",
-      "donated_at",
-      "donation_date",
-      "paid_at",
-      "updated_at"
-    ],
-    null
-  );
-
-}
-
-
-function donationName(row){
-
-  return candidate(
-    row,
-    [
-      "donor_name",
-      "name",
-      "full_name",
-      "customer_name",
-      "display_name",
-      "donor"
-    ],
-    "Anonymous"
-  );
-
-}
-
-
-function donationEmail(row){
-
-  return candidate(
-    row,
-    [
-      "donor_email",
-      "email",
-      "customer_email"
-    ],
-    ""
-  );
-
-}
-
-
-function donationReference(row){
-
-  return candidate(
-    row,
-    [
-      "stripe_payment_intent_id",
-      "payment_intent_id",
-      "stripe_session_id",
-      "checkout_session_id",
-      "transaction_id",
-      "reference",
-      "id"
-    ],
-    "—"
-  );
-
-}
-
-
-function donationCampaign(row){
-
-  return candidate(
-    row,
-    [
-      "campaign",
-      "campaign_name",
-      "purpose",
-      "designation",
-      "fund",
-      "project"
-    ],
-    "General"
-  );
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-function showToast(
-  message
-){
+function showToast(message){
 
   const toast =
     $("toast");
@@ -2460,138 +1603,129 @@ function showToast(
   toast.textContent =
     message;
 
-  toast.classList.add(
-    "show"
-  );
+  toast.classList.add("show");
 
   clearTimeout(
-    showToast.timer
+    window.__toastTimer
   );
 
-  showToast.timer =
+  window.__toastTimer =
     setTimeout(
-      () =>
-        toast.classList.remove(
-          "show"
-        ),
+      () => toast.classList.remove("show"),
       3500
     );
-
 }
 
 
-/* =====================================================
-   CONNECTION STATUS
-===================================================== */
-
 function setConnection(
-  online,
+  state,
   text
 ){
 
-  const element =
+  const el =
     $("connection");
 
-  element.classList.toggle(
+  el.classList.remove(
     "online",
-    Boolean(online)
+    "offline"
   );
 
-  element.querySelector(
-    "span"
-  ).textContent =
-    text ||
-    (
-      online
-        ? "Connected"
-        : "Offline"
-    );
-
-}
-
-
-/* =====================================================
-   PANEL NAVIGATION
-===================================================== */
-
-function focusPanel(
-  id
-){
-
-  const element =
-    $(id);
-
-  if(!element){
-    return;
+  if(state === "online"){
+    el.classList.add("online");
   }
 
-  element.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
+  if(state === "offline"){
+    el.classList.add("offline");
+  }
 
+  $("connectionText").textContent =
+    text;
 }
 
 
-/* =====================================================
-   GOOGLE AUTH
-===================================================== */
+/* =========================================================
+   AUTHENTICATION
+========================================================= */
 
 async function signIn(){
 
-  $("loginMsg").textContent =
-    "Opening Google sign-in…";
+  $("loginError").classList.add("hidden");
 
   const {
     error
   } =
     await sb.auth.signInWithOAuth({
-
       provider:"google",
-
       options:{
         redirectTo:
           window.location.href
       }
-
     });
-
 
   if(error){
 
-    $("loginMsg").textContent =
+    $("loginError").textContent =
       error.message;
 
-    showToast(
-      error.message
-    );
+    $("loginError")
+      .classList
+      .remove("hidden");
 
   }
 
 }
 
 
-/* =====================================================
-   SIGN OUT
-===================================================== */
-
 async function signOut(){
 
   await sb.auth.signOut();
 
-  window.location.reload();
+  if(realtimeChannel){
+
+    await sb.removeChannel(
+      realtimeChannel
+    );
+
+    realtimeChannel = null;
+
+  }
+
+  $("adminApp")
+    .classList
+    .add("hidden");
+
+  $("loginScreen")
+    .classList
+    .remove("hidden");
 
 }
 
 
-/* =====================================================
-   ADMIN VERIFICATION
-===================================================== */
-
 async function ensureAdmin(){
 
   const {
-    data,
+    data:{
+      session
+    }
+  } =
+    await sb.auth.getSession();
+
+  if(!session){
+
+    $("adminApp")
+      .classList
+      .add("hidden");
+
+    $("loginScreen")
+      .classList
+      .remove("hidden");
+
+    return false;
+  }
+
+
+  const {
+    data:isAdmin,
     error
   } =
     await sb.rpc(
@@ -2601,141 +1735,66 @@ async function ensureAdmin(){
 
   if(error){
 
-    throw error;
+    $("loginError").textContent =
+      "Unable to verify administrator access: " +
+      error.message;
+
+    $("loginError")
+      .classList
+      .remove("hidden");
+
+    return false;
 
   }
 
 
-  if(
-    data !== true &&
-    data !== "true"
-  ){
+  if(!isAdmin){
 
-    throw new Error(
-      "Your account is authenticated but is not an authorized Dreamscapes administrator."
-    );
+    $("loginError").textContent =
+      "Administrator access required.";
+
+    $("loginError")
+      .classList
+      .remove("hidden");
+
+    await sb.auth.signOut();
+
+    return false;
 
   }
 
+
+  const user =
+    session.user;
+
+  $("userPill").textContent =
+    user.email ||
+    user.user_metadata?.full_name ||
+    "Administrator";
+
+  $("loginScreen")
+    .classList
+    .add("hidden");
+
+  $("adminApp")
+    .classList
+    .remove("hidden");
+
+  return true;
 }
 
 
-/* =====================================================
-   COUNTS
-===================================================== */
-
-async function loadCounts(){
-
-  const results =
-    await Promise.allSettled([
-
-      sb
-        .from("ds_submissions")
-        .select("*",{
-          count:"exact",
-          head:true
-        }),
-
-      sb
-        .from("ds_submissions")
-        .select("*",{
-          count:"exact",
-          head:true
-        })
-        .in(
-          "status",
-          [
-            "submitted",
-            "pending",
-            "needs_review",
-            "review"
-          ]
-        ),
-
-      sb
-        .from("ds_projects")
-        .select("*",{
-          count:"exact",
-          head:true
-        }),
-
-      sb
-        .from("ds_creator_profiles")
-        .select("*",{
-          count:"exact",
-          head:true
-        }),
-
-      sb
-        .from("ds_collaborators")
-        .select("*",{
-          count:"exact",
-          head:true
-        }),
-
-      sb
-        .from("ds_collaboration_requests")
-        .select("*",{
-          count:"exact",
-          head:true
-        })
-        .in(
-          "status",
-          [
-            "open",
-            "pending"
-          ]
-        )
-
-    ]);
-
-
-  const values =
-    results.map(
-      result =>
-        result.status === "fulfilled"
-          ? result.value
-          : null
-    );
-
-
-  $("statDreams").textContent =
-    values[0]?.count ??
-    "—";
-
-
-  $("statReview").textContent =
-    values[1]?.count ??
-    "—";
-
-
-  $("statProjects").textContent =
-    values[2]?.count ??
-    "—";
-
-
-  $("statCreators").textContent =
-    values[3]?.count ??
-    "—";
-
-
-  $("statCollaborators").textContent =
-    values[4]?.count ??
-    "—";
-
-
-  $("statRequests").textContent =
-    values[5]?.count ??
-    "—";
-
-}
-
-
-/* =====================================================
+/* =========================================================
    SUBMISSIONS
-===================================================== */
+   IMPORTANT:
+   ds_submissions uses submitted_at, NOT created_at.
+========================================================= */
 
 async function loadSubmissions(){
+
+  $("submissionRows").innerHTML =
+    `<div class="empty">Loading submissions…</div>`;
+
 
   const {
     data,
@@ -2743,11 +1802,28 @@ async function loadSubmissions(){
   } =
     await sb
       .from("ds_submissions")
-      .select("*")
+      .select(`
+        id,
+        project_id,
+        submitter_id,
+        title,
+        submission_type,
+        message,
+        document_id,
+        status,
+        reviewer_id,
+        reviewer_notes,
+        submitted_at,
+        reviewed_at,
+        creator_name,
+        involvement,
+        updated_at
+      `)
       .order(
-        "created_at",
+        "submitted_at",
         {
-          ascending:false
+          ascending:false,
+          nullsFirst:false
         }
       )
       .limit(50);
@@ -2758,8 +1834,10 @@ async function loadSubmissions(){
     $("submissionRows").innerHTML =
       `
       <div class="errorbox">
-        Unable to load submissions:
-        ${escapeHtml(error.message)}
+        <strong>Unable to load submissions</strong>
+        <div style="margin-top:6px">
+          ${escapeHtml(error.message)}
+        </div>
       </div>
       `;
 
@@ -2772,7 +1850,6 @@ async function loadSubmissions(){
     data || [];
 
   renderSubmissions();
-
 }
 
 
@@ -2782,17 +1859,17 @@ function renderSubmissions(){
     (
       $("submissionSearch").value ||
       ""
-    ).toLowerCase();
+    )
+    .trim()
+    .toLowerCase();
 
 
   const rows =
     submissions.filter(
       row =>
-        JSON.stringify(
-          row
-        )
-        .toLowerCase()
-        .includes(query)
+        JSON.stringify(row)
+          .toLowerCase()
+          .includes(query)
     );
 
 
@@ -2820,9 +1897,10 @@ function renderSubmissions(){
 
           <tr>
             <th>Dream</th>
-            <th>Status</th>
+            <th>Type</th>
             <th>Creator</th>
-            <th>Date</th>
+            <th>Status</th>
+            <th>Submitted</th>
             <th></th>
           </tr>
 
@@ -2832,131 +1910,109 @@ function renderSubmissions(){
 
           ${
             rows
-              .slice(0,30)
+              .slice(0,50)
               .map(row => {
 
                 const title =
-                  candidate(
-                    row,
-                    [
-                      "title",
-                      "dream_title",
-                      "name",
-                      "subject"
-                    ],
-                    "Untitled Dream"
-                  );
+                  row.title ||
+                  "Untitled Dream";
 
-
-                const status =
-                  candidate(
-                    row,
-                    [
-                      "status",
-                      "review_status"
-                    ],
-                    "unknown"
-                  );
-
+                const type =
+                  row.submission_type ||
+                  "Dream";
 
                 const creator =
-                  candidate(
-                    row,
-                    [
-                      "creator_name",
-                      "display_name",
-                      "full_name",
-                      "email",
-                      "user_id"
-                    ],
-                    "—"
-                  );
+                  row.creator_name ||
+                  "Unknown Creator";
 
+                const status =
+                  row.status ||
+                  "unknown";
 
-                const description =
-                  String(
-                    candidate(
-                      row,
-                      [
-                        "description",
-                        "summary"
-                      ],
-                      ""
-                    )
-                  ).slice(
-                    0,
-                    120
-                  );
-
+                const message =
+                  row.message ||
+                  "";
 
                 return `
-                <tr>
+                  <tr>
 
-                  <td>
+                    <td>
 
-                    <b>
-                      ${escapeHtml(title)}
-                    </b>
+                      <b>
+                        ${escapeHtml(title)}
+                      </b>
 
-                    ${
-                      description
-                        ? `
-                          <div class="muted">
-                            ${escapeHtml(description)}
-                          </div>
-                        `
-                        : ""
-                    }
+                      ${
+                        message
+                          ?
+                            `
+                            <div
+                              class="muted"
+                              style="margin-top:5px;line-height:1.5"
+                            >
+                              ${escapeHtml(
+                                message.slice(0,120)
+                              )}
+                              ${
+                                message.length > 120
+                                  ? "…"
+                                  : ""
+                              }
+                            </div>
+                            `
+                          :
+                            ""
+                      }
 
-                  </td>
+                    </td>
 
+                    <td>
 
-                  <td>
+                      <span class="badge cyan">
+                        ${escapeHtml(
+                          prettyStatus(type)
+                        )}
+                      </span>
 
-                    <span
-                      class="badge ${statusClass(status)}"
-                    >
+                    </td>
+
+                    <td>
+                      ${escapeHtml(creator)}
+                    </td>
+
+                    <td>
+
+                      <span
+                        class="badge ${statusClass(status)}"
+                      >
+                        ${escapeHtml(
+                          prettyStatus(status)
+                        )}
+                      </span>
+
+                    </td>
+
+                    <td>
                       ${escapeHtml(
-                        prettyStatus(status)
-                      )}
-                    </span>
-
-                  </td>
-
-
-                  <td>
-                    ${escapeHtml(creator)}
-                  </td>
-
-
-                  <td>
-                    ${escapeHtml(
-                      timeAgo(
-                        candidate(
-                          row,
-                          [
-                            "created_at",
-                            "submitted_at"
-                          ],
-                          null
+                        formatDateTime(
+                          row.submitted_at
                         )
-                      )
-                    )}
-                  </td>
+                      )}
+                    </td>
 
+                    <td>
 
-                  <td>
+                      <button
+                        class="btn small-btn"
+                        type="button"
+                        onclick='openReview(${JSON.stringify(row.id)})'
+                      >
+                        Review
+                      </button>
 
-                    <button
-                      class="btn"
-                      onclick='openReview(${JSON.stringify(row.id)})'
-                    >
-                      Review
-                    </button>
+                    </td>
 
-                  </td>
-
-                </tr>
+                  </tr>
                 `;
 
               })
@@ -2969,118 +2025,90 @@ function renderSubmissions(){
 
     </div>
     `;
-
 }
 
 
-/* =====================================================
-   REVIEW MODAL
-===================================================== */
+/* =========================================================
+   REVIEW
+========================================================= */
 
-async function openReview(
-  id
-){
+function openReview(id){
 
-  currentSubmission =
+  const row =
     submissions.find(
-      row =>
-        String(row.id) ===
-        String(id)
+      item => item.id === id
     );
 
-
-  if(!currentSubmission){
+  if(!row){
+    showToast("Submission could not be found.");
     return;
   }
 
 
-  const title =
-    candidate(
-      currentSubmission,
-      [
-        "title",
-        "dream_title",
-        "name"
-      ],
-      "Untitled Dream"
+  currentReviewId =
+    row.id;
+
+
+  $("reviewSubtitle").textContent =
+    `Submitted ${formatDateTime(row.submitted_at)}`;
+
+
+  $("reviewTitle").textContent =
+    row.title ||
+    "Untitled Dream";
+
+
+  $("reviewCreator").textContent =
+    row.creator_name ||
+    "Unknown Creator";
+
+
+  $("reviewType").textContent =
+    prettyStatus(
+      row.submission_type
     );
 
 
-  const description =
-    candidate(
-      currentSubmission,
-      [
-        "description",
-        "summary",
-        "dream_text"
-      ],
-      "No description supplied."
-    );
+  $("reviewInvolvement").textContent =
+    row.involvement ||
+    "Not specified";
 
 
-  $("reviewContent").innerHTML =
-    `
-    <h3>
-      ${escapeHtml(title)}
-    </h3>
-
-    <p
-      class="muted"
-      style="
-        line-height:1.7;
-        white-space:pre-wrap;
-      "
-    >
-      ${escapeHtml(description)}
-    </p>
-    `;
-
-
-  $("reviewNote").value =
-    candidate(
-      currentSubmission,
-      [
-        "admin_note",
-        "review_note",
-        "notes"
-      ],
-      ""
-    );
+  $("reviewMessage").textContent =
+    row.message ||
+    "No message provided.";
 
 
   $("reviewStatus").value =
-    candidate(
-      currentSubmission,
-      [
-        "status",
-        "review_status"
-      ],
-      "needs_review"
-    );
+    row.status ||
+    "submitted";
+
+
+  $("reviewNotes").value =
+    row.reviewer_notes ||
+    "";
 
 
   $("reviewModal")
     .classList
-    .remove("hidden");
-
+    .add("open");
 }
 
 
 function closeReview(){
 
-  $("reviewModal")
-    .classList
-    .add("hidden");
-
-  currentSubmission =
+  currentReviewId =
     null;
 
+  $("reviewModal")
+    .classList
+    .remove("open");
 }
 
 
 async function saveReview(){
 
-  if(!currentSubmission){
+  if(!currentReviewId){
     return;
   }
 
@@ -3088,61 +2116,120 @@ async function saveReview(){
   const status =
     $("reviewStatus").value;
 
-  const note =
-    $("reviewNote").value;
+  const notes =
+    $("reviewNotes").value.trim();
 
 
-  const {
-    error
-  } =
-    await sb.rpc(
-      "ds_admin_review_submission",
-      {
-        p_submission_id:
-          currentSubmission.id,
+  const button =
+    $("saveReviewBtn");
 
-        p_status:
-          status,
+  button.disabled =
+    true;
 
-        p_admin_note:
-          note
-      }
+  button.textContent =
+    "Saving…";
+
+
+  try{
+
+    /*
+      Actual RPC signature:
+
+      ds_admin_review_submission(
+        p_submission_id uuid,
+        p_status text,
+        p_reviewer_notes text
+      )
+    */
+
+    const {
+      data,
+      error
+    } =
+      await sb.rpc(
+        "ds_admin_review_submission",
+        {
+          p_submission_id:
+            currentReviewId,
+
+          p_status:
+            status,
+
+          p_reviewer_notes:
+            notes || null
+        }
+      );
+
+
+    if(error){
+      throw error;
+    }
+
+
+    const updated =
+      Array.isArray(data)
+        ? data[0]
+        : data;
+
+
+    const index =
+      submissions.findIndex(
+        row =>
+          row.id === currentReviewId
+      );
+
+
+    if(index >= 0 && updated){
+
+      submissions[index] =
+        updated;
+
+    }
+
+
+    renderSubmissions();
+
+    closeReview();
+
+    showToast(
+      "Dream submission updated."
     );
 
 
-  if(error){
+    await Promise.all([
+      loadCounts(),
+      loadActivity()
+    ]);
+
+  }catch(error){
 
     showToast(
-      "Review failed: " +
+      "Unable to save review: " +
       error.message
     );
 
-    return;
+  }finally{
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "Save Review";
 
   }
-
-
-  showToast(
-    "Dream review saved."
-  );
-
-
-  closeReview();
-
-
-  await Promise.all([
-    loadSubmissions(),
-    loadCounts()
-  ]);
 
 }
 
 
-/* =====================================================
+/* =========================================================
    PROJECTS
-===================================================== */
+========================================================= */
 
 async function loadProjects(){
+
+  $("projectRows").innerHTML =
+    `<div class="empty">Loading projects…</div>`;
+
 
   const {
     data,
@@ -3150,14 +2237,27 @@ async function loadProjects(){
   } =
     await sb
       .from("ds_projects")
-      .select("*")
+      .select(`
+        id,
+        owner_id,
+        title,
+        slug,
+        logline,
+        description,
+        status,
+        visibility,
+        progress,
+        created_at,
+        updated_at
+      `)
       .order(
-        "created_at",
+        "updated_at",
         {
-          ascending:false
+          ascending:false,
+          nullsFirst:false
         }
       )
-      .limit(40);
+      .limit(30);
 
 
   if(error){
@@ -3165,8 +2265,10 @@ async function loadProjects(){
     $("projectRows").innerHTML =
       `
       <div class="errorbox">
-        Unable to load projects:
-        ${escapeHtml(error.message)}
+        <strong>Unable to load projects</strong>
+        <div style="margin-top:6px">
+          ${escapeHtml(error.message)}
+        </div>
       </div>
       `;
 
@@ -3178,76 +2280,11 @@ async function loadProjects(){
   projects =
     data || [];
 
-
-  const stages = [
-    "idea",
-    "development",
-    "writing",
-    "collaboration",
-    "pitch",
-    "production",
-    "completed",
-    "archived"
-  ];
+  renderProjects();
+}
 
 
-  const counts =
-    Object.fromEntries(
-      stages.map(
-        stage =>
-          [stage,0]
-      )
-    );
-
-
-  projects.forEach(
-    project => {
-
-      const stage =
-        String(
-          candidate(
-            project,
-            [
-              "status",
-              "stage"
-            ],
-            "idea"
-          )
-        ).toLowerCase();
-
-
-      if(
-        counts[stage] !== undefined
-      ){
-
-        counts[stage]++;
-
-      }
-
-    }
-  );
-
-
-  $("pipeline").innerHTML =
-    stages
-      .map(
-        stage =>
-          `
-          <div class="stage">
-
-            <b>
-              ${counts[stage]}
-            </b>
-
-            <span>
-              ${prettyStatus(stage)}
-            </span>
-
-          </div>
-          `
-      )
-      .join("");
-
+function renderProjects(){
 
   if(!projects.length){
 
@@ -3273,8 +2310,9 @@ async function loadProjects(){
 
           <tr>
             <th>Project</th>
-            <th>Stage</th>
-            <th>Creator</th>
+            <th>Status</th>
+            <th>Visibility</th>
+            <th>Progress</th>
             <th>Updated</th>
           </tr>
 
@@ -3283,93 +2321,103 @@ async function loadProjects(){
         <tbody>
 
           ${
-            projects
-              .slice(0,25)
-              .map(project => {
+            projects.map(row => {
 
-                const title =
-                  candidate(
-                    project,
-                    [
-                      "title",
-                      "project_title",
-                      "name"
-                    ],
-                    "Untitled Project"
-                  );
+              const progress =
+                Math.max(
+                  0,
+                  Math.min(
+                    100,
+                    Number(row.progress || 0)
+                  )
+                );
 
-
-                const stage =
-                  candidate(
-                    project,
-                    [
-                      "status",
-                      "stage"
-                    ],
-                    "idea"
-                  );
-
-
-                const creator =
-                  candidate(
-                    project,
-                    [
-                      "creator_name",
-                      "owner_name",
-                      "creator_id",
-                      "user_id"
-                    ],
-                    "—"
-                  );
-
-
-                const date =
-                  candidate(
-                    project,
-                    [
-                      "updated_at",
-                      "created_at"
-                    ],
-                    null
-                  );
-
-
-                return `
+              return `
                 <tr>
 
                   <td>
+
                     <b>
-                      ${escapeHtml(title)}
+                      ${escapeHtml(
+                        row.title ||
+                        "Untitled Project"
+                      )}
                     </b>
+
+                    ${
+                      row.logline
+                        ?
+                          `
+                          <div
+                            class="muted"
+                            style="margin-top:5px"
+                          >
+                            ${escapeHtml(
+                              row.logline.slice(0,130)
+                            )}
+                            ${
+                              row.logline.length > 130
+                                ? "…"
+                                : ""
+                            }
+                          </div>
+                          `
+                        :
+                          ""
+                    }
+
                   </td>
 
                   <td>
 
                     <span
-                      class="badge ${statusClass(stage)}"
+                      class="badge ${statusClass(row.status)}"
                     >
                       ${escapeHtml(
-                        prettyStatus(stage)
+                        prettyStatus(row.status)
                       )}
                     </span>
 
                   </td>
 
                   <td>
-                    ${escapeHtml(creator)}
+                    ${escapeHtml(
+                      prettyStatus(
+                        row.visibility
+                      )
+                    )}
+                  </td>
+
+                  <td>
+
+                    <div
+                      style="display:flex;align-items:center;gap:8px"
+                    >
+
+                      <div class="progress">
+                        <span
+                          style="width:${progress}%"
+                        ></span>
+                      </div>
+
+                      <span class="small muted">
+                        ${progress}%
+                      </span>
+
+                    </div>
+
                   </td>
 
                   <td>
                     ${escapeHtml(
-                      timeAgo(date)
+                      timeAgo(row.updated_at)
                     )}
                   </td>
 
                 </tr>
-                `;
+              `;
 
-              })
-              .join("")
+            }).join("")
           }
 
         </tbody>
@@ -3378,15 +2426,19 @@ async function loadProjects(){
 
     </div>
     `;
-
 }
 
 
-/* =====================================================
+/* =========================================================
    DONATIONS
-===================================================== */
+   Actual cr_donations fields are used.
+========================================================= */
 
 async function loadDonations(){
+
+  $("donationRows").innerHTML =
+    `<div class="empty">Loading donations…</div>`;
+
 
   const {
     data,
@@ -3394,62 +2446,61 @@ async function loadDonations(){
   } =
     await sb
       .from("cr_donations")
-      .select("*")
+      .select(`
+        id,
+        stripe_payment_intent_id,
+        stripe_checkout_session_id,
+        stripe_customer_id,
+        donor_user_id,
+        donor_name,
+        donor_email,
+        amount_cents,
+        currency,
+        donation_type,
+        status,
+        campaign,
+        purpose,
+        message,
+        is_public,
+        stripe_created_at,
+        created_at,
+        updated_at,
+        stripe_event_id,
+        payout_status
+      `)
       .order(
         "created_at",
         {
-          ascending:false
+          ascending:false,
+          nullsFirst:false
         }
       )
-      .limit(100);
+      .limit(50);
 
 
   if(error){
-
-    donations = [];
-
-
-    $("statDonationTotal")
-      .textContent =
-      "—";
-
-
-    $("statDonationCount")
-      .textContent =
-      "—";
-
 
     $("donationRows").innerHTML =
       `
       <div class="errorbox">
 
-        <strong>
-          Unable to load cr_donations.
-        </strong>
+        <strong>Unable to load donations</strong>
 
-        <br><br>
+        <div style="margin-top:6px">
+          ${escapeHtml(error.message)}
+        </div>
 
-        ${escapeHtml(
-          error.message
-        )}
-
-        <br><br>
-
-        <span class="muted">
-          Check that cr_donations is exposed
-          through the Supabase Data API and
-          that the authenticated administrator
-          has a SELECT policy for the table.
-        </span>
+        <div
+          class="muted small"
+          style="margin-top:8px"
+        >
+          Donation access is protected by Supabase RLS.
+          The admin account must have an appropriate
+          administrative read policy or admin RPC.
+        </div>
 
       </div>
       `;
-
-
-    $("donationSummary")
-      .textContent =
-      "Donation data unavailable.";
-
 
     return;
 
@@ -3459,117 +2510,20 @@ async function loadDonations(){
   donations =
     data || [];
 
-
-  updateDonationStatusFilter();
-
   updateDonationStats();
 
   renderDonations();
-
 }
 
 
-/* =====================================================
-   DONATION STATUS FILTER
-===================================================== */
+function isSuccessfulDonation(row){
 
-function updateDonationStatusFilter(){
-
-  const select =
-    $("donationFilter");
-
-
-  const current =
-    select.value;
-
-
-  const statuses =
-    [
-      ...new Set(
-        donations.map(
-          donation =>
-            donationStatus(
-              donation
-            )
-        )
-      )
-    ]
-    .filter(Boolean)
-    .sort(
-      (a,b) =>
-        a.localeCompare(b)
-    );
-
-
-  select.innerHTML =
-    `
-    <option value="">
-      All statuses
-    </option>
-
-    ${
-      statuses
-        .map(
-          status =>
-            `
-            <option
-              value="${escapeHtml(status)}"
-            >
-              ${escapeHtml(
-                prettyStatus(status)
-              )}
-            </option>
-            `
-        )
-        .join("")
-    }
-    `;
-
-
-  if(
-    statuses.includes(current)
-  ){
-
-    select.value =
-      current;
-
-  }
+  return String(
+    row.status || ""
+  ).toLowerCase() === "succeeded";
 
 }
 
-
-/* =====================================================
-   SUCCESSFUL DONATION CHECK
-===================================================== */
-
-function isSuccessfulDonation(
-  row
-){
-
-  const status =
-    donationStatus(
-      row
-    ).toLowerCase();
-
-
-  return [
-    "success",
-    "succeeded",
-    "paid",
-    "complete",
-    "completed",
-    "approved"
-  ].some(
-    value =>
-      status.includes(value)
-  );
-
-}
-
-
-/* =====================================================
-   DONATION STATISTICS
-===================================================== */
 
 function updateDonationStats(){
 
@@ -3581,126 +2535,46 @@ function updateDonationStats(){
 
   const total =
     successful.reduce(
-      (
-        sum,
-        donation
-      ) =>
+      (sum,row) =>
         sum +
-        donationAmount(
-          donation
-        ),
+        Number(row.amount_cents || 0),
       0
     );
 
 
-  const currency =
-    successful.length
-      ? donationCurrency(
-          successful[0]
-        )
-      : "USD";
+  $("statDonationTotal").textContent =
+    money(total,"USD");
 
 
-  $("statDonationTotal")
-    .textContent =
-    money(
-      total,
-      currency
-    );
-
-
-  $("statDonationCount")
-    .textContent =
+  $("statDonationCount").textContent =
     String(
       successful.length
     );
-
 }
 
 
-/* =====================================================
-   DONATION RENDERING
-===================================================== */
-
 function renderDonations(){
 
-  const query =
-    (
-      $("donationSearch").value ||
-      ""
-    ).toLowerCase();
+  const filter =
+    $("donationStatusFilter").value;
 
 
-  const selectedStatus =
-    $("donationFilter").value;
+  let rows =
+    donations;
 
 
-  const rows =
-    donations.filter(
-      donation => {
+  if(filter !== "all"){
 
-        const status =
-          donationStatus(
-            donation
-          );
+    rows =
+      rows.filter(
+        row =>
+          String(
+            row.status || ""
+          ).toLowerCase() ===
+          filter
+      );
 
-
-        const matchesStatus =
-          !selectedStatus ||
-          status ===
-          selectedStatus;
-
-
-        const matchesSearch =
-          JSON.stringify(
-            donation
-          )
-          .toLowerCase()
-          .includes(query);
-
-
-        return (
-          matchesStatus &&
-          matchesSearch
-        );
-
-      }
-    );
-
-
-  const successful =
-    donations.filter(
-      isSuccessfulDonation
-    );
-
-
-  const total =
-    successful.reduce(
-      (
-        sum,
-        donation
-      ) =>
-        sum +
-        donationAmount(
-          donation
-        ),
-      0
-    );
-
-
-  const currency =
-    successful.length
-      ? donationCurrency(
-          successful[0]
-        )
-      : "USD";
-
-
-  $("donationSummary")
-    .textContent =
-    `${rows.length} displayed • ` +
-    `${successful.length} successful • ` +
-    `${money(total,currency)} successful total`;
+  }
 
 
   if(!rows.length){
@@ -3708,7 +2582,7 @@ function renderDonations(){
     $("donationRows").innerHTML =
       `
       <div class="empty">
-        No donation records found.
+        No donations found for this filter.
       </div>
       `;
 
@@ -3726,173 +2600,114 @@ function renderDonations(){
         <thead>
 
           <tr>
-
-            <th>
-              Donor
-            </th>
-
-            <th>
-              Amount
-            </th>
-
-            <th>
-              Status
-            </th>
-
-            <th>
-              Campaign
-            </th>
-
-            <th>
-              Date
-            </th>
-
-            <th>
-              Reference
-            </th>
-
+            <th>Donor</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Campaign</th>
+            <th>Status</th>
+            <th>Date</th>
           </tr>
 
         </thead>
 
-
         <tbody>
 
           ${
-            rows
-              .slice(0,100)
-              .map(
-                donation => {
+            rows.map(row => {
 
-                  const name =
-                    donationName(
-                      donation
-                    );
-
-
-                  const email =
-                    donationEmail(
-                      donation
-                    );
+              const donor =
+                row.is_public
+                  ? (
+                      row.donor_name ||
+                      "Anonymous"
+                    )
+                  : "Private Donor";
 
 
-                  const amount =
-                    donationAmount(
-                      donation
-                    );
+              const currency =
+                row.currency ||
+                "USD";
 
 
-                  const currency =
-                    donationCurrency(
-                      donation
-                    );
+              return `
+                <tr>
 
+                  <td>
 
-                  const status =
-                    donationStatus(
-                      donation
-                    );
+                    <b>
+                      ${escapeHtml(donor)}
+                    </b>
 
-
-                  const campaign =
-                    donationCampaign(
-                      donation
-                    );
-
-
-                  const date =
-                    donationDate(
-                      donation
-                    );
-
-
-                  const reference =
-                    donationReference(
-                      donation
-                    );
-
-
-                  return `
-                  <tr>
-
-                    <td>
-
-                      <b>
-                        ${escapeHtml(name)}
-                      </b>
-
-                      ${
-                        email
-                          ? `
-                            <div class="muted">
-                              ${escapeHtml(email)}
-                            </div>
+                    ${
+                      row.donor_email &&
+                      row.is_public
+                        ?
                           `
-                          : ""
-                      }
+                          <div class="muted small">
+                            ${escapeHtml(
+                              row.donor_email
+                            )}
+                          </div>
+                          `
+                        :
+                          ""
+                    }
 
-                    </td>
+                  </td>
 
-
-                    <td>
-
-                      <b>
-                        ${escapeHtml(
-                          money(
-                            amount,
-                            currency
-                          )
-                        )}
-                      </b>
-
-                    </td>
-
-
-                    <td>
-
-                      <span
-                        class="badge ${statusClass(status)}"
-                      >
-                        ${escapeHtml(
-                          prettyStatus(status)
-                        )}
-                      </span>
-
-                    </td>
-
-
-                    <td>
-                      ${escapeHtml(campaign)}
-                    </td>
-
-
-                    <td>
+                  <td>
+                    <b>
                       ${escapeHtml(
-                        formatDateTime(
-                          date
+                        money(
+                          row.amount_cents,
+                          currency
                         )
                       )}
-                    </td>
+                    </b>
+                  </td>
 
+                  <td>
+                    ${escapeHtml(
+                      prettyStatus(
+                        row.donation_type
+                      )
+                    )}
+                  </td>
 
-                    <td>
+                  <td>
+                    ${escapeHtml(
+                      row.campaign ||
+                      row.purpose ||
+                      "General"
+                    )}
+                  </td>
 
-                      <code>
-                        ${escapeHtml(
-                          String(
-                            reference
-                          ).slice(0,50)
-                        )}
-                      </code>
+                  <td>
 
-                    </td>
+                    <span
+                      class="badge ${statusClass(row.status)}"
+                    >
+                      ${escapeHtml(
+                        prettyStatus(
+                          row.status
+                        )
+                      )}
+                    </span>
 
-                  </tr>
-                  `;
+                  </td>
 
-                }
-              )
-              .join("")
+                  <td>
+                    ${escapeHtml(
+                      formatDateTime(
+                        row.created_at
+                      )
+                    )}
+                  </td>
+
+                </tr>
+              `;
+
+            }).join("")
           }
 
         </tbody>
@@ -3901,15 +2716,18 @@ function renderDonations(){
 
     </div>
     `;
-
 }
 
 
-/* =====================================================
+/* =========================================================
    ACTIVITY
-===================================================== */
+========================================================= */
 
 async function loadActivity(){
+
+  $("activityRows").innerHTML =
+    `<div class="empty">Loading activity…</div>`;
+
 
   const {
     data,
@@ -3917,11 +2735,22 @@ async function loadActivity(){
   } =
     await sb
       .from("ds_activity")
-      .select("*")
+      .select(`
+        id,
+        project_id,
+        actor_id,
+        activity_type,
+        entity_type,
+        entity_id,
+        message,
+        metadata,
+        created_at
+      `)
       .order(
         "created_at",
         {
-          ascending:false
+          ascending:false,
+          nullsFirst:false
         }
       )
       .limit(30);
@@ -3932,9 +2761,10 @@ async function loadActivity(){
     $("activityRows").innerHTML =
       `
       <div class="errorbox">
-        ${escapeHtml(
-          error.message
-        )}
+        <strong>Unable to load activity</strong>
+        <div style="margin-top:6px">
+          ${escapeHtml(error.message)}
+        </div>
       </div>
       `;
 
@@ -3943,11 +2773,16 @@ async function loadActivity(){
   }
 
 
-  activities =
+  activity =
     data || [];
 
+  renderActivity();
+}
 
-  if(!activities.length){
+
+function renderActivity(){
+
+  if(!activity.length){
 
     $("activityRows").innerHTML =
       `
@@ -3963,102 +2798,89 @@ async function loadActivity(){
 
   $("activityRows").innerHTML =
     `
-    <div class="tablewrap">
+    <div class="activity">
 
-      <table class="table">
+      ${
+        activity.map(row => {
 
-        <thead>
+          return `
+            <div class="activity-item">
 
-          <tr>
-            <th>Activity</th>
-            <th>Time</th>
-          </tr>
+              <div class="activity-icon">
+                ⚡
+              </div>
 
-        </thead>
+              <div>
 
+                <div class="activity-message">
+                  ${escapeHtml(
+                    row.message ||
+                    prettyStatus(
+                      row.activity_type
+                    )
+                  )}
+                </div>
 
-        <tbody>
+                <div class="activity-time">
+                  ${escapeHtml(
+                    timeAgo(
+                      row.created_at
+                    )
+                  )}
+                  ·
+                  ${escapeHtml(
+                    prettyStatus(
+                      row.activity_type
+                    )
+                  )}
+                </div>
 
-          ${
-            activities
-              .map(
-                activity => {
+              </div>
 
-                  const text =
-                    candidate(
-                      activity,
-                      [
-                        "message",
-                        "description",
-                        "activity",
-                        "action",
-                        "event_type"
-                      ],
-                      "Activity"
-                    );
+            </div>
+          `;
 
-
-                  const date =
-                    candidate(
-                      activity,
-                      [
-                        "created_at",
-                        "occurred_at"
-                      ],
-                      null
-                    );
-
-
-                  return `
-                  <tr>
-
-                    <td>
-                      ${escapeHtml(text)}
-                    </td>
-
-                    <td>
-                      ${escapeHtml(
-                        timeAgo(date)
-                      )}
-                    </td>
-
-                  </tr>
-                  `;
-
-                }
-              )
-              .join("")
-          }
-
-        </tbody>
-
-      </table>
+        }).join("")
+      }
 
     </div>
     `;
-
 }
 
 
-/* =====================================================
+/* =========================================================
    COLLABORATION
-===================================================== */
+========================================================= */
 
 async function loadCollaborations(){
+
+  $("collaborationRows").innerHTML =
+    `<div class="empty">Loading collaboration…</div>`;
+
 
   const {
     data,
     error
   } =
     await sb
-      .from(
-        "ds_collaboration_requests"
-      )
-      .select("*")
+      .from("ds_collaboration_requests")
+      .select(`
+        id,
+        project_id,
+        requester_id,
+        role_needed,
+        description,
+        involvement,
+        matching_requested,
+        status,
+        created_at,
+        updated_at
+      `)
       .order(
         "created_at",
         {
-          ascending:false
+          ascending:false,
+          nullsFirst:false
         }
       )
       .limit(30);
@@ -4066,12 +2888,13 @@ async function loadCollaborations(){
 
   if(error){
 
-    $("collabRows").innerHTML =
+    $("collaborationRows").innerHTML =
       `
       <div class="errorbox">
-        ${escapeHtml(
-          error.message
-        )}
+        <strong>Unable to load collaboration requests</strong>
+        <div style="margin-top:6px">
+          ${escapeHtml(error.message)}
+        </div>
       </div>
       `;
 
@@ -4080,13 +2903,18 @@ async function loadCollaborations(){
   }
 
 
-  collaborations =
+  collaborationRequests =
     data || [];
 
+  renderCollaborations();
+}
 
-  if(!collaborations.length){
 
-    $("collabRows").innerHTML =
+function renderCollaborations(){
+
+  if(!collaborationRequests.length){
+
+    $("collaborationRows").innerHTML =
       `
       <div class="empty">
         No collaboration requests found.
@@ -4098,7 +2926,7 @@ async function loadCollaborations(){
   }
 
 
-  $("collabRows").innerHTML =
+  $("collaborationRows").innerHTML =
     `
     <div class="tablewrap">
 
@@ -4107,116 +2935,108 @@ async function loadCollaborations(){
         <thead>
 
           <tr>
-            <th>Request</th>
+            <th>Role Needed</th>
+            <th>Involvement</th>
+            <th>Matching</th>
             <th>Status</th>
             <th>Created</th>
           </tr>
 
         </thead>
 
-
         <tbody>
 
           ${
-            collaborations
-              .map(
-                request => {
+            collaborationRequests.map(row => {
 
-                  const title =
-                    candidate(
-                      request,
-                      [
-                        "title",
-                        "subject",
-                        "request_type",
-                        "role"
-                      ],
-                      "Collaboration Request"
-                    );
+              return `
+                <tr>
 
+                  <td>
 
-                  const status =
-                    candidate(
-                      request,
-                      [
-                        "status",
-                        "state"
-                      ],
-                      "unknown"
-                    );
-
-
-                  const message =
-                    candidate(
-                      request,
-                      [
-                        "message",
-                        "description"
-                      ],
-                      ""
-                    );
-
-
-                  const date =
-                    candidate(
-                      request,
-                      [
-                        "created_at",
-                        "submitted_at"
-                      ],
-                      null
-                    );
-
-
-                  return `
-                  <tr>
-
-                    <td>
-
-                      <b>
-                        ${escapeHtml(
-                          prettyStatus(title)
-                        )}
-                      </b>
-
-                      ${
-                        message
-                          ? `
-                            <div class="muted">
-                              ${escapeHtml(message)}
-                            </div>
-                          `
-                          : ""
-                      }
-
-                    </td>
-
-
-                    <td>
-
-                      <span
-                        class="badge ${statusClass(status)}"
-                      >
-                        ${escapeHtml(
-                          prettyStatus(status)
-                        )}
-                      </span>
-
-                    </td>
-
-
-                    <td>
+                    <b>
                       ${escapeHtml(
-                        timeAgo(date)
+                        row.role_needed
                       )}
-                    </td>
+                    </b>
 
-                  </tr>
-                  `;
+                    ${
+                      row.description
+                        ?
+                          `
+                          <div
+                            class="muted"
+                            style="margin-top:5px"
+                          >
+                            ${escapeHtml(
+                              row.description.slice(
+                                0,
+                                120
+                              )
+                            )}
+                            ${
+                              row.description.length > 120
+                                ? "…"
+                                : ""
+                            }
+                          </div>
+                          `
+                        :
+                          ""
+                    }
 
-                }
-              )
-              .join("")
+                  </td>
+
+                  <td>
+                    ${escapeHtml(
+                      row.involvement
+                    )}
+                  </td>
+
+                  <td>
+
+                    <span
+                      class="badge ${
+                        row.matching_requested
+                          ? "green"
+                          : "cyan"
+                      }"
+                    >
+                      ${
+                        row.matching_requested
+                          ? "Requested"
+                          : "No"
+                      }
+                    </span>
+
+                  </td>
+
+                  <td>
+
+                    <span
+                      class="badge ${statusClass(row.status)}"
+                    >
+                      ${escapeHtml(
+                        prettyStatus(
+                          row.status
+                        )
+                      )}
+                    </span>
+
+                  </td>
+
+                  <td>
+                    ${escapeHtml(
+                      formatDate(
+                        row.created_at
+                      )
+                    )}
+                  </td>
+
+                </tr>
+              `;
+
+            }).join("")
           }
 
         </tbody>
@@ -4225,171 +3045,208 @@ async function loadCollaborations(){
 
     </div>
     `;
-
 }
 
 
-/* =====================================================
-   SYSTEM STATUS
-===================================================== */
+/* =========================================================
+   COUNTS
+========================================================= */
+
+async function loadCounts(){
+
+  const results =
+    await Promise.allSettled([
+
+      sb
+        .from("ds_submissions")
+        .select("id",{count:"exact",head:true}),
+
+      sb
+        .from("ds_projects")
+        .select("id",{count:"exact",head:true}),
+
+      sb
+        .from("ds_creator_profiles")
+        .select("id",{count:"exact",head:true}),
+
+      sb
+        .from("ds_collaboration_requests")
+        .select("id",{count:"exact",head:true})
+        .in(
+          "status",
+          [
+            "pending",
+            "open",
+            "matching"
+          ]
+        )
+
+    ]);
+
+
+  const value =
+    result =>
+      result.status === "fulfilled"
+        ? (
+            result.value.count || 0
+          )
+        : 0;
+
+
+  $("statSubmissions").textContent =
+    value(results[0]);
+
+
+  $("statProjects").textContent =
+    value(results[1]);
+
+
+  $("statCreators").textContent =
+    value(results[2]);
+
+
+  $("statCollaboration").textContent =
+    value(results[3]);
+}
+
+
+/* =========================================================
+   SYSTEM
+========================================================= */
 
 function renderSystem(){
 
-  $("systemInfo").innerHTML =
+  $("systemRows").innerHTML =
     `
-    <div class="tablewrap">
+    <div class="system-list">
 
-      <table class="table">
+      <div class="system-row">
 
-        <tbody>
+        <span class="system-name">
+          Supabase
+        </span>
 
-          <tr>
+        <span class="system-value">
+          <span class="badge green">
+            Connected
+          </span>
+        </span>
 
-            <th>
-              Authenticated User
-            </th>
-
-            <td>
-              ${escapeHtml(
-                currentUser?.email ||
-                "—"
-              )}
-            </td>
-
-          </tr>
+      </div>
 
 
-          <tr>
+      <div class="system-row">
 
-            <th>
-              User ID
-            </th>
+        <span class="system-name">
+          Administrator Authentication
+        </span>
 
-            <td>
-              <code>
-                ${escapeHtml(
-                  currentUser?.id ||
-                  "—"
-                )}
-              </code>
-            </td>
+        <span class="system-value">
+          <span class="badge green">
+            Verified
+          </span>
+        </span>
 
-          </tr>
+      </div>
 
 
-          <tr>
+      <div class="system-row">
 
-            <th>
-              Supabase
-            </th>
+        <span class="system-name">
+          Dream Submission Schema
+        </span>
 
-            <td>
-              ${escapeHtml(
-                SUPABASE_URL
-              )}
-            </td>
+        <span class="system-value">
+          <span class="badge cyan">
+            submitted_at
+          </span>
+        </span>
 
-          </tr>
-
-
-          <tr>
-
-            <th>
-              Donations
-            </th>
-
-            <td>
-
-              <span
-                class="badge green"
-              >
-                cr_donations enabled
-              </span>
-
-            </td>
-
-          </tr>
+      </div>
 
 
-          <tr>
+      <div class="system-row">
 
-            <th>
-              Donation Records
-            </th>
+        <span class="system-name">
+          Review RPC
+        </span>
 
-            <td>
-              ${donations.length}
-            </td>
+        <span class="system-value">
+          <span class="badge green">
+            ds_admin_review_submission
+          </span>
+        </span>
 
-          </tr>
+      </div>
 
 
-          <tr>
+      <div class="system-row">
 
-            <th>
-              Realtime
-            </th>
+        <span class="system-name">
+          Donation Table
+        </span>
 
-            <td>
+        <span class="system-value">
+          <span class="badge purple">
+            cr_donations
+          </span>
+        </span>
 
-              <span
-                id="realtimeState"
-                class="badge gold"
-              >
-                Starting…
-              </span>
+      </div>
 
-            </td>
 
-          </tr>
+      <div class="system-row">
 
-        </tbody>
+        <span class="system-name">
+          Admin Realtime
+        </span>
 
-      </table>
+        <span class="system-value">
+          <span class="badge gold">
+            Graceful fallback
+          </span>
+        </span>
+
+      </div>
 
     </div>
     `;
-
 }
 
 
-/* =====================================================
+/* =========================================================
    REALTIME
-===================================================== */
+========================================================= */
 
-function subscribeRealtime(){
+async function subscribeRealtime(){
 
   if(realtimeChannel){
 
-    sb.removeChannel(
+    await sb.removeChannel(
       realtimeChannel
     );
+
+    realtimeChannel =
+      null;
 
   }
 
 
+  /*
+    The current Supabase Realtime publication
+    contains ds_projects only.
+
+    Therefore we intentionally do NOT pretend
+    that submissions/donations/activity are realtime.
+
+    We listen for project changes and use the
+    dashboard Refresh button / reload cycle
+    for the other datasets.
+  */
+
   realtimeChannel =
     sb
-      .channel(
-        "dreamscapes-admin-live"
-      )
-
-
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"ds_submissions"
-        },
-        () => {
-
-          loadSubmissions();
-          loadCounts();
-
-        }
-      )
-
+      .channel("dreamscapes-admin-live")
 
       .on(
         "postgres_changes",
@@ -4398,100 +3255,44 @@ function subscribeRealtime(){
           schema:"public",
           table:"ds_projects"
         },
-        () => {
+        async () => {
 
-          loadProjects();
-          loadCounts();
-
-        }
-      )
-
-
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"ds_collaboration_requests"
-        },
-        () => {
-
-          loadCollaborations();
-          loadCounts();
-
-        }
-      )
-
-
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"ds_activity"
-        },
-        () => {
-
-          loadActivity();
-
-        }
-      )
-
-
-      /*
-        NEW:
-
-        Realtime donation monitoring.
-
-        Whenever a row is inserted,
-        updated or deleted from
-        cr_donations, refresh the
-        donation center.
-      */
-
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"cr_donations"
-        },
-        () => {
-
-          loadDonations();
+          await Promise.all([
+            loadProjects(),
+            loadCounts()
+          ]);
 
           showToast(
-            "Donation activity updated."
+            "Project data updated."
           );
 
         }
       )
 
-
       .subscribe(
         status => {
 
-          const element =
-            $("realtimeState");
+          if(
+            status ===
+            "SUBSCRIBED"
+          ){
 
-
-          if(!element){
-            return;
-          }
-
-
-          element.textContent =
-            status;
-
-
-          element.className =
-            "badge " +
-            (
-              status ===
-              "SUBSCRIBED"
-                ? "green"
-                : "gold"
+            setConnection(
+              "online",
+              "Live"
             );
+
+          }else if(
+            status ===
+            "CHANNEL_ERROR"
+          ){
+
+            setConnection(
+              "offline",
+              "Realtime unavailable"
+            );
+
+          }
 
         }
       );
@@ -4499,51 +3300,74 @@ function subscribeRealtime(){
 }
 
 
-/* =====================================================
+/* =========================================================
    LOAD EVERYTHING
-===================================================== */
+========================================================= */
 
 async function loadAll(){
 
-  showToast(
-    "Refreshing Dreamscapes Admin…"
+  setConnection(
+    "online",
+    "Loading"
   );
 
 
-  await Promise.all([
+  const results =
+    await Promise.allSettled([
 
-    loadCounts(),
+      loadCounts(),
+      loadSubmissions(),
+      loadProjects(),
+      loadDonations(),
+      loadActivity(),
+      loadCollaborations()
 
-    loadSubmissions(),
+    ]);
 
-    loadProjects(),
 
-    loadDonations(),
-
-    loadActivity(),
-
-    loadCollaborations()
-
-  ]);
+  const failed =
+    results.filter(
+      result =>
+        result.status ===
+        "rejected"
+    );
 
 
   renderSystem();
 
-  setConnection(
-    true,
-    "Connected"
-  );
+
+  if(failed.length){
+
+    setConnection(
+      "offline",
+      "Partial"
+    );
+
+  }else{
+
+    setConnection(
+      "online",
+      "Ready"
+    );
+
+  }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    BOOT
-===================================================== */
+========================================================= */
 
 async function boot(){
 
   try{
+
+    setConnection(
+      "online",
+      "Connecting"
+    );
+
 
     const {
       data:{
@@ -4553,104 +3377,121 @@ async function boot(){
       await sb.auth.getSession();
 
 
-    if(!session){
+    if(session){
 
-      $("loginScreen")
-        .classList
-        .remove("hidden");
+      const isAdmin =
+        await ensureAdmin();
 
-      return;
+      if(isAdmin){
+
+        renderSystem();
+
+        await loadAll();
+
+        await subscribeRealtime();
+
+      }
 
     }
 
 
-    currentUser =
-      session.user;
+    sb.auth.onAuthStateChange(
+      async (
+        event,
+        session
+      ) => {
+
+        if(
+          event ===
+          "SIGNED_IN"
+        ){
+
+          const isAdmin =
+            await ensureAdmin();
+
+          if(isAdmin){
+
+            renderSystem();
+
+            await loadAll();
+
+            await subscribeRealtime();
+
+          }
+
+        }
 
 
-    await ensureAdmin();
+        if(
+          event ===
+          "SIGNED_OUT"
+        ){
+
+          $("adminApp")
+            .classList
+            .add("hidden");
+
+          $("loginScreen")
+            .classList
+            .remove("hidden");
+
+        }
+
+      }
+    );
 
 
-    $("loginScreen")
-      .classList
-      .add("hidden");
-
-
-    $("adminApp")
-      .classList
-      .remove("hidden");
-
+  }catch(error){
 
     setConnection(
-      true,
-      "Authenticated"
+      "offline",
+      "Error"
     );
 
+    $("loginError").textContent =
+      error.message;
 
-    renderSystem();
-
-
-    await loadAll();
-
-
-    subscribeRealtime();
-
-  }
-  catch(error){
-
-    console.error(
-      "Dreamscapes Admin boot error:",
-      error
-    );
-
-
-    setConnection(
-      false,
-      "Access denied"
-    );
-
-
-    $("loginMsg").textContent =
-      error.message ||
-      "Unable to authorize administrator.";
-
-
-    $("loginScreen")
+    $("loginError")
       .classList
       .remove("hidden");
-
-
-    $("adminApp")
-      .classList
-      .add("hidden");
 
   }
 
 }
 
 
-/* =====================================================
-   AUTH STATE
-===================================================== */
+/* =========================================================
+   MODAL EVENTS
+========================================================= */
 
-sb.auth.onAuthStateChange(
-  (
-    event,
-    session
-  ) => {
+$("reviewModal")
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target ===
+        $("reviewModal")
+      ){
+
+        closeReview();
+
+      }
+
+    }
+  );
+
+
+document.addEventListener(
+  "keydown",
+  event => {
 
     if(
-      session &&
-      !currentUser
+      event.key ===
+      "Escape"
     ){
 
-      currentUser =
-        session.user;
-
-      setTimeout(
-        boot,
-        0
-      );
+      closeReview();
 
     }
 
@@ -4658,73 +3499,9 @@ sb.auth.onAuthStateChange(
 );
 
 
-/* =====================================================
-   EVENT LISTENERS
-===================================================== */
-
-$("googleBtn")
-  .addEventListener(
-    "click",
-    signIn
-  );
-
-
-$("signOutBtn")
-  .addEventListener(
-    "click",
-    signOut
-  );
-
-
-$("refreshBtn")
-  .addEventListener(
-    "click",
-    loadAll
-  );
-
-
-$("systemBtn")
-  .addEventListener(
-    "click",
-    () => {
-
-      $("systemInfo")
-        .scrollIntoView({
-          behavior:"smooth"
-        });
-
-
-      showToast(
-        "System status ready."
-      );
-
-    }
-  );
-
-
-/* =====================================================
-   CLEANUP
-===================================================== */
-
-window.addEventListener(
-  "beforeunload",
-  () => {
-
-    if(realtimeChannel){
-
-      sb.removeChannel(
-        realtimeChannel
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================================
+/* =========================================================
    START
-===================================================== */
+========================================================= */
 
 boot();
 
